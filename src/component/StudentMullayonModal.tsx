@@ -395,7 +395,6 @@ export default function StudentMullayonModal({
     }
   }, 300);
 
-  console.log(`submitObj_wid_null`, submitObj_wid_null);
 
   return (
     <div className="content">

@@ -511,6 +511,7 @@ export default function StudentTranscript() {
                               <label className="form-label "></label>
                               <div className="">
                                 <button
+                                  type="button"
                                   onClick={fetchDataFromAPI}
                                   className="form-control py-1 border-right-0 bg-success border-0"
                                   defaultValue="নিম্নে মূল্যায়ন প্রতিবেদন দেখুন"
@@ -522,7 +523,7 @@ export default function StudentTranscript() {
                                   সকল শিক্ষার্থী মূল্যায়ন <br /> ডাউনলোড করুন
                                   <div
                                     className="btn btn-outline-secondary py-1 border-0"
-                                    type="button"
+                                    
                                     style={{
                                       backgroundColor: "#428F92",
                                     }}
@@ -546,6 +547,7 @@ export default function StudentTranscript() {
                         <label className="form-label "></label>
                         <div className="">
                           <button
+                            type="button"
                             onClick={fetchDataFromAPI}
                             className="form-control py-1 border-right-0 border-0"
                             defaultValue="নিম্নে মূল্যায়ন প্রতিবেদন দেখুন"
@@ -558,7 +560,6 @@ export default function StudentTranscript() {
                             নিম্নে মূল্যায়ন প্রতিবেদন দেখুন
                             <div
                               className="btn btn-outline-secondary py-1 border-0"
-                              type="button"
                               style={{
                                 backgroundColor: "#428F92",
                               }}
@@ -781,6 +782,7 @@ export default function StudentTranscript() {
                         <label className="form-label "></label>
                         <div className="input-group">
                           <button
+                            type="button"
                             onClick={fetchDataFromAPI}
                             className="form-control py-1 border-right-0 border-0"
                             defaultValue="নিম্নে মূল্যায়ন প্রতিবেদন দেখুন"
@@ -793,7 +795,7 @@ export default function StudentTranscript() {
                             নিম্নে মূল্যায়ন প্রতিবেদন দেখুন
                             <div
                               className="btn btn-outline-secondary py-1 border-0"
-                              type="button"
+                              
                               style={{
                                 backgroundColor: "#428F92",
                               }}
@@ -1195,7 +1197,6 @@ export default function StudentTranscript() {
         id="staticBackdrop"
         data-bs-backdrop="static"
         data-bs-keyboard="false"
-        tabindex="-1"
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >

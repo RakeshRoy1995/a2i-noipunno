@@ -6,6 +6,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import style from "./Home.style.module.css";
 import techerAvatar from "../../public/assets/images/teacher.jpeg";
 import { convertToBanglaNumber } from "../utils/Utils";
+import "../../src/styles/noipunno_custom_styles.css";
 
 const AmarProfile = () => {
   const [userDetails, setuserDetails] = useState<any>({});
@@ -47,11 +48,11 @@ const AmarProfile = () => {
 
         alert(
           "Image is valid. Size: " +
-            input.files[0].size / 1024 +
-            " KB, Width: " +
-            img.width +
-            ", Height: " +
-            img.height
+          input.files[0].size / 1024 +
+          " KB, Width: " +
+          img.width +
+          ", Height: " +
+          img.height
         );
       };
 
@@ -87,9 +88,9 @@ const AmarProfile = () => {
   // }
 
   return (
-    <section className="mx-auto">
+    <section className="mx-auto myProfilePage">
       <Breadcumbtitle title={"আমার প্রোফাইল"} />
-      <div className="container  my-5 mx-auto">
+      <div className="container  py-3 mx-auto">
         <div className="d-flex align-items-center">
           <div className="card shadow-sm border-1 w-100 rounded">
             <ul className="nav d-flex mt-2 justify-content-around py-1">
@@ -108,7 +109,7 @@ const AmarProfile = () => {
                 />
               </div>
 
-              <table className="table w-75 text-sm mx-auto">
+              <table className="table w-75 text-sm mx-auto ">
                 <tbody className="rounded border border-ligh">
                   <tr className="border-1 rounded">
                     <td className="">
@@ -146,15 +147,15 @@ const AmarProfile = () => {
                     <td className="p-1 v">
                       <strong>সাইন আপলোড করুন</strong>
                       <div
-                          style={{
-                            fontSize: "9px",
-                            width: "70%",
-                            marginLeft: "6px",
-                          }}
-                        >
-                          ছবি {convertToBanglaNumber(200)} PX প্রস্থ এবং {convertToBanglaNumber(150)} PX এর
-                          সর্বাধিক উচ্চতা অতিক্রম করা উচিত নয় এবং ছবির আকার {convertToBanglaNumber(100)}
-                           KB সীমা অতিক্রম করা উচিত নয়।
+                        style={{
+                          fontSize: "9px",
+                          width: "70%",
+                          marginLeft: "6px",
+                        }}
+                      >
+                        ছবি {convertToBanglaNumber(200)} PX প্রস্থ এবং {convertToBanglaNumber(150)} PX এর
+                        সর্বাধিক উচ্চতা অতিক্রম করা উচিত নয় এবং ছবির আকার {convertToBanglaNumber(100)}
+                        KB সীমা অতিক্রম করা উচিত নয়।
                       </div>
                     </td>
                     <td>
@@ -173,7 +174,7 @@ const AmarProfile = () => {
                           alt="Preview"
                         />
 
-                        
+
 
                         {/* <input type="file" id="imageInput" accept="image/*" onChange={getImageSize} /> */}
                       </div>

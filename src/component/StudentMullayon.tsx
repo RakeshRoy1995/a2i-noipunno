@@ -8,7 +8,6 @@ import {
   BiSquareRounded,
 } from "react-icons/bi";
 
-import ProfileCard from "./ProfileCard";
 import { Pi_save, teacher_own_subject } from "../Request";
 import { useParams } from "react-router-dom";
 

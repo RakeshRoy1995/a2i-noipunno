@@ -98,7 +98,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    color: #428f92!important;
+    color: #428f92 !important;
 }
 
 .fade.modal.show {
@@ -111,7 +111,7 @@
 }
 
 /* @media (min-width: 538px) {
-    .modal-dialog.modal-lg.modal-dialog-centered {
+    .modal-rakesh.modal-lg.modal-dialog-centered {
         position: absolute;
         right: 0;
         top: -12px;
@@ -128,10 +128,71 @@
 }
 
 
-.custom-px-2{
-    padding-right: 40% !important 
+.custom-px-2 {
+    padding-right: 40% !important
 }
 
 /* .custom-ps{
     padding-right: 10% !important;
 } */
+
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.marquee-content {
+    display: inline-block;
+    animation: marquee-animation 10s linear infinite;
+    /* Adjust the duration as needed */
+}
+
+@keyframes marquee-animation {
+    from {
+        transform: translateX(100%);
+        /* Move the text offscreen initially */
+    }
+
+    to {
+        transform: translateX(-100%);
+        /* Scroll the text to the left */
+    }
+}
+
+
+
+.total-student-show .text {
+    position: relative;
+    line-height: 20px;
+}
+
+.total-student-show .success {
+    position: relative;
+    line-height: 14px;
+    font-weight: 500;
+}
+
+.total-student-show .badge {
+    border-radius: 4px;
+    background-color: #f0fae9;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2px 5px;
+    color: #69cb1c;
+}
+
+.total-student-show .bottom {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    text-align: left;
+    font-size: 13px;
+    color: #7daeb0;
+    font-family: 'Public Sans';
+}

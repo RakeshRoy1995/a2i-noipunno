@@ -1,16 +1,14 @@
 import '../../assets/dashboard_materials/css/dashboard.css';
 import '../../assets/dashboard_materials/css/app_info.css';
-import AppInfoIcon1 from "../../assets/images/app-info-icons/bd-map.svg";
-import AppInfoIcon2 from "../../assets/images/app-info-icons/NCTB_logo-2.svg";
-import AppInfoIcon3 from "../../assets/images/app-info-icons/Aspire_to_Innovate_Seal 2.svg";
-import AppInfoIcon4 from "../../assets/images/app-info-icons/unicef logo.svg";
-import AppInfoIcon5 from "../../assets/images/app-info-icons/app-info.svg";
-
+import AppInfoIcon1 from "../../assets/popUp_app_info_materials/bd-map.svg";
+import AppInfoIcon2 from "../../assets/popUp_app_info_materials/NCTB_logo-2.svg";
+import AppInfoIcon3 from "../../assets/popUp_app_info_materials/Aspire_to_Innovate_Seal 2.svg";
+import AppInfoIcon4 from "../../assets/popUp_app_info_materials/unicef logo.svg";
+import AppInfoIcon5 from "../../assets/popUp_app_info_materials/app-info.svg";
 import { useState } from 'react';
 
-const PopUpCard = () => {
+const PopUpAppInfo = () => {
   const [togglePopup, setTogglePopup] = useState(false);
-
   return (
     <section className="chat_app_info">
       <div className="chat_box" >
@@ -85,4 +83,4 @@ const PopUpCard = () => {
   );
 };
 
-export default PopUpCard;
+export default PopUpAppInfo;

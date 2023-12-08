@@ -9,6 +9,7 @@ import female_avt_img from "../../public/assets/images/user_avatar/female_std.pn
 import male_avt_img from "../../public/assets/images/user_avatar/male_std.png";
 import "../styles/noipunno_custom_styles.css";
 
+
 const StudentList = () => {
   const [student, setStudent] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -30,9 +31,9 @@ const StudentList = () => {
         index === self.findIndex((o: any) => o.uid === obj.uid)
     );
 
-    uniqueObjectsArray.sort(function(a, b) {
+    uniqueObjectsArray.sort(function (a, b) {
       return a.roll - b.roll;
-  });
+    });
 
     setStudent(uniqueObjectsArray);
   };
@@ -77,10 +78,9 @@ const StudentList = () => {
   return (
     <section className="student_list_page">
       <Breadcumb title={"শিক্ষার্থীর তালিকা"} />
-      {student?.length == 0 ? (
-        <div className="container my-5 text-center" >No Student Found</div>
-      ) : (
-        <div className="container my-5" >
+      {student?.length == 0 ?
+        (<div className="container student_list_page py-5 text-center" >No Student Found</div>) :
+        (<div className="container py-3" >
           <section>
             <div className={`${styles.grid_view} p-0 m-0`}>
               {student?.map((student, index) => (
@@ -101,8 +101,8 @@ const StudentList = () => {
                         className="img-fluid"
                       />
                     </div>
-                    <div className="d-flex flex-column justify-content-center align-items-start">
-                      <div>
+                    <div className="d-flex flex-column justify-content-center align-items-start gap-1">
+                      <div className="d-flex flex-column justify-content-center align-items-start gap-1">
                         <h5 className={styles.teacherName}>
                           নামঃ {student?.student_name_bn || "no-entry"}{" "}
                         </h5>
@@ -117,7 +117,7 @@ const StudentList = () => {
                           style={{ backgroundColor: "#428F92", color: "#fff" }}
                         >
                           বিস্তারিত{" "}
-                          <MdOutlineKeyboardArrowRight className="fs-3" />{" "}
+                          <MdOutlineKeyboardArrowRight className="fs-5" />{" "}
                         </button>
                       </div>
                     </div>
@@ -349,7 +349,7 @@ const StudentList = () => {
             </div>
           </section>
         </div>
-      )}
+        )}
     </section>
   );
 };

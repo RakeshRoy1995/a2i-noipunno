@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { loginPassword } from "../Request";
-
+import PopUpAppInfo from "./PopUpAppInfo/PopUpAppInfo";
 
 const LoginPage = () => {
   const [error, seterror] = useState("");
@@ -32,23 +32,21 @@ const LoginPage = () => {
   };
 
   const getCookie = (name) => {
-    const cookies = document.cookie.split(';');
+    const cookies = document.cookie.split(";");
     for (let i = 0; i < cookies.length; i++) {
       const cookie = cookies[i].trim();
-      if (cookie.startsWith(name + '=')) {
+      if (cookie.startsWith(name + "=")) {
         return cookie.substring(name.length + 1);
       }
     }
     return null;
   };
 
-
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     const datas = new FormData(event.target);
-    const userId = event.target.caid.value
+    const userId = event.target.caid.value;
     const userPin = event.target.pin.value;
-
 
     if (savePin) {
       setCookie("userId", userId, 7);
@@ -58,14 +56,12 @@ const LoginPage = () => {
       // console.log('userPin', userPin);
     }
 
-
     try {
-
       const { data }: any = await loginPassword(datas);
       // console.log("data", data.status);
 
       if (data?.status === true) {
-        console.log("user Details", data?.data.user)
+        console.log("user Details", data?.data.user);
         const token = data?.data?.access_token;
         localStorage.setItem("customer_login_auth", JSON.stringify(data?.data));
         localStorage.setItem("token", token);
@@ -74,13 +70,14 @@ const LoginPage = () => {
       } else {
         seterror("Wrong Crediantial");
       }
-
     } catch (error) {
-      seterror(error?.response?.data?.error?.message || error?.response?.data?.error || "Something went wrong!");
+      seterror(
+        error?.response?.data?.error?.message ||
+          error?.response?.data?.error ||
+          "Something went wrong!"
+      );
       console.log(`error`, error);
     }
-
-
   };
 
   const handleChange = (event) => {
@@ -88,19 +85,20 @@ const LoginPage = () => {
     setValue(result);
   };
 
-
-
   useEffect(() => {
-
     const userId_Cookes = getCookie("userId");
     const userPin_Cookies = getCookie("userPin");
     // console.log("userId_Cookes", userId_Cookes);
     // console.log("userPin_Cookies", userPin_Cookies);
     if (userId_Cookes && userPin_Cookies) {
-      setUserId_from_Cookie(userId_Cookes)
-      setUserPin_from_Cookie(userPin_Cookies)
+      setUserId_from_Cookie(userId_Cookes);
+      setUserPin_from_Cookie(userPin_Cookies);
     }
-  }, [])
+  }, []);
+
+  const redirect = () => {
+    window.location.href = "https://forms.gle/sFrdsXavPaQryQ6k8";
+  };
 
   return (
     <>
@@ -110,14 +108,15 @@ const LoginPage = () => {
 
       <section id="body" className="login-page">
         <div className="login-bg min-vh-100 position-relative">
-          <div className="marque-notification">
-            <marquee>
-              প্রতিষ্ঠান প্রধান হিসেবে লগইন এসএমএস না পেয়ে থাকলে{" "}
-              <a href="https://forms.gle/sFrdsXavPaQryQ6k8" target="_blank">
+          <div className="marque-notification pointer" onClick={redirect} >
+            <div className="marquee-container">
+              <div className="marquee-content">
+                প্রতিষ্ঠান প্রধান হিসেবে লগইন এসএমএস না পেয়ে থাকলে{" "}
                 এখানে ক্লিক করুন
-              </a>{" "}
-            </marquee>
+              </div>
+            </div>
           </div>
+
           <div className="container">
             <div className="row min-vh-90-100 position-relative d-flex align-items-center justify-content-center py-3">
               <div className="col-sm-12 col-md-5 py-2">
@@ -126,8 +125,8 @@ const LoginPage = () => {
                   বিষয়ভিত্তিক মূল্যায়ন অ্যাপ্লিকেশন
                 </h1>
                 <p className="np-login-subtitle">
-                  অনুগ্রহ করে আপনার অ্যাকাউন্টে লগ ইন করুন এবং <br /> অ্যাডভেঞ্চার
-                  শুরু করুন
+                  অনুগ্রহ করে আপনার অ্যাকাউন্টে লগ ইন করুন এবং <br />{" "}
+                  অ্যাডভেঞ্চার শুরু করুন
                 </p>
               </div>
               <div className="col-sm-12 col-md-7 py-2">
@@ -139,7 +138,8 @@ const LoginPage = () => {
                     <div className="form-group my-1">
                       <label
                         htmlFor="user_type_id"
-                        className="login-field-title">
+                        className="login-field-title"
+                      >
                         ইউজার টাইপ
                       </label>
                       <div className="input-group">
@@ -150,7 +150,7 @@ const LoginPage = () => {
                           style={{
                             fontSize: 16,
                             fontFamily: '"Times New Roman", Times, serif',
-                            fontWeight: 400
+                            fontWeight: 400,
                           }}
                         >
                           <option value={1} selected>
@@ -164,15 +164,17 @@ const LoginPage = () => {
                       </div>
                     </div>
                     <div className="form-group mb-1">
-                      <label
-                        htmlFor="caid"
-                        className="login-field-title">
+                      <label htmlFor="caid" className="login-field-title">
                         বিষয় ভিত্তিক শিক্ষকের আইডি
                       </label>
                       <div className="input-group">
                         <div className="input-group-prepend">
                           <span>
-                            <img src={inputFieldUserIcon} className="np-login-field-icon" alt="logo" />
+                            <img
+                              src={inputFieldUserIcon}
+                              className="np-login-field-icon"
+                              alt="logo"
+                            />
                           </span>
                         </div>
                         <input
@@ -194,7 +196,11 @@ const LoginPage = () => {
                         পিন নম্বর
                       </label>
                       <div className="input-group">
-                        <img src={pinNumberFieldUserIcon} className="np-login-field-icon" alt="logo" />
+                        <img
+                          src={pinNumberFieldUserIcon}
+                          className="np-login-field-icon"
+                          alt="logo"
+                        />
                         <input
                           className="form-control np-login-form-field no-spinners custom-input"
                           type={showPassword ? "text" : "password"}
@@ -240,16 +246,12 @@ const LoginPage = () => {
                         <label
                           className="form-check-label"
                           htmlFor="flexCheckDefault"
-
                         >
                           <p className="pt-2 pin-collect">পিন সংরক্ষণ করুণ</p>
                         </label>
                       </div>
                     </div>
-                    <button
-                      type="submit"
-                      className="btn login-btn w-100"
-                    >
+                    <button type="submit" className="btn login-btn w-100">
                       লগ ইন করুন
                     </button>
                     <div className="form-group my-2">
@@ -263,12 +265,11 @@ const LoginPage = () => {
                       </p>
                     </div>
                   </form>
-
-
                 </div>
               </div>
             </div>
           </div>
+
           <div className="row">
             <div className="login_footer position-absolute bottom-0">
               <div className="d-flex flex-column flex-md-row justify-content-between align-items-end sm-row-reverse ps-5 pe-3 my-2">
@@ -331,7 +332,7 @@ const LoginPage = () => {
                 </div>
               </div>
             </div>
-
+            <PopUpAppInfo />
           </div>
         </div>
         {/* bootstrap 5.0.2 min.js */}

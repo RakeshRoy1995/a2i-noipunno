@@ -33,6 +33,7 @@ import shikkokBebostapona from "../assets/navbar_materials/icons/teacher-managem
 import branchBebostapona from "../assets/navbar_materials/icons/branch-ico.svg";
 import srenikokkoBebostapona from "../assets/navbar_materials/icons/branch-ico.svg";
 import dayitthoOrponKoron from "../assets/navbar_materials/icons/users.svg";
+import doublecheckPng from "../assets/navbar_materials/icons/double-check.png";
 
 import { useLocation } from 'react-router-dom'
 
@@ -596,13 +597,13 @@ const Navbar = () => {
               <div className="d-lg-flex d-block align-items-lg-center mt-2 mt-lg-0">
                 <div className="btn-group position-relative">
                   <Link to='/mollayon-koron' id="mollayon_koron_btn"
-                    className="nav-link navbar-menu-item nav-right-dorpdown  d-flex align-items-center"
+                    className="nav-link navbar-menu-item nav-right-dorpdown d-flex align-items-center"
                     role="button"
                     // data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <img src={addIcon} className="img-fluid icon-right-space" alt="add icon" />
-                    মুল্যায়ন করুন
+                    <img src={doublecheckPng} className="img-fluid " alt="add icon" />
+                    মূল্যায়ন শুরু করুন
                     {/* <img src={tikicowhite} className="img-fluid icon-left-space" alt="dropdown icon" /> */}
                   </Link>
 

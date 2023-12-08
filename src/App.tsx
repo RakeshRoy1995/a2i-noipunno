@@ -34,13 +34,12 @@ function App() {
   const fetchData = async () => {
     if (window.location.pathname !== "/login") {
       settopbar(true);
-
       if (render) {
-        const own_subjet = await teacher_own_subject();
-        localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+        // const own_subjet = await teacher_own_subject();
+        // localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
 
-        const data_dash: any = await teacher_dashboard();
-        localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
+        // const data_dash: any = await teacher_dashboard();
+        // localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
         setRender(false)
       }
     }

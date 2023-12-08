@@ -1,16 +1,26 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
-import { teacher_dashboard, teacher_own_subject } from "../Request";
+import {
+  class_room_info,
+  get_common_info,
+  teacher_dashboard,
+  teacher_own_subject,
+} from "../Request";
 
 import { Spinner } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import BreadcumbHome from "../layout/BreadcumbHome";
-import { section_name, shift_name, teacher_name } from "../utils/Utils";
+import {
+  formate_own_subject_data,
+  section_name,
+  shift_name,
+  teacher_name,
+} from "../utils/Utils";
 import AcorongotoComponent from "./AcorongotoComponent";
 import styles from "./Home.style.module.css";
 import ParodorshitaComponent from "./ParodorshitaComponent";
 import ShowAssesment from "./ShowAssesment";
-import bookIcon from '../../src/assets/dashboard_materials/images/dashboard/bicon.svg';
+import bookIcon from "../../src/assets/dashboard_materials/images/dashboard/bicon.svg";
 import "../styles/noipunno_custom_styles.css";
 
 export default function Teacher() {
@@ -41,18 +51,17 @@ export default function Teacher() {
   const [showSubjectname, seshowSubjectname] = useState("");
   const [showCompitance, seshowCompitance] = useState(false);
   const [parodorshita_acoron_tab, setparodorshita_acoron_tab] = useState(0);
-  const [shikhonKalinMullayon_sannasik_barsik, setshikhonKalinMullayon_sannasik_barsik] = useState([]);
+  const [
+    shikhonKalinMullayon_sannasik_barsik,
+    setshikhonKalinMullayon_sannasik_barsik,
+  ] = useState([]);
 
   const fetchData = async () => {
-
     const teacher_dash__: any = localStorage.getItem("teacher_dashboard") || "";
     const teacher_dash = teacher_dash__ ? JSON.parse(teacher_dash__) : "";
 
-    const own_subjet: any = await teacher_own_subject();
+    let own_subjet: any = await teacher_own_subject();    
     localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
-
-    console.log(`own_subjet----`, own_subjet);
-
 
     let data: any = "";
     if (teacher_dash) {
@@ -72,20 +81,16 @@ export default function Teacher() {
     let compitnc_obj = {};
     own_subjet.data.data.subjects.map((d: any) => {
       data.data.subjects.map((d_2: any) => {
-        if (d_2.uid === d.subject_id) {
-          data.data.teachers.map((al_tech: any) => {
-            if (d.teacher_id == al_tech.uid) {
-              const obj: any = {
-                subject: d_2,
-                own_subjet: d,
-                teacher: al_tech,
-              };
-              d.oviggota.map((competnc) => {
-                compitnc_obj = { ...compitnc_obj, [competnc.uid]: competnc };
-              });
-              all_subject.push(obj);
-            }
+        if (d_2.subject_id === d.subject_id) {
+          const obj: any = {
+            subject: d_2.subject_info,
+            own_subjet: d,
+            teacher: d.class_room.class_teacher,
+          };
+          d.oviggota.map((competnc) => {
+            compitnc_obj = { ...compitnc_obj, [competnc.uid]: competnc };
           });
+          all_subject.push(obj);
         }
       });
     });
@@ -114,7 +119,7 @@ export default function Teacher() {
     setelement(e);
   };
 
-
+  
   return (
     <div className="content mb-5 teacher_compo_bg">
       {loader && (
@@ -215,16 +220,13 @@ export default function Teacher() {
                               >
                                 <a className="subject-number">
                                   <div className="icon">
-                                    <img
-                                      src={bookIcon}
-                                      alt=""
-                                    />
+                                    <img src={bookIcon} alt="" />
                                   </div>
                                   <h2 className="mt-3"> {d?.subject?.name}</h2>
                                   <div className="total-student">
                                     <p>
                                       {" "}
-                                      {d?.subject.class_uid == "6"
+                                      {d?.subject?.class_uid == "6"
                                         ? "ষষ্ঠ "
                                         : "সপ্তম "}{" "}
                                       শ্রেণি{" "}
@@ -235,9 +237,7 @@ export default function Teacher() {
                                   </div>
                                   <div className="total-student">
                                     <p>
-                                      {teacher_name(
-                                        d.own_subjet.class_room.class_teacher_id
-                                      )}
+                                      {d.teacher.name_bn}
                                     </p>
                                   </div>
                                   <div className="flex-md-row flex-lg-row d-flex  justify-content-center gap-2">
@@ -256,6 +256,20 @@ export default function Teacher() {
                                       )}{" "}
                                       শাথা
                                     </h6>
+                                  </div>
+
+                                  <div className="total-student-show">
+                                    <div className="bottom">
+                                      <div className="text">Total Student </div>
+                                      <div className="badge">
+                                        <div className="success">
+                                          {
+                                            d.own_subjet?.class_room?.students
+                                              ?.length
+                                          }
+                                        </div>
+                                      </div>
+                                    </div>
                                   </div>
                                 </a>
                               </div>
@@ -299,7 +313,9 @@ export default function Teacher() {
                                 showDetailsshikhonKalinMullayon={
                                   showDetailsshikhonKalinMullayon
                                 }
-                                shikhonKalinMullayon_sannasik_barsik={shikhonKalinMullayon_sannasik_barsik}
+                                shikhonKalinMullayon_sannasik_barsik={
+                                  shikhonKalinMullayon_sannasik_barsik
+                                }
                                 Showcollaps={Showcollaps}
                                 setShowcollaps={setShowcollaps}
                                 Mullayon_name={Mullayon_name}
@@ -321,7 +337,9 @@ export default function Teacher() {
                                 showDetailsshikhonKalinMullayon={
                                   showDetailsshikhonKalinMullayon
                                 }
-                                shikhonKalinMullayon_sannasik_barsik={shikhonKalinMullayon_sannasik_barsik}
+                                shikhonKalinMullayon_sannasik_barsik={
+                                  shikhonKalinMullayon_sannasik_barsik
+                                }
                                 Showcollaps={Showcollaps}
                                 setShowcollaps={setShowcollaps}
                                 Mullayon_name={Mullayon_name}
@@ -335,12 +353,12 @@ export default function Teacher() {
                         )}
                       </>
                     )}
-                  </div >
-                </div >
-              </div >
-            </div >
-          </section >
-        </div >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       )}
       <style
         dangerouslySetInnerHTML={{
@@ -350,6 +368,6 @@ export default function Teacher() {
       />
 
       {/* Teachers List end */}
-    </div >
+    </div>
   );
 }

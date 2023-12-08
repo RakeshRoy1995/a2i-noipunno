@@ -1,10 +1,8 @@
 import '../../assets/dashboard_materials/css/dashboard.css';
-import OnorudhShomohu from './OnorudhShomohu';
-import ShikkathirHaziraChart from './ShikkathirHaziraChart';
-import ShorbomotHishabforHeadTeaherDashboard from './ShorbomotHishabforHeadTeaherDashboard';
-
 import TeacherProfileCard from './TeacherProfileCard';
-import TotalNumberOfSudentTeacherClassRoom from './TotalNumberOfSudentTeacherClassRoom';
+import Total_Student_Teacher_ClassRoom_for_HeadTeacherDashboard from './Total_Student_Teacher_ClassRoom_for_HeadTeacherDashboard';
+import Total_Student_Teacher_ClassRoom_for_TeacherDashboard from './Total_Student_Teacher_ClassRoom_for_TeacherDashboard';
+
 
 const BannerSection = () => {
   return (
@@ -13,7 +11,8 @@ const BannerSection = () => {
         <div className="row g-3 ">
           <TeacherProfileCard />
           {/* <ShikkathirHaziraChart /> */}
-          <TotalNumberOfSudentTeacherClassRoom />
+          {/* <Total_Student_Teacher_ClassRoom_for_HeadTeacherDashboard /> */}
+          <Total_Student_Teacher_ClassRoom_for_TeacherDashboard />
           {/* <OnorudhShomohu /> */}
         </div>
       </div>

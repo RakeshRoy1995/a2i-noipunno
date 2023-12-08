@@ -9,7 +9,7 @@ import {
 import styles from "./Home.style.module.css";
 import { BiSidebar } from "react-icons/bi";
 import { SlBookOpen } from "react-icons/sl";
-import ProfileCard from "./ProfileCard";
+
 import { Spinner } from "react-bootstrap";
 import ShowAssesment from "./ShowAssesment";
 import ParodorshitaComponent from "./ParodorshitaComponent";
@@ -181,7 +181,7 @@ export default function Teacher() {
             <div className="container">
               <div className="row">
                 <div className="col-sm-6 col-md-4 col-lg-3">
-                  <ProfileCard />
+                
                 </div>
                 {/* Chart */}
                 <div className="col-sm-6 col-md-4 col-lg-3">Chart</div>

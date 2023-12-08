@@ -122,7 +122,7 @@ export default function ShowAssesment({
             <ul className="nav d-flex mt-2 justify-content-around py-1 assestment-tabs">
               {own_data?.assessments.map((d: any, key: any) => (
                 <li
-                  className={`nav-item w-25 f-dlex justify-content-center ${styles.nav_tab_bottom_border}`}
+                  className={`nav-item w-50 f-dlex justify-content-center ${styles.nav_tab_bottom_border}`}
                   key={key}
                   style={{ fontSize: "15px" }}
                 >

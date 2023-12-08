@@ -5,17 +5,18 @@ import BannerSection from "../BannerSection";
 import BishoybittikThottoOMullayon from "../BishoybittikThottoOMullayon";
 import ClassRoutine from "../ClassRoutine";
 import ReportForTeacherDashboard from "../ReportForTeacherDashboard";
-import PopUpCard from "../PopUpCard";
+import PopUpAppInfo from '../../PopUpAppInfo/PopUpAppInfo';
+
 
 
 const TeacherDashboard = () => {
   return (
     <div className="dashboard_page">
       <BannerSection />
-      <ReportForTeacherDashboard />
+      {/* <ReportForTeacherDashboard /> */}
       <BishoybittikThottoOMullayon />
       {/* <ClassRoutine /> */}
-      <PopUpCard />
+      <PopUpAppInfo />
     </div>
   );
 };

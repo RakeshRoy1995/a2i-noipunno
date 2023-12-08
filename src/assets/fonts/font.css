@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Nikosh';
+  src: url('./Nikosh.eot');
+  src: url('./Nikosh.eot?#iefix') format('embedded-opentype'),
+    url('./Nikosh.woff2') format('woff2'),
+    url('./Nikosh.woff') format('woff'),
+    url('./Nikosh.ttf') format('truetype'),
+    url('./Nikosh.svg#Nikosh') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* font-class Nikosh */
+.ff_nikosh {
+  /* background-color: blue; */
+  font-family: 'Nikosh' !important;
+}

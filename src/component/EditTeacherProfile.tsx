@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { update_teacher_profile } from "../Request";
 import Breadcumbtitle from "../layout/Breadcumb";
 import Swal from "sweetalert2";
+import "../styles/noipunno_custom_styles.css";
+
 
 const EditTeacherProfile = () => {
 
@@ -59,7 +61,7 @@ const EditTeacherProfile = () => {
   }
 
   return (
-    <>
+    <section className="editTeacherProfilePage">
       <Breadcumbtitle title={"প্রোফাইল হালনাগাদ"} />
       <div className="container my-3">
         <div className="d-flex align-items-center">
@@ -124,7 +126,7 @@ const EditTeacherProfile = () => {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

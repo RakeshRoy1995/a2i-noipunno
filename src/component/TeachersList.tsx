@@ -76,17 +76,18 @@ export default function TeachersList() {
                         <img src={(teacher.gender === 'Male') && teacher_photo || (teacher.gender === 'Female') && female_tec_avatar || teacher_photo} width="60rem" className="img-fluid" />
                       </div>
 
-                      <div className="d-flex flex-column justify-content-center align-items-start">
-                        <div>
+                      <div className="d-flex flex-column justify-content-center align-items-start gap-1">
+                        <div className='d-flex flex-column justify-content-center align-items-start gap-1'>
                           <h5 className={styles.teacherName}>নামঃ {teacher?.name_en || "no-entry"} </h5>
                           <h5 className={styles.teacherName}>পদবিঃ {teacher?.designation || "no-entry"}</h5>
                         </div>
                         <div className="d-flex justify-content-center align-items-center">
                           <button onClick={() => handleShowModal(teacher)} className="btn btn-primay btn-sm d-flex justify-content-center align-items-center" style={{ backgroundColor: "#428F92", color: "#fff", }} >
                             বিস্তারিত{" "}
-                            <MdOutlineKeyboardArrowRight className="fs-3" />{" "}
+                            <MdOutlineKeyboardArrowRight className="fs-5" />{" "}
                           </button>
                         </div>
+
                       </div>
                     </div>
                   </div>

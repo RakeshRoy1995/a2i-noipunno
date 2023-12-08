@@ -1,8 +1,8 @@
 import '../../../assets/dashboard_materials/css/dashboard.css';
+import PopUpAppInfo from '../../PopUpAppInfo/PopUpAppInfo';
 import BannerSection from '../BannerSection';
 import ClassRoutine from '../ClassRoutine';
 import ParodorshitarSuchokBishoyokTottho from '../ParodorshitarSuchokBishoyokTottho';
-import PopUpCard from '../PopUpCard';
 import ReportForHeadTeacherDashboard from '../ReportForHeadTeacherDashboard';
 
 import ShikkokerTalika from '../ShikkokerTalika';
@@ -17,7 +17,7 @@ const HeadTeacherDashboard = () => {
       <ParodorshitarSuchokBishoyokTottho />
       <ShikkokerTalika />
       <ClassRoutine />
-      <PopUpCard />
+      <PopUpAppInfo />
     </div>
   );
 };

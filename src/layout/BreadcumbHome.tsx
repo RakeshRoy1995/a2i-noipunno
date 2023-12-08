@@ -3,18 +3,9 @@ import { AiOutlineHome } from "react-icons/ai";
 import { BiSidebar } from "react-icons/bi";
 import { MdArrowBackIosNew, MdOutlineArrowForwardIos } from "react-icons/md";
 import styles from "../component/Home.style.module.css";
-import { useNavigate } from 'react-router-dom';
-
-
 
 export default function BreadcumbHome({ showSubjectname, seshowSubject, setShowProfile, title, selected_subject }: any) {
 
-
-
-  // console.log("selected_subject", selected_subject.subject);
-
-
-  const navigate = useNavigate()
   return (
     <section className="container pt-3">
       <div className="d-flex align-items-center gap-2">

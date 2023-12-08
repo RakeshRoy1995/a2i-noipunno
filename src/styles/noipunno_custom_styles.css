@@ -1,4 +1,4 @@
-.dashboard_page {
+/* .dashboard_page {
   height: 100vh;
   font-family: "Roboto" !important;
   background-color: #efefef !important;
@@ -25,6 +25,21 @@
   background-color: #efefef !important;
 }
 
-.teacher_compo_bg {
+.editTeacherProfilePage {
+  height: 100vh;
   background-color: #efefef !important;
 }
+
+.myProfilePage {
+  background-color: #efefef !important;
+}
+
+.faq_page_bg_color {
+  height: 100vh;
+  background-color: #efefef !important;
+}
+
+
+.teacher_compo_bg {
+  background-color: #efefef !important;
+} */

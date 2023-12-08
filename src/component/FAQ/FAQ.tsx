@@ -48,10 +48,7 @@ const FAQ = () => {
     //   "id": 9,
     //   "question": "In which year did the Titanic sink?",
     //   "answer": "The Titanic sank in 1912."
-    // },
-
-
-
+    // }
   ]
 
 

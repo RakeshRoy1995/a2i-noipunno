@@ -4,7 +4,6 @@ import TeacherDashboard from "./Dashboards/TeacherDashboard/TeacherDashboard";
 
 
 export default function Home() {
-
   return (
     <>
       {<TeacherDashboard />}

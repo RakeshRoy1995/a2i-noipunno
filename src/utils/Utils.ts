@@ -70,7 +70,9 @@ export const subject_name = (id: any) => {
   const data = localStorage.getItem("teacher_dashboard");
   const storageData = JSON.parse(data);
   if (storageData) {
-    const subject = storageData.data.subjects.find((data) => data.subject_id == id);
+    const subject = storageData.data.subjects.find(
+      (data) => data.subject_id == id
+    );
     return subject?.subject_info?.name;
   }
 };
@@ -305,7 +307,6 @@ export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
   return own_subjet;
 };
 
-
 export const formate_teanscript_data = (data: any) => {
   const our_all_pi = localStorage.getItem("our_all_pi");
   const our_all_piData = JSON.parse(our_all_pi);
@@ -326,8 +327,7 @@ export const formate_teanscript_data = (data: any) => {
         (d: any) => d.uid == stu.student_uid
       );
 
-
-      const all_PI_array = []
+      const all_PI_array = [];
 
       for (let y = 0; y < allPi.length; y++) {
         const pi = allPi[y];
@@ -340,7 +340,7 @@ export const formate_teanscript_data = (data: any) => {
           pi_data: pi_data[0],
         };
 
-        all_PI_array.push(Pi_obj)
+        all_PI_array.push(Pi_obj);
       }
 
       obj = {
@@ -351,5 +351,74 @@ export const formate_teanscript_data = (data: any) => {
     }
   }
 
+  return result;
+};
+
+export const single_formate_teanscript_data = (element: any) => {
+  const our_all_pi = localStorage.getItem("our_all_pi");
+  const our_all_piData = JSON.parse(our_all_pi);
+
+  const all_students = localStorage.getItem("all_students");
+  const all_studentsData = JSON.parse(all_students);
+
+  const result = [];
+
+  let obj = {};
+
+  const stu = element?.student_result[0];
+  const allPi = element?.student_result;
+
+  if (stu) {
+    const student_dta = all_studentsData.filter(
+      (d: any) => d.uid == stu.student_uid
+    );
+
+    const all_PI_array = [];
+
+    for (let y = 0; y < allPi.length; y++) {
+      const pi = allPi[y];
+
+      const pi_data = our_all_piData.filter((d: any) => d.uid == pi.pi_uid);
+
+      const Pi_obj = {
+        ...pi,
+        student_data: student_dta[0],
+        pi_data: pi_data[0],
+      };
+
+      all_PI_array.push(Pi_obj);
+    }
+
+    obj = {
+      student_data: student_dta[0],
+      all_PI_array,
+    };
+    result.push(obj);
+  }
+
+  return result;
+};
+
+export const formate_report_data = (report_data: any, dimention: any) => {
+  const result = [];
+  for (let index = 0; index < report_data.length; index++) {
+    const report_data_ = report_data[index];
+
+    let obj = {};
+
+    for (let index = 0; index < dimention.length; index++) {
+      const dimention_data = dimention[index];
+
+      if (report_data_.dimension_uid == dimention_data.uid) {
+        obj = {
+          ...report_data_,
+          ...dimention_data,
+        };
+
+        result.push(obj);
+        break;
+      }
+    }
+  }
   return result;
 };

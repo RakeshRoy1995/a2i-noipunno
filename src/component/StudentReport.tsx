@@ -4,8 +4,8 @@ import {
   teacher_dashboard,
   teacher_own_subject,
   get_pi_bi_evaluation_list,
-  get_pi_bi,
-  get_pi_bi_by_student_student,
+  get_report_card,
+  dimension_by_subject,
 } from "../Request";
 import html2pdf from "html2pdf.js";
 import { RotatingLines } from "react-loader-spinner";
@@ -20,25 +20,18 @@ import { SlBookOpen } from "react-icons/sl";
 import {
   section_name,
   shift_name,
-  teacher_name,
   branch_name,
-  subject_name,
-  make_group_by,
   all_students,
   convertToBanglaNumber,
-  formate_teanscript_data,
-  single_formate_teanscript_data,
+  formate_report_data,
+  subject_name,
 } from "../utils/Utils";
 // import {handleConvertToPdf} from "./Pdf"
 import Breadcumb from "../layout/Breadcumb";
 import Pdf from "./Pdf";
-// import { toPng } from "html-to-image";
-import { toPng } from "html-to-image";
-import { jsPDF } from "jspdf";
-import { Link } from "react-router-dom";
 import "../../src/styles/noipunno_custom_styles.css";
 
-export default function StudentTranscript() {
+export default function StudentReport() {
   const [student_info_pdf, setStudent_info_pdf] = useState<any>("");
   const [subject, setsubject] = useState([]);
   const [student_name, setstudent_name] = useState<any>("");
@@ -47,12 +40,14 @@ export default function StudentTranscript() {
   const [all_bis, setall_bis] = useState<any>([]);
   const [assesment, setassesment] = useState<any>([]);
   const [teacher, setteacher] = useState<any>("");
+  const [subject_name, setsubject_name] = useState<any>("");
   const [loader, setloader] = useState(true);
   const [selectedSunject, setselectedSunject] = useState<any>("");
   const [instititute, setinstititute] = useState<any>("");
   const [data, setdata] = useState<any>({});
   const [selected_student, setselected_student] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
+  const [student, setstudent] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [submittingLoading, setsubmittingLoading] = useState(false);
 
@@ -176,34 +171,34 @@ export default function StudentTranscript() {
     try {
       setteacher(allFelter.subject.split("-")[2]);
       setselected_student([]);
-      if (!student_name) {
-        const pi_bi_data = await get_pi_bi(
-          allFelter.subject.split("-")[0],
-          allFelter.branch,
-          allFelter.version,
-          allFelter.shift,
-          allFelter.subject.split("-")[1],
-          allFelter.section,
-          ""
-        );
-        const data = formate_teanscript_data(pi_bi_data.data.transcript);
 
-        setselected_student(data);
-      } else {
-        const pi_bi_data = await get_pi_bi_by_student_student(
-          allFelter.subject.split("-")[0],
-          allFelter.branch,
-          allFelter.version,
-          allFelter.shift,
-          allFelter.subject.split("-")[1],
-          allFelter.section,
-          student_name
-        );
-        const data = single_formate_teanscript_data(pi_bi_data.data.transcript);
+      const dimentions = await dimension_by_subject(
+        allFelter.subject.split("-")[0]
+      );
 
-        setselected_student(data);
-      }
+      const report_data = await get_report_card(
+        allFelter.subject.split("-")[0],
+        allFelter.branch,
+        allFelter.version,
+        allFelter.shift,
+        allFelter.subject.split("-")[1],
+        allFelter.section,
+        student_name
+      );
+      const data = formate_report_data(
+        report_data.data.report_card.student_result,
+        dimentions.data.data
+      );
+      console.log(`data`, data);
 
+      const student_data = all_students(student_name);
+      const subject_data = subject_name(allFelter.subject.split("-")[0]);
+
+      setstudent(student_data)
+      setsubject_name(subject_data)
+
+      console.log(`student_data`, student_data , subject_data);
+      // setselected_student(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -265,8 +260,10 @@ export default function StudentTranscript() {
         setTimeout(() => {
           const pdf = html2pdf().from(element).set(options).outputPdf();
           pdf.save();
+          console.log("element", element);
         }, 700);
       }
+      // console.log("student", student);
     }
     setsubmittingLoading(false);
   };
@@ -289,8 +286,7 @@ export default function StudentTranscript() {
                     data-bs-target="#expertness"
                     href="#"
                   >
-                    <SlBookOpen className="me-1" /> পারদর্শিতার মূল্যায়ন
-                    প্রতিবেদন(PI)
+                    <SlBookOpen className="me-1" /> শিক্ষার্থীদের রিপোর্ট কার্ড
                   </a>
                 </li>
                 {/* <li className="nav-item">

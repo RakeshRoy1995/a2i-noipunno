@@ -68,7 +68,7 @@ const LoginPage = () => {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         window.location.assign("/");
       } else {
-        seterror("Wrong Crediantial");
+        seterror("পাসওয়ার্ড মেলেনি");
       }
     } catch (error) {
       seterror(
@@ -80,14 +80,14 @@ const LoginPage = () => {
     }
   };
 
-  const handleChange = (event) => {
-    const result = event.target.value.replace(/\D/g, "");
-    setValue(result);
-  };
 
   useEffect(() => {
     const userId_Cookes = getCookie("userId");
     const userPin_Cookies = getCookie("userPin");
+
+    localStorage.removeItem("customer_login_auth");
+    localStorage.removeItem("token");
+
     // console.log("userId_Cookes", userId_Cookes);
     // console.log("userPin_Cookies", userPin_Cookies);
     if (userId_Cookes && userPin_Cookies) {
@@ -96,9 +96,6 @@ const LoginPage = () => {
     }
   }, []);
 
-  const redirect = () => {
-    window.location.href = "https://forms.gle/sFrdsXavPaQryQ6k8";
-  };
 
   return (
     <>
@@ -108,18 +105,18 @@ const LoginPage = () => {
 
       <section id="body" className="login-page">
         <div className="login-bg min-vh-100 position-relative">
-          <div className="marque-notification pointer" onClick={redirect} >
+          {/* <div className="marque-notification pointer" onClick={redirect} >
             <div className="marquee-container">
               <div className="marquee-content">
                 প্রতিষ্ঠান প্রধান হিসেবে লগইন এসএমএস না পেয়ে থাকলে{" "}
                 এখানে ক্লিক করুন
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="container">
             <div className="row min-vh-90-100 position-relative d-flex align-items-center justify-content-center py-3">
-              <div className="col-sm-12 col-md-5 py-2">
+              <div className="col-sm-12 col-md-6 py-2">
                 <img src={noipunnoLogo} alt="logo" className="loginLogo" />
                 <h1 className="teacher-login-title">
                   বিষয়ভিত্তিক মূল্যায়ন অ্যাপ্লিকেশন
@@ -129,10 +126,10 @@ const LoginPage = () => {
                   অ্যাডভেঞ্চার শুরু করুন
                 </p>
               </div>
-              <div className="col-sm-12 col-md-7 py-2">
+              <div className="col-sm-12 col-md-6 py-2">
                 <div className="card loginCard max-width-540 m-auto">
                   <p className="login-title text-center">লগ ইন</p>
-                  {error && <p className="text-center text-danger">{error}</p>}
+                  {error && <div className="alert alert-danger text-white">{error}</div>}
 
                   <form onSubmit={handleSubmit}>
                     <div className="form-group my-1">
@@ -257,7 +254,7 @@ const LoginPage = () => {
                     <div className="form-group my-2">
                       <p className="mb-1">
                         <Link
-                          to="https://accounts.project-ca.com/password/reset"
+                          to="/password/reset"
                           className="forget-password"
                         >
                           পাসওয়ার্ড ভুলে গেছেন?

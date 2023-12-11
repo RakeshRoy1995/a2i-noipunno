@@ -24,6 +24,32 @@ export function loginPassword(data: any) {
   return axios(options);
 }
 
+export function resetPassword(data: any) {
+  const page_list = `${API_URL}/v2/account-otp`;
+
+  const options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
+export function otpComfirm(data: any) {
+  const page_list = `${API_URL}/v2/account-otp-verify`;
+
+  const options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
 export function all_teachers(data: any = "") {
   const page_list = `${API_URL}/v2/teacher-dashboard`;
 
@@ -243,6 +269,28 @@ export function get_pi_bi_evaluation_list(submit_status: any = "") {
     method: "get",
     headers: { "content-type": "application/json" },
     url: page_list,
+  };
+
+  return axios(options);
+}
+
+export function get_pi_bi(subject_uid , branch_uid , version_uid , shift_uid , class_uid , section_uid , student_uid="") {
+  const page_list = `${EVULATION_API}/transcript`;
+  // const page_list = `/assets/transcript_response.json`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+    params : {
+      subject_uid,
+      branch_uid,
+      version_uid,
+      shift_uid,
+      class_uid,
+      section_uid,
+      student_uid
+    }
   };
 
   return axios(options);

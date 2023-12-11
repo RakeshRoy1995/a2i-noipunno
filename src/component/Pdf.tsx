@@ -4,231 +4,41 @@ import { BsCheckCircle, BsFillFileEarmarkArrowDownFill } from "react-icons/bs";
 import styles from "./Home.style.module.css";
 import { TiTick } from "react-icons/ti";
 import {
-    section_name,
-    shift_name,
-    teacher_name,
-    branch_name,
-  } from "../utils/Utils";
+  section_name,
+  shift_name,
+  teacher_name,
+  branch_name,
+  convertToBanglaNumber,
+  subject_name,
+} from "../utils/Utils";
 
-function Pdf({data, selectedSunject, allFelter, student_info_pdf , handleConvertToPdf }:any) {
-
-
+function Pdf({
+  data,
+  instititute,
+  selectedSunject,
+  allFelter,
+  student_info_pdf,
+  handleConvertToPdf,
+  unique_id,
+  teacher,
+}: any) {
+  const imageShow = JSON.parse(localStorage.getItem("teacher_sign_show"));
+  const image = localStorage.getItem("teacher_sign");
   return (
     <div>
       <div>
-
-
-
-      {/* <div className="container border">
-            <div className="row pb-5 pt-2">
-              <div className="col-sm-6 col-md-3 py-2">
-                <div className="border-0 p-2 h-100">
-                  <div className="d-flex">
-                    <div>
-                      <h6>পারদর্শিতা সূচক ৬.১.১ </h6>
-                      <h6 style={{ fontSize: "14px" }}>
-                        নিজের এবং অন্যের প্রয়োজন ও আবেগ বিবেচনায় নিয়ে যোগাযোগ
-                        করতে পারছে।
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-3 py-2">
-                <div
-                  className="card h-100 shadow-lg border-0 p-2"
-                  style={{ backgroundColor: "#F0FAE9" }}
-                >
-                  <div className="d-flex">
-                    <div>
-                      <TiTick className={`${styles.tick_mark}`} />
-                    </div>
-                    <div>
-                      <h6 style={{ fontSize: "14px" }}>
-                        নিজের এবং অন্যের প্রয়োজন ও আবেগ বিবেচনায় নিয়ে যোগাযোগ
-                        করতে পারছে।
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-3 py-2">
-                <div className="card shadow-lg border-0 p-2 h-100">
-                  <div className="d-flex ">
-                    <div>
-                      <TiTick className={`${styles.tick_mark}`} />
-                    </div>
-                    <div>
-                      <h6 style={{ fontSize: "14px" }}>
-                        দলের কর্মপরিকল্পনায় বা সিদ্ধান্তগ্রহণে যথাযথভাবে
-                        অংশগ্রহণ না করলেও দলীয় নির্দেশনা অনুযায়ী নিজের
-                        দায়িত্বটুকু যথাযথভাবে পালন করছে
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-3 py-2">
-                <div
-                  className="card shadow-lg border-0 p-2 h-100"
-                  style={{ backgroundColor: "#F0FAE9" }}
-                >
-                  <div className="d-flex">
-                    <div>
-                      <TiTick className={`${styles.tick_mark}`} />
-                    </div>
-                    <div>
-                      <h6 style={{ fontSize: "14px" }}>
-                        দলের সিদ্ধান্ত ও কর্মপরিকল্পনায় সক্রিয় অংশগ্রহণ করছে,
-                        সেই অনুযায়ী নিজের ভূমিকা যথাযথভাবে পালন করছে
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-3 py-2">
-                <div className="border-0 p-2 h-100">
-                  <div className="d-flex">
-                    <div>
-                      <h6>পারদর্শিতা সূচক ৬.১.১ </h6>
-                      <h6 style={{ fontSize: "14px" }}>
-                        নিজের এবং অন্যের প্রয়োজন ও আবেগ বিবেচনায় নিয়ে যোগাযোগ
-                        করতে পারছে।
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-3 py-2">
-                <div
-                  className="card h-100 shadow-lg border-0 p-2"
-                  style={{ backgroundColor: "#F0FAE9" }}
-                >
-                  <div className="d-flex">
-                    <div>
-                      <TiTick className={`${styles.tick_mark}`} />
-                    </div>
-                    <div>
-                      <h6 style={{ fontSize: "14px" }}>
-                        নিজের এবং অন্যের প্রয়োজন ও আবেগ বিবেচনায় নিয়ে যোগাযোগ
-                        করতে পারছে।
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-3 py-2">
-                <div className="card shadow-lg border-0 p-2 h-100">
-                  <div className="d-flex ">
-                    <div>
-                      <TiTick className={`${styles.tick_mark}`} />
-                    </div>
-                    <div>
-                      <h6 style={{ fontSize: "14px" }}>
-                        দলের কর্মপরিকল্পনায় বা সিদ্ধান্তগ্রহণে যথাযথভাবে
-                        অংশগ্রহণ না করলেও দলীয় নির্দেশনা অনুযায়ী নিজের
-                        দায়িত্বটুকু যথাযথভাবে পালন করছে
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-3 py-2">
-                <div
-                  className="card shadow-lg border-0 p-2 h-100"
-                  style={{ backgroundColor: "#F0FAE9" }}
-                >
-                  <div className="d-flex">
-                    <div>
-                      <TiTick className={`${styles.tick_mark}`} />
-                    </div>
-                    <div>
-                      <h6 style={{ fontSize: "14px" }}>
-                        দলের সিদ্ধান্ত ও কর্মপরিকল্পনায় সক্রিয় অংশগ্রহণ করছে,
-                        সেই অনুযায়ী নিজের ভূমিকা যথাযথভাবে পালন করছে
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-3 py-2">
-                <div className="border-0 p-2 h-100">
-                  <div className="d-flex">
-                    <div>
-                      <h6>পারদর্শিতা সূচক ৬.১.১ </h6>
-                      <h6 style={{ fontSize: "14px" }}>
-                        নিজের এবং অন্যের প্রয়োজন ও আবেগ বিবেচনায় নিয়ে যোগাযোগ
-                        করতে পারছে।
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-3 py-2">
-                <div
-                  className="card h-100 shadow-lg border-0 p-2"
-                  style={{ backgroundColor: "#F0FAE9" }}
-                >
-                  <div className="d-flex">
-                    <div>
-                      <TiTick className={`${styles.tick_mark}`} />
-                    </div>
-                    <div>
-                      <h6 style={{ fontSize: "14px" }}>
-                        নিজের এবং অন্যের প্রয়োজন ও আবেগ বিবেচনায় নিয়ে যোগাযোগ
-                        করতে পারছে।
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-3 py-2">
-                <div className="card shadow-lg border-0 p-2 h-100">
-                  <div className="d-flex ">
-                    <div>
-                      <TiTick className={`${styles.tick_mark}`} />
-                    </div>
-                    <div>
-                      <h6 style={{ fontSize: "14px" }}>
-                        দলের কর্মপরিকল্পনায় বা সিদ্ধান্তগ্রহণে যথাযথভাবে
-                        অংশগ্রহণ না করলেও দলীয় নির্দেশনা অনুযায়ী নিজের
-                        দায়িত্বটুকু যথাযথভাবে পালন করছে
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-6 col-md-3 py-2">
-                <div
-                  className="card shadow-lg border-0 p-2 h-100"
-                  style={{ backgroundColor: "#F0FAE9" }}
-                >
-                  <div className="d-flex">
-                    <div>
-                      <TiTick className={`${styles.tick_mark}`} />
-                    </div>
-                    <div>
-                      <h6 style={{ fontSize: "14px" }}>
-                        দলের সিদ্ধান্ত ও কর্মপরিকল্পনায় সক্রিয় অংশগ্রহণ করছে,
-                        সেই অনুযায়ী নিজের ভূমিকা যথাযথভাবে পালন করছে
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
-        <div id="contentToConvert" className="container border">
+        <div id={"contentToConvert_" + unique_id} className="container border">
           <div className="row p-2">
             <div className="text-center py-3">
-              <h6 style={{ fontSize: "14px" }}>মডেল একাডেমি</h6>
-              <h6 style={{ fontSize: "14px" }}>[একটি আদর্শ উচ্চ বিদ্যালয়]</h6>
               <h6 style={{ fontSize: "14px" }}>
-                প্রিন্সিপাল আব্দুল কাশেম সড়ক, সরকারি ডি-টাইপ কলোনী, মিরপুর-১,
-                ঢাকা-১২১৬
+                {instititute?.institute_name}
               </h6>
-              
-              <h6 style={{ fontSize: "14px", fontWeight: "bold" }}>
+              <h6 style={{ fontSize: "14px" }}>
+                {instititute?.unions} ,{" "}
+                {instititute?.district?.district_name_bn}
+              </h6>
+
+              {/* <h6 style={{ fontSize: "14px", fontWeight: "bold" }}>
                 
               {allFelter?.mullayon == 1234567890 && "শিখনকালীন মূল্যায়ন"  }
               {allFelter?.mullayon == 1234567891 && "ষাষ্মাসিক সামষ্টিক মূল্যায়ন"  }
@@ -238,10 +48,10 @@ function Pdf({data, selectedSunject, allFelter, student_info_pdf , handleConvert
                 
                 এর বিষয়ভিত্তিক
                 ট্রান্সক্রিপ্ট-২০২৩
-              </h6>
+              </h6> */}
             </div>
-            <div className="">
-              <table className="table table-bordered table-sm table-responsive">
+            <div className="pdf_table">
+              <table className="table table-bordered border-dark table-sm table-responsive ">
                 <thead>
                   <tr>
                     <th
@@ -251,7 +61,9 @@ function Pdf({data, selectedSunject, allFelter, student_info_pdf , handleConvert
                         fontWeight: "bold",
                       }}
                     >
-                      শিক্ষার্থীর নাম: {student_info_pdf.student_name_bn}
+                      শিক্ষার্থীর নাম:{" "}
+                      {student_info_pdf.student_name_bn ||
+                        student_info_pdf.student_name_en}
                     </th>
                     <th
                       style={{
@@ -259,7 +71,8 @@ function Pdf({data, selectedSunject, allFelter, student_info_pdf , handleConvert
                         fontWeight: "bold",
                       }}
                     >
-                      শিক্ষার্থীর আইডি: {student_info_pdf.roll}
+                      শিক্ষার্থীর রোল :{" "}
+                      {convertToBanglaNumber(student_info_pdf.roll)}
                     </th>
                   </tr>
                   <tr>
@@ -285,11 +98,8 @@ function Pdf({data, selectedSunject, allFelter, student_info_pdf , handleConvert
                         fontWeight: "bold",
                       }}
                     >
-                        
-                      বিষয়: 
-                      {
-                            selectedSunject ? <>{selectedSunject}</> : ""
-                        }
+                      বিষয়:
+                      {subject_name(allFelter?.subject?.split("-")[0])}
                     </th>
                     <th
                       style={{
@@ -297,7 +107,7 @@ function Pdf({data, selectedSunject, allFelter, student_info_pdf , handleConvert
                         fontWeight: "bold",
                       }}
                     >
-                      বিষয় শিক্ষকের নাম:
+                      বিষয় শিক্ষকের নাম: {teacher}
                     </th>
                   </tr>
                   <tr>
@@ -333,83 +143,25 @@ function Pdf({data, selectedSunject, allFelter, student_info_pdf , handleConvert
                     </th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td className="w-25">
-                      ৬.১.১ <br />
-                      নিজের এবং অন্যের প্রয়োজন ও আবেগ বিবেচনায় নিয়ে যোগাযোগ করতে
-                      পারছে।
-                    </td>
-                    <td className="w-25">
-                      <BsCheckCircle className="fs-5 pe-1" />
-                      অন্যের সাথে যোগাযোগের সময়ে নিজের চাহিদা প্রকাশ করতে পারছে।
-                    </td>
-                    <td className="w-25">
-                      অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় ঐ ব্যক্তির আগ্রহ,
-                      চাহিদা ও আবেগ বিবেচনায় নিতে পারছে।
-                    </td>
-                    <td className="w-25">
-                      মর্যাদাপূর্ণ শারীরিক ভাষা প্রয়োগের পাশাপাশি ব্যাক্তির সাথে
-                      সম্পর্কের ধরন অনুযায়ী যথাযথভাবে সম্বোধন করতে পারছে
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="w-25">
-                      ৬.১.১ <br />
-                      নিজের এবং অন্যের প্রয়োজন ও আবেগ বিবেচনায় নিয়ে যোগাযোগ করতে
-                      পারছে।
-                    </td>
-                    <td className="w-25">
-                      <BsCheckCircle className="fs-5 pe-1" />
-                      অন্যের সাথে যোগাযোগের সময়ে নিজের চাহিদা প্রকাশ করতে পারছে।
-                    </td>
-                    <td className="w-25">
-                      অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় ঐ ব্যক্তির আগ্রহ,
-                      চাহিদা ও আবেগ বিবেচনায় নিতে পারছে।
-                    </td>
-                    <td className="w-25">
-                      মর্যাদাপূর্ণ শারীরিক ভাষা প্রয়োগের পাশাপাশি ব্যাক্তির সাথে
-                      সম্পর্কের ধরন অনুযায়ী যথাযথভাবে সম্বোধন করতে পারছে
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="w-25">
-                      ৬.১.১ <br />
-                      নিজের এবং অন্যের প্রয়োজন ও আবেগ বিবেচনায় নিয়ে যোগাযোগ করতে
-                      পারছে।
-                    </td>
-                    <td className="w-25">
-                      <BsCheckCircle className="fs-5 pe-1" />
-                      অন্যের সাথে যোগাযোগের সময়ে নিজের চাহিদা প্রকাশ করতে পারছে।
-                    </td>
-                    <td className="w-25">
-                      অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় ঐ ব্যক্তির আগ্রহ,
-                      চাহিদা ও আবেগ বিবেচনায় নিতে পারছে।
-                    </td>
-                    <td className="w-25">
-                      মর্যাদাপূর্ণ শারীরিক ভাষা প্রয়োগের পাশাপাশি ব্যাক্তির সাথে
-                      সম্পর্কের ধরন অনুযায়ী যথাযথভাবে সম্বোধন করতে পারছে
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="w-25">
-                      ৬.১.১ <br />
-                      নিজের এবং অন্যের প্রয়োজন ও আবেগ বিবেচনায় নিয়ে যোগাযোগ করতে
-                      পারছে।
-                    </td>
-                    <td className="w-25">
-                      <BsCheckCircle className="fs-5 pe-1" />
-                      অন্যের সাথে যোগাযোগের সময়ে নিজের চাহিদা প্রকাশ করতে পারছে।
-                    </td>
-                    <td className="w-25">
-                      অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় ঐ ব্যক্তির আগ্রহ,
-                      চাহিদা ও আবেগ বিবেচনায় নিতে পারছে।
-                    </td>
-                    <td className="w-25">
-                      মর্যাদাপূর্ণ শারীরিক ভাষা প্রয়োগের পাশাপাশি ব্যাক্তির সাথে
-                      সম্পর্কের ধরন অনুযায়ী যথাযথভাবে সম্বোধন করতে পারছে
-                    </td>
-                  </tr>
+                <tbody className="pdf_table_pi_show">
+                  {data?.all_PI_array?.map((all_pi: any, k: any) => (
+                    <tr key={k}>
+                      <td className="w-25">
+                        {convertToBanglaNumber(all_pi.pi_data.pi_no)} <br />
+                        {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
+                      </td>
+
+                      {all_pi.pi_data.pi_attribute.map((pi_data: any, key) => (
+                        <td className="w-25">
+                          {all_pi.weight_uid == pi_data.weight_uid && (
+                            <BsCheckCircle className="fs-5 pe-1" />
+                          )}
+
+                          {pi_data.title_bn || pi_data.title_en}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
                 </tbody>
               </table>
               <div className="d-flex pt-5 pb-1">
@@ -417,8 +169,13 @@ function Pdf({data, selectedSunject, allFelter, student_info_pdf , handleConvert
                   className="w-50"
                   style={{ fontSize: "14px", fontWeight: "bold" }}
                 >
-                  বিষয় শিক্ষকের স্বাক্ষরঃ
+                  <p>বিষয় শিক্ষকের নাম: {teacher}</p>
+                  
+                  {imageShow && <img src={image} style={{ width: "40%" }} />}
+                   
+                  <p>বিষয় শিক্ষকের স্বাক্ষরঃ</p>
                 </div>
+
                 <div
                   className="w-50"
                   style={{ fontSize: "14px", fontWeight: "bold" }}
@@ -428,11 +185,9 @@ function Pdf({data, selectedSunject, allFelter, student_info_pdf , handleConvert
               </div>
             </div>
           </div>
-
-          
         </div>
 
-        <div
+        {/* <div
           className="d-flex gap-2 pointer"
           onClick={(e) => handleConvertToPdf()}
         >
@@ -440,7 +195,7 @@ function Pdf({data, selectedSunject, allFelter, student_info_pdf , handleConvert
             <BsFillFileEarmarkArrowDownFill className="fs-4 me-2" />
             ডাউনলোড করুন
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

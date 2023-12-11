@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import "../../assets/dashboard_materials/css/dashboard.css";
+// import "../../assets/dashboard_materials/css/dashboard.css";
 import { Link } from "react-router-dom";
 import editIcon from "../../assets/dashboard_materials/images/dashboard/edit-2.svg";
+
 import teacherProfileImg from "../../assets/dashboard_materials/images/dashboard/60px.png";
 import femaleProfileImg from "../../assets/dashboard_materials/images/dashboard/female_teacher.png";
 
@@ -69,13 +70,13 @@ const TeacherProfileCard = () => {
           </div>
         </div>
         <div className="teacher-info">
-          <h2 className="card-title">
+          <h2 className="card-title text-two-line" >
             {/* আতাউর রহমান */}
             {teacherInfos?.name}
           </h2>
           <p className="card-text">
             {/* 95481468716473 */}
-            {teacherInfos?.eiin}
+            {teacherInfos?.pdsid || teacherInfos?.caid}
           </p>
           {/* <p className="card-text">পাবনা জিলা স্কুল, পাবনা</p> */}
           <p className="card-text">{schoolName}</p>

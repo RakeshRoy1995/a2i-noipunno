@@ -1,5 +1,5 @@
 import Teacher from "./Teacher";
-import "../../src/styles/noipunno_custom_styles.css";
+
 
 const MullayonKoron = () => {
   return (

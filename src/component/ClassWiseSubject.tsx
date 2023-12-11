@@ -7,7 +7,7 @@ import Breadcumbtitle from "../layout/Breadcumb";
 import { Spinner } from "react-bootstrap";
 import bookIcon from '../assets/dashboard_materials/images/dashboard/bicon.svg';
 import card from '../assets/dashboard_materials/css/dashboard.css';
-import "../styles/noipunno_custom_styles.css"
+
 
 
 

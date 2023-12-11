@@ -196,3 +196,191 @@
     color: #7daeb0;
     font-family: 'Public Sans';
 }
+
+
+.alert-danger,.alert-error,.bg-danger,.label-danger {
+    background-color: #dc3545!important;
+}
+
+a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hover,a.bg-danger:focus,a.bg-danger:hover,a.label-danger:focus,a.label-danger:hover,button.alert-danger:focus,button.alert-danger:hover,button.alert-error:focus,button.alert-error:hover,button.bg-danger:focus,button.bg-danger:hover,button.label-danger:focus,button.label-danger:hover {
+    background-color: #bd2130!important
+}
+
+
+
+
+
+
+
+
+.std-identity .institution-name {
+    color      : var(--text_dark);
+    font-family: Roboto;
+    font-size  : 15px;
+    font-style : normal;
+    font-weight: 600;
+    line-height: 38px;
+    font-weight: 600;
+    width      : 200px;
+  }
+  
+  .std-identity .dots {
+    color      : var(--text_dark);
+    font-family: Roboto;
+    font-size  : 15px;
+    font-style : normal;
+    font-weight: 600;
+    line-height: 38px;
+  }
+  
+  .sucjects {
+    color      : var(--text_dark);
+    font-family: Roboto;
+    font-size  : 30px;
+    font-style : normal;
+    font-weight: 400;
+    line-height: 38px;
+  }
+  
+  .subjucts-icon-name .icon {
+    color      : var(--text_dark);
+    font-family: Roboto;
+    font-size  : 25px;
+    font-style : normal;
+    font-weight: 600;
+    line-height: 38px;
+  }
+  .subjucts-icon-name .subject {
+    color      : var(--text_dark);
+    font-family: Roboto;
+    font-size  : 15px;
+    font-style : normal;
+    font-weight: 600;
+    line-height: 38px;
+  }
+  
+  .report-card-design-title {
+    color           : var(--text_dark);
+    font-family     : Roboto;
+    font-size       : 28px;
+    font-style      : normal;
+    font-weight     : 400;
+    line-height     : 38px;
+    background-color: #DDDEE0;
+    margin          : 16px 0xp 8px 0px;
+    font-weight     : 600;
+  }
+  
+  .report-card-design-subject-title {
+    color      : #231F20;
+    font-family: Roboto;
+    font-size  : 18px;
+    font-style : normal;
+    font-weight: 600;
+    line-height: 38px;
+  }
+  
+  .report-card-design-subject-assessment {
+    color         : #231F20;
+    font-family   : Roboto;
+    font-size     : 12px;
+    font-style    : normal;
+    font-weight   : 600;
+    line-height   : 30px;
+    letter-spacing: 0px;
+    padding       : 16px 10px 16px 10px;
+  }
+  
+  .assessment-mark-light-first {
+    border-top: 2px solid #000000;
+    height    : 30px;
+    width     : 14.285%;
+  }
+  
+  .assessment-mark-light {
+    border-top : 2px solid #000000;
+    border-left: 2px solid #000000;
+    height     : 50px;
+    width      : 14.285%;
+  }
+
+
+  .report-card-design-title {
+    color: var(--text_dark);
+    font-family: Roboto;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 38px;
+    background-color: #dddee0;
+    margin: 16px 0xp 8px 0px;
+    font-weight: 600;
+  }
+  
+  .report-card-design-subject-title {
+    color: #231f20;
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px;
+  }
+  
+  .report-card-design-subject-assessment {
+    color: #231f20;
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: 0px;
+    padding: 16px 10px 16px 10px;
+  }
+  
+  .assessment-mark-light-first {
+    border-top: 2px solid #000000;
+    height: 30px;
+    width: 14.285%;
+  }
+  
+  .assessment-mark-light {
+    border-top: 2px solid #000000;
+    border-left: 2px solid #000000;
+    height: 50px;
+    width: 14.285%;
+  }
+  .assessment-mark-dark {
+    border-top: 2px solid #000000;
+    border-left: 2px solid #000000;
+    background-color: #6c6d70;
+    height: 50px;
+    width: 14.285%;
+  }
+  .assessment-scale-box-dark {
+    height: 39px;
+    width: 39px;
+    border-radius: 2px;
+    background-color: #6c6d70;
+    border: 1px solid #000000;
+  }
+  .indicators-check-boxes {
+    padding: 0px 0px 10px 24px;
+  }
+  .assessment-scale-box-light {
+    height: 39px;
+    width: 39px;
+    border-radius: 2px;
+    border: 1px solid #000000;
+  }
+.pdf_table_pi_show tr td {
+    font-size: 10px;
+}
+
+
+.text-two-line {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; / number of lines to show /
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
+ }

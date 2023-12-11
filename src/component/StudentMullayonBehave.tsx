@@ -144,6 +144,7 @@ export default function StudentMullayonBehave({
                     "আপনি সব শিক্ষার্থীকে চিহ্নিত করেননি। অনুগ্রহ করে সকল শিক্ষার্থীকে চিহ্নিত করুন",
                   confirmButtonText: "হ্যাঁ",
                 });
+                refresh();
               } else {
                 const studuent_mark: any = make_group_by(total_bi_submit);
                 let get_unmarked_student: any = "";
@@ -215,6 +216,8 @@ export default function StudentMullayonBehave({
             }
           });
         } else {
+
+          console.log(`444`, 444);
           if (submitData.length > 0) {
             setcomment_status(true);
             checkedIn_comment(submitObj);

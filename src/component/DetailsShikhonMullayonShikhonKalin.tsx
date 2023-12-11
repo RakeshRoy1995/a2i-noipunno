@@ -37,9 +37,12 @@ export default function DetailsShikhonMullayonShikhonKalin({
       pi_uid,
       assessment_uid
     );
-    setall_submited_PI(data?.data?.evaluation);
-    if (data.data?.evaluation?.length) {
-      setis_draft(data.data?.evaluation[0]?.submit_status);
+
+    const ovigota_uid = showDetailsshikhonKalinMullayon.uid
+    const ev_data = data?.data?.evaluation.filter((d)=>  d.oviggota_uid == ovigota_uid )
+    setall_submited_PI(ev_data);
+    if (ev_data?.length) {
+      setis_draft(ev_data[0]?.submit_status);
     }
     setShowModal(true);
 

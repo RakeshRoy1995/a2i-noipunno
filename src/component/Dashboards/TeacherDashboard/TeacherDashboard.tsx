@@ -1,5 +1,5 @@
-import '../../../assets/dashboard_materials/css/dashboard.css';
-import '../../../../src/styles/noipunno_custom_styles.css';
+// import '../../../assets/dashboard_materials/css/dashboard.css';
+// import '../../../../src/styles/noipunno_custom_styles.css';
 
 import BannerSection from "../BannerSection";
 import BishoybittikThottoOMullayon from "../BishoybittikThottoOMullayon";

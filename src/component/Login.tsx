@@ -80,9 +80,9 @@ export default function Login() {
                     boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
                   }}
                 >
-                  {error && <p className="text-center text-danger">{error}</p>}
+                  {error && <div className="alert alert-danger">{error}</div>}
 
-                  <p className="teacher-login-title text-center">লগ ইন</p>
+                  <div className="teacher-login-title text-center">লগ ইন</div>
 
                   <form noValidate onSubmit={handleSubmit}>
                     <div className="form-group">
@@ -176,17 +176,17 @@ export default function Login() {
                       </div>
                     </div>
 
-                    <div className="form-group form-check my-2">
+                    {/* <div className="form-group form-check my-2">
                       <p className="mb-1">
                         <Link
-                          to="https://accounts.project-ca.com/password/reset"
+                          to="password/reset"
                           className="link-success"
                           style={{ color: "#428F92" }}
                         >
-                          পাসওয়ার্ড ভুলে গেছেন?. ক্লিক করুন
+                          পাসওয়ার্ড ভুলে গেছেন?. ক্লিক করুন 
                         </Link>
                       </p>
-                    </div>
+                    </div> */}
 
                     <button
                       type="submit"

@@ -51,11 +51,10 @@ export default function StudentMullayonModal({
   const [submitObj_wid_null, setsubmitObj_wid_null] = useState<any>([]);
   const [submited, setsubmited] = useState<any>(false);
   const [firstRender, setfirstRender] = useState<any>(true);
-
   const fetchData = async () => {
     const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
     const own_SUbjects = own_SUbjects__ ? JSON.parse(own_SUbjects__) : "";
-    
+
     let own_subjet: any = "";
     if (own_SUbjects) {
       own_subjet = own_SUbjects;
@@ -76,22 +75,22 @@ export default function StudentMullayonModal({
 
       const null_pi = [];
 
-        for (const x in obj) {
-          if (obj[x]?.weight_uid == null) {
-            // const id: any = obj[x].student_uid;
-            // const el: any = document.getElementsByClassName(id);
+      for (const x in obj) {
+        if (obj[x]?.weight_uid == null) {
+          // const id: any = obj[x].student_uid;
+          // const el: any = document.getElementsByClassName(id);
 
-            // if (el) {
-            //   el[0].parentElement.parentElement.parentElement.nextElementSibling.style.visibility =
-            //     "";
-            //   el[0].parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling.style.visibility =
-            //     "";
-            //   el[0].parentElement.parentElement.parentElement.innerHTML = obj[x].remark;
-            // }
+          // if (el) {
+          //   el[0].parentElement.parentElement.parentElement.nextElementSibling.style.visibility =
+          //     "";
+          //   el[0].parentElement.parentElement.parentElement.nextElementSibling.nextElementSibling.style.visibility =
+          //     "";
+          //   el[0].parentElement.parentElement.parentElement.innerHTML = obj[x].remark;
+          // }
 
-            null_pi.push(obj[x]);
-          }
+          null_pi.push(obj[x]);
         }
+      }
       setsubmitObj_wid_null(null_pi);
       // console.log(`is_draft`, all_submited_PI, obj);
     }
@@ -151,7 +150,7 @@ export default function StudentMullayonModal({
           const submit_obj_ = obj_ ? JSON.parse(obj_) : {};
           const submit_obj = { ...submit_obj_, ...submitObj };
           localStorage.setItem("PI_saved", JSON.stringify(submit_obj));
-          
+
           // refresh()
           // setmsg("আপনার খসড়া সংরক্ষণ করা হয়েছে");
 
@@ -191,7 +190,7 @@ export default function StudentMullayonModal({
       const params: any = {
         evaluate_type: assessment_uid,
         competence_uid,
-        oviggota_uid : ( assessment_uid == 1234567892 || assessment_uid == 1234567891 ) ? null : oviggota_uid,
+        oviggota_uid: (assessment_uid == 1234567892 || assessment_uid == 1234567891) ? null : oviggota_uid,
         pi_uid,
         weight_uid,
         class_room_uid: class_room_id,
@@ -417,7 +416,7 @@ export default function StudentMullayonModal({
                     <th
                       scope="col"
                       className="col-md-3 col-lg-2"
-                      style={{ width: "30%" }}
+                      style={{ width: "20%" }}
                     >
                       শিক্ষার্থীর নাম{" "}
                       {/* <BiFilterAlt className="fs-5 ms-4" /> */}
@@ -425,19 +424,19 @@ export default function StudentMullayonModal({
                     <th
                       scope="col"
                       className="col-md-3 col-lg-2"
-                      style={{ width: "20%" }}
+                      style={{ width: "10%" }}
                     ></th>
                     <th
                       scope="col"
                       className="col-md-3 col-lg-2"
-                      style={{ width: "20%" }}
+                      style={{ width: "10%" }}
                     >
                       {/* <BiFilterAlt className="fs-5" /> */}
                     </th>
                     <th
                       scope="col"
                       className="col-md-3 col-lg-2"
-                      style={{ width: "20%" }}
+                      style={{ width: "10%" }}
                     >
                       {comment_status && (
                         <button
@@ -544,7 +543,7 @@ export default function StudentMullayonModal({
 
                                   {/* {pi_attr.uid} */}
 
-                                  { kedy === 0 && (
+                                  {kedy === 0 && (
                                     <h5>
                                       {show_comment_box_Pi(
                                         pi_attr,

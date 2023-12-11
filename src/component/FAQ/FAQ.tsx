@@ -1,7 +1,5 @@
 import { convertToBanglaNumber } from '../../utils/Utils';
 import './faq.css';
-import "../../styles/noipunno_custom_styles.css"
-
 
 const FAQ = () => {
 
@@ -49,6 +47,8 @@ const FAQ = () => {
     //   "question": "In which year did the Titanic sink?",
     //   "answer": "The Titanic sank in 1912."
     // }
+
+
   ]
 
 

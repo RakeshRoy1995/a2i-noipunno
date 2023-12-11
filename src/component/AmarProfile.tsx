@@ -6,11 +6,13 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import style from "./Home.style.module.css";
 import techerAvatar from "../../public/assets/images/teacher.jpeg";
 import { convertToBanglaNumber } from "../utils/Utils";
-import "../../src/styles/noipunno_custom_styles.css";
+
 
 const AmarProfile = () => {
   const [userDetails, setuserDetails] = useState<any>({});
   const [signTeacher, setsignTeacher] = useState<any>("");
+  const [error, seterror] = useState<any>("");
+  const [showSign, setshowSign] = useState<any>(false);
 
   useEffect(() => {
     const get_loacl_storage_data = JSON.parse(
@@ -25,8 +27,10 @@ const AmarProfile = () => {
   function uploadImage() {
     const input: any = document.getElementById("imageInput");
     const preview: any = document.getElementById("previewImage");
-
+    seterror("")
     if (input.files && input.files[0]) {
+
+      setshowSign(false)
       const img = new window.Image();
 
       img.onload = function () {
@@ -35,57 +39,47 @@ const AmarProfile = () => {
         const maxHeight = 150;
 
         if (input.files[0].size / 1024 > maxSizeKB) {
-          alert("Image size exceeds 100 KB limit.");
+          seterror("Failed. Image size exceeds 100 KB limit.")
           return;
-        }
+        } else if (img.width > maxWidth || img.height > maxHeight) {
+          seterror("Failed. Image dimensions exceed maximum width of 200 and maximum height of 150.")
 
-        if (img.width > maxWidth || img.height > maxHeight) {
+          return;
+        } else {
+
+          setshowSign(true)
+
           alert(
-            "Image dimensions exceed maximum width of 200 and maximum height of 150."
+            "Success"
           );
-          return;
+
         }
 
-        alert(
-          "Image is valid. Size: " +
-          input.files[0].size / 1024 +
-          " KB, Width: " +
-          img.width +
-          ", Height: " +
-          img.height
-        );
+
       };
 
-      const reader = new FileReader();
+      const reader: any = new FileReader();
 
       reader.onload = function (e: any) {
         preview.src = e.target.result;
         setsignTeacher(e.target.result);
-
-        localStorage.setItem("teacher_sign", e.target.result);
+        console.log(`reader ddd`, reader);
+        localStorage.setItem("teacher_sign", reader.result);
       };
 
       reader.readAsDataURL(input.files[0]);
+
+      // console.log(`reader`, reader);
 
       img.src = URL.createObjectURL(input.files[0]);
     }
   }
 
-  // function getImageSize() {
-  //   var input: any = document.getElementById("imageInput");
-
-  //   if (input.files && input.files[0]) {
-  //     const img = new window.Image();
-
-  //     img.onload = function () {
-  //       console.log(
-  //         "Image width: " + img.width + ", Image height: " + img.height
-  //       );
-  //     };
-
-  //     img.src = URL.createObjectURL(input.files[0]);
-  //   }
-  // }
+  if (showSign) {
+    localStorage.setItem("teacher_sign_show", "true");
+  } else {
+    localStorage.setItem("teacher_sign_show", "false");
+  }
 
   return (
     <section className="mx-auto myProfilePage">
@@ -156,6 +150,10 @@ const AmarProfile = () => {
                         ছবি {convertToBanglaNumber(200)} PX প্রস্থ এবং {convertToBanglaNumber(150)} PX এর
                         সর্বাধিক উচ্চতা অতিক্রম করা উচিত নয় এবং ছবির আকার {convertToBanglaNumber(100)}
                         KB সীমা অতিক্রম করা উচিত নয়।
+                        {
+                          error && <h5 className="text-danger">{error}</h5>
+                        }
+
                       </div>
                     </td>
                     <td>
@@ -173,6 +171,8 @@ const AmarProfile = () => {
                           src={signTeacher}
                           alt="Preview"
                         />
+
+
 
 
 

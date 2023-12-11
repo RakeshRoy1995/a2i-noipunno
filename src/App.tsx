@@ -27,6 +27,8 @@ import TeacherDashboard from "./component/Dashboards/TeacherDashboard/TeacherDas
 import Navbar from "./layout/Navbar";
 import FAQ from "./component/FAQ/FAQ";
 import LoginPage from "./component/LoginPage";
+import PasswordReset from "./component/PasswordReset";
+import ShikarthirReportCard from "./component/ShikarthirReportCard";
 
 function App() {
   const [topbar, settopbar] = useState(false);
@@ -40,7 +42,7 @@ function App() {
 
         // const data_dash: any = await teacher_dashboard();
         // localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
-        setRender(false)
+        // setRender(false)
       }
     }
 
@@ -79,15 +81,17 @@ function App() {
           <Route path="/mollayon-koron" element={<MullayonKoron />} />
           <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
           <Route path="/head-teacher-dashboard" element={<HeadTeacherDashboard />} />
+          <Route path="/shikkarthir-report-card" element={<ShikarthirReportCard />} />
           <Route path="/faq" element={<FAQ />} />
         </Route>
-        {/* <Route path="/login" element={<Login />} /> */}
-        <Route path="/login" element={<LoginPage />} />
 
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/password/reset" element={<PasswordReset />} />
 
       </Routes>
 
       {topbar && <Footer />}
+
     </>
   );
 }

@@ -175,7 +175,7 @@ export default function StudentReport() {
       );
 
       const report_data = await get_report_card(
-        allFelter.subject.split("-")[0],
+        "",
         allFelter.branch,
         allFelter.version,
         allFelter.shift,
@@ -183,6 +183,7 @@ export default function StudentReport() {
         allFelter.section,
         student_name
       );
+      
       const data = formate_report_data(
         report_data.data.report_card.student_result,
         dimentions.data.data

@@ -5,10 +5,8 @@ import { SlBookOpen } from "react-icons/sl";
 import { clssWiseSubject } from "../Request";
 import Breadcumbtitle from "../layout/Breadcumb";
 import { Spinner } from "react-bootstrap";
-import bookIcon from '../assets/dashboard_materials/images/dashboard/bicon.svg';
-import card from '../assets/dashboard_materials/css/dashboard.css';
-
-
+import bookIcon from '../assets/project_ca_html/images/dashboard/bicon.svg';
+import '../assets/project_ca_html/css/dashboard.css';
 
 
 const ClassWiseSubject = () => {

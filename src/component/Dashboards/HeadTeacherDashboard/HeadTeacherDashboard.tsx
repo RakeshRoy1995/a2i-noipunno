@@ -1,4 +1,3 @@
-// import '../../../assets/dashboard_materials/css/dashboard.css';
 import PopUpAppInfo from '../../PopUpAppInfo/PopUpAppInfo';
 import BannerSection from '../BannerSection';
 import ClassRoutine from '../ClassRoutine';

@@ -1,16 +1,12 @@
-import { useEffect, useState } from "react";
-// import "../../assets/dashboard_materials/css/dashboard.css";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import editIcon from "../../assets/dashboard_materials/images/dashboard/edit-2.svg";
+import editIcon from "../../assets/project_ca_html/images/dashboard/edit-2.svg";
+import teacherProfileImg from "../../assets/project_ca_html/images/dashboard/60px.png";
+import starIcon from "../../assets/project_ca_html/images/dashboard/ico.svg";
+import messageIcon from "../../assets/project_ca_html/images/dashboard/message.svg";
+import darkMoodIcon from "../../assets/project_ca_html/images/dashboard/moon.svg";
+import eyeIcon from "../../assets/project_ca_html/images/dashboard/eye.svg";
 
-import teacherProfileImg from "../../assets/dashboard_materials/images/dashboard/60px.png";
-import femaleProfileImg from "../../assets/dashboard_materials/images/dashboard/female_teacher.png";
-
-import starIcon from "../../assets/dashboard_materials/images/dashboard/ico.svg";
-import messageIcon from "../../assets/dashboard_materials/images/dashboard/message.svg";
-import darkMoodIcon from "../../assets/dashboard_materials/images/dashboard/moon.svg";
-import eyeIcon from "../../assets/dashboard_materials/images/dashboard/eye.svg";
-// import { logged_teacher_details } from "../../utils/Utils";
 
 const TeacherProfileCard = () => {
   const [loading, setloading] = useState<any>(true);

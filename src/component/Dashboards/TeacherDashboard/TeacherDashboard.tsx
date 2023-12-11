@@ -1,11 +1,9 @@
-// import '../../../assets/dashboard_materials/css/dashboard.css';
-// import '../../../../src/styles/noipunno_custom_styles.css';
-
 import BannerSection from "../BannerSection";
 import BishoybittikThottoOMullayon from "../BishoybittikThottoOMullayon";
 import ClassRoutine from "../ClassRoutine";
 import ReportForTeacherDashboard from "../ReportForTeacherDashboard";
 import PopUpAppInfo from '../../PopUpAppInfo/PopUpAppInfo';
+import SryniBishoyokTottho from "../SryniBishoyokTottho";
 
 
 
@@ -15,6 +13,7 @@ const TeacherDashboard = () => {
       <BannerSection />
       {/* <ReportForTeacherDashboard /> */}
       <BishoybittikThottoOMullayon />
+      {/* <SryniBishoyokTottho /> */}
       {/* <ClassRoutine /> */}
       <PopUpAppInfo />
     </div>

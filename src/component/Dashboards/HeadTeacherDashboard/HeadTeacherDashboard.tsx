@@ -13,7 +13,7 @@ const HeadTeacherDashboard = () => {
       <BannerSection />
       <ReportForHeadTeacherDashboard />
       <SryniBishoyokTottho />
-      <ParodorshitarSuchokBishoyokTottho />
+      {/* <ParodorshitarSuchokBishoyokTottho /> */}
       <ShikkokerTalika />
       <ClassRoutine />
       <PopUpAppInfo />

@@ -7,6 +7,7 @@ import Total_Student_Teacher_ClassRoom_for_TeacherDashboard from './Total_Studen
 
 
 const BannerSection = () => {
+
   return (
     <section className="container my-3">
       <div className="card-container">
@@ -21,5 +22,6 @@ const BannerSection = () => {
     </section>
   );
 };
+
 
 export default BannerSection;

@@ -1,4 +1,3 @@
-// import '../../assets/dashboard_materials/css/dashboard.css';
 import Teacher from '../Teacher';
 
 const BishoybittikThottoOMullayon = () => {

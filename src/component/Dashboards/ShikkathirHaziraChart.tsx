@@ -1,5 +1,4 @@
-import '../../assets/dashboard_materials/css/dashboard.css';
-import chart from '../../assets/dashboard_materials/images/dashboard/Chart.png';
+import chart from '../../assets/project_ca_html/images/dashboard/Chart.png';
 
 
 const ShikkathirHaziraChart = () => {

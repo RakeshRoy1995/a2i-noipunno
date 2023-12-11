@@ -295,3 +295,67 @@ export function get_pi_bi(subject_uid , branch_uid , version_uid , shift_uid , c
 
   return axios(options);
 }
+
+
+
+export function get_pi_bi_by_student_student(subject_uid , branch_uid , version_uid , shift_uid , class_uid , section_uid , student_uid="") {
+  const page_list = `${EVULATION_API}/transcript-by-student`;
+  // const page_list = `/assets/transcript_response.json`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+    params : {
+      subject_uid,
+      branch_uid,
+      version_uid,
+      shift_uid,
+      class_uid,
+      section_uid,
+      student_uid
+    }
+  };
+
+  return axios(options);
+}
+
+
+export function get_report_card(subject_uid , branch_uid , version_uid , shift_uid , class_uid , section_uid , student_uid="") {
+  const page_list = `${EVULATION_API}/report-card-by-student`;
+  // const page_list = `/assets/transcript_response.json`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+    params : {
+      subject_uid,
+      branch_uid,
+      version_uid,
+      shift_uid,
+      class_uid,
+      section_uid,
+      student_uid
+    }
+  };
+
+  return axios(options);
+}
+
+
+export function dimension_by_subject(subject_uid ) {
+  const page_list = `${API_URL}/v2/dimension-by-subject`;
+  // const page_list = `/assets/transcript_response.json`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+    params : {
+      subject_uid,
+    }
+  };
+
+  return axios(options);
+}

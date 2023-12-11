@@ -1,5 +1,4 @@
-import '../../assets/dashboard_materials/css/dashboard.css';
-import reportIcon from '../../assets/dashboard_materials/images/dashboard/document-text.png';
+import reportIcon from '../../assets/project_ca_html/images/dashboard/document-text.png';
 
 const ReportForHeadTeacherDashboard = () => {
   return (

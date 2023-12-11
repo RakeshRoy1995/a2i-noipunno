@@ -1,5 +1,4 @@
-import '../../assets/dashboard_materials/css/dashboard.css';
-import parodorshitarSuchokBishoyokTotthoChart from '../../assets/dashboard_materials/images/dashboard/Chart44.svg';
+import parodorshitarSuchokBishoyokTotthoChart from '../../assets/project_ca_html/images/dashboard/Chart44.svg';
 
 const ParodorshitarSuchokBishoyokTottho = () => {
   return (

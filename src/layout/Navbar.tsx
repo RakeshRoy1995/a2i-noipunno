@@ -68,11 +68,12 @@ const Navbar = () => {
   const activeRoute = () => {
     const pathName = location.pathname.slice(1);
     // console.log("pathName", pathName);
-    if (pathName === "student-transcript") {
+    if (pathName === "student-transcript" || pathName === "shikkarthir-report-card") {
       setIsReportPathActive(true);
       setIsShikkarthiPathActive(false);
       setIsSryniPathActive(false);
       setIsFAQpathActive(false);
+
     } else if (pathName === "student-list") {
       setIsShikkarthiPathActive(true);
       setIsReportPathActive(false);
@@ -379,7 +380,7 @@ const Navbar = () => {
 
                             <li className="nav-item dropdown nav-item-style">
                               <a
-                                className={` nav-link navbar-menu-item d-flex align-items-center
+                                className={`nav-link navbar-menu-item d-flex align-items-center
                             ${isReportPathActive && "active"}`}
                                 role="button"
                                 data-bs-toggle="dropdown"

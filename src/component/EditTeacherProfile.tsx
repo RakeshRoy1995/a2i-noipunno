@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { update_teacher_profile } from "../Request";
 import Breadcumbtitle from "../layout/Breadcumb";
 import Swal from "sweetalert2";
-import "../styles/noipunno_custom_styles.css";
+
 
 
 const EditTeacherProfile = () => {

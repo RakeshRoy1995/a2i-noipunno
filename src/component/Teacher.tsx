@@ -21,7 +21,8 @@ import styles from "./Home.style.module.css";
 import ParodorshitaComponent from "./ParodorshitaComponent";
 import ShowAssesment from "./ShowAssesment";
 import bookIcon from "../../src/assets/dashboard_materials/images/dashboard/bicon.svg";
-import "../styles/noipunno_custom_styles.css";
+import "../../src/assets/project_ca_html/css/dashboard.css"
+
 
 export default function Teacher() {
   const [shift, setShift] = useState([]);
@@ -60,7 +61,7 @@ export default function Teacher() {
     const teacher_dash__: any = localStorage.getItem("teacher_dashboard") || "";
     const teacher_dash = teacher_dash__ ? JSON.parse(teacher_dash__) : "";
 
-    let own_subjet: any = await teacher_own_subject();    
+    let own_subjet: any = await teacher_own_subject();
     localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
 
     let data: any = "";
@@ -119,7 +120,7 @@ export default function Teacher() {
     setelement(e);
   };
 
-  
+
   return (
     <div className="content mb-5 teacher_compo_bg">
       {loader && (
@@ -237,7 +238,7 @@ export default function Teacher() {
                                   </div>
                                   <div className="total-student">
                                     <p>
-                                      {d.teacher.name_bn  || d.teacher.name_en}
+                                      {d.teacher.name_bn || d.teacher.name_en}
                                     </p>
                                   </div>
                                   <div className="flex-md-row flex-lg-row d-flex  justify-content-center gap-2">

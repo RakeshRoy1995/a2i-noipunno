@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../../assets/dashboard_materials/css/total_student_teacher_classroom_for_teacher_dashboard.css";
+import { teacher_list } from "../../utils/Utils";
 
 const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
   const [all_student, set_All_student] = useState([]);
@@ -26,7 +27,7 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
         };
 
         std_data.competence.map((conpitance_data: any) => {
-          conpitance_data.pis.map((data:any)=>{
+          conpitance_data.pis.map((data: any) => {
             app_PI.push(data)
           })
         });
@@ -42,14 +43,16 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
       );
       set_All_student(uniqueObjectsArray);
 
-      localStorage.setItem("all_students", JSON.stringify(uniqueObjectsArray) );
-      localStorage.setItem("our_all_pi", JSON.stringify(app_PI) );
+      localStorage.setItem("all_students", JSON.stringify(uniqueObjectsArray));
+      localStorage.setItem("our_all_pi", JSON.stringify(app_PI));
 
       if (local_storege_data?.data?.classes) {
         set_Total_class(local_storege_data?.data?.classes);
-        set_all_teacher(Object.keys(obj));
+        const all_teachers_list = teacher_list()
+        set_all_teacher(all_teachers_list);
         setLoadin(false);
       }
+
     }
   };
 

@@ -6,7 +6,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import style from "./Home.style.module.css";
 import techerAvatar from "../../public/assets/images/teacher.jpeg";
 import { convertToBanglaNumber } from "../utils/Utils";
-import "../../src/styles/noipunno_custom_styles.css";
+
 
 const AmarProfile = () => {
   const [userDetails, setuserDetails] = useState<any>({});
@@ -41,24 +41,24 @@ const AmarProfile = () => {
         if (input.files[0].size / 1024 > maxSizeKB) {
           seterror("Failed. Image size exceeds 100 KB limit.")
           return;
-        }  else if (img.width > maxWidth || img.height > maxHeight) {
+        } else if (img.width > maxWidth || img.height > maxHeight) {
           seterror("Failed. Image dimensions exceed maximum width of 200 and maximum height of 150.")
-          
+
           return;
-        }else{
+        } else {
 
           setshowSign(true)
 
           alert(
-            "Success" 
+            "Success"
           );
 
         }
 
-        
+
       };
 
-      const reader :any = new FileReader();
+      const reader: any = new FileReader();
 
       reader.onload = function (e: any) {
         preview.src = e.target.result;
@@ -75,11 +75,11 @@ const AmarProfile = () => {
     }
   }
 
-if (showSign) {
-  localStorage.setItem("teacher_sign_show", "true");
-}else{
-  localStorage.setItem("teacher_sign_show", "false");
-}
+  if (showSign) {
+    localStorage.setItem("teacher_sign_show", "true");
+  } else {
+    localStorage.setItem("teacher_sign_show", "false");
+  }
 
   return (
     <section className="mx-auto myProfilePage">
@@ -153,7 +153,7 @@ if (showSign) {
                         {
                           error && <h5 className="text-danger">{error}</h5>
                         }
-                        
+
                       </div>
                     </td>
                     <td>
@@ -172,7 +172,7 @@ if (showSign) {
                           alt="Preview"
                         />
 
-                        
+
 
 
 

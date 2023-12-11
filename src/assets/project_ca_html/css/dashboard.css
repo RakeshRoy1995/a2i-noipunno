@@ -38,7 +38,9 @@ body {
   --text_dark: #222222;
   --text_white: #ffffff;
 }
+
 @media (min-width: 1480px) {
+
   .container,
   .container-lg,
   .container-md,
@@ -48,6 +50,7 @@ body {
     max-width: 1440px;
   }
 }
+
 /* ============================== Teacher Dashboard ============================== */
 
 .teacher-profile {
@@ -107,6 +110,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .teacher-profile .card-header .profile-img img {
   width: 83px;
   height: 93px;
@@ -270,11 +274,13 @@ body {
   background-size: 10px 10px;
   padding: 0 5px;
 }
+
 .student-chart .header .all {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .student-chart .header .all h4 {
   font-family: Roboto;
   font-size: 10px;
@@ -302,17 +308,19 @@ body {
   background-size: 10px 10px;
   padding: 0 5px;
 }
-.student-chart .header .all .form-select select option {
-}
+
+.student-chart .header .all .form-select select option {}
 
 .student-chart .chart img {
   width: 100%;
   height: 280px;
   margin-top: 30px;
 }
+
 .all-teacher-student-card {
   height: 394px;
 }
+
 .all-teacher-student-card .card-container {
   height: 91px;
   border-radius: 6px;
@@ -321,11 +329,13 @@ body {
   padding: 15px 12px;
   margin-bottom: 10px;
 }
+
 .all-teacher-student-card .card-container .total-student {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .all-teacher-student-card .card-container .total-student .title h3 {
   color: #428f92;
   font-feature-settings: "clig" off, "liga" off;
@@ -336,6 +346,7 @@ body {
   line-height: 16px;
   text-transform: uppercase;
 }
+
 .all-teacher-student-card .card-container .total-student .title h3 span {
   color: #2d6668;
   font-feature-settings: "clig" off, "liga" off;
@@ -346,6 +357,7 @@ body {
   line-height: 16px;
   text-transform: uppercase;
 }
+
 .all-teacher-student-card .card-container .total-student .title h6 {
   display: flex;
   justify-content: center;
@@ -360,6 +372,7 @@ body {
   line-height: 20px;
   margin-top: 8px;
 }
+
 .all-teacher-student-card .card-container .total-student .circle {
   width: 50px;
   height: 50px;
@@ -370,6 +383,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .all-teacher-student-card .card-container .total-student .circle h5 {
   font-family: Public Sans;
   font-size: 14px;
@@ -385,6 +399,7 @@ body {
 .report-container {
   margin-top: 12px;
 }
+
 .report-container h2 {
   font-family: Roboto;
   font-size: 24px;
@@ -405,6 +420,7 @@ body {
   padding: 0 12px;
   margin-bottom: 12px;
 }
+
 .student-container:hover {
   box-shadow: 0px 1px 1px 0px #00224233, 0px 0px 1px 0px #0000001a;
 }
@@ -416,6 +432,7 @@ body {
   border-radius: 30px;
   background-color: #ffecec;
 }
+
 .student-container:hover .icon {
   background-color: #f0f0f0;
 }
@@ -430,6 +447,7 @@ body {
   padding-left: 8px;
   color: #222222;
 }
+
 /* subject info */
 .subject-container h2 {
   font-family: Roboto;
@@ -440,6 +458,7 @@ body {
   color: #222222;
   padding-bottom: 10px;
 }
+
 .subject-container .subject-number {
   /* width: 267.2px; */
   height: 241px;
@@ -486,6 +505,7 @@ body {
   letter-spacing: 0px;
   color: #7daeb0;
 }
+
 .subject-container .subject-number .total-student .number {
   width: 27px;
   height: 18px;
@@ -498,6 +518,7 @@ body {
   align-items: center;
   margin-left: 5px;
 }
+
 .subject-container .subject-number .total-student .number p {
   font-family: Public Sans;
   font-size: 13px;
@@ -515,11 +536,13 @@ body {
   box-shadow: 0px 2px 3px 0px #0000001a, 0px 0px 1px 0px #0000001a;
   padding: 12px;
 }
+
 .request-container .header .title {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .request-container .header p {
   color: #555;
   font-feature-settings: "clig" off, "liga" off;
@@ -529,23 +552,27 @@ body {
   font-weight: 400;
   line-height: 20px;
 }
-.request-container .tab-bar {
-}
+
+.request-container .tab-bar {}
+
 .request-container .tab-bar ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #dee2e6;
 }
+
 .request-container .tab-bar .nav-link.active {
   border-bottom: 2px solid var(--bg_primary);
 }
+
 .request-container .tab-bar ul li a {
   display: flex;
   justify-content: start;
   align-items: center;
   cursor: pointer;
 }
+
 .request-container .tab-bar ul li h2 {
   font-family: Inter;
   font-size: 14px;
@@ -556,16 +583,19 @@ body {
   color: #222222;
   padding-left: 5px;
 }
+
 .request-container .tab-container {
   border-bottom: 1px solid #dee2e6;
   padding: 5px 0;
 }
+
 .request-container .tab-container .heading {
   display: flex;
   justify-content: start;
   align-items: center;
   margin-top: 12px;
 }
+
 .request-container .tab-container .heading .icon {
   width: 24px;
   height: 24px;
@@ -576,6 +606,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .request-container .tab-container .heading h2 {
   color: #222;
   font-feature-settings: "clig" off, "liga" off;
@@ -586,6 +617,7 @@ body {
   line-height: 21px;
   padding-left: 5px;
 }
+
 .request-container .tab-container .teachers {
   display: flex;
   align-items: center;
@@ -601,15 +633,18 @@ body {
   text-align: left;
   color: #555555;
 }
+
 .request-container .tab-container .class-section {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 5px 0;
 }
+
 .request-container .tab-container .class-day-section {
   display: flex;
 }
+
 .request-container .tab-container .class-day-section h6 {
   display: flex;
   padding: 0px 6px;
@@ -625,6 +660,7 @@ body {
   font-weight: 400;
   line-height: 20px;
 }
+
 .request-container .tab-container .class-section p {
   color: #555;
   font-feature-settings: "clig" off, "liga" off;
@@ -659,6 +695,7 @@ body {
   color: #428f92;
   cursor: pointer;
 }
+
 .request-container .button a:hover {
   color: #428f92;
 }
@@ -673,11 +710,13 @@ body {
   box-shadow: 0px 2px 3px 0px #0000001a, 0px 0px 1px 0px #0000001a;
   padding: 16px;
 }
+
 .proficiency-container .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .proficiency-container .title h3 {
   font-family: Public Sans;
   font-size: 22px;
@@ -687,6 +726,7 @@ body {
   text-align: left;
   color: #222222;
 }
+
 .proficiency-container .pl-container .pl-primary {
   width: 10px;
   height: 10px;
@@ -694,6 +734,7 @@ body {
   border-radius: 50%;
   margin-right: 5px;
 }
+
 .proficiency-container .pl-container .pl-secondary {
   width: 10px;
   height: 10px;
@@ -701,6 +742,7 @@ body {
   border-radius: 50%;
   margin-right: 5px;
 }
+
 .proficiency-container .pl-container h4 {
   font-family: Public Sans;
   font-size: 13px;
@@ -709,6 +751,7 @@ body {
   letter-spacing: 0px;
   text-align: left;
 }
+
 .proficiency-container img {
   width: 100%;
   height: 284px;
@@ -716,14 +759,15 @@ body {
 }
 
 /* teacher list */
-.teacher-list {
-}
+.teacher-list {}
+
 .teacher-list .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 10px 0;
 }
+
 .teacher-list .title h3 {
   font-family: Roboto;
   font-size: 24px;
@@ -733,6 +777,7 @@ body {
   text-align: center;
   color: #222;
 }
+
 .teacher-list .title a {
   font-family: Roboto;
   font-size: 16px;
@@ -742,6 +787,7 @@ body {
   text-align: center;
   color: #222;
 }
+
 .teacher-list .teacher-container {
   /* width: 219.17px; */
   height: 111px;
@@ -751,6 +797,7 @@ body {
   box-shadow: 0px 2px 3px 0px #0000001a, 0px 0px 1px 0px #0000001a;
   position: relative;
 }
+
 .teacher-list .teacher-container .card-top-icon {
   width: 22px;
   height: 22px;
@@ -765,20 +812,24 @@ body {
   top: 5px;
   right: 5px;
 }
+
 .teacher-list .teacher-container .card-top-icon img {
   width: 10px;
   height: 9.92px;
 }
+
 .teacher-list .teacher-container .teacher {
   display: flex;
   justify-content: start;
   align-items: center;
   padding: 8px 16px;
 }
+
 .teacher-list .teacher-container .teacher img {
   width: 51px;
   height: 57px;
 }
+
 .teacher-list .teacher-container .teacher h3 {
   font-family: Roboto;
   font-size: 12px;
@@ -789,6 +840,7 @@ body {
   padding-left: 10px;
   margin-top: 6px;
 }
+
 .teacher-list .teacher-container .teacher h4 {
   font-family: Roboto;
   font-size: 10px;
@@ -798,18 +850,21 @@ body {
   color: #555555;
   padding-left: 10px;
 }
+
 .teacher-list .teacher-container .subjects {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 6px;
 }
+
 .teacher-list .teacher-container .subjects .subject {
   height: 20px;
   border-radius: 4px;
   border: 1px solid #e4feff;
   gap: 8px;
 }
+
 .teacher-list .teacher-container .subjects .subject h3 {
   font-family: Inter;
   font-size: 10px;
@@ -819,6 +874,7 @@ body {
   color: #00a1a1;
   padding: 0 6px;
 }
+
 /* class routine */
 .class-routine-container {
   margin-top: 13px;
@@ -828,12 +884,14 @@ body {
   background-color: #fff;
   box-shadow: 0px 2px 3px 0px #0000001a, 0px 0px 1px 0px #0000001a;
 }
+
 .class-routine-container .class-routine-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 16px;
 }
+
 .class-routine-container .class-routine-header .class_routine {
   font-family: Public Sans;
   font-size: 22px;
@@ -841,24 +899,19 @@ body {
   line-height: 30px;
   letter-spacing: 0px;
 }
+
 .class-routine-container .class-routine-header .class-routine-selector {
   display: flex;
   align-items: center;
 }
-.class-routine-container
-  .class-routine-header
-  .class-routine-selector
-  .timeline {
+
+.class-routine-container .class-routine-header .class-routine-selector .timeline {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.class-routine-container
-  .class-routine-header
-  .class-routine-selector
-  .timeline
-  h4 {
+.class-routine-container .class-routine-header .class-routine-selector .timeline h4 {
   font-family: Roboto;
   font-size: 12px;
   font-weight: 600;
@@ -868,11 +921,7 @@ body {
   padding-right: 12px;
 }
 
-.class-routine-container
-  .class-routine-header
-  .class-routine-selector
-  .timeline
-  .form-select {
+.class-routine-container .class-routine-header .class-routine-selector .timeline .form-select {
   width: auto;
   height: 48px;
   padding: 8px, 16px, 8px, 16px;
@@ -886,11 +935,13 @@ body {
   line-height: 24px;
   letter-spacing: 0.0225em;
 }
+
 .class-routine-container .class-routine-header .class-routine-selector .all {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .class-routine-container .class-routine-header .class-routine-selector .all h4 {
   font-family: Roboto;
   font-size: 12px;
@@ -901,10 +952,7 @@ body {
   padding: 0 12px;
 }
 
-.class-routine-container
-  .class-routine-header
-  .class-routine-selector
-  .form-select {
+.class-routine-container .class-routine-header .class-routine-selector .form-select {
   width: auto;
   height: 48px;
   padding: 8px, 16px, 8px, 16px;
@@ -919,6 +967,7 @@ body {
   letter-spacing: 0.0225em;
   text-align: left;
 }
+
 .class-routine-container .tabbar {
   height: 46px;
   border-radius: 6px;
@@ -927,17 +976,20 @@ body {
   box-shadow: 0px 2px 3px 0px #0000001a, 0px 0px 1px 0px #0000001a;
   margin: 24px 0;
 }
+
 .class-routine-container .tabbar ul {
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding-top: 6px;
 }
+
 .class-routine-container .tabbar ul li a {
   display: flex;
   justify-content: start;
   align-items: center;
 }
+
 .class-routine-container .tabbar ul li a h3 {
   font-family: Inter;
   font-size: 14px;
@@ -953,9 +1005,11 @@ body {
   display: flex;
   margin: 16px 0px 16px 0px;
 }
+
 .class-routine-container .routine-section ul {
   gap: 10px;
 }
+
 .class-routine-container .routine-section .class-section {
   border-radius: 16px;
   box-shadow: 0px 2px 3px 0px #0000001a;
@@ -967,6 +1021,7 @@ body {
   box-shadow: 0px 2px 3px 0px #0000001a;
   font-size: 14px;
 }
+
 .routine-section .nav-item.active {
   border-bottom: none;
   background-color: var(--bg_primary);
@@ -974,6 +1029,7 @@ body {
   border-radius: 16px;
   box-shadow: 0px 2px 3px 0px #0000001a;
 }
+
 .routine-section .nav-item.active a {
   color: var(--text_white);
 }
@@ -987,6 +1043,7 @@ body {
   letter-spacing: 0em;
   color: var(--text_dark);
 }
+
 .dataTables_filter label {
   font-size: 16px;
   margin: 16px 0px 16px 0px;
@@ -996,6 +1053,7 @@ body {
   letter-spacing: 0em;
   color: var(--text_dark);
 }
+
 .pagination .page-item a {
   color: var(--text_dark);
 }
@@ -1009,40 +1067,46 @@ body {
   letter-spacing: 0em;
   color: var(--text_dark);
 }
+
 .dataTables_info {
   font-size: 16px;
   margin: 16px 0px 16px 0px !important;
 }
+
 .previous a {
   font-size: 16px;
   color: var(--bg_primary);
 }
+
 .page-item.active .page-link {
   background-color: var(--bg_primary);
   color: var(--text_white);
 }
+
 .next a {
   font-size: 16px;
   color: var(--bg_primary);
 }
+
 .class-routine-container .class-routine-table {
   padding: 16px 0px 16px 0px;
 }
+
 .class-routine-container .class-routine-table .class-routine-table-tab-nav {
   background-color: #dddddd54;
   border-radius: 6px;
   line-height: 22px;
 }
-.class-routine-container
-  .class-routine-table
-  .class-routine-table-tab-nav
-  .gap-distance {
+
+.class-routine-container .class-routine-table .class-routine-table-tab-nav .gap-distance {
   gap: 10px;
 }
+
 .class-routine-container .class-routine-table .class-routine-table-tab-nav a {
   color: #555555;
   font-size: 14px;
 }
+
 .class-routine-table .tab-th-style {
   font-family: Roboto;
   font-size: 14px;
@@ -1057,14 +1121,17 @@ body {
   border-bottom: 2px solid var(--bg_primary);
   flex-grow: 1;
 }
+
 .class-routine-table .class-and-section.active {
   background-color: var(--bg_primary);
   color: var(--text_white);
   height: 33px;
 }
-.table > :not(:last-child) > :last-child > * {
+
+.table> :not(:last-child)> :last-child>* {
   border-bottom-color: #e5e5e5;
 }
+
 .class-routine-table .tab-first-td-style {
   font-family: Roboto;
   font-size: 14px;
@@ -1075,6 +1142,7 @@ body {
   padding: 18px 16px;
   min-width: 100px;
 }
+
 .class-routine-table .tab-td-style {
   font-family: Roboto;
   font-size: 14px;
@@ -1103,12 +1171,11 @@ body {
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-}
+@media only screen and (min-width: 992px) {}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-}
+@media only screen and (min-width: 1200px) {}
+
 /* ============================= /Teacher Dashboard ============================== ==================================================================================*/
 
 /* ================================ Head Master ============================== */
@@ -1133,6 +1200,7 @@ body {
   padding: 0 16px;
   margin: 8px 0;
 }
+
 .head-maseter-card-container .head-master-card:hover {
   box-shadow: 0px 1px 1px 0px #00224233, 0px 0px 1px 0px #0000001a;
 }
@@ -1147,6 +1215,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .head-maseter-card-container .head-master-card .number h4 {
   font-family: Noto Sans Bengali;
   font-size: 20px;
@@ -1155,6 +1224,7 @@ body {
   letter-spacing: 0px;
   color: #00a1a1;
 }
+
 .head-maseter-card-container .head-master-card .icon {
   width: 28px;
   height: 28px;
@@ -1165,6 +1235,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 /* .head-maseter-card-container .head-master-card:hover .icon {
   background-color: #f0f0f0;
 } */
@@ -1237,6 +1308,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .head-master-profile .card-header .profile-img img {
   width: 83px;
   height: 93px;
@@ -1355,6 +1427,7 @@ body {
     border-radius: 6px;
     gap: 10px;
   }
+
   .head-maseter-card-container .head-master-card {
     padding: 0 5px;
     margin: 8px 0;
@@ -1374,6 +1447,7 @@ body {
   color: #4b465c;
   padding: 26px 0;
 }
+
 .class-six-container .class-six-tab-nav {
   background-color: #dddddd54;
   border-radius: 6px;
@@ -1381,6 +1455,7 @@ body {
   background-color: #fff;
   box-shadow: 0px 2px 3px 0px #0000001a, 0px 0px 1px 0px #0000001a;
 }
+
 .class-six-container .class-six-tab-nav a {
   font-family: Inter;
   font-size: 14px;
@@ -1390,6 +1465,7 @@ body {
   text-align: center;
   color: #2222;
 }
+
 .class-six-container .nav-link.active {
   border-bottom: 2px solid var(--bg_primary);
 }
@@ -1417,6 +1493,7 @@ body {
   align-items: center;
   margin-bottom: 30px;
 }
+
 .subject-container .subject-number .icon img {
   width: 38px;
   height: 38px;
@@ -1432,6 +1509,7 @@ body {
   color: #2d6668;
   padding-bottom: 2px;
 }
+
 .subject-container .subject-number h5 {
   font-family: Public Sans;
   font-size: 13px;
@@ -1453,6 +1531,7 @@ body {
   letter-spacing: 0px;
   color: #7daeb0;
 }
+
 .subject-container .subject-number .total-student .number {
   width: 55px;
   height: 18px;
@@ -1465,6 +1544,7 @@ body {
   align-items: center;
   margin-left: 5px;
 }
+
 .subject-container .subject-number .total-student .number p {
   font-family: Public Sans;
   font-size: 13px;

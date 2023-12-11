@@ -29,14 +29,14 @@ import {
   formate_teanscript_data,
   single_formate_teanscript_data,
 } from "../utils/Utils";
-// import {handleConvertToPdf} from "./Pdf"
+
 import Breadcumb from "../layout/Breadcumb";
 import Pdf from "./Pdf";
 // import { toPng } from "html-to-image";
 import { toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
 import { Link } from "react-router-dom";
-import "../../src/styles/noipunno_custom_styles.css";
+
 
 export default function StudentTranscript() {
   const [student_info_pdf, setStudent_info_pdf] = useState<any>("");

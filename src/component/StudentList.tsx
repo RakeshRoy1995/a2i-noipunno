@@ -7,7 +7,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { section_name, shift_name, version_name } from "../utils/Utils";
 import female_avt_img from "../../public/assets/images/user_avatar/female_std.png";
 import male_avt_img from "../../public/assets/images/user_avatar/male_std.png";
-import "../styles/noipunno_custom_styles.css";
+
 
 
 const StudentList = () => {

@@ -4,9 +4,9 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import styles from "./Home.style.module.css";
 import Breadcumb from "../layout/Breadcumb";
 import { Button, Modal, Spinner } from 'react-bootstrap';
-import { subject_name } from "../utils/Utils";
+import { subject_name, teacher_list } from "../utils/Utils";
 import female_tec_avatar from "../../public/assets/images/teacher_avatar/female_tec_avatar.png";
-import "../../src/styles/noipunno_custom_styles.css";
+
 
 export default function TeachersList() {
   const [teachers, setTeachers] = useState<any>([]);
@@ -14,10 +14,44 @@ export default function TeachersList() {
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [screenSize, setScreenSize] = useState<any>('');
 
-  const fetchData = async () => {
-    const teachersData = JSON.parse(localStorage.getItem('teacher_dashboard'));
-    setTeachers(teachersData?.data?.teachers)
-  };
+  // const fetchData = async () => {
+  //   const teachersData = JSON.parse(localStorage.getItem('teacher_dashboard'));
+  //   setTeachers(teachersData?.data?.teachers)
+  // };
+
+
+  // const teacher_list = () => {
+  //   const own_subject = JSON.parse(localStorage.getItem("own_subjet"));
+  //   let all_teachers_with_duplicate = [];
+
+  //   const removeDuplicates = (arr, uniqueKey) => {
+  //     const uniqueMap = {};
+  //     return arr.reduce((uniqueArray, obj) => {
+  //       const key = obj[uniqueKey];
+  //       if (!uniqueMap[key]) {
+  //         uniqueMap[key] = true;
+  //         uniqueArray.push(obj);
+  //       }
+  //       return uniqueArray;
+  //     }, []);
+  //   }
+
+  //   if (own_subject) {
+  //     let subjects = [];
+  //     subjects = [...own_subject?.data?.data?.subjects];
+  //     subjects.map(item => all_teachers_with_duplicate?.push(item.class_room?.class_teacher));
+
+  //   }
+
+  //   let all_teachers = removeDuplicates(all_teachers_with_duplicate, 'pdsid');
+
+  //   return all_teachers
+  // }
+
+
+  const all_teachers_list = teacher_list()
+  // console.log("all_teachers_list", all_teachers_list);
+
 
   const handleShowModal = (item: any) => {
     setSelectedItem(item);
@@ -42,7 +76,10 @@ export default function TeachersList() {
   };
 
   useEffect(() => {
-    fetchData()
+    if (all_teachers_list) {
+      setTeachers(all_teachers_list)
+    }
+    // fetchData();
   }, []);
 
   useEffect(() => {
@@ -55,6 +92,7 @@ export default function TeachersList() {
 
 
   // console.log("teachers", teachers);
+  // teachers.map(item => console.log(item.name_bn));
 
 
   return (
@@ -73,20 +111,20 @@ export default function TeachersList() {
                   <div key={index} id={styles.teacher_card_list} className="card p-2 border">
                     <div className="d-flex justify-content-start align-items-center gap-4">
                       <div>
-                        <img src={(teacher.gender === 'Male') && teacher_photo || (teacher.gender === 'Female') && female_tec_avatar || teacher_photo} width="60rem" className="img-fluid" />
+                        <img src={(teacher?.gender === 'Male') && teacher_photo || (teacher.gender === 'Female') && female_tec_avatar || teacher_photo} width="60rem" className="img-fluid" />
                       </div>
 
                       <div className="d-flex flex-column justify-content-center align-items-start gap-1">
                         <div className='d-flex flex-column justify-content-center align-items-start gap-1'>
-                          <h5 className={styles.teacherName}>নামঃ {teacher?.name_en || "no-entry"} </h5>
-                          <h5 className={styles.teacherName}>পদবিঃ {teacher?.designation || "no-entry"}</h5>
+                          <h5 className={styles.teacherName}>নামঃ {teacher?.name_bn || teacher?.name_en || "no-entry"} </h5>
+                          {/* <h5 className={styles.teacherName}>পদবিঃ {teacher?.designation || "no-entry"}</h5> */}
                         </div>
-                        <div className="d-flex justify-content-center align-items-center">
+                        {/* <div className="d-flex justify-content-center align-items-center">
                           <button onClick={() => handleShowModal(teacher)} className="btn btn-primay btn-sm d-flex justify-content-center align-items-center" style={{ backgroundColor: "#428F92", color: "#fff", }} >
                             বিস্তারিত{" "}
                             <MdOutlineKeyboardArrowRight className="fs-5" />{" "}
                           </button>
-                        </div>
+                        </div> */}
 
                       </div>
                     </div>

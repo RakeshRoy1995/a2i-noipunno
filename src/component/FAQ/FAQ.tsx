@@ -1,7 +1,5 @@
 import { convertToBanglaNumber } from '../../utils/Utils';
 import './faq.css';
-import "../../styles/noipunno_custom_styles.css"
-
 
 const FAQ = () => {
 

@@ -331,9 +331,7 @@ export const formate_teanscript_data = (data: any) => {
 
       for (let y = 0; y < allPi.length; y++) {
         const pi = allPi[y];
-
         const pi_data = our_all_piData.filter((d: any) => d.uid == pi.pi_uid);
-
         const Pi_obj = {
           ...pi,
           student_data: student_dta[0],
@@ -420,5 +418,54 @@ export const formate_report_data = (report_data: any, dimention: any) => {
       }
     }
   }
-  return result;
+
+  const groupBy =  Object.entries(make_group_by_report_data(result)) 
+  return groupBy;
 };
+
+
+
+
+
+
+export const make_group_by_report_data = (studentData: any) => {
+  const groupedByStudentId = studentData.reduce((acc, student) => {
+    const { subject_uid } = student;
+    if (!acc[subject_uid]) {
+      acc[subject_uid] = [];
+    }
+    acc[subject_uid].push(student);
+
+    return acc;
+  }, {});
+
+  return groupedByStudentId;
+};
+
+
+
+export const teacher_list = () => {
+  const own_subject = JSON.parse(localStorage.getItem("own_subjet"));
+  let all_teachers_with_duplicate = [];
+
+  if (own_subject) {
+    let subjects = [];
+    subjects = [...own_subject?.data?.data?.subjects];
+    subjects.map(item => all_teachers_with_duplicate?.push(item.class_room?.class_teacher));
+  }
+
+  const removeDuplicates = (arr, uniqueKey) => {
+    const uniqueMap = {};
+    return arr.reduce((uniqueArray, obj) => {
+      const key = obj[uniqueKey];
+      if (!uniqueMap[key]) {
+        uniqueMap[key] = true;
+        uniqueArray.push(obj);
+      }
+      return uniqueArray;
+    }, []);
+  }
+
+  let all_teachers = removeDuplicates(all_teachers_with_duplicate, 'pdsid');
+  return all_teachers;
+}

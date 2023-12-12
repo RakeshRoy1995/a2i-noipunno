@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./component/PrivateRoute";
-import Login from "./component/Login";
-// import Topbar from "./layout/Topbar";
+// import Login from "./component/Login";
+
 import Footer from "./layout/Footer";
 import Home from "./component/Home";
 import { useEffect, useState } from "react";
@@ -14,16 +14,11 @@ import StudentTranscript from "./component/StudentTranscript";
 import TeachersList from "./component/TeachersList";
 import StudentMullayonBehave from "./component/StudentMullayonBehave";
 import StudentMullayonBehaveSubmit from "./component/StudentMullayonBehaveSubmit";
-import {
-  all_teachers,
-  teacher_dashboard,
-  teacher_own_subject,
-} from "./Request";
+import { all_teachers, teacher_dashboard, teacher_own_subject, } from "./Request";
 import AmarProfile from "./component/AmarProfile";
 import MullayonKoron from "./component/MullayonKoron";
 import HeadTeacherDashboard from "./component/Dashboards/HeadTeacherDashboard/HeadTeacherDashboard";
 import TeacherDashboard from "./component/Dashboards/TeacherDashboard/TeacherDashboard";
-
 import Navbar from "./layout/Navbar";
 import FAQ from "./component/FAQ/FAQ";
 import LoginPage from "./component/LoginPage";

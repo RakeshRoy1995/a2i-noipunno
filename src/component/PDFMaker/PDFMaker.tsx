@@ -275,16 +275,14 @@ const MyDocument = ({
           </View>
         ))}
 
-
-
         <View style={[styles.teacherSignatureContainer]}>
           <Text style={[styles.teacherSignature, styles.colortext]}>
             বিষয় শিক্ষকের স্বাক্ষরঃ
-            <br />
+            {/* <Text style={[styles.teacherSignature, styles.colortext]}>
+              {teacher}
+            </Text> */}
           </Text>
-          {/* <Text style={[styles.teacherSignature, styles.colortext]}>
-            {teacher}
-          </Text> */}
+
           <Text style={[styles.teacherSignature, styles.colortext]}>
             প্রধান শিক্ষকের স্বাক্ষরঃ
             <br />

@@ -1,5 +1,7 @@
-import '../../assets/dashboard_materials/css/dashboard.css';
-import '../../assets/dashboard_materials/css/app_info.css';
+
+import "../../../src/assets/project_ca_html/css/dashboard.css";
+import "../../../src/styles/app_info.css";
+
 import AppInfoIcon1 from "../../assets/popUp_app_info_materials/bd-map.svg";
 import AppInfoIcon2 from "../../assets/popUp_app_info_materials/NCTB_logo-2.svg";
 import AppInfoIcon3 from "../../assets/popUp_app_info_materials/Aspire_to_Innovate_Seal 2.svg";

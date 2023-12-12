@@ -834,6 +834,8 @@ export default function StudentTranscript() {
                         ডাউনলোড করুন
                       </button>
 
+                      <Link to="pdf-maker" target="_blank"><button>Download</button></Link>
+
                       {/* <span
                           className="input-group-append rounded-end"
                           style={{

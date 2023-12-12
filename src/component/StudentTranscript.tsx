@@ -5,7 +5,6 @@ import {
   teacher_own_subject,
   get_pi_bi_evaluation_list,
   get_pi_bi,
-  get_pi_bi_by_student_student,
 } from "../Request";
 import html2pdf from "html2pdf.js";
 import { RotatingLines } from "react-loader-spinner";
@@ -27,7 +26,6 @@ import {
   all_students,
   convertToBanglaNumber,
   formate_teanscript_data,
-  single_formate_teanscript_data,
 } from "../utils/Utils";
 
 import Breadcumb from "../layout/Breadcumb";
@@ -46,7 +44,7 @@ export default function StudentTranscript() {
   const [own_data, setown_data] = useState<any>([]);
   const [all_bis, setall_bis] = useState<any>([]);
   const [assesment, setassesment] = useState<any>([]);
-  const [teacher, setteacher] = useState<any>("");
+  const [teacher, setteacher] = useState<any>('');
   const [loader, setloader] = useState(true);
   const [selectedSunject, setselectedSunject] = useState<any>("");
   const [instititute, setinstititute] = useState<any>("");
@@ -171,39 +169,28 @@ export default function StudentTranscript() {
   // console.log("allFelter=====>", allFelter.subject.split("-")[2]);
   console.log(teacher);
 
+
   const fetchDataFromAPI = async () => {
+
     setsubmittingLoading(true);
     try {
-      setteacher(allFelter.subject.split("-")[2]);
-      setselected_student([]);
-      if (!student_name) {
-        const pi_bi_data = await get_pi_bi(
-          allFelter.subject.split("-")[0],
-          allFelter.branch,
-          allFelter.version,
-          allFelter.shift,
-          allFelter.subject.split("-")[1],
-          allFelter.section,
-          ""
-        );
-        const data = formate_teanscript_data(pi_bi_data.data.transcript);
+      setteacher(allFelter.subject.split("-")[2])
+      setselected_student([])
+      const pi_bi_data = await get_pi_bi(
+        allFelter.subject.split("-")[0],
+        allFelter.branch,
+        allFelter.version,
+        allFelter.shift,
+        allFelter.subject.split("-")[1],
+        allFelter.section,
+        student_name,
 
-        setselected_student(data);
-      } else {
-        const pi_bi_data = await get_pi_bi_by_student_student(
-          allFelter.subject.split("-")[0],
-          allFelter.branch,
-          allFelter.version,
-          allFelter.shift,
-          allFelter.subject.split("-")[1],
-          allFelter.section,
-          student_name
-        );
-        const data = single_formate_teanscript_data(pi_bi_data.data.transcript);
+      );
+      const data = formate_teanscript_data(pi_bi_data.data.transcript);
 
-        setselected_student(data);
-      }
+      setselected_student(data);
 
+      console.log(`data`, data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -265,8 +252,10 @@ export default function StudentTranscript() {
         setTimeout(() => {
           const pdf = html2pdf().from(element).set(options).outputPdf();
           pdf.save();
+          console.log("element", element);
         }, 700);
       }
+      // console.log("student", student);
     }
     setsubmittingLoading(false);
   };
@@ -454,10 +443,9 @@ export default function StudentTranscript() {
                                 "-" +
                                 data?.subject?.subject_info?.class_uid +
                                 "-" +
-                                (data?.own_subjet.class_room.class_teacher
-                                  .name_bn ||
-                                  data?.own_subjet.class_room.class_teacher
-                                    .name_en)
+                                (data?.own_subjet.class_room.class_teacher.name_bn ||
+                                  data?.own_subjet.class_room.class_teacher.name_en)
+
                               }
                             >
                               {data?.subject?.subject_info?.name}{" "}
@@ -842,6 +830,8 @@ export default function StudentTranscript() {
                         ডাউনলোড করুন
                       </button>
 
+                      <Link to="pdf-maker" target="_blank"><button>Download</button></Link>
+
                       {/* <span
                           className="input-group-append rounded-end"
                           style={{
@@ -919,7 +909,7 @@ export default function StudentTranscript() {
                                       style={{
                                         backgroundColor:
                                           data.weight_uid ==
-                                          pi_attribute_data.weight_uid
+                                            pi_attribute_data.weight_uid
                                             ? "#F0FAE9"
                                             : "#FFF",
                                       }}
@@ -927,12 +917,12 @@ export default function StudentTranscript() {
                                       <div className="d-flex">
                                         {data.weight_uid ==
                                           pi_attribute_data.weight_uid && (
-                                          <div>
-                                            <TiTick
-                                              className={`${styles.tick_mark}`}
-                                            />
-                                          </div>
-                                        )}
+                                            <div>
+                                              <TiTick
+                                                className={`${styles.tick_mark}`}
+                                              />
+                                            </div>
+                                          )}
 
                                         <div>
                                           <h6 style={{ fontSize: "14px" }}>
@@ -995,7 +985,9 @@ export default function StudentTranscript() {
               )}
             </div>
             <div className="modal-body">
-              {submittingLoading && <p>Loading...</p>}
+              {
+                submittingLoading && <p>Loading...</p>
+              }
               {loading ? (
                 <p>Loading...</p>
               ) : selected_student?.length > 0 ? (
@@ -1009,6 +1001,7 @@ export default function StudentTranscript() {
                     handleConvertToPdf={handleConvertToPdf}
                     instititute={instititute ? instititute[0] : {}}
                     teacher={teacher}
+
                   />
                 ))
               ) : (

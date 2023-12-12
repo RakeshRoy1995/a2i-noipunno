@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import '../../assets/dashboard_materials/css/dashboard.css';
 
 const ShorbomotHishabforHeadTeaherDashboard = () => {
   const [all_student, set_All_student] = useState([]);

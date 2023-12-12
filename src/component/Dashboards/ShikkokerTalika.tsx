@@ -1,6 +1,6 @@
-
-import headtecherMarker from '../../assets/project_ca_html/images/dashboard/ico.svg';
-import teacherAvater from '../../assets/project_ca_html/images/dashboard/60px.png';
+import '../../assets/dashboard_materials/css/dashboard.css';
+import headtecherMarker from '../../assets/dashboard_materials/images/dashboard/ico.svg';
+import teacherAvater from '../../assets/dashboard_materials/images/dashboard/60px.png';
 
 const ShikkokerTalika = () => {
   return (

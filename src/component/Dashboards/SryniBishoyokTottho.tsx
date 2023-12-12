@@ -1,5 +1,5 @@
-
-import bookIcon from '../../assets/project_ca_html/images/dashboard/bicon.svg';
+import '../../assets/dashboard_materials/css/dashboard.css';
+import bookIcon from '../../assets/dashboard_materials/images/dashboard/bicon.svg';
 
 const SryniBishoyokTottho = () => {
   return (

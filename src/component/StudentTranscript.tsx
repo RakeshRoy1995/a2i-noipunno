@@ -269,7 +269,7 @@ export default function StudentTranscript() {
 
       <div className="container">
         <div className="row">
-        <DownloadPDF_component />
+        {/* <DownloadPDF_component /> */}
           <Breadcumb title={"মূল্যায়ন প্রতিবেদন"} />
           <div className="d-flex align-items-center">
             <div className="card shadow-lg border-0 w-100 rounded">

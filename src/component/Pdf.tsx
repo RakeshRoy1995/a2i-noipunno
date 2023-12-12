@@ -11,6 +11,7 @@ import {
   convertToBanglaNumber,
   subject_name,
 } from "../utils/Utils";
+import RawPDFDownload from "./PDFMaker/PDFMaker";
 
 function Pdf({
   data,
@@ -29,6 +30,8 @@ function Pdf({
 
   return (
     <div>
+
+      <RawPDFDownload />
       <div>
         <div id={"contentToConvert_" + unique_id} className="">
           <div className="row p-6">

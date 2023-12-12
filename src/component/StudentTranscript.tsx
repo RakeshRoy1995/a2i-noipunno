@@ -229,8 +229,8 @@ export default function StudentTranscript() {
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
       };
 
-      const pdf = html2pdf().from(element).set(options).outputPdf();
-      pdf.save();
+      // const pdf = html2pdf().from(element).set(options).outputPdf();
+      // pdf.save();
     } else {
       for (let index = 0; index < selected_student.length; index++) {
         const el = selected_student[index];
@@ -252,11 +252,11 @@ export default function StudentTranscript() {
           jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
         };
 
-        setTimeout(() => {
-          const pdf = html2pdf().from(element).set(options).outputPdf();
-          pdf.save();
-          console.log("element", element);
-        }, 700);
+        // setTimeout(() => {
+        //   const pdf = html2pdf().from(element).set(options).outputPdf();
+        //   pdf.save();
+        //   console.log("element", element);
+        // }, 700);
       }
       // console.log("student", student);
     }

@@ -18,6 +18,7 @@ import {
   section_name,
   subject_name,
 } from "../../utils/Utils";
+import { BsFiletypePdf } from "react-icons/bs";
 Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 
 const styles = StyleSheet.create({
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderLeftWidth: 0,
     borderTopWidth: 0,
-    display:"flex !important",
+    display: "flex !important",
   },
   tableColPoint: {
     width: "75%",
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 10,
     lineHeight: "1px",
-    display:"flex"
+    display: "flex"
   },
   page: {
     flexDirection: "row",
@@ -163,10 +164,21 @@ const styles = StyleSheet.create({
     width: "12px",
     height: "10px"
   },
-  imageAnadIcon: {
-    display:"flex",
-  flexDirection:"row",
-  gap: "5px"
+
+  teacherSignatureContainer: {
+    marginTop: "80px",
+    display: "flex",
+    flexDirection: "row",
+    gap: "150px"
+
+  },
+  teacherSignature: {
+    fontFamily: "Nikosh",
+    color: "#000",
+    marginTop: "10px",
+    fontSize: 14,
+    fontWeight: 600,
+
   },
 });
 
@@ -246,7 +258,7 @@ const MyDocument = ({
         {data?.all_PI_array?.map((all_pi: any, k: any) => (
           <View style={styles.tableRow}>
             <View style={styles.tableCol}>
-              
+
               <Text style={styles.tableCell}>
                 {" "}
                 {convertToBanglaNumber(all_pi.pi_data.pi_no)}  {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
@@ -265,8 +277,25 @@ const MyDocument = ({
             ))}
           </View>
         ))}
+
+
+
+        <View style={[styles.teacherSignatureContainer]}>
+          <Text style={[styles.teacherSignature, styles.colortext]}>
+            বিষয় শিক্ষকের স্বাক্ষরঃ
+            <br />
+          </Text>
+          {/* <Text style={[styles.teacherSignature, styles.colortext]}>
+            {teacher}
+          </Text> */}
+          <Text style={[styles.teacherSignature, styles.colortext]}>
+            প্রধান শিক্ষকের স্বাক্ষরঃ
+            <br />
+          </Text>
+        </View>
       </View>
     </Page>
+
     {/* <Page size="A4">
       <View style={styles.section}>
         <Text style={[styles.h1, styles.colortext]}>মডেল একাডেমি</Text>
@@ -600,6 +629,10 @@ const RawPDFDownload = ({
   unique_id,
   teacher,
 }: any) => {
+
+
+  const pdf_name = student_info_pdf?.student_name_bn ||
+    student_info_pdf?.student_name_en + "-" + convertToBanglaNumber(student_info_pdf?.roll) + ".pdf"
   return (
     <div>
       <div>
@@ -614,17 +647,17 @@ const RawPDFDownload = ({
               teacher={teacher}
             />
           }
-          fileName="my_document.pdf"
+          fileName={pdf_name}
         >
           {({ blob, url, loading, error }: any) =>
-            loading ? "Loading document..." : "Download PDF"
+            loading ? <> <BsFiletypePdf title="loading" className="fs-4 me-2 text-secoundery" /> {"..."} </> : <BsFiletypePdf title="download" className="fs-4 me-2 text-success" />
           }
         </PDFDownloadLink>
       </div>
 
-      {/* <PDFViewer width={800} height={800}>
+      <PDFViewer width={800} height={800}>
         <MyDocument />
-      </PDFViewer> */}
+      </PDFViewer>
     </div>
   );
 };

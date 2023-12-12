@@ -1,4 +1,5 @@
 import "../assets/login_page_materials/login_page.css";
+// import "../assets/project_ca_html/css/public.css"
 import noipunnoLogo from "../assets/login_page_materials/images/noipunno-new-logo.svg";
 import inputFieldUserIcon from "../assets/login_page_materials/icons/user-square.svg";
 import pinNumberFieldUserIcon from "../assets/login_page_materials/icons/lock.svg";
@@ -73,8 +74,8 @@ const LoginPage = () => {
     } catch (error) {
       seterror(
         error?.response?.data?.error?.message ||
-          error?.response?.data?.error ||
-          "Something went wrong!"
+        error?.response?.data?.error ||
+        "Something went wrong!"
       );
       console.log(`error`, error);
     }
@@ -84,7 +85,6 @@ const LoginPage = () => {
   useEffect(() => {
     const userId_Cookes = getCookie("userId");
     const userPin_Cookies = getCookie("userPin");
-
     localStorage.removeItem("customer_login_auth");
     localStorage.removeItem("token");
 

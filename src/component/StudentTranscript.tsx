@@ -502,7 +502,7 @@ export default function StudentTranscript() {
                         allFelter.section &&
                         allFelter.shift &&
                         allFelter.version && (
-                          <div className="mb-3">
+                          <div className="mb-3" style={{ fontSize: "12px" }}>
                             <label className="form-label ">
                               আপনার নির্বাচন সম্পূর্ণ করুন
                             </label>
@@ -517,6 +517,7 @@ export default function StudentTranscript() {
                                 style={{
                                   fontSize: "12px",
                                   backgroundColor: "#428F92",
+                                  color: "#fff"
                                 }}
                               >
                                 নিম্নে মূল্যায়ন প্রতিবেদন দেখুন{" "}

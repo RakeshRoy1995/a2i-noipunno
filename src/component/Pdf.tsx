@@ -11,6 +11,7 @@ import {
   convertToBanglaNumber,
   subject_name,
 } from "../utils/Utils";
+import RawPDFDownload from "./PDFMaker/PDFMaker";
 
 function Pdf({
   data,
@@ -24,18 +25,26 @@ function Pdf({
 }: any) {
   const imageShow = JSON.parse(localStorage.getItem("teacher_sign_show"));
   const image = localStorage.getItem("teacher_sign");
+
   return (
     <div>
+      <RawPDFDownload
+        data={data}
+        instititute={instititute}
+        allFelter={allFelter}
+        student_info_pdf={student_info_pdf}
+        unique_id={unique_id}
+        teacher={teacher}
+      />
       <div>
-        <div id={"contentToConvert_" + unique_id} className="container border">
-          <div className="row p-2">
+        <div id={"contentToConvert_" + unique_id} className="">
+          <div className="row p-6">
             <div className="text-center py-3">
               <h6 style={{ fontSize: "14px" }}>
                 {instititute?.institute_name}
               </h6>
               <h6 style={{ fontSize: "14px" }}>
-                {instititute?.unions} ,{" "}
-                {instititute?.district?.district_name_bn}
+                {instititute?.unions} {instititute?.district?.district_name_bn}
               </h6>
 
               {/* <h6 style={{ fontSize: "14px", fontWeight: "bold" }}>
@@ -51,7 +60,10 @@ function Pdf({
               </h6> */}
             </div>
             <div className="pdf_table">
-              <table className="table table-bordered border-dark table-sm table-responsive ">
+              <table
+                className="table table-bordered bg-danger table-sm table-responsive "
+                style={{ border: "1px solid #000" }}
+              >
                 <thead>
                   <tr>
                     <th
@@ -124,7 +136,6 @@ function Pdf({
                   </tr>
                   <tr>
                     <th
-                      colSpan={2}
                       style={{
                         fontSize: "10px",
                         fontWeight: "bold",
@@ -133,7 +144,8 @@ function Pdf({
                       পারদর্শিতা সূচক (PI)
                     </th>
                     <th
-                      colSpan={2}
+                      className="text-center"
+                      colSpan={3}
                       style={{
                         fontSize: "10px",
                         fontWeight: "bold",
@@ -143,7 +155,10 @@ function Pdf({
                     </th>
                   </tr>
                 </thead>
-                <tbody className="pdf_table_pi_show">
+                <tbody
+                  className="pdf_table_pi_show"
+                  style={{ border: "2px solid #000" }}
+                >
                   {data?.all_PI_array?.map((all_pi: any, k: any) => (
                     <tr key={k}>
                       <td className="w-25">
@@ -170,9 +185,9 @@ function Pdf({
                   style={{ fontSize: "14px", fontWeight: "bold" }}
                 >
                   <p>বিষয় শিক্ষকের নাম: {teacher}</p>
-                  
+
                   {imageShow && <img src={image} style={{ width: "40%" }} />}
-                   
+
                   <p>বিষয় শিক্ষকের স্বাক্ষরঃ</p>
                 </div>
 

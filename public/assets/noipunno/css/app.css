@@ -384,3 +384,9 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
             line-clamp: 2; 
     -webkit-box-orient: vertical;
  }
+
+
+
+ table, th, td {
+    border: 2px solid black;
+  }

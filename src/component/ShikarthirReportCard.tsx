@@ -31,6 +31,8 @@ const ShikarthirReportCard = ({
     const pdf = html2pdf().from(element).set(options).outputPdf();
     pdf.save();
   };
+  
+
   return (
     <>
       {/* report card design start */}

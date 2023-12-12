@@ -34,6 +34,7 @@ import Pdf from "./Pdf";
 import { toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
 import { Link } from "react-router-dom";
+import DownloadPDF_component from "./DownloadPDF";
 
 
 export default function StudentTranscript() {
@@ -220,9 +221,10 @@ export default function StudentTranscript() {
       const element = document.getElementById(id);
 
       const options = {
-        margin: 5,
+        margin: 20,
+        border: '1px solid',
         filename: filename,
-        image: { type: "jpeg", quality: 0.98 },
+        image: { type: "jpeg", quality: 4.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
       };
@@ -242,9 +244,10 @@ export default function StudentTranscript() {
           Stu_data.student_name_en + "-roll-" + Stu_data.roll + ".pdf";
 
         const options = {
-          margin: 5,
+          margin: 20,
+          border: '1px solid',
           filename,
-          image: { type: "jpeg", quality: 0.98 },
+          image: { type: "jpeg", quality: 4.98 },
           html2canvas: { scale: 2 },
           jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
         };
@@ -266,6 +269,7 @@ export default function StudentTranscript() {
 
       <div className="container">
         <div className="row">
+        <DownloadPDF_component />
           <Breadcumb title={"মূল্যায়ন প্রতিবেদন"} />
           <div className="d-flex align-items-center">
             <div className="card shadow-lg border-0 w-100 rounded">

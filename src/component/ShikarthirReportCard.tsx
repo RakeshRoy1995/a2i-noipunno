@@ -22,6 +22,7 @@ const ShikarthirReportCard = () => {
     const pdf = html2pdf().from(element).set(options).outputPdf();
     pdf.save();
   };
+  
 
   return (
     <>

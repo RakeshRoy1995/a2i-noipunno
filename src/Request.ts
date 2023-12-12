@@ -345,7 +345,8 @@ export function get_report_card(subject_uid , branch_uid , version_uid , shift_u
 
 
 export function dimension_by_subject(subject_uid ) {
-  const page_list = `${API_URL}/v2/dimension-by-subject`;
+  // const page_list = `${API_URL}/v2/dimension-by-subject`;
+  const page_list = `https://competence.noipunno.gov.bd/api/dimension-by-subject`;
   // const page_list = `/assets/transcript_response.json`;
 
   const options = {

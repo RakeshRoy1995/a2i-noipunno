@@ -18,6 +18,7 @@ import {
   section_name,
   subject_name,
 } from "../../utils/Utils";
+import { BsFiletypePdf } from "react-icons/bs";
 Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 
 const styles = StyleSheet.create({
@@ -159,7 +160,9 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
   },
   tikMark: {
+    marginTop: 10,
     width: "12px",
+    height: "10px"
   },
 
   teacherSignatureContainer: {
@@ -624,6 +627,10 @@ const RawPDFDownload = ({
   unique_id,
   teacher,
 }: any) => {
+
+
+  const pdf_name = student_info_pdf?.student_name_bn ||
+    student_info_pdf?.student_name_en + "-" + convertToBanglaNumber(student_info_pdf?.roll) + ".pdf"
   return (
     <div>
       <div>
@@ -638,10 +645,10 @@ const RawPDFDownload = ({
               teacher={teacher}
             />
           }
-          fileName="my_document.pdf"
+          fileName={pdf_name}
         >
           {({ blob, url, loading, error }: any) =>
-            loading ? "Loading document..." : "Download PDF"
+            loading ? <> <BsFiletypePdf title="loading" className="fs-4 me-2 text-secoundery" /> {"..."} </> : <BsFiletypePdf title="download" className="fs-4 me-2 text-success" />
           }
         </PDFDownloadLink>
       </div>

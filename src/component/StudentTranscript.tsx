@@ -35,6 +35,7 @@ import { toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
 import { Link } from "react-router-dom";
 import DownloadPDF_component from "./DownloadPDF";
+import RawPDFDownload from "./PDFMaker/PDFMaker";
 
 
 export default function StudentTranscript() {
@@ -835,7 +836,7 @@ export default function StudentTranscript() {
                         ডাউনলোড করুন
                       </button>
 
-                      <Link to="pdf-maker" target="_blank"><button>Download</button></Link>
+                      {/* <Link to="pdf-maker" target="_blank"><button>Download</button></Link> */}
 
                       {/* <span
                           className="input-group-append rounded-end"
@@ -856,19 +857,18 @@ export default function StudentTranscript() {
                       <Accordion.Header className="px-4 " key={index}>
                         <>
                           <div className="d-flex justify-content-between flex-md-row flex-column align-items-center custom-px-2">
-                            <button
-                              type="button"
-                              className={`${styles.download_btn}`}
-                              data-bs-toggle="modal"
-                              data-bs-target="#staticBackdrop"
-                              onClick={(e) => {
-                                handleConvertToPdf(data.student_data, false);
-                                setdata(data);
-                                setStudent_info_pdf(data.student_data);
-                              }}
-                            >
-                              <BsFiletypePdf className="fs-4 me-2" />
-                            </button>
+                            
+
+
+                          <RawPDFDownload
+                            data={data}
+                            instititute={instititute}
+                            allFelter={allFelter}
+                            student_info_pdf={data.student_data}
+                            unique_id={""}
+                            teacher={teacher}
+                          />
+                            
                             <h5 className="px-2">
                               শিক্ষার্থীর নাম:{" "}
                               {data.student_data.student_name_bn ||

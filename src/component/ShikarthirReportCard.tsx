@@ -105,7 +105,7 @@ const ShikarthirReportCard = ({
                   <div className="">শ্রেণি </div>
                   <div className="">
                     {" "}
-                    : {student.class == "6" ? "ষষ্ঠ" : "সপ্তম"}
+                    : {student?.class == "6" ? "ষষ্ঠ" : "সপ্তম"}
                   </div>
                 </div>
               </div>
@@ -114,7 +114,7 @@ const ShikarthirReportCard = ({
                   <div className="">শিক্ষাবর্ষ </div>
                   <div className="">
                     {" "}
-                    : {convertToBanglaNumber(student.registration_year)}
+                    : {convertToBanglaNumber(student?.registration_year)}
                   </div>
                 </div>
               </div>

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRightWidth: 0,
     borderBottomWidth: 0,
-    padding: "10px",
+    padding: "40px",
   },
   tableRowTop: {
     margin: "auto",
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderLeftWidth: 0,
     borderTopWidth: 0,
+    display: "flex !important",
   },
   tableColPoint: {
     width: "75%",
@@ -75,6 +76,8 @@ const styles = StyleSheet.create({
     padding: 5,
     marginTop: 5,
     fontSize: 10,
+    lineHeight: "1px",
+    display: "flex"
   },
   page: {
     flexDirection: "row",
@@ -196,7 +199,7 @@ const MyDocument = ({
         </Text>
 
         <Text style={[styles.h3, styles.colortext]}>
-          (PI) এর বিষয়ভিত্তিক ট্রান্সক্রিপ্ট-
+          বিষয়ভিত্তিক ট্রান্সক্রিপ্ট-
           {convertToBanglaNumber(student_info_pdf?.registration_year)}
         </Text>
         <View style={styles.tableRowTop}>
@@ -217,7 +220,7 @@ const MyDocument = ({
         <View style={styles.tableRow}>
           <View style={styles.tableCol}>
             <Text style={styles.tableCell}>
-              শ্রেণী: {student_info_pdf?.class}
+              শ্রেণী: {convertToBanglaNumber(student_info_pdf?.class)}
             </Text>
           </View>
           <View style={styles.tableCol}>
@@ -260,7 +263,7 @@ const MyDocument = ({
             </View>
 
             {all_pi.pi_data.pi_attribute.map((pi_data: any, key) => (
-              <View style={styles.tableCol}>
+              <View style={[styles.tableCol, styles.imageAnadIcon]}>
                 {all_pi?.weight_uid == pi_data?.weight_uid && (
                   <Image src={icon} style={[styles.tikMark]} />
                 )}
@@ -279,6 +282,9 @@ const MyDocument = ({
             বিষয় শিক্ষকের স্বাক্ষরঃ
             <br />
           </Text>
+          {/* <Text style={[styles.teacherSignature, styles.colortext]}>
+            {teacher}
+          </Text> */}
           <Text style={[styles.teacherSignature, styles.colortext]}>
             প্রধান শিক্ষকের স্বাক্ষরঃ
             <br />

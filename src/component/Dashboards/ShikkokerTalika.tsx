@@ -1,5 +1,4 @@
 
-// import headtecherMarker from '../../assets/dashboard_materials/images/dashboard/ico.svg';
 import headtecherMarker from '../../assets/project_ca_html/images/dashboard/ico.svg';
 import teacherAvater from '../../assets/project_ca_html/images/dashboard/60px.png';
 

@@ -44,11 +44,6 @@ const FAQ = () => {
     //   "id": 9,
     //   "question": "In which year did the Titanic sink?",
     //   "answer": "The Titanic sank in 1912."
-    // },
-    // {
-    //   "id": 10,
-    //   "question": "What is the largest planet in our solar system?",
-    //   "answer": "Jupiter is the largest planet in our solar system."
     // }
 
   ]

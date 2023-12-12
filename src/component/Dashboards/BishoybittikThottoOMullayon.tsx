@@ -1,4 +1,3 @@
-
 import Teacher from '../Teacher';
 
 const BishoybittikThottoOMullayon = () => {

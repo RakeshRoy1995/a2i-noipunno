@@ -20,9 +20,7 @@ import AcorongotoComponent from "./AcorongotoComponent";
 import styles from "./Home.style.module.css";
 import ParodorshitaComponent from "./ParodorshitaComponent";
 import ShowAssesment from "./ShowAssesment";
-import bookIcon from "../../src/assets/dashboard_materials/images/dashboard/bicon.svg";
-import "../../src/assets/project_ca_html/css/dashboard.css"
-
+import bookIcon from "../../src/assets/project_ca_html/images/dashboard/bicon.svg";
 
 export default function Teacher() {
   const [shift, setShift] = useState([]);

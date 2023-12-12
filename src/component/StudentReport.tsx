@@ -171,7 +171,8 @@ export default function StudentReport() {
       setselected_student([]);
 
       const dimentions = await dimension_by_subject(
-        allFelter.subject.split("-")[0]
+        // allFelter.subject.split("-")[0]
+        ""
       );
 
       const report_data = await get_report_card(
@@ -183,7 +184,7 @@ export default function StudentReport() {
         allFelter.section,
         student_name
       );
-      
+
       const data = formate_report_data(
         report_data.data.report_card.student_result,
         dimentions.data.data

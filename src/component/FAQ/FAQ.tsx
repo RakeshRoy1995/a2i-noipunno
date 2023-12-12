@@ -25,6 +25,8 @@ const FAQ = () => {
       "answer": "লগইন শেষে হোম পেজে আপনি বিদ্যালয় সংশ্লিষ্ট সাতটি ব্যবস্থাপনা দেখতে পাবেন। উক্ত ব্যবস্থাপনাগুলো ব্যবস্থাপনা ট্যাবের ড্রপ-ডাউনেও দেখতে পাবেন। এই ব্যবস্থাপনাগুলো প্রতিষ্ঠান প্রধানের আইডি থেকে সম্পন্ন করতে হবে।"
     },
 
+
+
     // {
     //   "id": 6,
     //   "question": "What is the boiling point of water in Celsius?",
@@ -44,9 +46,16 @@ const FAQ = () => {
     //   "id": 9,
     //   "question": "In which year did the Titanic sink?",
     //   "answer": "The Titanic sank in 1912."
+    // },
+    // {
+    //   "id": 10,
+    //   "question": "What is the largest planet in our solar system?",
+    //   "answer": "Jupiter is the largest planet in our solar system."
     // }
 
+
   ]
+
 
   return (
     <section className='faq_page_bg_color'>
@@ -91,9 +100,10 @@ const FAQ = () => {
             </div>
           </div>
         </div>
+
+
       </div>
     </section>
-
   );
 };
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
+import "../../assets/dashboard_materials/css/total_student_teacher_classroom_for_teacher_dashboard.css";
 import { teacher_list } from "../../utils/Utils";
-import "../../styles/total_student_teacher_classroom_for_teacher_dashboard.css";
 
 const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
   const [all_student, set_All_student] = useState([]);

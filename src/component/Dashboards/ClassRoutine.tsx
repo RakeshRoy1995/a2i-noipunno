@@ -1,4 +1,5 @@
-import stdIcon from '../../assets/project_ca_html/images/dashboard/profile-2user.png';
+import '../../assets/dashboard_materials/css/dashboard.css';
+import stdIcon from '../../assets/dashboard_materials/images/dashboard/profile-2user.png';
 
 
 const ClassRoutine = () => {

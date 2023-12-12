@@ -29,7 +29,7 @@ import FAQ from "./component/FAQ/FAQ";
 import LoginPage from "./component/LoginPage";
 import PasswordReset from "./component/PasswordReset";
 import ShikarthirReportCard from "./component/ShikarthirReportCard";
-import StudentReport from "./component/StudentReport";
+import PDFMaker from "./component/PDFMaker/PDFMaker";
 
 function App() {
   const [topbar, settopbar] = useState(false);
@@ -82,11 +82,12 @@ function App() {
           <Route path="/mollayon-koron" element={<MullayonKoron />} />
           <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
           <Route path="/head-teacher-dashboard" element={<HeadTeacherDashboard />} />
-          <Route path="/shikkarthir-report-card" element={<StudentReport />} />
-          <Route path="/shikkarthir-report-card_pdf" element={<ShikarthirReportCard />} />
+          <Route path="/shikkarthir-report-card" element={<ShikarthirReportCard />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/pdf-maker" element={<PDFMaker />} />
         </Route>
 
+        
         <Route path="/login" element={<LoginPage />} />
         <Route path="/password/reset" element={<PasswordReset />} />
 

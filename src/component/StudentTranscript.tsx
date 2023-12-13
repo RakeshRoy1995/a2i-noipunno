@@ -503,7 +503,7 @@ export default function StudentTranscript() {
                         allFelter.section &&
                         allFelter.shift &&
                         allFelter.version && (
-                          <div className="mb-3" style={{ fontSize: "12px" }}>
+                          <div className="mb-3">
                             <label className="form-label ">
                               আপনার নির্বাচন সম্পূর্ণ করুন
                             </label>
@@ -518,7 +518,6 @@ export default function StudentTranscript() {
                                 style={{
                                   fontSize: "12px",
                                   backgroundColor: "#428F92",
-                                  color: "#fff"
                                 }}
                               >
                                 নিম্নে মূল্যায়ন প্রতিবেদন দেখুন{" "}
@@ -862,7 +861,7 @@ export default function StudentTranscript() {
 
                           <RawPDFDownload
                             data={data}
-                            instititute={instititute}
+                            instititute={instititute[0]? instititute[0] : instititute }
                             allFelter={allFelter}
                             student_info_pdf={data.student_data}
                             unique_id={""}

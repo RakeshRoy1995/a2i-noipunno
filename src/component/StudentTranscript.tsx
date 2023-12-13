@@ -112,7 +112,7 @@ export default function StudentTranscript() {
     });
     setall_bis(own_subjet.data.data.bis);
     setversion(teacher_dash?.data?.versions);
-    setinstititute(teacher_dash?.data?.institute);
+    setinstititute(teacher_dash?.data?.branches);
 
     console.log(`all_subject`, all_subject);
     setsubject(all_subject);
@@ -206,8 +206,10 @@ export default function StudentTranscript() {
         );
 
         const data = formate_teanscript_dataBy_single_student(
-          pi_bi_data.data.transcript.student_result
+          pi_bi_data?.data?.transcript?.subject_result || pi_bi_data?.data?.transcript?.student_result
         );
+
+        console.log(`datatttt`, data);
 
         setselected_student(data);
       }

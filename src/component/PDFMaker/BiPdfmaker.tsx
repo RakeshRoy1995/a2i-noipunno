@@ -1,6 +1,6 @@
 import { PDFViewer, Document, View, Image, Page, Text, StyleSheet, Font, PDFDownloadLink } from '@react-pdf/renderer';
 
-Font.register({ family: 'Nikosh', src: 'Nikosh.ttf', format: "truetype", });
+Font.register({ family: 'Nikosh', src: 'Nikosh.ttf' , format: "truetype", });
 
 const styles = StyleSheet.create({
   page: {
@@ -11,12 +11,38 @@ const styles = StyleSheet.create({
     margin: 50
   },
 
+  section1: {  },
+  section2: {  },
+  section3: { marginBottom: 50 },
+  section4: {  },
+  section5: {  },
+  section6: { marginBottom: 50 },
+  section7: {  },
+  section8: {  },
+  section9: {  },
+  section10: {  },
+  section11: {  },
+  section12: {  },
+  section13: {  },
+
   h1: {
     fontFamily: "Nikosh",
     fontSize: 20,
     fontWeight: 500,
     padding: '10px',
     textAlign: 'center',
+    marginBlockStart: '0.67em',
+    marginBlockEnd: '0.67em',
+    margininlineStart: '0px',
+    margininlineEnd: '0px'
+  },
+  
+  footerh1: {
+    fontFamily: "Nikosh",
+    fontSize: 20,
+    fontWeight: 500,
+    padding: '10px',
+    textAlign: 'left',
     marginBlockStart: '0.67em',
     marginBlockEnd: '0.67em',
     margininlineStart: '0px',
@@ -33,40 +59,25 @@ const styles = StyleSheet.create({
     margininlineStart: '0px',
     margininlineEnd: '0px'
   },
-
   h3: {
     fontFamily: 'Nikosh',
     textAlign: 'center',
     fontSize: 12,
     padding: '5px',
   },
-
   h4: {
     fontFamily: 'Nikosh',
     textAlign: 'left',
     fontSize: 15,
     padding: '5px',
   },
-
   h5: {
     fontSize: 10,
     fontWeight: 500,
     padding: '5px',
     fontFamily: "Nikosh",
   },
-
-  footerh1: {
-    fontFamily: "Nikosh",
-    fontSize: 20,
-    fontWeight: 500,
-    padding: '10px',
-    textAlign: 'left',
-    marginBlockStart: '0.67em',
-    marginBlockEnd: '0.67em',
-    margininlineStart: '0px',
-    margininlineEnd: '0px'
-  },
-
+ 
   image: {
     width: '100%',
     height: '250px',
@@ -79,18 +90,18 @@ const styles = StyleSheet.create({
   },
 
   colortext: {
-    color: '#000',
+    color: '#000'
   },
 
   containerMain: {
     backgroundColor: '#DCDDDE',
     marginTop: '20px',
-    marginBottom: '30px',
+    
   },
 
   subjectContainer: {
     width: '80%',
-    marginLeft: '40px',
+    marginLeft: '40px'
   },
 
   subjectTitle: {
@@ -99,7 +110,11 @@ const styles = StyleSheet.create({
   },
 
   subjectName: {
-    marginTop: '5px'
+    marginTop: '20px'
+  },
+
+  subjectName2: {
+
   },
 
   borderTop: {
@@ -126,24 +141,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 5,
     padding: '10px',
-    width: '100%'
-  },
-
-  container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-
-  box1: {
-    width: '30%', 
-    margin: '1.33%', 
-    height: 100,
   },
 
   column2: {
     flexDirection: 'column',
     marginRight: 5,
-    width: '500px',
+    width: '33%',
   },
 
   text: {
@@ -154,9 +157,12 @@ const styles = StyleSheet.create({
 
   paragraph: {
     fontFamily: 'Nikosh',
-    whiteSpace: 'nowrap', // Prevent word breaks
     fontSize: 10,
     padding: '5px',
+  },
+
+  icon: {
+  
   },
 
   box: {
@@ -170,11 +176,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
   },
-
   tableRow: {
     flexDirection: 'row',
   },
-
   tableCell: {
     flex: 1,
     borderStyle: 'solid',
@@ -191,15 +195,36 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    border: '1px solid black',
+    border:'1px solid black',
   },
 
   cardTitle: {
-    borderBottom: '1px solid black',
+    borderBottom:'1px solid black',
+  },
+
+  communicationTitle: {
+
   },
 
   cardbody: {
-    padding: '1px',
+    padding: '5px',
+  },
+
+  cardText: {
+
+  },
+
+  communicationBody: {
+    padding: '10px',
+    lineHeight: '1.2px',
+  },
+
+  cardFooter: {
+
+  },
+
+  communicatinSearch: {
+
   },
 
   footerBox: {
@@ -210,7 +235,7 @@ const styles = StyleSheet.create({
     height: '20px',
     border: '1px solid black',
   },
-
+  
   cardRow: {
     flexDirection: 'row',
   },
@@ -218,7 +243,7 @@ const styles = StyleSheet.create({
   cardColumn: {
     flexDirection: 'column',
     width: '14.50%',
-    height: '20px',
+    height: '24px',
     borderRight: '1px solid black',
     borderTop: '1px solid black',
     textAlign: 'center',
@@ -232,12 +257,6 @@ const styles = StyleSheet.create({
 
   itemBG: {
     backgroundColor: '#6C6D70',
-    // backgroundColor: 'white',
-    borderLeft: '1px solid black',
-  },
-
-  itemBG2: {
-    backgroundColor: '#6C6D70',
     borderLeft: '1px solid black',
   },
 
@@ -245,7 +264,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: '20px'
   },
-
+  
   columnFooter1: {
     flexDirection: 'column',
     width: '30%',
@@ -293,12 +312,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: '5px'
   },
-
+  
   columnSignatureCard: {
     flexDirection: 'column',
     width: '33%',
   },
-
+  
   signatureCard: {
     padding: '10px',
     textAlign: 'left',
@@ -306,54 +325,23 @@ const styles = StyleSheet.create({
     marginTop: '20px',
   },
 
-  achoronikContainer: {
-    marginTop: '20px',
-  },
-
   scalemargin: {
     marginBottom: '8px'
-  },
+  }
 
-  wordBox: {
-    fontFamily: 'Nikosh',
-    padding: 2,
-  },
-
-  wordText: {
-    fontFamily: 'Nikosh',
-    fontSize: 12,
-  },
-
-  sentenceBox: {
-    width: '100%',
-    padding: 5,
-  },
-
-  sentenceText: {
-    fontFamily: 'Nikosh',
-    fontSize: 12,
-    lineHeight: 1,
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  
 })
 
-const boxData = Array.from(Array(5).keys());
-const sentence = "পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে।  যোগাযোগ করে কেমন হয় সবাই জানি। দেশ কে জানি , তাজকে কি হবে শেষ ";
-const words = sentence.split(" ");
+
 const MyDocument = () => (
 
   <Document>
-    {/* First Page */}
-    <Page size="A4" wrap>
+    <Page size="A4" >
 
       <Image
         src="../reportcard-image.png"
         style={styles.image}
       />
-
+       
       <View style={[styles.borderTop]}>
         <Image
           src="../logo.png"
@@ -364,329 +352,1238 @@ const MyDocument = () => (
       {/* student info */}
       <View style={[styles.headerTop]}>
         <Text style={[styles.h2, styles.colortext]}> প্রতিষ্ঠানের নাম : .......................................................................................... </Text>
-        <Text style={[styles.h2, styles.colortext]}> শিক্ষার্থীর নাম  : .................................... শিক্ষার্থীর আইডি : ................................ </Text>
+        <Text style={[styles.h2, styles.colortext]}> শিক্ষার্থীর নাম  : আলিয়া ওসমান শিক্ষার্থীর আইডি : ................................ </Text>
         <Text style={[styles.h2, styles.colortext]}> শ্রেণী             : .................................... শিক্ষাবর্ষ :          ................................ </Text>
       </View>
 
       {/* subjects */}
       <View style={[styles.containerMain, styles.borderTop]}>
         <Text style={[styles.h1, styles.colortext, styles.subjectTitle]}> বিষয়সমূহ </Text>
-
+ 
         <View style={[styles.row, styles.subjectContainer]}>
 
           <View style={styles.column}>
-            <Text style={styles.text}><Image src="../graduation-cap.png"/> বাংলা</Text>
-            <Text style={styles.text}><Image src="../graduation-cap.png"/> ইংরেজি</Text>
-            <Text style={styles.text}><Image src="../graduation-cap.png"/> গণিত</Text>
-            <Text style={styles.text}><Image src="../graduation-cap.png"/> বিজ্ঞান</Text>
-            <Text style={styles.text}><Image src="../graduation-cap.png"/> ডিজিটাল প্রযুক্তি</Text>
+            <Text style={styles.text}><Image src="../graduation-cap.png" style={styles.icon}/> বাংলা</Text>
+            <Text style={styles.text}><Image src="../graduation-cap.png" style={styles.icon}/> ইংরেজি</Text>
+            <Text style={styles.text}><Image src="../graduation-cap.png" style={styles.icon}/> গণিত</Text>
+            <Text style={styles.text}><Image src="../graduation-cap.png" style={styles.icon}/> গণিত</Text>
+            <Text style={styles.text}><Image src="../graduation-cap.png" style={styles.icon}/> বিজ্ঞান</Text>
+            <Text style={styles.text}><Image src="../graduation-cap.png" style={styles.icon}/> ডিজিটাল প্রযুক্ত</Text>
           </View>
-
+      
           <View style={styles.column}>
-            <Text style={styles.text}><Image src="../graduation-cap.png"/> ইতিহাস ও সামাজিক বিজ্ঞান</Text>
-            <Text style={styles.text}><Image src="../graduation-cap.png"/> জীবন ও জীবিকা</Text>
-            <Text style={styles.text}><Image src="../graduation-cap.png"/> ধর্ম শিক্ষা</Text>
-            <Text style={styles.text}><Image src="../graduation-cap.png"/> স্বাস্থথ্য সুরক্ষা</Text>
-            <Text style={styles.text}><Image src="../graduation-cap.png"/> শিল্প ও সংস্কৃতি</Text>
+            <Text style={styles.text}><Image src="../graduation-cap.png" style={styles.icon}/> ইতিহাস ও সামাজিক বিজ্ঞান</Text>
+            <Text style={styles.text}><Image src="../graduation-cap.png" style={styles.icon}/> জীবন ও জীবিকা</Text>
+            <Text style={styles.text}><Image src="../graduation-cap.png" style={styles.icon}/> ধর্ম শিক্ষা</Text>
+            <Text style={styles.text}><Image src="../graduation-cap.png" style={styles.icon}/> স্বাস্থথ্য সুরক্ষা</Text>
+            <Text style={styles.text}><Image src="../graduation-cap.png" style={styles.icon}/> শিল্প ও সংস্কৃতি</Text>
           </View>
         </View>
       </View>
-    </Page>
 
-    {/* Dynamic Subject Page */}
-    <Page size="A4" wrap>
-      {/* Subject -1  */}
-      <View wrap={true}>
+      {/* Bangla */}
+      <View style={[styles.section1]}>
         <View>
           <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> বাংলা </Text>
         </View>
 
-        <View style={styles.container}>
-          {boxData.map((index) => (
-            <View style={[styles.box1]}>
-              <View style={[styles.card]}>
-                <View style={[styles.cardTitle]}>
-                  <Text style={[styles.h3]}> যোগাযোগ 1</Text>
-                </View>
-                <View style={[styles.cardbody]}>
-                  <View>
-                    <View style={styles.sentenceBox}>
-                      <Text style={styles.sentenceText}>গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে</Text>
+        <View style={styles.row2}>
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> যোগাযোগ </Text>
                     </View>
-                  </View>
-                </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
 
-                <View style={[styles.cardRow]}>
-                  <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                </View>
-              </View>
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
             </View>
-          ))}
 
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> যোগাযোগ </Text>
+                    </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
 
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
+            </View>
+
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> যোগাযোগ </Text>
+                    </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
+
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
+            </View>
+        </View>
+        <View style={styles.row2}>
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> যোগাযোগ </Text>
+                    </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
+
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
+            </View>
+
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> যোগাযোগ </Text>
+                    </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
+
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
+            </View>
         </View>
       </View>
 
-      {/* Subject -2 */}
-      <View wrap={true}>
+      {/* English */}
+      <View style={[styles.section2]}>
         <View>
-          <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> বাংলা </Text>
+          <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> English </Text>
         </View>
 
-        <View style={styles.container}>
-          {boxData.map((index) => (
-            <View style={[styles.box1]}>
-              <View style={[styles.card]}>
-                <View style={[styles.cardTitle]}>
-                  <Text style={[styles.h3]}> যোগাযোগ 1</Text>
-                </View>
-                <View style={[styles.cardbody]}>
-                  <View>
-                    <View style={styles.sentenceBox}>
-                      <Text style={styles.sentenceText}>গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে</Text>
+        <View style={styles.row2}>
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
                     </View>
-                  </View>
-                </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
 
-                <View style={[styles.cardRow]}>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                </View>
-              </View>
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
             </View>
-          ))}
 
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                    </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
 
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
+            </View>
+
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                    </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
+
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
+            </View>
+        </View>
+
+        <View style={styles.row2}>
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                    </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
+
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
+            </View>
         </View>
       </View>
 
-      {/* Subject -3 */}
-      <View wrap={true}>
+      {/* Math */}
+      <View style={[styles.section3]}>
+          <View>
+            <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> Math </Text>
+          </View>
+
+          <View style={styles.row2}>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> math </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+          </View>
+
+          <View style={styles.row2}>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+          </View>
+      </View>
+
+      {/* Biggan */}
+      <View style={[styles.section4]}>
+          <View>
+            <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> বিজ্ঞান </Text>
+          </View>
+
+          <View style={styles.row2}>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> math </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+          </View>
+
+          <View style={styles.row2}>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+          </View>
+      </View>
+
+
+      {/* Digital Projukti */}
+      <View style={[styles.section5]}>
         <View>
-          <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> বাংলা </Text>
+          <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> ডিজিটাল প্রযুক্তি </Text>
         </View>
 
-        <View style={styles.container}>
-          {boxData.map((index) => (
-            <View style={[styles.box1]}>
-              <View style={[styles.card]}>
-                <View style={[styles.cardTitle]}>
-                  <Text style={[styles.h3]}> যোগাযোগ 1</Text>
-                </View>
-                <View style={[styles.cardbody]}>
-                  <View>
-                    <View style={styles.sentenceBox}>
-                      <Text style={styles.sentenceText}>গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে</Text>
+        <View style={styles.row2}>
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
                     </View>
-                  </View>
-                </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
 
-                <View style={[styles.cardRow]}>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                </View>
-              </View>
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
             </View>
-          ))}
 
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                    </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
 
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
+            </View>
+
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                    </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
+
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
+            </View>
+        </View>
+
+        <View style={styles.row2}>
+            <View style={[styles.column2]}>
+                <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                        <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                    </View>
+                    <View style={[styles.cardbody]}>
+                        <View style={[styles.cardText]}>
+                            <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                        </View>
+                    </View>
+
+                    <View style={[styles.cardRow]}>
+                        <View style={[styles.cardColumn]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                        <View style={[styles.cardColumn]}><Text></Text></View>                        
+                        <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                    </View>
+                </View>                                                                           
+            </View>
         </View>
       </View>
 
-      {/* Subject -4 */}
-      <View wrap={true} break>
-        <View>
-          <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> বাংলা </Text>
-        </View>
+      {/* etihas o samajik biggan */}
+      <View style={[styles.section6]}>
+          <View>
+            <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> ইতিহাস ও সামাজিক বিজ্ঞান </Text>
+          </View>
 
-        <View style={styles.container}>
-          {boxData.map((index) => (
-            <View style={[styles.box1]}>
-              <View style={[styles.card]}>
-                <View style={[styles.cardTitle]}>
-                  <Text style={[styles.h3]}> যোগাযোগ 1</Text>
-                </View>
-                <View style={[styles.cardbody]}>
-                  <View>
-                    <View style={styles.sentenceBox}>
-                      <Text style={styles.sentenceText}>গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে</Text>
-                    </View>
-                  </View>
-                </View>
+          <View style={styles.row2}>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> math </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
 
-                <View style={[styles.cardRow]}>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                  <View style={[styles.cardColumn]}><Text></Text></View>
-                </View>
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
               </View>
-            </View>
-          ))}
 
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
 
-        </View>
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+          </View>
+
+          <View style={styles.row2}>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+          </View>
       </View>
-    </Page>
-    {/* Dynamic Subject Page */}
 
+      {/* Jibon O Jibika */}
+      <View style={[styles.section7]}>
+          <View>
+            <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> জীবন ও জীবিকা </Text>
+          </View>
 
-    {/* Last Page */}
-    <Page size="A4" wrap>
+          <View style={styles.row2}>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> math </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+          </View>
+
+          <View style={styles.row2}>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+          </View>
+      </View>
+
+      {/* Dhormo Shikkha */}
+      <View style={[styles.section8]}>
+          <View>
+            <Text style={[styles.h1, styles.colortext, styles.subjectName2, styles.cardHeaderBG]}> ধর্ম শিক্ষা </Text>
+          </View>
+
+          <View style={styles.row2}>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> math </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+          </View>
+
+      </View>
+
+      {/* Sasto Surokkha */}
+      <View style={[styles.section9]}>
+          <View>
+            <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> স্বাস্থথ্য সুরক্ষা </Text>
+          </View>
+
+          <View style={styles.row2}>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> math </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+          </View>
+      </View>
+
+      {/* Silpo O Sanskriti */}
+      <View style={[styles.section10]}>
+          <View>
+            <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> শিল্প ও সংস্কৃতি </Text>
+          </View>
+
+          <View style={styles.row2}>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> math </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+                      <View style={[styles.cardbody]}>
+                          <View style={[styles.cardText]}>
+                              <Text style={[styles.communicationBody, styles.paragraph]}>পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে </Text>
+                          </View>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
+          </View>
+
+      </View>
+
       {/* achoronik nidorshon */}
-      <View wrap style={[styles.achoronikContainer]}>
-        <View>
-          <Text style={[styles.h1, styles.colortext, styles.cardHeaderBG]}> আচরণিক নির্দেশক </Text>
-        </View>
-
-        <View style={styles.container}>
-          <View style={[styles.box1]}>
-            <View style={[styles.card]}>
-              <View style={[styles.cardTitle]}>
-                <Text style={[styles.h3]}> math </Text>
-              </View>
-
-              <View style={[styles.cardRow]}>
-                <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-              </View>
-            </View>
+      <View style={[styles.section11]}>
+          <View>
+            <Text style={[styles.h1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> আচরণিক নির্দেশক </Text>
           </View>
 
-          <View style={[styles.box1]}>
-            <View style={[styles.card]}>
-              <View style={[styles.cardTitle]}>
-                <Text style={[styles.h3]}> Communcation </Text>
+          <View style={styles.row2}>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> math </Text>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
               </View>
 
-              <View style={[styles.cardRow]}>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
               </View>
-            </View>
+
+              <View style={[styles.column2]}>
+                  <View style={[styles.card]}>
+                      <View style={[styles.cardTitle]}>
+                          <Text style={[styles.communicationTitle, styles.h3]}> Communcation </Text>
+                      </View>
+          
+                      <View style={[styles.cardRow]}>
+                          <View style={[styles.cardColumn]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>
+                          <View style={[styles.cardColumn]}><Text></Text></View>                        
+                          <View style={[styles.cardColumn, styles.itemBG]}><Text></Text></View>                        
+                      </View>
+                  </View>                                                                           
+              </View>
           </View>
-
-          <View style={[styles.box1]}>
-            <View style={[styles.card]}>
-              <View style={[styles.cardTitle]}>
-                <Text style={[styles.h3]}> Communcation </Text>
-              </View>
-
-              <View style={[styles.cardRow]}>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-                <View style={[styles.cardColumn]}><Text></Text></View>
-              </View>
-            </View>
-          </View>
-        </View>
 
       </View>
 
       {/* Mullayon Skel */}
-      <View wrap>
+      <View style={[styles.section13]}>
         <View>
           <Text style={[styles.footerh1, styles.colortext, styles.subjectName, styles.cardHeaderBG]}> মূল্যায়নের স্কেল </Text>
         </View>
-
+        
         <View style={styles.rowFooter}>
           <View style={[styles.columnFooter1]}>
-            <View style={[styles.cardRow]}>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-            </View>
-            <View style={[styles.cardRow]}>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-            </View>
-            <View style={[styles.cardRow]}>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-            </View>
-            <View style={[styles.cardRow]}>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-            </View>
-            <View style={[styles.cardRow]}>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-            </View>
-            <View style={[styles.cardRow]}>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-            </View>
-            <View style={[styles.cardRow]}>
-              <View style={[styles.cardColumn, styles.itemBG2, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-              <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
-            </View>
+              <View style={[styles.cardRow]}>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>                        
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>                        
+              </View>
+              <View style={[styles.cardRow]}>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>                        
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>                        
+              </View>
+              <View style={[styles.cardRow]}>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>                        
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>                        
+              </View>
+              <View style={[styles.cardRow]}>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>                        
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>                        
+              </View>
+              <View style={[styles.cardRow]}>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>                        
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>                        
+              </View>
+              <View style={[styles.cardRow]}>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>                        
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>                        
+              </View>
+              <View style={[styles.cardRow]}>
+                <View style={[styles.cardColumn, styles.itemBG, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>                        
+                <View style={[styles.cardColumn, styles.mullayonItem]}><Text></Text></View>                        
+              </View>
           </View>
           <View style={[styles.columnFooter2]}>
             <Text style={[styles.h5, styles.scalemargin]}>- অনন্য (Upgrading) </Text>
@@ -708,66 +1605,65 @@ const MyDocument = () => (
         </View>
 
       </View>
-
+      
       {/* Montobbo */}
       <View>
         <View style={styles.rowMontobboCard}>
-          <View style={[styles.columnMontobboCard]}>
-            <View style={[styles.montobboCard]}>
-              <Text style={[styles.h4]}> শ্রেণি শিক্ষকের মন্তব্য : </Text>
-              <Text style={[styles.paragraph]}> যে কাজটি সবচেয়ে ভালোোভাবে করতে পেরেছি : </Text>
-              <Text style={[styles.paragraph]}> ...................................................................................... </Text>
-              <Text style={[styles.paragraph]}> ...................................................................................... </Text>
-              <Text style={[styles.paragraph]}> আরো উন্নতির জন্য যা যা করতে চাই : </Text>
-              <Text style={[styles.paragraph]}> ...................................................................................... </Text>
-              <Text style={[styles.paragraph]}> ...................................................................................... </Text>
-              <Text style={[styles.paragraph]}> ...................................................................................... </Text>
+            <View style={[styles.columnMontobboCard]}>
+              <View style={[styles.montobboCard]}>
+                <Text style={[styles.h4]}> শ্রেণি শিক্ষকের মন্তব্য : </Text>
+                <Text style={[styles.paragraph]}> যে কাজটি সবচেয়ে ভালোোভাবে করতে পেরেছি : </Text>
+                <Text style={[styles.paragraph]}> ...................................................................................... </Text>
+                <Text style={[styles.paragraph]}> ...................................................................................... </Text>
+                <Text style={[styles.paragraph]}> আরো উন্নতির জন্য যা যা করতে চাই : </Text>
+                <Text style={[styles.paragraph]}> ...................................................................................... </Text>
+                <Text style={[styles.paragraph]}> ...................................................................................... </Text>
+                <Text style={[styles.paragraph]}> ...................................................................................... </Text>
+              </View>
             </View>
-          </View>
-          <View style={[styles.columnMontobboCard]}>
-            <View style={[styles.montobboCard]}>
-              <Text style={[styles.h4]}> শ্রেণি শিক্ষকের মন্তব্য : </Text>
-              <Text style={[styles.paragraph]}> যে কাজটি সবচেয়ে ভালোোভাবে করতে পেরেছি : </Text>
-              <Text style={[styles.paragraph]}> ....................................................................................... </Text>
-              <Text style={[styles.paragraph]}> ....................................................................................... </Text>
-              <Text style={[styles.paragraph]}> আমার সন্তানের উন্নয়নে আমি যা করতে পারি : </Text>
-              <Text style={[styles.paragraph]}> ....................................................................................... </Text>
-              <Text style={[styles.paragraph]}> ....................................................................................... </Text>
-              <Text style={[styles.paragraph]}> ....................................................................................... </Text>
+            <View style={[styles.columnMontobboCard]}>
+              <View style={[styles.montobboCard]}>
+                <Text style={[styles.h4]}> শ্রেণি শিক্ষকের মন্তব্য : </Text>
+                <Text style={[styles.paragraph]}> যে কাজটি সবচেয়ে ভালোোভাবে করতে পেরেছি : </Text>
+                <Text style={[styles.paragraph]}> ....................................................................................... </Text>
+                <Text style={[styles.paragraph]}> ....................................................................................... </Text>
+                <Text style={[styles.paragraph]}> আমার সন্তানের উন্নয়নে আমি যা করতে পারি : </Text>
+                <Text style={[styles.paragraph]}> ....................................................................................... </Text>
+                <Text style={[styles.paragraph]}> ....................................................................................... </Text>
+                <Text style={[styles.paragraph]}> ....................................................................................... </Text>
+              </View>
             </View>
-          </View>
         </View>
       </View>
-
+      
       {/* Signature */}
       <View>
         <View style={styles.rowSignatureCard}>
-          <View style={[styles.columnSignatureCard]}>
-            <View style={[styles.signatureCard]}>
-              <Text style={[styles.paragraph]}> ....................................... </Text>
-              <Text style={[styles.paragraph]}> শ্রেণি শিক্ষকের স্বাক্ষর </Text>
-              <Text style={[styles.paragraph]}> তারিখ  : </Text>
-            </View>
-          </View>
-          <View style={[styles.columnSignatureCard]}>
-            <View style={[styles.signatureCard]}>
-              <Text style={[styles.paragraph]}> ....................................... </Text>
-              <Text style={[styles.paragraph]}> প্রধান শিক্ষকের স্বাক্ষর </Text>
-              <Text style={[styles.paragraph]}> তারিখ  : </Text>
-            </View>
-          </View>
-          <View style={[styles.columnSignatureCard]}>
-            <View style={[styles.signatureCard]}>
-              <Text style={[styles.paragraph]}> ....................................... </Text>
-              <Text style={[styles.paragraph]}> অভিভাবকের স্বাক্ষর </Text>
-              <Text style={[styles.paragraph]}> তারিখ  : </Text>
-            </View>
-          </View>
+            <View style={[styles.columnSignatureCard]}>
+              <View style={[styles.signatureCard]}>
+                <Text style={[styles.paragraph]}> ....................................... </Text>
+                <Text style={[styles.paragraph]}> শ্রেণি শিক্ষকের স্বাক্ষর </Text>
+                <Text style={[styles.paragraph]}> তারিখ  : </Text>
+              </View>
+            </View>   
+            <View style={[styles.columnSignatureCard]}>
+              <View style={[styles.signatureCard]}>
+                <Text style={[styles.paragraph]}> ....................................... </Text>
+                <Text style={[styles.paragraph]}> প্রধান শিক্ষকের স্বাক্ষর </Text>
+                <Text style={[styles.paragraph]}> তারিখ  : </Text>
+              </View>
+            </View> 
+            <View style={[styles.columnSignatureCard]}>
+              <View style={[styles.signatureCard]}>
+                <Text style={[styles.paragraph]}> ....................................... </Text>
+                <Text style={[styles.paragraph]}> অভিভাবকের স্বাক্ষর </Text>
+                <Text style={[styles.paragraph]}> তারিখ  : </Text>
+              </View>
+            </View> 
         </View>
       </View>
 
     </Page>
-    
   </Document>
 );
 
@@ -785,8 +1681,8 @@ const BiRawPDFDownload = () => {
           }
         </PDFDownloadLink>
       </div>
-      
-      <PDFViewer style={{ width: '100%', height: '100vh' }}>
+
+      <PDFViewer width={1200} height={1200}>
         <MyDocument />
       </PDFViewer>
     </div>

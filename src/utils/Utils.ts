@@ -351,6 +351,7 @@ export const formate_teanscript_data = (data: any) => {
 };
 
 export const formate_teanscript_dataBy_single_student = (data: any) => {
+  
   const our_all_pi = localStorage.getItem("our_all_pi");
   const our_all_piData = JSON.parse(our_all_pi);
 
@@ -360,6 +361,8 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
   const result = [];
 
   let obj = {};
+
+  console.log(`datacc`, data );
 
   const stu = data[0];
   const allPi = data;

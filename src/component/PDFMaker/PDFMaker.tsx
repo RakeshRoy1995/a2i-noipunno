@@ -193,11 +193,11 @@ const MyDocument = ({
     <Page >
       <View style={styles.table}>
         <Text style={[styles.h3, styles.colortext]}>
-          {instititute?.institute_name}
+          {instititute?.branch_name}
           <br />
         </Text>
         <Text style={[styles.h3, styles.colortext]}>
-          {instititute?.unions} {instititute?.district?.district_name_bn}
+          {instititute?.branch_location} 
         </Text>
 
         <Text style={[styles.h3, styles.colortext]}>
@@ -255,8 +255,8 @@ const MyDocument = ({
         </View>
 
         {data?.all_PI_array?.map((all_pi: any, k: any) => (
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
+          <View style={styles.tableRow} >
+            <View style={styles.tableCol} wrap={true} break>
 
               <Text style={styles.tableCell}>
                 {" "}
@@ -279,7 +279,7 @@ const MyDocument = ({
 
 
 
-        <View style={[styles.teacherSignatureContainer]}>
+        <View style={[styles.teacherSignatureContainer]} wrap={true} break>
           <Text style={[styles.teacherSignature, styles.colortext]}>
             বিষয় শিক্ষকের স্বাক্ষরঃ
             <br />

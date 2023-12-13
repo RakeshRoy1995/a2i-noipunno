@@ -107,7 +107,7 @@ export default function StudentReport() {
     });
     setall_bis(own_subjet.data.data.bis);
     setversion(teacher_dash?.data?.versions);
-    setinstititute(teacher_dash?.data?.institute);
+    setinstititute(teacher_dash?.data?.branches);
 
     console.log(`all_subject`, all_subject);
     setsubject(all_subject);
@@ -185,8 +185,16 @@ export default function StudentReport() {
         student_name
       );
 
+      let res :any = []
+
+      report_data.data.report_card.map((d)=>{
+         d.subject_result.map((s_d)=>{
+          res.push(s_d)
+         })
+      })
+
       const data = formate_report_data(
-        report_data.data.report_card.student_result,
+        res,
         dimentions.data.data
       );
       const student_data = all_students(student_name);
@@ -197,7 +205,6 @@ export default function StudentReport() {
 
       setselected_student(data);
 
-      console.log(`data`, data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }

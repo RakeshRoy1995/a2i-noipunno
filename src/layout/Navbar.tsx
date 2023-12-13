@@ -399,7 +399,7 @@ const Navbar = () => {
                                 />
                               </a>
                               <ul className="dropdown-menu border-0 dropdown-menu-item-style">
-                                {/* <li>
+                                <li>
                                   <NavLink
                                     to="/student-transcript"
                                     className="dropdown-item"
@@ -432,7 +432,7 @@ const Navbar = () => {
                                       </p>
                                     </div>
                                   </NavLink>
-                                </li> */}
+                                </li>
                                 {/* <li>
                               <a className="dropdown-item" href="#">
                                 <div className="dropdown-list-item-style d-flex align-items-center">

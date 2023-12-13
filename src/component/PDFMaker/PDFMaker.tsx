@@ -163,7 +163,9 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
   },
   tikMark: {
-    marginTop: 10,
+    marginLeft: 50,
+    // justifyContent: "center",
+    marginTop: 5,
     width: "12px",
     height: "10px"
   },
@@ -338,9 +340,9 @@ const RawPDFDownload = ({
         </PDFDownloadLink>
       </div>
 
-      <PDFViewer width={800} height={800}>
+      {/* <PDFViewer width={800} height={800}>
         <MyDocument />
-      </PDFViewer>
+      </PDFViewer> */}
     </div>
   );
 };

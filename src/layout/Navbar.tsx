@@ -88,7 +88,7 @@ const Navbar = () => {
       const data_dash: any = await teacher_dashboard();
       localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
 
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
       alert(
         "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
@@ -397,7 +397,7 @@ const Navbar = () => {
                                 />
                               </a>
                               <ul className="dropdown-menu border-0 dropdown-menu-item-style">
-                                {/* <li>
+                                <li>
                                   <NavLink
                                     to="/student-transcript"
                                     className="dropdown-item"
@@ -430,7 +430,7 @@ const Navbar = () => {
                                       </p>
                                     </div>
                                   </NavLink>
-                                </li> */}
+                                </li>
                                 {/* <li>
                               <a className="dropdown-item" href="#">
                                 <div className="dropdown-list-item-style d-flex align-items-center">
@@ -661,81 +661,6 @@ const Navbar = () => {
                         />
                         মূল্যায়ন শুরু করুন
                       </Link>
-
-                      {/* <ul className="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a href="#">
-                        <div className="management-dropdown-style dropdown-item profile-style">
-                          <img
-                            src={shikkarthiBebostapona}
-                            className="img-fluid icon-right-space"
-                            alt="profile icon"
-                          />
-                          শিক্ষার্থী ব্যবস্থাপনা
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div className="management-dropdown-style dropdown-item profile-style">
-                          <img
-                            src={shikkokBebostapona}
-                            className="img-fluid icon-right-space"
-                            alt="profile icon"
-                          />
-                          শিক্ষক ব্যবস্থাপনা
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div className="management-dropdown-style dropdown-item profile-style">
-                          <img
-                            src={branchBebostapona}
-                            className="img-fluid icon-right-space"
-                            alt="profile icon"
-                          />
-                          ব্রাঞ্চ ব্যবস্থাপনা
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div className="management-dropdown-style dropdown-item profile-style">
-                          <img
-                            src={branchBebostapona}
-                            className="img-fluid icon-right-space"
-                            alt="profile icon"
-                          />
-                          শিফট ব্যবস্থাপনা
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div className="management-dropdown-style dropdown-item profile-style">
-                          <img
-                            src={srenikokkoBebostapona}
-                            className="img-fluid icon-right-space"
-                            alt="profile icon"
-                          />
-                          শ্রেণীকক্ষ ব্যবস্থাপনা
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <div className="management-dropdown-style dropdown-item profile-style">
-                          <img
-                            src={dayitthoOrponKoron}
-                            className="img-fluid icon-right-space"
-                            alt="profile icon"
-                          />
-                          দায়িত্ব অর্পণ করুন
-                        </div>
-                      </a>
-                    </li>
-                  </ul> */}
                     </div>
                   </div>
                 </div>

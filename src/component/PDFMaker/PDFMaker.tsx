@@ -338,9 +338,9 @@ const RawPDFDownload = ({
         </PDFDownloadLink>
       </div>
 
-      {/* <PDFViewer width={800} height={800}>
+      <PDFViewer width={800} height={800}>
         <MyDocument />
-      </PDFViewer> */}
+      </PDFViewer>
     </div>
   );
 };

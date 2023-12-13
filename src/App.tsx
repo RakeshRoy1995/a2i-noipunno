@@ -81,7 +81,6 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
         </Route>
-
         <Route path="/login" element={<LoginPage />} />
         <Route path="/password/reset" element={<PasswordReset />} />
 

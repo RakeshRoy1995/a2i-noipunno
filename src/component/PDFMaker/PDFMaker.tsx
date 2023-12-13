@@ -23,7 +23,7 @@ Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 
 const styles = StyleSheet.create({
   table: {
-    display: "table",
+    // display: "table",
     width: "auto",
     borderStyle: "solid",
     borderWidth: 1,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderLeftWidth: 0,
     borderTopWidth: 0,
-    display: "flex !important",
+    // display: "flex !important",
   },
   tableColPoint: {
     width: "75%",
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     width: "75%",
     textAlign: "justify",
-    textJustify: "inter-word",
+    // textJustify: "inter-word",
     // backgroundColor: "red",
   },
   tikMark: {
@@ -190,11 +190,10 @@ const MyDocument = ({
   instititute,
   allFelter,
   student_info_pdf,
-  unique_id,
   teacher,
 }: any) => (
   <Document>
-    <Page style={styles.body}>
+    <Page >
       <View style={styles.table}>
         <Text style={[styles.h3, styles.colortext]}>
           {instititute?.institute_name}
@@ -269,7 +268,7 @@ const MyDocument = ({
             </View>
 
             {all_pi.pi_data.pi_attribute.map((pi_data: any, key) => (
-              <View style={[styles.tableCol, styles.imageAnadIcon]}>
+              <View style={[styles.tableCol]}>
                 {all_pi?.weight_uid == pi_data?.weight_uid && (
                   <Image src={icon} style={[styles.tikMark]} />
                 )}
@@ -312,6 +311,8 @@ const RawPDFDownload = ({
   teacher,
 }: any) => {
 
+  console.log(`instititute ddddd `, instititute);
+
 
   const pdf_name = student_info_pdf?.student_name_bn ||
     student_info_pdf?.student_name_en + "-" + convertToBanglaNumber(student_info_pdf?.roll) + ".pdf"
@@ -337,9 +338,9 @@ const RawPDFDownload = ({
         </PDFDownloadLink>
       </div>
 
-      <PDFViewer width={800} height={800}>
+      {/* <PDFViewer width={800} height={800}>
         <MyDocument />
-      </PDFViewer>
+      </PDFViewer> */}
     </div>
   );
 };

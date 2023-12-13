@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
   section: {
     margin: 10,
     padding: 10,
-    flexGrow: 1
+    flexGrow: 1,
+    border: '1px solid black',
   },
   h1: {
     fontFamily: "Nikosh",
@@ -42,42 +43,30 @@ const styles = StyleSheet.create({
   colortext: {
     color: '#000'
   },
-  table: {
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderColor: '#000',
-    marginBottom: 10,
-  },
-  tableHeader: {
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderColor: '#000',
-    marginBottom: 10,
-    fontWeight: 'bold',
-  },
-  cell: {
-    padding: 5,
-    flexGrow: 1,
-  },
+  // table: {
+  //   flexDirection: 'row',
+  //   borderBottomWidth: 1,
+  //   borderColor: '#000',
+  //   marginBottom: 10,
+  // },
+  // tableHeader: {
+  //   flexDirection: 'row',
+  //   borderBottomWidth: 1,
+  //   borderColor: '#000',
+  //   marginBottom: 10,
+  //   fontWeight: 'bold',
+  // },
+  // cell: {
+  //   padding: 5,
+  //   flexGrow: 1,
+  // },
   myText: {
     // fontFamily: 'Nikosh',
     textAlign: 'center',
     // other styles
   },
 
-  page: {
-    flexDirection: 'row',
-    backgroundColor: '#ffffff',
-    padding: 10,
-    
-    
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
-    border: '1px solid black',
-  },
+  
   text: {
 
     fontSize: 10,

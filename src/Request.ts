@@ -169,8 +169,6 @@ export async function teacher_own_subject() {
     console.log(`bi_info enter`);
   }
 
-  
-
   if (bi !== "" && common_info !== "" && cls_room !== "") {
     const own_sub = await axios(options);
     let data = formate_own_subject_data(own_sub, cls_room);
@@ -180,6 +178,32 @@ export async function teacher_own_subject() {
     data.data.data.bis = bi.data.data.bis;
     localStorage.removeItem("common_room")
     localStorage.removeItem("cls_room")
+    return data;
+  }
+}
+
+export async function reloadteacher_own_subject() {
+  const page_list = `${API_URL}/v2/own-subjects`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+  };
+
+  const cls_room: any = await class_room_info();
+  const common_info: any = await get_common_info();
+  const bi: any = await bi_info();
+
+  if (bi !== "" && common_info !== "" && cls_room !== "") {
+    const own_sub = await axios(options);
+    const data = formate_own_subject_data(own_sub, cls_room);
+    data.data.data.assessments = common_info.data.data.assessments;
+    data.data.data.pi_attribute_weight =
+      common_info.data.data.pi_attribute_weight;
+    data.data.data.bis = bi.data.data.bis;
+    localStorage.removeItem("common_room");
+    localStorage.removeItem("cls_room");
     return data;
   }
 }

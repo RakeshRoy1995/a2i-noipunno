@@ -774,8 +774,8 @@ const BiRawPDFDownload = () => {
           }
         </PDFDownloadLink>
       </div>
-
-      <PDFViewer width={1200} height={1200}>
+      
+      <PDFViewer style={{ width: '100%', height: '80vh' }}>
         <MyDocument />
       </PDFViewer>
     </div>

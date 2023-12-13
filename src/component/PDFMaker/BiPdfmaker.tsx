@@ -23,18 +23,6 @@ const styles = StyleSheet.create({
     margininlineEnd: '0px'
   },
 
-  footerh1: {
-    fontFamily: "Nikosh",
-    fontSize: 20,
-    fontWeight: 500,
-    padding: '10px',
-    textAlign: 'left',
-    marginBlockStart: '0.67em',
-    marginBlockEnd: '0.67em',
-    margininlineStart: '0px',
-    margininlineEnd: '0px'
-  },
-
   h2: {
     fontFamily: "Nikosh",
     fontSize: 20,
@@ -45,23 +33,38 @@ const styles = StyleSheet.create({
     margininlineStart: '0px',
     margininlineEnd: '0px'
   },
+
   h3: {
     fontFamily: 'Nikosh',
     textAlign: 'center',
     fontSize: 12,
     padding: '5px',
   },
+
   h4: {
     fontFamily: 'Nikosh',
     textAlign: 'left',
     fontSize: 15,
     padding: '5px',
   },
+
   h5: {
     fontSize: 10,
     fontWeight: 500,
     padding: '5px',
     fontFamily: "Nikosh",
+  },
+
+  footerh1: {
+    fontFamily: "Nikosh",
+    fontSize: 20,
+    fontWeight: 500,
+    padding: '10px',
+    textAlign: 'left',
+    marginBlockStart: '0.67em',
+    marginBlockEnd: '0.67em',
+    margininlineStart: '0px',
+    margininlineEnd: '0px'
   },
 
   image: {
@@ -76,18 +79,18 @@ const styles = StyleSheet.create({
   },
 
   colortext: {
-    color: '#000'
+    color: '#000',
   },
 
   containerMain: {
     backgroundColor: '#DCDDDE',
     marginTop: '20px',
-    marginBottom: '30px'
+    marginBottom: '30px',
   },
 
   subjectContainer: {
     width: '80%',
-    marginLeft: '40px'
+    marginLeft: '40px',
   },
 
   subjectTitle: {
@@ -98,7 +101,6 @@ const styles = StyleSheet.create({
   subjectName: {
     marginTop: '5px'
   },
-
 
   borderTop: {
     borderTop: '4px solid black',
@@ -126,15 +128,18 @@ const styles = StyleSheet.create({
     padding: '10px',
     width: '100%'
   },
+
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+
   box1: {
     width: '30%', 
     margin: '1.33%', 
     height: 100,
   },
+
   column2: {
     flexDirection: 'column',
     marginRight: 5,
@@ -165,6 +170,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
   },
+
   tableRow: {
     flexDirection: 'row',
   },
@@ -307,18 +313,22 @@ const styles = StyleSheet.create({
   scalemargin: {
     marginBottom: '8px'
   },
+
   wordBox: {
     fontFamily: 'Nikosh',
     padding: 2,
   },
+
   wordText: {
     fontFamily: 'Nikosh',
     fontSize: 12,
   },
+
   sentenceBox: {
     width: '100%',
     padding: 5,
   },
+
   sentenceText: {
     fontFamily: 'Nikosh',
     fontSize: 12,
@@ -327,6 +337,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   },
+  
 })
 
 const boxData = Array.from(Array(5).keys());
@@ -336,7 +347,7 @@ const MyDocument = () => (
 
   <Document>
     {/* First Page */}
-    <Page size="A4">
+    <Page size="A4" wrap>
 
       <Image
         src="../reportcard-image.png"
@@ -383,7 +394,7 @@ const MyDocument = () => (
     </Page>
 
     {/* Dynamic Subject Page */}
-    <Page size="A4">
+    <Page size="A4" wrap>
       {/* Subject -1  */}
       <View wrap={true}>
         <View>
@@ -775,7 +786,7 @@ const BiRawPDFDownload = () => {
         </PDFDownloadLink>
       </div>
       
-      <PDFViewer style={{ width: '100%', height: '80vh' }}>
+      <PDFViewer style={{ width: '100%', height: '100vh' }}>
         <MyDocument />
       </PDFViewer>
     </div>

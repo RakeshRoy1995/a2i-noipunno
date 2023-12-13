@@ -160,7 +160,9 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
   },
   tikMark: {
+    marginTop: 10,
     width: "12px",
+    height: "10px"
   },
 
   teacherSignatureContainer: {

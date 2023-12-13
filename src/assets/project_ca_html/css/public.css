@@ -25,7 +25,7 @@ h6 {
 }
 
 .max-width-540 {
-  max-width: 540px;
+  max-width: 340px !important;
 }
 
 body {
@@ -50,7 +50,8 @@ body {
 
 /* ---------login page start------------------- */
 .login-page {
-  background: linear-gradient(180deg, #befdff 0%, #a2f3f5 100%);
+  /* background: linear-gradient(180deg, #befdff 0%, #a2f3f5 100%); */
+  background: linear-gradient(180deg, #BEFDFF 0%, #51B9BD 100%);
 }
 
 .login-bg {
@@ -83,20 +84,23 @@ body {
   width: 226px;
 }
 
-.login-page .loginCard {
+/* .login-page .loginCard {
   border-radius: 6px;
   padding: 30px 80px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+} */
+.login-page .loginCard {
+  border-radius: 6px;
+  padding: 16px 23px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .teacher-login-title {
-  color: var(--text_dark);
+  color: #181C32;
   font-size: 30px;
+  font-style: normal;
   font-weight: 700;
   line-height: 39px;
-  letter-spacing: 2px;
-  text-align: left;
-  font-family: Noto Sans Bengali;
 }
 
 .np-login-subtitle {
@@ -107,6 +111,7 @@ body {
   line-height: 26px;
   letter-spacing: 0em;
   text-align: left;
+  margin-top: 0.8rem;
 }
 
 .login-title {
@@ -418,13 +423,34 @@ label.form-check-label:focus,
 /* app info end */
 
 /* media query start */
+@media screen and (min-width: 1200px) and (max-width: 5120px) {
+  .loginLogo {
+    height: 60px;
+    width: 100px;
+  }
+
+  .login-field-title {
+    padding: 15px 0px;
+  }
+}
+
 @media screen and (min-width: 992px) and (max-width: 1199.98px) {
+  .loginLogo {
+    height: 60px;
+    width: 100px;
+  }
+
   .helpedBy {
     width: 350px;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 991.98px) {
+  .loginLogo {
+    height: 60px;
+    width: 100px;
+  }
+
   .teacher-login-title {
     font-size: 16px;
   }
@@ -434,23 +460,25 @@ label.form-check-label:focus,
   }
 
   .login-page .loginCard {
-    padding: 20px 40px;
+    padding: 20px 10px;
   }
 
   .np-login-form-field {
     padding: 0.775rem 2.75rem;
   }
-<<<<<<< HEAD
+
+  .login-field-title {
+    font-size: 12px;
+    padding-bottom: 10px;
+  }
 
   .helpedBy {
-=======
-  .helpedBy { maxValue = Math.max(...numbers);
->>>>>>> 11aaaa442aa871287c235e2962006c6ee1bd4f46
+    maxValue=Math.max(...numbers);
     width: 500px;
   }
 
   .loginCard ::placeholder {
-    font-size: 14px;
+    font-size: 12px;
     padding-left: 10px;
   }
 }

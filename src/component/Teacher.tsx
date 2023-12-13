@@ -21,12 +21,11 @@ import styles from "./Home.style.module.css";
 import ParodorshitaComponent from "./ParodorshitaComponent";
 import ShowAssesment from "./ShowAssesment";
 import bookIcon from "../../src/assets/dashboard_materials/images/dashboard/bicon.svg";
-import "../../src/assets/project_ca_html/css/dashboard.css"
-
+import "../../src/assets/project_ca_html/css/dashboard.css";
 
 export default function Teacher() {
-  const [shift, setShift] = useState([]);
-  const [numberOfStudents, setnumberOfStudents] = useState([]);
+  const [showLoadingErr, setshowLoadingErr] = useState("");
+  let [numberOfRender, setnumberOfRender] = useState(1);
   const [subject, setsubject] = useState([]);
   const [allCompitance, setallCompitance] = useState<any>({});
   const [element, setelement] = useState<any>("");
@@ -58,48 +57,69 @@ export default function Teacher() {
   ] = useState([]);
 
   const fetchData = async () => {
-    const teacher_dash__: any = localStorage.getItem("teacher_dashboard") || "";
-    const teacher_dash = teacher_dash__ ? JSON.parse(teacher_dash__) : "";
+    try {
+      const teacher_dash__: any =
+        localStorage.getItem("teacher_dashboard") || "";
+      const teacher_dash = teacher_dash__ ? JSON.parse(teacher_dash__) : "";
 
-    let own_subjet: any = await teacher_own_subject();
-    localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+      let own_subjet: any = await teacher_own_subject();
+      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
 
-    let data: any = "";
-    if (teacher_dash) {
-      data = teacher_dash;
-    } else {
-      const data_dash: any = await teacher_dashboard();
-      data = data_dash.data;
-      localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
-    }
+      let data: any = "";
+      if (teacher_dash) {
+        data = teacher_dash;
+      } else {
+        const data_dash: any = await teacher_dashboard();
+        data = data_dash.data;
+        localStorage.setItem(
+          "teacher_dashboard",
+          JSON.stringify(data_dash.data)
+        );
+      }
 
-    // const al_teacher: any = await all_teachers();
-    setown_data(own_subjet?.data?.data);
-    setteacher(own_subjet.data.data.user);
+      // const al_teacher: any = await all_teachers();
+      setown_data(own_subjet?.data?.data);
+      setteacher(own_subjet.data.data.user);
 
-    const all_subject: any = [];
+      const all_subject: any = [];
 
-    let compitnc_obj = {};
-    own_subjet.data.data.subjects.map((d: any) => {
-      data.data.subjects.map((d_2: any) => {
-        if (d_2.subject_id === d.subject_id) {
-          const obj: any = {
-            subject: d_2.subject_info,
-            own_subjet: d,
-            teacher: d.class_room.class_teacher,
-          };
-          d.oviggota.map((competnc) => {
-            compitnc_obj = { ...compitnc_obj, [competnc.uid]: competnc };
-          });
-          all_subject.push(obj);
-        }
+      let compitnc_obj = {};
+      own_subjet.data.data.subjects.map((d: any) => {
+        data.data.subjects.map((d_2: any) => {
+          if (d_2.subject_id === d.subject_id) {
+            const obj: any = {
+              subject: d_2.subject_info,
+              own_subjet: d,
+              teacher: d.class_room.class_teacher,
+            };
+            d.oviggota.map((competnc) => {
+              compitnc_obj = { ...compitnc_obj, [competnc.uid]: competnc };
+            });
+            all_subject.push(obj);
+          }
+        });
       });
-    });
 
-    setall_bis(own_subjet.data.data.bis);
-    setallCompitance(compitnc_obj);
-    setsubject(all_subject);
-    setloader(false);
+      setall_bis(own_subjet.data.data.bis);
+      setallCompitance(compitnc_obj);
+      setsubject(all_subject);
+      setloader(false);
+    } catch (error) {
+      setshowLoadingErr("");
+
+      numberOfRender++;
+
+      if (numberOfRender <= 10) {
+        setnumberOfRender(numberOfRender);
+        fetchData();
+      } else {
+        setshowLoadingErr(
+          "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
+        );
+      }
+
+      console.log(`error`, numberOfRender, error);
+    }
   };
 
   const skill_behaibor_count = async (datas: any) => {
@@ -120,13 +140,18 @@ export default function Teacher() {
     setelement(e);
   };
 
-
   return (
     <div className="content mb-5 teacher_compo_bg">
-      {loader && (
-        <div className={loader && styles.loading_container}>
-          {loader && <Spinner animation="border" />}
-        </div>
+      {showLoadingErr ? (
+        <p className="text-danger text-center">{showLoadingErr}</p>
+      ) : (
+        <>
+          {loader && (
+            <div className={loader && styles.loading_container}>
+              {loader && <Spinner animation="border" />}
+            </div>
+          )}
+        </>
       )}
 
       {!ShowProfile && (

@@ -399,7 +399,7 @@ const Navbar = () => {
                                 />
                               </a>
                               <ul className="dropdown-menu border-0 dropdown-menu-item-style">
-                                <li>
+                                {/* <li>
                                   <NavLink
                                     to="/student-transcript"
                                     className="dropdown-item"
@@ -432,7 +432,7 @@ const Navbar = () => {
                                       </p>
                                     </div>
                                   </NavLink>
-                                </li>
+                                </li> */}
                                 {/* <li>
                               <a className="dropdown-item" href="#">
                                 <div className="dropdown-list-item-style d-flex align-items-center">
@@ -639,6 +639,24 @@ const Navbar = () => {
 
                   <div className="d-lg-flex d-block align-items-lg-center mt-2 mt-lg-0">
                     <div className="btn-group position-relative">
+
+                    {/* <Link
+                        to="/mollayon-koron"
+                        id="mollayon_koron_btn"
+                        className="nav-link navbar-menu-item nav-right-dorpdown d-flex align-items-center"
+                        role="button"
+                        // data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <img
+                          src={doublecheckPng}
+                          className="img-fluid "
+                          alt="add icon"
+                        />
+                        মূল্যায়ন শুরু করুন
+                        
+                      </Link> */}
+
                       <Link
                         to="/mollayon-koron"
                         id="mollayon_koron_btn"
@@ -653,7 +671,7 @@ const Navbar = () => {
                           alt="add icon"
                         />
                         মূল্যায়ন শুরু করুন
-                        {/* <img src={tikicowhite} className="img-fluid icon-left-space" alt="dropdown icon" /> */}
+                        
                       </Link>
 
                       {/* <ul className="dropdown-menu dropdown-menu-end">

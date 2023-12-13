@@ -762,7 +762,7 @@ const MyDocument = () => (
 
 
 
-const RawPDFDownload = () => {
+const BiRawPDFDownload = () => {
 
   return (
     <div>
@@ -782,4 +782,4 @@ const RawPDFDownload = () => {
   );
 };
 
-export default RawPDFDownload;
+export default BiRawPDFDownload;

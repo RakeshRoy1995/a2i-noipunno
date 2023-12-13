@@ -23,13 +23,9 @@ import Navbar from "./layout/Navbar";
 import FAQ from "./component/FAQ/FAQ";
 import LoginPage from "./component/LoginPage";
 import PasswordReset from "./component/PasswordReset";
-<<<<<<< HEAD
-import ShikarthirReportCard from "./component/ShikarthirReportCard";
-import PDFMaker from "./component/PDFMaker/BiPdfmaker";
-=======
 import StudentReport from "./component/StudentReport";
 import PDFMaker from "./component/PDFMaker/PDFMaker";
->>>>>>> 6c8f724f8936a7fed3301f8ad4e2a75efb36849b
+import BiRawPDFDownload from "./component/PDFMaker/BiPdfmaker";
 
 function App() {
   const [topbar, settopbar] = useState(false);
@@ -85,6 +81,7 @@ function App() {
           <Route path="/shikkarthir-report-card" element={<StudentReport />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
+          <Route path="/bi-pdf-maker" element={<BiRawPDFDownload />} />
         </Route>
 
         <Route path="/login" element={<LoginPage />} />

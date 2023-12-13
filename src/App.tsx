@@ -25,6 +25,7 @@ import LoginPage from "./component/LoginPage";
 import PasswordReset from "./component/PasswordReset";
 import StudentReport from "./component/StudentReport";
 import PDFMaker from "./component/PDFMaker/PDFMaker";
+import TestCase from "./component/Dashboards/TestCase/TestCase";
 
 function App() {
   const [topbar, settopbar] = useState(false);
@@ -80,6 +81,7 @@ function App() {
           <Route path="/shikkarthir-report-card" element={<StudentReport />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
+          <Route path="/test-case" element={<TestCase />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/password/reset" element={<PasswordReset />} />

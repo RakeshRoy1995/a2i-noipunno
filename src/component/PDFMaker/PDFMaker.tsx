@@ -23,7 +23,7 @@ Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 
 const styles = StyleSheet.create({
   table: {
-    // display: "table",
+    display: "table",
     width: "auto",
     borderStyle: "solid",
     borderWidth: 1,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderLeftWidth: 0,
     borderTopWidth: 0,
-    // display: "flex !important",
+    display: "flex !important",
   },
   tableColPoint: {
     width: "75%",
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     width: "25%",
     textAlign: "justify",
-    // textJustify: "inter-word",
+    textJustify: "inter-word",
     // backgroundColor: "red",
   },
   cell2: {
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     width: "75%",
     textAlign: "justify",
-    // textJustify: "inter-word",
+    textJustify: "inter-word",
     // backgroundColor: "red",
   },
   tikMark: {
@@ -187,10 +187,11 @@ const MyDocument = ({
   instititute,
   allFelter,
   student_info_pdf,
+  unique_id,
   teacher,
 }: any) => (
   <Document>
-    <Page >
+    <Page style={styles.body}>
       <View style={styles.table}>
         <Text style={[styles.h3, styles.colortext]}>
           {instititute?.institute_name}
@@ -265,7 +266,7 @@ const MyDocument = ({
             </View>
 
             {all_pi.pi_data.pi_attribute.map((pi_data: any, key) => (
-              <View style={[styles.tableCol]}>
+              <View style={[styles.tableCol, styles.imageAnadIcon]}>
                 {all_pi?.weight_uid == pi_data?.weight_uid && (
                   <Image src={icon} style={[styles.tikMark]} />
                 )}
@@ -293,6 +294,328 @@ const MyDocument = ({
       </View>
     </Page>
 
+    {/* <Page size="A4">
+      <View style={styles.section}>
+        <Text style={[styles.h1, styles.colortext]}>মডেল একাডেমি</Text>
+        <Text style={[styles.h3, styles.colortext]}>
+          [একটি আদর্শ উচ্চ বিদ্যালয়]
+          <br />
+        </Text>
+        <Text style={[styles.h3, styles.colortext]}>
+          প্রিন্সিপাল আব্দুল কাশেম সড়ক, সরকারি ডি-টাইপ কলোনী, মিরপুর-১,
+          ঢাকা-১২১৬
+        </Text>
+        <Text style={[styles.h3, styles.colortext]}>
+          ষাণ্মাসিক সামষ্টিক মূল্যায়ন (PI) এর বিষয়ভিত্তিক ট্রান্সক্রিপ্ট-২০২৩
+        </Text>
+      <View>
+        <Text style={[styles.sot]}>Showkat</Text>
+      </View>
+        <View style={styles.tableHeader}>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>শিক্ষার্থীর নাম: ইনতিশার পারভেজ</Text>
+          </View>
+
+          <View style={[styles.h2, styles.cell]}>
+            <Text>শিক্ষার্থীর আইডি: ৩২১০০</Text>
+          </View>
+        </View>
+        <View style={styles.table}>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>শ্রেণী: ষষ্ঠ</Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>শাখা: পদ্মা</Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>বিষয়: বাংলা</Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>বিষয় শিক্ষকের নাম: তামান্না হাসিন</Text>
+          </View>
+        </View>
+        <Text style={[styles.h3, styles.colortext]}>
+          পারদর্শিতার সূচকের মাত্রা
+        </Text>
+        <View style={styles.table}>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>পারদর্শিতা সূচক (PI)</Text>
+          </View>
+          <View style={[styles.h2, styles.cell2]}>
+            <Text>শিক্ষার্থীর পারদর্শিতা মাত্রা</Text>
+          </View>
+        </View>
+        <View style={styles.table}>
+          <View style={[styles.customh2, styles.cell, { padding: 2 }]}>
+            <Text>৬.১.১</Text>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            {" "}
+            <Image src={icon} style={[styles.tikMark]} /> S
+            <Text>
+              অন্যের সাথে যোগাযোগের সময়ে নিজের চাহিদা প্রকাশ করতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় ঐ ব্যক্তির আগ্রহ, চাহিদা
+              ও আবেগ বিবেচনায় নিতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা ও আবেগ বিবেচনায় নিয়ে
+              যোগাযোগ করতে পারছে।
+            </Text>
+          </View>
+        </View>
+
+
+        <View style={styles.table}>
+          <View style={[styles.customh2, styles.cell, { padding: 2 }]}>
+            <Text>৬.১.১</Text>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            {" "}
+            <Image src={icon} style={[styles.tikMark]} /> S
+            <Text>
+              অন্যের সাথে যোগাযোগের সময়ে নিজের চাহিদা প্রকাশ করতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় ঐ ব্যক্তির আগ্রহ, চাহিদা
+              ও আবেগ বিবেচনায় নিতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা ও আবেগ বিবেচনায় নিয়ে
+              যোগাযোগ করতে পারছে।
+            </Text>
+          </View>
+        </View>
+
+
+
+        <View style={styles.table}>
+          <View style={[styles.customh2, styles.cell, { padding: 2 }]}>
+            <Text>৬.১.১</Text>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            {" "}
+            <Image src={icon} style={[styles.tikMark]} /> S
+            <Text>
+              অন্যের সাথে যোগাযোগের সময়ে নিজের চাহিদা প্রকাশ করতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় ঐ ব্যক্তির আগ্রহ, চাহিদা
+              ও আবেগ বিবেচনায় নিতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা ও আবেগ বিবেচনায় নিয়ে
+              যোগাযোগ করতে পারছে।
+            </Text>
+          </View>
+        </View>
+
+
+
+        <View style={styles.table}>
+          <View style={[styles.customh2, styles.cell, { padding: 2 }]}>
+            <Text>৬.১.১</Text>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            {" "}
+            <Image src={icon} style={[styles.tikMark]} /> S
+            <Text>
+              অন্যের সাথে যোগাযোগের সময়ে নিজের চাহিদা প্রকাশ করতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় ঐ ব্যক্তির আগ্রহ, চাহিদা
+              ও আবেগ বিবেচনায় নিতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা ও আবেগ বিবেচনায় নিয়ে
+              যোগাযোগ করতে পারছে।
+            </Text>
+          </View>
+        </View>
+
+
+        <View style={styles.table}>
+          <View style={[styles.customh2, styles.cell, { padding: 2 }]}>
+            <Text>৬.১.১</Text>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            {" "}
+            <Image src={icon} style={[styles.tikMark]} /> S
+            <Text>
+              অন্যের সাথে যোগাযোগের সময়ে নিজের চাহিদা প্রকাশ করতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় ঐ ব্যক্তির আগ্রহ, চাহিদা
+              ও আবেগ বিবেচনায় নিতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা ও আবেগ বিবেচনায় নিয়ে
+              যোগাযোগ করতে পারছে।
+            </Text>
+          </View>
+        </View>
+
+
+
+
+        <View style={styles.table}>
+          <View style={[styles.customh2, styles.cell, { padding: 2 }]}>
+            <Text>৬.১.১</Text>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            {" "}
+            <Image src={icon} style={[styles.tikMark]} /> S
+            <Text>
+              অন্যের সাথে যোগাযোগের সময়ে নিজের চাহিদা প্রকাশ করতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় ঐ ব্যক্তির আগ্রহ, চাহিদা
+              ও আবেগ বিবেচনায় নিতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা ও আবেগ বিবেচনায় নিয়ে
+              যোগাযোগ করতে পারছে।
+            </Text>
+          </View>
+        </View>
+
+
+
+        <View style={styles.table}>
+          <View style={[styles.customh2, styles.cell, { padding: 2 }]}>
+            <Text>৬.১.১</Text>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            {" "}
+            <Image src={icon} style={[styles.tikMark]} /> S
+            <Text>
+              অন্যের সাথে যোগাযোগের সময়ে নিজের চাহিদা প্রকাশ করতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় ঐ ব্যক্তির আগ্রহ, চাহিদা
+              ও আবেগ বিবেচনায় নিতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা ও আবেগ বিবেচনায় নিয়ে
+              যোগাযোগ করতে পারছে।
+            </Text>
+          </View>
+        </View>
+
+
+        <View style={styles.table}>
+          <View style={[styles.customh2, styles.cell, { padding: 2 }]}>
+            <Text>৬.১.১</Text>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            {" "}
+            <Image src={icon} style={[styles.tikMark]} /> S
+            <Text>
+              অন্যের সাথে যোগাযোগের সময়ে নিজের চাহিদা প্রকাশ করতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় ঐ ব্যক্তির আগ্রহ, চাহিদা
+              ও আবেগ বিবেচনায় নিতে পারছে।
+            </Text>
+          </View>
+          <View style={[styles.h2, styles.cell]}>
+            <Text>
+              অন্যের কাছে নিজের চাহিদা প্রকাশ করার সময় পরিবেশ - পরিস্থিতির
+              ভিন্নতা অনুযায়ী ব্যক্তির আগ্রহ, চাহিদা ও আবেগ বিবেচনায় নিয়ে
+              যোগাযোগ করতে পারছে।
+            </Text>
+          </View>
+        </View>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </View>
+    </Page> */}
   </Document>
 );
 
@@ -304,8 +627,6 @@ const RawPDFDownload = ({
   unique_id,
   teacher,
 }: any) => {
-
-  console.log(`instititute ddddd `, instititute);
 
 
   const pdf_name = student_info_pdf?.student_name_bn ||
@@ -332,9 +653,9 @@ const RawPDFDownload = ({
         </PDFDownloadLink>
       </div>
 
-      {/* <PDFViewer width={800} height={800}>
+      <PDFViewer width={800} height={800}>
         <MyDocument />
-      </PDFViewer> */}
+      </PDFViewer>
     </div>
   );
 };

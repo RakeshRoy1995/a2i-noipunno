@@ -29,7 +29,7 @@ import FAQ from "./component/FAQ/FAQ";
 import LoginPage from "./component/LoginPage";
 import PasswordReset from "./component/PasswordReset";
 import ShikarthirReportCard from "./component/ShikarthirReportCard";
-import PDFMaker from "./component/PDFMaker/PDFMaker";
+import PDFMaker from "./component/PDFMaker/BiPdfmaker";
 
 function App() {
   const [topbar, settopbar] = useState(false);

@@ -26,6 +26,7 @@ import PasswordReset from "./component/PasswordReset";
 import StudentReport from "./component/StudentReport";
 import PDFMaker from "./component/PDFMaker/PDFMaker";
 import TestCase from "./component/Dashboards/TestCase/TestCase";
+import BiRawPDFDownload from "./component/PDFMaker/BiPdfmaker";
 
 function App() {
   const [topbar, settopbar] = useState(false);
@@ -82,6 +83,7 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
           <Route path="/test-case" element={<TestCase />} />
+          <Route path="/bi-pdf-maker" element={<BiRawPDFDownload />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/password/reset" element={<PasswordReset />} />

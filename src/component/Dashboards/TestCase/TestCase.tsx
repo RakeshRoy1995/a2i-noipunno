@@ -5,7 +5,7 @@ const TestCase = () => {
   // Create styles
   const styles = StyleSheet.create({
     page: {
-      flexDirection: 'column',
+
       backgroundColor: 'white',
       margin: 2,
       border: 1,

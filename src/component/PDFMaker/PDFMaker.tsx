@@ -78,13 +78,13 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 10,
     lineHeight: "1px",
-    display: "flex",
+    // display: "flex",
+    
+    textOverflow: "ellipsis",
     
     
-    
-    
-    flexDirection: 'row', 
-    flexWrap: 'wrap',
+    // flexDirection: 'row', 
+    // flexWrap: 'wrap',
   },
   page: {
     flexDirection: "row",
@@ -273,7 +273,7 @@ const MyDocument = ({
                 {all_pi?.weight_uid == pi_data?.weight_uid && (
                   <Image src={icon} style={[styles.tikMark]} />
                 )}
-                <Text style={styles.tableCell}>
+                <Text break style={styles.tableCell}>
                   {pi_data?.title_bn || pi_data?.title_en}{" "}
                 </Text>
               </View>

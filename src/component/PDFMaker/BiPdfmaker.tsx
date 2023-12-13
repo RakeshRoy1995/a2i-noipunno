@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nikosh',
     fontSize: 12,
     lineHeight: 1,
-    whiteSpace: 'nowrap', // Ensure sentence doesn't break
+    whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   },

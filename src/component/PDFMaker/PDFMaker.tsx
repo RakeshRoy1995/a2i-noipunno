@@ -37,6 +37,12 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderLeftWidth: 1,
   },
+  tableRowBottom: {
+    flexDirection: "row",
+    borderTopWidth: 0,
+    borderLeftWidth: 0,
+    borderBottomWidth: 1,
+  },
   tableRow: {
     margin: "auto",
     flexDirection: "row",
@@ -79,12 +85,21 @@ const styles = StyleSheet.create({
     fontSize: 10,
     lineHeight: "1px",
     // display: "flex",
-    
+
     textOverflow: "ellipsis",
-    
-    
-    // flexDirection: 'row', 
+
+    // flexDirection: 'row',
     // flexWrap: 'wrap',
+  },
+  tableCellTikMark: {
+    fontFamily: "Nikosh",
+    margin: "auto",
+    marginTop:"3px",
+    padding: 1,
+    fontSize: 10,
+    lineHeight: "1px",
+    textOverflow: "ellipsis",
+    height:"15px"
   },
   page: {
     flexDirection: "row",
@@ -167,15 +182,14 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     marginTop: 5,
     width: "12px",
-    height: "10px"
+    height: "10px",
   },
 
   teacherSignatureContainer: {
     marginTop: "80px",
     display: "flex",
     flexDirection: "row",
-    gap: "150px"
-
+    gap: "150px",
   },
   teacherSignature: {
     fontFamily: "Nikosh",
@@ -183,7 +197,6 @@ const styles = StyleSheet.create({
     marginTop: "10px",
     fontSize: 14,
     fontWeight: 600,
-
   },
 });
 
@@ -195,7 +208,7 @@ const MyDocument = ({
   teacher,
 }: any) => (
   <Document>
-    <Page >
+    <Page>
       <View style={styles.table}>
         <Text style={[styles.h3, styles.colortext]}>
           {instititute?.branch_name}
@@ -260,20 +273,24 @@ const MyDocument = ({
         </View>
 
         {data?.all_PI_array?.map((all_pi: any, k: any) => (
-          <View style={styles.tableRow} >
-            <View style={styles.tableCol} wrap={true} break>
-
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
               <Text style={styles.tableCell}>
                 {" "}
-                {convertToBanglaNumber(all_pi.pi_data.pi_no)}  {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
+                {convertToBanglaNumber(all_pi.pi_data.pi_no)}{" "}
+                {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
               </Text>
             </View>
 
             {all_pi.pi_data.pi_attribute.map((pi_data: any, key) => (
               <View style={[styles.tableCol]}>
-                {all_pi?.weight_uid == pi_data?.weight_uid && (
+                <View style={styles.tableRowBottom}>
+                  <Text style={styles.tableCellTikMark}>
+                  {all_pi?.weight_uid == pi_data?.weight_uid && (
                   <Image src={icon} style={[styles.tikMark]} />
                 )}
+                  </Text>
+                </View>
                 <Text break style={styles.tableCell}>
                   {pi_data?.title_bn || pi_data?.title_en}{" "}
                 </Text>
@@ -282,9 +299,7 @@ const MyDocument = ({
           </View>
         ))}
 
-
-
-        <View style={[styles.teacherSignatureContainer]} wrap={true} break>
+        <View style={[styles.teacherSignatureContainer]}>
           <Text style={[styles.teacherSignature, styles.colortext]}>
             বিষয় শিক্ষকের স্বাক্ষরঃ
             <br />
@@ -299,8 +314,6 @@ const MyDocument = ({
         </View>
       </View>
     </Page>
-
-   
   </Document>
 );
 
@@ -312,12 +325,14 @@ const RawPDFDownload = ({
   unique_id,
   teacher,
 }: any) => {
-
   console.log(`instititute ddddd `, instititute);
 
-
-  const pdf_name = student_info_pdf?.student_name_bn ||
-    student_info_pdf?.student_name_en + "-transcript-result"  + ".pdf"
+  const pdf_name =
+    student_info_pdf?.student_name_bn ||
+    student_info_pdf?.student_name_en +
+      "-" +
+      convertToBanglaNumber(student_info_pdf?.roll) +
+      ".pdf";
   return (
     <div>
       <div>
@@ -335,7 +350,21 @@ const RawPDFDownload = ({
           fileName={pdf_name}
         >
           {({ blob, url, loading, error }: any) =>
-            loading ? <> <BsFiletypePdf title="loading" className="fs-4 me-2 text-secoundery" /> {"..."} </> : <BsFiletypePdf title="download" className="fs-4 me-2 text-success" />
+            loading ? (
+              <>
+                {" "}
+                <BsFiletypePdf
+                  title="loading"
+                  className="fs-4 me-2 text-secoundery"
+                />{" "}
+                {"..."}{" "}
+              </>
+            ) : (
+              <BsFiletypePdf
+                title="download"
+                className="fs-4 me-2 text-success"
+              />
+            )
           }
         </PDFDownloadLink>
       </div>

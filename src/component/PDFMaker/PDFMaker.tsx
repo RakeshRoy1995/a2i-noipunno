@@ -78,7 +78,13 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 10,
     lineHeight: "1px",
-    display: "flex"
+    // display: "flex",
+    
+    textOverflow: "ellipsis",
+    
+    
+    // flexDirection: 'row', 
+    // flexWrap: 'wrap',
   },
   page: {
     flexDirection: "row",
@@ -146,9 +152,6 @@ const styles = StyleSheet.create({
     padding: 1,
     flexGrow: 1,
     width: "25%",
-    textAlign: "justify",
-    // textJustify: "inter-word",
-    // backgroundColor: "red",
   },
   cell2: {
     border: "1px solid #000 !important",
@@ -160,7 +163,9 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
   },
   tikMark: {
-    marginTop: 10,
+    marginLeft: 50,
+    // justifyContent: "center",
+    marginTop: 5,
     width: "12px",
     height: "10px"
   },
@@ -269,7 +274,7 @@ const MyDocument = ({
                 {all_pi?.weight_uid == pi_data?.weight_uid && (
                   <Image src={icon} style={[styles.tikMark]} />
                 )}
-                <Text style={styles.tableCell}>
+                <Text break style={styles.tableCell}>
                   {pi_data?.title_bn || pi_data?.title_en}{" "}
                 </Text>
               </View>
@@ -295,6 +300,7 @@ const MyDocument = ({
       </View>
     </Page>
 
+   
   </Document>
 );
 
@@ -311,7 +317,7 @@ const RawPDFDownload = ({
 
 
   const pdf_name = student_info_pdf?.student_name_bn ||
-    student_info_pdf?.student_name_en + "-" + convertToBanglaNumber(student_info_pdf?.roll) + ".pdf"
+    student_info_pdf?.student_name_en + "-transcript-result"  + ".pdf"
   return (
     <div>
       <div>

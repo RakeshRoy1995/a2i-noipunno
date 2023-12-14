@@ -81,7 +81,7 @@ function App() {
           <Route path="/shikkarthir-report-card" element={<StudentReport />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
-          <Route path="/bi-pdf-maker" element={<BiRawPDFDownload />} />
+          {/* <Route path="/bi-pdf-maker" element={<BiRawPDFDownload />} /> */}
         </Route>
 
         <Route path="/login" element={<LoginPage />} />

@@ -397,7 +397,7 @@ export function get_report_card(
   student_uid = ""
 ) {
   const page_list = `${EVULATION_API}/report-card-by-student`;
-  // const page_list = `/assets/transcript_response.json`;
+  // const page_list = `/assets/report_card.json`;
 
   const options = {
     method: "get",
@@ -418,9 +418,9 @@ export function get_report_card(
 }
 
 export function dimension_by_subject(subject_uid) {
-  // const page_list = `${API_URL}/v2/dimension-by-subject`;
-  const page_list = `https://competence.noipunno.gov.bd/api/dimension-by-subject`;
-  // const page_list = `/assets/transcript_response.json`;
+  const page_list = `${API_URL}/v2/dimension-by-subject`;
+  // const page_list = `https://competence.noipunno.gov.bd/api/dimension-by-subject`;
+  // const page_list = `/assets/dimension.json`;
 
   const options = {
     method: "get",

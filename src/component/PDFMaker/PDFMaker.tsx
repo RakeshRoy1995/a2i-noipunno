@@ -80,9 +80,9 @@ const styles = StyleSheet.create({
   tableCell: {
     fontFamily: "Nikosh",
     margin: "auto",
-    padding: 5,
+    padding: 2,
     marginTop: 5,
-    fontSize: 10,
+    fontSize: 8,
     lineHeight: "1px",
     // display: "flex",
 

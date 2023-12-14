@@ -9,6 +9,7 @@ import {
   Font,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
+import { convertToBanglaNumber } from "../../utils/Utils";
 
 Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 
@@ -21,12 +22,38 @@ const styles = StyleSheet.create({
     margin: 50,
   },
 
+  section1: {},
+  section2: {},
+  section3: { marginBottom: 50 },
+  section4: {},
+  section5: {},
+  section6: { marginBottom: 50 },
+  section7: {},
+  section8: {},
+  section9: {},
+  section10: {},
+  section11: {},
+  section12: {},
+  section13: {},
+
   h1: {
     fontFamily: "Nikosh",
     fontSize: 20,
     fontWeight: 500,
     padding: "10px",
     textAlign: "center",
+    marginBlockStart: "0.67em",
+    marginBlockEnd: "0.67em",
+    margininlineStart: "0px",
+    margininlineEnd: "0px",
+  },
+
+  footerh1: {
+    fontFamily: "Nikosh",
+    fontSize: 20,
+    fontWeight: 500,
+    padding: "10px",
+    textAlign: "left",
     marginBlockStart: "0.67em",
     marginBlockEnd: "0.67em",
     margininlineStart: "0px",
@@ -43,40 +70,24 @@ const styles = StyleSheet.create({
     margininlineStart: "0px",
     margininlineEnd: "0px",
   },
-
   h3: {
     fontFamily: "Nikosh",
     textAlign: "center",
     fontSize: 12,
     padding: "5px",
   },
-
   h4: {
     fontFamily: "Nikosh",
     textAlign: "left",
     fontSize: 15,
     padding: "5px",
   },
-
   h5: {
     fontSize: 10,
     fontWeight: 500,
     padding: "5px",
     fontFamily: "Nikosh",
   },
-
-  footerh1: {
-    fontFamily: "Nikosh",
-    fontSize: 20,
-    fontWeight: 500,
-    padding: "10px",
-    textAlign: "left",
-    marginBlockStart: "0.67em",
-    marginBlockEnd: "0.67em",
-    margininlineStart: "0px",
-    margininlineEnd: "0px",
-  },
-
   image: {
     width: "100%",
     height: "250px",
@@ -164,10 +175,12 @@ const styles = StyleSheet.create({
 
   paragraph: {
     fontFamily: "Nikosh",
-    whiteSpace: "nowrap", // Prevent word breaks
+     // Prevent word breaks
     fontSize: 10,
     padding: "5px",
   },
+
+  icon: {},
 
   box: {
     border: "1px solid black",
@@ -180,11 +193,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
   },
-
   tableRow: {
     flexDirection: "row",
   },
-
   tableCell: {
     flex: 1,
     borderStyle: "solid",
@@ -343,20 +354,22 @@ const styles = StyleSheet.create({
     fontFamily: "Nikosh",
     fontSize: 12,
     lineHeight: 1,
-    whiteSpace: "nowrap",
+    
     overflow: "hidden",
     textOverflow: "ellipsis",
   },
   positionFixed: {
-    position: "fixed",
+    
   },
 });
 
-const boxData = Array.from(Array(5).keys());
-const sentence =
-  "পরিস্থিতি বিবেচনায় প্রমিত ভাষায় যোগাযোগ করছে।  যোগাযোগ করে কেমন হয় সবাই জানি। দেশ কে জানি , তাজকে কি হবে শেষ ";
-const words = sentence.split(" ");
-const MyDocument = () => (
+
+const MyDocument = ({
+  selected_student,
+  student,
+  instititute,
+  subject_name
+}) => (
   <Document>
     {/* First Page */}
     <Page size="A4" wrap>
@@ -367,27 +380,28 @@ const MyDocument = () => (
       </View>
 
       {/* student info */}
-      <View style={[styles.headerTop, ]}>
+      <View style={[styles.headerTop]}>
         <View style={[styles.row]}>
-        <Text style={[styles.h2, styles.colortext, ]}>
-          প্রতিষ্ঠানের নাম : NANOSOFT{" "}
-        </Text>
-        </View>
-        
-        <View style={[styles.row]}>
-          <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শিক্ষার্থীর নাম : Mehedi Hasan Neloy{" "}
-          </Text>
-          <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শিক্ষার্থীর আইডি : ০১{" "}
+          <Text style={[styles.h2, styles.colortext]}>
+            প্রতিষ্ঠানের নাম : {instititute?.branch_name}{" "}
           </Text>
         </View>
+
         <View style={[styles.row]}>
           <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শ্রেণী :{" "} {" "}ষষ্ঠ{" "}
+            শিক্ষার্থীর নাম :{" "}
+            {student?.student_name_bn || student?.student_name_en}{" "}
           </Text>
           <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শিক্ষাবর্ষ :{" "}{" "} ২০২৩{" "}
+            শিক্ষার্থীর আইডি : {convertToBanglaNumber(student?.roll)}{" "}
+          </Text>
+        </View>
+        <View style={[styles.row]}>
+          <Text style={[styles.h2, styles.colortext, styles.column]}>
+            শ্রেণী : {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}{" "}
+          </Text>
+          <Text style={[styles.h2, styles.colortext, styles.column]}>
+            শিক্ষাবর্ষ : {convertToBanglaNumber(student?.registration_year)}{" "}
           </Text>
         </View>
       </View>
@@ -401,39 +415,29 @@ const MyDocument = () => (
 
         <View style={[styles.row, styles.subjectContainer]}>
           <View style={styles.column}>
-            <Text style={styles.text}>
-              <Image src="../graduation-cap.png" /> বাংলা
-            </Text>
-            <Text style={styles.text}>
-              <Image src="../graduation-cap.png" /> ইংরেজি
-            </Text>
-            <Text style={styles.text}>
-              <Image src="../graduation-cap.png" /> গণিত
-            </Text>
-            <Text style={styles.text}>
-              <Image src="../graduation-cap.png" /> বিজ্ঞান
-            </Text>
-            <Text style={styles.text}>
-              <Image src="../graduation-cap.png" /> ডিজিটাল প্রযুক্তি
-            </Text>
+            {selected_student?.map((item, index) => {
+              return (
+                index < 5 && (
+                  <Text style={styles.text}>
+                    <Image src="../graduation-cap.png" />{" "}
+                    {subject_name(item[0])}
+                  </Text>
+                )
+              );
+            })}
           </View>
 
           <View style={styles.column}>
-            <Text style={styles.text}>
-              <Image src="../graduation-cap.png" /> ইতিহাস ও সামাজিক বিজ্ঞান
-            </Text>
-            <Text style={styles.text}>
-              <Image src="../graduation-cap.png" /> জীবন ও জীবিকা
-            </Text>
-            <Text style={styles.text}>
-              <Image src="../graduation-cap.png" /> ধর্ম শিক্ষা
-            </Text>
-            <Text style={styles.text}>
-              <Image src="../graduation-cap.png" /> স্বাস্থথ্য সুরক্ষা
-            </Text>
-            <Text style={styles.text}>
-              <Image src="../graduation-cap.png" /> শিল্প ও সংস্কৃতি
-            </Text>
+            {selected_student?.map((item, index) => {
+              return (
+                index >= 5 && (
+                  <Text style={styles.text}>
+                    <Image src="../graduation-cap.png" />{" "}
+                    {subject_name(item[0])}
+                  </Text>
+                )
+              );
+            })}
           </View>
         </View>
       </View>
@@ -442,256 +446,117 @@ const MyDocument = () => (
     {/* Dynamic Subject Page */}
     <Page size="A4" wrap>
       {/* Subject -1  */}
-      <View wrap={true}>
-        <View>
-          <Text
-            style={[
-              styles.h1,
-              styles.colortext,
-              styles.subjectName,
-              styles.cardHeaderBG,
-            ]}
-          >
-            {" "}
-            বাংলা{" "}
-          </Text>
-        </View>
 
-        <View style={styles.container}>
-          {boxData.map((index) => (
-            <View style={[styles.box1]}>
-              <View style={[styles.card]}>
-                <View style={[styles.cardTitle]}>
-                  <Text style={[styles.h3]}> যোগাযোগ 1</Text>
-                </View>
-                <View style={[styles.cardbody]}>
-                  <View>
-                    <View style={styles.sentenceBox}>
-                      <Text style={styles.sentenceText}>
-                        গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে
-                        গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে
-                      </Text>
+      {selected_student.map((item) => (
+        <View wrap={true}>
+          <View>
+            <Text
+              style={[
+                styles.h1,
+                styles.colortext,
+                styles.subjectName,
+                styles.cardHeaderBG,
+              ]}
+            >
+              {" "}
+              {subject_name(item[0])}{" "}
+            </Text>
+          </View>
+
+          <View style={styles.container}>
+            {item[1].map((data) => (
+              <View style={[styles.box1]}>
+                <View style={[styles.card]}>
+                  <View style={[styles.cardTitle]}>
+                    <Text style={[styles.h3]}> {data?.dimension_title}</Text>
+                  </View>
+                  <View style={[styles.cardbody]}>
+                    <View>
+                      <View style={styles.sentenceBox}>
+                        <Text style={styles.sentenceText}>
+                          {data?.dimension_details}
+                        </Text>
+                      </View>
                     </View>
                   </View>
-                </View>
 
-                <View style={[styles.cardRow]}>
-                  <View style={[styles.cardColumn, styles.itemBG]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
+                  <View style={[styles.cardRow]}>
+                    {data?.dimension_result >= 1 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+
+                    {data?.dimension_result >= 2 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+
+                    {data?.dimension_result >= 3 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+
+                    {data?.dimension_result >= 4 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+
+                    {data?.dimension_result >= 5 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+
+                    {data?.dimension_result >= 6 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+
+                    {data?.dimension_result >= 7 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
                   </View>
                 </View>
               </View>
-            </View>
-          ))}
+            ))}
+          </View>
         </View>
-      </View>
-
-      {/* Subject -2 */}
-      <View wrap={true}>
-        <View>
-          <Text
-            style={[
-              styles.h1,
-              styles.colortext,
-              styles.subjectName,
-              styles.cardHeaderBG,
-            ]}
-          >
-            {" "}
-            বাংলা{" "}
-          </Text>
-        </View>
-
-        <View style={styles.container}>
-          {boxData.map((index) => (
-            <View style={[styles.box1]}>
-              <View style={[styles.card]}>
-                <View style={[styles.cardTitle]}>
-                  <Text style={[styles.h3]}> যোগাযোগ 1</Text>
-                </View>
-                <View style={[styles.cardbody]}>
-                  <View>
-                    <View style={styles.sentenceBox}>
-                      <Text style={styles.sentenceText}>
-                        গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে
-                        গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <View style={[styles.cardRow]}>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          ))}
-        </View>
-      </View>
-
-      {/* Subject -3 */}
-      <View wrap={true}>
-        <View>
-          <Text
-            style={[
-              styles.h1,
-              styles.colortext,
-              styles.subjectName,
-              styles.cardHeaderBG,
-            ]}
-          >
-            {" "}
-            বাংলা{" "}
-          </Text>
-        </View>
-
-        <View style={styles.container}>
-          {boxData.map((index) => (
-            <View style={[styles.box1]}>
-              <View style={[styles.card]}>
-                <View style={[styles.cardTitle]}>
-                  <Text style={[styles.h3]}> যোগাযোগ 1</Text>
-                </View>
-                <View style={[styles.cardbody]}>
-                  <View>
-                    <View style={styles.sentenceBox}>
-                      <Text style={styles.sentenceText}>
-                        গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে
-                        গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <View style={[styles.cardRow]}>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          ))}
-        </View>
-      </View>
-
-      {/* Subject -4 */}
-      <View wrap={true} break>
-        <View>
-          <Text
-            style={[
-              styles.h1,
-              styles.colortext,
-              styles.subjectName,
-              styles.cardHeaderBG,
-            ]}
-          >
-            {" "}
-            বাংলা{" "}
-          </Text>
-        </View>
-
-        <View style={styles.container}>
-          {boxData.map((index) => (
-            <View style={[styles.box1]}>
-              <View style={[styles.card]}>
-                <View style={[styles.cardTitle]}>
-                  <Text style={[styles.h3]}> যোগাযোগ 1</Text>
-                </View>
-                <View style={[styles.cardbody]}>
-                  <View>
-                    <View style={styles.sentenceBox}>
-                      <Text style={styles.sentenceText}>
-                        গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে
-                        গাণিতিক সমস্যা সমাধানে যথাযথ ভাষা ও কৌশলের প্রয়োগ করেছে
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-
-                <View style={[styles.cardRow]}>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                  <View style={[styles.cardColumn]}>
-                    <Text></Text>
-                  </View>
-                </View>
-              </View>
-            </View>
-          ))}
-        </View>
-      </View>
+      ))}
     </Page>
     {/* Dynamic Subject Page */}
 
@@ -1201,20 +1066,35 @@ const MyDocument = () => (
   </Document>
 );
 
-const BiRawPDFDownload = () => {
+const BiRawPDFDownload = ({
+  selected_student,
+  subject_name,
+  student,
+  instititute,
+}) => {
+
+  const pdf_name = student?.student_name_bn ||
+    student?.student_name_en + "-report-card-result"  + ".pdf" 
+  console.log(`student`, student);
   return (
     <div>
       <div>
-        <PDFDownloadLink document={<MyDocument />} fileName="my_document.pdf">
+        <PDFDownloadLink
+          document={
+            <MyDocument
+              selected_student={selected_student}
+              student={student}
+              instititute={instititute}
+              subject_name={subject_name}
+            />
+          }
+          fileName={pdf_name}
+        >
           {({ blob, url, loading, error }: any) =>
             loading ? "Loading document..." : "Download PDF"
           }
         </PDFDownloadLink>
       </div>
-
-      <PDFViewer style={{ width: "100%", height: "100vh" }}>
-        <MyDocument />
-      </PDFViewer>
     </div>
   );
 };

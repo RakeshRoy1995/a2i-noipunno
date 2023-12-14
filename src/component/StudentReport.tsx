@@ -6,6 +6,7 @@ import {
   get_pi_bi_evaluation_list,
   get_report_card,
   dimension_by_subject,
+  clssWiseSubject,
 } from "../Request";
 import html2pdf from "html2pdf.js";
 import { RotatingLines } from "react-loader-spinner";
@@ -43,10 +44,10 @@ export default function StudentReport() {
   const [teacher, setteacher] = useState<any>("");
   const [sub_name, setsubject_name] = useState<any>("");
   const [loader, setloader] = useState(true);
-  const [selectedSunject, setselectedSunject] = useState<any>("");
   const [instititute, setinstititute] = useState<any>("");
   const [data, setdata] = useState<any>({});
   const [selected_student, setselected_student] = useState<any>([]);
+  const [all_subject, setall_subject] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
   const [student, setstudent] = useState<any>({});
   const [loading, setLoading] = useState(false);
@@ -66,9 +67,6 @@ export default function StudentReport() {
       own_subjet = await teacher_own_subject();
       localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
     }
-
-    console.log(`own_subjet`, own_subjet);
-
     let data: any = "";
     if (teacher_dash) {
       data = teacher_dash;
@@ -107,9 +105,7 @@ export default function StudentReport() {
     });
     setall_bis(own_subjet.data.data.bis);
     setversion(teacher_dash?.data?.versions);
-    setinstititute(teacher_dash?.data?.institute);
-
-    console.log(`all_subject`, all_subject);
+    setinstititute(teacher_dash?.data?.branches);
     setsubject(all_subject);
     setloader(false);
     setassesment(own_subjet?.data?.data?.assessments[0]?.assessment_details);
@@ -130,7 +126,6 @@ export default function StudentReport() {
         });
       });
     });
-
     // console.log("own_subjet", all_Pi);
   };
 
@@ -185,8 +180,19 @@ export default function StudentReport() {
         student_name
       );
 
+      const clssWiseSub: any = await clssWiseSubject(allFelter.subject.split("-")[1]);
+      setall_subject(clssWiseSub.data.data)
+
+      let res :any = []
+
+      report_data.data.report_card.map((d)=>{
+         d.subject_result.map((s_d)=>{
+          res.push(s_d)
+         })
+      })
+
       const data = formate_report_data(
-        report_data.data.report_card.student_result,
+        res,
         dimentions.data.data
       );
       const student_data = all_students(student_name);
@@ -197,7 +203,8 @@ export default function StudentReport() {
 
       setselected_student(data);
 
-      console.log(`data`, data);
+      console.log(`data----`, data);
+
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -215,6 +222,16 @@ export default function StudentReport() {
       return true;
     }
   });
+
+  const subject_name = (id: any) => {
+    if (all_subject.length) {
+      
+      const subject = all_subject.find(
+        (data) => data.uid == id
+      );
+      return subject?.name;
+    }
+  };
 
   return (
     <div className="report_page">
@@ -703,6 +720,7 @@ export default function StudentReport() {
           allFelter={allFelter}
           instititute={instititute ? instititute[0] : {}}
           sub_name={sub_name}
+          subject_name={subject_name}
         />
       )}
     </div>

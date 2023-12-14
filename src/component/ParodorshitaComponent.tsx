@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PiBookOpenText } from "react-icons/pi";
 // import DetailsShikhonMullayon from "./DetailsShikhonMullayonSannasikBarshik";
 import styles from "./Home.style.module.css";
@@ -10,6 +10,7 @@ import {
 import { FaExpand } from "react-icons/fa";
 import DetailsShikhonMullayonSannasikBarshik from "./DetailsShikhonMullayonSannasikBarshik";
 import DetailsShikhonMullayonShikhonKalin from "./DetailsShikhonMullayonShikhonKalin";
+import { Spinner } from "react-bootstrap";
 
 export default function ParodorshitaComponent({
   assessment_uid,
@@ -24,10 +25,17 @@ export default function ParodorshitaComponent({
   teacher_uid,
   pi_selection,
 }: any) {
+
+  const [loadingspinner, setloadingspinner] = useState(false);
+
   
   return (
     <div className="py-2">
       <div className="row">
+        <div className="text-center">
+        { loadingspinner && <><Spinner animation="border" /> Data is loading...</>   } 
+        </div>
+      
         {show_shannasik_barsik() == false ? (
           <>
             {shikhonKalinMullayon.map((d: any, key: any) => (
@@ -115,6 +123,7 @@ export default function ParodorshitaComponent({
                     pi_attr={pi_attr}
                     Student={Student}
                     teacher_uid={teacher_uid}
+                    setloadingspinner={setloadingspinner}
                   />
                 </div>
               </div>

@@ -273,8 +273,8 @@ const MyDocument = ({
         </View>
 
         {data?.all_PI_array?.map((all_pi: any, k: any) => (
-          <View style={styles.tableRow}>
-            <View style={styles.tableCol}>
+          <View style={styles.tableRow} wrap>
+            <View style={styles.tableCol} wrap={true}>
               <Text style={styles.tableCell}>
                 {" "}
                 {convertToBanglaNumber(all_pi.pi_data.pi_no)}{" "}
@@ -283,7 +283,7 @@ const MyDocument = ({
             </View>
 
             {all_pi.pi_data.pi_attribute.map((pi_data: any, key) => (
-              <View style={[styles.tableCol]}>
+              <View style={[styles.tableCol]} >
                 <View style={styles.tableRowBottom}>
                   <Text style={styles.tableCellTikMark}>
                   {all_pi?.weight_uid == pi_data?.weight_uid && (
@@ -291,7 +291,7 @@ const MyDocument = ({
                 )}
                   </Text>
                 </View>
-                <Text break style={styles.tableCell}>
+                <Text style={styles.tableCell}>
                   {pi_data?.title_bn || pi_data?.title_en}{" "}
                 </Text>
               </View>

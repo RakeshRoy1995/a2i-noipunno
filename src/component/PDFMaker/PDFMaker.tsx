@@ -20,22 +20,65 @@ import {
 } from "../../utils/Utils";
 import { BsFiletypePdf } from "react-icons/bs";
 Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
+Font.register({ family: "Noto Sans Bengali", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
 
 const styles = StyleSheet.create({
+  page: {
+    //flexDirection: "row",
+    fontFamily: "Noto Sans Bengali",
+    //  backgroundColor: "#E4E4E4",
+    padding: 4,
+    // margin: 50,
+    textAlign: "left",
+    marginTop: 10
+  },
+  h1: {
+    fontFamily: "Nikosh",
+    fontSize: 16,
+    textAlign: "center",
+    fontWeight: 700,
+    //   display: 'block',
+    //   fontSize: '2em',
+    // marginBlockStart: '0.67em',
+    // marginBlockEnd: '0.67em',
+    // margininlineStart: '0px',
+    // margininlineEnd: '0px',
+    // margin: 5,
+    lineHeight: 1.5
+  },
+  h2: {
+    fontFamily: "Nikosh",
+    textAlign: "center",
+    fontSize: 12,
+    lineHeight: 1.5
+  },
+  h3: {
+    fontFamily: "Nikosh",
+    fontSize: 11,
+    textAlign: "center",
+  },
+  h5: {
+    fontSize: 10,
+    fontWeight: 500,
+  },
+
   table: {
     // display: "table",
-    width: "auto",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderRightWidth: 0,
-    borderBottomWidth: 0,
-    padding: "40px",
+    width: "95%",
+    margin: 'auto'
+    // borderStyle: "solid",
+    // borderWidth: 1,
+    // borderRightWidth: 0,
+    // borderBottomWidth: 0,
+    // padding: "40px"
+
   },
   tableRowTop: {
-    margin: "auto",
+    // margin: "auto",
     flexDirection: "row",
     borderTopWidth: 1,
     borderLeftWidth: 1,
+
   },
   tableRowBottom: {
     flexDirection: "row",
@@ -44,24 +87,25 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   tableRow: {
-    margin: "auto",
+    // margin: "auto",
     flexDirection: "row",
-    borderLeftWidth: 1,
+    borderStyle: "solid",
+    borderWidth: '0.5',
   },
   tableCol: {
     width: "25%",
     borderStyle: "solid",
-    borderWidth: 1,
+    borderWidth: '0.5',
     borderLeftWidth: 0,
     borderTopWidth: 0,
     // display: "flex !important",
   },
   tableColPoint: {
-    width: "75%",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
+    // width: "75%",
+    // borderStyle: "solid",
+    // borderWidth: 1,
+    // borderLeftWidth: 0,
+    // borderTopWidth: 0,
   },
   tableColStdNameRoll: {
     width: "50%",
@@ -79,10 +123,10 @@ const styles = StyleSheet.create({
   },
   tableCell: {
     fontFamily: "Nikosh",
-    margin: "auto",
-    padding: 5,
-    marginTop: 5,
-    fontSize: 10,
+    // margin: "auto",
+    padding: "5px",
+    // marginTop: 5,
+    fontSize: 11,
     lineHeight: "1px",
     // display: "flex",
 
@@ -90,9 +134,13 @@ const styles = StyleSheet.create({
 
     // flexDirection: 'row',
     // flexWrap: 'wrap',
+
+
   },
+
+
   tableCellTikMark: {
-    fontFamily: "Nikosh",
+    fontFamily: "Noto Sans Bengali",
     margin: "auto",
     marginTop: "3px",
     padding: 1,
@@ -101,60 +149,14 @@ const styles = StyleSheet.create({
     textOverflow: "ellipsis",
     height: "15px"
   },
-  page: {
-    flexDirection: "row",
-    fontFamily: "Nikosh",
-    backgroundColor: "#E4E4E4",
-    padding: 40,
-    margin: 50,
-  },
 
   section: {
     margin: 20,
     padding: 10,
     flexGrow: 1,
   },
-  h1: {
-    fontFamily: "Nikosh",
-    fontSize: 24,
-    textAlign: "center",
-    fontWeight: 500,
-    //   display: 'block',
-    //   fontSize: '2em',
-    // marginBlockStart: '0.67em',
-    // marginBlockEnd: '0.67em',
-    // margininlineStart: '0px',
-    // margininlineEnd: '0px',
-    margin: 10,
-  },
-  h2: {
-    fontFamily: "Nikosh",
-    textAlign: "center",
-    fontSize: 10,
-  },
-  customh2: {
-    fontFamily: "Nikosh",
 
-    fontSize: 10,
-  },
-  h3: {
-    fontFamily: "Nikosh",
-    textAlign: "center",
-  },
-  h5: {
-    fontSize: 12,
-    fontWeight: 500,
-  },
-  colortext: {
-    margin: 5,
-    color: "#000",
-  },
-  // table: {
-  //   flexDirection: "row",
-  //   borderBottomWidth: 1,
-  //   borderColor: "#000",
 
-  // },
   tableHeader: {
     flexDirection: "row",
     borderBottomWidth: 1,
@@ -168,15 +170,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     width: "25%",
   },
-  cell2: {
-    border: "1px solid #000 !important",
-    padding: 5,
-    flexGrow: 1,
-    width: "75%",
-    textAlign: "justify",
-    // textJustify: "inter-word",
-    // backgroundColor: "red",
-  },
+
   tikMark: {
     marginLeft: 50,
     // justifyContent: "center",
@@ -186,7 +180,7 @@ const styles = StyleSheet.create({
   },
 
   teacherSignatureContainer: {
-    marginTop: "80px",
+    marginTop: "50px",
     display: "flex",
     flexDirection: "row",
     gap: "150px",
@@ -208,20 +202,22 @@ const MyDocument = ({
   teacher,
 }: any) => (
   <Document>
-    <Page>
-      <View style={styles.table}>
-        <Text style={[styles.h3, styles.colortext]}>
+    <Page size="A4" style={styles.page}>
+      <View fixed >
+        <Text style={[styles.h1]}>
           {instititute?.branch_name}
           <br />
         </Text>
-        <Text style={[styles.h3, styles.colortext]}>
+        <Text style={[styles.h2]}>
           {instititute?.branch_location}
         </Text>
-
-        <Text style={[styles.h3, styles.colortext]}>
+        {/* style={{ color: 'white', textAlign: 'center', margin: 30 }} */}
+        <Text style={[styles.h3, { marginBottom: 30 }]}>
           বিষয়ভিত্তিক ট্রান্সক্রিপ্ট-
           {convertToBanglaNumber(student_info_pdf?.registration_year)}
         </Text>
+      </View>
+      <View style={styles.table}>
         <View style={styles.tableRowTop}>
           <View style={styles.tableColStdNameRoll}>
             <Text style={styles.tableCell}>
@@ -260,20 +256,20 @@ const MyDocument = ({
 
         <View style={styles.tableRow}>
           <View style={styles.tableColTitle}>
-            <Text style={styles.tableCell}>পারদর্শিতার সূচকের মাত্রা</Text>
+            <Text style={[styles.tableCell, { fontWeight: "bold", fontSize: 12, textAlign: 'center' }]}>পারদর্শিতার সূচকের মাত্রা</Text>
           </View>
         </View>
         <View style={styles.tableRow}>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>পারদর্শিতা সূচক (PI)</Text>
+            <Text style={[styles.tableCell, { fontWeight: "bold" }]}>পারদর্শিতা সূচক (PI)</Text>
           </View>
-          <View style={styles.tableColPoint}>
+          <View style={[styles.tableCol, { width: '75%' }]}>
             <Text style={styles.tableCell}>শিক্ষার্থীর পারদর্শিতা মাত্রা</Text>
           </View>
         </View>
 
         {data?.all_PI_array?.map((all_pi: any, k: any) => (
-          <View style={styles.tableRow} wrap>
+          <View style={styles.tableRow} wrap={false} >
             <View style={styles.tableCol} wrap={true}>
               <Text style={styles.tableCell}>
                 {" "}
@@ -300,18 +296,24 @@ const MyDocument = ({
         ))}
 
         <View style={[styles.teacherSignatureContainer]}>
-          <Text style={[styles.teacherSignature, styles.colortext]}>
+          <Text style={[styles.teacherSignature]}>
             বিষয় শিক্ষকের স্বাক্ষরঃ
-            <View><Text>dd</Text></View>
+            {" "}
             {teacher}
           </Text>
 
-          <Text style={[styles.teacherSignature, styles.colortext]}>
+          <Text style={[styles.teacherSignature]}>
             প্রধান শিক্ষকের স্বাক্ষরঃ
             <br />
           </Text>
         </View>
       </View>
+      <View fixed style={{ height: 70, fontSize: 7, textAlign: 'center', padding: '5px', paddingTop: 40 }}>
+        <Text style={{ textAlign: 'left', bottom: 0 }}>এই প্রতিবেদনটি সিস্টেম দ্বারা তৈরি করা হয়েছে</Text>
+        <Text style={{ fontSize: 7, textAlign: 'right', bottom: 0 }} render={({ pageNumber, totalPages }) => (
+          `${pageNumber} / ${totalPages}`
+        )} /></View>
+
     </Page>
   </Document>
 );

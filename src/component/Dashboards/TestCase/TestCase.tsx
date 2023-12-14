@@ -30,17 +30,16 @@ const TestCase = () => {
       >
 
         <View >
-          <View wrap={true} style={{ fontFamily: "Nikosh", display: "flex", flexDirection: "column", gap: "5" }}>
+          <View wrap={true} style={{ fontFamily: "Nikosh", display: "flex", flexDirection: "column", gap: "5", padding: "5px" }}>
 
             <View style={{
               backgroundColor: "skyblue",
               border: "1px",
-              paddingVertical: "5px",
               display: "flex",
               flexDirection: "column",
               gap: 2
             }}>
-              <Text style={{ marginHorizontal: "auto" }}>
+              <Text style={{ marginHorizontal: "auto", textDecoration: "underline", marginBottom: "10px" }}>
                 This is English Paragraph
               </Text>
               <Text style={{ lineHeight: "1.5px" }}>
@@ -48,7 +47,7 @@ const TestCase = () => {
               </Text>
             </View>
 
-            <Text style={{ lineHeight: "1px", fontSize: "11px", fontWeight: "normal", }}>
+            <Text style={{ lineHeight: "1px", fontSize: "11px", fontWeight: "normal", textAlign: "justify" }}>
               আজ ভোর সোয়া চারটার দিকে ঢাকা-ময়মনসিংহ রেলপথের বনখড়িয়া এলাকায় মোহনগঞ্জ এক্সপ্রেস ট্রেনটি লাইনচ্যুত হয়। ট্রেনটি নেত্রকোনা থেকে ঢাকার দিকে যাচ্ছিল। প্রাথমিকভাবে ধারণা করা হচ্ছে, দুর্বৃত্তরা নাশকতা করতে রেললাইনের অংশ কেটে রাখে। দুর্ঘটনায় ময়মনসিংহের গফরগাঁও উপজেলার রওহা গ্রামের আসলাম হোসেন (৩৫) নামের এক যাত্রী নিহত হয়েছেন। আহত হয়েছেন অন্তত ১০ জন।
             </Text>
 

@@ -23,7 +23,7 @@ Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 
 const styles = StyleSheet.create({
   table: {
-    display: "table",
+    // display: "table",
     width: "auto",
     borderStyle: "solid",
     borderWidth: 1,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderLeftWidth: 0,
     borderTopWidth: 0,
-    display: "flex !important",
+    // display: "flex !important",
   },
   tableColPoint: {
     width: "75%",
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     width: "75%",
     textAlign: "justify",
-    textJustify: "inter-word",
+    // textJustify: "inter-word",
     // backgroundColor: "red",
   },
   tikMark: {
@@ -205,18 +205,17 @@ const MyDocument = ({
   instititute,
   allFelter,
   student_info_pdf,
-  unique_id,
   teacher,
 }: any) => (
   <Document>
     <Page>
       <View style={styles.table}>
         <Text style={[styles.h3, styles.colortext]}>
-          {instititute?.institute_name}
+          {instititute?.branch_name}
           <br />
         </Text>
         <Text style={[styles.h3, styles.colortext]}>
-          {instititute?.unions} {instititute?.district?.district_name_bn}
+          {instititute?.branch_location}
         </Text>
 
         <Text style={[styles.h3, styles.colortext]}>
@@ -303,9 +302,8 @@ const MyDocument = ({
         <View style={[styles.teacherSignatureContainer]}>
           <Text style={[styles.teacherSignature, styles.colortext]}>
             বিষয় শিক্ষকের স্বাক্ষরঃ
-            {/* <Text style={[styles.teacherSignature, styles.colortext]}>
-              {teacher}
-            </Text> */}
+            <View><Text>dd</Text></View>
+            {teacher}
           </Text>
 
           <Text style={[styles.teacherSignature, styles.colortext]}>

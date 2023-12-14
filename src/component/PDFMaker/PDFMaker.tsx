@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   h1: {
-    fontFamily: "Nikosh",
+    fontFamily: "Noto Sans Bengali",
     fontSize: 16,
     textAlign: "center",
     fontWeight: 700,
@@ -43,17 +43,16 @@ const styles = StyleSheet.create({
     // marginBlockEnd: '0.67em',
     // margininlineStart: '0px',
     // margininlineEnd: '0px',
-    // margin: 5,
-    lineHeight: 1.5
+    margin: 5,
+    lineHeight: 1
   },
   h2: {
-    fontFamily: "Nikosh",
+    fontFamily: "Noto Sans Bengali",
     textAlign: "center",
     fontSize: 12,
-    lineHeight: 1.5
   },
   h3: {
-    fontFamily: "Nikosh",
+    fontFamily: "Noto Sans Bengali",
     fontSize: 11,
     textAlign: "center",
   },
@@ -121,22 +120,12 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderTopWidth: 0,
   },
-
-  tableCell_custom : {
+  tableCell: {
     fontFamily: "Nikosh",
     // margin: "auto",
     padding: "5px",
     // marginTop: 5,
     fontSize: 11,
-    lineHeight: "1px",
-    textOverflow: "ellipsis",
-  },
-  tableCell: {
-    fontFamily: "Nikosh",
-    margin: "auto",
-    padding: 2,
-    marginTop: 5,
-    fontSize: 8,
     lineHeight: "1px",
     // display: "flex",
 
@@ -196,7 +185,7 @@ const styles = StyleSheet.create({
     gap: "150px",
   },
   teacherSignature: {
-    fontFamily: "Nikosh",
+    fontFamily: "Noto Sans Bengali",
     color: "#000",
     marginTop: "10px",
     fontSize: 14,
@@ -245,25 +234,24 @@ const MyDocument = ({
 
         <View style={styles.tableRow}>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell_custom}>
+            <Text style={styles.tableCell}>
               শ্রেণী: {convertToBanglaNumber(student_info_pdf?.class)}
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell_custom}>
+            <Text style={styles.tableCell}>
               শাখা: {section_name(student_info_pdf?.section)}{" "}
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell_custom}>
+            <Text style={styles.tableCell}>
               বিষয়: {subject_name(allFelter?.subject?.split("-")[0])}
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell_custom}>বিষয় শিক্ষকের নাম: {teacher}</Text>
+            <Text style={styles.tableCell}>বিষয় শিক্ষকের নাম: {teacher}</Text>
           </View>
         </View>
-        
 
         <View style={styles.tableRow}>
           <View style={styles.tableColTitle}>
@@ -305,22 +293,23 @@ const MyDocument = ({
             ))}
           </View>
         ))}
+
         <View style={[styles.teacherSignatureContainer]}>
-          <Text style={[styles.teacherSignature]}>
+          <Text style={[styles.teacherSignature, styles.colortext]}>
             বিষয় শিক্ষকের স্বাক্ষরঃ
             {" "}
             {teacher}
           </Text>
 
-          <Text style={[styles.teacherSignature]}>
+          <Text style={[styles.teacherSignature, styles.colortext]}>
             প্রধান শিক্ষকের স্বাক্ষরঃ
             <br />
           </Text>
         </View>
       </View>
-      <View fixed style={{ height: 70, fontSize: 7, textAlign: 'center', padding: '5px', paddingTop: 40 }}>
+      <View fixed style={{ height: 70, fontSize: 7, textAlign: 'center', padding: '5px' }}>
         <Text style={{ textAlign: 'left', bottom: 0 }}>এই প্রতিবেদনটি সিস্টেম দ্বারা তৈরি করা হয়েছে</Text>
-        <Text style={{ fontSize: 7, textAlign: 'right', bottom: 0 }} render={({ pageNumber, totalPages }) => (
+        <Text style={{ fontSize: 7 }} render={({ pageNumber, totalPages }) => (
           `${pageNumber} / ${totalPages}`
         )} /></View>
 

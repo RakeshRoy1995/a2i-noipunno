@@ -121,12 +121,22 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderTopWidth: 0,
   },
-  tableCell: {
+
+  tableCell_custom : {
     fontFamily: "Nikosh",
     // margin: "auto",
     padding: "5px",
     // marginTop: 5,
     fontSize: 11,
+    lineHeight: "1px",
+    textOverflow: "ellipsis",
+  },
+  tableCell: {
+    fontFamily: "Nikosh",
+    margin: "auto",
+    padding: 2,
+    marginTop: 5,
+    fontSize: 8,
     lineHeight: "1px",
     // display: "flex",
 
@@ -235,24 +245,25 @@ const MyDocument = ({
 
         <View style={styles.tableRow}>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>
+            <Text style={styles.tableCell_custom}>
               শ্রেণী: {convertToBanglaNumber(student_info_pdf?.class)}
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>
+            <Text style={styles.tableCell_custom}>
               শাখা: {section_name(student_info_pdf?.section)}{" "}
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>
+            <Text style={styles.tableCell_custom}>
               বিষয়: {subject_name(allFelter?.subject?.split("-")[0])}
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>বিষয় শিক্ষকের নাম: {teacher}</Text>
+            <Text style={styles.tableCell_custom}>বিষয় শিক্ষকের নাম: {teacher}</Text>
           </View>
         </View>
+        
 
         <View style={styles.tableRow}>
           <View style={styles.tableColTitle}>
@@ -294,7 +305,6 @@ const MyDocument = ({
             ))}
           </View>
         ))}
-
         <View style={[styles.teacherSignatureContainer]}>
           <Text style={[styles.teacherSignature]}>
             বিষয় শিক্ষকের স্বাক্ষরঃ

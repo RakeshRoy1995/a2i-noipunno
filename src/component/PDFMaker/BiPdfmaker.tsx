@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
 
   paragraph: {
     fontFamily: "Nikosh",
-     // Prevent word breaks
+    // Prevent word breaks
     fontSize: 10,
     padding: "5px",
   },
@@ -216,11 +216,13 @@ const styles = StyleSheet.create({
   },
 
   cardTitle: {
+    fontSize: 10,
     borderBottom: "1px solid black",
   },
 
   cardbody: {
     padding: "1px",
+    height: "50px",
   },
 
   footerBox: {
@@ -234,6 +236,7 @@ const styles = StyleSheet.create({
 
   cardRow: {
     flexDirection: "row",
+    marginLeft: "10px",
   },
 
   cardColumn: {
@@ -352,23 +355,20 @@ const styles = StyleSheet.create({
 
   sentenceText: {
     fontFamily: "Nikosh",
-    fontSize: 12,
+    fontSize: 9,
     lineHeight: 1,
-    
+
     overflow: "hidden",
     textOverflow: "ellipsis",
   },
-  positionFixed: {
-    
-  },
+  positionFixed: {},
 });
-
 
 const MyDocument = ({
   selected_student,
   student,
   instititute,
-  subject_name
+  subject_name,
 }) => (
   <Document>
     {/* First Page */}
@@ -1072,9 +1072,9 @@ const BiRawPDFDownload = ({
   student,
   instititute,
 }) => {
-
-  const pdf_name = student?.student_name_bn ||
-    student?.student_name_en + "-report-card-result"  + ".pdf" 
+  const pdf_name =
+    student?.student_name_bn ||
+    student?.student_name_en + "-report-card-result" + ".pdf";
   console.log(`student`, student);
   return (
     <div>
@@ -1095,6 +1095,14 @@ const BiRawPDFDownload = ({
           }
         </PDFDownloadLink>
       </div>
+      <PDFViewer width={800} height={800}>
+        <MyDocument
+          selected_student={selected_student}
+          student={student}
+          instititute={instititute}
+          subject_name={subject_name}
+        />
+      </PDFViewer>
     </div>
   );
 };

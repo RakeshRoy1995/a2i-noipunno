@@ -77,6 +77,16 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderTopWidth: 0,
   },
+
+  tableCell_custom : {
+    fontFamily: "Nikosh",
+    // margin: "auto",
+    padding: 5,
+    marginTop: 5,
+    fontSize: 10,
+    lineHeight: "1px",
+    textOverflow: "ellipsis",
+  },
   tableCell: {
     fontFamily: "Nikosh",
     margin: "auto",
@@ -208,8 +218,8 @@ const MyDocument = ({
   teacher,
 }: any) => (
   <Document>
-    <Page>
-      <View style={styles.table}>
+    <Page size="A4" wrap >
+      <View style={styles.table} >
         <Text style={[styles.h3, styles.colortext]}>
           {instititute?.branch_name}
           <br />
@@ -239,24 +249,25 @@ const MyDocument = ({
 
         <View style={styles.tableRow}>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>
+            <Text style={styles.tableCell_custom}>
               শ্রেণী: {convertToBanglaNumber(student_info_pdf?.class)}
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>
+            <Text style={styles.tableCell_custom}>
               শাখা: {section_name(student_info_pdf?.section)}{" "}
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>
+            <Text style={styles.tableCell_custom}>
               বিষয়: {subject_name(allFelter?.subject?.split("-")[0])}
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>বিষয় শিক্ষকের নাম: {teacher}</Text>
+            <Text style={styles.tableCell_custom}>বিষয় শিক্ষকের নাম: {teacher}</Text>
           </View>
         </View>
+        
 
         <View style={styles.tableRow}>
           <View style={styles.tableColTitle}>
@@ -273,8 +284,8 @@ const MyDocument = ({
         </View>
 
         {data?.all_PI_array?.map((all_pi: any, k: any) => (
-          <View style={styles.tableRow} wrap>
-            <View style={styles.tableCol} wrap={true}>
+          <View style={styles.tableRow} wrap={true} key={k}>
+            <View style={styles.tableCol} >
               <Text style={styles.tableCell}>
                 {" "}
                 {convertToBanglaNumber(all_pi.pi_data.pi_no)}{" "}
@@ -298,10 +309,9 @@ const MyDocument = ({
             ))}
           </View>
         ))}
-
         <View style={[styles.teacherSignatureContainer]}>
           <Text style={[styles.teacherSignature, styles.colortext]}>
-            বিষয় শিক্ষকের স্বাক্ষরঃ
+            বিষয় শিক্ষকের স্বাক্ষরঃ {teacher}
             <br />
           </Text>
           {/* <Text style={[styles.teacherSignature, styles.colortext]}>

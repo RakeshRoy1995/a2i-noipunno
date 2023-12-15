@@ -357,6 +357,41 @@ export function get_pi_bi(
   return axios(options);
 }
 
+
+
+
+
+
+// export function get_pi_bi(
+//   subject_uid,
+//   branch_uid,
+//   version_uid,
+//   shift_uid,
+//   class_uid,
+//   section_uid,
+//   student_uid = ""
+// ) {
+//   const page_list = `${EVULATION_API}/transcript`;
+//   // const page_list = `/assets/transcript_response.json`;
+
+//   const options = {
+//     method: "get",
+//     headers: { "content-type": "application/json" },
+//     url: page_list,
+//     params: {
+//       subject_uid,
+//       branch_uid,
+//       version_uid,
+//       shift_uid,
+//       class_uid,
+//       section_uid,
+//       student_uid,
+//     },
+//   };
+
+//   return axios(options);
+// }
+
 export function get_pi_bi_by_student_student(
   subject_uid,
   branch_uid,

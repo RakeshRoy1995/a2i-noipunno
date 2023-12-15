@@ -839,31 +839,7 @@ export default function StudentTranscript() {
                   </div>
                 </div>
               </div>
-              {/* {selected_student?.length > 0 && (
-                <div className="d-flex justify-content-between flex-md-row flex-column align-items-center border custom-px-2 ">
-                  <div className=" d-flex ">
-                    <div className="form-label p-4 ms-4 fw-bold ">
-                      সকল শিক্ষার্থী মূল্যায়ন ডাউনলোড করুন
-                    </div>
-                    <div className="d-flex justify-content-between flex-md-row flex-column align-items-center flex-end">
-                      <button
-                        className={`${styles.download_btn}`}
-                        defaultValue="নিম্নে মূল্যায়ন প্রতিবেদন দেখুন"
-                        id="example-search-input"
-                        data-bs-toggle="modal"
-                        data-bs-target="#allstaticBackdrop"
-                        style={{
-                          fontSize: "12px",
-                        }}
-                      >
-                        <BsFiletypePdf className="fs-4 me-2 " />
-                        ডাউনলোড করুন
-                      </button>
-
-                    </div>
-                  </div>
-                </div>
-              )} */}
+              
 
               <Accordion>
                 {selected_student?.length > 0 ? (

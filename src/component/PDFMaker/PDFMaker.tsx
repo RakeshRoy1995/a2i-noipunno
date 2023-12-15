@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
 
-  tableCell_custom : {
+  tableCell_custom: {
     fontFamily: "Nikosh",
     // margin: "auto",
     padding: 5,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     margin: "auto",
     padding: 2,
     marginTop: 5,
-    fontSize: 8,
+    fontSize: 10,
     lineHeight: "1px",
     // display: "flex",
 
@@ -104,12 +104,12 @@ const styles = StyleSheet.create({
   tableCellTikMark: {
     fontFamily: "Nikosh",
     margin: "auto",
-    marginTop:"3px",
+    marginTop: "3px",
     padding: 1,
     fontSize: 10,
     lineHeight: "1px",
     textOverflow: "ellipsis",
-    height:"15px"
+    height: "15px",
   },
   page: {
     flexDirection: "row",
@@ -218,14 +218,14 @@ const MyDocument = ({
   teacher,
 }: any) => (
   <Document>
-    <Page size="A4" wrap >
-      <View style={styles.table} >
+    <Page size="A4" wrap>
+      <View style={styles.table}>
         <Text style={[styles.h3, styles.colortext]}>
           {instititute?.branch_name}
           <br />
         </Text>
         <Text style={[styles.h3, styles.colortext]}>
-          {instititute?.branch_location} 
+          {instititute?.branch_location}
         </Text>
 
         <Text style={[styles.h3, styles.colortext]}>
@@ -264,10 +264,11 @@ const MyDocument = ({
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell_custom}>বিষয় শিক্ষকের নাম: {teacher}</Text>
+            <Text style={styles.tableCell_custom}>
+              বিষয় শিক্ষকের নাম: {teacher}
+            </Text>
           </View>
         </View>
-        
 
         <View style={styles.tableRow}>
           <View style={styles.tableColTitle}>
@@ -283,32 +284,61 @@ const MyDocument = ({
           </View>
         </View>
 
-        {data?.all_PI_array?.map((all_pi: any, k: any) => (
-          <View style={styles.tableRow} wrap={true} key={k}>
-            <View style={styles.tableCol} >
-              <Text style={styles.tableCell}>
-                {" "}
-                {convertToBanglaNumber(all_pi.pi_data.pi_no)}{" "}
-                {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
-              </Text>
-            </View>
-
-            {all_pi.pi_data.pi_attribute.map((pi_data: any, key) => (
-              <View style={[styles.tableCol]} >
-                <View style={styles.tableRowBottom}>
-                  <Text style={styles.tableCellTikMark}>
-                  {all_pi?.weight_uid == pi_data?.weight_uid && (
-                  <Image src={icon} style={[styles.tikMark]} />
-                )}
-                  </Text>
-                </View>
+        {data?.all_PI_array?.map((all_pi: any, k: any) =>
+          // Use JavaScript logic outside the rendering phase
+          k % 9 == 0 ? (
+            <View style={styles.tableRow} key={k}>
+              <View style={styles.tableCol}>
                 <Text style={styles.tableCell}>
-                  {pi_data?.title_bn || pi_data?.title_en}{" "}
+                  {" "}
+                  {convertToBanglaNumber(all_pi.pi_data.pi_no)}{" "}
+                  {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
                 </Text>
               </View>
-            ))}
-          </View>
-        ))}
+
+              {all_pi.pi_data.pi_attribute.map((pi_data: any, key) => (
+                <View style={[styles.tableCol]}>
+                  <View style={styles.tableRowBottom}>
+                    <Text style={styles.tableCellTikMark}>
+                      {all_pi?.weight_uid == pi_data?.weight_uid && (
+                        <Image src={icon} style={[styles.tikMark]} />
+                      )}
+                    </Text>
+                  </View>
+                  <Text style={styles.tableCell}>
+                    {pi_data?.title_bn || pi_data?.title_en}{" "}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          ) : (
+            <View style={styles.tableRow} key={k}>
+              <View style={styles.tableCol} break>
+                <Text style={styles.tableCell}>
+                  {" "}
+                  {convertToBanglaNumber(all_pi.pi_data.pi_no)}{" "}
+                  {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
+                </Text>
+              </View>
+
+              {all_pi.pi_data.pi_attribute.map((pi_data: any, key) => (
+                <View style={[styles.tableCol]}>
+                  <View style={styles.tableRowBottom}>
+                    <Text style={styles.tableCellTikMark}>
+                      {all_pi?.weight_uid == pi_data?.weight_uid && (
+                        <Image src={icon} style={[styles.tikMark]} />
+                      )}
+                    </Text>
+                  </View>
+                  <Text style={styles.tableCell}>
+                    {pi_data?.title_bn || pi_data?.title_en}{" "}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          )
+        )}
+
         <View style={[styles.teacherSignatureContainer]}>
           <Text style={[styles.teacherSignature, styles.colortext]}>
             বিষয় শিক্ষকের স্বাক্ষরঃ {teacher}

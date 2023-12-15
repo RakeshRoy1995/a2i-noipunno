@@ -27,7 +27,7 @@ import {
   all_students,
   convertToBanglaNumber,
   formate_teanscript_data,
-  single_formate_teanscript_data,
+  formate_teanscript_dataBy_single_student,
 } from "../utils/Utils";
 
 import Breadcumb from "../layout/Breadcumb";
@@ -36,7 +36,8 @@ import Pdf from "./Pdf";
 import { toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
 import { Link } from "react-router-dom";
-
+import DownloadPDF_component from "./DownloadPDF";
+import RawPDFDownload from "./PDFMaker/PDFMaker";
 
 export default function StudentTranscript() {
   const [student_info_pdf, setStudent_info_pdf] = useState<any>("");
@@ -111,7 +112,7 @@ export default function StudentTranscript() {
     });
     setall_bis(own_subjet.data.data.bis);
     setversion(teacher_dash?.data?.versions);
-    setinstititute(teacher_dash?.data?.institute);
+    setinstititute(teacher_dash?.data?.branches);
 
     console.log(`all_subject`, all_subject);
     setsubject(all_subject);
@@ -176,7 +177,8 @@ export default function StudentTranscript() {
     try {
       setteacher(allFelter.subject.split("-")[2]);
       setselected_student([]);
-      if (!student_name) {
+
+      if (student_name == "") {
         const pi_bi_data = await get_pi_bi(
           allFelter.subject.split("-")[0],
           allFelter.branch,
@@ -186,7 +188,10 @@ export default function StudentTranscript() {
           allFelter.section,
           ""
         );
-        const data = formate_teanscript_data(pi_bi_data.data.transcript);
+
+        const data = formate_teanscript_data(
+          pi_bi_data.data.transcript
+        );
 
         setselected_student(data);
       } else {
@@ -199,7 +204,12 @@ export default function StudentTranscript() {
           allFelter.section,
           student_name
         );
-        const data = single_formate_teanscript_data(pi_bi_data.data.transcript);
+
+        const data = formate_teanscript_dataBy_single_student(
+          pi_bi_data?.data?.transcript?.subject_result || pi_bi_data?.data?.transcript?.student_result
+        );
+
+        console.log(`datatttt`, data);
 
         setselected_student(data);
       }
@@ -233,15 +243,16 @@ export default function StudentTranscript() {
       const element = document.getElementById(id);
 
       const options = {
-        margin: 5,
+        margin: 20,
+        border: "1px solid",
         filename: filename,
-        image: { type: "jpeg", quality: 0.98 },
+        image: { type: "jpeg", quality: 4.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
       };
 
-      const pdf = html2pdf().from(element).set(options).outputPdf();
-      pdf.save();
+      // const pdf = html2pdf().from(element).set(options).outputPdf();
+      // pdf.save();
     } else {
       for (let index = 0; index < selected_student.length; index++) {
         const el = selected_student[index];
@@ -255,18 +266,21 @@ export default function StudentTranscript() {
           Stu_data.student_name_en + "-roll-" + Stu_data.roll + ".pdf";
 
         const options = {
-          margin: 5,
+          margin: 20,
+          border: "1px solid",
           filename,
-          image: { type: "jpeg", quality: 0.98 },
+          image: { type: "jpeg", quality: 4.98 },
           html2canvas: { scale: 2 },
           jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
         };
 
-        setTimeout(() => {
-          const pdf = html2pdf().from(element).set(options).outputPdf();
-          pdf.save();
-        }, 700);
+        // setTimeout(() => {
+        //   const pdf = html2pdf().from(element).set(options).outputPdf();
+        //   pdf.save();
+        //   console.log("element", element);
+        // }, 700);
       }
+      // console.log("student", student);
     }
     setsubmittingLoading(false);
   };
@@ -277,6 +291,7 @@ export default function StudentTranscript() {
 
       <div className="container">
         <div className="row">
+          {/* <DownloadPDF_component /> */}
           <Breadcumb title={"মূল্যায়ন প্রতিবেদন"} />
           <div className="d-flex align-items-center">
             <div className="card shadow-lg border-0 w-100 rounded">
@@ -491,7 +506,10 @@ export default function StudentTranscript() {
                                   setstudent_name(e.target.value)
                                 }
                               >
-                                <option value={""}> সকল শিক্ষার্থী </option>
+                                <option value={""}>
+                                  {" "}
+                                  শিক্ষার্থী নির্বাচন করুন{" "}
+                                </option>
 
                                 {new_student?.map((data: any, index) => (
                                   <option key={index} value={data?.uid}>
@@ -821,7 +839,7 @@ export default function StudentTranscript() {
                   </div>
                 </div>
               </div>
-              {selected_student?.length > 0 && (
+              {/* {selected_student?.length > 0 && (
                 <div className="d-flex justify-content-between flex-md-row flex-column align-items-center border custom-px-2 ">
                   <div className=" d-flex ">
                     <div className="form-label p-4 ms-4 fw-bold ">
@@ -842,17 +860,10 @@ export default function StudentTranscript() {
                         ডাউনলোড করুন
                       </button>
 
-                      {/* <span
-                          className="input-group-append rounded-end"
-                          style={{
-                            fontSize: "12px",
-                            backgroundColor: "white",
-                          }}
-                        ></span> */}
                     </div>
                   </div>
                 </div>
-              )}
+              )} */}
 
               <Accordion>
                 {selected_student?.length > 0 ? (
@@ -861,19 +872,17 @@ export default function StudentTranscript() {
                       <Accordion.Header className="px-4 " key={index}>
                         <>
                           <div className="d-flex justify-content-between flex-md-row flex-column align-items-center custom-px-2">
-                            <button
-                              type="button"
-                              className={`${styles.download_btn}`}
-                              data-bs-toggle="modal"
-                              data-bs-target="#staticBackdrop"
-                              onClick={(e) => {
-                                handleConvertToPdf(data.student_data, false);
-                                setdata(data);
-                                setStudent_info_pdf(data.student_data);
-                              }}
-                            >
-                              <BsFiletypePdf className="fs-4 me-2" />
-                            </button>
+                            <RawPDFDownload
+                              data={data}
+                              instititute={
+                                instititute[0] ? instititute[0] : instititute
+                              }
+                              allFelter={allFelter}
+                              student_info_pdf={data.student_data}
+                              unique_id={""}
+                              teacher={teacher}
+                            />
+
                             <h5 className="px-2">
                               শিক্ষার্থীর নাম:{" "}
                               {data.student_data.student_name_bn ||

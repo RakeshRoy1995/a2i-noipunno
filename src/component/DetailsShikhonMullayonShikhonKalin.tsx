@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import StudentMullayonModal from "./StudentMullayonModal";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Spinner } from "react-bootstrap";
 import { get_pi_evaluation_by_pi } from "../Request";
 import { check_pi_submitted, show_pis , convertToBanglaNumber } from "../utils/Utils";
 
@@ -11,6 +11,7 @@ export default function DetailsShikhonMullayonShikhonKalin({
   pi_attr,
   Student,
   teacher_uid,
+  setloadingspinner
 }: any) {
   const [competence_uid, setcompetence_uid] = useState<any>("");
   const [oviggota_uid, setoviggota_uid] = useState<any>("");
@@ -25,6 +26,7 @@ export default function DetailsShikhonMullayonShikhonKalin({
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setloadingspinner(false)
   };
 
   const get_all_pi_evaluation_by_pi = async (pi_uid: any) => {
@@ -85,11 +87,12 @@ export default function DetailsShikhonMullayonShikhonKalin({
 
                               setpi_name(d?.name_bn);
                               setpi_id(d?.pi_no);
+                              setloadingspinner(false)
                             }}
                             to={"#"}
                             className="text-decoration text-success  ps-2"
                           >
-                            <h6>{d?.name_bn}  {check_pi_submitted(d , assessment_uid ) && <i className="fa-regular fa-circle-check"></i>}  </h6>
+                            <h6>{d?.name_bn}  {check_pi_submitted(d , assessment_uid ) && <i className="fa-regular fa-circle-check"></i>} { showModal && <Spinner animation="border" /> }    </h6>
                           </Link>
                         </div>
                       </div>

@@ -3,19 +3,9 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 import noipunnologo from "../assets/navbar_materials/images/noipunno-new-logo.svg";
-import searchIcon from "../assets/navbar_materials/icons/search-normal.svg";
-import startIcon from "../assets/navbar_materials/icons/star.svg";
-import dark_light_mode_icon from "../assets/navbar_materials/icons/dark-light-mode.svg";
-import notificationIcon from "../assets/navbar_materials/icons/notification.svg";
 import teacherIcon from "../assets/navbar_materials/icons/teacher.svg";
 import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
 import amarProfileIcon from "../assets/navbar_materials/icons/profile-icon.svg";
-import settingIcon from "../assets/navbar_materials/icons/setting-2.svg";
-import shahajjuIcon from "../assets/navbar_materials/icons/help.svg";
-import shadaronProshonUttorIcon from "../assets/navbar_materials/icons/info-circle.svg";
-import opnushondanKoronIcon from "../assets/navbar_materials/icons/search-normal.svg";
-import prioBishoyIcon from "../assets/navbar_materials/icons/star.svg";
-import themeNirbahonKoronIcon from "../assets/navbar_materials/icons/dark-light-mode.svg";
 import signoutIcon from "../assets/navbar_materials/icons/sign-out.svg";
 import mobileMenuIcon from "../assets/navbar_materials/icons/menu.png";
 import prothomPatha from "../assets/navbar_materials/icons/home.svg";
@@ -26,30 +16,21 @@ import shikkokIcon from "../assets/navbar_materials/icons/nav-teacher-icon.svg";
 import shikkarthiIcon from "../assets/navbar_materials/icons/student-icon.svg";
 import shreniIcon from "../assets/navbar_materials/icons/class-icon.svg";
 import onurudhGoliIcon from "../assets/navbar_materials/icons/requests.svg";
-import addIcon from "../assets/navbar_materials/icons/add.svg";
-import tikicowhite from "../assets/navbar_materials/icons/tik-ico-white.svg";
-import shikkarthiBebostapona from "../assets/navbar_materials/icons/std-management.svg";
-import shikkokBebostapona from "../assets/navbar_materials/icons/teacher-management.svg";
-import branchBebostapona from "../assets/navbar_materials/icons/branch-ico.svg";
-import srenikokkoBebostapona from "../assets/navbar_materials/icons/branch-ico.svg";
-import dayitthoOrponKoron from "../assets/navbar_materials/icons/users.svg";
 import doublecheckPng from "../assets/navbar_materials/icons/double-check.png";
 
 import { useLocation } from "react-router-dom";
+import { teacher_dashboard, reloadteacher_own_subject } from "../Request";
 
 const Navbar = () => {
   const [userDetails, setuserDetails] = useState<any>({});
 
   setTimeout(() => {
-
     if (!userDetails?.email) {
       const items = JSON.parse(localStorage.getItem("customer_login_auth"));
       if (items) {
         setuserDetails(items.user);
       }
     }
-
-
   }, 500);
 
   // console.log("userDetails", userDetails);
@@ -68,12 +49,14 @@ const Navbar = () => {
   const activeRoute = () => {
     const pathName = location.pathname.slice(1);
     // console.log("pathName", pathName);
-    if (pathName === "student-transcript" || pathName === "shikkarthir-report-card") {
+    if (
+      pathName === "student-transcript" ||
+      pathName === "shikkarthir-report-card"
+    ) {
       setIsReportPathActive(true);
       setIsShikkarthiPathActive(false);
       setIsSryniPathActive(false);
       setIsFAQpathActive(false);
-
     } else if (pathName === "student-list") {
       setIsShikkarthiPathActive(true);
       setIsReportPathActive(false);
@@ -97,10 +80,25 @@ const Navbar = () => {
     }
   };
 
+  const fetchData = async () => {
+    try {
+      const own_subjet: any = await reloadteacher_own_subject();
+      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+
+      const data_dash: any = await teacher_dashboard();
+      localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
+
+      window.location.reload();
+    } catch (error) {
+      alert(
+        "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
+      );
+    }
+  };
+
   useEffect(() => {
     activeRoute();
   }, [location]);
-
 
   return (
     <>
@@ -433,34 +431,7 @@ const Navbar = () => {
                                     </div>
                                   </NavLink>
                                 </li>
-                                {/* <li>
-                              <a className="dropdown-item" href="#">
-                                <div className="dropdown-list-item-style d-flex align-items-center">
-                                  <img
-                                    src={unOrderListIcon}
-                                    className="img-fluid dropdown-list-item-icon"
-                                    alt="icon"
-                                  />
-                                  <p className="dropdown-class-list">
-                                    শ্রেণির প্রতিবেদন
-                                  </p>
-                                </div>
-                              </a>
-                            </li> */}
-                                {/* <li>
-                              <a className="dropdown-item" href="#">
-                                <div className="dropdown-list-item-style d-flex align-items-center">
-                                  <img
-                                    src={unOrderListIcon}
-                                    className="img-fluid dropdown-list-item-icon"
-                                    alt="icon"
-                                  />
-                                  <p className="dropdown-class-list">
-                                    শিক্ষার্থীর হাজিরা প্রতিবেদন
-                                  </p>
-                                </div>
-                              </a>
-                            </li> */}
+                                
                               </ul>
                             </li>
 
@@ -522,20 +493,7 @@ const Navbar = () => {
                                     </div>
                                   </NavLink>
                                 </li>
-                                {/* <li>
-                              <a className="dropdown-item" href="#">
-                                <div className="dropdown-list-item-style d-flex align-items-center">
-                                  <img
-                                    src={shikkarthiIcon}
-                                    className="img-fluid dropdown-list-item-icon"
-                                    alt="icon"
-                                  />
-                                  <p className="dropdown-class-list">
-                                    শিক্ষার্থীর হাজিরা
-                                  </p>
-                                </div>
-                              </a>
-                            </li> */}
+                                
                               </ul>
                             </li>
                             <li className="nav-item dropdown nav-item-style">
@@ -639,6 +597,15 @@ const Navbar = () => {
 
                   <div className="d-lg-flex d-block align-items-lg-center mt-2 mt-lg-0">
                     <div className="btn-group position-relative">
+                      <button
+                        onClick={fetchData}
+                        className="nav-link navbar-menu-item nav-right-dorpdown d-flex align-items-center mx-1"
+                        type="button"
+                        title="যদি কিছু ডেটা যেমন শিক্ষার্থী যোগ করা হয়, শিক্ষক যোগ করা হয় বা অন্য কিছু পরিবর্তন করা হয় তবে দয়া করে ডেটা পুনরায় লোড করুন"
+                      >
+                        ডেটা পুনরায় লোড করুন
+                      </button>
+
                       <Link
                         to="/mollayon-koron"
                         id="mollayon_koron_btn"
@@ -653,83 +620,7 @@ const Navbar = () => {
                           alt="add icon"
                         />
                         মূল্যায়ন শুরু করুন
-                        {/* <img src={tikicowhite} className="img-fluid icon-left-space" alt="dropdown icon" /> */}
                       </Link>
-
-                      {/* <ul className="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a href="#">
-                        <div className="management-dropdown-style dropdown-item profile-style">
-                          <img
-                            src={shikkarthiBebostapona}
-                            className="img-fluid icon-right-space"
-                            alt="profile icon"
-                          />
-                          শিক্ষার্থী ব্যবস্থাপনা
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div className="management-dropdown-style dropdown-item profile-style">
-                          <img
-                            src={shikkokBebostapona}
-                            className="img-fluid icon-right-space"
-                            alt="profile icon"
-                          />
-                          শিক্ষক ব্যবস্থাপনা
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div className="management-dropdown-style dropdown-item profile-style">
-                          <img
-                            src={branchBebostapona}
-                            className="img-fluid icon-right-space"
-                            alt="profile icon"
-                          />
-                          ব্রাঞ্চ ব্যবস্থাপনা
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div className="management-dropdown-style dropdown-item profile-style">
-                          <img
-                            src={branchBebostapona}
-                            className="img-fluid icon-right-space"
-                            alt="profile icon"
-                          />
-                          শিফট ব্যবস্থাপনা
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <div className="management-dropdown-style dropdown-item profile-style">
-                          <img
-                            src={srenikokkoBebostapona}
-                            className="img-fluid icon-right-space"
-                            alt="profile icon"
-                          />
-                          শ্রেণীকক্ষ ব্যবস্থাপনা
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="">
-                        <div className="management-dropdown-style dropdown-item profile-style">
-                          <img
-                            src={dayitthoOrponKoron}
-                            className="img-fluid icon-right-space"
-                            alt="profile icon"
-                          />
-                          দায়িত্ব অর্পণ করুন
-                        </div>
-                      </a>
-                    </li>
-                  </ul> */}
                     </div>
                   </div>
                 </div>

@@ -1,9 +1,10 @@
-import threeDoots from '../../assets/project_ca_html/images/dashboard/dots-vertical.svg';
-import abedonIcon from '../../assets/project_ca_html/images/dashboard/alertico.png';
-import biggoftiIcon from '../../assets/project_ca_html/images/dashboard/info-circle.png';
-import PhoneNuberChangeiIcon from '../../assets/project_ca_html/images/dashboard/ico2.svg';
-import bishoiPoribortonIcon from '../../assets/project_ca_html/images/dashboard/arrow-right2.svg';
-import rightArrow from '../../assets/project_ca_html/images/dashboard/arrow-right.svg';
+import '../../assets/dashboard_materials/css/dashboard.css';
+import threeDoots from '../../assets/dashboard_materials/images/dashboard/dots-vertical.svg';
+import abedonIcon from '../../assets/dashboard_materials/images/dashboard/alertico.png';
+import biggoftiIcon from '../../assets/dashboard_materials/images/dashboard/info-circle.png';
+import PhoneNuberChangeiIcon from '../../assets/dashboard_materials/images/dashboard/ico2.svg';
+import bishoiPoribortonIcon from '../../assets/dashboard_materials/images/dashboard/arrow-right2.svg';
+import rightArrow from '../../assets/dashboard_materials/images/dashboard/arrow-right.svg';
 
 const OnorudhShomohu = () => {
   return (

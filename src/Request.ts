@@ -140,19 +140,72 @@ export async function teacher_own_subject() {
     url: page_list,
   };
 
-  const cls_room = await class_room_info();
-  const common_info = await get_common_info();
-  const bi = await bi_info();
+  let cls_room: any = localStorage.getItem("cls_room")
+    ? JSON.parse(localStorage.getItem("cls_room"))
+    : "";
 
-  const own_sub = await axios(options);
+  if (cls_room == "") {
+    cls_room = await class_room_info();
+    localStorage.setItem("cls_room", JSON.stringify(cls_room));
+    console.log(`cls_room enter`);
+  }
 
-  let data = formate_own_subject_data(own_sub, cls_room);
-  data.data.data.assessments = common_info.data.data.assessments;
-  data.data.data.pi_attribute_weight =
-    common_info.data.data.pi_attribute_weight;
-  data.data.data.bis = bi.data.data.bis;
+  let common_info: any = localStorage.getItem("common_room")
+    ? JSON.parse(localStorage.getItem("common_room"))
+    : "";
+  if (common_info == "") {
+    common_info = await get_common_info();
+    localStorage.setItem("common_room", JSON.stringify(common_info));
+    console.log(`get_common_info enter`);
+  }
 
-  return data;
+  let bi: any = localStorage.getItem("bi")
+    ? JSON.parse(localStorage.getItem("bi"))
+    : "";
+
+  if (bi == "") {
+    bi = await bi_info();
+    localStorage.setItem("bi", JSON.stringify(bi));
+    console.log(`bi_info enter`);
+  }
+
+  if (bi !== "" && common_info !== "" && cls_room !== "") {
+    const own_sub = await axios(options);
+    let data = formate_own_subject_data(own_sub, cls_room);
+    data.data.data.assessments = common_info.data.data.assessments;
+    data.data.data.pi_attribute_weight =
+      common_info.data.data.pi_attribute_weight;
+    data.data.data.bis = bi.data.data.bis;
+    localStorage.removeItem("common_room")
+    localStorage.removeItem("cls_room")
+    return data;
+  }
+}
+
+export async function reloadteacher_own_subject() {
+  const page_list = `${API_URL}/v2/own-subjects`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+  };
+
+  const cls_room: any = await class_room_info();
+  const common_info: any = await get_common_info();
+  const bi: any = await bi_info();
+
+  if (bi !== "" && common_info !== "" && cls_room !== "") {
+    const own_sub = await axios(options);
+    const data = formate_own_subject_data(own_sub, cls_room);
+    data.data.data.assessments = common_info.data.data.assessments;
+    data.data.data.pi_attribute_weight =
+      common_info.data.data.pi_attribute_weight;
+    data.data.data.bis = bi.data.data.bis;
+    localStorage.removeItem("common_room");
+    localStorage.removeItem("cls_room");
+    return data;
+  }
 }
 
 export function bi_info() {
@@ -274,7 +327,15 @@ export function get_pi_bi_evaluation_list(submit_status: any = "") {
   return axios(options);
 }
 
-export function get_pi_bi(subject_uid , branch_uid , version_uid , shift_uid , class_uid , section_uid , student_uid="") {
+export function get_pi_bi(
+  subject_uid,
+  branch_uid,
+  version_uid,
+  shift_uid,
+  class_uid,
+  section_uid,
+  student_uid = ""
+) {
   const page_list = `${EVULATION_API}/transcript`;
   // const page_list = `/assets/transcript_response.json`;
 
@@ -282,23 +343,29 @@ export function get_pi_bi(subject_uid , branch_uid , version_uid , shift_uid , c
     method: "get",
     headers: { "content-type": "application/json" },
     url: page_list,
-    params : {
+    params: {
       subject_uid,
       branch_uid,
       version_uid,
       shift_uid,
       class_uid,
       section_uid,
-      student_uid
-    }
+      student_uid,
+    },
   };
 
   return axios(options);
 }
 
-
-
-export function get_pi_bi_by_student_student(subject_uid , branch_uid , version_uid , shift_uid , class_uid , section_uid , student_uid="") {
+export function get_pi_bi_by_student_student(
+  subject_uid,
+  branch_uid,
+  version_uid,
+  shift_uid,
+  class_uid,
+  section_uid,
+  student_uid = ""
+) {
   const page_list = `${EVULATION_API}/transcript-by-student`;
   // const page_list = `/assets/transcript_response.json`;
 
@@ -306,55 +373,62 @@ export function get_pi_bi_by_student_student(subject_uid , branch_uid , version_
     method: "get",
     headers: { "content-type": "application/json" },
     url: page_list,
-    params : {
+    params: {
       subject_uid,
       branch_uid,
       version_uid,
       shift_uid,
       class_uid,
       section_uid,
-      student_uid
-    }
+      student_uid,
+    },
   };
 
   return axios(options);
 }
 
-
-export function get_report_card(subject_uid , branch_uid , version_uid , shift_uid , class_uid , section_uid , student_uid="") {
+export function get_report_card(
+  subject_uid,
+  branch_uid,
+  version_uid,
+  shift_uid,
+  class_uid,
+  section_uid,
+  student_uid = ""
+) {
   const page_list = `${EVULATION_API}/report-card-by-student`;
-  // const page_list = `/assets/transcript_response.json`;
+  // const page_list = `/assets/report_card.json`;
 
   const options = {
     method: "get",
     headers: { "content-type": "application/json" },
     url: page_list,
-    params : {
+    params: {
       subject_uid,
       branch_uid,
       version_uid,
       shift_uid,
       class_uid,
       section_uid,
-      student_uid
-    }
+      student_uid,
+    },
   };
 
   return axios(options);
 }
 
-
-export function dimension_by_subject(subject_uid ) {
+export function dimension_by_subject(subject_uid) {
   const page_list = `${API_URL}/v2/dimension-by-subject`;
-  // const page_list = `/assets/transcript_response.json`;
+  // const page_list = `https://competence.noipunno.gov.bd/api/dimension-by-subject`;
+  // const page_list = `/assets/dimension.json`;
 
   const options = {
     method: "get",
     headers: { "content-type": "application/json" },
     url: page_list,
-    params : {
+    params: {
       subject_uid,
-    }
+    },
   };
 
   return axios(options);

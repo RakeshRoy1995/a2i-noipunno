@@ -121,12 +121,12 @@ export default function StudentMullayonModal({
             confirmButtonText: "হ্যাঁ",
           }).then(async (result) => {
             if (result.isConfirmed) {
-              let own_subjet: any = await get_pi_bi_evaluation_list(2);
+              // let own_subjet: any = await get_pi_bi_evaluation_list(2);
 
-              localStorage.setItem(
-                "pi_bi_evaluation_list",
-                JSON.stringify(own_subjet.data.data)
-              );
+              // localStorage.setItem(
+              //   "pi_bi_evaluation_list",
+              //   JSON.stringify(own_subjet.data.data)
+              // );
 
               await Pi_save(data);
               setsubmited(true);

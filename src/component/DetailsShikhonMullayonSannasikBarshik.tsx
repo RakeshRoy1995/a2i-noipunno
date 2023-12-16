@@ -80,7 +80,7 @@ export default function DetailsShikhonMullayonSannasikBarshik({
                             {/* <p>{showDetailsshikhonKalinMullayon.class_uid } .{showDetailsshikhonKalinMullayon.competence_id} . {d.pi_id}</p> */}
                           </h6>
 
-                          <Link
+                          <div
                             onClick={(e) => {
                               pi_attr(d, e);
                               setal_pi_attr(d?.pi_attribute);
@@ -96,8 +96,7 @@ export default function DetailsShikhonMullayonSannasikBarshik({
                               setpi_id(d?.pi_id);
                               setloadingspinner(true)
                             }}
-                            to={"#"}
-                            className="text-decoration text-success  ps-2"
+                            className="text-decoration text-success  ps-2 pointer"
                           >
                             <h6>
                               {d?.name_bn}{" "}
@@ -106,7 +105,7 @@ export default function DetailsShikhonMullayonSannasikBarshik({
                               )}{" "}
                               
                             </h6>
-                          </Link>
+                          </div>
                         </div>
                       </div>
                     </div>

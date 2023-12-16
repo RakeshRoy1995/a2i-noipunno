@@ -95,6 +95,7 @@ export default function StudentMullayonBehave({
   ) => {
     try {
       if (submit_status == 2 && !next_uid) {
+        
         if (submitData.length == 10) {
           Swal.fire({
             title: "আপনি কি তথ্য সংরক্ষণ করতে চান?",
@@ -216,28 +217,138 @@ export default function StudentMullayonBehave({
             }
           });
         } else {
-
           console.log(`444`, 444);
           if (submitData.length > 0) {
             setcomment_status(true);
             checkedIn_comment(submitObj);
           } else {
-            Swal.fire({
-              icon: "error",
+            // Swal.fire({
+            //   icon: "error",
+            //   title: "আপনি কোন কিছু নির্বাচন করেন নি!",
+            //   confirmButtonText: "হ্যাঁ",
+            // });
+
+
+
+
+            const { value: text } = await Swal.fire({
               title: "আপনি কোন কিছু নির্বাচন করেন নি!",
-              confirmButtonText: "হ্যাঁ",
+              input: "text",
+              inputPlaceholder: "আপনি কেন চিহ্নিত করেননি তার কারণ লিখুন",
+              showCancelButton: true,
+              confirmButtonText: "Submit",
+              cancelButtonText: "Cancel",
+              inputValidator: (value) => {
+                // Validation logic, return undefined if the value is valid
+                if (!value) {
+                  return "কিছু লিখতে হবে!";
+                }
+              },
             });
+  
+            if (text) {
+              console.log(`all_bis`, all_bis);
+  
+              const result: any = [];
+              all_bis.map((d) => {
+                d?.weights.map((w_d: any, k: any) => {
+  
+                  if (k==0) {
+                    let x = save_PI_evalution_data_make_for_comment(
+                      w_d.uid,
+                      null,
+                      student.uid,
+                      w_d.bi_uid,
+                      text
+                    );
+    
+                    result.push(x);
+                  }
+                  
+                });
+              });
+  
+  
+              await Bi_save(result);
+  
+              Swal.fire({
+                title: "আপনার তথ্য সংরক্ষণ করা হয়েছে!",
+                icon: "success",
+              });
+  
+  
+              // handleSave("" , next_uid ? 1 :2 , next_uid ? true : false)
+  
+  
+              showOffCollaps(keynext, next_uid);
+  
+              console.log(`result`, result);
+              // Swal.fire(`You entered: ${text}`);
+            }
+
+
+
+
           }
         }
 
         // seterr("");
       } else {
         if (submitData.length == 0) {
-          Swal.fire({
-            icon: "error",
+          const { value: text } = await Swal.fire({
             title: "আপনি কোন কিছু নির্বাচন করেন নি!",
-            confirmButtonText: "হ্যাঁ",
+            input: "text",
+            inputPlaceholder: "আপনি কেন চিহ্নিত করেননি তার কারণ লিখুন",
+            showCancelButton: true,
+            confirmButtonText: "Submit",
+            cancelButtonText: "Cancel",
+            inputValidator: (value) => {
+              // Validation logic, return undefined if the value is valid
+              if (!value) {
+                return "কিছু লিখতে হবে!";
+              }
+            },
           });
+
+          if (text) {
+            console.log(`all_bis`, all_bis);
+
+            const result: any = [];
+            all_bis.map((d) => {
+              d?.weights.map((w_d: any, k: any) => {
+
+                if (k==0) {
+                  let x = save_PI_evalution_data_make_for_comment(
+                    w_d.uid,
+                    null,
+                    student.uid,
+                    w_d.bi_uid,
+                    text
+                  );
+  
+                  result.push(x);
+                }
+                
+              });
+            });
+
+
+            await Bi_save(result);
+
+            Swal.fire({
+              title: "আপনার তথ্য খসড়া সংরক্ষণ করা হয়েছে!",
+              icon: "success",
+            });
+
+
+            // handleSave("" , next_uid ? 1 :2 , next_uid ? true : false)
+
+
+            showOffCollaps(keynext, next_uid);
+
+            console.log(`result`, result);
+            // Swal.fire(`You entered: ${text}`);
+          }
         } else {
           const data: any = submitData.map((d: any) => {
             d.submit_status = 1;
@@ -247,17 +358,26 @@ export default function StudentMullayonBehave({
 
           // setmsg("আপনার খসড়া সংরক্ষণ করা হয়েছে");
           seterr("");
-          if (go_next) {
-            if (next_uid) {
-              showOffCollaps(keynext, next_uid);
-              refresh();
-              setsubmited(true);
-            }
-          } else {
-            // refresh()
-            setcomment_status(true);
-            checkedIn_comment(submitObj);
+
+          console.log(`33`, 33 , next_uid);
+
+          if (next_uid) {
+            showOffCollaps(keynext, next_uid);
+            // refresh();
+            // setsubmited(true);
           }
+
+          // if (go_next) {
+          //   if (next_uid) {
+          //     showOffCollaps(keynext, next_uid);
+          //     refresh();
+          //     setsubmited(true);
+          //   }
+          // } else {
+          //   // refresh()
+          //   // setcomment_status(true);
+          //   checkedIn_comment(submitObj);
+          // }
         }
       }
     } catch (error) {
@@ -272,6 +392,36 @@ export default function StudentMullayonBehave({
   };
 
   // console.log("showModal", showModal);
+
+  const save_PI_evalution_data_make_for_comment = (
+    pi_uid: any,
+    weight_uid: any,
+    student_id: any,
+    bi_uid: any,
+    remark: any
+  ) => {
+    try {
+      const subject_uid = localStorage.getItem("subject_id");
+
+      const params: any = {
+        evaluate_type: assessment_uid,
+        bi_uid,
+        weight_uid,
+        class_room_uid: class_room_id,
+        student_uid: student_id,
+        teacher_uid: teacher_uid,
+        submit_status: 1,
+        is_approved: 1,
+        remark,
+        pi_uid,
+        subject_uid,
+      };
+
+      return params;
+    } catch (error) {
+      console.log(`error`, error);
+    }
+  };
 
   const save_PI_evalution = async (
     pi_uid: any,
@@ -476,7 +626,7 @@ export default function StudentMullayonBehave({
       element.value = "";
     }
 
-    showOffCollaps(Number(keynext - 1) , student?.uid);
+    showOffCollaps(Number(keynext - 1), student?.uid);
   };
 
   setTimeout(() => {
@@ -505,7 +655,6 @@ export default function StudentMullayonBehave({
       // setfirstRender(false);
     }
   }, 300);
-
 
   return (
     <div className="content">
@@ -739,7 +888,7 @@ export default function StudentMullayonBehave({
                     )}
                   </>
                 )}
-                {!submited && (
+                {/* {!submited && (
                   <button
                     type="button"
                     className="btn btn-sm btn-outline-secondary"
@@ -753,7 +902,7 @@ export default function StudentMullayonBehave({
                       </span>
                     </div>
                   </button>
-                )}
+                )} */}
 
                 {msg && <h6 className="text-success">{msg}</h6>}
 

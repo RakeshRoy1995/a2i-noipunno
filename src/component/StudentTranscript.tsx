@@ -169,9 +169,6 @@ export default function StudentTranscript() {
     studnt.reduce((acc, obj) => ({ ...acc, [obj.uid]: obj }), {})
   );
 
-  // console.log("allFelter=====>", allFelter.subject.split("-")[2]);
-  console.log(teacher);
-
   const fetchDataFromAPI = async () => {
     setsubmittingLoading(true);
     try {

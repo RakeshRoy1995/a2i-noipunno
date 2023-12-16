@@ -468,3 +468,43 @@ export function dimension_by_subject(subject_uid) {
 
   return axios(options);
 }
+
+
+export function all_upozila() {
+  const page_list = `${EVULATION_API}/v2/upazilla`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+    
+  };
+
+  return axios(options);
+}
+
+export function all_district() {
+  const page_list = `${EVULATION_API}/v2/district`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+    
+  };
+
+  return axios(options);
+}
+
+export function all_division() {
+  const page_list = `${EVULATION_API}/v2/division`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+    
+  };
+
+  return axios(options);
+}

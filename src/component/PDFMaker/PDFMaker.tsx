@@ -19,6 +19,7 @@ import {
   subject_name,
 } from "../../utils/Utils";
 import { BsFiletypePdf } from "react-icons/bs";
+import React from "react";
 Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 Font.register({ family: "Noto Sans Bengali", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
 
@@ -193,6 +194,10 @@ const styles = StyleSheet.create({
   },
 });
 
+
+
+
+
 const MyDocument = ({
   data,
   instititute,
@@ -288,11 +293,19 @@ const MyDocument = ({
                   </Text>
                 </View>
                 <Text style={styles.tableCell}>
-                  {" "}
-                  {pi_data?.title_bn || pi_data?.title_en}{" "}
+                  {/* {pi_data?.title_bn || pi_data?.title_en}{" "} */}
+
+                  {pi_data?.title_bn.split(' ').map((word, index) => (
+                    <React.Fragment key={index}>
+                      {index > 0 && index % 5 === 0 && <Text>{"\n"}</Text>}
+                      {word}{' '}
+                    </React.Fragment>
+                  ))}
+
                 </Text>
               </View>
             ))}
+
           </View>
 
         ))}
@@ -310,6 +323,7 @@ const MyDocument = ({
           </Text>
         </View>
       </View>
+
       <View fixed style={{ height: 70, fontSize: 7, textAlign: 'center', padding: '5px' }}>
         <Text style={{ textAlign: 'left', bottom: 0 }}>এই প্রতিবেদনটি সিস্টেম দ্বারা তৈরি করা হয়েছে</Text>
         <Text style={{ fontSize: 7 }} render={({ pageNumber, totalPages }) => (

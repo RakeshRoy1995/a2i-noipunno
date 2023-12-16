@@ -100,6 +100,7 @@ export default function ParodorshitaComponent({
                           pi_attr={pi_attr}
                           Student={Student}
                           teacher_uid={teacher_uid}
+                          setloadingspinner={setloadingspinner}
                         />
                       </div>
                     </div>

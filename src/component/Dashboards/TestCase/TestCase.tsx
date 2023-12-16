@@ -49,7 +49,7 @@ const TestCase = () => {
             <Text style={{ lineHeight: "1px", fontSize: "14px", fontWeight: "normal" }}>
               ঘটনাস্থলে কথা হয় ওই ট্রেনের যাত্রী হাবিবা খাতুনের সঙ্গে। তিনি দুর্ঘটনার বর্ণনা দিয়ে বলেন, দুই শিশুসহ মাঝামাঝি একটি বগিতে তাঁরা মোট চারজন ছিলেন। হঠাৎ বিকট শব্দে তাঁদের বগিটি পাশের নিচু জমিতে পড়ে যায়। তিনি বলেন, ‘শব্দের সঙ্গে সঙ্গে আমার সন্তানকে পাচ্ছিলাম না। বগি অন্ধকার হয়ে যায়। চিৎকার–চেঁচামেচি করছিলেন সবাই। কিছুক্ষণের মধ্যেই আমার স্বজনদের খুঁজে পেয়ে ওপরের দিকের জানালা দিয়ে বের হই। আমাদের অনেকেই শরীরে আঘাত পেয়েছেন।’
             </Text>
-            <Text style={{ lineHeight: "1.2px", fontSize: "11px", fontWeight: "normal", textAlign: "justify", textJustify: "inter-word" }}>
+            <Text style={{ lineHeight: "1.2px", fontSize: "11px", fontWeight: "normal", textAlign: "justify" }}>
               A smartly-turned-out contingent of the Bangladesh Armed Forces gave a state salute while the bugle played the last post at that time.
               Later, flanked by party leaders, Sheikh Hasina, the president of Awami League, placed another wreath at the Martyred Intellectuals Memorial as the chief of her party.
               The prime minister also exchanged pleasantries with the family members of the martyred intellectuals here.

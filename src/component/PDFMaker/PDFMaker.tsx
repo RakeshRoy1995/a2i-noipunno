@@ -204,6 +204,7 @@ const MyDocument = ({
   allFelter,
   student_info_pdf,
   teacher,
+  subject_teacher
 }: any) => (
   <Document>
     <Page size="A4" style={styles.page}>
@@ -254,7 +255,7 @@ const MyDocument = ({
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>বিষয় শিক্ষকের নাম: {teacher}</Text>
+            <Text style={styles.tableCell}>শ্রেণি শিক্ষকের নাম: {teacher}</Text>
           </View>
         </View>
 
@@ -306,16 +307,17 @@ const MyDocument = ({
             ))}
 
           </View>
+
         ))}
 
         <View style={[styles.teacherSignatureContainer]}>
-          <Text style={[styles.teacherSignature, styles.colortext]}>
+          <Text style={[styles.teacherSignature]}>
             বিষয় শিক্ষকের স্বাক্ষরঃ
             {" "}
-            {teacher}
+            {subject_teacher?.data?.user?.name}
           </Text>
 
-          <Text style={[styles.teacherSignature, styles.colortext]}>
+          <Text style={[styles.teacherSignature ]}>
             প্রধান শিক্ষকের স্বাক্ষরঃ
             <br />
           </Text>
@@ -341,13 +343,14 @@ const RawPDFDownload = ({
   teacher,
 }: any) => {
 
-
   const pdf_name =
     student_info_pdf?.student_name_bn ||
     student_info_pdf?.student_name_en +
     "-" +
     convertToBanglaNumber(student_info_pdf?.roll) +
     ".pdf";
+
+    const subject_teacher = localStorage.getItem("teacher_dashboard") ? JSON.parse(localStorage.getItem("teacher_dashboard")) : "" 
   return (
     <div>
       <div>
@@ -360,6 +363,7 @@ const RawPDFDownload = ({
               student_info_pdf={student_info_pdf}
               unique_id={unique_id}
               teacher={teacher}
+              subject_teacher={subject_teacher}
             />
           }
           fileName={pdf_name}

@@ -19,6 +19,7 @@ import {
   subject_name,
 } from "../../utils/Utils";
 import { BsFiletypePdf } from "react-icons/bs";
+import React from "react";
 Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 Font.register({ family: "Noto Sans Bengali", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
 
@@ -193,12 +194,17 @@ const styles = StyleSheet.create({
   },
 });
 
+
+
+
+
 const MyDocument = ({
   data,
   instititute,
   allFelter,
   student_info_pdf,
   teacher,
+  subject_teacher
 }: any) => (
   <Document>
     <Page size="A4" style={styles.page}>
@@ -249,7 +255,7 @@ const MyDocument = ({
             </Text>
           </View>
           <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>বিষয় শিক্ষকের নাম: {teacher}</Text>
+            <Text style={styles.tableCell}>শ্রেণি শিক্ষকের নাম: {teacher}</Text>
           </View>
         </View>
 
@@ -287,26 +293,37 @@ const MyDocument = ({
                   </Text>
                 </View>
                 <Text style={styles.tableCell}>
-                  {pi_data?.title_bn || pi_data?.title_en}{" "}
+                  {/* {pi_data?.title_bn || pi_data?.title_en}{" "} */}
+
+                  {pi_data?.title_bn.split(' ').map((word, index) => (
+                    <React.Fragment key={index}>
+                      {index > 0 && index % 5 === 0 && <Text>{"\n"}</Text>}
+                      {word}{' '}
+                    </React.Fragment>
+                  ))}
+
                 </Text>
               </View>
             ))}
+
           </View>
+
         ))}
 
         <View style={[styles.teacherSignatureContainer]}>
-          <Text style={[styles.teacherSignature, styles.colortext]}>
+          <Text style={[styles.teacherSignature]}>
             বিষয় শিক্ষকের স্বাক্ষরঃ
             {" "}
-            {teacher}
+            {subject_teacher?.data?.user?.name}
           </Text>
 
-          <Text style={[styles.teacherSignature, styles.colortext]}>
+          <Text style={[styles.teacherSignature ]}>
             প্রধান শিক্ষকের স্বাক্ষরঃ
             <br />
           </Text>
         </View>
       </View>
+
       <View fixed style={{ height: 70, fontSize: 7, textAlign: 'center', padding: '5px' }}>
         <Text style={{ textAlign: 'left', bottom: 0 }}>এই প্রতিবেদনটি সিস্টেম দ্বারা তৈরি করা হয়েছে</Text>
         <Text style={{ fontSize: 7 }} render={({ pageNumber, totalPages }) => (
@@ -325,7 +342,6 @@ const RawPDFDownload = ({
   unique_id,
   teacher,
 }: any) => {
-  console.log(`instititute ddddd `, instititute);
 
   const pdf_name =
     student_info_pdf?.student_name_bn ||
@@ -333,6 +349,8 @@ const RawPDFDownload = ({
     "-" +
     convertToBanglaNumber(student_info_pdf?.roll) +
     ".pdf";
+
+    const subject_teacher = localStorage.getItem("teacher_dashboard") ? JSON.parse(localStorage.getItem("teacher_dashboard")) : "" 
   return (
     <div>
       <div>
@@ -345,6 +363,7 @@ const RawPDFDownload = ({
               student_info_pdf={student_info_pdf}
               unique_id={unique_id}
               teacher={teacher}
+              subject_teacher={subject_teacher}
             />
           }
           fileName={pdf_name}

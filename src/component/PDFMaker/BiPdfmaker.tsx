@@ -238,6 +238,7 @@ const styles = StyleSheet.create({
   cardRow: {
     flexDirection: "row",
     marginLeft: "0px",
+    marginLeft: "0px",
   },
 
   cardColumn: {
@@ -455,7 +456,7 @@ const MyDocument = ({
       {/* Subject -1  */}
 
       {selected_student.map((item) => (
-        <View wrap={true}>
+        <View wrap={false}>
           <View>
             <Text
               style={[
@@ -470,7 +471,7 @@ const MyDocument = ({
             </Text>
           </View>
 
-          <View style={styles.container}>
+          <View style={styles.container} wrap={true}>
             {item[1].map((data) => (
               <View style={[styles.box1]}>
                 <View style={[styles.card]}>

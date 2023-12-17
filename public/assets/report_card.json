@@ -62,26 +62,18 @@
                     "subject_uid": 1780295779085618,
                     "student_uid": 1784586541466898,
                     "dimension_uid": 1781925972124779,
-                    "dimension_result": 6
+                    "dimension_result": 7
                 },
                 {
                     "subject_uid": 1780295779085618,
                     "student_uid": 1784586541466898,
                     "dimension_uid": 1781925989167528,
-                    "dimension_result": 7
+                    "dimension_result": 4
                 },
                 {
                     "subject_uid": 1780295779085618,
                     "student_uid": 1784586541466898,
-                    "dimension_uid": 1781926021065544,
-                    "dimension_result": 6
                 },
-                {
-                    "subject_uid": 1780295779085618,
-                    "student_uid": 1784586541466898,
-                    "dimension_uid": 1781926047362052,
-                    "dimension_result": 7
-                }
             ]
         },
         {
@@ -112,7 +104,7 @@
                     "subject_uid": 1780295779134237,
                     "student_uid": 1784586541466898,
                     "dimension_uid": 1783626448851551,
-                    "dimension_result": 6
+                    "dimension_result": 7
                 },
                 {
                     "subject_uid": 1780295779134237,
@@ -124,7 +116,109 @@
                     "subject_uid": 1780295779134237,
                     "student_uid": 1784586541466898,
                     "dimension_uid": 1783626503701237,
+                    "dimension_result": 7
+                }
+            ]
+        },
+        {
+            "subject_result": [
+                {
+                    "subject_uid": 1780295779170010,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783624767504542,
                     "dimension_result": 6
+                },
+                {
+                    "subject_uid": 1780295779170010,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783624807847707,
+                    "dimension_result": 7
+                },
+                {
+                    "subject_uid": 1780295779170010,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783624846527337,
+                    "dimension_result": 7
+                },
+                {
+                    "subject_uid": 1780295779170010,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783624991265910,
+                    "dimension_result": 6
+                },
+                {
+                    "subject_uid": 1780295779170010,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783625018657186,
+                    "dimension_result": 7
+                }
+            ]
+        },
+        {
+            "subject_result": [
+                {
+                    "subject_uid": 1780295779154801,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783623906586354,
+                    "dimension_result": 6
+                },
+                {
+                    "subject_uid": 1780295779154801,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783623981047886,
+                    "dimension_result": 7
+                },
+                {
+                    "subject_uid": 1780295779154801,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783624051271545,
+                    "dimension_result": 7
+                },
+                {
+                    "subject_uid": 1780295779154801,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783624094397614,
+                    "dimension_result": 6
+                },
+                {
+                    "subject_uid": 1780295779154801,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783624157761261,
+                    "dimension_result": 7
+                }
+            ]
+        },
+        {
+            "subject_result": [
+                {
+                    "subject_uid": 1780295779149748,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783622319459420,
+                    "dimension_result": 7
+                },
+                {
+                    "subject_uid": 1780295779149748,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783622366923621,
+                    "dimension_result": 7
+                },
+                {
+                    "subject_uid": 1780295779149748,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783622428458172,
+                    "dimension_result": 7
+                },
+                {
+                    "subject_uid": 1780295779149748,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783622532803893,
+                    "dimension_result": 7
+                },
+                {
+                    "subject_uid": 1780295779149748,
+                    "student_uid": 1783057974815902,
+                    "dimension_uid": 1783622570999728,
+                    "dimension_result": 7
                 }
             ]
         },

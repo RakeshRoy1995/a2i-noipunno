@@ -95,7 +95,6 @@ export default function StudentMullayonBehave({
   ) => {
     try {
       if (submit_status == 2 && !next_uid) {
-        
         if (submitData.length == 10) {
           Swal.fire({
             title: "আপনি কি তথ্য সংরক্ষণ করতে চান?",
@@ -228,9 +227,6 @@ export default function StudentMullayonBehave({
             //   confirmButtonText: "হ্যাঁ",
             // });
 
-
-
-
             const { value: text } = await Swal.fire({
               title: "আপনি কোন কিছু নির্বাচন করেন নি!",
               input: "text",
@@ -245,15 +241,14 @@ export default function StudentMullayonBehave({
                 }
               },
             });
-  
+
             if (text) {
               console.log(`all_bis`, all_bis);
-  
+
               const result: any = [];
               all_bis.map((d) => {
                 d?.weights.map((w_d: any, k: any) => {
-  
-                  if (k==0) {
+                  if (k == 0) {
                     let x = save_PI_evalution_data_make_for_comment(
                       w_d.uid,
                       null,
@@ -261,34 +256,26 @@ export default function StudentMullayonBehave({
                       w_d.bi_uid,
                       text
                     );
-    
+
                     result.push(x);
                   }
-                  
                 });
               });
-  
-  
+
               await Bi_save(result);
-  
+
               Swal.fire({
                 title: "আপনার তথ্য সংরক্ষণ করা হয়েছে!",
                 icon: "success",
               });
-  
-  
+
               // handleSave("" , next_uid ? 1 :2 , next_uid ? true : false)
-  
-  
+
               showOffCollaps(keynext, next_uid);
-  
+
               console.log(`result`, result);
               // Swal.fire(`You entered: ${text}`);
             }
-
-
-
-
           }
         }
 
@@ -316,8 +303,7 @@ export default function StudentMullayonBehave({
             const result: any = [];
             all_bis.map((d) => {
               d?.weights.map((w_d: any, k: any) => {
-
-                if (k==0) {
+                if (k == 0) {
                   let x = save_PI_evalution_data_make_for_comment(
                     w_d.uid,
                     null,
@@ -325,13 +311,11 @@ export default function StudentMullayonBehave({
                     w_d.bi_uid,
                     text
                   );
-  
+
                   result.push(x);
                 }
-                
               });
             });
-
 
             await Bi_save(result);
 
@@ -340,9 +324,7 @@ export default function StudentMullayonBehave({
               icon: "success",
             });
 
-
             // handleSave("" , next_uid ? 1 :2 , next_uid ? true : false)
-
 
             showOffCollaps(keynext, next_uid);
 
@@ -359,7 +341,7 @@ export default function StudentMullayonBehave({
           // setmsg("আপনার খসড়া সংরক্ষণ করা হয়েছে");
           seterr("");
 
-          console.log(`33`, 33 , next_uid);
+          console.log(`33`, 33, next_uid);
 
           if (next_uid) {
             showOffCollaps(keynext, next_uid);
@@ -956,7 +938,7 @@ export default function StudentMullayonBehave({
               <div className="col-md-12">
                 <div className="row p-1">
                   <p className="text-success text-center">
-                    আপনার তথ্য সংরক্ষণ করা হয়েছিল
+                    ইতোমধ্যে আপনার চূড়ান্ত তথ্য সংরক্ষণ করা হয়েছে
                   </p>
                 </div>
               </div>

@@ -322,7 +322,11 @@ const MyDocument = ({
 
           <Text style={[styles.teacherSignature]}>
             প্রধান শিক্ষকের স্বাক্ষরঃ
-            <br />
+            {" "}
+            <Text>{"\n"}</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 11 }}>
+              {""}
+            </Text>
           </Text>
         </View>
       </View>
@@ -345,6 +349,7 @@ const RawPDFDownload = ({
   unique_id,
   teacher,
 }: any) => {
+
 
   const pdf_name =
     student_info_pdf?.student_name_bn ||

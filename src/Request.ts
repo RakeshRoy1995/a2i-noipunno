@@ -176,8 +176,8 @@ export async function teacher_own_subject() {
     data.data.data.pi_attribute_weight =
       common_info.data.data.pi_attribute_weight;
     data.data.data.bis = bi.data.data.bis;
-    localStorage.removeItem("common_room")
-    localStorage.removeItem("cls_room")
+    localStorage.removeItem("common_room");
+    localStorage.removeItem("cls_room");
     return data;
   }
 }
@@ -329,7 +329,53 @@ export function get_bi_evaluation_by_bi(
   return axios(options);
 }
 
-export function get_pi_bi_evaluation_list(submit_status: any = "") {
+
+
+export function bi_report_card_details() {
+  const page_list = `${API_URL}/v2/bi-dimension`;
+  // https://api.noipunno.gov.bd/api/v2/bi-dimension
+  
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+    
+  };
+
+  return axios(options);
+}
+
+export function bi_report_card_by_student(
+  branch_uid: any,
+  version_uid: any,
+  student_uid: any,
+  shift_uid: any,
+  class_uid: any,
+  section_uid: any
+) {
+  const page_list = `/assets/yousuf_bi_response.json`;
+  // `${API_URL}/bi-report-card-by-student?branch_uid=${branch_uid}&version_uid=${version_uid}&shift_uid=${shift_uid}&class_uid=${class_uid}&section_uid=${section_uid}&student_uid=${student_uid}`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+    params: {
+      branch_uid,
+      version_uid,
+      shift_uid,
+      class_uid,
+      section_uid,
+      student_uid,
+    },
+  };
+
+  return axios(options);
+}
+//teacher.project-ca.com/api/v2/bi-report-card-by-student?branch_uid=1782345351002697&version_uid=1782343521342761&shift_uid=1782343482748247&class_uid=6&section_uid=1782343690355322&student_uid=1784586541382652
+
+ export function get_pi_bi_evaluation_list(submit_status: any = "") {
   const page_list =
     `${API_URL}/v2/pi-bi-evaluation-list?submit_status=` + submit_status;
 
@@ -374,39 +420,6 @@ export function get_pi_bi(
 
 
 
-
-
-
-// export function get_pi_bi(
-//   subject_uid,
-//   branch_uid,
-//   version_uid,
-//   shift_uid,
-//   class_uid,
-//   section_uid,
-//   student_uid = ""
-// ) {
-//   const page_list = `${EVULATION_API}/transcript`;
-//   // const page_list = `/assets/transcript_response.json`;
-
-//   const options = {
-//     method: "get",
-//     headers: { "content-type": "application/json" },
-//     url: page_list,
-//     params: {
-//       subject_uid,
-//       branch_uid,
-//       version_uid,
-//       shift_uid,
-//       class_uid,
-//       section_uid,
-//       student_uid,
-//     },
-//   };
-
-//   return axios(options);
-// }
-
 export function get_pi_bi_by_student_student(
   subject_uid,
   branch_uid,
@@ -446,8 +459,8 @@ export function get_report_card(
   section_uid,
   student_uid = ""
 ) {
-  const page_list = `${EVULATION_API}/report-card-by-student`;
-  // const page_list = `/assets/report_card.json`;
+  // const page_list = `${EVULATION_API}/report-card-by-student`;
+  const page_list = `/assets/report_card.json`;
 
   const options = {
     method: "get",
@@ -484,7 +497,6 @@ export function dimension_by_subject(subject_uid) {
   return axios(options);
 }
 
-
 export function all_upozila() {
   const page_list = `${EVULATION_API}/v2/upazilla`;
 
@@ -492,7 +504,6 @@ export function all_upozila() {
     method: "get",
     headers: { "content-type": "application/json" },
     url: page_list,
-
   };
 
   return axios(options);
@@ -505,7 +516,6 @@ export function all_district() {
     method: "get",
     headers: { "content-type": "application/json" },
     url: page_list,
-
   };
 
   return axios(options);
@@ -518,7 +528,6 @@ export function all_division() {
     method: "get",
     headers: { "content-type": "application/json" },
     url: page_list,
-
   };
 
   return axios(options);

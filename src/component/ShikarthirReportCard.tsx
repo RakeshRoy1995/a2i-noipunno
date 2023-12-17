@@ -5,6 +5,7 @@ const ShikarthirReportCard = ({
   student,
   instititute,
   subject_name,
+  biData,
 }: any) => {
 
   return (
@@ -17,6 +18,7 @@ const ShikarthirReportCard = ({
         student={student}
         instititute={instititute}
         subject_name={subject_name}
+        biData={biData}
       />
 
       </div>

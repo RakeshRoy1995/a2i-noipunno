@@ -23,6 +23,9 @@ import React from "react";
 Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 Font.register({ family: "Noto Sans Bengali", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
 
+
+
+
 const styles = StyleSheet.create({
   page: {
     //flexDirection: "row",
@@ -277,7 +280,9 @@ const MyDocument = ({
           <View style={styles.tableRow} wrap={false} >
             <View style={styles.tableCol} wrap={true}>
               <Text style={styles.tableCell}>
+                
                 {" "}
+                {/* {(all_pi.pi_data.pi_no).split('').reverse().join('')}{" "} */}
                 {convertToBanglaNumber(all_pi.pi_data.pi_no)}{" "}
                 {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
               </Text>
@@ -322,11 +327,7 @@ const MyDocument = ({
 
           <Text style={[styles.teacherSignature]}>
             প্রধান শিক্ষকের স্বাক্ষরঃ
-            {" "}
-            <Text>{"\n"}</Text>
-            <Text style={{ fontWeight: "bold", fontSize: 11 }}>
-              {""}
-            </Text>
+            <br />
           </Text>
         </View>
       </View>
@@ -349,7 +350,6 @@ const RawPDFDownload = ({
   unique_id,
   teacher,
 }: any) => {
-
 
   const pdf_name =
     student_info_pdf?.student_name_bn ||

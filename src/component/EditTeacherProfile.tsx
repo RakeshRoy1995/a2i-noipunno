@@ -1,5 +1,5 @@
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { all_district, all_division, all_upozila, update_teacher_profile } from "../Request";
 import Breadcumbtitle from "../layout/Breadcumb";
 import Swal from "sweetalert2";
@@ -9,21 +9,27 @@ import Swal from "sweetalert2";
 const EditTeacherProfile = () => {
 
   const [userDetails, setuserDetails] = useState<any>({});
-  const [upozila, setupozila] = useState<any>([]);
-  const [all_upozila, setall_upozila] = useState<any>([]);
-  const [district, setdistrict] = useState<any>([]);
-  const [all_district, setall_district] = useState<any>([]);
-  const [division, setdivision] = useState<any>([]);
-  const [all_division, setall_division] = useState<any>([]);
-  const [all_local_storage_data, setAll_local_storage_data] = useState<any>({})
-  const { caid, name, email, phone_no } = userDetails;
 
-  
+  const [allDivision, setAllDivision] = useState<any>([]);
+  const [allllDistrict, setAllDistrict] = useState<any>([]);
+  const [allUpozila, setAllUpozila] = useState<any>([]);
+
+  const [district, setdistrict] = useState<any>([]);
+  const [upozila, setupozila] = useState<any>([]);
+  const [all_local_storage_data, setAll_local_storage_data] = useState<any>({})
+  const { pdsid, caid, name, email, phone_no } = userDetails;
+
+  // console.log(userDetails);
 
 
   const handleTeacherProfileEdit = async (event: any) => {
     event.preventDefault()
     const formDatas = new FormData(event.target);
+
+    for (const [name, value] of formDatas) {
+      console.log(`KeyName: ${name}, value: ${value}`);
+    }
+
     const form = event.target;
     const name = form.name.value;
     const email = form.email.value;
@@ -36,10 +42,12 @@ const EditTeacherProfile = () => {
     new_user_info.phone_no = phone_no;
     new_localstorage_data.user = new_user_info;
 
-    // console.log("New Local storage data====>", new_localstorage_data);
+    // console.log("New Local storage data====>", new_user_info);
 
     try {
       const { data }: any = await update_teacher_profile(caid, formDatas);
+
+
       if (data.status === true) {
         Swal.fire({
           position: "center",
@@ -50,9 +58,9 @@ const EditTeacherProfile = () => {
         })
         localStorage.setItem("customer_login_auth", JSON.stringify(new_localstorage_data));
 
-        setTimeout(() => {
-          window.location.replace("/");
-        }, 1000)
+        // setTimeout(() => {
+        //   window.location.replace("/");
+        // }, 1000)
       }
     } catch (error) {
       alert('হালনাগাদ সম্পন্ন হয়নি, আবার চেষ্টা করুন!');
@@ -62,30 +70,29 @@ const EditTeacherProfile = () => {
 
   const fetchData = async () => {
 
-    const upozila_data = await all_upozila()
-    const district_data = await all_district()
     const division_data = await all_division()
+    const district_data = await all_district()
+    const upozila_data = await all_upozila()
 
-    setdivision(division_data?.data?.data)
-    setdistrict(district_data?.data?.data)
-    setupozila(upozila_data?.data?.data)
 
-    setall_division(division_data?.data?.data)
-    setall_district(district_data?.data?.data)
-    setall_upozila(upozila_data?.data?.data)
 
-    console.log(`upozila_data`,upozila_data );
-    console.log(`district_data`,district_data );
-    console.log(`division_data`,division_data );
-    
+    // setdivision(division_data?.data?.data)
+    // setdistrict(district_data?.data?.data)
+    // setupozila(upozila_data?.data?.data)
+
+    setAllDivision(division_data?.data?.data)
+    setAllDistrict(district_data?.data?.data)
+    setAllUpozila(upozila_data?.data?.data)
   };
 
   const getdistrictBydivisionID = (id) => {
-
+    const divisionWiseDistric = allllDistrict.filter(district => district.division_id == id)
+    setdistrict(divisionWiseDistric)
   }
 
-  const getupozilaByDistrictID = (id) => {
-    
+  const getDivisionByDistrictId = (id) => {
+    const zilawiseUpazila = allUpozila.filter(upozila => upozila.district_id == id)
+    setupozila(zilawiseUpazila)
   }
 
   useEffect(() => {
@@ -128,6 +135,15 @@ const EditTeacherProfile = () => {
 
                   <div className="form-group  col-sm-4 col-md-6">
                     <div className="mb-3" style={{ fontSize: "16px" }}>
+                      <label className="form-label">ব্যবহারকারী আইডি</label>
+                      <div className="input-group">
+                        <input type="text" id="pin" className="form-control" readOnly name="phone_no" defaultValue={pdsid || caid} />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group  col-sm-4 col-md-6">
+                    <div className="mb-3" style={{ fontSize: "16px" }}>
                       <label className="form-label">ফোন নম্বর</label>
                       <div className="input-group">
                         <input type="text" id="pin" className="form-control" readOnly name="phone_no" defaultValue={phone_no} />
@@ -148,44 +164,76 @@ const EditTeacherProfile = () => {
                   <div className="form-group  col-sm-4 col-md-6">
                     <div className="mb-3" style={{ fontSize: "16px" }}>
                       <label className="form-label"> বিভাগ</label>
-                      <select className="form-control" name="division_id" onChange={(e:any)=> getdistrictBydivisionID(e.target.value) }>
+                      <select className="form-control" name="division_id"
+                        onChange={(e: any) => getdistrictBydivisionID(e.target.value)}>
                         {
-                          division.map((d,k)=>
-                          <option value={d?.uid}>{d?.division_name_bn || d?.division_name_en}</option>
+                          allDivision.map((d, k) =>
+                            <option value={d?.uid}>{d?.division_name_bn || d?.division_name_en}</option>
                           )
                         }
-                        
+
                       </select>
                     </div>
                   </div>
 
-                  <div className="form-group  col-sm-4 col-md-6">
+                  {/* <div className="form-group  col-sm-4 col-md-6">
                     <div className="mb-3" style={{ fontSize: "16px" }}>
                       <label className="form-label"> জেলা</label>
-                      <select className="form-control" name="district_id">
+                      <select className="form-control" name="district_id"
+                        onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
                         {
-                          district.map((d)=>
-                          <option value={d?.uid}>{d?.district_name_bn || d?.district_name_en}</option>
+                          district.map((d) =>
+                            <option value={d?.uid}>{d?.district_name_bn || d?.district_name_en}</option>
                           )
                         }
-                        
                       </select>
                     </div>
-                  </div>
+                  </div> */}
 
-                  <div className="form-group  col-sm-4 col-md-6">
+                  {(district.length > 0) && <div className="form-group  col-sm-4 col-md-6">
+                    <div className="mb-3" style={{ fontSize: "16px" }}>
+                      <label className="form-label"> জেলা</label>
+                      <select className="form-control" name="district_id"
+                        onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
+                        {
+                          district.map((d) =>
+                            <option value={d?.uid}>{d?.district_name_bn || d?.district_name_en}</option>
+                          )
+                        }
+                      </select>
+                    </div>
+                  </div>}
+
+
+
+                  {/* <div className="form-group  col-sm-4 col-md-6">
                     <div className="mb-3" style={{ fontSize: "16px" }}>
                       <label className="form-label"> উপজেলা</label>
                       <select className="form-control" name="upazilla_id">
                         {
-                          upozila.map((d)=>
-                          <option value={d?.uid}>{d?.upazila_name_bn || d?.upazila_name_en}</option>
+                          upozila.map((d) =>
+                            <option value={d?.uid}>{d?.upazila_name_bn || d?.upazila_name_en}</option>
                           )
                         }
-                        
                       </select>
                     </div>
-                  </div>
+                  </div> */}
+
+                  {
+                    (upozila.length > 0) &&
+                    <div className="form-group  col-sm-4 col-md-6">
+                      <div className="mb-3" style={{ fontSize: "16px" }}>
+                        <label className="form-label"> উপজেলা</label>
+                        <select className="form-control" name="upazilla_id">
+                          {
+                            upozila.map((d) =>
+                              <option value={d?.uid}>{d?.upazila_name_bn || d?.upazila_name_en}</option>
+                            )
+                          }
+                        </select>
+                      </div>
+                    </div>
+                  }
 
                   <div className="d-flex justify-content-end align-items-center pt-3 pe-3">
                     <button type="submit" className="btn btn-primay px-5" style={{ backgroundColor: "#428F92", color: "#fff", }} > প্রোফাইল হালনাগাদ করুন{" "} <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem", }} />{" "} </button>

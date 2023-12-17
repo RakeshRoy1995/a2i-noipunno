@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     fontFamily: "Noto Sans Bengali",
     color: "#000",
     marginTop: "10px",
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: 600,
   },
 });
@@ -314,12 +314,19 @@ const MyDocument = ({
           <Text style={[styles.teacherSignature]}>
             বিষয় শিক্ষকের স্বাক্ষরঃ
             {" "}
-            {subject_teacher?.data?.user?.name}
+            <Text>{"\n"}</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 11 }}>
+              {subject_teacher?.data?.user?.name}
+            </Text>
           </Text>
 
-          <Text style={[styles.teacherSignature ]}>
+          <Text style={[styles.teacherSignature]}>
             প্রধান শিক্ষকের স্বাক্ষরঃ
-            <br />
+            {" "}
+            <Text>{"\n"}</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 11 }}>
+              {""}
+            </Text>
           </Text>
         </View>
       </View>
@@ -343,6 +350,7 @@ const RawPDFDownload = ({
   teacher,
 }: any) => {
 
+
   const pdf_name =
     student_info_pdf?.student_name_bn ||
     student_info_pdf?.student_name_en +
@@ -350,7 +358,7 @@ const RawPDFDownload = ({
     convertToBanglaNumber(student_info_pdf?.roll) +
     ".pdf";
 
-    const subject_teacher = localStorage.getItem("teacher_dashboard") ? JSON.parse(localStorage.getItem("teacher_dashboard")) : "" 
+  const subject_teacher = localStorage.getItem("teacher_dashboard") ? JSON.parse(localStorage.getItem("teacher_dashboard")) : ""
   return (
     <div>
       <div>

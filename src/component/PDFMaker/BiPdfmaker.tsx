@@ -370,6 +370,7 @@ const MyDocument = ({
   student,
   instititute,
   subject_name,
+  biData,
 }) => (
   <Document>
     {/* First Page */}
@@ -386,6 +387,9 @@ const MyDocument = ({
           <Text style={[styles.h2, styles.colortext]}>
             প্রতিষ্ঠানের নাম : {instititute?.branch_name}{" "}
           </Text>
+         
+          
+          
         </View>
 
         <View style={[styles.row]}>
@@ -417,6 +421,8 @@ const MyDocument = ({
         <View style={[styles.row, styles.subjectContainer]}>
           <View style={styles.column}>
             {selected_student?.map((item, index) => {
+              console.log("selected_student",selected_student);
+              
               return (
                 index < 5 && (
                   <Text style={styles.text}>
@@ -574,113 +580,109 @@ const MyDocument = ({
     {/* Last Page */}
     <Page size="A4" wrap>
       {/* achoronik nidorshon */}
+      
       <View wrap style={[styles.achoronikContainer]}>
+      
         <View>
           <Text style={[styles.h1, styles.colortext, styles.cardHeaderBG]}>
             {" "}
             আচরণিক নির্দেশক{" "}
           </Text>
         </View>
-
+        {biData.map((item) => (
         <View style={styles.container}>
+
+
+
+
+            {item[1].map((data) =>(
           <View style={[styles.box1]}>
             <View style={[styles.card]}>
               <View style={[styles.cardTitle]}>
-                <Text style={[styles.h3]}> অংশগ্রহণ ও যোগাযোগ </Text>
+                
+                <Text style={[styles.h3]}>{data?.dimension_title}  </Text>
+                
               </View>
 
               <View style={[styles.cardRow]}>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-              </View>
+                    {data?.dimension_result >= 1 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+
+                    {data?.dimension_result >= 2 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+
+                    {data?.dimension_result >= 3 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+
+                    {data?.dimension_result >= 4 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+
+                    {data?.dimension_result >= 5 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+
+                    {data?.dimension_result >= 6 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+
+                    {data?.dimension_result >= 7 ? (
+                      <View style={[styles.cardColumn, styles.itemBG]}>
+                        <Text></Text>
+                      </View>
+                    ) : (
+                      <View style={[styles.cardColumn]}>
+                        <Text></Text>
+                      </View>
+                    )}
+                  </View>
             </View>
           </View>
-
-          <View style={[styles.box1]}>
-            <View style={[styles.card]}>
-              <View style={[styles.cardTitle]}>
-                <Text style={[styles.h3]}> নিষ্ঠা ও সততা </Text>
-              </View>
-
-              <View style={[styles.cardRow]}>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-              </View>
-            </View>
-          </View>
-
-          <View style={[styles.box1]}>
-            <View style={[styles.card]}>
-              <View style={[styles.cardTitle]}>
-                <Text style={[styles.h3]}> পারস্পরিক শ্রদ্ধা ও সহযোগিতা </Text>
-              </View>
-
-              <View style={[styles.cardRow]}>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn, styles.itemBG]}>
-                  <Text></Text>
-                </View>
-              </View>
-            </View>
-          </View>
+        ))}
+        
         </View>
+        ))}
       </View>
-
+      
       {/* Mullayon Skel */}
       <View wrap>
         <View>
@@ -1082,11 +1084,12 @@ const BiRawPDFDownload = ({
   subject_name,
   student,
   instititute,
+  biData,
 }) => {
   const pdf_name =
     student?.student_name_bn ||
     student?.student_name_en + "-report-card-result" + ".pdf";
-  console.log(`student`, student);
+  console.log(`student`, student,biData);
   return (
     <div>
       <div>
@@ -1097,6 +1100,7 @@ const BiRawPDFDownload = ({
               student={student}
               instititute={instititute}
               subject_name={subject_name}
+              biData={biData}
             />
           }
           fileName={pdf_name}

@@ -6,6 +6,7 @@ import {
   get_pi_bi_evaluation_list,
   get_pi_bi,
   get_pi_bi_by_student_student,
+  
 } from "../Request";
 import html2pdf from "html2pdf.js";
 import { RotatingLines } from "react-loader-spinner";
@@ -228,6 +229,8 @@ export default function StudentTranscript() {
       return true;
     }
   });
+
+
 
   const handleConvertToPdf = (student: any, multiple = false) => {
     setsubmittingLoading(true);
@@ -474,7 +477,8 @@ export default function StudentTranscript() {
                             >
                               {data?.subject?.subject_info?.name}{" "}
                               {data?.subject?.subject_info?.class_uid == 6 &&
-                                "ষষ্ঠ"}
+                                "ষষ্ঠ"}{" "}
+                                
                               {data?.subject?.subject_info?.class_uid == 7 &&
                                 "সপ্তম"}{" "}
                               {" শ্রেণী"}
@@ -525,7 +529,7 @@ export default function StudentTranscript() {
                         allFelter.section &&
                         allFelter.shift &&
                         allFelter.version && (
-                          <div className="mb-3">
+                          <div className="mb-3" style={{ fontSize: "12px" }}>
                             <label className="form-label ">
                               আপনার নির্বাচন সম্পূর্ণ করুন
                             </label>

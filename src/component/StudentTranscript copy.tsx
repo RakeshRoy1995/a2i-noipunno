@@ -4,11 +4,9 @@ import {
   teacher_dashboard,
   teacher_own_subject,
   get_pi_bi_evaluation_list,
-  get_report_card,
-  dimension_by_subject,
-  clssWiseSubject,
-  bi_report_card_by_student,
-  bi_report_card_details,
+  get_pi_bi,
+  get_pi_bi_by_student_student,
+  
 } from "../Request";
 import html2pdf from "html2pdf.js";
 import { RotatingLines } from "react-loader-spinner";
@@ -23,19 +21,26 @@ import { SlBookOpen } from "react-icons/sl";
 import {
   section_name,
   shift_name,
+  teacher_name,
   branch_name,
+  subject_name,
+  make_group_by,
   all_students,
   convertToBanglaNumber,
-  formate_report_data,
-  subject_name,
+  formate_teanscript_data,
+  formate_teanscript_dataBy_single_student,
 } from "../utils/Utils";
-// import {handleConvertToPdf} from "./Pdf"
+
 import Breadcumb from "../layout/Breadcumb";
 import Pdf from "./Pdf";
-import ShikarthirReportCard from "./ShikarthirReportCard";
-// import "../../src/styles/noipunno_custom_styles.css";
+// import { toPng } from "html-to-image";
+import { toPng } from "html-to-image";
+import { jsPDF } from "jspdf";
+import { Link } from "react-router-dom";
+import DownloadPDF_component from "./DownloadPDF";
+import RawPDFDownload from "./PDFMaker/PDFMaker";
 
-export default function StudentReport() {
+export default function StudentTranscript() {
   const [student_info_pdf, setStudent_info_pdf] = useState<any>("");
   const [subject, setsubject] = useState([]);
   const [student_name, setstudent_name] = useState<any>("");
@@ -44,14 +49,12 @@ export default function StudentReport() {
   const [all_bis, setall_bis] = useState<any>([]);
   const [assesment, setassesment] = useState<any>([]);
   const [teacher, setteacher] = useState<any>("");
-  const [sub_name, setsubject_name] = useState<any>("");
   const [loader, setloader] = useState(true);
+  const [selectedSunject, setselectedSunject] = useState<any>("");
   const [instititute, setinstititute] = useState<any>("");
-  const [biData, setbiData] = useState<any>({});
+  const [data, setdata] = useState<any>({});
   const [selected_student, setselected_student] = useState<any>([]);
-  const [all_subject, setall_subject] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
-  const [student, setstudent] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [submittingLoading, setsubmittingLoading] = useState(false);
 
@@ -69,6 +72,9 @@ export default function StudentReport() {
       own_subjet = await teacher_own_subject();
       localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
     }
+
+    console.log(`own_subjet`, own_subjet);
+
     let data: any = "";
     if (teacher_dash) {
       data = teacher_dash;
@@ -108,6 +114,8 @@ export default function StudentReport() {
     setall_bis(own_subjet.data.data.bis);
     setversion(teacher_dash?.data?.versions);
     setinstititute(teacher_dash?.data?.branches);
+
+    console.log(`all_subject`, all_subject);
     setsubject(all_subject);
     setloader(false);
     setassesment(own_subjet?.data?.data?.assessments[0]?.assessment_details);
@@ -128,6 +136,7 @@ export default function StudentReport() {
         });
       });
     });
+
     // console.log("own_subjet", all_Pi);
   };
 
@@ -167,63 +176,42 @@ export default function StudentReport() {
       setteacher(allFelter.subject.split("-")[2]);
       setselected_student([]);
 
-      const dimentions = await dimension_by_subject(
-        // allFelter.subject.split("-")[0]
-        ""
-      );
+      if (student_name == "") {
+        const pi_bi_data = await get_pi_bi(
+          allFelter.subject.split("-")[0],
+          allFelter.branch,
+          allFelter.version,
+          allFelter.shift,
+          allFelter.subject.split("-")[1],
+          allFelter.section,
+          ""
+        );
 
-      const report_data = await get_report_card(
-        "",
-        allFelter.branch,
-        allFelter.version,
-        allFelter.shift,
-        allFelter.subject.split("-")[1],
-        allFelter.section,
-        student_name
-      );
+        const data = formate_teanscript_data(
+          pi_bi_data.data.transcript
+        );
 
-      const get_bi_report_card = await bi_report_card_by_student(
-        "",
-        allFelter.branch,
-        allFelter.version,
-        allFelter.shift,
-        allFelter.subject.split("-")[1],
-        allFelter.section,
-        student_name
-      );
-      console.log("get_bi_report_card",get_bi_report_card);
-      
+        setselected_student(data);
+      } else {
+        const pi_bi_data = await get_pi_bi_by_student_student(
+          allFelter.subject.split("-")[0],
+          allFelter.branch,
+          allFelter.version,
+          allFelter.shift,
+          allFelter.subject.split("-")[1],
+          allFelter.section,
+          student_name
+        );
 
-      const dimentions_details = await bi_report_card_details();
-      // allFelter.subject.split("-")[0]
-      const clssWiseSub: any = await clssWiseSubject(
-        allFelter.subject.split("-")[1]
-      );
-      setall_subject(clssWiseSub.data.data);
+        const data = formate_teanscript_dataBy_single_student(
+          pi_bi_data?.data?.transcript?.subject_result || pi_bi_data?.data?.transcript?.student_result
+        );
 
-      let res: any = [];
+        console.log(`datatttt`, data);
 
-      report_data.data.report_card.map((d) => {
-        d.subject_result.map((s_d) => {
-          res.push(s_d);
-        });
-      });
-      let bi_res: any = [];
-      get_bi_report_card.data.report_card.map(( data) => {
-        bi_res.push(data);
-      }) 
+        setselected_student(data);
+      }
 
-      const bi_data = formate_report_data(bi_res ,dimentions_details.data.data)
-      const data = formate_report_data(res, dimentions.data.data);
-      const student_data = all_students(student_name);
-      const subject_data = subject_name(allFelter.subject.split("-")[0]);
-      console.log("dimentions", dimentions, res,bi_data);
-      setstudent(student_data);
-      setsubject_name(subject_data);
-      setbiData(bi_data);
-      setselected_student(data);
-
-      console.log(`data----`, data,biData,bi_data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -242,13 +230,60 @@ export default function StudentReport() {
     }
   });
 
-  const subject_name = (id: any) => {
-    if (all_subject.length) {
-      const subject = all_subject.find((data) => data.uid == id);
-      return subject?.name;
-    }
-  };
 
+
+  const handleConvertToPdf = (student: any, multiple = false) => {
+    setsubmittingLoading(true);
+    if (!multiple) {
+      const filename =
+        student.student_name_bn ||
+        student.student_name_en + "-roll-" + student.roll + ".pdf";
+
+      const id = "contentToConvert_" + student.uid;
+      const element = document.getElementById(id);
+
+      const options = {
+        margin: 20,
+        border: "1px solid",
+        filename: filename,
+        image: { type: "jpeg", quality: 4.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      };
+
+      // const pdf = html2pdf().from(element).set(options).outputPdf();
+      // pdf.save();
+    } else {
+      for (let index = 0; index < selected_student.length; index++) {
+        const el = selected_student[index];
+        const Stu_data: any = all_students(el.student_data.uid);
+
+        const id = "contentToConvert_" + el.student_data.uid;
+        const element = document.getElementById(id);
+
+        const filename =
+          Stu_data.student_name_bn ||
+          Stu_data.student_name_en + "-roll-" + Stu_data.roll + ".pdf";
+
+        const options = {
+          margin: 20,
+          border: "1px solid",
+          filename,
+          image: { type: "jpeg", quality: 4.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        };
+
+        // setTimeout(() => {
+        //   const pdf = html2pdf().from(element).set(options).outputPdf();
+        //   pdf.save();
+        //   console.log("element", element);
+        // }, 700);
+      }
+      // console.log("student", student);
+    }
+    setsubmittingLoading(false);
+  };
   return (
     <div className="report_page">
       {/* report end */}
@@ -256,6 +291,7 @@ export default function StudentReport() {
 
       <div className="container">
         <div className="row">
+          {/* <DownloadPDF_component /> */}
           <Breadcumb title={"মূল্যায়ন প্রতিবেদন"} />
           <div className="d-flex align-items-center">
             <div className="card shadow-lg border-0 w-100 rounded">
@@ -268,9 +304,22 @@ export default function StudentReport() {
                     data-bs-target="#expertness"
                     href="#"
                   >
-                    <SlBookOpen className="me-1" /> শিক্ষার্থীদের রিপোর্ট কার্ড
+                    <SlBookOpen className="me-1" /> পারদর্শিতার মূল্যায়ন
+                    প্রতিবেদন(PI)
                   </a>
                 </li>
+                {/* <li className="nav-item">
+                  <a
+                    className={`nav-link link-secondary ${styles.nav_tab_bottom_border}`}
+                    id="behaviour-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#behaviour"
+                    href="#"
+                  >
+                    <SlBookOpen className="me-1" /> আচরণগত মূল্যায়ন
+                    প্রতিবেদন(BI)
+                  </a>
+                </li> */}
               </ul>
               <div
                 className="tab-content"
@@ -428,8 +477,7 @@ export default function StudentReport() {
                             >
                               {data?.subject?.subject_info?.name}{" "}
                               {data?.subject?.subject_info?.class_uid == 6 &&
-                                "ষষ্ঠ"}{" "}
-                              
+                                "ষষ্ঠ"}
                               {data?.subject?.subject_info?.class_uid == 7 &&
                                 "সপ্তম"}{" "}
                               {" শ্রেণী"}
@@ -458,7 +506,10 @@ export default function StudentReport() {
                                   setstudent_name(e.target.value)
                                 }
                               >
-                                <option value={""}> সকল শিক্ষার্থী </option>
+                                <option value={""}>
+                                  {" "}
+                                  শিক্ষার্থী নির্বাচন করুন{" "}
+                                </option>
 
                                 {new_student?.map((data: any, index) => (
                                   <option key={index} value={data?.uid}>
@@ -476,8 +527,7 @@ export default function StudentReport() {
                         allFelter.subject &&
                         allFelter.section &&
                         allFelter.shift &&
-                        allFelter.version &&
-                        student_name && (
+                        allFelter.version && (
                           <div className="mb-3" style={{ fontSize: "12px" }}>
                             <label className="form-label ">
                               আপনার নির্বাচন সম্পূর্ণ করুন
@@ -573,10 +623,37 @@ export default function StudentReport() {
                               {shift_name(data)} সেশন
                             </option>
                           ))}
+                          {/* {shifts?.map((data, index) => (
+                              <option key={index} value="1">{data.shift_name}</option>
+                              ))} */}
                         </select>
                       </div>
                     </div>
+                    {/* <div className="col-6 col-sm-4 col-md-3">
+                      <div className="mb-3" style={{ fontSize: "12px" }}>
+                        <label className="form-label">শাখা নির্বাচন করুন</label>
+                        <select
+                          className="form-select p-2"
+                          aria-label="Default select example"
+                          style={{ fontSize: "12px" }}
+                          name="section"
+                          onChange={(e) =>
+                            setallFelter({
+                              ...allFelter,
+                              [e.target.name]: e.target.value,
+                            })
+                          }
+                        >
+                          <option value={""}>শাখা নির্বাচন করুন</option>
 
+                          {uniqueSections?.map((data, index) => (
+                            <option key={index} value={data}>
+                              {section_name(data)} শাখা
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div> */}
                     <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
@@ -655,6 +732,9 @@ export default function StudentReport() {
                               {shift_name(data)} সেশন
                             </option>
                           ))}
+                          {/* {shifts?.map((data, index) => (
+                              <option key={index} value="1">{data.shift_name}</option>
+                              ))} */}
                         </select>
                       </div>
                     </div>
@@ -722,25 +802,271 @@ export default function StudentReport() {
                         </div>
                       </div>
                     </div>
+                    {/* <div className="col-6 col-sm-4 col-md-3">
+                      <div className="mb-3">
+                        <label className="form-label mt-3"></label>
+                        <div className="input-group">
+                          <input
+                            className="form-control py-1 border-right-0 border-0"
+                            type="search"
+                            defaultValue="নিম্নে মূল্যায়ন প্রতিবেদন দেখুন"
+                            id="example-search-input"
+                            style={{
+                              fontSize: "12px",
+                              backgroundColor: "#428F92",
+                            }}
+                          />
+                          <span
+                            className="input-group-append rounded-end"
+                            style={{
+                              fontSize: "12px",
+                              backgroundColor: "#428F92",
+                            }}
+                          >
+                            <button
+                              className="btn btn-outline-secondary py-1 border-0"
+                              type="button"
+                              style={{
+                                backgroundColor: "#428F92",
+                              }}
+                            >
+                              <i className="fa fa-search" />
+                            </button>
+                          </span>
+                        </div>
+                      </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
+              
+
+              <Accordion>
+                {selected_student?.length > 0 ? (
+                  selected_student?.map((data: any, index) => (
+                    <Accordion.Item eventKey={index}>
+                      <Accordion.Header className="px-4 " key={index}>
+                        <>
+                          <div className="d-flex justify-content-between flex-md-row flex-column align-items-center custom-px-2">
+                            <RawPDFDownload
+                              data={data}
+                              instititute={
+                                instititute[0] ? instititute[0] : instititute
+                              }
+                              allFelter={allFelter}
+                              student_info_pdf={data.student_data}
+                              unique_id={""}
+                              teacher={teacher}
+                            />
+
+                            <h5 className="px-2">
+                              শিক্ষার্থীর নাম:{" "}
+                              {data.student_data.student_name_bn ||
+                                data.student_data.student_name_en}
+                              <br />
+                              রোল নম্বর #{" "}
+                              {convertToBanglaNumber(data.student_data.roll)}
+                            </h5>
+                          </div>
+                        </>
+                      </Accordion.Header>
+                      <Accordion.Body>
+                        {data.all_PI_array.map((data: any, key: number) => (
+                          <div className="container border" key={key}>
+                            <div className="row pb-5 pt-2">
+                              <div className="col-sm-6 col-md-3 py-2">
+                                <div className="border-0 p-2 h-100">
+                                  <div className="d-flex">
+                                    <div>
+                                      <h6>
+                                        পারদর্শিতা সূচক{" "}
+                                        {convertToBanglaNumber(
+                                          data.pi_data.pi_no
+                                        )}{" "}
+                                      </h6>
+                                      <h6 style={{ fontSize: "14px" }}>
+                                        {data.pi_data.name_bn ||
+                                          data.pi_data.name_en}
+                                      </h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {data.pi_data.pi_attribute.map(
+                                (pi_attribute_data: any, k: any) => (
+                                  <div
+                                    className="col-sm-6 col-md-3 py-2"
+                                    key={k}
+                                  >
+                                    <div
+                                      className="card h-100 shadow-lg border-0 p-2"
+                                      style={{
+                                        backgroundColor:
+                                          data.weight_uid ==
+                                          pi_attribute_data.weight_uid
+                                            ? "#F0FAE9"
+                                            : "#FFF",
+                                      }}
+                                    >
+                                      <div className="d-flex">
+                                        {data.weight_uid ==
+                                          pi_attribute_data.weight_uid && (
+                                          <div>
+                                            <TiTick
+                                              className={`${styles.tick_mark}`}
+                                            />
+                                          </div>
+                                        )}
+
+                                        <div>
+                                          <h6 style={{ fontSize: "14px" }}>
+                                            {pi_attribute_data.title_bn ||
+                                              pi_attribute_data.title_en}
+                                          </h6>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                )
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </Accordion.Body>
+                    </Accordion.Item>
+                  ))
+                ) : (
+                  <p className="m-5">শিক্ষার্থীর মূল্যায়ন পাওয়া যায়নি ।</p>
+                )}
+              </Accordion>
             </div>
           </div>
         </div>
       </div>
 
-      {selected_student.length > 0 && (
-        <ShikarthirReportCard
-          selected_student={selected_student}
-          student={student}
-          allFelter={allFelter}
-          instititute={instititute ? instititute[0] : {}}
-          sub_name={sub_name}
-          subject_name={subject_name}
-          biData={biData}
-        />
-      )}
+      <div
+        className="modal fade"
+        id="allstaticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        aria-labelledby="allstaticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="allstaticBackdropLabel">
+                <button
+                  type="button"
+                  onClick={(e) => handleConvertToPdf(selected_student, true)}
+                  className={`${styles.download_btn}`}
+                  defaultValue="নিম্নে মূল্যায়ন প্রতিবেদন দেখুন"
+                  style={{
+                    fontSize: "12px",
+                  }}
+                >
+                  <BsFiletypePdf className="fs-4 me-2 " />
+                  ডাউনলোড করুন
+                </button>
+              </h5>
+              {!submittingLoading && (
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              )}
+            </div>
+            <div className="modal-body">
+              {submittingLoading && <p>Loading...</p>}
+              {loading ? (
+                <p>Loading...</p>
+              ) : selected_student?.length > 0 ? (
+                selected_student?.map((data: any, index) => (
+                  <Pdf
+                    data={data}
+                    selectedSunject={selectedSunject}
+                    allFelter={allFelter}
+                    student_info_pdf={data.student_data}
+                    unique_id={data.student_data.uid}
+                    handleConvertToPdf={handleConvertToPdf}
+                    instititute={instititute ? instititute[0] : {}}
+                    teacher={teacher}
+                  />
+                ))
+              ) : (
+                "No Students"
+              )}
+            </div>
+            {!submittingLoading && (
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="modal fade"
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">
+                <h5>
+                  শিক্ষার্থীর নাম:
+                  {student_info_pdf.student_name_bn}{" "}
+                </h5>
+
+                <p>
+                  রোল নম্বর # {convertToBanglaNumber(student_info_pdf.roll)}
+                </p>
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <Pdf
+                data={data}
+                selectedSunject={selectedSunject}
+                allFelter={allFelter}
+                unique_id={student_info_pdf.uid}
+                student_info_pdf={student_info_pdf}
+                handleConvertToPdf={handleConvertToPdf}
+                instititute={instititute ? instititute[0] : {}}
+                teacher={teacher}
+              />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

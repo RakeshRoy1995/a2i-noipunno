@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import style from "./Home.style.module.css";
-import techerAvatar from "../../public/assets/images/teacher.jpeg";
+// import techerAvatar from "../../public/assets/images/teacher.jpeg";
+import techerAvatar from "../assets/project_ca_html/icons/teacher.svg";
 import { convertToBanglaNumber } from "../utils/Utils";
 
 

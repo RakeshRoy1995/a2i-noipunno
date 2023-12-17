@@ -25,6 +25,7 @@ import LoginPage from "./component/LoginPage";
 import PasswordReset from "./component/PasswordReset";
 import StudentReport from "./component/StudentReport";
 import PDFMaker from "./component/PDFMaker/PDFMaker";
+import TestCase from "./component/Dashboards/TestCase/TestCase";
 import BiRawPDFDownload from "./component/PDFMaker/BiPdfmaker";
 
 function App() {
@@ -83,7 +84,6 @@ function App() {
           <Route path="/pdf-maker" element={<PDFMaker />} />
           {/* <Route path="/bi-pdf-maker" element={<BiRawPDFDownload />} /> */}
         </Route>
-
         <Route path="/login" element={<LoginPage />} />
         <Route path="/password/reset" element={<PasswordReset />} />
 

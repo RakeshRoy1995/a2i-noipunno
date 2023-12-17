@@ -73,7 +73,7 @@ export default function DetailsShikhonMullayonShikhonKalin({
                             }
                           </h6>
 
-                          <Link
+                          <div
                             onClick={(e) => {
                               pi_attr(d, e);
                               setal_pi_attr(d?.pi_attribute);
@@ -89,11 +89,10 @@ export default function DetailsShikhonMullayonShikhonKalin({
                               setpi_id(d?.pi_no);
                               setloadingspinner(false)
                             }}
-                            to={"#"}
-                            className="text-decoration text-success  ps-2"
+                            className="text-decoration text-success  ps-2 pointer"
                           >
                             <h6>{d?.name_bn}  {check_pi_submitted(d , assessment_uid ) && <i className="fa-regular fa-circle-check"></i>} { showModal && <Spinner animation="border" /> }    </h6>
-                          </Link>
+                          </div>
                         </div>
                       </div>
                     </div>

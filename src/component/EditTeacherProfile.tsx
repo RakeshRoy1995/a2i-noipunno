@@ -1,6 +1,6 @@
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useEffect, useState } from "react";
-import { update_teacher_profile } from "../Request";
+import { all_district, all_division, all_upozila, update_teacher_profile } from "../Request";
 import Breadcumbtitle from "../layout/Breadcumb";
 import Swal from "sweetalert2";
 
@@ -9,26 +9,37 @@ import Swal from "sweetalert2";
 const EditTeacherProfile = () => {
 
   const [userDetails, setuserDetails] = useState<any>({});
+  const [division, setdivision] = useState<any>([]);
+  const [district, setdistrict] = useState<any>([]);
+  const [upozila, setupozila] = useState<any>([]);
   const [all_local_storage_data, setAll_local_storage_data] = useState<any>({})
   const { caid, name, email, phone_no } = userDetails;
 
-  useEffect(() => {
-    const get_loacl_storage_data = JSON.parse(localStorage.getItem("customer_login_auth"));
-    if (get_loacl_storage_data) {
-      setAll_local_storage_data(get_loacl_storage_data)
-      setuserDetails(get_loacl_storage_data.user);
 
-    }
-  }, []);
 
 
   const handleTeacherProfileEdit = async (event: any) => {
     event.preventDefault()
     const formDatas = new FormData(event.target);
+
+    //see The field-value  ->> way-1
+    // for (const [name, value] of formDatas) {
+    //   console.log(`KeyName: ${name}, value: ${value}`);
+    // }
+
     const form = event.target;
     const name = form.name.value;
     const email = form.email.value;
     const phone_no = form.phone_no.value;
+
+    const selected_division = form.division_id.value;
+    const selected_district = form.district_id.value;
+    const selected_upozila = form.upazilla_id.value;
+
+    // console.log("Selected new_division", selected_division);
+    // console.log("Selected new_district", selected_district);
+    // console.log("Selected new_upozila", selected_upozila);
+
 
     const new_localstorage_data = { ...all_local_storage_data }
     const new_user_info = { ...userDetails };
@@ -37,10 +48,12 @@ const EditTeacherProfile = () => {
     new_user_info.phone_no = phone_no;
     new_localstorage_data.user = new_user_info;
 
-    // console.log("New Local storage data====>", new_localstorage_data);
+    // console.log("New Local storage data====>", new_user_info);
 
     try {
       const { data }: any = await update_teacher_profile(caid, formDatas);
+
+
       if (data.status === true) {
         Swal.fire({
           position: "center",
@@ -51,14 +64,55 @@ const EditTeacherProfile = () => {
         })
         localStorage.setItem("customer_login_auth", JSON.stringify(new_localstorage_data));
 
-        setTimeout(() => {
-          window.location.replace("/");
-        }, 1000)
+        // setTimeout(() => {
+        //   window.location.replace("/");
+        // }, 1000)
       }
     } catch (error) {
       alert('হালনাগাদ সম্পন্ন হয়নি, আবার চেষ্টা করুন!');
     }
   }
+
+
+  const fetchData = async () => {
+
+    const upozila_data = await all_upozila()
+    const district_data = await all_district()
+    const division_data = await all_division()
+
+    // console.log(`upozila_data`, upozila_data);
+    // console.log(`district_data`, district_data);
+    // console.log(`division_data`, division_data);
+
+    setdivision(division_data?.data?.data)
+    setdistrict(district_data?.data?.data)
+    setupozila(upozila_data?.data?.data)
+
+    // setall_division(division_data?.data?.data)
+    // setall_district(district_data?.data?.data)
+    // setall_upozila(upozila_data?.data?.data)
+  };
+
+
+
+
+  const getdistrictBydivisionID = (id) => {
+
+  }
+
+  const getupozilaByDistrictID = (id) => {
+
+  }
+
+  useEffect(() => {
+    const get_loacl_storage_data = JSON.parse(localStorage.getItem("customer_login_auth"));
+    if (get_loacl_storage_data) {
+      setAll_local_storage_data(get_loacl_storage_data)
+      setuserDetails(get_loacl_storage_data.user);
+
+    }
+    fetchData();
+  }, []);
 
   return (
     <section className="editTeacherProfilePage">
@@ -109,10 +163,43 @@ const EditTeacherProfile = () => {
 
                   <div className="form-group  col-sm-4 col-md-6">
                     <div className="mb-3" style={{ fontSize: "16px" }}>
-                      <label className="form-label"> শিক্ষকের স্বাক্ষর আপলোড করুন</label>
-                      <div className="input-group mb-3">
-                        <input type="file" className="form-control" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload" />
-                      </div>
+                      <label className="form-label"> বিভাগ</label>
+                      <select className="form-control" name="division_id" onChange={(e: any) => getdistrictBydivisionID(e.target.value)}>
+                        {
+                          division.map((d, k) =>
+                            <option value={d?.uid}>{d?.division_name_bn || d?.division_name_en}</option>
+                          )
+                        }
+
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="form-group  col-sm-4 col-md-6">
+                    <div className="mb-3" style={{ fontSize: "16px" }}>
+                      <label className="form-label"> জেলা</label>
+                      <select className="form-control" name="district_id">
+                        {
+                          district.map((d) =>
+                            <option value={d?.uid}>{d?.district_name_bn || d?.district_name_en}</option>
+                          )
+                        }
+
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="form-group  col-sm-4 col-md-6">
+                    <div className="mb-3" style={{ fontSize: "16px" }}>
+                      <label className="form-label"> উপজেলা</label>
+                      <select className="form-control" name="upazilla_id">
+                        {
+                          upozila.map((d) =>
+                            <option value={d?.uid}>{d?.upazila_name_bn || d?.upazila_name_en}</option>
+                          )
+                        }
+
+                      </select>
                     </div>
                   </div>
 

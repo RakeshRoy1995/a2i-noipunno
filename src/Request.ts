@@ -417,8 +417,8 @@ export function get_report_card(
   section_uid,
   student_uid = ""
 ) {
-  const page_list = `${EVULATION_API}/report-card-by-student`;
-  // const page_list = `/assets/report_card.json`;
+  // const page_list = `${EVULATION_API}/report-card-by-student`;
+  const page_list = `/assets/report_card.json`;
 
   const options = {
     method: "get",

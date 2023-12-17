@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
 
   cardRow: {
     flexDirection: "row",
-    marginLeft: "10px",
+    marginLeft: "0px",
   },
 
   cardColumn: {
@@ -448,7 +448,7 @@ const MyDocument = ({
       {/* Subject -1  */}
 
       {selected_student.map((item) => (
-        <View wrap={true}>
+        <View wrap={false}>
           <View>
             <Text
               style={[
@@ -463,7 +463,7 @@ const MyDocument = ({
             </Text>
           </View>
 
-          <View style={styles.container}>
+          <View style={styles.container} wrap={true}>
             {item[1].map((data) => (
               <View style={[styles.box1]}>
                 <View style={[styles.card]}>
@@ -575,61 +575,29 @@ const MyDocument = ({
           <View style={[styles.box1]}>
             <View style={[styles.card]}>
               <View style={[styles.cardTitle]}>
-                <Text style={[styles.h3]}> math </Text>
+                <Text style={[styles.h3]}> অংশগ্রহণ ও যোগাযোগ </Text>
               </View>
 
               <View style={[styles.cardRow]}>
                 <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
-                <View style={[styles.cardColumn]}>
+                <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
-                <View style={[styles.cardColumn]}>
+                <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
-                <View style={[styles.cardColumn]}>
+                <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
-                <View style={[styles.cardColumn]}>
+                <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
-                <View style={[styles.cardColumn]}>
+                <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
-                <View style={[styles.cardColumn]}>
-                  <Text></Text>
-                </View>
-              </View>
-            </View>
-          </View>
-
-          <View style={[styles.box1]}>
-            <View style={[styles.card]}>
-              <View style={[styles.cardTitle]}>
-                <Text style={[styles.h3]}> Communcation </Text>
-              </View>
-
-              <View style={[styles.cardRow]}>
-                <View style={[styles.cardColumn]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn]}>
-                  <Text></Text>
-                </View>
-                <View style={[styles.cardColumn]}>
+                <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
               </View>
@@ -639,29 +607,61 @@ const MyDocument = ({
           <View style={[styles.box1]}>
             <View style={[styles.card]}>
               <View style={[styles.cardTitle]}>
-                <Text style={[styles.h3]}> Communcation </Text>
+                <Text style={[styles.h3]}> নিষ্ঠা ও সততা </Text>
               </View>
 
               <View style={[styles.cardRow]}>
-                <View style={[styles.cardColumn]}>
+              <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
-                <View style={[styles.cardColumn]}>
+                <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
-                <View style={[styles.cardColumn]}>
+                <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
-                <View style={[styles.cardColumn]}>
+                <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
-                <View style={[styles.cardColumn]}>
+                <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
-                <View style={[styles.cardColumn]}>
+                <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
-                <View style={[styles.cardColumn]}>
+                <View style={[styles.cardColumn, styles.itemBG]}>
+                  <Text></Text>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          <View style={[styles.box1]}>
+            <View style={[styles.card]}>
+              <View style={[styles.cardTitle]}>
+                <Text style={[styles.h3]}> পারস্পরিক শ্রদ্ধা ও সহযোগিতা </Text>
+              </View>
+
+              <View style={[styles.cardRow]}>
+              <View style={[styles.cardColumn, styles.itemBG]}>
+                  <Text></Text>
+                </View>
+                <View style={[styles.cardColumn, styles.itemBG]}>
+                  <Text></Text>
+                </View>
+                <View style={[styles.cardColumn, styles.itemBG]}>
+                  <Text></Text>
+                </View>
+                <View style={[styles.cardColumn, styles.itemBG]}>
+                  <Text></Text>
+                </View>
+                <View style={[styles.cardColumn, styles.itemBG]}>
+                  <Text></Text>
+                </View>
+                <View style={[styles.cardColumn, styles.itemBG]}>
+                  <Text></Text>
+                </View>
+                <View style={[styles.cardColumn, styles.itemBG]}>
                   <Text></Text>
                 </View>
               </View>
@@ -1095,14 +1095,14 @@ const BiRawPDFDownload = ({
           }
         </PDFDownloadLink>
       </div>
-      <PDFViewer width={800} height={800}>
+      {/* <PDFViewer width={800} height={800}>
         <MyDocument
           selected_student={selected_student}
           student={student}
           instititute={instititute}
           subject_name={subject_name}
         />
-      </PDFViewer>
+      </PDFViewer> */}
     </div>
   );
 };

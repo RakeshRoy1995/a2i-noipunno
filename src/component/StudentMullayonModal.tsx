@@ -128,6 +128,8 @@ export default function StudentMullayonModal({
               //   JSON.stringify(own_subjet.data.data)
               // );
 
+              console.log(`data`, data);
+
               await Pi_save(data);
               setsubmited(true);
               setShowModal(false);
@@ -190,7 +192,10 @@ export default function StudentMullayonModal({
       const params: any = {
         evaluate_type: assessment_uid,
         competence_uid,
-        oviggota_uid: (assessment_uid == 1234567892 || assessment_uid == 1234567891) ? null : oviggota_uid,
+        oviggota_uid:
+          assessment_uid == 1234567892 || assessment_uid == 1234567891
+            ? null
+            : oviggota_uid,
         pi_uid,
         weight_uid,
         class_room_uid: class_room_id,
@@ -344,7 +349,7 @@ export default function StudentMullayonModal({
 
     await get_all_pi_evaluation_by_pi(pi_uid_);
     // setall_submited_PI([])
-    fetchData()
+    fetchData();
     setfirstRender(true);
   };
 
@@ -393,7 +398,6 @@ export default function StudentMullayonModal({
       setfirstRender(false);
     }
   }, 300);
-
 
   return (
     <div className="content">
@@ -603,7 +607,7 @@ export default function StudentMullayonModal({
             <div className="col-md-12">
               <div className="row p-1">
                 <p className="text-success text-center">
-                  আপনার তথ্য সংরক্ষণ করা হয়েছিল
+                  ইতোমধ্যে আপনার চূড়ান্ত তথ্য সংরক্ষণ করা হয়েছে
                 </p>
               </div>
             </div>

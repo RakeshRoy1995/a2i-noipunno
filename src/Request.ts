@@ -357,6 +357,27 @@ export function get_pi_bi(
   return axios(options);
 }
 
+// const bi_report = `${EVULATION_API}/bi-report-card-by-student`;
+
+
+// const options = {
+//   method: "get",
+//   headers: { "content-type": "application/json" },
+//   url: page_list,
+//   params: {
+//     subject_uid,
+//     branch_uid,
+//     version_uid,
+//     shift_uid,
+//     class_uid,
+//     section_uid,
+//     student_uid,
+//   },
+// };
+
+// return axios(options);
+// }
+
 export function get_pi_bi_by_student_student(
   subject_uid,
   branch_uid,

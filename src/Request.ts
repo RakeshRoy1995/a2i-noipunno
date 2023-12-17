@@ -268,15 +268,30 @@ export function all_student() {
   return axios(options);
 }
 
-export function update_teacher_profile(caid: any, data: any) {
-  const page_list = `${API_URL}/v2/account-update/${caid}`;
+// export function update_teacher_profile(caid: any, data: any) {
+//   const page_list = `${API_URL}/v2/account-update/${caid}`;
 
+//   const options = {
+//     method: "PUT",
+//     headers: { "content-type": "application/json" },
+//     data,
+//     url: page_list,
+//   };
+
+//   return axios(options);
+// }
+
+export function update_teacher_profile(caid: any, data: any) {
+  // const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
+  const page_list = `https://master.noipunno.gov.bd/api/teachers/${caid}`
   const options = {
     method: "PUT",
     headers: { "content-type": "application/json" },
     data,
     url: page_list,
   };
+  // console.log("data teacher edit profile", data);
+
 
   return axios(options);
 }

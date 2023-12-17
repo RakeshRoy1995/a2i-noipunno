@@ -27,6 +27,7 @@ import StudentReport from "./component/StudentReport";
 import PDFMaker from "./component/PDFMaker/PDFMaker";
 import TestCase from "./component/Dashboards/TestCase/TestCase";
 import BiRawPDFDownload from "./component/PDFMaker/BiPdfmaker";
+import StudentTranscriptBI from "./component/StudentTranscriptBI";
 
 function App() {
   const [topbar, settopbar] = useState(false);
@@ -72,7 +73,8 @@ function App() {
           <Route path="/teacher" element={<Teacher />} />
           <Route path="/class/:id" element={<ClassWiseSubject />} />
           <Route path="/student-list" element={<StudentList />} />
-          <Route path="/student-transcript" element={<StudentTranscript />} />
+          <Route path="/student-transcript-pi" element={<StudentTranscript />} />
+          <Route path="/student-transcript-bi" element={<StudentTranscriptBI />} />
           <Route path="/edit-teacher-profile" element={<EditTeacherProfile />} />
           <Route path="/teacher-profile" element={<AmarProfile />} />
           <Route path="/teachers-list" element={<TeachersList />} />

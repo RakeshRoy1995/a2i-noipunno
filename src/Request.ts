@@ -301,7 +301,7 @@ export function get_pi_evaluation_by_pi(
   pi_uid: any,
   evaluate_type: any
 ) {
-  const page_list = `${EVULATION_API}/get-pi-evaluation-by-pi?class_room_uid=${class_room_uid}&pi_uid=${pi_uid}&evaluate_type=${evaluate_type}`;
+  const page_list = `${EVULATION_API}/v2/get-pi-evaluation-by-pi?class_room_uid=${class_room_uid}&pi_uid=${pi_uid}&evaluate_type=${evaluate_type}`;
 
   const options = {
     method: "get",
@@ -318,7 +318,7 @@ export function get_bi_evaluation_by_bi(
   student_uid: any,
   subject_uid: any
 ) {
-  const page_list = `${EVULATION_API}/get-bi-evaluation-by-bi?class_room_uid=${class_room_uid}&evaluate_type=${evaluate_type}&student_uid=${student_uid}&subject_uid=${subject_uid}`;
+  const page_list = `${EVULATION_API}/v2/get-bi-evaluation-by-bi?class_room_uid=${class_room_uid}&evaluate_type=${evaluate_type}&student_uid=${student_uid}&subject_uid=${subject_uid}`;
 
   const options = {
     method: "get",
@@ -351,7 +351,7 @@ export function get_pi_bi(
   section_uid,
   student_uid = ""
 ) {
-  const page_list = `${EVULATION_API}/transcript`;
+  const page_list = `${EVULATION_API}/v2/transcript`;
   // const page_list = `/assets/transcript_response.json`;
 
   const options = {
@@ -373,6 +373,35 @@ export function get_pi_bi(
 }
 
 
+export function get_bi_report(
+  subject_uid,
+  branch_uid,
+  version_uid,
+  shift_uid,
+  class_uid,
+  section_uid,
+  student_uid = ""
+) {
+  const page_list = `${EVULATION_API}/v2/bi-transcript-by-student`;
+  // const page_list = `/assets/transcript_response.json`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+    params: {
+      subject_uid,
+      branch_uid,
+      version_uid,
+      shift_uid,
+      class_uid,
+      section_uid,
+      student_uid,
+    },
+  };
+
+  return axios(options);
+}
 
 
 
@@ -416,7 +445,7 @@ export function get_pi_bi_by_student_student(
   section_uid,
   student_uid = ""
 ) {
-  const page_list = `${EVULATION_API}/transcript-by-student`;
+  const page_list = `${EVULATION_API}/v2/transcript-by-student`;
   // const page_list = `/assets/transcript_response.json`;
 
   const options = {
@@ -446,7 +475,7 @@ export function get_report_card(
   section_uid,
   student_uid = ""
 ) {
-  const page_list = `${EVULATION_API}/report-card-by-student`;
+  const page_list = `${EVULATION_API}/v2/report-card-by-student`;
   // const page_list = `/assets/report_card.json`;
 
   const options = {

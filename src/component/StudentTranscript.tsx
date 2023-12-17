@@ -878,7 +878,7 @@ export default function StudentTranscript() {
                                       <h6>
                                         পারদর্শিতা সূচক{" "}
                                         {convertToBanglaNumber(
-                                          data.pi_data.pi_no
+                                          data?.pi_data?.pi_no
                                         )}{" "}
                                       </h6>
                                       <h6 style={{ fontSize: "14px" }}>

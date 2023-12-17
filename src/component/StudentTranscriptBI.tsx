@@ -6,6 +6,7 @@ import {
   get_pi_bi_evaluation_list,
   get_pi_bi,
   get_pi_bi_by_student_student,
+  get_bi_report,
 } from "../Request";
 import html2pdf from "html2pdf.js";
 import { RotatingLines } from "react-loader-spinner";
@@ -27,7 +28,7 @@ import {
   all_students,
   convertToBanglaNumber,
   formate_teanscript_data,
-  formate_teanscript_dataBy_single_student,
+  formate_Bi_teanscript_dataBy_single_student,
 } from "../utils/Utils";
 
 import Breadcumb from "../layout/Breadcumb";
@@ -37,7 +38,7 @@ import { toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
 import { Link } from "react-router-dom";
 import DownloadPDF_component from "./DownloadPDF";
-import RawPDFDownload from "./PDFMaker/PDFMaker";
+import PDFMakerBiTranscript from "./PDFMaker/PDFMakerBi";
 
 export default function StudentTranscriptBI() {
   const [student_info_pdf, setStudent_info_pdf] = useState<any>("");
@@ -71,8 +72,6 @@ export default function StudentTranscriptBI() {
       own_subjet = await teacher_own_subject();
       localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
     }
-
-    console.log(`own_subjet`, own_subjet);
 
     let data: any = "";
     if (teacher_dash) {
@@ -176,7 +175,7 @@ export default function StudentTranscriptBI() {
       setselected_student([]);
 
       if (student_name == "") {
-        const pi_bi_data = await get_pi_bi(
+        const pi_bi_data = await get_bi_report(
           allFelter.subject.split("-")[0],
           allFelter.branch,
           allFelter.version,
@@ -186,13 +185,13 @@ export default function StudentTranscriptBI() {
           ""
         );
 
-        const data = formate_teanscript_data(
-          pi_bi_data.data.transcript
+        const data = formate_Bi_teanscript_dataBy_single_student(
+          pi_bi_data?.data?.trancript
         );
 
         setselected_student(data);
       } else {
-        const pi_bi_data = await get_pi_bi_by_student_student(
+        const pi_bi_data = await get_bi_report(
           allFelter.subject.split("-")[0],
           allFelter.branch,
           allFelter.version,
@@ -202,11 +201,13 @@ export default function StudentTranscriptBI() {
           student_name
         );
 
-        const data = formate_teanscript_dataBy_single_student(
-          pi_bi_data?.data?.transcript?.subject_result || pi_bi_data?.data?.transcript?.student_result
+        console.log(`pi_bi_data`, pi_bi_data.data.trancript , student_name);
+
+        const data = formate_Bi_teanscript_dataBy_single_student(
+          pi_bi_data?.data?.trancript , student_name
         );
 
-        console.log(`datatttt`, data);
+        console.log(`data`, data);
 
         setselected_student(data);
       }
@@ -845,7 +846,7 @@ export default function StudentTranscriptBI() {
                       <Accordion.Header className="px-4 " key={index}>
                         <>
                           <div className="d-flex justify-content-between flex-md-row flex-column align-items-center custom-px-2">
-                            <RawPDFDownload
+                            <PDFMakerBiTranscript
                               data={data}
                               instititute={
                                 instititute[0] ? instititute[0] : instititute
@@ -867,7 +868,7 @@ export default function StudentTranscriptBI() {
                           </div>
                         </>
                       </Accordion.Header>
-                      <Accordion.Body>
+                      {/* <Accordion.Body>
                         {data.all_PI_array.map((data: any, key: number) => (
                           <div className="container border" key={key}>
                             <div className="row pb-5 pt-2">
@@ -930,7 +931,7 @@ export default function StudentTranscriptBI() {
                             </div>
                           </div>
                         ))}
-                      </Accordion.Body>
+                      </Accordion.Body> */}
                     </Accordion.Item>
                   ))
                 ) : (
@@ -942,128 +943,7 @@ export default function StudentTranscriptBI() {
         </div>
       </div>
 
-      <div
-        className="modal fade"
-        id="allstaticBackdrop"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        aria-labelledby="allstaticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="allstaticBackdropLabel">
-                <button
-                  type="button"
-                  onClick={(e) => handleConvertToPdf(selected_student, true)}
-                  className={`${styles.download_btn}`}
-                  defaultValue="নিম্নে মূল্যায়ন প্রতিবেদন দেখুন"
-                  style={{
-                    fontSize: "12px",
-                  }}
-                >
-                  <BsFiletypePdf className="fs-4 me-2 " />
-                  ডাউনলোড করুন
-                </button>
-              </h5>
-              {!submittingLoading && (
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              )}
-            </div>
-            <div className="modal-body">
-              {submittingLoading && <p>Loading...</p>}
-              {loading ? (
-                <p>Loading...</p>
-              ) : selected_student?.length > 0 ? (
-                selected_student?.map((data: any, index) => (
-                  <Pdf
-                    data={data}
-                    selectedSunject={selectedSunject}
-                    allFelter={allFelter}
-                    student_info_pdf={data.student_data}
-                    unique_id={data.student_data.uid}
-                    handleConvertToPdf={handleConvertToPdf}
-                    instititute={instititute ? instititute[0] : {}}
-                    teacher={teacher}
-                  />
-                ))
-              ) : (
-                "No Students"
-              )}
-            </div>
-            {!submittingLoading && (
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="modal fade"
-        id="staticBackdrop"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">
-                <h5>
-                  শিক্ষার্থীর নাম:
-                  {student_info_pdf.student_name_bn}{" "}
-                </h5>
-
-                <p>
-                  রোল নম্বর # {convertToBanglaNumber(student_info_pdf.roll)}
-                </p>
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <Pdf
-                data={data}
-                selectedSunject={selectedSunject}
-                allFelter={allFelter}
-                unique_id={student_info_pdf.uid}
-                student_info_pdf={student_info_pdf}
-                handleConvertToPdf={handleConvertToPdf}
-                instititute={instititute ? instititute[0] : {}}
-                teacher={teacher}
-              />
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+  
     </div>
   );
 }

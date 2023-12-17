@@ -282,11 +282,11 @@ export function all_student() {
 // }
 
 export function update_teacher_profile(caid: any, data: any) {
-  // const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
-  const page_list = `https://master.noipunno.gov.bd/api/teachers/${caid}`
+  const page_list = `${EVULATION_API}/teachers/${caid}`;
+  // const page_list = `https://master.noipunno.gov.bd/api/teachers/${caid}`
   const options = {
     method: "PUT",
-    headers: { "content-type": "application/json" },
+    headers: { "content-type": "multipart/form-data" },
     data,
     url: page_list,
   };

@@ -283,17 +283,21 @@ export function all_student() {
 // }
 
 export function update_teacher_profile(caid: any, data: any) {
-  const page_list = `${EVULATION_API}/teachers/${caid}`;
-  // const page_list = `https://master.noipunno.gov.bd/api/teachers/${caid}`
+  const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
+
+  let obj = {}
+  for (const [name, value] of data) {
+    obj = { ...obj, [name]: value }
+    // console.log(`KeyName: ${name}, value: ${value}`);
+  }
   const options = {
     method: "PUT",
     headers: { "content-type": "multipart/form-data" },
-    data,
     url: page_list,
+    params: {
+      ...obj
+    },
   };
-  // console.log("data teacher edit profile", data);
-
-
   return axios(options);
 }
 
@@ -336,13 +340,13 @@ export function get_bi_evaluation_by_bi(
 export function bi_report_card_details() {
   const page_list = `${API_URL}/v2/bi-dimension`;
   // https://api.noipunno.gov.bd/api/v2/bi-dimension
-  
+
 
   const options = {
     method: "get",
     headers: { "content-type": "application/json" },
     url: page_list,
-    
+
   };
 
   return axios(options);
@@ -378,7 +382,7 @@ export function bi_report_card_by_student(
 }
 //teacher.project-ca.com/api/v2/bi-report-card-by-student?branch_uid=1782345351002697&version_uid=1782343521342761&shift_uid=1782343482748247&class_uid=6&section_uid=1782343690355322&student_uid=1784586541382652
 
- export function get_pi_bi_evaluation_list(submit_status: any = "") {
+export function get_pi_bi_evaluation_list(submit_status: any = "") {
   const page_list =
     `${API_URL}/v2/pi-bi-evaluation-list?submit_status=` + submit_status;
 

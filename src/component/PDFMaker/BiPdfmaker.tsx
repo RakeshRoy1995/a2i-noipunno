@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   cardRow: {
     flexDirection: "row",
     marginLeft: "0px",
-    marginLeft: "0px",
+    // marginLeft: "0px",
   },
 
   cardColumn: {

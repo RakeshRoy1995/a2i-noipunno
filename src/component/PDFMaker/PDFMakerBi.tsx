@@ -23,9 +23,6 @@ import React from "react";
 Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 // Font.register({ family: "Nikosh", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
 
-
-
-
 const styles = StyleSheet.create({
   page: {
     //flexDirection: "row",
@@ -221,7 +218,7 @@ const MyDocument = ({
         </Text>
         {/* style={{ color: 'white', textAlign: 'center', margin: 30 }} */}
         <Text style={[styles.h3, { marginBottom: 30 }]}>
-          বিষয়ভিত্তিক পারদর্শিতার ট্রান্সক্রিপ্ট-
+          বিষয়ভিত্তিক আচরণগত ট্রান্সক্রিপ্ট-
           {convertToBanglaNumber(student_info_pdf?.registration_year)}
         </Text>
       </View>
@@ -264,15 +261,15 @@ const MyDocument = ({
 
         <View style={styles.tableRow}>
           <View style={styles.tableColTitle}>
-            <Text style={[styles.tableCell, { fontWeight: "bold", fontSize: 12, textAlign: 'center' }]}>পারদর্শিতার সূচকের মাত্রা</Text>
+            <Text style={[styles.tableCell, { fontWeight: "bold", fontSize: 12, textAlign: 'center' }]}>আচরণগত মূল্যায়ন মাত্রা (BI)</Text>
           </View>
         </View>
         <View style={styles.tableRow}>
           <View style={styles.tableCol}>
-            <Text style={[styles.tableCell, { fontWeight: "bold" }]}>পারদর্শিতা সূচক (PI)</Text>
+            <Text style={[styles.tableCell, { fontWeight: "bold" }]}>আচরণগত মূল্যায়ন(BI)</Text>
           </View>
           <View style={[styles.tableCol, { width: '75%' }]}>
-            <Text style={styles.tableCell}>শিক্ষার্থীর পারদর্শিতা মাত্রা</Text>
+            <Text style={styles.tableCell}>শিক্ষার্থীর আচরণগত মাত্রা</Text>
           </View>
         </View>
 
@@ -280,15 +277,13 @@ const MyDocument = ({
           <View style={styles.tableRow} wrap={false} >
             <View style={styles.tableCol} wrap={true}>
               <Text style={styles.tableCell}>
-                
                 {" "}
-                {/* {(all_pi.pi_data.pi_no).split('').reverse().join('')}{" "} */}
-                {convertToBanglaNumber(all_pi.pi_data.pi_no)}{" "}
+                {convertToBanglaNumber( k+1 )}{" . "}
                 {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
               </Text>
             </View>
 
-            {all_pi.pi_data.pi_attribute.map((pi_data: any, key) => (
+            {all_pi.pi_data.weights.map((pi_data: any, key) => (
               <View style={[styles.tableCol]} >
                 <View style={styles.tableRowBottom}>
                   <Text style={styles.tableCellTikMark}>
@@ -298,14 +293,14 @@ const MyDocument = ({
                   </Text>
                 </View>
                 <Text style={styles.tableCell}>
-                  {pi_data?.title_bn || pi_data?.title_en}{" "}
+                  {/* {pi_data?.title_bn || pi_data?.title_en}{" "} */}
 
-                  {/* {pi_data?.title_bn?.split(' ').map((word, index) => (
+                  {pi_data?.title_bn?.replace(/\s/g, " ").split(' ').map((word, index) => (
                     <React.Fragment key={index}>
                       {index > 0 && index % 5 === 0 && <Text>{"\n"}</Text>}
                       {word}{' '}
                     </React.Fragment>
-                  ))} */}
+                  ))}
 
                 </Text>
               </View>
@@ -327,7 +322,11 @@ const MyDocument = ({
 
           <Text style={[styles.teacherSignature]}>
             প্রধান শিক্ষকের স্বাক্ষরঃ
-            <br />
+            {" "}
+            <Text>{"\n"}</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 11 }}>
+              {""}
+            </Text>
           </Text>
         </View>
       </View>
@@ -342,7 +341,7 @@ const MyDocument = ({
   </Document>
 );
 
-const RawPDFDownload = ({
+const PDFMakerBiTranscript = ({
   data,
   instititute,
   allFelter,
@@ -351,12 +350,15 @@ const RawPDFDownload = ({
   teacher,
 }: any) => {
 
+
   const pdf_name =
     student_info_pdf?.student_name_bn ||
     student_info_pdf?.student_name_en +
     "-" +
     convertToBanglaNumber(student_info_pdf?.roll) +
     ".pdf";
+
+    console.log(`student_info_pdf`, student_info_pdf , data);
 
   const subject_teacher = localStorage.getItem("teacher_dashboard") ? JSON.parse(localStorage.getItem("teacher_dashboard")) : ""
   return (
@@ -403,4 +405,4 @@ const RawPDFDownload = ({
   );
 };
 
-export default RawPDFDownload;
+export default PDFMakerBiTranscript;

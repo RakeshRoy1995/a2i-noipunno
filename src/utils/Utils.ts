@@ -362,8 +362,6 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
 
   let obj = {};
 
-  console.log(`datacc`, data );
-
   const stu = data[0];
   const allPi = data;
 
@@ -376,6 +374,54 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
     for (let y = 0; y < allPi.length; y++) {
       const pi = allPi[y];
       const pi_data = our_all_piData.filter((d: any) => d.uid == pi.pi_uid);
+      const Pi_obj = {
+        ...pi,
+        student_data: student_dta[0],
+        pi_data: pi_data[0],
+      };
+      all_PI_array.push(Pi_obj);
+    }
+
+    obj = {
+      student_data: student_dta[0],
+      all_PI_array,
+    };
+    result.push(obj);
+  }
+  return result;
+};
+
+
+
+export const formate_Bi_teanscript_dataBy_single_student = (data: any , student_name:any) => {
+  
+  const our_all_pi = localStorage.getItem("bi");
+  const tempBi= JSON.parse(our_all_pi)
+  const our_all_piData = tempBi?.data?.data?.bis  ;
+
+  const all_students = localStorage.getItem("all_students");
+  const all_studentsData = JSON.parse(all_students);
+
+  const result = [];
+
+  let obj = {};
+
+  console.log(`data`, data);
+
+  const stu = student_name;
+  const allPi = data;
+
+  if (stu) {
+    const student_dta = all_studentsData.filter(
+      (d: any) => d.uid == stu
+    );
+
+    console.log(`student_dta`, student_dta);
+
+    const all_PI_array = [];
+    for (let y = 0; y < allPi.length; y++) {
+      const pi = allPi[y];
+      const pi_data = our_all_piData.filter((d: any) => d.uid == pi.bi_uid);
       const Pi_obj = {
         ...pi,
         student_data: student_dta[0],

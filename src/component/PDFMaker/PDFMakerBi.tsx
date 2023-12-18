@@ -249,11 +249,11 @@ const MyDocument = ({
               শাখা: {section_name(student_info_pdf?.section)}{" "}
             </Text>
           </View>
-          <View style={styles.tableCol}>
+          {/* <View style={styles.tableCol}>
             <Text style={styles.tableCell}>
               বিষয়: {subject_name(allFelter?.subject?.split("-")[0])}
             </Text>
-          </View>
+          </View> */}
           <View style={styles.tableCol}>
             <Text style={styles.tableCell}>শ্রেণি শিক্ষকের নাম: {teacher}</Text>
           </View>
@@ -312,11 +312,11 @@ const MyDocument = ({
 
         <View style={[styles.teacherSignatureContainer]}>
           <Text style={[styles.teacherSignature]}>
-            বিষয় শিক্ষকের স্বাক্ষরঃ
+          শ্রেণি শিক্ষকের স্বাক্ষরঃ
             {" "}
             <Text>{"\n"}</Text>
             <Text style={{ fontWeight: "bold", fontSize: 11 }}>
-              {subject_teacher?.data?.user?.name}
+              {teacher}
             </Text>
           </Text>
 

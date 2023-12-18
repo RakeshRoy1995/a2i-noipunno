@@ -10,6 +10,7 @@ const token: any = authToken ? JSON.parse(authToken) : "";
 axios.defaults.headers.common[
   "Authorization"
 ] = `Bearer ${token?.access_token}`;
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 export function loginPassword(data: any) {
   const page_list = `${API_URL}/v2/login`;
@@ -361,7 +362,7 @@ export function bi_report_card_by_student(
   student_uid = ""
 ) {
   // const page_list = `/assets/yousuf_bi_response.json`;
-  const page_list = `${API_URL}/bi-report-card-by-student?branch_uid=${branch_uid}&version_uid=${version_uid}&shift_uid=${shift_uid}&class_uid=${class_uid}&section_uid=${section_uid}&student_uid=${student_uid}`;
+  const page_list = `${EVULATION_API}/v2/bi-report-card-by-student?branch_uid=${branch_uid}&version_uid=${version_uid}&shift_uid=${shift_uid}&class_uid=${class_uid}&section_uid=${section_uid}&student_uid=${student_uid}`;
 
   const options = {
     method: "get",

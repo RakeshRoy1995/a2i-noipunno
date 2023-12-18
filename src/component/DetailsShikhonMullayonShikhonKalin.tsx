@@ -30,6 +30,7 @@ export default function DetailsShikhonMullayonShikhonKalin({
   };
 
   const get_all_pi_evaluation_by_pi = async (pi_uid: any) => {
+    const ovigota_uid = showDetailsshikhonKalinMullayon?.uid || null
     setpi_uid_(pi_uid)
     setis_draft(1);
     setall_submited_PI([]);
@@ -37,11 +38,14 @@ export default function DetailsShikhonMullayonShikhonKalin({
     const { data }: any = await get_pi_evaluation_by_pi(
       class_room_id,
       pi_uid,
-      assessment_uid
+      assessment_uid,
+      ovigota_uid
     );
 
-    const ovigota_uid = showDetailsshikhonKalinMullayon.uid
+    
     const ev_data = data?.data?.evaluation.filter((d)=>  d.oviggota_uid == ovigota_uid )
+
+    console.log(`data?.data?.evaluation`,ev_data );
     setall_submited_PI(ev_data);
     if (ev_data?.length) {
       setis_draft(ev_data[0]?.submit_status);

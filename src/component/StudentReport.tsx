@@ -7,6 +7,8 @@ import {
   get_report_card,
   dimension_by_subject,
   clssWiseSubject,
+  bi_report_card_by_student,
+  bi_report_card_details,
 } from "../Request";
 import html2pdf from "html2pdf.js";
 import { RotatingLines } from "react-loader-spinner";
@@ -45,7 +47,7 @@ export default function StudentReport() {
   const [sub_name, setsubject_name] = useState<any>("");
   const [loader, setloader] = useState(true);
   const [instititute, setinstititute] = useState<any>("");
-  const [data, setdata] = useState<any>({});
+  const [biData, setbiData] = useState<any>({});
   const [selected_student, setselected_student] = useState<any>([]);
   const [all_subject, setall_subject] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
@@ -180,31 +182,48 @@ export default function StudentReport() {
         student_name
       );
 
-      const clssWiseSub: any = await clssWiseSubject(allFelter.subject.split("-")[1]);
-      setall_subject(clssWiseSub.data.data)
-
-      let res :any = []
-
-      report_data.data.report_card.map((d)=>{
-         d.subject_result.map((s_d)=>{
-          res.push(s_d)
-         })
-      })
-
-      const data = formate_report_data(
-        res,
-        dimentions.data.data
+      const get_bi_report_card = await bi_report_card_by_student(
+        "",
+        allFelter.branch,
+        allFelter.version,
+        allFelter.shift,
+        allFelter.subject.split("-")[1],
+        allFelter.section,
+        student_name
       );
+      console.log("get_bi_report_card",get_bi_report_card);
+      
+
+      const dimentions_details = await bi_report_card_details();
+      // allFelter.subject.split("-")[0]
+      const clssWiseSub: any = await clssWiseSubject(
+        allFelter.subject.split("-")[1]
+      );
+      setall_subject(clssWiseSub.data.data);
+
+      let res: any = [];
+
+      report_data.data.report_card.map((d) => {
+        d.subject_result.map((s_d) => {
+          res.push(s_d);
+        });
+      });
+      let bi_res: any = [];
+      get_bi_report_card.data.report_card.map(( data) => {
+        bi_res.push(data);
+      }) 
+
+      const bi_data = formate_report_data(bi_res ,dimentions_details.data.data)
+      const data = formate_report_data(res, dimentions.data.data);
       const student_data = all_students(student_name);
       const subject_data = subject_name(allFelter.subject.split("-")[0]);
-
+      console.log("dimentions", dimentions, res,bi_data);
       setstudent(student_data);
       setsubject_name(subject_data);
-
+      setbiData(bi_data);
       setselected_student(data);
 
-      console.log(`data----`, data);
-
+      console.log(`data----`, data,biData,bi_data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -225,10 +244,7 @@ export default function StudentReport() {
 
   const subject_name = (id: any) => {
     if (all_subject.length) {
-      
-      const subject = all_subject.find(
-        (data) => data.uid == id
-      );
+      const subject = all_subject.find((data) => data.uid == id);
       return subject?.name;
     }
   };
@@ -412,7 +428,8 @@ export default function StudentReport() {
                             >
                               {data?.subject?.subject_info?.name}{" "}
                               {data?.subject?.subject_info?.class_uid == 6 &&
-                                "ষষ্ঠ"}
+                                "ষষ্ঠ"}{" "}
+                              
                               {data?.subject?.subject_info?.class_uid == 7 &&
                                 "সপ্তম"}{" "}
                               {" শ্রেণী"}
@@ -461,7 +478,7 @@ export default function StudentReport() {
                         allFelter.shift &&
                         allFelter.version &&
                         student_name && (
-                          <div className="mb-3">
+                          <div className="mb-3" style={{ fontSize: "12px" }}>
                             <label className="form-label ">
                               আপনার নির্বাচন সম্পূর্ণ করুন
                             </label>
@@ -721,6 +738,7 @@ export default function StudentReport() {
           instititute={instititute ? instititute[0] : {}}
           sub_name={sub_name}
           subject_name={subject_name}
+          biData={biData}
         />
       )}
     </div>

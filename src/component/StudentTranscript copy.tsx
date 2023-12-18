@@ -6,7 +6,7 @@ import {
   get_pi_bi_evaluation_list,
   get_pi_bi,
   get_pi_bi_by_student_student,
-  get_bi_report,
+  
 } from "../Request";
 import html2pdf from "html2pdf.js";
 import { RotatingLines } from "react-loader-spinner";
@@ -28,7 +28,7 @@ import {
   all_students,
   convertToBanglaNumber,
   formate_teanscript_data,
-  formate_Bi_teanscript_dataBy_single_student,
+  formate_teanscript_dataBy_single_student,
 } from "../utils/Utils";
 
 import Breadcumb from "../layout/Breadcumb";
@@ -38,9 +38,9 @@ import { toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
 import { Link } from "react-router-dom";
 import DownloadPDF_component from "./DownloadPDF";
-import PDFMakerBiTranscript from "./PDFMaker/PDFMakerBi";
+import RawPDFDownload from "./PDFMaker/PDFMaker";
 
-export default function StudentTranscriptBI() {
+export default function StudentTranscript() {
   const [student_info_pdf, setStudent_info_pdf] = useState<any>("");
   const [subject, setsubject] = useState([]);
   const [student_name, setstudent_name] = useState<any>("");
@@ -72,6 +72,8 @@ export default function StudentTranscriptBI() {
       own_subjet = await teacher_own_subject();
       localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
     }
+
+    console.log(`own_subjet`, own_subjet);
 
     let data: any = "";
     if (teacher_dash) {
@@ -175,7 +177,7 @@ export default function StudentTranscriptBI() {
       setselected_student([]);
 
       if (student_name == "") {
-        const pi_bi_data = await get_bi_report(
+        const pi_bi_data = await get_pi_bi(
           allFelter.subject.split("-")[0],
           allFelter.branch,
           allFelter.version,
@@ -185,13 +187,13 @@ export default function StudentTranscriptBI() {
           ""
         );
 
-        const data = formate_Bi_teanscript_dataBy_single_student(
-          pi_bi_data?.data?.trancript,""
+        const data = formate_teanscript_data(
+          pi_bi_data.data.transcript
         );
 
         setselected_student(data);
       } else {
-        const pi_bi_data = await get_bi_report(
+        const pi_bi_data = await get_pi_bi_by_student_student(
           allFelter.subject.split("-")[0],
           allFelter.branch,
           allFelter.version,
@@ -201,13 +203,11 @@ export default function StudentTranscriptBI() {
           student_name
         );
 
-        console.log(`pi_bi_data`, pi_bi_data.data.trancript , student_name);
-
-        const data = formate_Bi_teanscript_dataBy_single_student(
-          pi_bi_data?.data?.trancript , student_name
+        const data = formate_teanscript_dataBy_single_student(
+          pi_bi_data?.data?.transcript?.subject_result || pi_bi_data?.data?.transcript?.student_result
         );
 
-        console.log(`data`, data);
+        console.log(`datatttt`, data);
 
         setselected_student(data);
       }
@@ -229,6 +229,8 @@ export default function StudentTranscriptBI() {
       return true;
     }
   });
+
+
 
   const handleConvertToPdf = (student: any, multiple = false) => {
     setsubmittingLoading(true);
@@ -303,7 +305,7 @@ export default function StudentTranscriptBI() {
                     href="#"
                   >
                     <SlBookOpen className="me-1" /> পারদর্শিতার মূল্যায়ন
-                    প্রতিবেদন(BI)
+                    প্রতিবেদন(PI)
                   </a>
                 </li>
                 {/* <li className="nav-item">
@@ -526,7 +528,7 @@ export default function StudentTranscriptBI() {
                         allFelter.section &&
                         allFelter.shift &&
                         allFelter.version && (
-                          <div className="mb-3">
+                          <div className="mb-3" style={{ fontSize: "12px" }}>
                             <label className="form-label ">
                               আপনার নির্বাচন সম্পূর্ণ করুন
                             </label>
@@ -837,7 +839,7 @@ export default function StudentTranscriptBI() {
                   </div>
                 </div>
               </div>
-
+              
 
               <Accordion>
                 {selected_student?.length > 0 ? (
@@ -846,7 +848,7 @@ export default function StudentTranscriptBI() {
                       <Accordion.Header className="px-4 " key={index}>
                         <>
                           <div className="d-flex justify-content-between flex-md-row flex-column align-items-center custom-px-2">
-                            <PDFMakerBiTranscript
+                            <RawPDFDownload
                               data={data}
                               instititute={
                                 instititute[0] ? instititute[0] : instititute
@@ -868,7 +870,7 @@ export default function StudentTranscriptBI() {
                           </div>
                         </>
                       </Accordion.Header>
-                      {/* <Accordion.Body>
+                      <Accordion.Body>
                         {data.all_PI_array.map((data: any, key: number) => (
                           <div className="container border" key={key}>
                             <div className="row pb-5 pt-2">
@@ -902,7 +904,7 @@ export default function StudentTranscriptBI() {
                                       style={{
                                         backgroundColor:
                                           data.weight_uid ==
-                                            pi_attribute_data.weight_uid
+                                          pi_attribute_data.weight_uid
                                             ? "#F0FAE9"
                                             : "#FFF",
                                       }}
@@ -910,12 +912,12 @@ export default function StudentTranscriptBI() {
                                       <div className="d-flex">
                                         {data.weight_uid ==
                                           pi_attribute_data.weight_uid && (
-                                            <div>
-                                              <TiTick
-                                                className={`${styles.tick_mark}`}
-                                              />
-                                            </div>
-                                          )}
+                                          <div>
+                                            <TiTick
+                                              className={`${styles.tick_mark}`}
+                                            />
+                                          </div>
+                                        )}
 
                                         <div>
                                           <h6 style={{ fontSize: "14px" }}>
@@ -931,7 +933,7 @@ export default function StudentTranscriptBI() {
                             </div>
                           </div>
                         ))}
-                      </Accordion.Body> */}
+                      </Accordion.Body>
                     </Accordion.Item>
                   ))
                 ) : (
@@ -943,7 +945,128 @@ export default function StudentTranscriptBI() {
         </div>
       </div>
 
-  
+      <div
+        className="modal fade"
+        id="allstaticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        aria-labelledby="allstaticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="allstaticBackdropLabel">
+                <button
+                  type="button"
+                  onClick={(e) => handleConvertToPdf(selected_student, true)}
+                  className={`${styles.download_btn}`}
+                  defaultValue="নিম্নে মূল্যায়ন প্রতিবেদন দেখুন"
+                  style={{
+                    fontSize: "12px",
+                  }}
+                >
+                  <BsFiletypePdf className="fs-4 me-2 " />
+                  ডাউনলোড করুন
+                </button>
+              </h5>
+              {!submittingLoading && (
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              )}
+            </div>
+            <div className="modal-body">
+              {submittingLoading && <p>Loading...</p>}
+              {loading ? (
+                <p>Loading...</p>
+              ) : selected_student?.length > 0 ? (
+                selected_student?.map((data: any, index) => (
+                  <Pdf
+                    data={data}
+                    selectedSunject={selectedSunject}
+                    allFelter={allFelter}
+                    student_info_pdf={data.student_data}
+                    unique_id={data.student_data.uid}
+                    handleConvertToPdf={handleConvertToPdf}
+                    instititute={instititute ? instititute[0] : {}}
+                    teacher={teacher}
+                  />
+                ))
+              ) : (
+                "No Students"
+              )}
+            </div>
+            {!submittingLoading && (
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="modal fade"
+        id="staticBackdrop"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">
+                <h5>
+                  শিক্ষার্থীর নাম:
+                  {student_info_pdf.student_name_bn}{" "}
+                </h5>
+
+                <p>
+                  রোল নম্বর # {convertToBanglaNumber(student_info_pdf.roll)}
+                </p>
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <Pdf
+                data={data}
+                selectedSunject={selectedSunject}
+                allFelter={allFelter}
+                unique_id={student_info_pdf.uid}
+                student_info_pdf={student_info_pdf}
+                handleConvertToPdf={handleConvertToPdf}
+                instititute={instititute ? instititute[0] : {}}
+                teacher={teacher}
+              />
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -51,6 +51,8 @@ export default function StudentMullayonModal({
   const [submitObj_wid_null, setsubmitObj_wid_null] = useState<any>([]);
   const [submited, setsubmited] = useState<any>(false);
   const [firstRender, setfirstRender] = useState<any>(true);
+
+  console.log(`oviggota_uid`, oviggota_uid);
   const fetchData = async () => {
     const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
     const own_SUbjects = own_SUbjects__ ? JSON.parse(own_SUbjects__) : "";
@@ -69,6 +71,8 @@ export default function StudentMullayonModal({
       all_submited_PI.map((d: any) => {
         obj = { ...obj, [d.student_uid]: d };
       });
+
+      console.log(`all_submited_PI`, all_submited_PI);
       // setsubmitData(all_submited_PI)
       setsubmitObj(obj);
       checkedIn(obj);
@@ -110,7 +114,7 @@ export default function StudentMullayonModal({
       });
 
       if (submit_status == 2) {
-        if (Student.length === submitData.length) {
+        if (Student.length <= submitData.length) {
           Swal.fire({
             title: "আপনি কি তথ্য সংরক্ষণ করতে চান?",
             icon: "warning",
@@ -127,9 +131,7 @@ export default function StudentMullayonModal({
               //   "pi_bi_evaluation_list",
               //   JSON.stringify(own_subjet.data.data)
               // );
-
-              console.log(`data`, data);
-
+              // console.log(`111111`, 111111);
               await Pi_save(data);
               setsubmited(true);
               setShowModal(false);
@@ -306,7 +308,7 @@ export default function StudentMullayonModal({
         const comment_id = "comment_id_" + x;
         const el: any = document.getElementsByClassName(x)[0];
         const el_comment: any = document.getElementById(comment_id);
-
+        
         el.style.display = "none";
         el_comment.style.display = "none";
         sumbitArray.push(obj[x]);

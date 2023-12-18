@@ -20,8 +20,8 @@ import {
 } from "../../utils/Utils";
 import { BsFiletypePdf } from "react-icons/bs";
 import React from "react";
-Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
-// Font.register({ family: "Nikosh", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
+Font.register({ family: "kalpurush", src: "kalpurush.ttf", format: "truetype" });
+// Font.register({ family: "kalpurush", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
 
 
 
@@ -29,7 +29,7 @@ Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 const styles = StyleSheet.create({
   page: {
     //flexDirection: "row",
-    fontFamily: "Nikosh",
+    fontFamily: "kalpurush",
     //  backgroundColor: "#E4E4E4",
     padding: 4,
     // margin: 50,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   h1: {
-    fontFamily: "Nikosh",
+    fontFamily: "kalpurush",
     fontSize: 16,
     textAlign: "center",
     fontWeight: 700,
@@ -51,12 +51,12 @@ const styles = StyleSheet.create({
     lineHeight: 1
   },
   h2: {
-    fontFamily: "Nikosh",
+    fontFamily: "kalpurush",
     textAlign: "center",
     fontSize: 12,
   },
   h3: {
-    fontFamily: "Nikosh",
+    fontFamily: "kalpurush",
     fontSize: 11,
     textAlign: "center",
   },
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   tableCell: {
-    fontFamily: "Nikosh",
+    fontFamily: "kalpurush",
     // margin: "auto",
     padding: "5px",
     // marginTop: 5,
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
 
 
   tableCellTikMark: {
-    fontFamily: "Nikosh",
+    fontFamily: "kalpurush",
     margin: "auto",
     marginTop: "3px",
     padding: 1,
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     gap: "150px",
   },
   teacherSignature: {
-    fontFamily: "Nikosh",
+    fontFamily: "kalpurush",
     color: "#000",
     marginTop: "10px",
     fontSize: 12,

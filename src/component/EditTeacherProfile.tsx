@@ -276,11 +276,12 @@ const EditTeacherProfile = () => {
                           <div className="input-group">
                             <select className="form-control"
                               name="gender"
-                              value={gender}>
+                              // value={gender}
+                            >
                               <option value={''}>লিঙ্গ নির্বাচন করুন</option>
-                              <option value={1}>পুরুষ</option>
-                              <option value={2}>মহিলা</option>
-                              <option value={3}>অন্যান্য</option>
+                              <option value={"1"} selected={(gender==="1")}>পুরুষ</option>
+                              <option value={"2"} selected={(gender==="2")}>মহিলা</option>
+                              <option value={"3"} selected={(gender==="3")}>অন্যান্য</option>
                             </select>
                           </div>
                         </div>

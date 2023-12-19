@@ -406,10 +406,10 @@ export const formate_Bi_teanscript_dataBy_single_student = (data: any , student_
 
   let obj = {};
 
-  console.log(`data`, data);
-
   const stu = student_name;
   const allPi = data;
+
+  console.log(`allPi`, allPi);
 
   if (stu) {
     const student_dta = all_studentsData.filter(

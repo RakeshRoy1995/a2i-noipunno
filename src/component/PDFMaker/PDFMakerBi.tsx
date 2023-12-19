@@ -10,6 +10,7 @@ import {
   Image,
   Svg,
 } from "@react-pdf/renderer";
+import fontkit from '@react-pdf/fontkit';
 // import icon from "../../assets/images/Vector.png"
 import icon from "../../../src/assets/project_ca_html/icons/OK_Icon.png";
 // import myIcon from 'icons/myIcon.svg'
@@ -20,13 +21,23 @@ import {
 } from "../../utils/Utils";
 import { BsFiletypePdf } from "react-icons/bs";
 import React from "react";
-Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
+
+
+// const fontData = fs.readFileSync('path/to/fonts/BanglaKalpurush.ttf');
+
+// // Register the font
+// Font.register({ family: 'Kalpurush', format: 'truetype', data: fontData });
+
+
+Font.register({ family: "NikoshBAN", src: "NikoshBAN.ttf", format: "truetype" });
+// Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
+// Font.register({ family: "Kalpurush", src: "kalpurush.ttf", format: "truetype" });
 // Font.register({ family: "Nikosh", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
 
 const styles = StyleSheet.create({
   page: {
     //flexDirection: "row",
-    fontFamily: "Nikosh",
+    fontFamily: "NikoshBAN",
     //  backgroundColor: "#E4E4E4",
     padding: 4,
     // margin: 50,
@@ -34,7 +45,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   h1: {
-    fontFamily: "Nikosh",
+    fontFamily: "NikoshBAN",
     fontSize: 16,
     textAlign: "center",
     fontWeight: 700,
@@ -48,12 +59,12 @@ const styles = StyleSheet.create({
     lineHeight: 1
   },
   h2: {
-    fontFamily: "Nikosh",
+    fontFamily: "NikoshBAN",
     textAlign: "center",
     fontSize: 12,
   },
   h3: {
-    fontFamily: "Nikosh",
+    fontFamily: "NikoshBAN",
     fontSize: 11,
     textAlign: "center",
   },
@@ -122,7 +133,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   tableCell: {
-    fontFamily: "Nikosh",
+    fontFamily: "NikoshBAN",
     // margin: "auto",
     padding: "5px",
     // marginTop: 5,
@@ -140,7 +151,7 @@ const styles = StyleSheet.create({
 
 
   tableCellTikMark: {
-    fontFamily: "Nikosh",
+    fontFamily: "NikoshBAN",
     margin: "auto",
     marginTop: "3px",
     padding: 1,
@@ -186,7 +197,7 @@ const styles = StyleSheet.create({
     gap: "150px",
   },
   teacherSignature: {
-    fontFamily: "Nikosh",
+    fontFamily: "NikoshBAN",
     color: "#000",
     marginTop: "10px",
     fontSize: 12,

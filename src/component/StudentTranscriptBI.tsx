@@ -207,6 +207,8 @@ export default function StudentTranscriptBI() {
           pi_bi_data?.data?.trancript , student_name
         );
 
+        // data.sort((a, b) => a.age - b.age);
+
         console.log(`data`, data);
 
         setselected_student(data);

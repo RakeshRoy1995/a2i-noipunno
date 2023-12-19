@@ -13,11 +13,12 @@ import { convertToBanglaNumber, show_sub_by_religion } from "../../utils/Utils";
 import React from "react";
 
 Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
+Font.register({ family: "Kalpurush", src: "kalpurush.ttf", format: "truetype" });
 
 const styles = StyleSheet.create({
   page: {
     flexDirection: "row",
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     backgroundColor: "#E4E4E4",
     padding: 40,
     margin: 50,
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   section13: {},
 
   h1: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     fontSize: 20,
     fontWeight: 500,
     padding: "10px",
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   },
 
   footerh1: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     fontSize: 20,
     fontWeight: 500,
     padding: "10px",
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
   },
 
   h2: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     fontSize: 12,
     fontWeight: 500,
     padding: "10px",
@@ -72,13 +73,13 @@ const styles = StyleSheet.create({
     margininlineEnd: "0px",
   },
   h3: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     textAlign: "center",
     fontSize: 12,
     padding: "5px",
   },
   h4: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     textAlign: "left",
     fontSize: 15,
     padding: "5px",
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: 500,
     padding: "5px",
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
   },
   image: {
     width: "100%",
@@ -170,12 +171,12 @@ const styles = StyleSheet.create({
 
   text: {
     marginBottom: "10px",
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     fontSize: 22,
   },
 
   paragraph: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     // Prevent word breaks
     fontSize: 10,
     padding: "5px",
@@ -341,12 +342,12 @@ const styles = StyleSheet.create({
   },
 
   wordBox: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     padding: 2,
   },
 
   wordText: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     fontSize: 12,
   },
 
@@ -356,7 +357,7 @@ const styles = StyleSheet.create({
   },
 
   sentenceText: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     fontSize: 9,
     lineHeight: 1,
 

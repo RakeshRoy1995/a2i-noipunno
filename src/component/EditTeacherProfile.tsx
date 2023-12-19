@@ -1,6 +1,6 @@
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useEffect, useId, useState } from "react";
-import { all_district, all_division, all_upozila, teacher_dashboard, update_teacher_profile } from "../Request";
+import { all_district, all_division, all_upozila, teacher_dashboard, teacher_designation, update_teacher_profile } from "../Request";
 import Breadcumbtitle from "../layout/Breadcumb";
 import Swal from "sweetalert2";
 
@@ -11,21 +11,80 @@ const EditTeacherProfile = () => {
   const [allDivision, setAllDivision] = useState<any>([]);
   const [allDistrict, setAllDistrict] = useState<any>([]);
   const [allUpozila, setAllUpozila] = useState<any>([]);
+  const [allDesignation, setAllDesignation] = useState<any>([]);
+  const [teacherDesignation, seTeacherDesignation] = useState<any>('');
 
   const [district, setdistrict] = useState<any>([]);
   const [upozila, setupozila] = useState<any>([]);
 
 
-  const { name_en, name_bn, email, mobile_no, date_of_birth, gender, designation, division_id, district_id, upazilla_id, pdsid, caid } = userDetails;
+  const {
+    name_en,
+    name_bn,
+    email,
+    mobile_no,
+    date_of_birth,
+    gender,
+    designation,
+    division_id,
+    district_id,
+    upazilla_id,
+    designation_id,
+    pdsid,
+    caid } = userDetails;
 
-
+  // const designation_id = "10";
 
   const getUserDetails = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
     if (get_teachers_details) {
       setuserDetails(get_teachers_details?.data?.teachers[0]);
     }
+
+
   }
+
+
+  const fetchData = async () => {
+    const getDesignation = await teacher_designation()
+    const division_data = await all_division();
+    const district_data = await all_district();
+    const upozila_data = await all_upozila();
+    setAllDivision(division_data?.data?.data);
+    setAllDistrict(district_data?.data?.data);
+    setAllUpozila(upozila_data?.data?.data);
+    setAllDesignation(getDesignation.data.data);
+
+
+    if (division_id) {
+      const getAssignedDistrict = allDistrict.filter(district => district.district_id == district_id)
+      setdistrict(getAssignedDistrict)
+    }
+
+    if (designation_id) {
+      const find_current_user_designation = allDesignation?.filter(designation => designation?.uid == designation_id)
+      find_current_user_designation.map(item => seTeacherDesignation(item.designation_name))
+    }
+  };
+
+  console.log(teacherDesignation);
+
+  const getdistrictBydivisionID = (id) => {
+    const divisionWiseDistric = allDistrict.filter(district => district.division_id == id)
+    setdistrict(divisionWiseDistric)
+  }
+
+  const getDivisionByDistrictId = (id) => {
+    const zilawiseUpazila = allUpozila.filter(upozila => upozila.district_id == id)
+    setupozila(zilawiseUpazila)
+  }
+
+  useEffect(() => {
+    fetchData();
+    getUserDetails();
+  }, []);
+
+
 
   const handleTeacherProfileEdit = async (event: any) => {
     event.preventDefault()
@@ -61,41 +120,6 @@ const EditTeacherProfile = () => {
     }
   }
 
-  const fetchData = async () => {
-    const division_data = await all_division();
-    const district_data = await all_district();
-    const upozila_data = await all_upozila();
-    setAllDivision(division_data?.data?.data);
-    setAllDistrict(district_data?.data?.data);
-    setAllUpozila(upozila_data?.data?.data);
-
-    if (division_id) {
-      const getAssignedDistrict = allDistrict.filter(district => district.district_id == district_id)
-      setdistrict(getAssignedDistrict)
-    }
-  };
-
-  // console.log("allDivision", allDivision);
-  
-
-  const getdistrictBydivisionID = (id) => {
-    const divisionWiseDistric = allDistrict.filter(district => district.division_id == id)
-    setdistrict(divisionWiseDistric)
-  }
-
-  const getDivisionByDistrictId = (id) => {
-    const zilawiseUpazila = allUpozila.filter(upozila => upozila.district_id == id)
-    setupozila(zilawiseUpazila)
-  }
-
-  useEffect(() => {
-    fetchData();
-    getUserDetails();
-  }, []);
-
-  // console.log("userDetails", userDetails);
-  // console.log("gender", gender);
-
 
   return (
     <section className="editTeacherProfilePage">
@@ -127,7 +151,10 @@ const EditTeacherProfile = () => {
                     <div className="mb-3" style={{ fontSize: "16px" }}>
                       <label className="form-label">নাম (বাংলা)</label>
                       <div className="input-group">
-                        <input type="text" id="pin" className="form-control" name="name_bn" defaultValue={name_bn} placeholder="আপনার নাম লিখুন (বাংলায়)" />
+                        <input type="text" id="pin"
+                          className="form-control" name="name_bn"
+                          defaultValue={name_bn}
+                          placeholder="আপনার নাম লিখুন (বাংলায়)" />
                       </div>
                     </div>
                   </div>
@@ -136,7 +163,10 @@ const EditTeacherProfile = () => {
                     <div className="mb-3" style={{ fontSize: "16px" }}>
                       <label className="form-label">নাম (ইংরেজি)</label>
                       <div className="input-group">
-                        <input type="text" id="pin" className="form-control" name="name_en" placeholder="আপনার নাম লিখুন (ইংরেজিতে)" defaultValue={name_en} />
+                        <input type="text" id="pin" className="form-control"
+                          name="name_en"
+                          placeholder="আপনার নাম লিখুন (ইংরেজিতে)"
+                          defaultValue={name_en} />
                       </div>
                     </div>
                   </div>
@@ -160,7 +190,7 @@ const EditTeacherProfile = () => {
                         <input type="text" id="pin" className="form-control"
                           readOnly
                           // name="designation"
-                          defaultValue={designation} />
+                          defaultValue={teacherDesignation || "(Not-Assign)"} />
                       </div>
                     </div>
                   </div>
@@ -205,14 +235,14 @@ const EditTeacherProfile = () => {
                     </div>
                   </div> */}
 
-                  
+
                   <div className="form-group col-sm-4 col-md-6">
                     <div className="mb-3" style={{ fontSize: "16px" }}>
                       <label htmlFor="gender" className="form-label">লিঙ্গ</label>
                       <div className="input-group">
                         <select className="form-control"
                           name="gender"
-                          value={gender || ''}>
+                          value={gender}>
                           <option value={''}>লিঙ্গ নির্বাচন করুন</option>
                           <option value={1}>পুরুষ</option>
                           <option value={2}>মহিলা</option>

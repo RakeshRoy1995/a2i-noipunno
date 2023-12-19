@@ -7,13 +7,11 @@ import Swal from "sweetalert2";
 
 const EditTeacherProfile = () => {
   const [userDetails, setuserDetails] = useState<any>({});
-
   const [allDivision, setAllDivision] = useState<any>([]);
   const [allDistrict, setAllDistrict] = useState<any>([]);
   const [allUpozila, setAllUpozila] = useState<any>([]);
   const [allDesignation, setAllDesignation] = useState<any>([]);
   const [teacherDesignation, seTeacherDesignation] = useState<any>('');
-
   const [district, setdistrict] = useState<any>([]);
   const [upozila, setupozila] = useState<any>([]);
 
@@ -40,10 +38,7 @@ const EditTeacherProfile = () => {
     if (get_teachers_details) {
       setuserDetails(get_teachers_details?.data?.teachers[0]);
     }
-
-
   }
-
 
   const fetchData = async () => {
     const getDesignation = await teacher_designation()
@@ -54,7 +49,6 @@ const EditTeacherProfile = () => {
     setAllDistrict(district_data?.data?.data);
     setAllUpozila(upozila_data?.data?.data);
     setAllDesignation(getDesignation.data.data);
-
 
     if (division_id) {
       const getAssignedDistrict = allDistrict.filter(district => district.district_id == district_id)
@@ -67,7 +61,11 @@ const EditTeacherProfile = () => {
     }
   };
 
-  console.log(teacherDesignation);
+  useEffect(() => {
+    fetchData();
+    getUserDetails();
+  }, []);
+
 
   const getdistrictBydivisionID = (id) => {
     const divisionWiseDistric = allDistrict.filter(district => district.division_id == id)
@@ -78,11 +76,6 @@ const EditTeacherProfile = () => {
     const zilawiseUpazila = allUpozila.filter(upozila => upozila.district_id == id)
     setupozila(zilawiseUpazila)
   }
-
-  useEffect(() => {
-    fetchData();
-    getUserDetails();
-  }, []);
 
 
 

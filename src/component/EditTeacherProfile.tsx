@@ -95,19 +95,14 @@ const EditTeacherProfile = () => {
         })
 
         const data_dash: any = await teacher_dashboard();
-        console.log(data_dash.data.data.teachers[0]);
-
         localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
 
         setTimeout(() => {
           window.location.replace("/");
         }, 1000)
 
-        setTimeout(() => {
-          window.location.replace("/");
-        }, 1000)
-
       }
+      
     } catch (error) {
       alert('হালনাগাদ সম্পন্ন হয়নি, আবার চেষ্টা করুন!');
     }

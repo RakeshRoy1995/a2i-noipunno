@@ -4,6 +4,9 @@ import { all_district, all_division, all_upozila, teacher_dashboard, teacher_des
 import Breadcumbtitle from "../layout/Breadcumb";
 import Swal from "sweetalert2";
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 const EditTeacherProfile = () => {
   const [userDetails, setuserDetails] = useState<any>({});
@@ -14,6 +17,7 @@ const EditTeacherProfile = () => {
   const [teacherDesignation, seTeacherDesignation] = useState<any>('');
   const [district, setdistrict] = useState<any>([]);
   const [upozila, setupozila] = useState<any>([]);
+  const [selectedDate, setSelectedDate] = useState(new Date()); 
 
 
   const {
@@ -96,12 +100,21 @@ const EditTeacherProfile = () => {
 
         setTimeout(() => {
           window.location.replace("/");
-        }, 1000)
+        }, 900)
 
       }
 
     } catch (error) {
-      alert('হালনাগাদ সম্পন্ন হয়নি, আবার চেষ্টা করুন!');
+      
+      // alert('হালনাগাদ সম্পন্ন হয়নি, আবার চেষ্টা করুন!');
+
+      Swal.fire({
+        icon: "error",
+        title: "হালনাগাদ সম্পন্ন হয়নি!",
+        text: "আবার চেষ্টা করুন!",
+        confirmButtonText: "হ্যাঁ",
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
     }
   }
 
@@ -220,7 +233,7 @@ const EditTeacherProfile = () => {
                       </div>
                     </div>
 
-                    <div className="form-group  col-sm-4 col-md-6">
+                    {/* <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label">জন্ম তারিখ </label>
                         <div className="input-group">
@@ -230,24 +243,27 @@ const EditTeacherProfile = () => {
                             defaultValue={date_of_birth} />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
 
-                    {/* <div className="form-group col-sm-4 col-md-6">
-                    <div className="mb-3" style={{ fontSize: '16px' }}>
-                      <label className="form-label">জন্ম তারিখ </label>
-                      <div className="input-group">
-                        <DatePicker
-                          selected={selectedDate}
-                          onChange={(date) => setSelectedDate(date)}
-                          dateFormat="dd/MM/yyyy" 
-                          placeholderText="আপনার জন্ম তারিখ দিন"
-                          className="form-control"
-                          name="date_of_birth"
-                        />
+                      <div className="form-group col-sm-4 col-md-6">
+                        <div className="mb-3" style={{ fontSize: "16px" }}>
+                          <label className="form-label">জন্ম তারিখ</label>
+                          <div className="input-group">
+                            <DatePicker
+                              id="pin"
+                              className="form-control"
+                              placeholderText="আপনার জন্ম তারিখ দিন"
+                              name="date_of_birth"
+                              dateFormat="yyyy-MM-dd"
+                              selected={selectedDate}
+                              onChange={(date) => setSelectedDate(date)}
+                              style={{ width: '100% !important', minWidth: '100% !important' }}
+                            />
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div> */}
 
+                   
 
                     <div className="form-group col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
@@ -291,7 +307,8 @@ const EditTeacherProfile = () => {
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label className="form-label"> জেলা</label>
                           <select className="form-control" name="district_id"
-                            onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
+                                onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
+                                <option value={''}>জেলা নির্বাচন করুন</option>
 
                             {
                               district.map((d, k) =>

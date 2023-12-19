@@ -28,6 +28,7 @@ import {
   convertToBanglaNumber,
   formate_report_data,
   subject_name,
+  version_name,
 } from "../utils/Utils";
 // import {handleConvertToPdf} from "./Pdf"
 import Breadcumb from "../layout/Breadcumb";
@@ -241,6 +242,14 @@ export default function StudentReport() {
       return true;
     }
   });
+  const handleSelectChange = (e) => {
+    const { name, value } = e.target;
+    setallFelter({
+      ...allFelter,
+      [name]: value,
+    });
+  };
+console.log("allFelter",allFelter);
 
   const subject_name = (id: any) => {
     if (all_subject.length) {
@@ -420,6 +429,7 @@ export default function StudentReport() {
                                 "-" +
                                 data?.subject?.subject_info?.class_uid +
                                 "-" +
+                                
                                 (data?.own_subjet.class_room.class_teacher
                                   .name_bn ||
                                   data?.own_subjet.class_room.class_teacher
@@ -429,21 +439,77 @@ export default function StudentReport() {
                               {data?.subject?.subject_info?.name}{" "}
                               {data?.subject?.subject_info?.class_uid == 6 &&
                                 "ষষ্ঠ"}{" "}
+                                
                               
                               {data?.subject?.subject_info?.class_uid == 7 &&
                                 "সপ্তম"}{" "}
                               {" শ্রেণী"}
+                              
                             </option>
                           ))}
                         </select>
                       </div>
                     </div>
+                    {/* <div className="col-6 col-sm-4 col-md-3">
+                      <div className="mb-3" style={{ fontSize: "12px" }}>
+                        <label className="form-label">
+                          বিষয় নির্বাচন করুন
+                        </label>
+                        <select
+                          className="form-select p-2"
+                          aria-label="Default select example"
+                          style={{ fontSize: "12px" }}
+                          name={["subject", "section","shift","version","branch"]}
+                          onChange={(e) => handleSelectChange(e)} 
+                        >
+                          <option value={""}>বিষয় নির্বাচন করুন</option>
+                          {subject?.map((data, index) => (
+                            <option
+                              key={index}
+                              value={
+                                data?.subject?.subject_info?.uid +
+                                "-" +
+                                data?.subject?.subject_info?.class_uid +
+                                "-" +
+                                data?.own_subjet.class_room.section_id+
+                                "-" +
+                                data?.own_subjet.class_room.shift_id+
+                                "-" +
+                                data?.own_subjet.class_room.version_id+
+                                "-" +
+                                data?.own_subjet.class_room.branch_id+
+                                "-" +
+                                (data?.own_subjet.class_room.class_teacher
+                                  .name_bn ||
+                                  data?.own_subjet.class_room.class_teacher
+                                    .name_en)
+                              }
+                            >
+                              {data?.subject?.subject_info?.name}{"--"}
+                              {data?.subject?.subject_info?.class_uid == 6 &&
+                                "ষষ্ঠ"}{" "}
+                                
+                              
+                              {data?.subject?.subject_info?.class_uid == 7 &&
+                                "সপ্তম"}{" "}
+                              {" শ্রেণী"}{"--"}
+                              {"--"}{section_name(data?.own_subjet.class_room.section_id)} শাখা
+                              {"--"}{shift_name(data?.own_subjet.class_room.shift_id)} সেশন
+                              {"--"}{version_name(data?.own_subjet.class_room.version_id)} ভার্সন
+                              {"--"}{branch_name(data?.own_subjet.class_room.branch_id)} ব্রাঞ্চ
+                            </option>
+                            
+                          ))}
+                        </select>
+                      </div>
+                    </div> */}
 
                     {allFelter.branch &&
                       allFelter.subject &&
                       allFelter.section &&
                       allFelter.shift &&
-                      allFelter.version && (
+                      allFelter.version && 
+                      (
                         <>
                           <div className="col-6 col-sm-4 col-md-3">
                             <div className="mb-3" style={{ fontSize: "12px" }}>

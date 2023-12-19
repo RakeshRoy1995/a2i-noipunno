@@ -393,11 +393,11 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
 
 
 
-export const formate_Bi_teanscript_dataBy_single_student = (data: any , student_name:any) => {
+export const formate_Bi_teanscript_dataBy_single_student = (data: any , student_name:any , bi:any = []) => {
   
   const our_all_pi = localStorage.getItem("bi");
   const tempBi= JSON.parse(our_all_pi)
-  const our_all_piData = tempBi?.data?.data?.bis  ;
+  const our_all_piData = bi?.data?.data?.bis  ;
 
   const all_students = localStorage.getItem("all_students");
   const all_studentsData = JSON.parse(all_students);

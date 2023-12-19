@@ -18,7 +18,7 @@ const EditTeacherProfile = () => {
   const [district, setdistrict] = useState<any>([]);
   const [upozila, setupozila] = useState<any>([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-
+  const [countdown, setCountdown] = useState(30);
 
   const {
     name_en,
@@ -133,7 +133,7 @@ const EditTeacherProfile = () => {
     }
   }, [designation_id, allDesignation])
 
-  const [countdown, setCountdown] = useState(30);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCountdown(prevCountdown => (prevCountdown > 0 ? prevCountdown - 1 : 0));
@@ -143,7 +143,7 @@ const EditTeacherProfile = () => {
     };
   }, []);
 
-  if ((allDivision.length < 0) && (countdown == 0)) {
+  if ((allDivision.length == 0) && (countdown == 0)) {
     window.location.replace("/");
   }
 
@@ -154,7 +154,7 @@ const EditTeacherProfile = () => {
     <section className="editTeacherProfilePage">
       <Breadcumbtitle title={"প্রোফাইল হালনাগাদ"} />
       {
-        (allDivision.length < 0) ?
+        (allDivision.length == 0) ?
           <div className="d-flex flex-column align-items-center justify-content-center vh-100">
             <div className="spinner-border text-primary" role="status">
               <span className="visually-hidden">Loading...</span>
@@ -247,18 +247,6 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
-                      {/* <div className="form-group  col-sm-4 col-md-6">
-                      <div className="mb-3" style={{ fontSize: "16px" }}>
-                        <label className="form-label">জন্ম তারিখ </label>
-                        <div className="input-group">
-                          <input type="text" id="pin" className="form-control"
-                            placeholder="আপনার জন্ম তারিখ দিন"
-                            name="date_of_birth"
-                            defaultValue={date_of_birth} />
-                        </div>
-                      </div>
-                    </div> */}
-
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label className="form-label">জন্ম তারিখ</label>
@@ -271,7 +259,7 @@ const EditTeacherProfile = () => {
                               dateFormat="yyyy-MM-dd"
                               selected={selectedDate}
                               onChange={(date) => setSelectedDate(date)}
-                              style={{ width: '100% !important', minWidth: '100% !important' }}
+                              style={{ width: '100%', minWidth: '100%' }}
                             />
                           </div>
                         </div>

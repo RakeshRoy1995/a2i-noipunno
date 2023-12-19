@@ -17,8 +17,10 @@ const EditTeacherProfile = () => {
   const [teacherDesignation, seTeacherDesignation] = useState<any>('');
   const [district, setdistrict] = useState<any>([]);
   const [upozila, setupozila] = useState<any>([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [countdown, setCountdown] = useState(30);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  // const [selectedDate, setSelectedDate] = useState('');
+
 
   const {
     name_en,
@@ -27,7 +29,6 @@ const EditTeacherProfile = () => {
     mobile_no,
     date_of_birth,
     gender,
-    designation,
     division_id,
     district_id,
     upazilla_id,
@@ -129,9 +130,14 @@ const EditTeacherProfile = () => {
     if (designation_id) {
       const find_current_user_designation = allDesignation?.filter(designation => designation?.uid == designation_id)
       find_current_user_designation.map(item => seTeacherDesignation(item.designation_name))
-      console.log(find_current_user_designation);
     }
-  }, [designation_id, allDesignation])
+
+    if (date_of_birth) {
+      setSelectedDate(new Date(date_of_birth))
+    }
+
+    
+  }, [designation_id, allDesignation, date_of_birth])
 
 
   useEffect(() => {
@@ -147,9 +153,8 @@ const EditTeacherProfile = () => {
     window.location.replace("/");
   }
 
-  console.log(teacherDesignation);
+  // console.log(teacherDesignation);
  
-  
   return (
     <section className="editTeacherProfilePage">
       <Breadcumbtitle title={"প্রোফাইল হালনাগাদ"} />
@@ -254,7 +259,7 @@ const EditTeacherProfile = () => {
                             <DatePicker
                               id="pin"
                               className="form-control"
-                              placeholderText="আপনার জন্ম তারিখ দিন"
+                              placeholderText={"আপনার জন্ম তারিখ দিন"}
                               name="date_of_birth"
                               dateFormat="yyyy-MM-dd"
                               selected={selectedDate}
@@ -265,19 +270,18 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
-
-
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label htmlFor="gender" className="form-label">লিঙ্গ</label>
                           <div className="input-group">
                             <select className="form-control"
                               name="gender"
-                              value={gender}>
+                              // value={gender}
+                            >
                               <option value={''}>লিঙ্গ নির্বাচন করুন</option>
-                              <option value={1}>পুরুষ</option>
-                              <option value={2}>মহিলা</option>
-                              <option value={3}>অন্যান্য</option>
+                              <option value={"1"} selected={(gender==="1")}>পুরুষ</option>
+                              <option value={"2"} selected={(gender==="2")}>মহিলা</option>
+                              <option value={"3"} selected={(gender==="3")}>অন্যান্য</option>
                             </select>
                           </div>
                         </div>
@@ -300,8 +304,6 @@ const EditTeacherProfile = () => {
                           </select>
                         </div>
                       </div>
-
-
 
                       {
                         (district.length > 0) ?

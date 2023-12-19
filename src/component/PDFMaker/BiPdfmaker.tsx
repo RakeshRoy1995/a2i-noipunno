@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
 
   columnX: {
     flexDirection: "column",
-    width: "20%",
+    width: "15%",
   },
 
   columnY: {
@@ -1047,10 +1047,10 @@ margin: "auto",}}>
         <View style={styles.rowMontobboCard}>
           <View style={[styles.columnMontobboCard]}>
             <View style={[styles.montobboCard]}>
-              <Text style={[styles.h4]}> শ্রেণি শিক্ষকের মন্তব্য : </Text>
+              <Text style={[styles.h4]}> শিক্ষার্থীর মন্তব্য : </Text>
               <Text style={[styles.paragraph]}>
                 {" "}
-                যে কাজটি সবচেয়ে ভালোোভাবে করতে পেরেছি :{" "}
+                যে কাজটি সবচেয়ে ভালোভাবে করতে পেরেছি :{" "}
               </Text>
               <Text style={[styles.paragraph]}>
                 {" "}
@@ -1080,10 +1080,10 @@ margin: "auto",}}>
           </View>
           <View style={[styles.columnMontobboCard]}>
             <View style={[styles.montobboCard]}>
-              <Text style={[styles.h4]}> শ্রেণি শিক্ষকের মন্তব্য : </Text>
+              <Text style={[styles.h4]}> অভিভাবকের মন্তব্য : </Text>
               <Text style={[styles.paragraph]}>
                 {" "}
-                যে কাজটি সবচেয়ে ভালোোভাবে করতে পেরেছি :{" "}
+                আমার সন্তান যে কাজটি ভালোভাবে করতে পারে :{" "}
               </Text>
               <Text style={[styles.paragraph]}>
                 {" "}

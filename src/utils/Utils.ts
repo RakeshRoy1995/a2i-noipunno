@@ -393,11 +393,11 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
 
 
 
-export const formate_Bi_teanscript_dataBy_single_student = (data: any , student_name:any) => {
+export const formate_Bi_teanscript_dataBy_single_student = (data: any , student_name:any , bi:any = []) => {
   
   const our_all_pi = localStorage.getItem("bi");
   const tempBi= JSON.parse(our_all_pi)
-  const our_all_piData = tempBi?.data?.data?.bis  ;
+  const our_all_piData = bi?.data?.data?.bis  ;
 
   const all_students = localStorage.getItem("all_students");
   const all_studentsData = JSON.parse(all_students);
@@ -406,10 +406,10 @@ export const formate_Bi_teanscript_dataBy_single_student = (data: any , student_
 
   let obj = {};
 
-  console.log(`data`, data);
-
   const stu = student_name;
   const allPi = data;
+
+  console.log(`allPi`, allPi);
 
   if (stu) {
     const student_dta = all_studentsData.filter(
@@ -551,3 +551,40 @@ export const make_group_by_report_data = (studentData: any) => {
 
   return groupedByStudentId;
 };
+
+
+export const show_sub_by_religion = (religion:any , subject_name:any)=>{
+  if (
+    religion == "Islam" &&
+    (subject_name == "হিন্দুধর্ম শিক্ষা" || subject_name== "খ্রীষ্টধর্ম শিক্ষা" || subject_name== "বৌদ্ধধর্ম শিক্ষা" )
+  ) {
+    return true;
+  }
+
+
+  if (
+    religion == "Hinduism" &&
+    (subject_name == "ইসলাম শিক্ষা" || subject_name== "খ্রীষ্টধর্ম শিক্ষা" || subject_name== "বৌদ্ধধর্ম শিক্ষা" )
+  ) {
+    return true;
+  }
+
+
+  if (
+    religion == "Christianity" &&
+    (subject_name == "ইসলাম শিক্ষা" || subject_name== "হিন্দুধর্ম শিক্ষা" || subject_name== "বৌদ্ধধর্ম শিক্ষা" )
+  ) {
+    return true;
+  }
+
+
+  if (
+    religion == "Buddhism" &&
+    (subject_name == "ইসলাম শিক্ষা" || subject_name== "খ্রীষ্টধর্ম শিক্ষা" || subject_name== "বৌদ্ধধর্ম শিক্ষা" )
+  ) {
+    return true;
+  }
+
+
+  return false
+}

@@ -20,13 +20,20 @@ import {
 } from "../../utils/Utils";
 import { BsFiletypePdf } from "react-icons/bs";
 import React from "react";
-Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
-// Font.register({ family: "Nikosh", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
+Font.register({ family: "Kalpurush", src: "kalpurush.ttf", fontStyle: 'normal',
+fontWeight: 'normal',
+unicodeRange: 'U+0000-FFFF',
+fontFace: {
+  unitsPerEm: 1000,
+  ascent: 800,
+  descent: -200,
+}, });
+// Font.register({ family: "Kalpurush", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
 
 const styles = StyleSheet.create({
   page: {
     //flexDirection: "row",
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     //  backgroundColor: "#E4E4E4",
     padding: 4,
     // margin: 50,
@@ -34,7 +41,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   h1: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     fontSize: 16,
     textAlign: "center",
     fontWeight: 700,
@@ -48,12 +55,12 @@ const styles = StyleSheet.create({
     lineHeight: 1
   },
   h2: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     textAlign: "center",
     fontSize: 12,
   },
   h3: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     fontSize: 11,
     textAlign: "center",
   },
@@ -122,7 +129,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   tableCell: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     // margin: "auto",
     padding: "5px",
     // marginTop: 5,
@@ -140,7 +147,7 @@ const styles = StyleSheet.create({
 
 
   tableCellTikMark: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     margin: "auto",
     marginTop: "3px",
     padding: 1,
@@ -186,7 +193,7 @@ const styles = StyleSheet.create({
     gap: "150px",
   },
   teacherSignature: {
-    fontFamily: "Nikosh",
+    fontFamily: "Kalpurush",
     color: "#000",
     marginTop: "10px",
     fontSize: 12,
@@ -206,7 +213,7 @@ const MyDocument = ({
   teacher,
   subject_teacher
 }: any) => (
-  <Document>
+  <Document language="BN" >
     <Page size="A4" style={styles.page}>
       <View fixed >
         <Text style={[styles.h1]}>
@@ -218,7 +225,7 @@ const MyDocument = ({
         </Text>
         {/* style={{ color: 'white', textAlign: 'center', margin: 30 }} */}
         <Text style={[styles.h3, { marginBottom: 30 }]}>
-          বিষয়ভিত্তিক আচরণগত ট্রান্সক্রিপ্ট-
+          -আচরণগত মূল্যায়ন-
           {convertToBanglaNumber(student_info_pdf?.registration_year)}
         </Text>
       </View>
@@ -254,9 +261,9 @@ const MyDocument = ({
               বিষয়: {subject_name(allFelter?.subject?.split("-")[0])}
             </Text>
           </View> */}
-          <View style={styles.tableCol}>
+          {/* <View style={styles.tableCol} >
             <Text style={styles.tableCell}>শ্রেণি শিক্ষকের নাম: {teacher}</Text>
-          </View>
+          </View> */}
         </View>
 
         <View style={styles.tableRow}>
@@ -277,7 +284,7 @@ const MyDocument = ({
           <View style={styles.tableRow} wrap={false} >
             <View style={styles.tableCol} wrap={true}>
               <Text style={styles.tableCell}>
-                {" "}
+                {/* {" "} */}
                 {convertToBanglaNumber( k+1 )}{" . "}
                 {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
               </Text>
@@ -293,14 +300,17 @@ const MyDocument = ({
                   </Text>
                 </View>
                 <Text style={styles.tableCell}>
-                  {/* {pi_data?.title_bn || pi_data?.title_en}{" "} */}
+                  {pi_data?.title_bn || pi_data?.title_en}
 
-                  {pi_data?.title_bn?.replace(/\s/g, " ").split(' ').map((word, index) => (
+                  {/* ব্যক্তিগত যোগাযোগ, উপস্থাপন, মডেল তৈরি, উপকরণ নির্বাচন ও ব্যবহার ইত্যাদি ক্ষেত্রে পরিমিতিবোধ, বৈচিত্রময়তা ও নান্দনিকতা বজায় রেখে সিদ্ধান্ত  নিচ্ছে 1 */}
+                  {/* {" "} */}
+
+                  {/* {pi_data?.title_bn?.replace(/\s/g, " ").split(' ').map((word, index) => (
                     <React.Fragment key={index}>
                       {index > 0 && index % 5 === 0 && <Text>{"\n"}</Text>}
                       {word}{' '}
                     </React.Fragment>
-                  ))}
+                  ))} */}
 
                 </Text>
               </View>
@@ -321,7 +331,7 @@ const MyDocument = ({
           </Text>
 
           <Text style={[styles.teacherSignature]}>
-            প্রধান শিক্ষকের স্বাক্ষরঃ
+            প্রধান শিক্ষকের স্বাক্ষরঃ  
             {" "}
             <Text>{"\n"}</Text>
             <Text style={{ fontWeight: "bold", fontSize: 11 }}>
@@ -357,8 +367,6 @@ const PDFMakerBiTranscript = ({
     "-" +
     convertToBanglaNumber(student_info_pdf?.roll) +
     ".pdf";
-
-    console.log(`student_info_pdf`, student_info_pdf , data);
 
   const subject_teacher = localStorage.getItem("teacher_dashboard") ? JSON.parse(localStorage.getItem("teacher_dashboard")) : ""
   return (

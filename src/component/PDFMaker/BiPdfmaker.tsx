@@ -9,7 +9,7 @@ import {
   Font,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
-import { convertToBanglaNumber } from "../../utils/Utils";
+import { convertToBanglaNumber, show_sub_by_religion } from "../../utils/Utils";
 import React from "react";
 
 Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
@@ -37,6 +37,10 @@ const styles = StyleSheet.create({
   section12: {},
   section13: {},
 
+  alignCenter: {
+    textAlign: 'center',
+  },
+
   h1: {
     fontFamily: "Nikosh",
     fontSize: 20,
@@ -47,6 +51,13 @@ const styles = StyleSheet.create({
     marginBlockEnd: "0.67em",
     margininlineStart: "0px",
     margininlineEnd: "0px",
+  },
+  customh1: {
+    fontFamily: "Nikosh",
+    fontSize: 20,
+    fontWeight: 500,
+    textAlign: "center",
+    
   },
 
   footerh1: {
@@ -106,8 +117,10 @@ const styles = StyleSheet.create({
 
   containerMain: {
     backgroundColor: "#DCDDDE",
-    marginTop: "20px",
-    marginBottom: "30px",
+    //marginTop: "20px",
+    //marginBottom: "30px",
+    // textAlign: "center",
+    height: "300px",
   },
 
   subjectContainer: {
@@ -118,6 +131,10 @@ const styles = StyleSheet.create({
   subjectTitle: {
     fontSize: "30px",
     padding: "20px",
+  },
+  customsubjectTitle: {
+    fontSize: "30px",
+    
   },
 
   subjectName: {
@@ -144,6 +161,23 @@ const styles = StyleSheet.create({
     width: "50%",
   },
 
+  columnX: {
+    flexDirection: "column",
+    width: "15%",
+  },
+
+  columnY: {
+    flexDirection: "column",
+    marginRight: 5,
+    width: "30%",
+  },
+
+  // column2: {
+  //   flexDirection: "column",
+  //   marginRight: 5,
+  //   width: "20%",
+  // },
+
   row2: {
     flexDirection: "row",
     marginBottom: 5,
@@ -154,6 +188,18 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     flexWrap: "wrap",
+    textAlign: "center",
+  },
+
+  dot:{
+    borderBottom: '2px dotted black',
+    fontFamily: "Nikosh",
+    fontSize: "12px",
+   marginTop: "10px",
+  },
+  borderbot:{
+    borderBottom: '2px solid black',
+    marginBottom: "20px",
   },
 
   box1: {
@@ -171,7 +217,8 @@ const styles = StyleSheet.create({
   text: {
     marginBottom: "10px",
     fontFamily: "Nikosh",
-    fontSize: 22,
+    fontSize: "18px",
+    
   },
 
   paragraph: {
@@ -219,6 +266,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 10,
     borderBottom: "1px solid black",
+    
   },
 
   cardbody: {
@@ -334,10 +382,11 @@ const styles = StyleSheet.create({
 
   achoronikContainer: {
     marginTop: "20px",
+    
   },
 
   scalemargin: {
-    marginBottom: "8px",
+    marginBottom: "3px",
   },
 
   wordBox: {
@@ -385,46 +434,64 @@ const MyDocument = ({
       {/* student info */}
       <View style={[styles.headerTop]}>
         <View style={[styles.row]}>
-          <Text style={[styles.h2, styles.colortext]}>
-            প্রতিষ্ঠানের নাম : {instititute?.branch_name}{" "}
-          </Text>
-         
-          
-          
+          <View style={[styles.columnX]}>
+            <Text style={[styles.h2, styles.colortext]}> প্রতিষ্ঠানের নাম :  </Text>
+          </View>
+          <View style={[styles.columnY]}>
+            : <Text style={styles.dot}>{instititute?.branch_name}{" "}</Text>
+          </View>
         </View>
 
         <View style={[styles.row]}>
-          <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শিক্ষার্থীর নাম :{" "}
-            {student?.student_name_bn || student?.student_name_en}{" "}
-          </Text>
-          <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শিক্ষার্থীর আইডি : {convertToBanglaNumber(student?.roll)}{" "}
-          </Text>
+          <View style={[styles.columnX]}>
+            <Text style={[styles.h2, styles.colortext]}> শিক্ষার্থীর নাম :</Text>
+          </View>
+          <View style={[styles.columnY]}>
+            <Text style={styles.dot}> {student?.student_name_bn || student?.student_name_en}</Text>
+          </View>
+          <View style={[styles.columnX]}>
+            <Text style={[styles.h2, styles.colortext]}> শিক্ষার্থীর আইডি :</Text>
+          </View>
+          <View style={[styles.columnY]}>
+            <Text style={styles.dot}>{convertToBanglaNumber(student?.roll)}</Text>
+          </View>
         </View>
+
         <View style={[styles.row]}>
-          <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শ্রেণী : {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}{" "}
-          </Text>
-          <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শিক্ষাবর্ষ : {convertToBanglaNumber(student?.registration_year)}{" "}
-          </Text>
+          <View style={[styles.columnX]}>
+            <Text style={[styles.h2, styles.colortext]}> শ্রেণী : </Text>
+          </View>
+          <View style={[styles.columnY]}>
+            <Text style={styles.dot}>{student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}</Text>
+          </View>
+          <View style={[styles.columnX]}>
+            <Text style={[styles.h2, styles.colortext]}> শিক্ষাবর্ষ : </Text>
+          </View>
+          <View style={[styles.columnY]}>
+            <Text style={styles.dot}>{convertToBanglaNumber(student?.registration_year)}</Text>
+          </View>
         </View>
+
       </View>
 
       {/* subjects */}
       <View style={[styles.containerMain, styles.borderTop]}>
-        <Text style={[styles.h1, styles.colortext, styles.subjectTitle]}>
+        <View style={{  width: "80%",
+margin: "auto",}}>  
+        <Text style={[styles.h1, styles.colortext, styles.customsubjectTitle,  styles.borderbot]}>
           {" "}
           বিষয়সমূহ{" "}
         </Text>
 
-        <View style={[styles.row, styles.subjectContainer]}>
+        <View style={[styles.row, styles.subjectContainer, ]}>
           <View style={styles.column}>
             {selected_student?.map((item, index) => {
               console.log("selected_student", subject_name(item[0]));
-              
-              
+              if (
+                show_sub_by_religion(student?.religion, subject_name(item[0]))
+              ) {
+                return null;
+              }
               return (
                 index < 5 && (
                   <Text style={styles.text}>
@@ -434,11 +501,17 @@ const MyDocument = ({
                 )
               );
             })}
+
+
           </View>
 
           <View style={styles.column}>
             {selected_student?.map((item, index) => {
-
+              if (
+                show_sub_by_religion(student?.religion, subject_name(item[0]))
+              ) {
+                return null;
+              }
 
               return (
                 index >= 5 && (
@@ -451,54 +524,159 @@ const MyDocument = ({
             })}
           </View>
         </View>
-      </View>
+      </View></View>
     </Page>
 
     {/* Dynamic Subject Page */}
     <Page size="A4" wrap>
       {/* Subject -1  */}
 
-      {selected_student.map((item) => (
-        <View wrap={false}>
-          <View>
-            <Text
-              style={[
-                styles.h1,
-                styles.colortext,
-                styles.subjectName,
-                styles.cardHeaderBG,
-              ]}
-            >
-              {" "}
-              {subject_name(item[0])}{" "}
-            </Text>
-          </View>
+      {selected_student.map((item) => {
+        if (show_sub_by_religion(student?.religion, subject_name(item[0]))) {
+          return null;
+        }
+        return (
+          <View wrap={false}>
+            <View>
+              <Text
+                style={[
+                  styles.h1,
+                  styles.colortext,
+                  styles.subjectName,
+                  styles.cardHeaderBG,
+                ]}
+              >
+                {" "}
+                {subject_name(item[0])}{" "}
+              </Text>
+            </View>
 
-          <View style={styles.container} wrap={true}>
+            <View style={styles.container} wrap={true}>
+              {item[1].map((data) => (
+                <View style={[styles.box1]}>
+                  <View style={[styles.card]}>
+                    <View style={[styles.cardTitle]}>
+                      <Text style={[styles.h3]}> {data?.dimension_title}</Text>
+                    </View>
+                    <View style={[styles.cardbody]}>
+                      <View>
+                        <View style={styles.sentenceBox}>
+                          <Text style={styles.sentenceText}>
+                            {/* {data?.dimension_details
+                              .split(" ")
+                              .map((word, index) => (
+                                <React.Fragment key={index}>
+                                  {index > 0 && index % 5 === 0 && (
+                                    <Text>{"\n"}</Text>
+                                  )}
+                                  {word}{" "}
+                                </React.Fragment>
+                              ))} */}
+                            {data?.dimension_details}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+
+                    <View style={[styles.cardRow]}>
+                      {data?.dimension_result >= 1 ? (
+                        <View style={[styles.cardColumn, styles.itemBG]}>
+                          <Text></Text>
+                        </View>
+                      ) : (
+                        <View style={[styles.cardColumn]}>
+                          <Text></Text>
+                        </View>
+                      )}
+
+                      {data?.dimension_result >= 2 ? (
+                        <View style={[styles.cardColumn, styles.itemBG]}>
+                          <Text></Text>
+                        </View>
+                      ) : (
+                        <View style={[styles.cardColumn]}>
+                          <Text></Text>
+                        </View>
+                      )}
+
+                      {data?.dimension_result >= 3 ? (
+                        <View style={[styles.cardColumn, styles.itemBG]}>
+                          <Text></Text>
+                        </View>
+                      ) : (
+                        <View style={[styles.cardColumn]}>
+                          <Text></Text>
+                        </View>
+                      )}
+
+                      {data?.dimension_result >= 4 ? (
+                        <View style={[styles.cardColumn, styles.itemBG]}>
+                          <Text></Text>
+                        </View>
+                      ) : (
+                        <View style={[styles.cardColumn]}>
+                          <Text></Text>
+                        </View>
+                      )}
+
+                      {data?.dimension_result >= 5 ? (
+                        <View style={[styles.cardColumn, styles.itemBG]}>
+                          <Text></Text>
+                        </View>
+                      ) : (
+                        <View style={[styles.cardColumn]}>
+                          <Text></Text>
+                        </View>
+                      )}
+
+                      {data?.dimension_result >= 6 ? (
+                        <View style={[styles.cardColumn, styles.itemBG]}>
+                          <Text></Text>
+                        </View>
+                      ) : (
+                        <View style={[styles.cardColumn]}>
+                          <Text></Text>
+                        </View>
+                      )}
+
+                      {data?.dimension_result >= 7 ? (
+                        <View style={[styles.cardColumn, styles.itemBG]}>
+                          <Text></Text>
+                        </View>
+                      ) : (
+                        <View style={[styles.cardColumn]}>
+                          <Text></Text>
+                        </View>
+                      )}
+                    </View>
+                  </View>
+                </View>
+              ))}
+            </View>
+          </View>
+        );
+      })}
+    </Page>
+    {/* Dynamic Subject Page */}
+
+    {/* Last Page */}
+    <Page size="A4" wrap>
+      {/* achoronik nidorshon */}
+
+      <View wrap style={[styles.achoronikContainer]}>
+        <View>
+          <Text style={[styles.h1, styles.colortext, styles.cardHeaderBG]}>
+            {" "}
+            আচরণিক নির্দেশক{" "}
+          </Text>
+        </View>
+        {biData.map((item) => (
+          <View style={styles.container}>
             {item[1].map((data) => (
               <View style={[styles.box1]}>
                 <View style={[styles.card]}>
                   <View style={[styles.cardTitle]}>
-                    <Text style={[styles.h3]}> {data?.dimension_title}</Text>
-                  </View>
-                  <View style={[styles.cardbody]}>
-                    <View>
-                      <View style={styles.sentenceBox}>
-                        <Text style={styles.sentenceText}>
-                          {data?.dimension_details
-                            .split(" ")
-                            .map((word, index) => (
-                              <React.Fragment key={index}>
-                                {index > 0 && index % 5 === 0 && (
-                                  <Text>{"\n"}</Text>
-                                )}
-                                {word}{" "}
-                              </React.Fragment>
-                            ))}
-                          {/* {data?.dimension_details} */}
-                        </Text>
-                      </View>
-                    </View>
+                    <Text style={[styles.h3]}>{data?.dimension_title} </Text>
                   </View>
 
                   <View style={[styles.cardRow]}>
@@ -576,117 +754,9 @@ const MyDocument = ({
               </View>
             ))}
           </View>
-        </View>
-      ))}
-    </Page>
-    {/* Dynamic Subject Page */}
-
-    {/* Last Page */}
-    <Page size="A4" wrap>
-      {/* achoronik nidorshon */}
-      
-      <View wrap style={[styles.achoronikContainer]}>
-      
-        <View>
-          <Text style={[styles.h1, styles.colortext, styles.cardHeaderBG]}>
-            {" "}
-            আচরণিক নির্দেশক{" "}
-          </Text>
-        </View>
-        {biData.map((item) => (
-        <View style={styles.container}>
-
-
-
-
-            {item[1].map((data) =>(
-          <View style={[styles.box1]}>
-            <View style={[styles.card]}>
-              <View style={[styles.cardTitle]}>
-                
-                <Text style={[styles.h3]}>{data?.dimension_title}  </Text>
-                
-              </View>
-
-              <View style={[styles.cardRow]}>
-                    {data?.dimension_result >= 1 ? (
-                      <View style={[styles.cardColumn, styles.itemBG]}>
-                        <Text></Text>
-                      </View>
-                    ) : (
-                      <View style={[styles.cardColumn]}>
-                        <Text></Text>
-                      </View>
-                    )}
-
-                    {data?.dimension_result >= 2 ? (
-                      <View style={[styles.cardColumn, styles.itemBG]}>
-                        <Text></Text>
-                      </View>
-                    ) : (
-                      <View style={[styles.cardColumn]}>
-                        <Text></Text>
-                      </View>
-                    )}
-
-                    {data?.dimension_result >= 3 ? (
-                      <View style={[styles.cardColumn, styles.itemBG]}>
-                        <Text></Text>
-                      </View>
-                    ) : (
-                      <View style={[styles.cardColumn]}>
-                        <Text></Text>
-                      </View>
-                    )}
-
-                    {data?.dimension_result >= 4 ? (
-                      <View style={[styles.cardColumn, styles.itemBG]}>
-                        <Text></Text>
-                      </View>
-                    ) : (
-                      <View style={[styles.cardColumn]}>
-                        <Text></Text>
-                      </View>
-                    )}
-
-                    {data?.dimension_result >= 5 ? (
-                      <View style={[styles.cardColumn, styles.itemBG]}>
-                        <Text></Text>
-                      </View>
-                    ) : (
-                      <View style={[styles.cardColumn]}>
-                        <Text></Text>
-                      </View>
-                    )}
-
-                    {data?.dimension_result >= 6 ? (
-                      <View style={[styles.cardColumn, styles.itemBG]}>
-                        <Text></Text>
-                      </View>
-                    ) : (
-                      <View style={[styles.cardColumn]}>
-                        <Text></Text>
-                      </View>
-                    )}
-
-                    {data?.dimension_result >= 7 ? (
-                      <View style={[styles.cardColumn, styles.itemBG]}>
-                        <Text></Text>
-                      </View>
-                    ) : (
-                      <View style={[styles.cardColumn]}>
-                        <Text></Text>
-                      </View>
-                    )}
-                  </View>
-            </View>
-          </View>
-        ))}
-        
-        </View>
         ))}
       </View>
-      
+
       {/* Mullayon Skel */}
       <View wrap>
         <View>
@@ -977,10 +1047,10 @@ const MyDocument = ({
         <View style={styles.rowMontobboCard}>
           <View style={[styles.columnMontobboCard]}>
             <View style={[styles.montobboCard]}>
-              <Text style={[styles.h4]}> শ্রেণি শিক্ষকের মন্তব্য : </Text>
+              <Text style={[styles.h4]}> শিক্ষার্থীর মন্তব্য : </Text>
               <Text style={[styles.paragraph]}>
                 {" "}
-                যে কাজটি সবচেয়ে ভালোোভাবে করতে পেরেছি :{" "}
+                যে কাজটি সবচেয়ে ভালোভাবে করতে পেরেছি :{" "}
               </Text>
               <Text style={[styles.paragraph]}>
                 {" "}
@@ -1010,10 +1080,10 @@ const MyDocument = ({
           </View>
           <View style={[styles.columnMontobboCard]}>
             <View style={[styles.montobboCard]}>
-              <Text style={[styles.h4]}> শ্রেণি শিক্ষকের মন্তব্য : </Text>
+              <Text style={[styles.h4]}> অভিভাবকের মন্তব্য : </Text>
               <Text style={[styles.paragraph]}>
                 {" "}
-                যে কাজটি সবচেয়ে ভালোোভাবে করতে পেরেছি :{" "}
+                আমার সন্তান যে কাজটি ভালোভাবে করতে পারে :{" "}
               </Text>
               <Text style={[styles.paragraph]}>
                 {" "}
@@ -1090,12 +1160,9 @@ const BiRawPDFDownload = ({
   instititute,
   biData,
 }) => {
-
-  console.log(`student --- `, student);
-  const pdf_name =
-    student?.student_name_bn ||
-    student?.student_name_en + "-report-card-result" + ".pdf";
-  console.log(`student`, student,biData);
+  // console.log(`student --- `, student);
+  const pdf_name = student?.student_name_en + "-report-card-result-roll-" + student?.roll + ".pdf";
+  // console.log(`student`, student, biData);
   return (
     <div>
       <div>
@@ -1122,6 +1189,7 @@ const BiRawPDFDownload = ({
           student={student}
           instititute={instititute}
           subject_name={subject_name}
+          biData={biData}
         />
       </PDFViewer> */}
     </div>

@@ -19,7 +19,7 @@ const EditTeacherProfile = () => {
   const [upozila, setupozila] = useState<any>([]);
   const [countdown, setCountdown] = useState(30);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  // const [selectedDate, setSelectedDate] = useState('');
+  const [nameBn, setNameBn] = useState('');
 
 
   const {
@@ -59,7 +59,7 @@ const EditTeacherProfile = () => {
       const getAssignedDistrict = allDistrict.filter(district => district.district_id == district_id)
       setdistrict(getAssignedDistrict)
     }
-    
+
 
     // if (designation_id) {
     //   const find_current_user_designation = allDesignation?.filter(designation => designation?.uid == designation_id)
@@ -136,7 +136,7 @@ const EditTeacherProfile = () => {
       setSelectedDate(new Date(date_of_birth))
     }
 
-    
+
   }, [designation_id, allDesignation, date_of_birth])
 
 
@@ -153,8 +153,18 @@ const EditTeacherProfile = () => {
     window.location.replace("/");
   }
 
-  // console.log(teacherDesignation);
- 
+  // const [nameBn, setNameBn] = useState(''); 
+  // const handleNameBnChange = (event) => {
+   
+  //   const inputText = event.target.value;
+  //   const isValidBangla = /^[\u0980-\u09FF\s]+$/.test(inputText);
+
+  //   if (isValidBangla || inputText === '') {
+      
+  //     setNameBn(inputText);
+  //   }
+  // };
+
   return (
     <section className="editTeacherProfilePage">
       <Breadcumbtitle title={"প্রোফাইল হালনাগাদ"} />
@@ -203,6 +213,23 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
+                      {/* <div className="form-group col-sm-4 col-md-6">
+                        <div className="mb-3" style={{ fontSize: '16px' }}>
+                          <label className="form-label">নাম (বাংলা)</label>
+                          <div className="input-group">
+                            <input
+                              type="text"
+                              id="pin"
+                              className="form-control"
+                              name="name_bn"
+                              value={nameBn}
+                              onChange={handleNameBnChange}
+                              placeholder="আপনার নাম লিখুন (বাংলায়)"
+                            />
+                          </div>
+                        </div>
+                      </div> */}
+
                       <div className="form-group  col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label className="form-label">নাম (ইংরেজি)</label>
@@ -227,7 +254,7 @@ const EditTeacherProfile = () => {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="form-group  col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label className="form-label">পদবী</label>
@@ -276,12 +303,12 @@ const EditTeacherProfile = () => {
                           <div className="input-group">
                             <select className="form-control"
                               name="gender"
-                              // value={gender}
+                            // value={gender}
                             >
                               <option value={''}>লিঙ্গ নির্বাচন করুন</option>
-                              <option value={"1"} selected={(gender==="1")}>পুরুষ</option>
-                              <option value={"2"} selected={(gender==="2")}>মহিলা</option>
-                              <option value={"3"} selected={(gender==="3")}>অন্যান্য</option>
+                              <option value={"1"} selected={(gender === "1")}>পুরুষ</option>
+                              <option value={"2"} selected={(gender === "2")}>মহিলা</option>
+                              <option value={"3"} selected={(gender === "3")}>অন্যান্য</option>
                             </select>
                           </div>
                         </div>

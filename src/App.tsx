@@ -28,6 +28,7 @@ import PDFMaker from "./component/PDFMaker/PDFMaker";
 import TestCase from "./component/Dashboards/TestCase/TestCase";
 import BiRawPDFDownload from "./component/PDFMaker/BiPdfmaker";
 import StudentTranscriptBI from "./component/StudentTranscriptBI";
+import TestingPDF from "./component/Dashboards/TestCase/TestingPDF";
 
 function App() {
   const [topbar, settopbar] = useState(false);
@@ -84,6 +85,7 @@ function App() {
           <Route path="/shikkarthir-report-card" element={<StudentReport />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
+
           {/* <Route path="/bi-pdf-maker" element={<BiRawPDFDownload />} /> */}
         </Route>
         <Route path="/login" element={<LoginPage />} />

@@ -3,13 +3,9 @@ import { useEffect, useId, useState } from "react";
 import { all_district, all_division, all_upozila, teacher_dashboard, update_teacher_profile } from "../Request";
 import Breadcumbtitle from "../layout/Breadcumb";
 import Swal from "sweetalert2";
-// import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
-
 
 
 const EditTeacherProfile = () => {
-
   const [userDetails, setuserDetails] = useState<any>({});
 
   const [allDivision, setAllDivision] = useState<any>([]);
@@ -19,7 +15,6 @@ const EditTeacherProfile = () => {
   const [district, setdistrict] = useState<any>([]);
   const [upozila, setupozila] = useState<any>([]);
 
-  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const { name_en, name_bn, email, mobile_no, date_of_birth, gender, designation, division_id, district_id, upazilla_id, pdsid, caid } = userDetails;
 
@@ -37,7 +32,6 @@ const EditTeacherProfile = () => {
 
     try {
       const { data }: any = await update_teacher_profile(caid, formDatas);
-
       if (data.status === true) {
         Swal.fire({
           position: "center",
@@ -47,13 +41,12 @@ const EditTeacherProfile = () => {
           timer: 1500
         })
 
-        setTimeout(() => {
-          window.location.replace("/");
-        }, 1000)
-
         const data_dash: any = await teacher_dashboard();
         localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
 
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 1000)
 
       }
     } catch (error) {
@@ -70,6 +63,9 @@ const EditTeacherProfile = () => {
     setAllDistrict(district_data?.data?.data);
     setAllUpozila(upozila_data?.data?.data);
   };
+
+  // console.log("allDivision", allDivision);
+  
 
   const getdistrictBydivisionID = (id) => {
     const divisionWiseDistric = allDistrict.filter(district => district.division_id == id)

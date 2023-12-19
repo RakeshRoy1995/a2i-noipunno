@@ -52,6 +52,13 @@ const styles = StyleSheet.create({
     margininlineStart: "0px",
     margininlineEnd: "0px",
   },
+  customh1: {
+    fontFamily: "Nikosh",
+    fontSize: 20,
+    fontWeight: 500,
+    textAlign: "center",
+    
+  },
 
   footerh1: {
     fontFamily: "Nikosh",
@@ -110,10 +117,10 @@ const styles = StyleSheet.create({
 
   containerMain: {
     backgroundColor: "#DCDDDE",
-    marginTop: "20px",
-    marginBottom: "30px",
+    //marginTop: "20px",
+    //marginBottom: "30px",
     // textAlign: "center",
-
+    height: "300px",
   },
 
   subjectContainer: {
@@ -124,6 +131,10 @@ const styles = StyleSheet.create({
   subjectTitle: {
     fontSize: "30px",
     padding: "20px",
+  },
+  customsubjectTitle: {
+    fontSize: "30px",
+    
   },
 
   subjectName: {
@@ -152,8 +163,7 @@ const styles = StyleSheet.create({
 
   columnX: {
     flexDirection: "column",
-    marginRight: 5,
-    width: "10%",
+    width: "20%",
   },
 
   columnY: {
@@ -186,6 +196,10 @@ const styles = StyleSheet.create({
     fontFamily: "Nikosh",
     fontSize: "12px",
    marginTop: "10px",
+  },
+  borderbot:{
+    borderBottom: '2px solid black',
+    marginBottom: "20px",
   },
 
   box1: {
@@ -252,6 +266,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 10,
     borderBottom: "1px solid black",
+    
   },
 
   cardbody: {
@@ -371,7 +386,7 @@ const styles = StyleSheet.create({
   },
 
   scalemargin: {
-    marginBottom: "8px",
+    marginBottom: "3px",
   },
 
   wordBox: {
@@ -423,43 +438,47 @@ const MyDocument = ({
             <Text style={[styles.h2, styles.colortext]}> প্রতিষ্ঠানের নাম :  </Text>
           </View>
           <View style={[styles.columnY]}>
-            <Text style={styles.dot}>{instititute?.branch_name}{" "}</Text>
+            : <Text style={styles.dot}>{instititute?.branch_name}{" "}</Text>
           </View>
         </View>
 
-
         <View style={[styles.row]}>
-          <Text style={[styles.h2, styles.colortext]}>
-            প্রতিষ্ঠানের নাম : </Text> <Text style={styles.dot}>{instititute?.branch_name}{" "}</Text>
+          <View style={[styles.columnX]}>
+            <Text style={[styles.h2, styles.colortext]}> শিক্ষার্থীর নাম :</Text>
+          </View>
+          <View style={[styles.columnY]}>
+            <Text style={styles.dot}> {student?.student_name_bn || student?.student_name_en}</Text>
+          </View>
+          <View style={[styles.columnX]}>
+            <Text style={[styles.h2, styles.colortext]}> শিক্ষার্থীর আইডি :</Text>
+          </View>
+          <View style={[styles.columnY]}>
+            <Text style={styles.dot}>{convertToBanglaNumber(student?.roll)}</Text>
+          </View>
         </View>
 
         <View style={[styles.row]}>
-          <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শিক্ষার্থীর নাম :</Text> <Text style={styles.dot}>
-            {student?.student_name_bn || student?.student_name_en}
-          </Text>
-          <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শিক্ষার্থীর আইডি :</Text> <Text style={styles.dot}>
-               {convertToBanglaNumber(student?.roll)}
-          </Text>
+          <View style={[styles.columnX]}>
+            <Text style={[styles.h2, styles.colortext]}> শ্রেণী : </Text>
+          </View>
+          <View style={[styles.columnY]}>
+            <Text style={styles.dot}>{student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}</Text>
+          </View>
+          <View style={[styles.columnX]}>
+            <Text style={[styles.h2, styles.colortext]}> শিক্ষাবর্ষ : </Text>
+          </View>
+          <View style={[styles.columnY]}>
+            <Text style={styles.dot}>{convertToBanglaNumber(student?.registration_year)}</Text>
+          </View>
         </View>
-        <View style={[styles.row]}>
-          <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শ্রেণী : </Text> <Text style={styles.dot}>
-            {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}
-          </Text>
-          <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শিক্ষাবর্ষ : </Text> <Text style={styles.dot}>
-              {convertToBanglaNumber(student?.registration_year)}
-          </Text>
-        </View>
+
       </View>
 
       {/* subjects */}
       <View style={[styles.containerMain, styles.borderTop]}>
         <View style={{  width: "80%",
 margin: "auto",}}>  
-        <Text style={[styles.h1, styles.colortext, styles.subjectTitle]}>
+        <Text style={[styles.h1, styles.colortext, styles.customsubjectTitle,  styles.borderbot]}>
           {" "}
           বিষয়সমূহ{" "}
         </Text>

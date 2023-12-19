@@ -882,19 +882,19 @@ export default function StudentTranscript() {
                                       <h6>
                                         পারদর্শিতা সূচক{" "}
                                         {convertToBanglaNumber(
-                                          data.pi_data.pi_no
+                                          data?.pi_data?.pi_no
                                         )}{" "}
                                       </h6>
                                       <h6 style={{ fontSize: "14px" }}>
-                                        {data.pi_data.name_bn ||
-                                          data.pi_data.name_en}
+                                        {data.pi_data?.name_bn ||
+                                          data.pi_data?.name_en}
                                       </h6>
                                     </div>
                                   </div>
                                 </div>
                               </div>
 
-                              {data.pi_data.pi_attribute.map(
+                              {data?.pi_data?.pi_attribute.map(
                                 (pi_attribute_data: any, k: any) => (
                                   <div
                                     className="col-sm-6 col-md-3 py-2"
@@ -941,129 +941,6 @@ export default function StudentTranscript() {
                   <p className="m-5">শিক্ষার্থীর মূল্যায়ন পাওয়া যায়নি ।</p>
                 )}
               </Accordion>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="modal fade"
-        id="allstaticBackdrop"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        aria-labelledby="allstaticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="allstaticBackdropLabel">
-                <button
-                  type="button"
-                  onClick={(e) => handleConvertToPdf(selected_student, true)}
-                  className={`${styles.download_btn}`}
-                  defaultValue="নিম্নে মূল্যায়ন প্রতিবেদন দেখুন"
-                  style={{
-                    fontSize: "12px",
-                  }}
-                >
-                  <BsFiletypePdf className="fs-4 me-2 " />
-                  ডাউনলোড করুন
-                </button>
-              </h5>
-              {!submittingLoading && (
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              )}
-            </div>
-            <div className="modal-body">
-              {submittingLoading && <p>Loading...</p>}
-              {loading ? (
-                <p>Loading...</p>
-              ) : selected_student?.length > 0 ? (
-                selected_student?.map((data: any, index) => (
-                  <Pdf
-                    data={data}
-                    selectedSunject={selectedSunject}
-                    allFelter={allFelter}
-                    student_info_pdf={data.student_data}
-                    unique_id={data.student_data.uid}
-                    handleConvertToPdf={handleConvertToPdf}
-                    instititute={instititute ? instititute[0] : {}}
-                    teacher={teacher}
-                  />
-                ))
-              ) : (
-                "No Students"
-              )}
-            </div>
-            {!submittingLoading && (
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div
-        className="modal fade"
-        id="staticBackdrop"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">
-                <h5>
-                  শিক্ষার্থীর নাম:
-                  {student_info_pdf.student_name_bn}{" "}
-                </h5>
-
-                <p>
-                  রোল নম্বর # {convertToBanglaNumber(student_info_pdf.roll)}
-                </p>
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <Pdf
-                data={data}
-                selectedSunject={selectedSunject}
-                allFelter={allFelter}
-                unique_id={student_info_pdf.uid}
-                student_info_pdf={student_info_pdf}
-                handleConvertToPdf={handleConvertToPdf}
-                instititute={instititute ? instititute[0] : {}}
-                teacher={teacher}
-              />
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
             </div>
           </div>
         </div>

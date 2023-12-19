@@ -10,6 +10,7 @@ const token: any = authToken ? JSON.parse(authToken) : "";
 axios.defaults.headers.common[
   "Authorization"
 ] = `Bearer ${token?.access_token}`;
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 export function loginPassword(data: any) {
   const page_list = `${API_URL}/v2/login`;
@@ -89,7 +90,7 @@ export function all_class(data: any = "") {
 }
 
 export function Pi_save(data: any) {
-  const page_list = `${EVULATION_API}/pi-evaluation`;
+  const page_list = `${EVULATION_API}/v2/pi-evaluation`;
 
   const options = {
     method: "POST",
@@ -104,7 +105,7 @@ export function Pi_save(data: any) {
 }
 
 export function Bi_save(data: any) {
-  const page_list = `${EVULATION_API}/bi-evaluation`;
+  const page_list = `${EVULATION_API}/v2/bi-evaluation`;
 
   const options = {
     method: "POST",
@@ -282,26 +283,31 @@ export function all_student() {
 // }
 
 export function update_teacher_profile(caid: any, data: any) {
-  // const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
-  const page_list = `https://master.noipunno.gov.bd/api/teachers/${caid}`
+  const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
+
+  let obj = {}
+  for (const [name, value] of data) {
+    obj = { ...obj, [name]: value }
+    // console.log(`KeyName: ${name}, value: ${value}`);
+  }
   const options = {
     method: "PUT",
-    headers: { "content-type": "application/json" },
-    data,
+    headers: { "content-type": "multipart/form-data" },
     url: page_list,
+    params: {
+      ...obj
+    },
   };
-  // console.log("data teacher edit profile", data);
-
-
   return axios(options);
 }
 
 export function get_pi_evaluation_by_pi(
   class_room_uid: any,
   pi_uid: any,
-  evaluate_type: any
+  evaluate_type: any,
+  oviggota_uid: any
 ) {
-  const page_list = `${EVULATION_API}/get-pi-evaluation-by-pi?class_room_uid=${class_room_uid}&pi_uid=${pi_uid}&evaluate_type=${evaluate_type}`;
+  const page_list = `${EVULATION_API}/v2/get-pi-evaluation-by-pi?oviggota_uid=${oviggota_uid}&class_room_uid=${class_room_uid}&pi_uid=${pi_uid}&evaluate_type=${evaluate_type}`;
 
   const options = {
     method: "get",
@@ -318,7 +324,7 @@ export function get_bi_evaluation_by_bi(
   student_uid: any,
   subject_uid: any
 ) {
-  const page_list = `${EVULATION_API}/get-bi-evaluation-by-bi?class_room_uid=${class_room_uid}&evaluate_type=${evaluate_type}&student_uid=${student_uid}&subject_uid=${subject_uid}`;
+  const page_list = `${EVULATION_API}/v2/get-bi-evaluation-by-bi?class_room_uid=${class_room_uid}&evaluate_type=${evaluate_type}&student_uid=${student_uid}&subject_uid=${subject_uid}`;
 
   const options = {
     method: "get",
@@ -334,13 +340,13 @@ export function get_bi_evaluation_by_bi(
 export function bi_report_card_details() {
   const page_list = `${API_URL}/v2/bi-dimension`;
   // https://api.noipunno.gov.bd/api/v2/bi-dimension
-  
+
 
   const options = {
     method: "get",
     headers: { "content-type": "application/json" },
     url: page_list,
-    
+
   };
 
   return axios(options);
@@ -355,7 +361,7 @@ export function bi_report_card_by_student(
   section_uid,
   student_uid = ""
 ) {
-  // const page_list = /assets/yousuf_bi_response.json;
+  // const page_list = `/assets/yousuf_bi_response.json`;
   const page_list = `${EVULATION_API}/v2/bi-report-card-by-student?branch_uid=${branch_uid}&version_uid=${version_uid}&shift_uid=${shift_uid}&class_uid=${class_uid}&section_uid=${section_uid}&student_uid=${student_uid}`;
 
   const options = {
@@ -376,7 +382,7 @@ export function bi_report_card_by_student(
 }
 //teacher.project-ca.com/api/v2/bi-report-card-by-student?branch_uid=1782345351002697&version_uid=1782343521342761&shift_uid=1782343482748247&class_uid=6&section_uid=1782343690355322&student_uid=1784586541382652
 
- export function get_pi_bi_evaluation_list(submit_status: any = "") {
+export function get_pi_bi_evaluation_list(submit_status: any = "") {
   const page_list =
     `${API_URL}/v2/pi-bi-evaluation-list?submit_status=` + submit_status;
 
@@ -398,7 +404,7 @@ export function get_pi_bi(
   section_uid,
   student_uid = ""
 ) {
-  const page_list = `${EVULATION_API}/transcript`;
+  const page_list = `${EVULATION_API}/v2/transcript`;
   // const page_list = `/assets/transcript_response.json`;
 
   const options = {
@@ -420,6 +426,35 @@ export function get_pi_bi(
 }
 
 
+export function get_bi_report(
+  subject_uid,
+  branch_uid,
+  version_uid,
+  shift_uid,
+  class_uid,
+  section_uid,
+  student_uid = ""
+) {
+  const page_list = `${EVULATION_API}/v2/bi-transcript-by-student`;
+  // const page_list = `/assets/transcript_response.json`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+    params: {
+      subject_uid,
+      branch_uid,
+      version_uid,
+      shift_uid,
+      class_uid,
+      section_uid,
+      student_uid,
+    },
+  };
+
+  return axios(options);
+}
 
 export function get_pi_bi_by_student_student(
   subject_uid,
@@ -430,7 +465,7 @@ export function get_pi_bi_by_student_student(
   section_uid,
   student_uid = ""
 ) {
-  const page_list = `${EVULATION_API}/transcript-by-student`;
+  const page_list = `${EVULATION_API}/v2/transcript-by-student`;
   // const page_list = `/assets/transcript_response.json`;
 
   const options = {
@@ -460,8 +495,8 @@ export function get_report_card(
   section_uid,
   student_uid = ""
 ) {
-  // const page_list = `${EVULATION_API}/report-card-by-student`;
-  const page_list = `/assets/report_card.json`;
+  const page_list = `${EVULATION_API}/v2/report-card-by-student`;
+  // const page_list = `/assets/report_card.json`;
 
   const options = {
     method: "get",

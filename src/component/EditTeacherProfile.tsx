@@ -1,8 +1,10 @@
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useEffect, useId, useState } from "react";
-import { all_district, all_division, all_upozila, update_teacher_profile } from "../Request";
+import { all_district, all_division, all_upozila, teacher_dashboard, update_teacher_profile } from "../Request";
 import Breadcumbtitle from "../layout/Breadcumb";
 import Swal from "sweetalert2";
+// import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
 
 
 
@@ -11,42 +13,31 @@ const EditTeacherProfile = () => {
   const [userDetails, setuserDetails] = useState<any>({});
 
   const [allDivision, setAllDivision] = useState<any>([]);
-  const [allllDistrict, setAllDistrict] = useState<any>([]);
+  const [allDistrict, setAllDistrict] = useState<any>([]);
   const [allUpozila, setAllUpozila] = useState<any>([]);
 
   const [district, setdistrict] = useState<any>([]);
   const [upozila, setupozila] = useState<any>([]);
-  const [all_local_storage_data, setAll_local_storage_data] = useState<any>({})
-  const { pdsid, caid, name, email, phone_no } = userDetails;
 
-  // console.log(userDetails);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
+  const { name_en, name_bn, email, mobile_no, date_of_birth, gender, designation, division_id, district_id, upazilla_id, pdsid, caid } = userDetails;
+
+
+
+  const getUserDetails = () => {
+    const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
+    if (get_teachers_details) {
+      setuserDetails(get_teachers_details?.data?.teachers[0]);
+    }
+  }
 
   const handleTeacherProfileEdit = async (event: any) => {
     event.preventDefault()
     const formDatas = new FormData(event.target);
 
-    for (const [name, value] of formDatas) {
-      console.log(`KeyName: ${name}, value: ${value}`);
-    }
-
-    const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const phone_no = form.phone_no.value;
-
-    const new_localstorage_data = { ...all_local_storage_data }
-    const new_user_info = { ...userDetails };
-    new_user_info.name = name;
-    new_user_info.email = email;
-    new_user_info.phone_no = phone_no;
-    new_localstorage_data.user = new_user_info;
-
-    // console.log("New Local storage data====>", new_user_info);
-
     try {
       const { data }: any = await update_teacher_profile(caid, formDatas);
-
 
       if (data.status === true) {
         Swal.fire({
@@ -56,37 +47,39 @@ const EditTeacherProfile = () => {
           showConfirmButton: false,
           timer: 1500
         })
-        localStorage.setItem("customer_login_auth", JSON.stringify(new_localstorage_data));
 
-        // setTimeout(() => {
-        //   window.location.replace("/");
-        // }, 1000)
+        const data_dash: any = await teacher_dashboard();
+        console.log(data_dash.data.data.teachers[0]);
+
+        localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
+
+
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 1000)
+
       }
     } catch (error) {
       alert('হালনাগাদ সম্পন্ন হয়নি, আবার চেষ্টা করুন!');
     }
   }
 
-
   const fetchData = async () => {
+    const division_data = await all_division();
+    const district_data = await all_district();
+    const upozila_data = await all_upozila();
+    setAllDivision(division_data?.data?.data);
+    setAllDistrict(district_data?.data?.data);
+    setAllUpozila(upozila_data?.data?.data);
 
-    const division_data = await all_division()
-    const district_data = await all_district()
-    const upozila_data = await all_upozila()
-
-
-
-    // setdivision(division_data?.data?.data)
-    // setdistrict(district_data?.data?.data)
-    // setupozila(upozila_data?.data?.data)
-
-    setAllDivision(division_data?.data?.data)
-    setAllDistrict(district_data?.data?.data)
-    setAllUpozila(upozila_data?.data?.data)
+    if (division_id) {
+      const getAssignedDistrict = allDistrict.filter(district => district.district_id == district_id)
+      setdistrict(getAssignedDistrict)
+    }
   };
 
   const getdistrictBydivisionID = (id) => {
-    const divisionWiseDistric = allllDistrict.filter(district => district.division_id == id)
+    const divisionWiseDistric = allDistrict.filter(district => district.division_id == id)
     setdistrict(divisionWiseDistric)
   }
 
@@ -96,14 +89,13 @@ const EditTeacherProfile = () => {
   }
 
   useEffect(() => {
-    const get_loacl_storage_data = JSON.parse(localStorage.getItem("customer_login_auth"));
-    if (get_loacl_storage_data) {
-      setAll_local_storage_data(get_loacl_storage_data)
-      setuserDetails(get_loacl_storage_data.user);
-
-    }
     fetchData();
+    getUserDetails();
   }, []);
+
+  // console.log("userDetails", userDetails);
+  // console.log("gender", gender);
+
 
   return (
     <section className="editTeacherProfilePage">
@@ -120,33 +112,55 @@ const EditTeacherProfile = () => {
               <div className="tab-pane fade show active" id="expertness" role="tabpanel" aria-labelledby="expertness-tab" >
 
                 <form className="row m-4" onSubmit={handleTeacherProfileEdit}>
-
-
-
-
                   <div className="form-group  col-sm-4 col-md-6">
                     <div className="mb-3" style={{ fontSize: "16px" }}>
-                      <label className="form-label">নাম</label>
+                      <label className="form-label">ইউজার আইডি</label>
                       <div className="input-group">
-                        <input type="text" id="pin" className="form-control" name="name" defaultValue={name} />
+                        <input type="text" id="pin" className="form-control" readOnly
+                          // name="xxxxx"
+                          defaultValue={pdsid || caid} />
                       </div>
                     </div>
                   </div>
 
                   <div className="form-group  col-sm-4 col-md-6">
                     <div className="mb-3" style={{ fontSize: "16px" }}>
-                      <label className="form-label">ব্যবহারকারী আইডি</label>
+                      <label className="form-label">নাম (বাংলা)</label>
                       <div className="input-group">
-                        <input type="text" id="pin" className="form-control" readOnly name="phone_no" defaultValue={pdsid || caid} />
+                        <input type="text" id="pin" className="form-control" name="name_bn" defaultValue={name_bn} placeholder="আপনার নাম লিখুন (বাংলায়)" />
                       </div>
                     </div>
                   </div>
 
                   <div className="form-group  col-sm-4 col-md-6">
                     <div className="mb-3" style={{ fontSize: "16px" }}>
-                      <label className="form-label">ফোন নম্বর</label>
+                      <label className="form-label">নাম (ইংরেজি)</label>
                       <div className="input-group">
-                        <input type="text" id="pin" className="form-control" readOnly name="phone_no" defaultValue={phone_no} />
+                        <input type="text" id="pin" className="form-control" name="name_en" placeholder="আপনার নাম লিখুন (ইংরেজিতে)" defaultValue={name_en} />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group  col-sm-4 col-md-6">
+                    <div className="mb-3" style={{ fontSize: "16px" }}>
+                      <label className="form-label">মোবাইল নাম্বার</label>
+                      <div className="input-group">
+                        <input type="text" id="pin" className="form-control"
+                          // readOnly
+                          name="mobile_no"
+                          placeholder="আপনার মোবাইল নাম্বার দিন"
+                          defaultValue={mobile_no} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="form-group  col-sm-4 col-md-6">
+                    <div className="mb-3" style={{ fontSize: "16px" }}>
+                      <label className="form-label">পদবী</label>
+                      <div className="input-group">
+                        <input type="text" id="pin" className="form-control"
+                          readOnly
+                          // name="designation"
+                          defaultValue={designation} />
                       </div>
                     </div>
                   </div>
@@ -156,7 +170,54 @@ const EditTeacherProfile = () => {
                     <div className="mb-3" style={{ fontSize: "16px" }}>
                       <label className="form-label">ইমেইল আইডি </label>
                       <div className="input-group">
-                        <input type="text" id="pin" className="form-control" readOnly name="email" defaultValue={email} />
+                        <input type="text" id="pin" className="form-control" readOnly
+                          name="email"
+                          defaultValue={email} />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group  col-sm-4 col-md-6">
+                    <div className="mb-3" style={{ fontSize: "16px" }}>
+                      <label className="form-label">জন্ম তারিখ </label>
+                      <div className="input-group">
+                        <input type="text" id="pin" className="form-control"
+                          placeholder="আপনার জন্ম তারিখ দিন"
+                          name="date_of_birth"
+                          defaultValue={date_of_birth} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* <div className="form-group col-sm-4 col-md-6">
+                    <div className="mb-3" style={{ fontSize: '16px' }}>
+                      <label className="form-label">জন্ম তারিখ </label>
+                      <div className="input-group">
+                        <DatePicker
+                          selected={selectedDate}
+                          onChange={(date) => setSelectedDate(date)}
+                          dateFormat="dd/MM/yyyy" 
+                          placeholderText="আপনার জন্ম তারিখ দিন"
+                          className="form-control"
+                          name="date_of_birth"
+                        />
+                      </div>
+                    </div>
+                  </div> */}
+
+                  
+                  <div className="form-group col-sm-4 col-md-6">
+                    <div className="mb-3" style={{ fontSize: "16px" }}>
+                      <label htmlFor="gender" className="form-label">লিঙ্গ</label>
+                      <div className="input-group">
+                        <select className="form-control"
+                          name="gender"
+                          value={gender || ''}>
+                          <option value={''}>লিঙ্গ নির্বাচন করুন</option>
+                          <option value={1}>পুরুষ</option>
+                          <option value={2}>মহিলা</option>
+                          <option value={3}>অন্যান্য</option>
+                        </select>
                       </div>
                     </div>
                   </div>
@@ -164,75 +225,90 @@ const EditTeacherProfile = () => {
                   <div className="form-group  col-sm-4 col-md-6">
                     <div className="mb-3" style={{ fontSize: "16px" }}>
                       <label className="form-label"> বিভাগ</label>
-                      <select className="form-control" name="division_id"
+                      <select className="form-control"
+                        name="division_id"
                         onChange={(e: any) => getdistrictBydivisionID(e.target.value)}>
                         {
                           allDivision.map((d, k) =>
-                            <option value={d?.uid}>{d?.division_name_bn || d?.division_name_en}</option>
-                          )
+                            <option key={k} value={d?.uid} selected={d?.uid == division_id}>
+                              {d?.division_name_bn || d?.division_name_en}
+                            </option>)
                         }
 
                       </select>
                     </div>
                   </div>
 
-                  {/* <div className="form-group  col-sm-4 col-md-6">
-                    <div className="mb-3" style={{ fontSize: "16px" }}>
-                      <label className="form-label"> জেলা</label>
-                      <select className="form-control" name="district_id"
-                        onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
-                        {
-                          district.map((d) =>
-                            <option value={d?.uid}>{d?.district_name_bn || d?.district_name_en}</option>
-                          )
-                        }
-                      </select>
-                    </div>
-                  </div> */}
-
-                  {(district.length > 0) && <div className="form-group  col-sm-4 col-md-6">
-                    <div className="mb-3" style={{ fontSize: "16px" }}>
-                      <label className="form-label"> জেলা</label>
-                      <select className="form-control" name="district_id"
-                        onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
-                        {
-                          district.map((d) =>
-                            <option value={d?.uid}>{d?.district_name_bn || d?.district_name_en}</option>
-                          )
-                        }
-                      </select>
-                    </div>
-                  </div>}
 
 
-
-                  {/* <div className="form-group  col-sm-4 col-md-6">
-                    <div className="mb-3" style={{ fontSize: "16px" }}>
-                      <label className="form-label"> উপজেলা</label>
-                      <select className="form-control" name="upazilla_id">
-                        {
-                          upozila.map((d) =>
-                            <option value={d?.uid}>{d?.upazila_name_bn || d?.upazila_name_en}</option>
-                          )
-                        }
-                      </select>
-                    </div>
-                  </div> */}
-
-                  {
-                    (upozila.length > 0) &&
+                  {(district.length > 0) ?
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
-                        <label className="form-label"> উপজেলা</label>
-                        <select className="form-control" name="upazilla_id">
+                        <label className="form-label"> জেলা</label>
+                        <select className="form-control" name="district_id"
+                          onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
+
                           {
-                            upozila.map((d) =>
-                              <option value={d?.uid}>{d?.upazila_name_bn || d?.upazila_name_en}</option>
+                            district.map((d, k) =>
+                              <option key={k} value={d?.uid} selected={d?.uid == district_id}>
+                                {d?.district_name_bn || d?.district_name_en}
+                              </option>
                             )
                           }
                         </select>
                       </div>
                     </div>
+                    :
+                    <div className="form-group  col-sm-4 col-md-6">
+                      <div className="mb-3" style={{ fontSize: "16px" }}>
+                        <label className="form-label"> জেলা</label>
+                        <select className="form-control" name="district_id"
+                          onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
+
+                          {
+                            allDistrict.map((d, k) =>
+                              <option key={k} value={d?.uid} selected={d?.uid == district_id}>
+                                {d?.district_name_bn || d?.district_name_en}
+                              </option>
+                            )
+                          }
+                        </select>
+                      </div>
+                    </div>
+
+                  }
+
+                  {
+                    (upozila.length > 0) ?
+                      <div className="form-group  col-sm-4 col-md-6">
+                        <div className="mb-3" style={{ fontSize: "16px" }}>
+                          <label className="form-label"> উপজেলা</label>
+                          <select className="form-control" name="upazilla_id">
+                            {
+                              upozila.map((d, k) =>
+                                <option key={k} value={d?.uid} selected={d?.uid == upazilla_id}>
+                                  {d?.upazila_name_bn || d?.upazila_name_en}
+                                </option>
+                              )
+                            }
+                          </select>
+                        </div>
+                      </div>
+                      :
+                      <div className="form-group  col-sm-4 col-md-6">
+                        <div className="mb-3" style={{ fontSize: "16px" }}>
+                          <label className="form-label"> উপজেলা</label>
+                          <select className="form-control" name="upazilla_id">
+                            {
+                              allUpozila.map((d, k) =>
+                                <option key={k} value={d?.uid} selected={d?.uid == upazilla_id}>
+                                  {d?.upazila_name_bn || d?.upazila_name_en}
+                                </option>
+                              )
+                            }
+                          </select>
+                        </div>
+                      </div>
                   }
 
                   <div className="d-flex justify-content-end align-items-center pt-3 pe-3">

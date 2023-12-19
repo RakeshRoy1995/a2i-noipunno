@@ -14,12 +14,12 @@ const EditTeacherProfile = () => {
   const [allDistrict, setAllDistrict] = useState<any>([]);
   const [allUpozila, setAllUpozila] = useState<any>([]);
   const [allDesignation, setAllDesignation] = useState<any>([]);
-  const [teacherDesignation, seTeacherDesignation] = useState<any>('');
+  const [teacherDesignation, seTeacherDesignation] = useState<any>('(Not Assign)');
   const [district, setdistrict] = useState<any>([]);
   const [upozila, setupozila] = useState<any>([]);
   const [countdown, setCountdown] = useState(30);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  // const [selectedDate, setSelectedDate] = useState('');
+  
 
 
   const {
@@ -59,18 +59,7 @@ const EditTeacherProfile = () => {
       const getAssignedDistrict = allDistrict.filter(district => district.district_id == district_id)
       setdistrict(getAssignedDistrict)
     }
-    
-
-    // if (designation_id) {
-    //   const find_current_user_designation = allDesignation?.filter(designation => designation?.uid == designation_id)
-    //   find_current_user_designation.map(item => seTeacherDesignation(item.designation_name))
-    //   console.log(find_current_user_designation);
-    // }
-
   };
-
-
-
 
   const getdistrictBydivisionID = (id) => {
     const divisionWiseDistric = allDistrict.filter(district => district.division_id == id)
@@ -81,7 +70,6 @@ const EditTeacherProfile = () => {
     const zilawiseUpazila = allUpozila.filter(upozila => upozila.district_id == id)
     setupozila(zilawiseUpazila)
   }
-
 
 
   const handleTeacherProfileEdit = async (event: any) => {
@@ -160,7 +148,7 @@ const EditTeacherProfile = () => {
       <Breadcumbtitle title={"প্রোফাইল হালনাগাদ"} />
       {
         (allDivision.length == 0) ?
-          <div className="d-flex flex-column align-items-center justify-content-center vh-100">
+          <div className="d-flex flex-column align-items-center justify-content-center vh-50%">
             <div className="spinner-border text-primary" role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
@@ -332,7 +320,6 @@ const EditTeacherProfile = () => {
                                 onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
                                 <option value={''}>জেলা নির্বাচন করুন</option>
                                 {
-
                                   allDistrict.map((d, k) =>
                                     <option key={k} value={d?.uid} selected={d?.uid == district_id}>
                                       {d?.district_name_bn || d?.district_name_en}

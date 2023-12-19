@@ -110,17 +110,31 @@ const EditTeacherProfile = () => {
     getUserDetails();
   }, []);
 
+  const [countdown, setCountdown] = useState(30);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown(prevCountdown => (prevCountdown > 0 ? prevCountdown - 1 : 0));
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+  if (countdown == 0) {
+    window.location.replace("/");
+  }
+
   return (
     <section className="editTeacherProfilePage">
       <Breadcumbtitle title={"প্রোফাইল হালনাগাদ"} />
       {
         (allDivision.length < 0) ?
-        <div className="d-flex flex-column align-items-center justify-content-center vh-100">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
+          <div className="d-flex flex-column align-items-center justify-content-center vh-100">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <p className="mt-2">Server Busy, Please Wait...</p>
+            <p className="mt-2">Retry in {countdown} seconds</p>
           </div>
-          <p className="mt-2">Server Busy, Please Wait...</p>
-        </div>
         :
         <div className="container my-3">
           <div className="d-flex align-items-center">

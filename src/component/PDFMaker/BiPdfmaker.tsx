@@ -37,6 +37,10 @@ const styles = StyleSheet.create({
   section12: {},
   section13: {},
 
+  alignCenter: {
+    textAlign: 'center',
+  },
+
   h1: {
     fontFamily: "Nikosh",
     fontSize: 20,
@@ -108,6 +112,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#DCDDDE",
     marginTop: "20px",
     marginBottom: "30px",
+    // textAlign: "center",
+
   },
 
   subjectContainer: {
@@ -144,6 +150,24 @@ const styles = StyleSheet.create({
     width: "50%",
   },
 
+  columnX: {
+    flexDirection: "column",
+    marginRight: 5,
+    width: "10%",
+  },
+
+  columnY: {
+    flexDirection: "column",
+    marginRight: 5,
+    width: "30%",
+  },
+
+  column2: {
+    flexDirection: "column",
+    marginRight: 5,
+    width: "20%",
+  },
+
   row2: {
     flexDirection: "row",
     marginBottom: 5,
@@ -154,6 +178,14 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     flexWrap: "wrap",
+    textAlign: "center",
+  },
+
+  dot:{
+    borderBottom: '2px dotted black',
+    fontFamily: "Nikosh",
+    fontSize: "12px",
+   marginTop: "10px",
   },
 
   box1: {
@@ -171,7 +203,8 @@ const styles = StyleSheet.create({
   text: {
     marginBottom: "10px",
     fontFamily: "Nikosh",
-    fontSize: 22,
+    fontSize: "18px",
+    
   },
 
   paragraph: {
@@ -334,6 +367,7 @@ const styles = StyleSheet.create({
 
   achoronikContainer: {
     marginTop: "20px",
+    
   },
 
   scalemargin: {
@@ -385,41 +419,52 @@ const MyDocument = ({
       {/* student info */}
       <View style={[styles.headerTop]}>
         <View style={[styles.row]}>
+          <View style={[styles.columnX]}>
+            <Text style={[styles.h2, styles.colortext]}> প্রতিষ্ঠানের নাম :  </Text>
+          </View>
+          <View style={[styles.columnY]}>
+            <Text style={styles.dot}>{instititute?.branch_name}{" "}</Text>
+          </View>
+        </View>
+
+
+        <View style={[styles.row]}>
           <Text style={[styles.h2, styles.colortext]}>
-            প্রতিষ্ঠানের নাম : {instititute?.branch_name}{" "}
-          </Text>
-         
-          
-          
+            প্রতিষ্ঠানের নাম : </Text> <Text style={styles.dot}>{instititute?.branch_name}{" "}</Text>
         </View>
 
         <View style={[styles.row]}>
           <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শিক্ষার্থীর নাম :{" "}
-            {student?.student_name_bn || student?.student_name_en}{" "}
+            শিক্ষার্থীর নাম :</Text> <Text style={styles.dot}>
+            {student?.student_name_bn || student?.student_name_en}
           </Text>
           <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শিক্ষার্থীর আইডি : {convertToBanglaNumber(student?.roll)}{" "}
+            শিক্ষার্থীর আইডি :</Text> <Text style={styles.dot}>
+               {convertToBanglaNumber(student?.roll)}
           </Text>
         </View>
         <View style={[styles.row]}>
           <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শ্রেণী : {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}{" "}
+            শ্রেণী : </Text> <Text style={styles.dot}>
+            {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}
           </Text>
           <Text style={[styles.h2, styles.colortext, styles.column]}>
-            শিক্ষাবর্ষ : {convertToBanglaNumber(student?.registration_year)}{" "}
+            শিক্ষাবর্ষ : </Text> <Text style={styles.dot}>
+              {convertToBanglaNumber(student?.registration_year)}
           </Text>
         </View>
       </View>
 
       {/* subjects */}
       <View style={[styles.containerMain, styles.borderTop]}>
+        <View style={{  width: "80%",
+margin: "auto",}}>  
         <Text style={[styles.h1, styles.colortext, styles.subjectTitle]}>
           {" "}
           বিষয়সমূহ{" "}
         </Text>
 
-        <View style={[styles.row, styles.subjectContainer]}>
+        <View style={[styles.row, styles.subjectContainer, ]}>
           <View style={styles.column}>
             {selected_student?.map((item, index) => {
               console.log("selected_student",selected_student);
@@ -433,6 +478,8 @@ const MyDocument = ({
                 )
               );
             })}
+
+
           </View>
 
           <View style={styles.column}>
@@ -448,7 +495,7 @@ const MyDocument = ({
             })}
           </View>
         </View>
-      </View>
+      </View></View>
     </Page>
 
     {/* Dynamic Subject Page */}
@@ -457,7 +504,7 @@ const MyDocument = ({
 
       {selected_student.map((item) => (
         <View wrap={false}>
-          <View>
+          <View >
             <Text
               style={[
                 styles.h1,
@@ -1111,14 +1158,15 @@ const BiRawPDFDownload = ({
           }
         </PDFDownloadLink>
       </div>
-      {/* <PDFViewer width={800} height={800}>
+      <PDFViewer width={800} height={800}>
         <MyDocument
           selected_student={selected_student}
           student={student}
           instititute={instititute}
           subject_name={subject_name}
+          biData={biData}
         />
-      </PDFViewer> */}
+      </PDFViewer>
     </div>
   );
 };

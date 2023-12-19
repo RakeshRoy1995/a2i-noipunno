@@ -347,15 +347,16 @@ export function bi_report_card_details() {
 }
 
 export function bi_report_card_by_student(
-  branch_uid: any,
-  version_uid: any,
-  student_uid: any,
-  shift_uid: any,
-  class_uid: any,
-  section_uid: any
+  subject_uid,
+  branch_uid,
+  version_uid,
+  shift_uid,
+  class_uid,
+  section_uid,
+  student_uid = ""
 ) {
-  const page_list = `/assets/yousuf_bi_response.json`;
-  // `${API_URL}/bi-report-card-by-student?branch_uid=${branch_uid}&version_uid=${version_uid}&shift_uid=${shift_uid}&class_uid=${class_uid}&section_uid=${section_uid}&student_uid=${student_uid}`;
+  // const page_list = /assets/yousuf_bi_response.json;
+  const page_list = `${EVULATION_API}/v2/bi-report-card-by-student?branch_uid=${branch_uid}&version_uid=${version_uid}&shift_uid=${shift_uid}&class_uid=${class_uid}&section_uid=${section_uid}&student_uid=${student_uid}`;
 
   const options = {
     method: "get",

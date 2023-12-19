@@ -422,7 +422,8 @@ const MyDocument = ({
         <View style={[styles.row, styles.subjectContainer]}>
           <View style={styles.column}>
             {selected_student?.map((item, index) => {
-              console.log("selected_student",selected_student);
+              console.log("selected_student", subject_name(item[0]));
+              
               
               return (
                 index < 5 && (
@@ -437,6 +438,8 @@ const MyDocument = ({
 
           <View style={styles.column}>
             {selected_student?.map((item, index) => {
+
+
               return (
                 index >= 5 && (
                   <Text style={styles.text}>
@@ -1087,6 +1090,8 @@ const BiRawPDFDownload = ({
   instititute,
   biData,
 }) => {
+
+  console.log(`student --- `, student);
   const pdf_name =
     student?.student_name_bn ||
     student?.student_name_en + "-report-card-result" + ".pdf";

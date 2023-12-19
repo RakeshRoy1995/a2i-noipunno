@@ -55,7 +55,6 @@ const TestCase = () => {
               The prime minister also exchanged pleasantries with the family members of the martyred intellectuals here.
               Then, she went to Dhanmondi Road No 32 and laid a wreath at the portrait of the Father of the Nation in front of Bangabandhu Memorial Museum to pay homage to the architect of the Independence Bangabandhu Sheikh Mujibur Rahman.
             </Text>
-
           </View>
         </View>
 

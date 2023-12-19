@@ -119,7 +119,8 @@ const EditTeacherProfile = () => {
       clearInterval(timer);
     };
   }, []);
-  if (countdown == 0) {
+
+  if ((allDivision.length < 0) && (countdown == 0)) {
     window.location.replace("/");
   }
 
@@ -269,7 +270,8 @@ const EditTeacherProfile = () => {
                         <label className="form-label"> বিভাগ</label>
                         <select className="form-control"
                           name="division_id"
-                          onChange={(e: any) => getdistrictBydivisionID(e.target.value)}>
+                            onChange={(e: any) => getdistrictBydivisionID(e.target.value)}>
+                            <option value={''}>বিভাগ নির্বাচন করুন</option>
                           {
                             allDivision.map((d, k) =>
                               <option key={k} value={d?.uid} selected={d?.uid == division_id}>
@@ -306,15 +308,17 @@ const EditTeacherProfile = () => {
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label className="form-label"> জেলা</label>
                           <select className="form-control" name="district_id"
-                            onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
-
-                            {
-                              allDistrict.map((d, k) =>
-                                <option key={k} value={d?.uid} selected={d?.uid == district_id}>
-                                  {d?.district_name_bn || d?.district_name_en}
-                                </option>
-                              )
-                            }
+                                onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
+                                <option value={''}>জেলা নির্বাচন করুন</option>
+                                {
+                            
+                                  allDistrict.map((d, k) =>
+                                    <option key={k} value={d?.uid} selected={d?.uid == district_id}>
+                                      {d?.district_name_bn || d?.district_name_en}
+                                    </option>
+                                  )
+                                }
+                            
                           </select>
                         </div>
                       </div>
@@ -325,8 +329,9 @@ const EditTeacherProfile = () => {
                       (upozila.length > 0) ?
                         <div className="form-group  col-sm-4 col-md-6">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
-                            <label className="form-label"> উপজেলা</label>
-                            <select className="form-control" name="upazilla_id">
+                            <label className="form-label">উপজেলা</label>
+                              <select className="form-control" name="upazilla_id">
+                                <option value={''}>উপজেলা নির্বাচন করুন</option>
                               {
                                 upozila.map((d, k) =>
                                   <option key={k} value={d?.uid} selected={d?.uid == upazilla_id}>
@@ -341,7 +346,9 @@ const EditTeacherProfile = () => {
                         <div className="form-group  col-sm-4 col-md-6">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label"> উপজেলা</label>
-                            <select className="form-control" name="upazilla_id">
+                              <select className="form-control" name="upazilla_id">
+                                <option value={''}>উপজেলা নির্বাচন করুন</option>
+                                
                               {
                                 allUpozila.map((d, k) =>
                                   <option key={k} value={d?.uid} selected={d?.uid == upazilla_id}>

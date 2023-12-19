@@ -551,3 +551,40 @@ export const make_group_by_report_data = (studentData: any) => {
 
   return groupedByStudentId;
 };
+
+
+export const show_sub_by_religion = (religion:any , subject_name:any)=>{
+  if (
+    religion == "Islam" &&
+    (subject_name == "হিন্দুধর্ম শিক্ষা" || subject_name== "খ্রীষ্টধর্ম শিক্ষা" || subject_name== "বৌদ্ধধর্ম শিক্ষা" )
+  ) {
+    return true;
+  }
+
+
+  if (
+    religion == "Hinduism" &&
+    (subject_name == "ইসলাম শিক্ষা" || subject_name== "খ্রীষ্টধর্ম শিক্ষা" || subject_name== "বৌদ্ধধর্ম শিক্ষা" )
+  ) {
+    return true;
+  }
+
+
+  if (
+    religion == "Christianity" &&
+    (subject_name == "ইসলাম শিক্ষা" || subject_name== "হিন্দুধর্ম শিক্ষা" || subject_name== "বৌদ্ধধর্ম শিক্ষা" )
+  ) {
+    return true;
+  }
+
+
+  if (
+    religion == "Buddhism" &&
+    (subject_name == "ইসলাম শিক্ষা" || subject_name== "খ্রীষ্টধর্ম শিক্ষা" || subject_name== "বৌদ্ধধর্ম শিক্ষা" )
+  ) {
+    return true;
+  }
+
+
+  return false
+}

@@ -55,7 +55,6 @@ export default function StudentTranscript() {
   const [data, setdata] = useState<any>({});
   const [selected_student, setselected_student] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
-  const [loading, setLoading] = useState(false);
   const [submittingLoading, setsubmittingLoading] = useState(false);
 
   const fetchData = async () => {
@@ -72,8 +71,6 @@ export default function StudentTranscript() {
       own_subjet = await teacher_own_subject();
       localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
     }
-
-    console.log(`own_subjet`, own_subjet);
 
     let data: any = "";
     if (teacher_dash) {
@@ -115,7 +112,6 @@ export default function StudentTranscript() {
     setversion(teacher_dash?.data?.versions);
     setinstititute(teacher_dash?.data?.branches);
 
-    console.log(`all_subject`, all_subject);
     setsubject(all_subject);
     setloader(false);
     setassesment(own_subjet?.data?.data?.assessments[0]?.assessment_details);
@@ -190,6 +186,8 @@ export default function StudentTranscript() {
         const data = formate_teanscript_data(
           pi_bi_data.data.transcript
         );
+
+        console.log(`datat`, data);
 
         setselected_student(data);
       } else {

@@ -293,14 +293,14 @@ const MyDocument = ({
                   </Text>
                 </View>
                 <Text style={styles.tableCell}>
-                  {/* {pi_data?.title_bn || pi_data?.title_en}{" "} */}
+                  {pi_data?.title_bn || pi_data?.title_en}{" "}
 
-                  {pi_data?.title_bn?.replace(/\s/g, " ").split(' ').map((word, index) => (
+                  {/* {pi_data?.title_bn?.replace(/\s/g, " ").split(' ').map((word, index) => (
                     <React.Fragment key={index}>
                       {index > 0 && index % 5 === 0 && <Text>{"\n"}</Text>}
                       {word}{' '}
                     </React.Fragment>
-                  ))}
+                  ))} */}
 
                 </Text>
               </View>
@@ -350,13 +350,7 @@ const PDFMakerBiTranscript = ({
   teacher,
 }: any) => {
 
-
-  const pdf_name =
-    student_info_pdf?.student_name_bn ||
-    student_info_pdf?.student_name_en +
-    "-" +
-    convertToBanglaNumber(student_info_pdf?.roll) +
-    ".pdf";
+    const pdf_name = student_info_pdf?.student_name_en+ "class-" + student_info_pdf?.class + "-bi-result-roll-" + student_info_pdf?.roll + ".pdf";
 
     console.log(`student_info_pdf`, student_info_pdf , data);
 

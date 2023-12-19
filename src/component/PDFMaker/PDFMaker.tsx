@@ -351,12 +351,7 @@ const RawPDFDownload = ({
   teacher,
 }: any) => {
 
-  const pdf_name =
-    student_info_pdf?.student_name_bn ||
-    student_info_pdf?.student_name_en +
-    "-" +
-    convertToBanglaNumber(student_info_pdf?.roll) +
-    ".pdf";
+    const pdf_name = student_info_pdf?.student_name_en+ "class-" + student_info_pdf?.class + "-pi-roll-" + student_info_pdf?.roll +  ".pdf";
 
   const subject_teacher = localStorage.getItem("teacher_dashboard") ? JSON.parse(localStorage.getItem("teacher_dashboard")) : ""
   return (

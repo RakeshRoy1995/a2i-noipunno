@@ -26,7 +26,7 @@ import PasswordReset from "./component/PasswordReset";
 import StudentReport from "./component/StudentReport";
 import PDFMaker from "./component/PDFMaker/PDFMaker";
 import TestCase from "./component/Dashboards/TestCase/TestCase";
-import BiRawPDFDownload from "./component/PDFMaker/BiPdfmaker";
+import BiRawPDFDownload from "./component/PDFMaker/ReportPdf";
 import StudentTranscriptBI from "./component/StudentTranscriptBI";
 // import PdfGenerator from "./component/Dashboards/TestCase/PdfGenerator";
 import GeneratePdf from "./component/generatePdf/GeneratePdf";

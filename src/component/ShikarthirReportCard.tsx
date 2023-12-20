@@ -1,4 +1,4 @@
-import BiRawPDFDownload from "./PDFMaker/BiPdfmaker";
+import BiRawPDFDownload from "./PDFMaker/ReportPdf";
 
 const ShikarthirReportCard = ({
   selected_student,

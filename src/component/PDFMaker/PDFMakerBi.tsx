@@ -24,9 +24,9 @@ Font.register({ family: "Kalpurush", src: "kalpurush.ttf", fontStyle: 'normal',
 fontWeight: 'normal',
 unicodeRange: 'U+0000-FFFF',
 fontFace: {
-  unitsPerEm: 1000,
-  ascent: 800,
-  descent: -200,
+  unitsPerEm: 10,
+  ascent: 8,
+  descent: -2,
 }, });
 // Font.register({ family: "Kalpurush", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
 
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
 
     // flexDirection: 'row',
     // flexWrap: 'wrap',
-
+    width: '90%',
 
   },
 

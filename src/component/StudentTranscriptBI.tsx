@@ -202,12 +202,8 @@ export default function StudentTranscriptBI() {
           student_name
         );
 
-        const bi = await bi_info();
-
-        console.log(`pi_bi_data`, pi_bi_data.data.trancript , student_name , bi);
-
         const data = formate_Bi_teanscript_dataBy_single_student(
-          pi_bi_data?.data?.trancript , student_name , bi 
+          pi_bi_data?.data?.trancript , student_name 
         );
 
         // data.sort((a, b) => a.age - b.age);

@@ -172,11 +172,11 @@ const styles = StyleSheet.create({
     width: "30%",
   },
 
-  column2: {
-    flexDirection: "column",
-    marginRight: 5,
-    width: "20%",
-  },
+  // column2: {
+  //   flexDirection: "column",
+  //   marginRight: 5,
+  //   width: "20%",
+  // },
 
   row2: {
     flexDirection: "row",
@@ -1160,9 +1160,9 @@ const BiRawPDFDownload = ({
   instititute,
   biData,
 }) => {
-  console.log(`student --- `, student);
+  // console.log(`student --- `, student);
   const pdf_name = student?.student_name_en + "-report-card-result-roll-" + student?.roll + ".pdf";
-  console.log(`student`, student, biData);
+  // console.log(`student`, student, biData);
   return (
     <div>
       <div>
@@ -1183,7 +1183,7 @@ const BiRawPDFDownload = ({
           }
         </PDFDownloadLink>
       </div>
-      <PDFViewer width={800} height={800}>
+      {/* <PDFViewer width={800} height={800}>
         <MyDocument
           selected_student={selected_student}
           student={student}
@@ -1191,7 +1191,7 @@ const BiRawPDFDownload = ({
           subject_name={subject_name}
           biData={biData}
         />
-      </PDFViewer>
+      </PDFViewer> */}
     </div>
   );
 };

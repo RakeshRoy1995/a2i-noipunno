@@ -117,6 +117,23 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderTopWidth: 0,
   },
+
+  tableColName: {
+    width: "75%",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+  },
+  tableColRoll: {
+    width: "25%",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+  },
+
+
   tableColTitle: {
     width: "100%",
     borderStyle: "solid",
@@ -124,10 +141,11 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderTopWidth: 0,
   },
+
   tableCell: {
     fontFamily: "kalpurush",
     // margin: "auto",
-    padding: "5px",
+    padding: "2px",
     // marginTop: 5,
     fontSize: 11,
     lineHeight: "1px",
@@ -135,8 +153,10 @@ const styles = StyleSheet.create({
 
     textOverflow: "ellipsis",
 
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
+
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    // textAlign: "center"
 
 
   },
@@ -182,23 +202,7 @@ const styles = StyleSheet.create({
     height: "10px",
   },
 
-  teacherSignatureContainer: {
-    marginTop: "50px",
-    display: "flex",
-    flexDirection: "row",
-    gap: "150px",
-  },
-  teacherSignature: {
-    fontFamily: "kalpurush",
-    color: "#000",
-    marginTop: "10px",
-    fontSize: 12,
-    fontWeight: 600,
-  },
 });
-
-
-
 
 
 const MyDocument = ({
@@ -210,7 +214,7 @@ const MyDocument = ({
   subject_teacher
 }: any) => (
   <Document>
-    <Page size="A4" style={styles.page}>
+    <Page size="A4" style={styles.page} orientation="landscape">
       <View fixed >
         <Text style={[styles.h1]}>
           {instititute?.branch_name}
@@ -221,43 +225,57 @@ const MyDocument = ({
         </Text>
         {/* style={{ color: 'white', textAlign: 'center', margin: 30 }} */}
         <Text style={[styles.h3, { marginBottom: 30 }]}>
-          বিষয়ভিত্তিক পারদর্শিতার ট্রান্সক্রিপ্ট-
+          বিষয়ভিত্তিক ট্রান্সক্রিপ্ট-
           {convertToBanglaNumber(student_info_pdf?.registration_year)}
         </Text>
       </View>
       <View style={styles.table}>
         <View style={styles.tableRowTop}>
-          <View style={styles.tableColStdNameRoll}>
-            <Text style={styles.tableCell}>
+          <View style={styles.tableColName}>
+
+            <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>
               শিক্ষার্থীর নাম:{" "}
               {student_info_pdf?.student_name_bn ||
                 student_info_pdf?.student_name_en}
             </Text>
           </View>
-          <View style={styles.tableColStdNameRoll}>
-            <Text style={styles.tableCell}>
+          <View style={styles.tableColRoll}>
+            <Text style={[styles.tableCell,]}>
               শিক্ষার্থীর আইডি: {convertToBanglaNumber(student_info_pdf?.roll)}
             </Text>
           </View>
         </View>
 
         <View style={styles.tableRow}>
-          <View style={styles.tableCol}>
+          <View style={{
+            width: "25%",
+            borderStyle: "solid",
+            borderWidth: '0.5',
+            borderLeftWidth: 0,
+            borderTopWidth: 0,
+          }}>
             <Text style={styles.tableCell}>
-              শ্রেণী: {convertToBanglaNumber(student_info_pdf?.class)}
+              {/* শ্রেণী: {convertToBanglaNumber(student_info_pdf?.class)} */}
+              শ্রেণী: {(student_info_pdf?.class == "6") ? "ষষ্ঠ" : "সপ্তম"}
             </Text>
           </View>
-          <View style={styles.tableCol}>
+          <View style={{
+            width: "20%",
+            borderStyle: "solid",
+            borderWidth: '0.5',
+            borderLeftWidth: 0,
+            borderTopWidth: 0,
+          }}>
             <Text style={styles.tableCell}>
               শাখা: {section_name(student_info_pdf?.section)}{" "}
             </Text>
           </View>
-          <View style={styles.tableCol}>
+          <View style={{ width: "15%", borderStyle: "solid", borderWidth: '0.5', borderLeftWidth: 0, borderTopWidth: 0, }}>
             <Text style={styles.tableCell}>
               বিষয়: {subject_name(allFelter?.subject?.split("-")[0])}
             </Text>
           </View>
-          <View style={styles.tableCol}>
+          <View style={{ width: "40%", borderStyle: "solid", borderWidth: '0.5', borderLeftWidth: 0, borderTopWidth: 0, }}>
             <Text style={styles.tableCell}>শ্রেণি শিক্ষকের নাম: {teacher}</Text>
           </View>
         </View>
@@ -271,7 +289,7 @@ const MyDocument = ({
           <View style={styles.tableCol}>
             <Text style={[styles.tableCell, { fontWeight: "bold" }]}>পারদর্শিতা সূচক (PI)</Text>
           </View>
-          <View style={[styles.tableCol, { width: '75%' }]}>
+          <View style={[styles.tableCol, { width: '75%', textAlign: "center" }]}>
             <Text style={styles.tableCell}>শিক্ষার্থীর পারদর্শিতা মাত্রা</Text>
           </View>
         </View>
@@ -280,11 +298,17 @@ const MyDocument = ({
           <View style={styles.tableRow} wrap={false} >
             <View style={styles.tableCol} wrap={true}>
               <Text style={styles.tableCell}>
-                
-                {" "}
                 {/* {(all_pi.pi_data.pi_no).split('').reverse().join('')}{" "} */}
-                {convertToBanglaNumber(all_pi.pi_data.pi_no)}{" "}
-                {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
+                {convertToBanglaNumber(all_pi.pi_data.pi_no)}
+                {" "}
+                {/* {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}{"  "} */}
+                {all_pi.pi_data.name_bn?.split(' ').map((word, index) => (
+                  <React.Fragment key={index}>
+                    {index > 0 && index % 5 === 0 && <Text>{"\n"}</Text>}
+                    {word}{" "}
+                  </React.Fragment>
+                ))}
+
               </Text>
             </View>
 
@@ -298,14 +322,14 @@ const MyDocument = ({
                   </Text>
                 </View>
                 <Text style={styles.tableCell}>
-                  {pi_data?.title_bn || pi_data?.title_en}{" "}
+                  {/* {pi_data?.title_bn || pi_data?.title_en}{" "}{" "} */}
 
-                  {/* {pi_data?.title_bn?.split(' ').map((word, index) => (
+                  {pi_data?.title_bn?.split(' ').map((word, index) => (
                     <React.Fragment key={index}>
                       {index > 0 && index % 5 === 0 && <Text>{"\n"}</Text>}
-                      {word}{' '}
+                      {word}{" "}
                     </React.Fragment>
-                  ))} */}
+                  ))}
 
                 </Text>
               </View>
@@ -315,8 +339,10 @@ const MyDocument = ({
 
         ))}
 
-        <View style={[styles.teacherSignatureContainer]}>
-          <Text style={[styles.teacherSignature]}>
+        <View style={{
+          
+          marginVertical:"70px", display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
+          <Text style={{ fontFamily: "kalpurush", color: "#000", marginTop: "10px", fontSize: 12, fontWeight: 600, }}>
             বিষয় শিক্ষকের স্বাক্ষরঃ
             {" "}
             <Text>{"\n"}</Text>
@@ -325,7 +351,7 @@ const MyDocument = ({
             </Text>
           </Text>
 
-          <Text style={[styles.teacherSignature]}>
+          <Text style={{ fontFamily: "kalpurush", color: "#000", marginTop: "10px", fontSize: 12, fontWeight: 600, } }>
             প্রধান শিক্ষকের স্বাক্ষরঃ
             <br />
           </Text>
@@ -336,7 +362,8 @@ const MyDocument = ({
         <Text style={{ textAlign: 'left', bottom: 0 }}>এই প্রতিবেদনটি সিস্টেম দ্বারা তৈরি করা হয়েছে</Text>
         <Text style={{ fontSize: 7 }} render={({ pageNumber, totalPages }) => (
           `${pageNumber} / ${totalPages}`
-        )} /></View>
+        )} />
+      </View>
 
     </Page>
   </Document>
@@ -351,7 +378,10 @@ const RawPDFDownload = ({
   teacher,
 }: any) => {
 
-    const pdf_name = student_info_pdf?.student_name_en+ "class-" + student_info_pdf?.class + "-pi-roll-" + student_info_pdf?.roll +  ".pdf";
+
+
+
+  const pdf_name = student_info_pdf?.student_name_en + "class-" + student_info_pdf?.class + "-pi-roll-" + student_info_pdf?.roll + ".pdf";
 
   const subject_teacher = localStorage.getItem("teacher_dashboard") ? JSON.parse(localStorage.getItem("teacher_dashboard")) : ""
   return (

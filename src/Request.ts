@@ -204,8 +204,6 @@ export async function teacher_own_subject() {
     localStorage.setItem("all_students", JSON.stringify(usnique_all_student));
     localStorage.setItem("our_all_pi", JSON.stringify(app_PI));
 
-
-
     return data;
   }
 }

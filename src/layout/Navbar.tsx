@@ -1,7 +1,7 @@
 import "../assets/navbar_materials/navbar.css";
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-
+import Swal from "sweetalert2";
 import noipunnologo from "../assets/navbar_materials/images/noipunno-new-logo.svg";
 import teacherIcon from "../assets/navbar_materials/icons/teacher.svg";
 import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
@@ -90,9 +90,13 @@ const Navbar = () => {
 
       window.location.reload();
     } catch (error) {
-      alert(
-        "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
-      );
+
+      Swal.fire({
+        icon: "error",
+        title: "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন",
+        confirmButtonText: "হ্যাঁ",
+      });
+
     }
   };
 

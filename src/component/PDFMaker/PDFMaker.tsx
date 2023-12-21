@@ -389,8 +389,6 @@ const RawPDFDownload = ({
 
   const generatePdfDocument = async (fileName, pdfDocumentComponent) => {
     const blob = await pdf(pdfDocumentComponent).toBlob();
-
-    console.log(`blob`, blob);
     saveAs(blob, fileName);
 };
 

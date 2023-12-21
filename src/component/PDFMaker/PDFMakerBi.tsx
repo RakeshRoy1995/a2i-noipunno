@@ -20,47 +20,33 @@ import {
 } from "../../utils/Utils";
 import { BsFiletypePdf } from "react-icons/bs";
 import React from "react";
-Font.register({ family: "Kalpurush", src: "kalpurush.ttf", fontStyle: 'normal',
-fontWeight: 'normal',
-unicodeRange: 'U+0000-FFFF',
-fontFace: {
-  unitsPerEm: 10,
-  ascent: 8,
-  descent: -2,
-}, });
-// Font.register({ family: "Kalpurush", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
 
+
+
+
+Font.register({ family: "kalpurush", src: "kalpurush.ttf", format: "truetype" });
 const styles = StyleSheet.create({
   page: {
-    //flexDirection: "row",
-    fontFamily: "Kalpurush",
-    //  backgroundColor: "#E4E4E4",
+    fontFamily: "kalpurush",
     padding: 4,
-    // margin: 50,
     textAlign: "left",
     marginTop: 10
   },
   h1: {
-    fontFamily: "Kalpurush",
+    fontFamily: "kalpurush",
     fontSize: 16,
     textAlign: "center",
     fontWeight: 700,
-    //   display: 'block',
-    //   fontSize: '2em',
-    // marginBlockStart: '0.67em',
-    // marginBlockEnd: '0.67em',
-    // margininlineStart: '0px',
-    // margininlineEnd: '0px',
     margin: 5,
     lineHeight: 1
   },
   h2: {
-    fontFamily: "Kalpurush",
+    fontFamily: "kalpurush",
     textAlign: "center",
     fontSize: 12,
   },
   h3: {
-    fontFamily: "Kalpurush",
+    fontFamily: "kalpurush",
     fontSize: 11,
     textAlign: "center",
   },
@@ -70,18 +56,10 @@ const styles = StyleSheet.create({
   },
 
   table: {
-    // display: "table",
     width: "95%",
     margin: 'auto'
-    // borderStyle: "solid",
-    // borderWidth: 1,
-    // borderRightWidth: 0,
-    // borderBottomWidth: 0,
-    // padding: "40px"
-
   },
   tableRowTop: {
-    // margin: "auto",
     flexDirection: "row",
     borderTopWidth: 1,
     borderLeftWidth: 1,
@@ -94,7 +72,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   tableRow: {
-    // margin: "auto",
     flexDirection: "row",
     borderStyle: "solid",
     borderWidth: '0.5',
@@ -105,14 +82,9 @@ const styles = StyleSheet.create({
     borderWidth: '0.5',
     borderLeftWidth: 0,
     borderTopWidth: 0,
-    // display: "flex !important",
   },
   tableColPoint: {
-    // width: "75%",
-    // borderStyle: "solid",
-    // borderWidth: 1,
-    // borderLeftWidth: 0,
-    // borderTopWidth: 0,
+
   },
   tableColStdNameRoll: {
     width: "50%",
@@ -121,6 +93,23 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderTopWidth: 0,
   },
+
+  tableColName: {
+    width: "75%",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+  },
+  tableColRoll: {
+    width: "25%",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
+  },
+
+
   tableColTitle: {
     width: "100%",
     borderStyle: "solid",
@@ -128,26 +117,20 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderTopWidth: 0,
   },
+
   tableCell: {
-    fontFamily: "Kalpurush",
-    // margin: "auto",
-    padding: "5px",
-    // marginTop: 5,
+    fontFamily: "kalpurush",
+    padding: "2px",
     fontSize: 11,
     lineHeight: "1px",
-    // display: "flex",
-
     textOverflow: "ellipsis",
-
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-    width: '90%',
-
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
 
 
   tableCellTikMark: {
-    fontFamily: "Kalpurush",
+    fontFamily: "kalpurush",
     margin: "auto",
     marginTop: "3px",
     padding: 1,
@@ -162,7 +145,6 @@ const styles = StyleSheet.create({
     padding: 10,
     flexGrow: 1,
   },
-
 
   tableHeader: {
     flexDirection: "row",
@@ -180,30 +162,12 @@ const styles = StyleSheet.create({
 
   tikMark: {
     marginLeft: 50,
-    // justifyContent: "center",
     marginTop: 5,
     width: "12px",
     height: "10px",
   },
 
-  teacherSignatureContainer: {
-    marginTop: "50px",
-    display: "flex",
-    flexDirection: "row",
-    gap: "150px",
-  },
-  teacherSignature: {
-    fontFamily: "Kalpurush",
-    color: "#000",
-    marginTop: "10px",
-    fontSize: 12,
-    fontWeight: 600,
-  },
 });
-
-
-
-
 
 const MyDocument = ({
   data,
@@ -213,8 +177,128 @@ const MyDocument = ({
   teacher,
   subject_teacher
 }: any) => (
-  <Document language="BN" >
-    <Page size="A4" style={styles.page}>
+
+  // <Document >
+  //   <Page size="A4" style={styles.page}>
+  //     <View fixed >
+  //       <Text style={[styles.h1]}>
+  //         {instititute?.branch_name}
+  //         <br />
+  //       </Text>
+  //       <Text style={[styles.h2]}>
+  //         {instititute?.branch_location}
+  //       </Text>
+
+  //       <Text style={[styles.h3, { marginBottom: 30 }]}>
+  //         -আচরণগত মূল্যায়ন-
+  //         {convertToBanglaNumber(student_info_pdf?.registration_year)}
+  //       </Text>
+  //     </View>
+  //     <View style={styles.table}>
+  //       <View style={styles.tableRowTop}>
+  //         <View style={styles.tableColStdNameRoll}>
+  //           <Text style={styles.tableCell}>
+  //             শিক্ষার্থীর নাম:{" "}
+  //             {student_info_pdf?.student_name_bn ||
+  //               student_info_pdf?.student_name_en}
+  //           </Text>
+  //         </View>
+  //         <View style={styles.tableColStdNameRoll}>
+  //           <Text style={styles.tableCell}>
+  //             শিক্ষার্থীর আইডি: {convertToBanglaNumber(student_info_pdf?.roll)}
+  //           </Text>
+  //         </View>
+  //       </View>
+
+  //       <View style={styles.tableRow}>
+  //         <View style={styles.tableCol}>
+  //           <Text style={styles.tableCell}>
+  //             শ্রেণী: {convertToBanglaNumber(student_info_pdf?.class)}
+  //           </Text>
+  //         </View>
+  //         <View style={styles.tableCol}>
+  //           <Text style={styles.tableCell}>
+  //             শাখা: {section_name(student_info_pdf?.section)}{" "}
+  //           </Text>
+  //         </View>
+
+  //       </View>
+
+  //       <View style={styles.tableRow}>
+  //         <View style={styles.tableColTitle}>
+  //           <Text style={[styles.tableCell, { fontWeight: "bold", fontSize: 12, textAlign: 'center' }]}>আচরণগত মূল্যায়ন মাত্রা (BI)</Text>
+  //         </View>
+  //       </View>
+  //       <View style={styles.tableRow}>
+  //         <View style={styles.tableCol}>
+  //           <Text style={[styles.tableCell, { fontWeight: "bold" }]}>আচরণগত মূল্যায়ন(BI)</Text>
+  //         </View>
+  //         <View style={[styles.tableCol, { width: '75%' }]}>
+  //           <Text style={styles.tableCell}>শিক্ষার্থীর আচরণগত মাত্রা</Text>
+  //         </View>
+  //       </View>
+
+  //       {data?.all_PI_array?.map((all_pi: any, k: any) => (
+  //         <View style={styles.tableRow} wrap={false} >
+  //           <View style={styles.tableCol} wrap={true}>
+  //             <Text style={styles.tableCell}>
+  //               {/* {" "} */}
+  //               {convertToBanglaNumber( k+1 )}{" . "}
+  //               {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
+  //             </Text>
+  //           </View>
+
+  //           {all_pi.pi_data.weights.map((pi_data: any, key) => (
+  //             <View style={[styles.tableCol]} >
+  //               <View style={styles.tableRowBottom}>
+  //                 <Text style={styles.tableCellTikMark}>
+  //                   {all_pi?.weight_uid == pi_data?.weight_uid && (
+  //                     <Image src={icon} style={[styles.tikMark]} />
+  //                   )}
+  //                 </Text>
+  //               </View>
+  //               <Text style={styles.tableCell}>
+  //                 {pi_data?.title_bn || pi_data?.title_en}
+  //               </Text>
+  //             </View>
+  //           ))}
+
+  //         </View>
+
+  //       ))}
+
+  //       <View style={{
+  //         marginVertical: "70px", display: "flex", flexDirection: "row", justifyContent: "space-around"
+  //       }}>
+  //         <Text style={{ fontFamily: "kalpurush", color: "#000", marginTop: "10px", fontSize: 12, fontWeight: 600, }}>
+  //           বিষয় শিক্ষকের স্বাক্ষরঃ
+  //           {" "}
+  //           <Text>{"\n"}</Text>
+  //           <Text style={{ fontWeight: "bold", fontSize: 11 }}>
+  //             {subject_teacher?.data?.user?.name}
+  //           </Text>
+  //         </Text>
+
+  //         <Text style={{ fontFamily: "kalpurush", color: "#000", marginTop: "10px", fontSize: 12, fontWeight: 600, }}>
+  //           প্রধান শিক্ষকের স্বাক্ষরঃ
+  //           <br />
+  //         </Text>
+  //       </View>
+
+
+  //     </View>
+
+  //     <View fixed style={{ height: 70, fontSize: 7, textAlign: 'center', padding: '5px' }}>
+  //       <Text style={{ textAlign: 'left', bottom: 0 }}>এই প্রতিবেদনটি সিস্টেম দ্বারা তৈরি করা হয়েছে</Text>
+  //       <Text style={{ fontSize: 7 }} render={({ pageNumber, totalPages }) => (
+  //         `${pageNumber} / ${totalPages}`
+  //       )} /></View>
+
+  //   </Page>
+  // </Document>
+
+  <Document>
+    <Page size="A4" style={styles.page} >
       <View fixed >
         <Text style={[styles.h1]}>
           {instititute?.branch_name}
@@ -225,58 +309,72 @@ const MyDocument = ({
         </Text>
         {/* style={{ color: 'white', textAlign: 'center', margin: 30 }} */}
         <Text style={[styles.h3, { marginBottom: 30 }]}>
-          -আচরণগত মূল্যায়ন-
+          বিষয়ভিত্তিক ট্রান্সক্রিপ্ট-
           {convertToBanglaNumber(student_info_pdf?.registration_year)}
         </Text>
       </View>
       <View style={styles.table}>
         <View style={styles.tableRowTop}>
-          <View style={styles.tableColStdNameRoll}>
-            <Text style={styles.tableCell}>
+          <View style={styles.tableColName}>
+
+            <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>
               শিক্ষার্থীর নাম:{" "}
               {student_info_pdf?.student_name_bn ||
                 student_info_pdf?.student_name_en}
             </Text>
           </View>
-          <View style={styles.tableColStdNameRoll}>
-            <Text style={styles.tableCell}>
+          <View style={styles.tableColRoll}>
+            <Text style={[styles.tableCell,]}>
               শিক্ষার্থীর আইডি: {convertToBanglaNumber(student_info_pdf?.roll)}
             </Text>
           </View>
         </View>
 
         <View style={styles.tableRow}>
-          <View style={styles.tableCol}>
+          <View style={{
+            width: "25%",
+            borderStyle: "solid",
+            borderWidth: '0.5',
+            borderLeftWidth: 0,
+            borderTopWidth: 0,
+          }}>
             <Text style={styles.tableCell}>
-              শ্রেণী: {convertToBanglaNumber(student_info_pdf?.class)}
+              {/* শ্রেণী: {convertToBanglaNumber(student_info_pdf?.class)} */}
+              শ্রেণী: {(student_info_pdf?.class == "6") ? "ষষ্ঠ" : "সপ্তম"}
             </Text>
           </View>
-          <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>
+          <View style={{
+            width: "20%",
+            borderStyle: "solid",
+            borderWidth: '0.5',
+            borderLeftWidth: 0,
+            borderTopWidth: 0,
+          }}>
+            <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>
               শাখা: {section_name(student_info_pdf?.section)}{" "}
             </Text>
           </View>
-          {/* <View style={styles.tableCol}>
-            <Text style={styles.tableCell}>
+          <View style={{ width: "15%", borderStyle: "solid", borderWidth: '0.5', borderLeftWidth: 0, borderTopWidth: 0, }}>
+            <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>
               বিষয়: {subject_name(allFelter?.subject?.split("-")[0])}
             </Text>
-          </View> */}
-          {/* <View style={styles.tableCol} >
-            <Text style={styles.tableCell}>শ্রেণি শিক্ষকের নাম: {teacher}</Text>
-          </View> */}
+          </View>
+          <View style={{ width: "40%", borderStyle: "solid", borderWidth: '0.5', borderLeftWidth: 0, borderTopWidth: 0, }}>
+            <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>শ্রেণি শিক্ষকের নাম: {teacher}</Text>
+          </View>
         </View>
 
         <View style={styles.tableRow}>
           <View style={styles.tableColTitle}>
-            <Text style={[styles.tableCell, { fontWeight: "bold", fontSize: 12, textAlign: 'center' }]}>আচরণগত মূল্যায়ন মাত্রা (BI)</Text>
+            <Text style={[styles.tableCell, { fontWeight: "bold", fontSize: 12, textAlign: 'center', paddingBottom: "5px" }]}>পারদর্শিতার সূচকের মাত্রা</Text>
           </View>
         </View>
         <View style={styles.tableRow}>
           <View style={styles.tableCol}>
-            <Text style={[styles.tableCell, { fontWeight: "bold" }]}>আচরণগত মূল্যায়ন(BI)</Text>
+            <Text style={[styles.tableCell, { fontWeight: "bold" }]}>পারদর্শিতা সূচক (PI)</Text>
           </View>
-          <View style={[styles.tableCol, { width: '75%' }]}>
-            <Text style={styles.tableCell}>শিক্ষার্থীর আচরণগত মাত্রা</Text>
+          <View style={[styles.tableCol, { width: '75%', textAlign: "center" }]}>
+            <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>শিক্ষার্থীর পারদর্শিতা মাত্রা</Text>
           </View>
         </View>
 
@@ -284,13 +382,20 @@ const MyDocument = ({
           <View style={styles.tableRow} wrap={false} >
             <View style={styles.tableCol} wrap={true}>
               <Text style={styles.tableCell}>
-                {/* {" "} */}
-                {convertToBanglaNumber( k+1 )}{" . "}
-                {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}
+                {/* {(all_pi.pi_data.pi_no).split('').reverse().join('')}{" "} */}
+                {convertToBanglaNumber(all_pi.pi_data.pi_no)}
+                {/* {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}{"  "} */}
+                {all_pi.pi_data.name_bn?.split(' ').map((word, index) => (
+                  <React.Fragment key={index}>
+                    {index > 0 && index % 4 === 0 && <Text>{"\n"}</Text>}
+                    {word}{" "}
+                  </React.Fragment>
+                ))}
+
               </Text>
             </View>
 
-            {all_pi.pi_data.weights.map((pi_data: any, key) => (
+            {all_pi.pi_data.pi_attribute.map((pi_data: any, key) => (
               <View style={[styles.tableCol]} >
                 <View style={styles.tableRowBottom}>
                   <Text style={styles.tableCellTikMark}>
@@ -299,18 +404,32 @@ const MyDocument = ({
                     )}
                   </Text>
                 </View>
-                <Text style={styles.tableCell}>
-                  {pi_data?.title_bn || pi_data?.title_en}
+                <Text style={[styles.tableCell, { marginBottom: "5px", marginLeft: "0px" }]}>
 
-                  {/* ব্যক্তিগত যোগাযোগ, উপস্থাপন, মডেল তৈরি, উপকরণ নির্বাচন ও ব্যবহার ইত্যাদি ক্ষেত্রে পরিমিতিবোধ, বৈচিত্রময়তা ও নান্দনিকতা বজায় রেখে সিদ্ধান্ত  নিচ্ছে 1 */}
-                  {/* {" "} */}
+                  {/* {pi_data?.title_bn || pi_data?.title_en}{" "} */}
 
-                  {/* {pi_data?.title_bn?.replace(/\s/g, " ").split(' ').map((word, index) => (
+
+                  {/* {pi_data?.title_bn?.split(' ').map((word, index) => (
                     <React.Fragment key={index}>
-                      {index > 0 && index % 5 === 0 && <Text>{"\n"}</Text>}
-                      {word}{' '}
+                      {index > 0 && index % 4 === 0 && <Text>{"\n"}</Text>}
+                      {word.trim()}{" "}
                     </React.Fragment>
                   ))} */}
+
+                  {(allFelter?.subject?.split("-")[0] == "ইংরেজি") ?
+                    <>
+                      {pi_data?.title_bn || pi_data?.title_en}{" "}
+                    </> :
+                    <>
+                      {pi_data?.title_bn?.split(' ').map((word, index) => (
+                        <React.Fragment key={index}>
+                          {index > 0 && index % 4 === 0 && <Text>{"\n"}</Text>}
+                          {word.trim()}{" "}
+                        </React.Fragment>
+                      ))}
+                    </>}
+
+
 
                 </Text>
               </View>
@@ -320,35 +439,36 @@ const MyDocument = ({
 
         ))}
 
-        <View style={[styles.teacherSignatureContainer]}>
-          <Text style={[styles.teacherSignature]}>
-          শ্রেণি শিক্ষকের স্বাক্ষরঃ
+        <View style={{
+          marginVertical: "70px", display: "flex", flexDirection: "row", justifyContent: "space-around"
+        }}>
+          <Text style={{ fontFamily: "kalpurush", color: "#000", marginTop: "10px", fontSize: 12, fontWeight: 600, }}>
+            বিষয় শিক্ষকের স্বাক্ষরঃ
             {" "}
             <Text>{"\n"}</Text>
             <Text style={{ fontWeight: "bold", fontSize: 11 }}>
-              {teacher}
+              {subject_teacher?.data?.user?.name}
             </Text>
           </Text>
 
-          <Text style={[styles.teacherSignature]}>
-            প্রধান শিক্ষকের স্বাক্ষরঃ  
-            {" "}
-            <Text>{"\n"}</Text>
-            <Text style={{ fontWeight: "bold", fontSize: 11 }}>
-              {""}
-            </Text>
+          <Text style={{ fontFamily: "kalpurush", color: "#000", marginTop: "10px", fontSize: 12, fontWeight: 600, }}>
+            প্রধান শিক্ষকের স্বাক্ষরঃ
+            <br />
           </Text>
         </View>
+
       </View>
 
       <View fixed style={{ height: 70, fontSize: 7, textAlign: 'center', padding: '5px' }}>
         <Text style={{ textAlign: 'left', bottom: 0 }}>এই প্রতিবেদনটি সিস্টেম দ্বারা তৈরি করা হয়েছে</Text>
         <Text style={{ fontSize: 7 }} render={({ pageNumber, totalPages }) => (
           `${pageNumber} / ${totalPages}`
-        )} /></View>
+        )} />
+      </View>
 
     </Page>
   </Document>
+
 );
 
 const PDFMakerBiTranscript = ({

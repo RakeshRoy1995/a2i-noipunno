@@ -22,6 +22,7 @@ import {
 import { BsFiletypePdf } from "react-icons/bs";
 import React from "react";
 Font.register({ family: "kalpurush", src: "kalpurush.ttf", format: "truetype" });
+// Font.register({ family: "Arial", src: "arial.ttf", format: "truetype" });
 // Font.register({ family: "kalpurush", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
 // Font.register({ family: "Kalpurush", src: "kalpurush.ttf", fontStyle: 'normal',
 // fontWeight: 'normal',
@@ -32,15 +33,10 @@ Font.register({ family: "kalpurush", src: "kalpurush.ttf", format: "truetype" })
 //   descent: -2,
 // }, });
 
-
-
 const styles = StyleSheet.create({
   page: {
-    //flexDirection: "row",
     fontFamily: "kalpurush",
-    //  backgroundColor: "#E4E4E4",
     padding: 4,
-    // margin: 50,
     textAlign: "left",
     marginTop: 10
   },
@@ -49,12 +45,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     fontWeight: 700,
-    //   display: 'block',
-    //   fontSize: '2em',
-    // marginBlockStart: '0.67em',
-    // marginBlockEnd: '0.67em',
-    // margininlineStart: '0px',
-    // margininlineEnd: '0px',
     margin: 5,
     lineHeight: 1
   },
@@ -74,18 +64,10 @@ const styles = StyleSheet.create({
   },
 
   table: {
-    // display: "table",
     width: "95%",
     margin: 'auto'
-    // borderStyle: "solid",
-    // borderWidth: 1,
-    // borderRightWidth: 0,
-    // borderBottomWidth: 0,
-    // padding: "40px"
-
   },
   tableRowTop: {
-    // margin: "auto",
     flexDirection: "row",
     borderTopWidth: 1,
     borderLeftWidth: 1,
@@ -98,7 +80,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   tableRow: {
-    // margin: "auto",
     flexDirection: "row",
     borderStyle: "solid",
     borderWidth: '0.5',
@@ -109,14 +90,9 @@ const styles = StyleSheet.create({
     borderWidth: '0.5',
     borderLeftWidth: 0,
     borderTopWidth: 0,
-    // display: "flex !important",
   },
   tableColPoint: {
-    // width: "75%",
-    // borderStyle: "solid",
-    // borderWidth: 1,
-    // borderLeftWidth: 0,
-    // borderTopWidth: 0,
+
   },
   tableColStdNameRoll: {
     width: "50%",
@@ -152,21 +128,12 @@ const styles = StyleSheet.create({
 
   tableCell: {
     fontFamily: "kalpurush",
-    // margin: "auto",
     padding: "2px",
-    // marginTop: 5,
-    fontSize: 8,
+    fontSize: 11,
     lineHeight: "1px",
-    // display: "flex",
-
     textOverflow: "ellipsis",
-
-
     flexDirection: 'row',
     flexWrap: 'wrap',
-    // textAlign: "center"
-
-
   },
 
 
@@ -187,7 +154,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 
-
   tableHeader: {
     flexDirection: "row",
     borderBottomWidth: 1,
@@ -204,7 +170,6 @@ const styles = StyleSheet.create({
 
   tikMark: {
     marginLeft: 50,
-    // justifyContent: "center",
     marginTop: 5,
     width: "12px",
     height: "10px",
@@ -222,7 +187,7 @@ const MyDocument = ({
   subject_teacher
 }: any) => (
   <Document>
-    <Page size="A4" style={styles.page} orientation="landscape">
+    <Page size="A4" style={styles.page} >
       <View fixed >
         <Text style={[styles.h1]}>
           {instititute?.branch_name}
@@ -274,23 +239,23 @@ const MyDocument = ({
             borderLeftWidth: 0,
             borderTopWidth: 0,
           }}>
-            <Text style={styles.tableCell}>
+            <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>
               শাখা: {section_name(student_info_pdf?.section)}{" "}
             </Text>
           </View>
           <View style={{ width: "15%", borderStyle: "solid", borderWidth: '0.5', borderLeftWidth: 0, borderTopWidth: 0, }}>
-            <Text style={styles.tableCell}>
+            <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>
               বিষয়: {subject_name(allFelter?.subject?.split("-")[0])}
             </Text>
           </View>
           <View style={{ width: "40%", borderStyle: "solid", borderWidth: '0.5', borderLeftWidth: 0, borderTopWidth: 0, }}>
-            <Text style={styles.tableCell}>শ্রেণি শিক্ষকের নাম: {teacher}</Text>
+            <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>শ্রেণি শিক্ষকের নাম: {teacher}</Text>
           </View>
         </View>
 
         <View style={styles.tableRow}>
           <View style={styles.tableColTitle}>
-            <Text style={[styles.tableCell, { fontWeight: "bold", fontSize: 12, textAlign: 'center' }]}>পারদর্শিতার সূচকের মাত্রা</Text>
+            <Text style={[styles.tableCell, { fontWeight: "bold", fontSize: 12, textAlign: 'center', paddingBottom: "5px" }]}>পারদর্শিতার সূচকের মাত্রা</Text>
           </View>
         </View>
         <View style={styles.tableRow}>
@@ -298,7 +263,7 @@ const MyDocument = ({
             <Text style={[styles.tableCell, { fontWeight: "bold" }]}>পারদর্শিতা সূচক (PI)</Text>
           </View>
           <View style={[styles.tableCol, { width: '75%', textAlign: "center" }]}>
-            <Text style={styles.tableCell}>শিক্ষার্থীর পারদর্শিতা মাত্রা</Text>
+            <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>শিক্ষার্থীর পারদর্শিতা মাত্রা</Text>
           </View>
         </View>
 
@@ -308,11 +273,10 @@ const MyDocument = ({
               <Text style={styles.tableCell}>
                 {/* {(all_pi.pi_data.pi_no).split('').reverse().join('')}{" "} */}
                 {convertToBanglaNumber(all_pi.pi_data.pi_no)}
-                {" "}
                 {/* {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}{"  "} */}
                 {all_pi.pi_data.name_bn?.split(' ').map((word, index) => (
                   <React.Fragment key={index}>
-                    {index > 0 && index % 5 === 0 && <Text>{"\n"}</Text>}
+                    {index > 0 && index % 4 === 0 && <Text>{"\n"}</Text>}
                     {word}{" "}
                   </React.Fragment>
                 ))}
@@ -329,15 +293,32 @@ const MyDocument = ({
                     )}
                   </Text>
                 </View>
-                <Text style={styles.tableCell}>
-                  {/* {pi_data?.title_bn || pi_data?.title_en}{" "}{" "} */}
+                <Text style={[styles.tableCell, { marginBottom: "5px", marginLeft: "0px" }]}>
+  
+                  {/* {pi_data?.title_bn || pi_data?.title_en}{" "} */}
 
-                  {pi_data?.title_bn?.split(' ').map((word, index) => (
+
+                  {/* {pi_data?.title_bn?.split(' ').map((word, index) => (
                     <React.Fragment key={index}>
-                      {index > 0 && index % 5 === 0 && <Text>{"\n"}</Text>}
-                      {word}{" "}
+                      {index > 0 && index % 4 === 0 && <Text>{"\n"}</Text>}
+                      {word.trim()}{" "}
                     </React.Fragment>
-                  ))}
+                  ))} */}
+
+                  {(allFelter?.subject?.split("-")[0] == "ইংরেজি") ?
+                    <>
+                      {pi_data?.title_bn || pi_data?.title_en}{" "}
+                    </> :
+                    <>
+                      {pi_data?.title_bn?.split(' ').map((word, index) => (
+                        <React.Fragment key={index}>
+                          {index > 0 && index % 4 === 0 && <Text>{"\n"}</Text>}
+                          {word.trim()}{" "}
+                        </React.Fragment>
+                      ))}
+                    </>}
+
+
 
                 </Text>
               </View>
@@ -348,8 +329,8 @@ const MyDocument = ({
         ))}
 
         <View style={{
-          
-          marginVertical:"70px", display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
+          marginVertical: "70px", display: "flex", flexDirection: "row", justifyContent: "space-around"
+        }}>
           <Text style={{ fontFamily: "kalpurush", color: "#000", marginTop: "10px", fontSize: 12, fontWeight: 600, }}>
             বিষয় শিক্ষকের স্বাক্ষরঃ
             {" "}
@@ -359,11 +340,12 @@ const MyDocument = ({
             </Text>
           </Text>
 
-          <Text style={{ fontFamily: "kalpurush", color: "#000", marginTop: "10px", fontSize: 12, fontWeight: 600, } }>
+          <Text style={{ fontFamily: "kalpurush", color: "#000", marginTop: "10px", fontSize: 12, fontWeight: 600, }}>
             প্রধান শিক্ষকের স্বাক্ষরঃ
             <br />
           </Text>
         </View>
+        
       </View>
 
       <View fixed style={{ height: 70, fontSize: 7, textAlign: 'center', padding: '5px' }}>
@@ -387,12 +369,8 @@ const RawPDFDownload = ({
 }: any) => {
 
 
-  const generatePdfDocument = async (fileName, pdfDocumentComponent) => {
-    const blob = await pdf(pdfDocumentComponent).toBlob();
-
-    console.log(`blob`, blob);
-    saveAs(blob, fileName);
-};
+//   console.log(subject_name(allFelter?.subject?.split("-")[0]ইংরেজি
+// ))
 
     const pdf_name = student_info_pdf?.student_name_en+ "class-" + student_info_pdf?.class + "-pi-roll-" + student_info_pdf?.roll +  ".pdf";
 

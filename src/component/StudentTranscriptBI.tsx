@@ -7,6 +7,7 @@ import {
   get_pi_bi,
   get_pi_bi_by_student_student,
   get_bi_report,
+  bi_info,
 } from "../Request";
 import html2pdf from "html2pdf.js";
 import { RotatingLines } from "react-loader-spinner";
@@ -201,11 +202,11 @@ export default function StudentTranscriptBI() {
           student_name
         );
 
-        console.log(`pi_bi_data`, pi_bi_data.data.trancript , student_name);
-
         const data = formate_Bi_teanscript_dataBy_single_student(
-          pi_bi_data?.data?.trancript , student_name
+          pi_bi_data?.data?.trancript , student_name 
         );
+
+        // data.sort((a, b) => a.age - b.age);
 
         console.log(`data`, data);
 

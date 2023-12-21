@@ -206,8 +206,6 @@ export default function StudentTranscript() {
             pi_bi_data?.data?.transcript?.student_result
         );
 
-        console.log(`datatttt`, data);
-
         setselected_student(data);
       }
     } catch (error) {

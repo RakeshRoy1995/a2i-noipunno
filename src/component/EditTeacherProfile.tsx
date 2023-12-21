@@ -14,9 +14,10 @@ const EditTeacherProfile = () => {
   const [allDistrict, setAllDistrict] = useState<any>([]);
   const [allUpozila, setAllUpozila] = useState<any>([]);
   const [allDesignation, setAllDesignation] = useState<any>([]);
-  const [teacherDesignation, seTeacherDesignation] = useState<any>('');
+  const [teacherDesignation, seTeacherDesignation] = useState<any>('(Not Assign)');
   const [district, setdistrict] = useState<any>([]);
   const [upozila, setupozila] = useState<any>([]);
+  const [countdown, setCountdown] = useState(30);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
 
@@ -27,7 +28,6 @@ const EditTeacherProfile = () => {
     mobile_no,
     date_of_birth,
     gender,
-    designation,
     division_id,
     district_id,
     upazilla_id,
@@ -58,18 +58,7 @@ const EditTeacherProfile = () => {
       const getAssignedDistrict = allDistrict.filter(district => district.district_id == district_id)
       setdistrict(getAssignedDistrict)
     }
-    
-
-    // if (designation_id) {
-    //   const find_current_user_designation = allDesignation?.filter(designation => designation?.uid == designation_id)
-    //   find_current_user_designation.map(item => seTeacherDesignation(item.designation_name))
-    //   console.log(find_current_user_designation);
-    // }
-
   };
-
-
-
 
   const getdistrictBydivisionID = (id) => {
     const divisionWiseDistric = allDistrict.filter(district => district.division_id == id)
@@ -80,7 +69,6 @@ const EditTeacherProfile = () => {
     const zilawiseUpazila = allUpozila.filter(upozila => upozila.district_id == id)
     setupozila(zilawiseUpazila)
   }
-
 
 
   const handleTeacherProfileEdit = async (event: any) => {
@@ -129,11 +117,16 @@ const EditTeacherProfile = () => {
     if (designation_id) {
       const find_current_user_designation = allDesignation?.filter(designation => designation?.uid == designation_id)
       find_current_user_designation.map(item => seTeacherDesignation(item.designation_name))
-      console.log(find_current_user_designation);
     }
-  }, [designation_id, allDesignation])
 
-  const [countdown, setCountdown] = useState(30);
+    if (date_of_birth) {
+      setSelectedDate(new Date(date_of_birth))
+    }
+
+
+  }, [designation_id, allDesignation, date_of_birth])
+
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCountdown(prevCountdown => (prevCountdown > 0 ? prevCountdown - 1 : 0));
@@ -143,19 +136,16 @@ const EditTeacherProfile = () => {
     };
   }, []);
 
-  if ((allDivision.length < 0) && (countdown == 0)) {
+  if ((allDivision.length == 0) && (countdown == 0)) {
     window.location.replace("/");
   }
 
-  console.log(teacherDesignation);
- 
-  
   return (
     <section className="editTeacherProfilePage">
       <Breadcumbtitle title={"প্রোফাইল হালনাগাদ"} />
       {
-        (allDivision.length < 0) ?
-          <div className="d-flex flex-column align-items-center justify-content-center vh-100">
+        (allDivision.length == 0) ?
+          <div className="d-flex flex-column align-items-center justify-content-center mt-5">
             <div className="spinner-border text-primary" role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
@@ -198,6 +188,23 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
+                      {/* <div className="form-group col-sm-4 col-md-6">
+                        <div className="mb-3" style={{ fontSize: '16px' }}>
+                          <label className="form-label">নাম (বাংলা)</label>
+                          <div className="input-group">
+                            <input
+                              type="text"
+                              id="pin"
+                              className="form-control"
+                              name="name_bn"
+                              value={nameBn}
+                              onChange={handleNameBnChange}
+                              placeholder="আপনার নাম লিখুন (বাংলায়)"
+                            />
+                          </div>
+                        </div>
+                      </div> */}
+
                       <div className="form-group  col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label className="form-label">নাম (ইংরেজি)</label>
@@ -222,7 +229,7 @@ const EditTeacherProfile = () => {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="form-group  col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label className="form-label">পদবী</label>
@@ -247,18 +254,6 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
-                      {/* <div className="form-group  col-sm-4 col-md-6">
-                      <div className="mb-3" style={{ fontSize: "16px" }}>
-                        <label className="form-label">জন্ম তারিখ </label>
-                        <div className="input-group">
-                          <input type="text" id="pin" className="form-control"
-                            placeholder="আপনার জন্ম তারিখ দিন"
-                            name="date_of_birth"
-                            defaultValue={date_of_birth} />
-                        </div>
-                      </div>
-                    </div> */}
-
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label className="form-label">জন্ম তারিখ</label>
@@ -266,18 +261,16 @@ const EditTeacherProfile = () => {
                             <DatePicker
                               id="pin"
                               className="form-control"
-                              placeholderText="আপনার জন্ম তারিখ দিন"
+                              placeholderText={"আপনার জন্ম তারিখ দিন"}
                               name="date_of_birth"
                               dateFormat="yyyy-MM-dd"
                               selected={selectedDate}
                               onChange={(date) => setSelectedDate(date)}
-                              style={{ width: '100% !important', minWidth: '100% !important' }}
+                              style={{ width: '100%', minWidth: '100%' }}
                             />
                           </div>
                         </div>
                       </div>
-
-
 
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>
@@ -285,11 +278,12 @@ const EditTeacherProfile = () => {
                           <div className="input-group">
                             <select className="form-control"
                               name="gender"
-                              value={gender}>
+                            // value={gender}
+                            >
                               <option value={''}>লিঙ্গ নির্বাচন করুন</option>
-                              <option value={1}>পুরুষ</option>
-                              <option value={2}>মহিলা</option>
-                              <option value={3}>অন্যান্য</option>
+                              <option value={"1"} selected={(gender === "1")}>পুরুষ</option>
+                              <option value={"2"} selected={(gender === "2")}>মহিলা</option>
+                              <option value={"3"} selected={(gender === "3")}>অন্যান্য</option>
                             </select>
                           </div>
                         </div>
@@ -312,8 +306,6 @@ const EditTeacherProfile = () => {
                           </select>
                         </div>
                       </div>
-
-
 
                       {
                         (district.length > 0) ?
@@ -342,7 +334,6 @@ const EditTeacherProfile = () => {
                                 onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
                                 <option value={''}>জেলা নির্বাচন করুন</option>
                                 {
-
                                   allDistrict.map((d, k) =>
                                     <option key={k} value={d?.uid} selected={d?.uid == district_id}>
                                       {d?.district_name_bn || d?.district_name_en}

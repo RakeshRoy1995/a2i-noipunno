@@ -387,7 +387,6 @@ const RawPDFDownload = ({
 }: any) => {
 
 
-<<<<<<< HEAD
   const generatePdfDocument = async (fileName, pdfDocumentComponent) => {
     const blob = await pdf(pdfDocumentComponent).toBlob();
 
@@ -396,18 +395,13 @@ const RawPDFDownload = ({
 };
 
     const pdf_name = student_info_pdf?.student_name_en+ "class-" + student_info_pdf?.class + "-pi-roll-" + student_info_pdf?.roll +  ".pdf";
-=======
-
-
-  const pdf_name = student_info_pdf?.student_name_en + "class-" + student_info_pdf?.class + "-pi-roll-" + student_info_pdf?.roll + ".pdf";
->>>>>>> 35b9b1cb9c7142471db22e4a475bfe43b3d61a04
 
   const subject_teacher = localStorage.getItem("teacher_dashboard") ? JSON.parse(localStorage.getItem("teacher_dashboard")) : ""
   return (
     <div>
       <div>
 
-      <button
+      {/* <button
         type="button"
         onClick={() => {
             generatePdfDocument('MyDocument.pdf', 
@@ -425,7 +419,7 @@ const RawPDFDownload = ({
         }}
     >
         Download PDF
-    </button>
+    </button> */}
 
         <PDFDownloadLink
           document={

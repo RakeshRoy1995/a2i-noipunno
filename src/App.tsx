@@ -28,8 +28,9 @@ import PDFMaker from "./component/PDFMaker/PDFMaker";
 import TestCase from "./component/Dashboards/TestCase/TestCase";
 import BiRawPDFDownload from "./component/PDFMaker/ReportPdf";
 import StudentTranscriptBI from "./component/StudentTranscriptBI";
-import PdfGenerator from "./component/Dashboards/TestCase/PdfGenerator";
+// import PdfGenerator from "./component/Dashboards/TestCase/PdfGenerator";
 import GeneratePdf from "./component/generatePdf/GeneratePdf";
+import CustomlyMakePDF from "./component/Dashboards/TestCase/CustomlyMakePDF";
 
 function App() {
   const [topbar, settopbar] = useState(false);
@@ -86,8 +87,12 @@ function App() {
           <Route path="/shikkarthir-report-card" element={<StudentReport />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
-          <Route path="/test-case" element={<GeneratePdf/>} />
-          {/* <Route path="/bi-pdf-maker" element={<BiRawPDFDownload />} /> */}
+          {/* <Route path="/test-case1" element={<GeneratePdf/>} /> */}
+          {/* <Route path="/test-case2" element={<CustomlyMakePDF />} /> */}
+          <Route path="/test-case" element={<TestCase />} />
+
+
+          {/* <Route path="/bi-pdf-maker2" element={<BiRawPDFDownload />} /> */}
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/password/reset" element={<PasswordReset />} />

@@ -12,7 +12,7 @@ const ContentTemplate: React.FC = () => {
     } as CSSProperties,
    
     title: {
-      fontSize: "1rem",
+      fontSize: "0.7rem",
       textAlign: "center",
       fontFamily: "Kalpurush",
     } as CSSProperties,

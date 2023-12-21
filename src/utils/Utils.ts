@@ -463,7 +463,7 @@ export const teacher_list = () => {
     }, []);
   };
 
-  let all_teachers = removeDuplicates(all_teachers_with_duplicate, "pdsid");
+  const all_teachers = removeDuplicates(all_teachers_with_duplicate, "pdsid");
   return all_teachers;
 };
 
@@ -586,4 +586,13 @@ export const show_sub_by_religion = (religion:any , subject_name:any)=>{
 
 
   return false
+}
+
+
+export const accessBIandReport = ()=>{
+
+  const data = localStorage.getItem("teacher_dashboard");
+  const storageData = JSON.parse(data);
+
+  return storageData?.data?.teachers[0].is_class_teacher?.uid ? true : false
 }

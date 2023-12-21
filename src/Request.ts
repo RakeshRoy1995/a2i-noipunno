@@ -10,7 +10,7 @@ const token: any = authToken ? JSON.parse(authToken) : "";
 axios.defaults.headers.common[
   "Authorization"
 ] = `Bearer ${token?.access_token}`;
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
 export function loginPassword(data: any) {
   const page_list = `${API_URL}/v2/login`;
@@ -172,27 +172,6 @@ export async function teacher_own_subject() {
 
   if (bi !== "" && common_info !== "" && cls_room !== "") {
     const own_sub = await axios(options);
-    const app_PI :any = []
-    const student :any = []
-
-    own_sub.data.data.subjects.map((std_data: any) => {
-      std_data.competence.map((conpitance_data: any) => {
-        conpitance_data.pis.map((data: any) => {
-          app_PI.push(data)
-        })
-      });
-
-      std_data.class_room.students.map((stu_data: any) => {
-        student.push(stu_data);
-      });
-
-    });
-
-    const usnique_all_student = student.filter(
-      (obj: any, index: any, self: any) =>
-        index === self.findIndex((o: any) => o.uid === obj.uid)
-    );
-
 
     const data = formate_own_subject_data(own_sub, cls_room);
     data.data.data.assessments = common_info.data.data.assessments;
@@ -201,10 +180,6 @@ export async function teacher_own_subject() {
     data.data.data.bis = bi.data.data.bis;
     localStorage.removeItem("common_room");
     localStorage.removeItem("cls_room");
-    localStorage.setItem("all_students", JSON.stringify(usnique_all_student));
-    localStorage.setItem("our_all_pi", JSON.stringify(app_PI));
-
-
 
     return data;
   }
@@ -223,31 +198,23 @@ export async function reloadteacher_own_subject() {
   const common_info: any = await get_common_info();
   const bi: any = await bi_info();
 
+  let app_PI: any = [];
+  let student: any = [];
+
   if (bi !== "" && common_info !== "" && cls_room !== "") {
     const own_sub = await axios(options);
 
-
-
-    studentsData.data.data.subjects.map((std_data: any) => {
-      obj = {
-        ...obj,
-        [std_data.class_room.class_teacher.uid]:
-          std_data.class_room.class_teacher.uid,
-      };
-
+    own_sub.data.data.subjects.map((std_data: any) => {
       std_data.competence.map((conpitance_data: any) => {
         conpitance_data.pis.map((data: any) => {
-          app_PI.push(data)
-        })
+          app_PI.push(data);
+        });
       });
 
       return std_data.class_room.students.map((stu_data: any) => {
         student.push(stu_data);
       });
     });
-
-
-
 
     const data = formate_own_subject_data(own_sub, cls_room);
     data.data.data.assessments = common_info.data.data.assessments;
@@ -256,6 +223,8 @@ export async function reloadteacher_own_subject() {
     data.data.data.bis = bi.data.data.bis;
     localStorage.removeItem("common_room");
     localStorage.removeItem("cls_room");
+    localStorage.setItem("all_students", student);
+    localStorage.setItem("our_all_pi", app_PI);
     return data;
   }
 }
@@ -336,9 +305,9 @@ export function all_student() {
 export function update_teacher_profile(caid: any, data: any) {
   const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
 
-  let obj = {}
+  let obj = {};
   for (const [name, value] of data) {
-    obj = { ...obj, [name]: value }
+    obj = { ...obj, [name]: value };
     // console.log(`KeyName: ${name}, value: ${value}`);
   }
   const options = {
@@ -346,7 +315,7 @@ export function update_teacher_profile(caid: any, data: any) {
     headers: { "content-type": "multipart/form-data" },
     url: page_list,
     params: {
-      ...obj
+      ...obj,
     },
   };
   return axios(options);
@@ -386,18 +355,14 @@ export function get_bi_evaluation_by_bi(
   return axios(options);
 }
 
-
-
 export function bi_report_card_details() {
   const page_list = `${API_URL}/v2/bi-dimension`;
   // https://api.noipunno.gov.bd/api/v2/bi-dimension
-
 
   const options = {
     method: "get",
     headers: { "content-type": "application/json" },
     url: page_list,
-
   };
 
   return axios(options);
@@ -475,7 +440,6 @@ export function get_pi_bi(
 
   return axios(options);
 }
-
 
 export function get_bi_report(
   subject_uid,
@@ -633,4 +597,3 @@ export function teacher_designation() {
 
   return axios(options);
 }
-

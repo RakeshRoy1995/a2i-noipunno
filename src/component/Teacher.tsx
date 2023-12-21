@@ -148,7 +148,7 @@ export default function Teacher() {
   };
 
 
-  // return null
+  return null
 
   return (
     <div className="content mb-5 teacher_compo_bg">

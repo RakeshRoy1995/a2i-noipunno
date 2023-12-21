@@ -6,7 +6,6 @@ import {
   get_pi_bi_evaluation_list,
   get_pi_bi,
   get_pi_bi_by_student_student,
-  
 } from "../Request";
 import html2pdf from "html2pdf.js";
 import { RotatingLines } from "react-loader-spinner";
@@ -29,6 +28,7 @@ import {
   convertToBanglaNumber,
   formate_teanscript_data,
   formate_teanscript_dataBy_single_student,
+  sortByNumericPropertyAscending,
 } from "../utils/Utils";
 
 import Breadcumb from "../layout/Breadcumb";
@@ -85,6 +85,7 @@ export default function StudentTranscript() {
     setown_data(own_subjet?.data?.data);
     setteacher(own_subjet.data.data.user);
 
+    
     let all_subject: any = [];
 
     own_subjet.data.data.subjects.map((d: any) => {
@@ -140,6 +141,7 @@ export default function StudentTranscript() {
     fetchData();
   }, []);
 
+
   const uniqueclass = [...new Set(subject.map((data) => data?.class))];
 
   const uniqueSections = [...new Set(subject.map((data) => data?.section))];
@@ -183,9 +185,7 @@ export default function StudentTranscript() {
           ""
         );
 
-        const data = formate_teanscript_data(
-          pi_bi_data.data.transcript
-        );
+        const data = formate_teanscript_data(pi_bi_data.data.transcript);
 
         console.log(`datat`, data);
 
@@ -202,14 +202,14 @@ export default function StudentTranscript() {
         );
 
         const data = formate_teanscript_dataBy_single_student(
-          pi_bi_data?.data?.transcript?.subject_result || pi_bi_data?.data?.transcript?.student_result
+          pi_bi_data?.data?.transcript?.subject_result ||
+            pi_bi_data?.data?.transcript?.student_result
         );
 
         console.log(`datatttt`, data);
 
         setselected_student(data);
       }
-
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -227,8 +227,6 @@ export default function StudentTranscript() {
       return true;
     }
   });
-
-
 
   const handleConvertToPdf = (student: any, multiple = false) => {
     setsubmittingLoading(true);
@@ -476,7 +474,6 @@ export default function StudentTranscript() {
                               {data?.subject?.subject_info?.name}{" "}
                               {data?.subject?.subject_info?.class_uid == 6 &&
                                 "ষষ্ঠ"}{" "}
-                                
                               {data?.subject?.subject_info?.class_uid == 7 &&
                                 "সপ্তম"}{" "}
                               {" শ্রেণী"}
@@ -653,6 +650,7 @@ export default function StudentTranscript() {
                         </select>
                       </div>
                     </div> */}
+
                     <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
@@ -838,7 +836,6 @@ export default function StudentTranscript() {
                   </div>
                 </div>
               </div>
-              
 
               <Accordion>
                 {selected_student?.length > 0 ? (
@@ -879,7 +876,7 @@ export default function StudentTranscript() {
                                     <div>
                                       <h6>
                                         পারদর্শিতা সূচক{" "}
-                                        {convertToBanglaNumber(
+                                        {sortByNumericPropertyAscending(
                                           data?.pi_data?.pi_no
                                         )}{" "}
                                       </h6>

@@ -205,6 +205,23 @@ export function check_pi_submitted(pis_id: any, assessment_uid: any) {
   }
 }
 
+
+// Function to sort array of objects by a numeric property in ascending order
+export function sortByNumericPropertyAscending(data) {
+  // Assuming data is an array of objects with a property 'pi_no'
+
+  // Sort the array based on the numeric property 'pi_no' (assuming it contains numbers)
+  data.sort((a, b) => {
+    const numericA = convertToBanglaNumber(a.pi_no); // Convert to Bangla number
+    const numericB = convertToBanglaNumber(b.pi_no); // Convert to Bangla number
+
+    return numericA - numericB; // Sort in ascending order
+  });
+
+  return data;
+}
+
+
 export const convertToBanglaNumber = (number: any) => {
   const banglaDigits = [
     "০",

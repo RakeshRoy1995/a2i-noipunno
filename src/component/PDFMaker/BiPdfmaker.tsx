@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   section13: {},
 
   alignCenter: {
-    textAlign: 'center',
+    textAlign: "center",
   },
 
   h1: {
@@ -57,7 +57,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 500,
     textAlign: "center",
-    
   },
 
   footerh1: {
@@ -134,7 +133,6 @@ const styles = StyleSheet.create({
   },
   customsubjectTitle: {
     fontSize: "30px",
-    
   },
 
   subjectName: {
@@ -191,14 +189,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 
-  dot:{
-    borderBottom: '2px dotted black',
+  dot: {
+    borderBottom: "2px dotted black",
     fontFamily: "Nikosh",
     fontSize: "12px",
-   marginTop: "10px",
+    marginTop: "10px",
   },
-  borderbot:{
-    borderBottom: '2px solid black',
+  borderbot: {
+    borderBottom: "2px solid black",
     marginBottom: "20px",
   },
 
@@ -218,7 +216,6 @@ const styles = StyleSheet.create({
     marginBottom: "10px",
     fontFamily: "Nikosh",
     fontSize: "18px",
-    
   },
 
   paragraph: {
@@ -266,7 +263,6 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 10,
     borderBottom: "1px solid black",
-    
   },
 
   cardbody: {
@@ -382,7 +378,6 @@ const styles = StyleSheet.create({
 
   achoronikContainer: {
     marginTop: "20px",
-    
   },
 
   scalemargin: {
@@ -434,97 +429,145 @@ const MyDocument = ({
       {/* student info */}
       <View style={[styles.headerTop]}>
         <View style={[styles.row]}>
-          <View style={[styles.columnX]}>
-            <Text style={[styles.h2, styles.colortext]}> প্রতিষ্ঠানের নাম :  </Text>
+          <View style={{ flexDirection: "column", width: "15%" }}>
+            <Text style={[styles.h2, styles.colortext]}>
+              {" "}
+              প্রতিষ্ঠানের নাম :{" "}
+            </Text>
           </View>
-          <View style={[styles.columnY]}>
-            : <Text style={styles.dot}>{instititute?.branch_name}{" "}</Text>
-          </View>
-        </View>
-
-        <View style={[styles.row]}>
-          <View style={[styles.columnX]}>
-            <Text style={[styles.h2, styles.colortext]}> শিক্ষার্থীর নাম :</Text>
-          </View>
-          <View style={[styles.columnY]}>
-            <Text style={styles.dot}> {student?.student_name_bn || student?.student_name_en}</Text>
-          </View>
-          <View style={[styles.columnX]}>
-            <Text style={[styles.h2, styles.colortext]}> শিক্ষার্থীর আইডি :</Text>
-          </View>
-          <View style={[styles.columnY]}>
-            <Text style={styles.dot}>{convertToBanglaNumber(student?.roll)}</Text>
+          <View
+            style={{
+              flexDirection: "column",
+              marginRight: 5,
+              width: "80%",
+            }}
+          >
+            : <Text style={styles.dot}>{instititute?.branch_name} </Text>
           </View>
         </View>
 
         <View style={[styles.row]}>
-          <View style={[styles.columnX]}>
+          <View style={{ flexDirection: "column", width: "15%" }}>
+            <Text style={[styles.h2, styles.colortext]}>
+              {" "}
+              শিক্ষার্থীর নাম :
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "column",
+              marginRight: 5,
+              width: "49%",
+            }}
+          >
+            <Text style={styles.dot}>
+              {" "}
+              {student?.student_name_bn || student?.student_name_en}
+            </Text>
+          </View>
+          <View style={{ flexDirection: "column", width: "15%" }}>
+            <Text style={[styles.h2, styles.colortext]}>
+              {" "}
+              শিক্ষার্থীর আইডি :
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "column",
+              marginRight: 5,
+              width: "15%",
+            }}
+          >
+            <Text style={styles.dot}>
+              {convertToBanglaNumber(student?.roll)}
+            </Text>
+          </View>
+        </View>
+
+        <View style={[styles.row]}>
+          <View style={{ flexDirection: "column", width: "15%" }}>
             <Text style={[styles.h2, styles.colortext]}> শ্রেণী : </Text>
           </View>
-          <View style={[styles.columnY]}>
-            <Text style={styles.dot}>{student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}</Text>
+          <View style={{
+              flexDirection: "column",
+              marginRight: 5,
+              width: "49%",
+            }}>
+            <Text style={styles.dot}>
+              {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}
+            </Text>
           </View>
-          <View style={[styles.columnX]}>
+          <View style={{ flexDirection: "column", width: "15%" }}>
             <Text style={[styles.h2, styles.colortext]}> শিক্ষাবর্ষ : </Text>
           </View>
-          <View style={[styles.columnY]}>
-            <Text style={styles.dot}>{convertToBanglaNumber(student?.registration_year)}</Text>
+          <View style={{
+              flexDirection: "column",
+              marginRight: 5,
+              width: "15%",
+            }}>
+            <Text style={styles.dot}>
+              {convertToBanglaNumber(student?.registration_year)}
+            </Text>
           </View>
         </View>
-
       </View>
 
       {/* subjects */}
       <View style={[styles.containerMain, styles.borderTop]}>
-        <View style={{  width: "80%",
-margin: "auto",}}>  
-        <Text style={[styles.h1, styles.colortext, styles.customsubjectTitle,  styles.borderbot]}>
-          {" "}
-          বিষয়সমূহ{" "}
-        </Text>
+        <View style={{ width: "80%", margin: "auto" }}>
+          <Text
+            style={[
+              styles.h1,
+              styles.colortext,
+              styles.customsubjectTitle,
+              styles.borderbot,
+            ]}
+          >
+            {" "}
+            বিষয়সমূহ{" "}
+          </Text>
 
-        <View style={[styles.row, styles.subjectContainer, ]}>
-          <View style={styles.column}>
-            {selected_student?.map((item, index) => {
-              console.log("selected_student", subject_name(item[0]));
-              if (
-                show_sub_by_religion(student?.religion, subject_name(item[0]))
-              ) {
-                return null;
-              }
-              return (
-                index < 5 && (
-                  <Text style={styles.text}>
-                    <Image src="../graduation-cap.png" />{" "}
-                    {subject_name(item[0])}
-                  </Text>
-                )
-              );
-            })}
+          <View style={[styles.row, styles.subjectContainer]}>
+            <View style={styles.column}>
+              {selected_student?.map((item, index) => {
+                console.log("selected_student", subject_name(item[0]));
+                if (
+                  show_sub_by_religion(student?.religion, subject_name(item[0]))
+                ) {
+                  return null;
+                }
+                return (
+                  index < 5 && (
+                    <Text style={styles.text}>
+                      <Image src="../graduation-cap.png" />{" "}
+                      {subject_name(item[0])}
+                    </Text>
+                  )
+                );
+              })}
+            </View>
 
+            <View style={styles.column}>
+              {selected_student?.map((item, index) => {
+                if (
+                  show_sub_by_religion(student?.religion, subject_name(item[0]))
+                ) {
+                  return null;
+                }
 
-          </View>
-
-          <View style={styles.column}>
-            {selected_student?.map((item, index) => {
-              if (
-                show_sub_by_religion(student?.religion, subject_name(item[0]))
-              ) {
-                return null;
-              }
-
-              return (
-                index >= 5 && (
-                  <Text style={styles.text}>
-                    <Image src="../graduation-cap.png" />{" "}
-                    {subject_name(item[0])}
-                  </Text>
-                )
-              );
-            })}
+                return (
+                  index >= 5 && (
+                    <Text style={styles.text}>
+                      <Image src="../graduation-cap.png" />{" "}
+                      {subject_name(item[0])}
+                    </Text>
+                  )
+                );
+              })}
+            </View>
           </View>
         </View>
-      </View></View>
+      </View>
     </Page>
 
     {/* Dynamic Subject Page */}
@@ -1161,7 +1204,11 @@ const BiRawPDFDownload = ({
   biData,
 }) => {
   console.log(`student --- `, student);
-  const pdf_name = student?.student_name_en + "-report-card-result-roll-" + student?.roll + ".pdf";
+  const pdf_name =
+    student?.student_name_en +
+    "-report-card-result-roll-" +
+    student?.roll +
+    ".pdf";
   console.log(`student`, student, biData);
   return (
     <div>

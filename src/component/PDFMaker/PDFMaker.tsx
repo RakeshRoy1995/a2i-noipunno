@@ -8,8 +8,9 @@ import {
   PDFDownloadLink,
   View,
   Image,
-  Svg,
+  pdf,
 } from "@react-pdf/renderer";
+import { saveAs } from 'file-saver';
 // import icon from "../../assets/images/Vector.png"
 import icon from "../../../src/assets/project_ca_html/icons/OK_Icon.png";
 // import myIcon from 'icons/myIcon.svg'
@@ -22,7 +23,14 @@ import { BsFiletypePdf } from "react-icons/bs";
 import React from "react";
 Font.register({ family: "kalpurush", src: "kalpurush.ttf", format: "truetype" });
 // Font.register({ family: "kalpurush", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
-
+// Font.register({ family: "Kalpurush", src: "kalpurush.ttf", fontStyle: 'normal',
+// fontWeight: 'normal',
+// unicodeRange: 'U+0000-FFFF',
+// fontFace: {
+//   unitsPerEm: 10,
+//   ascent: 8,
+//   descent: -2,
+// }, });
 
 
 
@@ -129,7 +137,7 @@ const styles = StyleSheet.create({
     // margin: "auto",
     padding: "5px",
     // marginTop: 5,
-    fontSize: 11,
+    fontSize: 8,
     lineHeight: "1px",
     // display: "flex",
 
@@ -298,7 +306,7 @@ const MyDocument = ({
                   </Text>
                 </View>
                 <Text style={styles.tableCell}>
-                  {pi_data?.title_bn || pi_data?.title_en}{" "}
+                  {pi_data?.title_bn || pi_data?.title_en}
 
                   {/* {pi_data?.title_bn?.split(' ').map((word, index) => (
                     <React.Fragment key={index}>
@@ -351,12 +359,41 @@ const RawPDFDownload = ({
   teacher,
 }: any) => {
 
+
+  const generatePdfDocument = async (fileName, pdfDocumentComponent) => {
+    const blob = await pdf(pdfDocumentComponent).toBlob();
+
+    console.log(`blob`, blob);
+    saveAs(blob, fileName);
+};
+
     const pdf_name = student_info_pdf?.student_name_en+ "class-" + student_info_pdf?.class + "-pi-roll-" + student_info_pdf?.roll +  ".pdf";
 
   const subject_teacher = localStorage.getItem("teacher_dashboard") ? JSON.parse(localStorage.getItem("teacher_dashboard")) : ""
   return (
     <div>
       <div>
+
+      <button
+        type="button"
+        onClick={() => {
+            generatePdfDocument('MyDocument.pdf', 
+            <MyDocument
+              data={data}
+              instititute={instititute}
+              allFelter={allFelter}
+              student_info_pdf={student_info_pdf}
+              unique_id={unique_id}
+              teacher={teacher}
+              subject_teacher={subject_teacher}
+            />
+
+            );
+        }}
+    >
+        Download PDF
+    </button>
+
         <PDFDownloadLink
           document={
             <MyDocument

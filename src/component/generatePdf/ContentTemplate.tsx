@@ -7,14 +7,14 @@ const ContentTemplate: React.FC = () => {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      fontFamily: "Nikosh",
+      fontFamily: "Kalpurush",
       
     } as CSSProperties,
    
     title: {
       fontSize: "1rem",
       textAlign: "center",
-      fontFamily: "Nikosh",
+      fontFamily: "Kalpurush",
     } as CSSProperties,
 };
 

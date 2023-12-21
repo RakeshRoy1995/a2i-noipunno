@@ -533,7 +533,6 @@ export const formate_report_data = (report_data: any, dimention: any) => {
       }
     }
   }
-
   const groupBy = Object.entries(make_group_by_report_data(result));
   return groupBy;
 };

@@ -15,11 +15,11 @@ const GeneratePdf: React.FC = () => {
 
    
     // Register the font
-    doc.addFont("Nikosh.ttf", "Nikosh", "normal");
+    doc.addFont("kalpurush.ttf", "Kalpurush", "normal");
 
     doc.html(certificateTemplateRef.current, {
       async callback(doc) {
-        doc.setFont("Nikosh");
+        doc.setFont("Kalpurush");
         doc.save("jspdf");
       }
     });
@@ -39,7 +39,7 @@ const GeneratePdf: React.FC = () => {
           padding: "10px",
           backgroundColor: "black",
           color: "white",
-          fontFamily: "Nikosh",
+          fontFamily: "Kalpurush",
           fontSize: "1.2rem",
           textTransform: "uppercase",
           letterSpacing: "0.1rem",

@@ -314,8 +314,6 @@ const styles = StyleSheet.create({
 });
 
 
-
-
 // const MyDocument = ({
 //   data,
 //   instititute,

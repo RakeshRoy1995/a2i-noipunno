@@ -8,8 +8,9 @@ import {
   PDFDownloadLink,
   View,
   Image,
-  Svg,
+  pdf,
 } from "@react-pdf/renderer";
+import { saveAs } from 'file-saver';
 // import icon from "../../assets/images/Vector.png"
 import icon from "../../../src/assets/project_ca_html/icons/OK_Icon.png";
 // import myIcon from 'icons/myIcon.svg'
@@ -23,7 +24,14 @@ import React from "react";
 Font.register({ family: "kalpurush", src: "kalpurush.ttf", format: "truetype" });
 // Font.register({ family: "Arial", src: "arial.ttf", format: "truetype" });
 // Font.register({ family: "kalpurush", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
-
+// Font.register({ family: "Kalpurush", src: "kalpurush.ttf", fontStyle: 'normal',
+// fontWeight: 'normal',
+// unicodeRange: 'U+0000-FFFF',
+// fontFace: {
+//   unitsPerEm: 10,
+//   ascent: 8,
+//   descent: -2,
+// }, });
 
 const styles = StyleSheet.create({
   page: {
@@ -364,13 +372,33 @@ const RawPDFDownload = ({
 //   console.log(subject_name(allFelter?.subject?.split("-")[0]ইংরেজি
 // ))
 
-
-  const pdf_name = student_info_pdf?.student_name_en + "class-" + student_info_pdf?.class + "-pi-roll-" + student_info_pdf?.roll + ".pdf";
+    const pdf_name = student_info_pdf?.student_name_en+ "class-" + student_info_pdf?.class + "-pi-roll-" + student_info_pdf?.roll +  ".pdf";
 
   const subject_teacher = localStorage.getItem("teacher_dashboard") ? JSON.parse(localStorage.getItem("teacher_dashboard")) : ""
   return (
     <div>
       <div>
+
+      {/* <button
+        type="button"
+        onClick={() => {
+            generatePdfDocument('MyDocument.pdf', 
+            <MyDocument
+              data={data}
+              instititute={instititute}
+              allFelter={allFelter}
+              student_info_pdf={student_info_pdf}
+              unique_id={unique_id}
+              teacher={teacher}
+              subject_teacher={subject_teacher}
+            />
+
+            );
+        }}
+    >
+        Download PDF
+    </button> */}
+
         <PDFDownloadLink
           document={
             <MyDocument

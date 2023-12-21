@@ -200,6 +200,9 @@ export default function StudentReport() {
       const clssWiseSub: any = await clssWiseSubject(
         allFelter.subject.split("-")[1]
       );
+
+      clssWiseSub.data.data.sort((a, b) => a.subject_no - b.subject_no);
+
       setall_subject(clssWiseSub.data.data);
 
       let res: any = [];
@@ -214,6 +217,8 @@ export default function StudentReport() {
         bi_res.push(data);
       }) 
 
+      
+
       const bi_data = formate_report_data(bi_res ,dimentions_details.data.data)
       const data = formate_report_data(res, dimentions.data.data);
       const student_data = all_students(student_name);
@@ -222,9 +227,27 @@ export default function StudentReport() {
       setstudent(student_data);
       setsubject_name(subject_data);
       setbiData(bi_data);
-      setselected_student(data);
+      
 
-      console.log(`data----`, data,biData,bi_data);
+
+      const all_sub = clssWiseSub.data.data
+
+      const final_data = []
+
+      for (let index = 0; index < all_sub.length; index++) {
+        const sub_data = all_sub[index];
+        for (let z = 0; z < data.length; z++) {
+          const report_data = data[z];
+
+          if (sub_data.uid == report_data[0] ) {
+            final_data.push(report_data)
+            break
+          }
+          
+        }
+      }
+
+      setselected_student(final_data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }

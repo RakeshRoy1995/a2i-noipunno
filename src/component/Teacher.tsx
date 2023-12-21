@@ -126,7 +126,6 @@ export default function Teacher() {
         );
       }
 
-      console.log(`error`, numberOfRender, error);
     }
   };
 

@@ -43,6 +43,8 @@ export default function StudentMullayonBehave({
   all_student,
 }: any) {
   // console.log(`is_draft`, is_draft);
+
+  console.log(`teacher_uid`, teacher_uid);
   const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
   const own_SUbjects = own_SUbjects__ ? JSON.parse(own_SUbjects__) : "";
   const pi_attribute_weight =
@@ -55,38 +57,6 @@ export default function StudentMullayonBehave({
   const [firstRender, setfirstRender] = useState<any>(true);
   const [comment_status, setcomment_status] = useState<any>(false);
   const [showOffAll, setshowOffAll] = useState<any>(false);
-
-  // const handleSave = async (e: any, submit_status: any) => {
-  //   try {
-  //     const data: any = submitData.map((d: any) => {
-  //       d.submit_status = submit_status;
-  //       return d;
-  //     });
-
-  //     if (submit_status == 2) {
-  //       if (submitData.length == 10) {
-  //         await Bi_save(data);
-  //         setmsg("আপনার তথ্য সংরক্ষণ করা হয়েছে");
-  //         setsubmited(true);
-  //       } else {
-  //         if (submitData.length > 0) {
-  //           setcomment_status(true);
-  //         }
-
-  //         checkedIn_comment(submitObj);
-  //       }
-
-  //       seterr("");
-  //     } else {
-  //       await Bi_save(data);
-  //       setsubmited(true);
-  //       setmsg("আপনার খসড়া সংরক্ষণ করা হয়েছে");
-  //       seterr("");
-  //     }
-  //   } catch (error) {
-  //     seterr(" কিছু ভুল হয়েছে");
-  //   }
-  // };
 
   const handleSave = async (
     e: any,

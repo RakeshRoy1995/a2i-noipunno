@@ -45,10 +45,9 @@ export default function DetailsShikhonMullayonShikhonKalin({
     
     const ev_data = data?.data?.evaluation.filter((d)=>  d.oviggota_uid == ovigota_uid )
 
-    console.log(`data?.data?.evaluation`,ev_data );
     setall_submited_PI(ev_data);
     if (ev_data?.length) {
-      setis_draft(ev_data[0]?.submit_status);
+      setis_draft(ev_data[0]?.submit_status || 1);
     }
     setShowModal(true);
 

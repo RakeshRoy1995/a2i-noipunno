@@ -50,7 +50,7 @@ export default function DetailsShikhonMullayonSannasikBarshik({
 
     setall_submited_PI(ev_data);
     if (ev_data) {
-      setis_draft(data.data?.evaluation[0]?.submit_status);
+      setis_draft(ev_data[0]?.submit_status || 1);
     }
     setShowModal(true);
 

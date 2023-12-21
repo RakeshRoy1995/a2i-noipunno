@@ -172,27 +172,6 @@ export async function teacher_own_subject() {
 
   if (bi !== "" && common_info !== "" && cls_room !== "") {
     const own_sub = await axios(options);
-    const app_PI :any = []
-    const student :any = []
-
-    own_sub.data.data.subjects.map((std_data: any) => {
-      std_data.competence.map((conpitance_data: any) => {
-        conpitance_data.pis.map((data: any) => {
-          app_PI.push(data)
-        })
-      });
-
-      std_data.class_room.students.map((stu_data: any) => {
-        student.push(stu_data);
-      });
-
-    });
-
-    const usnique_all_student = student.filter(
-      (obj: any, index: any, self: any) =>
-        index === self.findIndex((o: any) => o.uid === obj.uid)
-    );
-
 
     const data = formate_own_subject_data(own_sub, cls_room);
     data.data.data.assessments = common_info.data.data.assessments;
@@ -201,11 +180,7 @@ export async function teacher_own_subject() {
     data.data.data.bis = bi.data.data.bis;
     localStorage.removeItem("common_room");
     localStorage.removeItem("cls_room");
-    localStorage.setItem("all_students", JSON.stringify(usnique_all_student));
-    localStorage.setItem("our_all_pi", JSON.stringify(app_PI));
-
-
-
+    
     return data;
   }
 }
@@ -228,23 +203,23 @@ export async function reloadteacher_own_subject() {
 
 
 
-    studentsData.data.data.subjects.map((std_data: any) => {
-      obj = {
-        ...obj,
-        [std_data.class_room.class_teacher.uid]:
-          std_data.class_room.class_teacher.uid,
-      };
+    // own_sub.data.data.subjects.map((std_data: any) => {
+    //   obj = {
+    //     ...obj,
+    //     [std_data.class_room.class_teacher.uid]:
+    //       std_data.class_room.class_teacher.uid,
+    //   };
 
-      std_data.competence.map((conpitance_data: any) => {
-        conpitance_data.pis.map((data: any) => {
-          app_PI.push(data)
-        })
-      });
+    //   std_data.competence.map((conpitance_data: any) => {
+    //     conpitance_data.pis.map((data: any) => {
+    //       app_PI.push(data)
+    //     })
+    //   });
 
-      return std_data.class_room.students.map((stu_data: any) => {
-        student.push(stu_data);
-      });
-    });
+    //   return std_data.class_room.students.map((stu_data: any) => {
+    //     student.push(stu_data);
+    //   });
+    // });
 
 
 
@@ -256,6 +231,8 @@ export async function reloadteacher_own_subject() {
     data.data.data.bis = bi.data.data.bis;
     localStorage.removeItem("common_room");
     localStorage.removeItem("cls_room");
+    // localStorage.setItem("all_students", JSON.stringify(usnique_all_student));
+    // localStorage.setItem("our_all_pi", JSON.stringify(app_PI));
     return data;
   }
 }
@@ -548,6 +525,7 @@ export function get_report_card(
 ) {
   const page_list = `${EVULATION_API}/v2/report-card-by-student`;
   // const page_list = `/assets/report_card.json`;
+
 
   const options = {
     method: "get",

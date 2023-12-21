@@ -30,6 +30,7 @@ import {
   convertToBanglaNumber,
   formate_teanscript_data,
   formate_Bi_teanscript_dataBy_single_student,
+  version_name,
 } from "../utils/Utils";
 
 import Breadcumb from "../layout/Breadcumb";
@@ -332,7 +333,7 @@ export default function StudentTranscriptBI() {
                   aria-labelledby="expertness-tab"
                 >
                   <div className="row p-5">
-                    <div className="col-6 col-sm-4 col-md-3">
+                    {/* <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
                           ব্রাঞ্চ নির্বাচন করুন
@@ -356,9 +357,7 @@ export default function StudentTranscriptBI() {
                             </option>
                           ))}
 
-                          {/* {shifts?.map((data, index) => (
-                              <option key={index} value="1">{data.shift_name}</option>
-                              ))} */}
+                          
                         </select>
                       </div>
                     </div>
@@ -383,13 +382,11 @@ export default function StudentTranscriptBI() {
                               {shift_name(data)} সেশন
                             </option>
                           ))}
-                          {/* {shifts?.map((data, index) => (
-                              <option key={index} value="1">{data.shift_name}</option>
-                              ))} */}
+                         
                         </select>
                       </div>
-                    </div>
-                    <div className="col-6 col-sm-4 col-md-3">
+                    </div> */}
+                    {/* <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
                           ভার্সন নির্বাচন করুন
@@ -481,6 +478,74 @@ export default function StudentTranscriptBI() {
                                 "সপ্তম"}{" "}
                               {" শ্রেণী"}
                             </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div> */}
+
+
+
+                    <div className="col-6 col-sm-4 col-md-3">
+                      <div className="mb-3" style={{ fontSize: "12px" }}>
+                        <label className="form-label">
+                          বিষয় নির্বাচন করুন
+                        </label>
+                        <select
+                          className="form-select p-2"
+                          aria-label="Default select example"
+                          style={{ fontSize: "12px" }}
+                          onChange={(e) => {
+
+                            const value = e.target.value.split("-")
+
+                            let obj = {
+                              ...allFelter , ["subject"]: value[0]+ "-" + value[1] + "-" + value[6] ,
+
+                              ['section'] : value[2] ,
+                              ['shift'] : value[3] ,
+                              ['version'] : value[4] ,
+                              ['branch'] : value[5] ,
+                            }
+
+                            setallFelter(obj)
+                          } }
+                        >
+                          <option value={""}>বিষয় নির্বাচন করুন</option>
+                          {subject?.map((data, index) => (
+                            <option
+                              key={index}
+                              value={
+                                data?.subject?.subject_info?.uid +
+                                "-" +
+                                data?.subject?.subject_info?.class_uid +
+                                "-" +
+                                data?.own_subjet.class_room.section_id+
+                                "-" +
+                                data?.own_subjet.class_room.shift_id+
+                                "-" +
+                                data?.own_subjet.class_room.version_id+
+                                "-" +
+                                data?.own_subjet.class_room.branch_id+
+                                "-" +
+                                (data?.own_subjet.class_room.class_teacher
+                                  .name_bn ||
+                                  data?.own_subjet.class_room.class_teacher
+                                    .name_en)
+                              }
+                            >
+                              {data?.subject?.subject_info?.name}{"--"}
+                              {data?.subject?.subject_info?.class_uid == 6 &&
+                                "ষষ্ঠ"}{" "}
+                                
+                              
+                              {data?.subject?.subject_info?.class_uid == 7 &&
+                                "সপ্তম"}{" "}
+                              {" শ্রেণী"}{"--"}
+                              {"--"}{section_name(data?.own_subjet.class_room.section_id)} শাখা
+                              {"--"}{shift_name(data?.own_subjet.class_room.shift_id)} সেশন
+                              {"--"}{version_name(data?.own_subjet.class_room.version_id)} ভার্সন
+                            </option>
+                            
                           ))}
                         </select>
                       </div>

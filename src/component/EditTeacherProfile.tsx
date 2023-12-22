@@ -127,32 +127,32 @@ const EditTeacherProfile = () => {
   }, [designation_id, allDesignation, date_of_birth])
 
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown(prevCountdown => (prevCountdown > 0 ? prevCountdown - 1 : 0));
-    }, 1000);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setCountdown(prevCountdown => (prevCountdown > 0 ? prevCountdown - 1 : 0));
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
 
-  if ((allDivision.length == 0) && (countdown == 0)) {
-    window.location.replace("/");
-  }
+  // if ((allDivision.length == 0) && (countdown == 0)) {
+  //   window.location.replace("/");
+  // }
 
   return (
     <section className="editTeacherProfilePage">
       <Breadcumbtitle title={"প্রোফাইল হালনাগাদ"} />
       {
-        (allDivision.length == 0) ?
-          <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-            <p className="mt-2">Server Busy, Please Wait...</p>
-            <p className="mt-2">Retry in {countdown} seconds</p>
-          </div>
-          :
+        // (allDivision.length !== 0) ?
+        //   <div className="d-flex flex-column align-items-center justify-content-center mt-5">
+        //     <div className="spinner-border text-primary" role="status">
+        //       <span className="visually-hidden">Loading...</span>
+        //     </div>
+        //     <p className="mt-2">Server Busy, Please Wait...</p>
+        //     <p className="mt-2">Retry in {countdown} seconds</p>
+        //   </div>
+          
           <div className="container my-3">
             <div className="d-flex align-items-center">
               <div className="card shadow-lg border-0 w-100 rounded">

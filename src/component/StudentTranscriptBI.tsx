@@ -949,7 +949,7 @@ export default function StudentTranscriptBI() {
                       ))
                     ) : (
                       <p className="m-5">
-                        শিক্ষার্থীর মূল্যায়ন পাওয়া যায়নি ।
+                        এই শিক্ষার্থীর কোনো মূল্যায়ন হয়নি
                       </p>
                     )}
                   </Accordion>

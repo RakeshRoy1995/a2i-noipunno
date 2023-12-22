@@ -84,7 +84,7 @@ const MyDocument = ({
         </View>
 
         <View style={[styles.row]}>
-          <View style={[styles.columnX]}>
+          <View style={{ flexDirection: "column", width: "15%" }}>
             <Text style={[styles.h2, styles.colortext]}> শ্রেণী : </Text>
           </View>
           <View
@@ -94,7 +94,7 @@ const MyDocument = ({
               {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}
             </Text>
           </View>
-          <View style={[styles.columnX]}>
+          <View style={{ flexDirection: "column", width: "15%" }}>
             <Text style={[styles.h2, styles.colortext]}> শিক্ষাবর্ষ : </Text>
           </View>
           <View

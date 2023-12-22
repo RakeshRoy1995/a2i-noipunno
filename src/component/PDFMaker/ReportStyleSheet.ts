@@ -291,7 +291,7 @@ export  const styles = StyleSheet.create({
     cardColumn: {
       flexDirection: "column",
       width: "14.50%",
-      height: "20px",
+      height: "19px",
       borderRight: "1px solid black",
       borderTop: "1px solid black",
       textAlign: "center",

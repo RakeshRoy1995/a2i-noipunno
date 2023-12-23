@@ -180,7 +180,6 @@ export async function teacher_own_subject() {
     data.data.data.bis = bi.data.data.bis;
     localStorage.removeItem("common_room");
     localStorage.removeItem("cls_room");
-
     return data;
   }
 }
@@ -198,8 +197,8 @@ export async function reloadteacher_own_subject() {
   const common_info: any = await get_common_info();
   const bi: any = await bi_info();
 
-  let app_PI: any = [];
-  let student: any = [];
+  const app_PI: any = [];
+  const student: any = [];
 
   if (bi !== "" && common_info !== "" && cls_room !== "") {
     const own_sub = await axios(options);
@@ -211,7 +210,7 @@ export async function reloadteacher_own_subject() {
         });
       });
 
-      return std_data.class_room.students.map((stu_data: any) => {
+      std_data.class_room.students.map((stu_data: any) => {
         student.push(stu_data);
       });
     });
@@ -512,6 +511,7 @@ export function get_report_card(
 ) {
   const page_list = `${EVULATION_API}/v2/report-card-by-student`;
   // const page_list = `/assets/report_card.json`;
+
 
   const options = {
     method: "get",

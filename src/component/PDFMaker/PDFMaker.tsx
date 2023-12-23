@@ -22,161 +22,7 @@ import {
 import { BsFiletypePdf } from "react-icons/bs";
 import React from "react";
 Font.register({ family: "kalpurush", src: "kalpurush.ttf", format: "truetype" });
-// Font.register({ family: "Arial", src: "arial.ttf", format: "truetype" });
-// Font.register({ family: "kalpurush", src: "Noto-Sans-Bengali-Regular.ttf", format: "truetype" });
-// Font.register({ family: "Kalpurush", src: "kalpurush.ttf", fontStyle: 'normal',
-// fontWeight: 'normal',
-// unicodeRange: 'U+0000-FFFF',
-// fontFace: {
-//   unitsPerEm: 10,
-//   ascent: 8,
-//   descent: -2,
-// }, });
-
-const styles = StyleSheet.create({
-  page: {
-    fontFamily: "kalpurush",
-    padding: 4,
-    textAlign: "left",
-    marginTop: 10
-  },
-  h1: {
-    fontFamily: "kalpurush",
-    fontSize: 16,
-    textAlign: "center",
-    fontWeight: 700,
-    margin: 5,
-    lineHeight: 1
-  },
-  h2: {
-    fontFamily: "kalpurush",
-    textAlign: "center",
-    fontSize: 12,
-  },
-  h3: {
-    fontFamily: "kalpurush",
-    fontSize: 11,
-    textAlign: "center",
-  },
-  h5: {
-    fontSize: 10,
-    fontWeight: 500,
-  },
-
-  table: {
-    width: "95%",
-    margin: 'auto'
-  },
-  tableRowTop: {
-    flexDirection: "row",
-    borderTopWidth: 1,
-    borderLeftWidth: 1,
-
-  },
-  tableRowBottom: {
-    flexDirection: "row",
-    borderTopWidth: 0,
-    borderLeftWidth: 0,
-    borderBottomWidth: 1,
-  },
-  tableRow: {
-    flexDirection: "row",
-    borderStyle: "solid",
-    borderWidth: '0.5',
-  },
-  tableCol: {
-    width: "25%",
-    borderStyle: "solid",
-    borderWidth: '0.5',
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-  },
-  tableColPoint: {
-
-  },
-  tableColStdNameRoll: {
-    width: "50%",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-  },
-
-  tableColName: {
-    width: "75%",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-  },
-  tableColRoll: {
-    width: "25%",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-  },
-
-
-  tableColTitle: {
-    width: "100%",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-  },
-
-  tableCell: {
-    fontFamily: "kalpurush",
-    padding: "2px",
-    fontSize: 11,
-    lineHeight: "1px",
-    textOverflow: "ellipsis",
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-
-
-  tableCellTikMark: {
-    fontFamily: "kalpurush",
-    margin: "auto",
-    marginTop: "3px",
-    padding: 1,
-    fontSize: 10,
-    lineHeight: "1px",
-    textOverflow: "ellipsis",
-    height: "15px"
-  },
-
-  section: {
-    margin: 20,
-    padding: 10,
-    flexGrow: 1,
-  },
-
-  tableHeader: {
-    flexDirection: "row",
-    borderBottomWidth: 1,
-    borderColor: "#000",
-    marginBottom: 10,
-    fontWeight: "bold",
-  },
-  cell: {
-    border: "1px solid #000 !important",
-    padding: 1,
-    flexGrow: 1,
-    width: "25%",
-  },
-
-  tikMark: {
-    marginLeft: 50,
-    marginTop: 5,
-    width: "12px",
-    height: "10px",
-  },
-
-});
-
+import { styles } from "./PI_trans_style";
 
 const MyDocument = ({
   data,
@@ -245,11 +91,11 @@ const MyDocument = ({
           </View>
           <View style={{ width: "15%", borderStyle: "solid", borderWidth: '0.5', borderLeftWidth: 0, borderTopWidth: 0, }}>
             <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>
-              বিষয়: {subject_name(allFelter?.subject?.split("-")[0])}
+              বিষয়: {subject_name(allFelter?.subject?.split("-")[0])} {" "}
             </Text>
           </View>
           <View style={{ width: "40%", borderStyle: "solid", borderWidth: '0.5', borderLeftWidth: 0, borderTopWidth: 0, }}>
-            <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>শ্রেণি শিক্ষকের নাম: {teacher}</Text>
+            <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>শ্রেণি শিক্ষকের নাম: {teacher} {" "}</Text>
           </View>
         </View>
 
@@ -272,7 +118,7 @@ const MyDocument = ({
             <View style={styles.tableCol} wrap={true}>
               <Text style={styles.tableCell}>
                 {/* {(all_pi.pi_data.pi_no).split('').reverse().join('')}{" "} */}
-                {convertToBanglaNumber(all_pi.pi_data.pi_no)}
+                {convertToBanglaNumber(all_pi.pi_data.pi_no)} 
                 {/* {all_pi.pi_data.name_bn || all_pi.pi_data.name_en}{"  "} */}
                 {all_pi.pi_data.name_bn?.split(' ').map((word, index) => (
                   <React.Fragment key={index}>
@@ -293,7 +139,7 @@ const MyDocument = ({
                     )}
                   </Text>
                 </View>
-                <Text style={[styles.tableCell, { marginBottom: "5px", marginLeft: "0px" }]}>
+                <Text style={[styles.tableCell, { marginBottom: "8px", marginLeft: "0px" }]}>
   
                   {/* {pi_data?.title_bn || pi_data?.title_en}{" "} */}
 
@@ -307,18 +153,16 @@ const MyDocument = ({
 
                   {(allFelter?.subject?.split("-")[0] == "ইংরেজি") ?
                     <>
-                      {pi_data?.title_bn || pi_data?.title_en}{" "}
+                      {pi_data?.title_bn?.replaceAll('\r\n', ' ') || pi_data?.title_en?.replaceAll('\r\n', ' ')}{" "}
                     </> :
                     <>
-                      {pi_data?.title_bn?.split(' ').map((word, index) => (
+                      {pi_data?.title_bn?.replaceAll('\r\n', ' ').split(' ').map((word, index) => (
                         <React.Fragment key={index}>
                           {index > 0 && index % 4 === 0 && <Text>{"\n"}</Text>}
                           {word.trim()}{" "}
                         </React.Fragment>
                       ))}
                     </>}
-
-
 
                 </Text>
               </View>

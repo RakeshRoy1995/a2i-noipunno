@@ -390,7 +390,6 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
     const student_dta = all_studentsData.filter(
       (d: any) => d.uid == stu.student_uid
     );
-
     const all_PI_array = [];
 
     for (let y = 0; y < allPi.length; y++) {
@@ -400,13 +399,13 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
         ...pi,
         student_data: student_dta[0],
         pi_data: pi_data[0],
-        pi_no: pi_data[0].pi_no.replaceAll(".", ""),
+        pi_no: pi_data[0]?.pi_no?.replaceAll(".", "") || 0,
       };
       all_PI_array.push(Pi_obj);
     }
 
     all_PI_array.sort((a, b) => {
-      return a.pi_no - b.pi_no;
+      return a?.pi_no - b?.pi_no;
     });
 
     obj = {

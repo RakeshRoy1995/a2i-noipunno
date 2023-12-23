@@ -65,7 +65,7 @@ const MyDocument = ({
           >
             <Text style={styles.dot}>
               {" "}
-              {student?.student_name_bn || student?.student_name_en}
+              {student?.student_name_bn || student?.student_name_en} {" "}
             </Text>
           </View>
           <View style={[styles.columnX]}>
@@ -78,7 +78,7 @@ const MyDocument = ({
             style={{ flexDirection: "column", marginRight: 5, width: "15%" }}
           >
             <Text style={styles.dot}>
-              {convertToBanglaNumber(student?.roll)}
+              {convertToBanglaNumber(student?.roll)} { " "}
             </Text>
           </View>
         </View>
@@ -91,7 +91,7 @@ const MyDocument = ({
             style={{ flexDirection: "column", marginRight: 5, width: "45%" }}
           >
             <Text style={styles.dot}>
-              {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}
+              {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"} {" "}
             </Text>
           </View>
           <View style={{ flexDirection: "column", width: "15%" }}>
@@ -101,7 +101,7 @@ const MyDocument = ({
             style={{ flexDirection: "column", marginRight: 5, width: "15%" }}
           >
             <Text style={styles.dot}>
-              {convertToBanglaNumber(student?.registration_year)}
+              {convertToBanglaNumber(student?.registration_year)} {" "}
             </Text>
           </View>
         </View>
@@ -137,7 +137,7 @@ const MyDocument = ({
                   index < 5 && (
                     <Text style={styles.text}>
                       <Image src="../graduation-cap.png" />{" "}
-                      {subject_name(item[0])}
+                      {subject_name(item[0])} {" "}
                     </Text>
                   )
                 );
@@ -156,7 +156,7 @@ const MyDocument = ({
                   index >= 5 && (
                     <Text style={styles.text}>
                       <Image src="../graduation-cap.png" />{" "}
-                      {subject_name(item[0])}
+                      {subject_name(item[0])} {" "}
                     </Text>
                   )
                 );
@@ -338,7 +338,7 @@ const MyDocument = ({
               <View style={[styles.box1]}>
                 <View style={[styles.card]}>
                   <View style={[styles.cardTitle]}>
-                    <Text style={[styles.h3]}>{data?.dimension_title} </Text>
+                    <Text style={[styles.h3]}>{data?.dimension_title} {" "} </Text>
                   </View>
 
                   <View style={[styles.cardRow]}>

@@ -19,7 +19,6 @@ const EditTeacherProfile = () => {
   const [upozila, setupozila] = useState<any>([]);
   const [countdown, setCountdown] = useState(30);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  
 
 
   const {
@@ -124,38 +123,36 @@ const EditTeacherProfile = () => {
       setSelectedDate(new Date(date_of_birth))
     }
 
-    
+
   }, [designation_id, allDesignation, date_of_birth])
 
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown(prevCountdown => (prevCountdown > 0 ? prevCountdown - 1 : 0));
-    }, 1000);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setCountdown(prevCountdown => (prevCountdown > 0 ? prevCountdown - 1 : 0));
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, []);
 
-  if ((allDivision.length == 0) && (countdown == 0)) {
-    window.location.replace("/");
-  }
+  // if ((allDivision.length == 0) && (countdown == 0)) {
+  //   window.location.replace("/");
+  // }
 
-  // console.log(teacherDesignation);
- 
   return (
     <section className="editTeacherProfilePage">
       <Breadcumbtitle title={"প্রোফাইল হালনাগাদ"} />
       {
-        (allDivision.length == 0) ?
-          <div className="d-flex flex-column align-items-center justify-content-center vh-50%">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-            <p className="mt-2">Server Busy, Please Wait...</p>
-            <p className="mt-2">Retry in {countdown} seconds</p>
-          </div>
-          :
+        // (allDivision.length !== 0) ?
+        //   <div className="d-flex flex-column align-items-center justify-content-center mt-5">
+        //     <div className="spinner-border text-primary" role="status">
+        //       <span className="visually-hidden">Loading...</span>
+        //     </div>
+        //     <p className="mt-2">Server Busy, Please Wait...</p>
+        //     <p className="mt-2">Retry in {countdown} seconds</p>
+        //   </div>
+          
           <div className="container my-3">
             <div className="d-flex align-items-center">
               <div className="card shadow-lg border-0 w-100 rounded">
@@ -191,6 +188,23 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
+                      {/* <div className="form-group col-sm-4 col-md-6">
+                        <div className="mb-3" style={{ fontSize: '16px' }}>
+                          <label className="form-label">নাম (বাংলা)</label>
+                          <div className="input-group">
+                            <input
+                              type="text"
+                              id="pin"
+                              className="form-control"
+                              name="name_bn"
+                              value={nameBn}
+                              onChange={handleNameBnChange}
+                              placeholder="আপনার নাম লিখুন (বাংলায়)"
+                            />
+                          </div>
+                        </div>
+                      </div> */}
+
                       <div className="form-group  col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label className="form-label">নাম (ইংরেজি)</label>
@@ -215,7 +229,7 @@ const EditTeacherProfile = () => {
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="form-group  col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label className="form-label">পদবী</label>
@@ -264,12 +278,12 @@ const EditTeacherProfile = () => {
                           <div className="input-group">
                             <select className="form-control"
                               name="gender"
-                              // value={gender}
+                            // value={gender}
                             >
                               <option value={''}>লিঙ্গ নির্বাচন করুন</option>
-                              <option value={"1"} selected={(gender==="1")}>পুরুষ</option>
-                              <option value={"2"} selected={(gender==="2")}>মহিলা</option>
-                              <option value={"3"} selected={(gender==="3")}>অন্যান্য</option>
+                              <option value={"1"} selected={(gender === "1")}>পুরুষ</option>
+                              <option value={"2"} selected={(gender === "2")}>মহিলা</option>
+                              <option value={"3"} selected={(gender === "3")}>অন্যান্য</option>
                             </select>
                           </div>
                         </div>

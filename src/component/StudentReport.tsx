@@ -200,6 +200,9 @@ export default function StudentReport() {
       const clssWiseSub: any = await clssWiseSubject(
         allFelter.subject.split("-")[1]
       );
+
+      clssWiseSub.data.data.sort((a, b) => a.subject_no - b.subject_no);
+
       setall_subject(clssWiseSub.data.data);
 
       let res: any = [];
@@ -214,6 +217,8 @@ export default function StudentReport() {
         bi_res.push(data);
       }) 
 
+      
+
       const bi_data = formate_report_data(bi_res ,dimentions_details.data.data)
       const data = formate_report_data(res, dimentions.data.data);
       const student_data = all_students(student_name);
@@ -222,9 +227,27 @@ export default function StudentReport() {
       setstudent(student_data);
       setsubject_name(subject_data);
       setbiData(bi_data);
-      setselected_student(data);
+      
 
-      console.log(`data----`, data,biData,bi_data);
+
+      const all_sub = clssWiseSub.data.data
+
+      const final_data = []
+
+      for (let index = 0; index < all_sub.length; index++) {
+        const sub_data = all_sub[index];
+        for (let z = 0; z < data.length; z++) {
+          const report_data = data[z];
+
+          if (sub_data.uid == report_data[0] ) {
+            final_data.push(report_data)
+            break
+          }
+          
+        }
+      }
+
+      setselected_student(final_data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -293,7 +316,7 @@ console.log("allFelter",allFelter);
                   aria-labelledby="expertness-tab"
                 >
                   <div className="row p-5">
-                    <div className="col-6 col-sm-4 col-md-3">
+                    {/* <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
                           ব্রাঞ্চ নির্বাচন করুন
@@ -317,13 +340,11 @@ console.log("allFelter",allFelter);
                             </option>
                           ))}
 
-                          {/* {shifts?.map((data, index) => (
-                              <option key={index} value="1">{data.shift_name}</option>
-                              ))} */}
+                          
                         </select>
                       </div>
-                    </div>
-                    <div className="col-6 col-sm-4 col-md-3">
+                    </div> */}
+                    {/* <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">সেশন নির্বাচন করুন</label>
                         <select
@@ -344,13 +365,11 @@ console.log("allFelter",allFelter);
                               {shift_name(data)} সেশন
                             </option>
                           ))}
-                          {/* {shifts?.map((data, index) => (
-                              <option key={index} value="1">{data.shift_name}</option>
-                              ))} */}
+                         
                         </select>
                       </div>
-                    </div>
-                    <div className="col-6 col-sm-4 col-md-3">
+                    </div> */}
+                    {/* <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
                           ভার্সন নির্বাচন করুন
@@ -375,9 +394,9 @@ console.log("allFelter",allFelter);
                           ))}
                         </select>
                       </div>
-                    </div>
+                    </div> */}
 
-                    <div className="col-6 col-sm-4 col-md-3">
+                    {/* <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">শাখা নির্বাচন করুন</label>
                         <select
@@ -401,9 +420,9 @@ console.log("allFelter",allFelter);
                           ))}
                         </select>
                       </div>
-                    </div>
+                    </div> */}
 
-                    <div className="col-6 col-sm-4 col-md-3">
+                    {/* <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
                           বিষয় নির্বাচন করুন
@@ -449,8 +468,8 @@ console.log("allFelter",allFelter);
                           ))}
                         </select>
                       </div>
-                    </div>
-                    {/* <div className="col-6 col-sm-4 col-md-3">
+                    </div> */}
+                    <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
                           বিষয় নির্বাচন করুন
@@ -459,8 +478,21 @@ console.log("allFelter",allFelter);
                           className="form-select p-2"
                           aria-label="Default select example"
                           style={{ fontSize: "12px" }}
-                          name={["subject", "section","shift","version","branch"]}
-                          onChange={(e) => handleSelectChange(e)} 
+                          onChange={(e) => {
+
+                            const value = e.target.value.split("-")
+
+                            let obj = {
+                              ...allFelter , ["subject"]: value[0]+ "-" + value[1] + "-" + value[6] ,
+
+                              ['section'] : value[2] ,
+                              ['shift'] : value[3] ,
+                              ['version'] : value[4] ,
+                              ['branch'] : value[5] ,
+                            }
+
+                            setallFelter(obj)
+                          } }
                         >
                           <option value={""}>বিষয় নির্বাচন করুন</option>
                           {subject?.map((data, index) => (
@@ -496,13 +528,12 @@ console.log("allFelter",allFelter);
                               {"--"}{section_name(data?.own_subjet.class_room.section_id)} শাখা
                               {"--"}{shift_name(data?.own_subjet.class_room.shift_id)} সেশন
                               {"--"}{version_name(data?.own_subjet.class_room.version_id)} ভার্সন
-                              {"--"}{branch_name(data?.own_subjet.class_room.branch_id)} ব্রাঞ্চ
                             </option>
                             
                           ))}
                         </select>
                       </div>
-                    </div> */}
+                    </div>
 
                     {allFelter.branch &&
                       allFelter.subject &&

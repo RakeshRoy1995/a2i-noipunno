@@ -205,6 +205,27 @@ export function check_pi_submitted(pis_id: any, assessment_uid: any) {
   }
 }
 
+// Function to sort array of objects by a numeric property in ascending order
+export function sortByNumericPropertyAscending(data) {
+  let dataArray = Array.isArray(data) ? data : []; // Ensure 'data' is an array
+
+  // If 'data' is not an array and needs conversion, perform the conversion here
+
+  dataArray = dataArray.filter(
+    (item) => item && typeof item.pi_no === "number"
+  ); // Filter out non-numeric items
+
+  // Sort the array based on the numeric property 'pi_no' (assuming it contains numbers)
+  dataArray.sort((a, b) => {
+    const numericA: any = convertToBanglaNumber(a.pi_no); // Convert to Bangla number
+    const numericB: any = convertToBanglaNumber(b.pi_no); // Convert to Bangla number
+
+    return numericA - numericB; // Sort in ascending order
+  });
+
+  return dataArray;
+}
+
 export const convertToBanglaNumber = (number: any) => {
   const banglaDigits = [
     "০",
@@ -351,7 +372,6 @@ export const formate_teanscript_data = (data: any) => {
 };
 
 export const formate_teanscript_dataBy_single_student = (data: any) => {
-  
   const our_all_pi = localStorage.getItem("our_all_pi");
   const our_all_piData = JSON.parse(our_all_pi);
 
@@ -365,12 +385,14 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
   const stu = data[0];
   const allPi = data;
 
+  // console.log("our_all_piData" , our_all_piData);
   if (stu) {
     const student_dta = all_studentsData.filter(
       (d: any) => d.uid == stu.student_uid
     );
 
     const all_PI_array = [];
+
     for (let y = 0; y < allPi.length; y++) {
       const pi = allPi[y];
       const pi_data = our_all_piData.filter((d: any) => d.uid == pi.pi_uid);
@@ -378,9 +400,14 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
         ...pi,
         student_data: student_dta[0],
         pi_data: pi_data[0],
+        pi_no: pi_data[0]?.pi_no?.replaceAll(".", "") || 0,
       };
       all_PI_array.push(Pi_obj);
     }
+
+    all_PI_array.sort((a, b) => {
+      return a?.pi_no - b?.pi_no;
+    });
 
     obj = {
       student_data: student_dta[0],
@@ -391,13 +418,13 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
   return result;
 };
 
-
-
-export const formate_Bi_teanscript_dataBy_single_student = (data: any , student_name:any , bi:any = []) => {
-  
+export const formate_Bi_teanscript_dataBy_single_student = (
+  data: any,
+  student_name: any
+) => {
   const our_all_pi = localStorage.getItem("bi");
-  const tempBi= JSON.parse(our_all_pi)
-  const our_all_piData = bi?.data?.data?.bis  ;
+  const tempBi = JSON.parse(our_all_pi);
+  const our_all_piData = tempBi?.data?.data?.bis;
 
   const all_students = localStorage.getItem("all_students");
   const all_studentsData = JSON.parse(all_students);
@@ -406,15 +433,13 @@ export const formate_Bi_teanscript_dataBy_single_student = (data: any , student_
 
   let obj = {};
 
+  console.log(`data`, data);
+
   const stu = student_name;
   const allPi = data;
 
-  console.log(`allPi`, allPi);
-
   if (stu) {
-    const student_dta = all_studentsData.filter(
-      (d: any) => d.uid == stu
-    );
+    const student_dta = all_studentsData.filter((d: any) => d.uid == stu);
 
     console.log(`student_dta`, student_dta);
 
@@ -552,39 +577,42 @@ export const make_group_by_report_data = (studentData: any) => {
   return groupedByStudentId;
 };
 
-
-export const show_sub_by_religion = (religion:any , subject_name:any)=>{
+export const show_sub_by_religion = (religion: any, subject_name: any) => {
   if (
     religion == "Islam" &&
-    (subject_name == "হিন্দুধর্ম শিক্ষা" || subject_name== "খ্রীষ্টধর্ম শিক্ষা" || subject_name== "বৌদ্ধধর্ম শিক্ষা" )
+    (subject_name == "হিন্দুধর্ম শিক্ষা" ||
+      subject_name == "খ্রীষ্টধর্ম শিক্ষা" ||
+      subject_name == "বৌদ্ধধর্ম শিক্ষা")
   ) {
     return true;
   }
-
 
   if (
     religion == "Hinduism" &&
-    (subject_name == "ইসলাম শিক্ষা" || subject_name== "খ্রীষ্টধর্ম শিক্ষা" || subject_name== "বৌদ্ধধর্ম শিক্ষা" )
+    (subject_name == "ইসলাম শিক্ষা" ||
+      subject_name == "খ্রীষ্টধর্ম শিক্ষা" ||
+      subject_name == "বৌদ্ধধর্ম শিক্ষা")
   ) {
     return true;
   }
-
 
   if (
     religion == "Christianity" &&
-    (subject_name == "ইসলাম শিক্ষা" || subject_name== "হিন্দুধর্ম শিক্ষা" || subject_name== "বৌদ্ধধর্ম শিক্ষা" )
+    (subject_name == "ইসলাম শিক্ষা" ||
+      subject_name == "হিন্দুধর্ম শিক্ষা" ||
+      subject_name == "বৌদ্ধধর্ম শিক্ষা")
   ) {
     return true;
   }
-
 
   if (
     religion == "Buddhism" &&
-    (subject_name == "ইসলাম শিক্ষা" || subject_name== "খ্রীষ্টধর্ম শিক্ষা" || subject_name== "বৌদ্ধধর্ম শিক্ষা" )
+    (subject_name == "ইসলাম শিক্ষা" ||
+      subject_name == "খ্রীষ্টধর্ম শিক্ষা" ||
+      subject_name == "বৌদ্ধধর্ম শিক্ষা")
   ) {
     return true;
   }
 
-
-  return false
-}
+  return false;
+};

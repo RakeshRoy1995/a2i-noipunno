@@ -6,7 +6,6 @@ import {
   get_pi_bi_evaluation_list,
   get_pi_bi,
   get_pi_bi_by_student_student,
-  
 } from "../Request";
 import html2pdf from "html2pdf.js";
 import { RotatingLines } from "react-loader-spinner";
@@ -29,6 +28,8 @@ import {
   convertToBanglaNumber,
   formate_teanscript_data,
   formate_teanscript_dataBy_single_student,
+  sortByNumericPropertyAscending,
+  version_name,
 } from "../utils/Utils";
 
 import Breadcumb from "../layout/Breadcumb";
@@ -85,6 +86,7 @@ export default function StudentTranscript() {
     setown_data(own_subjet?.data?.data);
     setteacher(own_subjet.data.data.user);
 
+    
     let all_subject: any = [];
 
     own_subjet.data.data.subjects.map((d: any) => {
@@ -140,6 +142,7 @@ export default function StudentTranscript() {
     fetchData();
   }, []);
 
+
   const uniqueclass = [...new Set(subject.map((data) => data?.class))];
 
   const uniqueSections = [...new Set(subject.map((data) => data?.section))];
@@ -183,9 +186,7 @@ export default function StudentTranscript() {
           ""
         );
 
-        const data = formate_teanscript_data(
-          pi_bi_data.data.transcript
-        );
+        const data = formate_teanscript_data(pi_bi_data.data.transcript);
 
         console.log(`datat`, data);
 
@@ -202,12 +203,13 @@ export default function StudentTranscript() {
         );
 
         const data = formate_teanscript_dataBy_single_student(
-          pi_bi_data?.data?.transcript?.subject_result || pi_bi_data?.data?.transcript?.student_result
+          pi_bi_data?.data?.transcript?.subject_result ||
+            pi_bi_data?.data?.transcript?.student_result
         );
+console.log("data",data);
 
         setselected_student(data);
       }
-
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -225,8 +227,6 @@ export default function StudentTranscript() {
       return true;
     }
   });
-
-
 
   const handleConvertToPdf = (student: any, multiple = false) => {
     setsubmittingLoading(true);
@@ -329,7 +329,7 @@ export default function StudentTranscript() {
                   aria-labelledby="expertness-tab"
                 >
                   <div className="row p-5">
-                    <div className="col-6 col-sm-4 col-md-3">
+                    {/* <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
                           ব্রাঞ্চ নির্বাচন করুন
@@ -353,9 +353,7 @@ export default function StudentTranscript() {
                             </option>
                           ))}
 
-                          {/* {shifts?.map((data, index) => (
-                              <option key={index} value="1">{data.shift_name}</option>
-                              ))} */}
+                         
                         </select>
                       </div>
                     </div>
@@ -380,13 +378,11 @@ export default function StudentTranscript() {
                               {shift_name(data)} সেশন
                             </option>
                           ))}
-                          {/* {shifts?.map((data, index) => (
-                              <option key={index} value="1">{data.shift_name}</option>
-                              ))} */}
+                         
                         </select>
                       </div>
-                    </div>
-                    <div className="col-6 col-sm-4 col-md-3">
+                    </div> */}
+                    {/* <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
                           ভার্সন নির্বাচন করুন
@@ -474,11 +470,77 @@ export default function StudentTranscript() {
                               {data?.subject?.subject_info?.name}{" "}
                               {data?.subject?.subject_info?.class_uid == 6 &&
                                 "ষষ্ঠ"}{" "}
-                                
                               {data?.subject?.subject_info?.class_uid == 7 &&
                                 "সপ্তম"}{" "}
                               {" শ্রেণী"}
                             </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div> */}
+
+
+                    <div className="col-6 col-sm-4 col-md-3">
+                      <div className="mb-3" style={{ fontSize: "12px" }}>
+                        <label className="form-label">
+                          বিষয় নির্বাচন করুন
+                        </label>
+                        <select
+                          className="form-select p-2"
+                          aria-label="Default select example"
+                          style={{ fontSize: "12px" }}
+                          onChange={(e) => {
+
+                            const value = e.target.value.split("-")
+
+                            let obj = {
+                              ...allFelter , ["subject"]: value[0]+ "-" + value[1] + "-" + value[6] ,
+
+                              ['section'] : value[2] ,
+                              ['shift'] : value[3] ,
+                              ['version'] : value[4] ,
+                              ['branch'] : value[5] ,
+                            }
+
+                            setallFelter(obj)
+                          } }
+                        >
+                          <option value={""}>বিষয় নির্বাচন করুন</option>
+                          {subject?.map((data, index) => (
+                            <option
+                              key={index}
+                              value={
+                                data?.subject?.subject_info?.uid +
+                                "-" +
+                                data?.subject?.subject_info?.class_uid +
+                                "-" +
+                                data?.own_subjet.class_room.section_id+
+                                "-" +
+                                data?.own_subjet.class_room.shift_id+
+                                "-" +
+                                data?.own_subjet.class_room.version_id+
+                                "-" +
+                                data?.own_subjet.class_room.branch_id+
+                                "-" +
+                                (data?.own_subjet.class_room.class_teacher
+                                  .name_bn ||
+                                  data?.own_subjet.class_room.class_teacher
+                                    .name_en)
+                              }
+                            >
+                              {data?.subject?.subject_info?.name}{"--"}
+                              {data?.subject?.subject_info?.class_uid == 6 &&
+                                "ষষ্ঠ"}{" "}
+                                
+                              
+                              {data?.subject?.subject_info?.class_uid == 7 &&
+                                "সপ্তম"}{" "}
+                              {" শ্রেণী"}{"--"}
+                              {"--"}{section_name(data?.own_subjet.class_room.section_id)} শাখা
+                              {"--"}{shift_name(data?.own_subjet.class_room.shift_id)} সেশন
+                              {"--"}{version_name(data?.own_subjet.class_room.version_id)} ভার্সন
+                            </option>
+                            
                           ))}
                         </select>
                       </div>
@@ -651,6 +713,7 @@ export default function StudentTranscript() {
                         </select>
                       </div>
                     </div> */}
+
                     <div className="col-6 col-sm-4 col-md-3">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
@@ -836,7 +899,6 @@ export default function StudentTranscript() {
                   </div>
                 </div>
               </div>
-              
 
               <Accordion>
                 {selected_student?.length > 0 ? (
@@ -877,7 +939,7 @@ export default function StudentTranscript() {
                                     <div>
                                       <h6>
                                         পারদর্শিতা সূচক{" "}
-                                        {convertToBanglaNumber(
+                                        {sortByNumericPropertyAscending(
                                           data?.pi_data?.pi_no
                                         )}{" "}
                                       </h6>

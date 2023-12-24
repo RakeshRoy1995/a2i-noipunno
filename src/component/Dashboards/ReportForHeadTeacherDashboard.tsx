@@ -17,7 +17,7 @@ const ReportForHeadTeacherDashboard = () => {
             </Link>
           </div>
           <div className="col">
-            <Link to="#" className="student-container">
+            <Link to="/student-transcript-bi" className="student-container">
               <div className="icon">
                 <img src={reportIcon} alt="reportIcon" />
               </div>

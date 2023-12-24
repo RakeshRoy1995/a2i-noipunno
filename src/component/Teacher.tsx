@@ -148,45 +148,9 @@ export default function Teacher() {
     setelement(e);
   };
 
-  // return (
-  //   <>
-  //     <div className="">
-  //       <p className="text-center">
-  //         শিক্ষার্থী মূল্যায়ন জমা দিতে নৈপুণ্য মোবাইল অ্যাপ ব্যবহার করুন।
-  //         মোবাইল অ্যাপ ডাউনলোড করুন এই লিঙ্ক থেকে
-  //       </p>
-
-  //       <p className="text-center">
-  //         <a
-  //           href="https://eklink.click/noipunno-android-app"
-  //           download=""
-  //           target="_blank"
-  //         >
-  //           <img
-  //             height="40px"
-  //             src="https://evaluation.noipunno.gov.bd/playstore.png"
-  //           />
-  //         </a>
-  //         <a
-  //           href="https://accounts.noipunno.gov.bd/app/noipunno.apk"
-  //           download=""
-  //         >
-  //           <img
-  //             height="40px"
-  //             src="https://accounts.noipunno.gov.bd/images/play-store-logo.png"
-  //           />
-  //         </a>
-  //       </p>
-  //     </div>
-  //     {!loader && <ReportForHeadTeacherDashboard />}
-
-  //     {/* <ReportForHeadTeacherDashboard /> */}
-  //   </>
-  // );
-
   return (
     <>
-      {!showReportDeleteEv() && (
+      {!showReportDeleteEv() ? (
         <div className="content mb-5 teacher_compo_bg">
           {showLoadingErr ? (
             <p className="text-danger text-center">{showLoadingErr}</p>
@@ -458,6 +422,22 @@ export default function Teacher() {
 
           {/* Teachers List end */}
         </div>
+      ) : (
+        <>
+          {showLoadingErr ? (
+            <p className="text-danger text-center">{showLoadingErr}</p>
+          ) : (
+            <>
+              {loader && (
+                <div className={loader && styles.loading_container}>
+                  {loader && <Spinner animation="border" />}
+                </div>
+              )}
+
+              {!loader && <ReportForHeadTeacherDashboard />}
+            </>
+          )}
+        </>
       )}
     </>
   );

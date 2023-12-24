@@ -28,8 +28,8 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
 
         std_data.competence.map((conpitance_data: any) => {
           conpitance_data.pis.map((data: any) => {
-            app_PI.push(data)
-          })
+            app_PI.push(data);
+          });
         });
 
         return std_data.class_room.students.map((stu_data: any) => {
@@ -48,11 +48,10 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
 
       if (local_storege_data?.data?.classes) {
         set_Total_class(local_storege_data?.data?.classes);
-        const all_teachers_list = teacher_list()
+        const all_teachers_list = teacher_list();
         set_all_teacher(all_teachers_list);
         setLoadin(false);
       }
-
     }
   };
 
@@ -63,43 +62,44 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
   }, 4000);
 
   return (
-    <div className="col-lg-2 col-md-6 ">
-      <div className="teacher-student-card gy-5">
-        <a href="#">
-          <div className="card-container">
-            <div className="total-student">
-              <div className="title">
-                <h3>
-                  সর্বমোট
-                  <br />
-                  <span>শিক্ষার্থী</span>
-                </h3>
-                <h6>শ্রেণী - ষষ্ঠ - সপ্তম</h6>
-              </div>
-              <div className="circle">
-                <h5>{all_student?.length || "00"}</h5>
-              </div>
-            </div>
-          </div>
-        </a>
-        <a href="#">
-          <div className="card-container">
-            <div className="total-student">
-              <div className="title">
-                <h3>
-                  সর্বমোট
-                  <br />
-                  <span>শিক্ষক</span>
-                </h3>
-                <h6>আপনার স্কুল এ</h6>
-              </div>
-              <div className="circle">
-                <h5>{all_teacher?.length || "00"}</h5>
+    <>
+      <div className="col-lg-2 col-md-6 ">
+        <div className="teacher-student-card gy-5">
+          <a href="#">
+            <div className="card-container">
+              <div className="total-student">
+                <div className="title">
+                  <h3>
+                    সর্বমোট
+                    <br />
+                    <span>শিক্ষার্থী</span>
+                  </h3>
+                  <h6>শ্রেণী - ষষ্ঠ - সপ্তম</h6>
+                </div>
+                <div className="circle">
+                  <h5>{all_student?.length || "00"}</h5>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-        {/* <a href="#">
+          </a>
+          <a href="#">
+            <div className="card-container">
+              <div className="total-student">
+                <div className="title">
+                  <h3>
+                    সর্বমোট
+                    <br />
+                    <span>শিক্ষক</span>
+                  </h3>
+                  <h6>আপনার স্কুল এ</h6>
+                </div>
+                <div className="circle">
+                  <h5>{all_teacher?.length || "00"}</h5>
+                </div>
+              </div>
+            </div>
+          </a>
+          {/* <a href="#">
           <div className="card-container">
             <div className="total-student">
               <div className="title">
@@ -116,8 +116,44 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
             </div>
           </div>
         </a> */}
+        </div>
       </div>
-    </div>
+
+      <div className="col-lg-6 col-md-6 ">
+        <div className="teacher-student-card gy-5">
+          <>
+            <div className="">
+              <p className="text-center">
+                শিক্ষার্থী মূল্যায়ন জমা দিতে নৈপুণ্য মোবাইল অ্যাপ ব্যবহার করুন।
+                মোবাইল অ্যাপ ডাউনলোড করুন এই লিঙ্ক থেকে
+              </p>
+
+              <p className="text-center">
+                <a
+                  href="https://eklink.click/noipunno-android-app"
+                  download=""
+                  target="_blank"
+                >
+                  <img
+                    height="40px"
+                    src="https://evaluation.noipunno.gov.bd/playstore.png"
+                  />
+                </a>
+                <a
+                  href="https://accounts.noipunno.gov.bd/app/noipunno.apk"
+                  download=""
+                >
+                  <img
+                    height="40px"
+                    src="https://accounts.noipunno.gov.bd/images/play-store-logo.png"
+                  />
+                </a>
+              </p>
+            </div>
+          </>
+        </div>
+      </div>
+    </>
   );
 };
 

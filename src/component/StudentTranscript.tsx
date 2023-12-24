@@ -45,6 +45,7 @@ import DownloadPDF_component from "./DownloadPDF";
 import RawPDFDownload from "./PDFMaker/PDFMaker";
 
 import TableComp from "./TableComp";
+import { Modal } from "react-bootstrap";
 
 export default function StudentTranscript() {
   const [student_info_pdf, setStudent_info_pdf] = useState<any>("");
@@ -60,8 +61,11 @@ export default function StudentTranscript() {
   const [instititute, setinstititute] = useState<any>("");
   const [data, setdata] = useState<any>({});
   const [selected_student, setselected_student] = useState<any>([]);
+  // const [data, setdata] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
   const [submittingLoading, setsubmittingLoading] = useState(false);
+  const [showModal, setshowModal] = useState(false);
+  const [pdfDownloading, setpdfDownloading] = useState(false);
 
   const fetchData = async () => {
     const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
@@ -146,13 +150,6 @@ export default function StudentTranscript() {
     fetchData();
   }, []);
 
-  const uniqueclass = [...new Set(subject.map((data) => data?.class))];
-
-  const uniqueSections = [...new Set(subject.map((data) => data?.section))];
-  const uniqueshift = [...new Set(subject.map((data) => data?.shift))];
-  const uniquebranch = [
-    ...new Set(subject.map((data) => data?.own_subjet?.class_room?.branch_id)),
-  ];
   const uniquestudents = [
     ...new Set(subject.map((data) => data?.own_subjet?.class_room?.students)),
   ];
@@ -171,6 +168,10 @@ export default function StudentTranscript() {
   const Stuent_result = Object.values(
     studnt.reduce((acc, obj) => ({ ...acc, [obj.uid]: obj }), {})
   );
+
+  const handleCloseModal = () => {
+    setshowModal(false);
+  };
 
   const fetchDataFromAPI = async (student_uid) => {
     setsubmittingLoading(true);
@@ -193,40 +194,7 @@ export default function StudentTranscript() {
           pi_bi_data?.data?.transcript?.student_result
       );
       setselected_student(data);
-
-      // if (student_name == "") {
-      //   const pi_bi_data = await get_pi_bi(
-      //     allFelter.subject.split("-")[0],
-      //     allFelter.branch,
-      //     allFelter.version,
-      //     allFelter.shift,
-      //     allFelter.subject.split("-")[1],
-      //     allFelter.section,
-      //     ""
-      //   );
-
-      //   const data = formate_teanscript_data(pi_bi_data.data.transcript);
-
-      //   console.log(`datat`, data);
-
-      //   setselected_student(data);
-      // } else {
-      //   const pi_bi_data = await get_pi_bi_by_student_student(
-      //     allFelter.subject.split("-")[0],
-      //     allFelter.branch,
-      //     allFelter.version,
-      //     allFelter.shift,
-      //     allFelter.subject.split("-")[1],
-      //     allFelter.section,
-      //     student_name
-      //   );
-
-      //   const data = formate_teanscript_dataBy_single_student(
-      //     pi_bi_data?.data?.transcript?.subject_result ||
-      //       pi_bi_data?.data?.transcript?.student_result
-      //   );
-      //   setselected_student(data);
-      // }
+      // setshowModal(true);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -244,59 +212,6 @@ export default function StudentTranscript() {
       return true;
     }
   });
-
-  const handleConvertToPdf = (student: any, multiple = false) => {
-    setsubmittingLoading(true);
-    if (!multiple) {
-      const filename =
-        student.student_name_bn ||
-        student.student_name_en + "-roll-" + student.roll + ".pdf";
-
-      const id = "contentToConvert_" + student.uid;
-      const element = document.getElementById(id);
-
-      const options = {
-        margin: 20,
-        border: "1px solid",
-        filename: filename,
-        image: { type: "jpeg", quality: 4.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-      };
-
-      // const pdf = html2pdf().from(element).set(options).outputPdf();
-      // pdf.save();
-    } else {
-      for (let index = 0; index < selected_student.length; index++) {
-        const el = selected_student[index];
-        const Stu_data: any = all_students(el.student_data.uid);
-
-        const id = "contentToConvert_" + el.student_data.uid;
-        const element = document.getElementById(id);
-
-        const filename =
-          Stu_data.student_name_bn ||
-          Stu_data.student_name_en + "-roll-" + Stu_data.roll + ".pdf";
-
-        const options = {
-          margin: 20,
-          border: "1px solid",
-          filename,
-          image: { type: "jpeg", quality: 4.98 },
-          html2canvas: { scale: 2 },
-          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-        };
-
-        // setTimeout(() => {
-        //   const pdf = html2pdf().from(element).set(options).outputPdf();
-        //   pdf.save();
-        //   console.log("element", element);
-        // }, 700);
-      }
-      // console.log("student", student);
-    }
-    setsubmittingLoading(false);
-  };
 
   console.log("new_student", new_student);
 
@@ -322,18 +237,6 @@ export default function StudentTranscript() {
                       প্রতিবেদন(PI)
                     </a>
                   </li>
-                  {/* <li className="nav-item">
-                  <a
-                    className={`nav-link link-secondary ${styles.nav_tab_bottom_border}`}
-                    id="behaviour-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#behaviour"
-                    href="#"
-                  >
-                    <SlBookOpen className="me-1" /> আচরণগত মূল্যায়ন
-                    প্রতিবেদন(BI)
-                  </a>
-                </li> */}
                 </ul>
                 <div
                   className="tab-content"
@@ -430,9 +333,23 @@ export default function StudentTranscript() {
                 <TableComp
                   new_student={new_student}
                   fetchDataFromAPI={fetchDataFromAPI}
+                  setdata={setdata}
+                  data={data}
+                  pdf={
+                    <RawPDFDownload
+                      data={selected_student[0]}
+                      instititute={
+                        instititute[0] ? instititute[0] : instititute
+                      }
+                      allFelter={allFelter}
+                      student_info_pdf={data}
+                      unique_id={""}
+                      teacher={teacher}
+                    />
+                  }
                 />
 
-                <Accordion>
+                {/* <Accordion>
                   {selected_student?.length > 0 ? (
                     selected_student?.map((data: any, index) => (
                       <Accordion.Item eventKey={index}>
@@ -530,7 +447,7 @@ export default function StudentTranscript() {
                   ) : (
                     <p className="m-5">এই শিক্ষার্থীর কোনো মূল্যায়ন হয়নি</p>
                   )}
-                </Accordion>
+                </Accordion> */}
               </div>
             </div>
           </div>
@@ -540,6 +457,7 @@ export default function StudentTranscript() {
           <p className="text-center card-body">{show_report_open_time_msg}</p>
         </div>
       )}
+
     </div>
   );
 }

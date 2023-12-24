@@ -213,10 +213,9 @@ const RawPDFDownload = ({
 }: any) => {
 
 
-//   console.log(subject_name(allFelter?.subject?.split("-")[0]ইংরেজি
-// ))
 
-    const pdf_name = student_info_pdf?.student_name_en+ "class-" + student_info_pdf?.class + "-pi-roll-" + student_info_pdf?.roll +  ".pdf";
+
+  const pdf_name = student_info_pdf?.student_name_en+ "class-" + student_info_pdf?.class + "-pi-roll-" + student_info_pdf?.roll +  ".pdf";
 
   const subject_teacher = localStorage.getItem("teacher_dashboard") ? JSON.parse(localStorage.getItem("teacher_dashboard")) : ""
   return (
@@ -265,7 +264,7 @@ const RawPDFDownload = ({
                   title="loading"
                   className="fs-4 me-2 text-secoundery"
                 />{" "}
-                {"..."}{" "}
+                {"loading..."}{" "}
               </>
             ) : (
               <BsFiletypePdf

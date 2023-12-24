@@ -10,6 +10,8 @@ function TableComp({ new_student, fetchDataFromAPI, setdata, pdf, data }: any) {
         selector: (row) => Number(row.roll),
         sortable: true,
         width:"15%",
+        paddingLeft:"10px",
+        center: true,
       },
       {
       name: "শিক্ষার্থীর নাম",

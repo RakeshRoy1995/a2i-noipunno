@@ -15,6 +15,7 @@ import {
   section_name,
   shift_name,
   showReportDeleteEv,
+  show_report_open_time_msg,
   teacher_name,
 } from "../utils/Utils";
 import AcorongotoComponent from "./AcorongotoComponent";
@@ -409,10 +410,7 @@ export default function Teacher() {
             </div>
           )}
 
-          <p className="text-center text-success">
-            সকাল ৯টা থেকে দুপুর ১টা পর্যন্ত রিপোর্ট কার্ড ডাউনলোড অপশন চালু
-            থাকবে
-          </p>
+          
           <style
             dangerouslySetInnerHTML={{
               __html:

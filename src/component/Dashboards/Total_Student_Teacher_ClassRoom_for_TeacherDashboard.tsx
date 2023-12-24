@@ -1,6 +1,11 @@
 import { useState } from "react";
 import "../../assets/dashboard_materials/css/total_student_teacher_classroom_for_teacher_dashboard.css";
-import { teacher_list } from "../../utils/Utils";
+import {
+  showReportDeleteEv,
+  show_report_OFF_time_msg,
+  show_report_open_time_msg,
+  teacher_list,
+} from "../../utils/Utils";
 
 const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
   const [all_student, set_All_student] = useState([]);
@@ -119,38 +124,48 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
         </div>
       </div>
 
-      <div className="col-lg-6 col-md-6 ">
-        <div className="teacher-student-card gy-5">
-          <>
-            <div className="">
-              <p className="text-center">
-                শিক্ষার্থী মূল্যায়ন জমা দিতে নৈপুণ্য মোবাইল অ্যাপ ব্যবহার করুন।
-                মোবাইল অ্যাপ ডাউনলোড করুন এই লিঙ্ক থেকে
-              </p>
-
-              <p className="text-center">
-                <a
-                  href="https://eklink.click/noipunno-android-app"
-                  download=""
-                  target="_blank"
-                >
-                  <img
-                    height="40px"
-                    src="https://evaluation.noipunno.gov.bd/playstore.png"
-                  />
-                </a>
-                <a
-                  href="https://accounts.noipunno.gov.bd/app/noipunno.apk"
-                  download=""
-                >
-                  <img
-                    height="40px"
-                    src="https://accounts.noipunno.gov.bd/images/play-store-logo.png"
-                  />
-                </a>
-              </p>
-            </div>
-          </>
+      <div className="col-lg-8 col-md-6 ">
+        <div className="teacher-student-card gy-5 text-center">
+          <div className="card">
+            {showReportDeleteEv() ? (
+              <div className="card-body">
+                <div className="text-center">
+                  {
+                  show_report_OFF_time_msg
+                  }
+                </div>
+              </div>
+            ) : (
+              <div className="card-body">
+                <div className="text-center">{show_report_open_time_msg}</div>
+              </div>
+            )}
+            <p className="card-body">
+              শিক্ষার্থী মূল্যায়ন জমা দিতে নৈপুণ্য মোবাইল অ্যাপ ব্যবহার করুন।
+              মোবাইল অ্যাপ ডাউনলোড করুন এই লিঙ্ক থেকে
+            </p>
+            <p className="card-body">
+              <a
+                href="https://eklink.click/noipunno-android-app"
+                download=""
+                target="_blank"
+              >
+                <img
+                  height="40px"
+                  src="https://evaluation.noipunno.gov.bd/playstore.png"
+                />
+              </a>
+              <a
+                href="https://accounts.noipunno.gov.bd/app/noipunno.apk"
+                download=""
+              >
+                <img
+                  height="40px"
+                  src="https://accounts.noipunno.gov.bd/images/play-store-logo.png"
+                />
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </>

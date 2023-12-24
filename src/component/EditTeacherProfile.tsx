@@ -20,6 +20,13 @@ const EditTeacherProfile = () => {
   const [countdown, setCountdown] = useState(30);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  const [nameBn, setNameBn] = useState('');
+  const [isBanglaValid, setIsBanglaValid] = useState(true);
+
+  const [nameEn, setNameEn] = useState('');
+  const [isEnglishValid, setisEnglishValid] = useState(true);
+
+  
 
   const {
     name_en,
@@ -122,9 +129,12 @@ const EditTeacherProfile = () => {
     if (date_of_birth) {
       setSelectedDate(new Date(date_of_birth))
     }
+    if (name_bn) {
+      setNameBn(name_bn);
+    }
 
 
-  }, [designation_id, allDesignation, date_of_birth])
+  }, [designation_id, allDesignation, date_of_birth, name_bn])
 
 
   // useEffect(() => {
@@ -139,6 +149,39 @@ const EditTeacherProfile = () => {
   // if ((allDivision.length == 0) && (countdown == 0)) {
   //   window.location.replace("/");
   // }
+
+ 
+
+  const handleBanglaInputValidate = (event) => {
+    const inputValue = event.target.value;
+
+    // Regular expression to check if the input contains Bangla characters
+    const banglaRegex = /^[\u0980-\u09FF\s]+$/;
+
+    if (banglaRegex.test(inputValue) || inputValue === '') {
+      setNameBn(inputValue);
+      setIsBanglaValid(true);
+    } else {
+      setIsBanglaValid(false);
+    }
+  };
+
+  
+
+  const handleEnglishInputValidate = (event) => {
+    const inputValue = event.target.value;
+
+    // Regular expression to check if the input contains Bangla characters
+    const englishPattern = /^[a-zA-Z\s]*$/;
+
+    if (englishPattern.test(inputValue) || inputValue === '') {
+      setNameEn(inputValue);
+      setisEnglishValid(true);
+    } else {
+      setisEnglishValid(false);
+    }
+  };
+
 
   return (
     <section className="editTeacherProfilePage">
@@ -176,7 +219,8 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
-                      <div className="form-group  col-sm-4 col-md-6">
+                    
+                      {/* <div className="form-group  col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label className="form-label">নাম (বাংলা)</label>
                           <div className="input-group">
@@ -186,26 +230,49 @@ const EditTeacherProfile = () => {
                               placeholder="আপনার নাম লিখুন (বাংলায়)" />
                           </div>
                         </div>
-                      </div>
-
-                      {/* <div className="form-group col-sm-4 col-md-6">
-                        <div className="mb-3" style={{ fontSize: '16px' }}>
-                          <label className="form-label">নাম (বাংলা)</label>
-                          <div className="input-group">
-                            <input
-                              type="text"
-                              id="pin"
-                              className="form-control"
-                              name="name_bn"
-                              value={nameBn}
-                              onChange={handleNameBnChange}
-                              placeholder="আপনার নাম লিখুন (বাংলায়)"
-                            />
-                          </div>
-                        </div>
                       </div> */}
 
-                      <div className="form-group  col-sm-4 col-md-6">
+                    <div className="form-group col-sm-4 col-md-6">
+                      <div className="mb-3" style={{ fontSize: "16px" }}>
+                        <label className="form-label">নাম (বাংলা)</label>
+                        <div className="input-group">
+                          <input
+                            type="text"
+                            id="pin"
+                            className={`form-control ${isBanglaValid ? '' : 'is-invalid'}`}
+                            name="name_bn"
+                            value={nameBn}
+                            onChange={handleBanglaInputValidate}
+                            placeholder="আপনার নাম লিখুন (বাংলায়)"
+                          />
+                          {!isBanglaValid && (
+                            <div className="invalid-feedback">অনুগ্রহ করে বাংলায় নাম লিখুন!</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="form-group col-sm-4 col-md-6">
+                      <div className="mb-3" style={{ fontSize: "16px" }}>
+                        <label className="form-label">নাম (ইংরেজি)</label>
+                        <div className="input-group">
+                          <input
+                            type="text"
+                            id="pin"
+                            className={`form-control ${isEnglishValid ? '' : 'is-invalid'}`}
+                            name="name_bn"
+                            value={nameEn}
+                            onChange={handleEnglishInputValidate}
+                            placeholder="আপনার নাম লিখুন (ইংরেজিতে)"
+                          />
+                          {!isEnglishValid && (
+                            <div className="invalid-feedback">অনুগ্রহ করে ইংরেজিতে নাম লিখুন!</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                  
+                      {/* <div className="form-group  col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>
                           <label className="form-label">নাম (ইংরেজি)</label>
                           <div className="input-group">
@@ -215,7 +282,7 @@ const EditTeacherProfile = () => {
                               defaultValue={name_en} />
                           </div>
                         </div>
-                      </div>
+                      </div> */}
 
                       <div className="form-group  col-sm-4 col-md-6">
                         <div className="mb-3" style={{ fontSize: "16px" }}>

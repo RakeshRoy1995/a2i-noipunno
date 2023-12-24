@@ -48,7 +48,7 @@ import TableComp from "./TableComp";
 import { Modal } from "react-bootstrap";
 
 export default function StudentTranscript() {
-  const [student_info_pdf, setStudent_info_pdf] = useState<any>("");
+  const [err, seterr] = useState<any>("");
   const [subject, setsubject] = useState([]);
   const [student_name, setstudent_name] = useState<any>("");
   const [version, setversion] = useState<any>([]);
@@ -196,7 +196,9 @@ export default function StudentTranscript() {
       setselected_student(data);
       // setshowModal(true);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      seterr(
+        "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। ডেটা লোড করতে অনুগ্রহ করে আবার ক্লিক করুন"
+      );
     }
     setsubmittingLoading(false);
   };
@@ -330,6 +332,8 @@ export default function StudentTranscript() {
                   </div>
                 </div>
 
+
+                {err && <p className="text-center text-danger p-2">{err}</p>}
                 <TableComp
                   new_student={new_student}
                   fetchDataFromAPI={fetchDataFromAPI}
@@ -348,106 +352,6 @@ export default function StudentTranscript() {
                     />
                   }
                 />
-
-                {/* <Accordion>
-                  {selected_student?.length > 0 ? (
-                    selected_student?.map((data: any, index) => (
-                      <Accordion.Item eventKey={index}>
-                        <Accordion.Header className="px-4 " key={index}>
-                          <>
-                            <div className="d-flex justify-content-between flex-md-row flex-column align-items-center custom-px-2">
-                              <RawPDFDownload
-                                data={data}
-                                instititute={
-                                  instititute[0] ? instititute[0] : instititute
-                                }
-                                allFelter={allFelter}
-                                student_info_pdf={data.student_data}
-                                unique_id={""}
-                                teacher={teacher}
-                              />
-
-                              <h5 className="px-2">
-                                শিক্ষার্থীর নাম:{" "}
-                                {data.student_data.student_name_bn ||
-                                  data.student_data.student_name_en}
-                                <br />
-                                রোল নম্বর #{" "}
-                                {convertToBanglaNumber(data.student_data.roll)}
-                              </h5>
-                            </div>
-                          </>
-                        </Accordion.Header>
-                        <Accordion.Body>
-                          {data.all_PI_array.map((data: any, key: number) => (
-                            <div className="container border" key={key}>
-                              <div className="row pb-5 pt-2">
-                                <div className="col-sm-6 col-md-3 py-2">
-                                  <div className="border-0 p-2 h-100">
-                                    <div className="d-flex">
-                                      <div>
-                                        <h6>
-                                          পারদর্শিতা সূচক{" "}
-                                          {sortByNumericPropertyAscending(
-                                            data?.pi_data?.pi_no
-                                          )}{" "}
-                                        </h6>
-                                        <h6 style={{ fontSize: "14px" }}>
-                                          {data.pi_data?.name_bn ||
-                                            data.pi_data?.name_en}
-                                        </h6>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                {data?.pi_data?.pi_attribute.map(
-                                  (pi_attribute_data: any, k: any) => (
-                                    <div
-                                      className="col-sm-6 col-md-3 py-2"
-                                      key={k}
-                                    >
-                                      <div
-                                        className="card h-100 shadow-lg border-0 p-2"
-                                        style={{
-                                          backgroundColor:
-                                            data.weight_uid ==
-                                            pi_attribute_data.weight_uid
-                                              ? "#F0FAE9"
-                                              : "#FFF",
-                                        }}
-                                      >
-                                        <div className="d-flex">
-                                          {data.weight_uid ==
-                                            pi_attribute_data.weight_uid && (
-                                            <div>
-                                              <TiTick
-                                                className={`${styles.tick_mark}`}
-                                              />
-                                            </div>
-                                          )}
-
-                                          <div>
-                                            <h6 style={{ fontSize: "14px" }}>
-                                              {pi_attribute_data.title_bn ||
-                                                pi_attribute_data.title_en}
-                                            </h6>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  )
-                                )}
-                              </div>
-                            </div>
-                          ))}
-                        </Accordion.Body>
-                      </Accordion.Item>
-                    ))
-                  ) : (
-                    <p className="m-5">এই শিক্ষার্থীর কোনো মূল্যায়ন হয়নি</p>
-                  )}
-                </Accordion> */}
               </div>
             </div>
           </div>

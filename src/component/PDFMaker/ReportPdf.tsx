@@ -13,6 +13,7 @@ import { convertToBanglaNumber, show_sub_by_religion } from "../../utils/Utils";
 import React from "react";
 
 import { styles } from "./ReportStyleSheet";
+import { BsFiletypePdf } from "react-icons/bs";
 
 // Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 Font.register({
@@ -828,10 +829,13 @@ const BiRawPDFDownload = ({
     "-report-card-result-roll-" +
     student?.roll +
     ".pdf";
-  // console.log(`student`, student, biData);
+  console.log(`student`, student, biData);
   return (
     <div>
       <div>
+        {
+          selected_student.length > 0 && biData.length > 0 ?
+        
         <PDFDownloadLink
           document={
             <MyDocument
@@ -845,11 +849,28 @@ const BiRawPDFDownload = ({
           fileName={pdf_name}
         >
           {({ blob, url, loading, error }: any) =>
-            loading ? "Loading document..." : "Download PDF"
+            loading ? (
+              <>
+                {" "}
+                <BsFiletypePdf
+                  title="loading"
+                  className="fs-4 me-2 text-secoundery"
+                />
+                {"loading"}
+                {"..."}{" "}
+              </>
+            ) : (
+              <BsFiletypePdf
+                title="download"
+                className="fs-4 me-2 text-success"
+              />
+            )
           }
-        </PDFDownloadLink>
+        </PDFDownloadLink>:
+        "Loading..."
+        }
       </div>
-      <PDFViewer width={1200} height={800}>
+      {/* <PDFViewer width={1200} height={800}>
         <MyDocument
           selected_student={selected_student}
           student={student}
@@ -857,7 +878,7 @@ const BiRawPDFDownload = ({
           subject_name={subject_name}
           biData={biData}
         />
-      </PDFViewer>
+      </PDFViewer> */}
     </div>
   );
 };

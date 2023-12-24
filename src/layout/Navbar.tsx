@@ -438,7 +438,7 @@ const Navbar = () => {
                                             alt="icon"
                                           />
                                           <p className="dropdown-class-list">
-                                            শিক্ষার্থীর আচরণগত মূল্যায়ন (BI)
+                                            শিক্ষার্থীর মূল্যায়ন (BI)
                                           </p>
                                         </div>
                                       </NavLink>

@@ -14,6 +14,7 @@ import {
   formate_own_subject_data,
   section_name,
   shift_name,
+  showReportDeleteEv,
   teacher_name,
 } from "../utils/Utils";
 import AcorongotoComponent from "./AcorongotoComponent";
@@ -126,7 +127,6 @@ export default function Teacher() {
           "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
         );
       }
-
     }
   };
 
@@ -148,287 +148,317 @@ export default function Teacher() {
     setelement(e);
   };
 
+  // return (
+  //   <>
+  //     <div className="">
+  //       <p className="text-center">
+  //         শিক্ষার্থী মূল্যায়ন জমা দিতে নৈপুণ্য মোবাইল অ্যাপ ব্যবহার করুন।
+  //         মোবাইল অ্যাপ ডাউনলোড করুন এই লিঙ্ক থেকে
+  //       </p>
+
+  //       <p className="text-center">
+  //         <a
+  //           href="https://eklink.click/noipunno-android-app"
+  //           download=""
+  //           target="_blank"
+  //         >
+  //           <img
+  //             height="40px"
+  //             src="https://evaluation.noipunno.gov.bd/playstore.png"
+  //           />
+  //         </a>
+  //         <a
+  //           href="https://accounts.noipunno.gov.bd/app/noipunno.apk"
+  //           download=""
+  //         >
+  //           <img
+  //             height="40px"
+  //             src="https://accounts.noipunno.gov.bd/images/play-store-logo.png"
+  //           />
+  //         </a>
+  //       </p>
+  //     </div>
+  //     {!loader && <ReportForHeadTeacherDashboard />}
+
+  //     {/* <ReportForHeadTeacherDashboard /> */}
+  //   </>
+  // );
+
   return (
     <>
-    {
-      !loader && <ReportForHeadTeacherDashboard />
-    }
-    <p className="text-center text-success">দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে  </p>
-    {/* <ReportForHeadTeacherDashboard /> */}
-    </>
-
-  ) 
-  
-  // (
-  //   <div>
-  //   {
-  //     !loader && <ReportForHeadTeacherDashboard />
-  //   }
-    
-  //   <p className="text-center text-success">দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে  </p>
-  //   </div>
-  // )
-  
-
-  return (
-    <div className="content mb-5 teacher_compo_bg">
-      {showLoadingErr ? (
-        <p className="text-danger text-center">{showLoadingErr}</p>
-      ) : (
-        <>
-          {loader && (
-            <div className={loader && styles.loading_container}>
-              {loader && <Spinner animation="border" />}
-            </div>
+      {!showReportDeleteEv() && (
+        <div className="content mb-5 teacher_compo_bg">
+          {showLoadingErr ? (
+            <p className="text-danger text-center">{showLoadingErr}</p>
+          ) : (
+            <>
+              {loader && (
+                <div className={loader && styles.loading_container}>
+                  {loader && <Spinner animation="border" />}
+                </div>
+              )}
+            </>
           )}
-        </>
-      )}
 
-      
-
-      {!ShowProfile && (
-        <BreadcumbHome
-          showSubjectname={showSubjectname}
-          setShowProfile={setShowProfile}
-          seshowSubject={seshowSubject}
-          title={" পারদর্শিতা এবং আচরণগত মূল্যায়ন"}
-          selected_subject={selected_subject}
-        />
-      )}
-      {!loader && (
-        <div className="dashboard-section ">
-          <section className="np-breadcumb-section pt-2 pb-5">
-            <div className="container">
-              <div className="row mt-1">
-                {/* {ShowProfile && (location.pathname !== "/mollayon-koron")  && (
+          {!ShowProfile && (
+            <BreadcumbHome
+              showSubjectname={showSubjectname}
+              setShowProfile={setShowProfile}
+              seshowSubject={seshowSubject}
+              title={" পারদর্শিতা এবং আচরণগত মূল্যায়ন"}
+              selected_subject={selected_subject}
+            />
+          )}
+          {!loader && (
+            <div className="dashboard-section ">
+              <section className="np-breadcumb-section pt-2 pb-5">
+                <div className="container">
+                  <div className="row mt-1">
+                    {/* {ShowProfile && (location.pathname !== "/mollayon-koron")  && (
                   <div className="col-md-3 mt-2">
                     <ProfileCard />
                   </div>
                 )} */}
 
-                <div
-                  className={
-                    // ShowProfile ?
-                    // "col-md-9" :
-                    "col-md-12"
-                  }
-                >
-                  <div
-                    className={`row d-flex gap-2 ${styles.subject_container}`}
-                  >
-                    <div className="d-flex" style={{ cursor: "pointer" }}>
-                      <h5
-                        onClick={(e) => {
-                          seshowSubject(true);
-                          setShowProfile(true);
-                        }}
+                    <div
+                      className={
+                        // ShowProfile ?
+                        // "col-md-9" :
+                        "col-md-12"
+                      }
+                    >
+                      <div
+                        className={`row d-flex gap-2 ${styles.subject_container}`}
                       >
-                        {showSubject && subject.length > 0 && (
-                          <>{/* বিষয়ভিত্তিক তথ্য ও মূল্যায়ন{" "} */}</>
-                        )}
-                        {subject.length == 0 && (
-                          <>কোন বিষয় খুঁজে পাওয়া যায়নি</>
-                        )}
+                        <div className="d-flex" style={{ cursor: "pointer" }}>
+                          <h5
+                            onClick={(e) => {
+                              seshowSubject(true);
+                              setShowProfile(true);
+                            }}
+                          >
+                            {showSubject && subject.length > 0 && (
+                              <>{/* বিষয়ভিত্তিক তথ্য ও মূল্যায়ন{" "} */}</>
+                            )}
+                            {subject.length == 0 && (
+                              <>কোন বিষয় খুঁজে পাওয়া যায়নি</>
+                            )}
 
-                        {/* {showSkillBehaibor && <><MdArrowBackIosNew className="fs-3 text-secondary" /> পারদর্শিতা এবং আচরণগত মূল্যায়ন </>  } */}
-                      </h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="container subject-container">
-                      {ShowProfile && (
-                        <h2 className="m-0">বিষয় ভিত্তিক তথ্য ও মূল্যায়ন</h2>
-                      )}
-
+                            {/* {showSkillBehaibor && <><MdArrowBackIosNew className="fs-3 text-secondary" /> পারদর্শিতা এবং আচরণগত মূল্যায়ন </>  } */}
+                          </h5>
+                        </div>
+                      </div>
                       <div className="row">
-                        {showSubject && (
-                          <>
-                            {subject.map((d: any, key: any) => (
-                              <div
-                                className="col-sm-12 col-md-6 col-lg-3 col-xl-2 g-2"
-                                style={{ cursor: "pointer" }}
-                                key={key}
-                                onClick={(e) => {
-                                  skill_behaibor_count(d);
-                                  seshowSubjectname(d.subject.name);
+                        <div className="container subject-container">
+                          {ShowProfile && (
+                            <h2 className="m-0">
+                              বিষয় ভিত্তিক তথ্য ও মূল্যায়ন
+                            </h2>
+                          )}
 
-                                  const studnt =
-                                    d?.own_subjet?.class_room?.students;
+                          <div className="row">
+                            {showSubject && (
+                              <>
+                                {subject.map((d: any, key: any) => (
+                                  <div
+                                    className="col-sm-12 col-md-6 col-lg-3 col-xl-2 g-2"
+                                    style={{ cursor: "pointer" }}
+                                    key={key}
+                                    onClick={(e) => {
+                                      skill_behaibor_count(d);
+                                      seshowSubjectname(d.subject.name);
 
-                                  studnt.sort(function (a, b) {
-                                    return a.roll - b.roll;
-                                  });
+                                      const studnt =
+                                        d?.own_subjet?.class_room?.students;
 
-                                  setStudent(studnt);
+                                      studnt.sort(function (a, b) {
+                                        return a.roll - b.roll;
+                                      });
 
-                                  setteacher_uid(d?.own_subjet.teacher_id);
-                                  setShowProfile(false);
-                                  localStorage.setItem(
-                                    "class_room_id",
-                                    d.own_subjet.class_room_id
-                                  );
+                                      setStudent(studnt);
 
-                                  localStorage.setItem(
-                                    "subject_id",
-                                    d.own_subjet.subject_id
-                                  );
+                                      setteacher_uid(d?.own_subjet.teacher_id);
+                                      setShowProfile(false);
+                                      localStorage.setItem(
+                                        "class_room_id",
+                                        d.own_subjet.class_room_id
+                                      );
 
-                                  setpi_selection(d.own_subjet?.pi_selection);
-                                }}
-                              >
-                                <a className="subject-number">
-                                  <div className="icon">
-                                    <img src={bookIcon} alt="" />
-                                  </div>
-                                  <h2 className="mt-3"> {d?.subject?.name}</h2>
-                                  <div className="total-student">
-                                    <p>
-                                      {" "}
-                                      {d?.subject?.class_uid == "6"
-                                        ? "ষষ্ঠ "
-                                        : "সপ্তম "}{" "}
-                                      শ্রেণি{" "}
-                                    </p>
-                                  </div>
-                                  <div className="total-student">
-                                    <p> শ্রেণি শিক্ষক : </p>
-                                  </div>
-                                  <div className="total-student">
-                                    <p>
-                                      {d.teacher.name_bn || d.teacher.name_en}
-                                    </p>
-                                  </div>
-                                  <div className="flex-md-row flex-lg-row d-flex  justify-content-center gap-2">
-                                    <h6 className={styles.session}>
-                                      {shift_name(
-                                        d.own_subjet.class_room.shift_id
-                                      )}{" "}
-                                      সেশন
-                                    </h6>
-                                    <h6 className={styles.horizontal_bar}>
-                                      ।{" "}
-                                    </h6>
-                                    <h6 className={styles.branch}>
-                                      {section_name(
-                                        d.own_subjet.class_room.section_id
-                                      )}{" "}
-                                      শাখা
-                                    </h6>
-                                  </div>
+                                      localStorage.setItem(
+                                        "subject_id",
+                                        d.own_subjet.subject_id
+                                      );
 
-                                  <div className="total-student-show">
-                                    <div className="bottom">
-                                      <div className="text">Total Student </div>
-                                      <div className="badge">
-                                        <div className="success">
-                                          {
-                                            d.own_subjet?.class_room?.students
-                                              ?.length
-                                          }
+                                      setpi_selection(
+                                        d.own_subjet?.pi_selection
+                                      );
+                                    }}
+                                  >
+                                    <a className="subject-number">
+                                      <div className="icon">
+                                        <img src={bookIcon} alt="" />
+                                      </div>
+                                      <h2 className="mt-3">
+                                        {" "}
+                                        {d?.subject?.name}
+                                      </h2>
+                                      <div className="total-student">
+                                        <p>
+                                          {" "}
+                                          {d?.subject?.class_uid == "6"
+                                            ? "ষষ্ঠ "
+                                            : "সপ্তম "}{" "}
+                                          শ্রেণি{" "}
+                                        </p>
+                                      </div>
+                                      <div className="total-student">
+                                        <p> শ্রেণি শিক্ষক : </p>
+                                      </div>
+                                      <div className="total-student">
+                                        <p>
+                                          {d.teacher.name_bn ||
+                                            d.teacher.name_en}
+                                        </p>
+                                      </div>
+                                      <div className="flex-md-row flex-lg-row d-flex  justify-content-center gap-2">
+                                        <h6 className={styles.session}>
+                                          {shift_name(
+                                            d.own_subjet.class_room.shift_id
+                                          )}{" "}
+                                          সেশন
+                                        </h6>
+                                        <h6 className={styles.horizontal_bar}>
+                                          ।{" "}
+                                        </h6>
+                                        <h6 className={styles.branch}>
+                                          {section_name(
+                                            d.own_subjet.class_room.section_id
+                                          )}{" "}
+                                          শাখা
+                                        </h6>
+                                      </div>
+
+                                      <div className="total-student-show">
+                                        <div className="bottom">
+                                          <div className="text">
+                                            Total Student{" "}
+                                          </div>
+                                          <div className="badge">
+                                            <div className="success">
+                                              {
+                                                d.own_subjet?.class_room
+                                                  ?.students?.length
+                                              }
+                                            </div>
+                                          </div>
                                         </div>
                                       </div>
-                                    </div>
+                                    </a>
                                   </div>
-                                </a>
-                              </div>
-                            ))}
+                                ))}
+                              </>
+                            )}
+                          </div>
+                        </div>
+
+                        {ShowProfile === false && (
+                          <>
+                            {showSkillBehaibor && (
+                              <>
+                                <ShowAssesment
+                                  seshowCompitance={seshowCompitance}
+                                  setassessment_uid={setassessment_uid}
+                                  setMullayon_name={setMullayon_name}
+                                  allassessmet={allassessmet}
+                                  parodorshita_acoron_tab={
+                                    parodorshita_acoron_tab
+                                  }
+                                  own_data={own_data}
+                                  setallassessmet={setallassessmet}
+                                  setparodorshita_acoron_tab={
+                                    setparodorshita_acoron_tab
+                                  }
+                                  pi_selection={pi_selection}
+                                  allCompitance={allCompitance}
+                                  setShowcollaps={setShowcollaps}
+                                />
+                              </>
+                            )}
+
+                            {showCompitance && (
+                              <>
+                                {parodorshita_acoron_tab === 0 && (
+                                  <ParodorshitaComponent
+                                    pi_selection={pi_selection}
+                                    teacher_uid={teacher_uid}
+                                    Student={Student}
+                                    assessment_uid={assessment_uid}
+                                    pi_attr={pi_attr}
+                                    showDetailsshikhonKalinMullayon={
+                                      showDetailsshikhonKalinMullayon
+                                    }
+                                    shikhonKalinMullayon_sannasik_barsik={
+                                      shikhonKalinMullayon_sannasik_barsik
+                                    }
+                                    Showcollaps={Showcollaps}
+                                    setShowcollaps={setShowcollaps}
+                                    Mullayon_name={Mullayon_name}
+                                    shikhonKalinMullayon={shikhonKalinMullayon}
+                                    setshowDetailsshikhonKalinMullayon={
+                                      setshowDetailsshikhonKalinMullayon
+                                    }
+                                  />
+                                )}
+
+                                {parodorshita_acoron_tab === 1 && (
+                                  <AcorongotoComponent
+                                    teacher_uid={teacher_uid}
+                                    teacher={teacher}
+                                    Student={Student}
+                                    all_bis={all_bis}
+                                    assessment_uid={assessment_uid}
+                                    pi_attr={pi_attr}
+                                    showDetailsshikhonKalinMullayon={
+                                      showDetailsshikhonKalinMullayon
+                                    }
+                                    shikhonKalinMullayon_sannasik_barsik={
+                                      shikhonKalinMullayon_sannasik_barsik
+                                    }
+                                    Showcollaps={Showcollaps}
+                                    setShowcollaps={setShowcollaps}
+                                    Mullayon_name={Mullayon_name}
+                                    shikhonKalinMullayon={shikhonKalinMullayon}
+                                    setshowDetailsshikhonKalinMullayon={
+                                      setshowDetailsshikhonKalinMullayon
+                                    }
+                                  />
+                                )}
+                              </>
+                            )}
                           </>
                         )}
                       </div>
                     </div>
-
-                    {ShowProfile === false && (
-                      <>
-                        {showSkillBehaibor && (
-                          <>
-                            <ShowAssesment
-                              seshowCompitance={seshowCompitance}
-                              setassessment_uid={setassessment_uid}
-                              setMullayon_name={setMullayon_name}
-                              allassessmet={allassessmet}
-                              parodorshita_acoron_tab={parodorshita_acoron_tab}
-                              own_data={own_data}
-                              setallassessmet={setallassessmet}
-                              setparodorshita_acoron_tab={
-                                setparodorshita_acoron_tab
-                              }
-                              pi_selection={pi_selection}
-                              allCompitance={allCompitance}
-                              setShowcollaps={setShowcollaps}
-                            />
-                          </>
-                        )}
-
-                        {showCompitance && (
-                          <>
-                            {parodorshita_acoron_tab === 0 && (
-                              <ParodorshitaComponent
-                                pi_selection={pi_selection}
-                                teacher_uid={teacher_uid}
-                                Student={Student}
-                                assessment_uid={assessment_uid}
-                                pi_attr={pi_attr}
-                                showDetailsshikhonKalinMullayon={
-                                  showDetailsshikhonKalinMullayon
-                                }
-                                shikhonKalinMullayon_sannasik_barsik={
-                                  shikhonKalinMullayon_sannasik_barsik
-                                }
-                                Showcollaps={Showcollaps}
-                                setShowcollaps={setShowcollaps}
-                                Mullayon_name={Mullayon_name}
-                                shikhonKalinMullayon={shikhonKalinMullayon}
-                                setshowDetailsshikhonKalinMullayon={
-                                  setshowDetailsshikhonKalinMullayon
-                                }
-                              />
-                            )}
-
-                            {parodorshita_acoron_tab === 1 && (
-                              <AcorongotoComponent
-                                teacher_uid={teacher_uid}
-                                teacher={teacher}
-                                Student={Student}
-                                all_bis={all_bis}
-                                assessment_uid={assessment_uid}
-                                pi_attr={pi_attr}
-                                showDetailsshikhonKalinMullayon={
-                                  showDetailsshikhonKalinMullayon
-                                }
-                                shikhonKalinMullayon_sannasik_barsik={
-                                  shikhonKalinMullayon_sannasik_barsik
-                                }
-                                Showcollaps={Showcollaps}
-                                setShowcollaps={setShowcollaps}
-                                Mullayon_name={Mullayon_name}
-                                shikhonKalinMullayon={shikhonKalinMullayon}
-                                setshowDetailsshikhonKalinMullayon={
-                                  setshowDetailsshikhonKalinMullayon
-                                }
-                              />
-                            )}
-                          </>
-                        )}
-                      </>
-                    )}
                   </div>
                 </div>
-              </div>
+              </section>
             </div>
-          </section>
+          )}
+
+          <p className="text-center text-success">
+            সকাল ৯টা থেকে দুপুর ১টা পর্যন্ত রিপোর্ট কার্ড ডাউনলোড অপশন চালু
+            থাকবে
+          </p>
+          <style
+            dangerouslySetInnerHTML={{
+              __html:
+                "\n            .np-table th,\n            td {\n                font-size: 11px;\n            }\n        ",
+            }}
+          />
+
+          {/* Teachers List end */}
         </div>
       )}
-
-
-<p className="text-center text-success">সকাল ৯টা থেকে দুপুর ১টা পর্যন্ত রিপোর্ট কার্ড ডাউনলোড অপশন চালু থাকবে</p>
-      <style
-        dangerouslySetInnerHTML={{
-          __html:
-            "\n            .np-table th,\n            td {\n                font-size: 11px;\n            }\n        ",
-        }}
-      />
-
-      {/* Teachers List end */}
-    </div>
+    </>
   );
 }

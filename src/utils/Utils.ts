@@ -625,3 +625,7 @@ export const accessBIandReport = ()=>{
 
   return storageData?.data?.teachers[0].is_class_teacher?.uid ? true : false
 }
+
+export const showReportDeleteEv = ()=>{
+  return true
+}

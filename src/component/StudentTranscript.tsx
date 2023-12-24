@@ -213,10 +213,12 @@ export default function StudentTranscript() {
     }
   });
 
+
+ 
   console.log("new_student", new_student);
 
   return (
-    <div className="report_page">
+    <div className="report_page mb-4">
       {showReportDeleteEv() ? (
         <div className="container">
           <div className="row">

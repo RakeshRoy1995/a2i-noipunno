@@ -1,3 +1,4 @@
+const VITE_REACT_APP_SHOW_REPORT = import.meta.env.VITE_REACT_APP_SHOW_REPORT;
 export const weightId = (allWeight: any, id: any) => {
   let name;
   allWeight.map((al_d: any) => {
@@ -627,5 +628,10 @@ export const accessBIandReport = ()=>{
 }
 
 export const showReportDeleteEv = ()=>{
-  return true
+
+  const res = JSON.parse(VITE_REACT_APP_SHOW_REPORT) 
+  return res
 }
+
+export const show_report_open_time_msg = "সকাল ৯টা থেকে দুপুর ১টা পর্যন্ত রিপোর্ট কার্ড ডাউনলোড অপশন চালু থাকবে"
+export const show_report_OFF_time_msg = "দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে"

@@ -1,4 +1,5 @@
 import React from "react";
+
 import Accordion from "react-bootstrap/Accordion";
 import {
   teacher_dashboard,
@@ -40,6 +41,8 @@ import { jsPDF } from "jspdf";
 import { Link } from "react-router-dom";
 import DownloadPDF_component from "./DownloadPDF";
 import RawPDFDownload from "./PDFMaker/PDFMaker";
+
+import TableComp from "./TableComp";
 
 export default function StudentTranscript() {
   const [student_info_pdf, setStudent_info_pdf] = useState<any>("");
@@ -86,7 +89,6 @@ export default function StudentTranscript() {
     setown_data(own_subjet?.data?.data);
     setteacher(own_subjet.data.data.user);
 
-    
     let all_subject: any = [];
 
     own_subjet.data.data.subjects.map((d: any) => {
@@ -142,7 +144,6 @@ export default function StudentTranscript() {
     fetchData();
   }, []);
 
-
   const uniqueclass = [...new Set(subject.map((data) => data?.class))];
 
   const uniqueSections = [...new Set(subject.map((data) => data?.section))];
@@ -169,47 +170,61 @@ export default function StudentTranscript() {
     studnt.reduce((acc, obj) => ({ ...acc, [obj.uid]: obj }), {})
   );
 
-  const fetchDataFromAPI = async () => {
+  const fetchDataFromAPI = async (student_uid) => {
     setsubmittingLoading(true);
     try {
       setteacher(allFelter.subject.split("-")[2]);
       setselected_student([]);
 
-      if (student_name == "") {
-        const pi_bi_data = await get_pi_bi(
-          allFelter.subject.split("-")[0],
-          allFelter.branch,
-          allFelter.version,
-          allFelter.shift,
-          allFelter.subject.split("-")[1],
-          allFelter.section,
-          ""
-        );
+      const pi_bi_data = await get_pi_bi_by_student_student(
+        allFelter.subject.split("-")[0],
+        allFelter.branch,
+        allFelter.version,
+        allFelter.shift,
+        allFelter.subject.split("-")[1],
+        allFelter.section,
+        student_uid
+      );
 
-        const data = formate_teanscript_data(pi_bi_data.data.transcript);
+      const data = formate_teanscript_dataBy_single_student(
+        pi_bi_data?.data?.transcript?.subject_result ||
+          pi_bi_data?.data?.transcript?.student_result
+      );
+      setselected_student(data);
 
-        console.log(`datat`, data);
+      // if (student_name == "") {
+      //   const pi_bi_data = await get_pi_bi(
+      //     allFelter.subject.split("-")[0],
+      //     allFelter.branch,
+      //     allFelter.version,
+      //     allFelter.shift,
+      //     allFelter.subject.split("-")[1],
+      //     allFelter.section,
+      //     ""
+      //   );
 
-        setselected_student(data);
-      } else {
-        const pi_bi_data = await get_pi_bi_by_student_student(
-          allFelter.subject.split("-")[0],
-          allFelter.branch,
-          allFelter.version,
-          allFelter.shift,
-          allFelter.subject.split("-")[1],
-          allFelter.section,
-          student_name
-        );
+      //   const data = formate_teanscript_data(pi_bi_data.data.transcript);
 
-        const data = formate_teanscript_dataBy_single_student(
-          pi_bi_data?.data?.transcript?.subject_result ||
-            pi_bi_data?.data?.transcript?.student_result
-        );
-console.log("data",data);
+      //   console.log(`datat`, data);
 
-        setselected_student(data);
-      }
+      //   setselected_student(data);
+      // } else {
+      //   const pi_bi_data = await get_pi_bi_by_student_student(
+      //     allFelter.subject.split("-")[0],
+      //     allFelter.branch,
+      //     allFelter.version,
+      //     allFelter.shift,
+      //     allFelter.subject.split("-")[1],
+      //     allFelter.section,
+      //     student_name
+      //   );
+
+      //   const data = formate_teanscript_dataBy_single_student(
+      //     pi_bi_data?.data?.transcript?.subject_result ||
+      //       pi_bi_data?.data?.transcript?.student_result
+      //   );
+      //   setselected_student(data);
+      // }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -280,6 +295,9 @@ console.log("data",data);
     }
     setsubmittingLoading(false);
   };
+
+  console.log("new_student", new_student);
+
   return (
     <div className="report_page">
       {/* report end */}
@@ -329,158 +347,7 @@ console.log("data",data);
                   aria-labelledby="expertness-tab"
                 >
                   <div className="row p-5">
-                    {/* <div className="col-6 col-sm-4 col-md-3">
-                      <div className="mb-3" style={{ fontSize: "12px" }}>
-                        <label className="form-label">
-                          ব্রাঞ্চ নির্বাচন করুন
-                        </label>
-                        <select
-                          className="form-select p-2"
-                          name="branch"
-                          aria-label="Default select example"
-                          style={{ fontSize: "12px" }}
-                          onChange={(e) =>
-                            setallFelter({
-                              ...allFelter,
-                              [e.target.name]: e.target.value,
-                            })
-                          }
-                        >
-                          <option value={""}>ব্রাঞ্চ নির্বাচন করুন</option>
-                          {uniquebranch?.map((data, index) => (
-                            <option key={index} value={data}>
-                              {branch_name(data)} ব্রাঞ্চ
-                            </option>
-                          ))}
-
-                         
-                        </select>
-                      </div>
-                    </div>
-                    <div className="col-6 col-sm-4 col-md-3">
-                      <div className="mb-3" style={{ fontSize: "12px" }}>
-                        <label className="form-label">সেশন নির্বাচন করুন</label>
-                        <select
-                          className="form-select p-2"
-                          name="shift"
-                          aria-label="Default select example"
-                          style={{ fontSize: "12px" }}
-                          onChange={(e) =>
-                            setallFelter({
-                              ...allFelter,
-                              [e.target.name]: e.target.value,
-                            })
-                          }
-                        >
-                          <option value={""}>সেশন নির্বাচন করুন</option>
-                          {uniqueshift?.map((data, index) => (
-                            <option key={index} value={data}>
-                              {shift_name(data)} সেশন
-                            </option>
-                          ))}
-                         
-                        </select>
-                      </div>
-                    </div> */}
-                    {/* <div className="col-6 col-sm-4 col-md-3">
-                      <div className="mb-3" style={{ fontSize: "12px" }}>
-                        <label className="form-label">
-                          ভার্সন নির্বাচন করুন
-                        </label>
-                        <select
-                          className="form-select p-2"
-                          name="version"
-                          aria-label="Default select example"
-                          style={{ fontSize: "12px" }}
-                          onChange={(e) =>
-                            setallFelter({
-                              ...allFelter,
-                              [e.target.name]: e.target.value,
-                            })
-                          }
-                        >
-                          <option value={""}>ভার্সন নির্বাচন করুন</option>
-                          {version?.map((data, index) => (
-                            <option key={index} value={data.uid}>
-                              {data?.version_name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="col-6 col-sm-4 col-md-3">
-                      <div className="mb-3" style={{ fontSize: "12px" }}>
-                        <label className="form-label">শাখা নির্বাচন করুন</label>
-                        <select
-                          className="form-select p-2"
-                          aria-label="Default select example"
-                          style={{ fontSize: "12px" }}
-                          name="section"
-                          onChange={(e) =>
-                            setallFelter({
-                              ...allFelter,
-                              [e.target.name]: e.target.value,
-                            })
-                          }
-                        >
-                          <option value={""}>শাখা নির্বাচন করুন</option>
-
-                          {uniqueSections?.map((data, index) => (
-                            <option key={index} value={data}>
-                              {section_name(data)} শাখা
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="col-6 col-sm-4 col-md-3">
-                      <div className="mb-3" style={{ fontSize: "12px" }}>
-                        <label className="form-label">
-                          বিষয় নির্বাচন করুন
-                        </label>
-                        <select
-                          className="form-select p-2"
-                          aria-label="Default select example"
-                          style={{ fontSize: "12px" }}
-                          name="subject"
-                          onChange={(e) =>
-                            setallFelter({
-                              ...allFelter,
-                              [e.target.name]: e.target.value,
-                            })
-                          }
-                        >
-                          <option value={""}>বিষয় নির্বাচন করুন</option>
-                          {subject?.map((data, index) => (
-                            <option
-                              key={index}
-                              value={
-                                data?.subject?.subject_info?.uid +
-                                "-" +
-                                data?.subject?.subject_info?.class_uid +
-                                "-" +
-                                (data?.own_subjet.class_room.class_teacher
-                                  .name_bn ||
-                                  data?.own_subjet.class_room.class_teacher
-                                    .name_en)
-                              }
-                            >
-                              {data?.subject?.subject_info?.name}{" "}
-                              {data?.subject?.subject_info?.class_uid == 6 &&
-                                "ষষ্ঠ"}{" "}
-                              {data?.subject?.subject_info?.class_uid == 7 &&
-                                "সপ্তম"}{" "}
-                              {" শ্রেণী"}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div> */}
-
-
-                    <div className="col-9 col-sm-9 col-md-9">
+                    <div className="col-6 col-sm-6 col-md-6">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
                           বিষয় নির্বাচন করুন
@@ -490,19 +357,20 @@ console.log("data",data);
                           aria-label="Default select example"
                           style={{ fontSize: "12px" }}
                           onChange={(e) => {
-
-                            const value = e.target.value.split("-")
+                            const value = e.target.value.split("-");
                             const obj = {
-                              ...allFelter , ["subject"]: value[0]+ "-" + value[1] + "-" + value[6] ,
+                              ...allFelter,
+                              ["subject"]:
+                                value[0] + "-" + value[1] + "-" + value[6],
 
-                              ['section'] : value[2] ,
-                              ['shift'] : value[3] ,
-                              ['version'] : value[4] ,
-                              ['branch'] : value[5] ,
-                            }
+                              ["section"]: value[2],
+                              ["shift"]: value[3],
+                              ["version"]: value[4],
+                              ["branch"]: value[5],
+                            };
 
-                            setallFelter(obj)
-                          } }
+                            setallFelter(obj);
+                          }}
                         >
                           <option value={""}>বিষয় নির্বাচন করুন</option>
                           {subject?.map((data, index) => (
@@ -513,13 +381,13 @@ console.log("data",data);
                                 "-" +
                                 data?.subject?.subject_info?.class_uid +
                                 "-" +
-                                data?.own_subjet.class_room.section_id+
+                                data?.own_subjet.class_room.section_id +
                                 "-" +
-                                data?.own_subjet.class_room.shift_id+
+                                data?.own_subjet.class_room.shift_id +
                                 "-" +
-                                data?.own_subjet.class_room.version_id+
+                                data?.own_subjet.class_room.version_id +
                                 "-" +
-                                data?.own_subjet.class_room.branch_id+
+                                data?.own_subjet.class_room.branch_id +
                                 "-" +
                                 (data?.own_subjet.class_room.class_teacher
                                   .name_bn ||
@@ -527,377 +395,43 @@ console.log("data",data);
                                     .name_en)
                               }
                             >
-                              {data?.subject?.subject_info?.name}{"-"}
+                              {data?.subject?.subject_info?.name}
+                              {"-"}
                               {data?.subject?.subject_info?.class_uid == 6 &&
                                 "ষষ্ঠ"}{" "}
-                                
-                              
                               {data?.subject?.subject_info?.class_uid == 7 &&
                                 "সপ্তম"}{" "}
-                              {" শ্রেণী"}{"-"}
-                              {"-"}{section_name(data?.own_subjet.class_room.section_id)} শাখা
-                              {"-"}{shift_name(data?.own_subjet.class_room.shift_id)} সেশন
-                              {"-"}{version_name(data?.own_subjet.class_room.version_id)} ভার্সন
-                            </option>
-                            
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-
-                    {allFelter.branch &&
-                      allFelter.subject &&
-                      allFelter.section &&
-                      allFelter.shift &&
-                      allFelter.version && (
-                        <>
-                          <div className="col-3 col-sm-3 col-md-3">
-                            <div className="mb-3" style={{ fontSize: "12px" }}>
-                              <label className="form-label">
-                                শিক্ষার্থী নির্বাচন করুন
-                              </label>
-                              <select
-                                className="form-select p-2"
-                                aria-label="Default select example"
-                                style={{ fontSize: "12px" }}
-                                onChange={(e) =>
-                                  setstudent_name(e.target.value)
-                                }
-                              >
-                                <option value={""}>
-                                  {" "}
-                                  শিক্ষার্থী নির্বাচন করুন{" "}
-                                </option>
-
-                                {new_student?.map((data: any, index) => (
-                                  <option key={index} value={data?.uid}>
-                                    {data?.student_name_bn ||
-                                      data?.student_name_en}
-                                  </option>
-                                ))}
-                              </select>
-                            </div>
-                          </div>
-                        </>
-                      )}
-                    <div className="col-6 col-sm-4 col-md-3 pointer">
-                      {allFelter.branch &&
-                        allFelter.subject &&
-                        allFelter.section &&
-                        allFelter.shift &&
-                        allFelter.version && (
-                          <div className="mb-3" style={{ fontSize: "12px" }}>
-                            <label className="form-label ">
-                              আপনার নির্বাচন সম্পূর্ণ করুন
-                            </label>
-                            <div className="">
-                              <button
-                                type="button"
-                                disabled={submittingLoading}
-                                onClick={fetchDataFromAPI}
-                                className="form-control py-1 border-right-0 border-0"
-                                defaultValue="নিম্নে মূল্যায়ন প্রতিবেদন দেখুন"
-                                id="example-search-input"
-                                style={{
-                                  fontSize: "12px",
-                                  backgroundColor: "#428F92",
-                                }}
-                              >
-                                নিম্নে মূল্যায়ন প্রতিবেদন দেখুন{" "}
-                                {submittingLoading && "......"}
-                                <div
-                                  className="btn btn-outline-secondary py-1 border-0"
-                                  style={{
-                                    backgroundColor: "#428F92",
-                                  }}
-                                >
-                                  <i className="fa fa-search" />
-                                </div>
-                              </button>
-                              <span
-                                className=" "
-                                style={{
-                                  fontSize: "12px",
-                                  backgroundColor: "#428F92",
-                                }}
-                              ></span>
-                            </div>
-                          </div>
-                        )}
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="tab-pane fade"
-                  id="behaviour"
-                  role="tabpanel"
-                  aria-labelledby="behaviour-tab"
-                >
-                  <div className="row p-5">
-                    <div className="col-6 col-sm-4 col-md-3">
-                      <div className="mb-3" style={{ fontSize: "12px" }}>
-                        <label className="form-label">
-                          শ্রেণী নির্বাচন করুন
-                        </label>
-                        <select
-                          className="form-select p-2"
-                          aria-label="Default select example"
-                          style={{ fontSize: "12px" }}
-                          name="class"
-                          onChange={(e) =>
-                            setallFelter({
-                              ...allFelter,
-                              [e.target.name]: e.target.value,
-                            })
-                          }
-                        >
-                          <option value={""}>শ্রেণী নির্বাচন করুন</option>
-                          {uniqueclass?.map((data, index) => (
-                            <option key={index} value={data}>
-                              {convertToBanglaNumber(data)} শ্রেণী
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="col-6 col-sm-4 col-md-3">
-                      <div className="mb-3" style={{ fontSize: "12px" }}>
-                        <label className="form-label">সেশন নির্বাচন করুন</label>
-                        <select
-                          className="form-select p-2"
-                          name="shift"
-                          aria-label="Default select example"
-                          style={{ fontSize: "12px" }}
-                          onChange={(e) =>
-                            setallFelter({
-                              ...allFelter,
-                              [e.target.name]: e.target.value,
-                            })
-                          }
-                        >
-                          <option value={""}>সেশন নির্বাচন করুন</option>
-                          {uniqueshift?.map((data, index) => (
-                            <option key={index} value={data}>
-                              {shift_name(data)} সেশন
-                            </option>
-                          ))}
-                          {/* {shifts?.map((data, index) => (
-                              <option key={index} value="1">{data.shift_name}</option>
-                              ))} */}
-                        </select>
-                      </div>
-                    </div>
-                    {/* <div className="col-6 col-sm-4 col-md-3">
-                      <div className="mb-3" style={{ fontSize: "12px" }}>
-                        <label className="form-label">শাখা নির্বাচন করুন</label>
-                        <select
-                          className="form-select p-2"
-                          aria-label="Default select example"
-                          style={{ fontSize: "12px" }}
-                          name="section"
-                          onChange={(e) =>
-                            setallFelter({
-                              ...allFelter,
-                              [e.target.name]: e.target.value,
-                            })
-                          }
-                        >
-                          <option value={""}>শাখা নির্বাচন করুন</option>
-
-                          {uniqueSections?.map((data, index) => (
-                            <option key={index} value={data}>
-                              {section_name(data)} শাখা
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div> */}
-
-                    <div className="col-6 col-sm-4 col-md-3">
-                      <div className="mb-3" style={{ fontSize: "12px" }}>
-                        <label className="form-label">
-                          ভার্সন নির্বাচন করুন
-                        </label>
-                        <select
-                          className="form-select p-2"
-                          name="version"
-                          aria-label="Default select example"
-                          style={{ fontSize: "12px" }}
-                          onChange={(e) =>
-                            setallFelter({
-                              ...allFelter,
-                              [e.target.name]: e.target.value,
-                            })
-                          }
-                        >
-                          <option value={""}>ভার্সন নির্বাচন করুন</option>
-                          {version?.map((data, index) => (
-                            <option key={index} value={data.uid}>
-                              {data?.version_name}
+                              {" শ্রেণী"}
+                              {"-"}
+                              {"-"}
+                              {section_name(
+                                data?.own_subjet.class_room.section_id
+                              )}{" "}
+                              শাখা
+                              {"-"}
+                              {shift_name(
+                                data?.own_subjet.class_room.shift_id
+                              )}{" "}
+                              সেশন
+                              {"-"}
+                              {version_name(
+                                data?.own_subjet.class_room.version_id
+                              )}{" "}
+                              ভার্সন
                             </option>
                           ))}
                         </select>
                       </div>
                     </div>
 
-                    <div className="col-6 col-sm-4 col-md-3">
-                      <div className="mb-3" style={{ fontSize: "12px" }}>
-                        <label className="form-label">
-                          মূল্যায়ন শিরোনাম নির্বাচন করুন
-                        </label>
-                        <select
-                          className="form-select p-2"
-                          aria-label="Default select example"
-                          style={{ fontSize: "12px" }}
-                          name="mullayon"
-                          onChange={(e) =>
-                            setallFelter({
-                              ...allFelter,
-                              [e.target.name]: e.target.value,
-                            })
-                          }
-                        >
-                          <option selected>
-                            {" "}
-                            মূল্যায়ন শিরোনাম নির্বাচন করুন
-                          </option>
-                          {assesment?.map((data: any, index) => (
-                            <option key={index} value={data?.uid}>
-                              {data?.assessment_details_name_bn ||
-                                data?.assessment_details_name_en}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="col-6 col-sm-4 col-md-3">
-                      <div className="mb-3" style={{ fontSize: "12px" }}>
-                        <label className="form-label">সেশন নির্বাচন করুন</label>
-                        <select
-                          className="form-select p-2"
-                          name="shift"
-                          aria-label="Default select example"
-                          style={{ fontSize: "12px" }}
-                          onChange={(e) =>
-                            setallFelter({
-                              ...allFelter,
-                              [e.target.name]: e.target.value,
-                            })
-                          }
-                        >
-                          <option value={""}>সেশন নির্বাচন করুন</option>
-                          {uniqueshift?.map((data, index) => (
-                            <option key={index} value={data}>
-                              {shift_name(data)} সেশন
-                            </option>
-                          ))}
-                          {/* {shifts?.map((data, index) => (
-                              <option key={index} value="1">{data.shift_name}</option>
-                              ))} */}
-                        </select>
-                      </div>
-                    </div>
-                    {allFelter.branch &&
-                      allFelter.class &&
-                      allFelter.section &&
-                      allFelter.shift &&
-                      allFelter.version &&
-                      allFelter.mullayon && (
-                        <div className="col-6 col-sm-4 col-md-3">
-                          <div className="mb-3" style={{ fontSize: "12px" }}>
-                            <label className="form-label">
-                              শিক্ষার্থী নির্বাচন করুন
-                            </label>
-                            <select
-                              className="form-select p-2"
-                              aria-label="Default select example"
-                              style={{ fontSize: "12px" }}
-                              onChange={(e) => setstudent_name(e.target.value)}
-                            >
-                              <option value={""}>শিক্ষার্থী </option>
-
-                              {new_student?.map((data: any, index) => (
-                                <option key={index} value={data?.uid}>
-                                  {data?.student_name_bn ||
-                                    data?.student_name_en}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                        </div>
-                      )}
-                    <div className="col-6 col-sm-4 col-md-3 pointer">
-                      <div className="mb-3">
-                        <label className="form-label "></label>
-                        <div className="input-group">
-                          <button
-                            type="button"
-                            onClick={fetchDataFromAPI}
-                            className="form-control py-1 border-right-0 border-0"
-                            defaultValue="নিম্নে মূল্যায়ন প্রতিবেদন দেখুন"
-                            id="example-search-input"
-                            style={{
-                              fontSize: "12px",
-                              backgroundColor: "#428F92",
-                            }}
-                          >
-                            নিম্নে মূল্যায়ন প্রতিবেদন দেখুন
-                            <div
-                              className="btn btn-outline-secondary py-1 border-0"
-                              style={{
-                                backgroundColor: "#428F92",
-                              }}
-                            >
-                              <i className="fa fa-search" />
-                            </div>
-                          </button>
-                          <span
-                            className="input-group-append rounded-end"
-                            style={{
-                              fontSize: "12px",
-                              backgroundColor: "#428F92",
-                            }}
-                          ></span>
-                        </div>
-                      </div>
-                    </div>
-                    {/* <div className="col-6 col-sm-4 col-md-3">
-                      <div className="mb-3">
-                        <label className="form-label mt-3"></label>
-                        <div className="input-group">
-                          <input
-                            className="form-control py-1 border-right-0 border-0"
-                            type="search"
-                            defaultValue="নিম্নে মূল্যায়ন প্রতিবেদন দেখুন"
-                            id="example-search-input"
-                            style={{
-                              fontSize: "12px",
-                              backgroundColor: "#428F92",
-                            }}
-                          />
-                          <span
-                            className="input-group-append rounded-end"
-                            style={{
-                              fontSize: "12px",
-                              backgroundColor: "#428F92",
-                            }}
-                          >
-                            <button
-                              className="btn btn-outline-secondary py-1 border-0"
-                              type="button"
-                              style={{
-                                backgroundColor: "#428F92",
-                              }}
-                            >
-                              <i className="fa fa-search" />
-                            </button>
-                          </span>
-                        </div>
-                      </div>
-                    </div> */}
                   </div>
                 </div>
               </div>
+
+              <TableComp
+                new_student={new_student}
+                fetchDataFromAPI={fetchDataFromAPI}
+              />
 
               <Accordion>
                 {selected_student?.length > 0 ? (

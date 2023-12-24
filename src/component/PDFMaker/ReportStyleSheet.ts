@@ -82,7 +82,7 @@ export  const styles = StyleSheet.create({
     h3: {
       fontFamily: "Kalpurush",
       textAlign: "center",
-      fontSize: 12,
+      fontSize: 10,
       padding: "5px",
     },
     h4: {
@@ -270,7 +270,7 @@ export  const styles = StyleSheet.create({
   
     cardbody: {
       padding: "1px",
-      height: "50px",
+      height: "70px",
     },
   
     footerBox: {
@@ -291,7 +291,7 @@ export  const styles = StyleSheet.create({
     cardColumn: {
       flexDirection: "column",
       width: "14.50%",
-      height: "20px",
+      height: "19px",
       borderRight: "1px solid black",
       borderTop: "1px solid black",
       textAlign: "center",

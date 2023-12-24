@@ -480,7 +480,7 @@ console.log("data",data);
                     </div> */}
 
 
-                    <div className="col-6 col-sm-4 col-md-3">
+                    <div className="col-9 col-sm-9 col-md-9">
                       <div className="mb-3" style={{ fontSize: "12px" }}>
                         <label className="form-label">
                           বিষয় নির্বাচন করুন
@@ -492,8 +492,7 @@ console.log("data",data);
                           onChange={(e) => {
 
                             const value = e.target.value.split("-")
-
-                            let obj = {
+                            const obj = {
                               ...allFelter , ["subject"]: value[0]+ "-" + value[1] + "-" + value[6] ,
 
                               ['section'] : value[2] ,
@@ -528,17 +527,17 @@ console.log("data",data);
                                     .name_en)
                               }
                             >
-                              {data?.subject?.subject_info?.name}{"--"}
+                              {data?.subject?.subject_info?.name}{"-"}
                               {data?.subject?.subject_info?.class_uid == 6 &&
                                 "ষষ্ঠ"}{" "}
                                 
                               
                               {data?.subject?.subject_info?.class_uid == 7 &&
                                 "সপ্তম"}{" "}
-                              {" শ্রেণী"}{"--"}
-                              {"--"}{section_name(data?.own_subjet.class_room.section_id)} শাখা
-                              {"--"}{shift_name(data?.own_subjet.class_room.shift_id)} সেশন
-                              {"--"}{version_name(data?.own_subjet.class_room.version_id)} ভার্সন
+                              {" শ্রেণী"}{"-"}
+                              {"-"}{section_name(data?.own_subjet.class_room.section_id)} শাখা
+                              {"-"}{shift_name(data?.own_subjet.class_room.shift_id)} সেশন
+                              {"-"}{version_name(data?.own_subjet.class_room.version_id)} ভার্সন
                             </option>
                             
                           ))}
@@ -552,7 +551,7 @@ console.log("data",data);
                       allFelter.shift &&
                       allFelter.version && (
                         <>
-                          <div className="col-6 col-sm-4 col-md-3">
+                          <div className="col-3 col-sm-3 col-md-3">
                             <div className="mb-3" style={{ fontSize: "12px" }}>
                               <label className="form-label">
                                 শিক্ষার্থী নির্বাচন করুন
@@ -996,7 +995,7 @@ console.log("data",data);
                     </Accordion.Item>
                   ))
                 ) : (
-                  <p className="m-5">শিক্ষার্থীর মূল্যায়ন পাওয়া যায়নি ।</p>
+                  <p className="m-5">এই শিক্ষার্থীর কোনো মূল্যায়ন হয়নি</p>
                 )}
               </Accordion>
             </div>

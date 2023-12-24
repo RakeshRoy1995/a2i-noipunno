@@ -22,6 +22,7 @@ import ParodorshitaComponent from "./ParodorshitaComponent";
 import ShowAssesment from "./ShowAssesment";
 import bookIcon from "../../src/assets/dashboard_materials/images/dashboard/bicon.svg";
 import "../../src/assets/project_ca_html/css/dashboard.css";
+import ReportForHeadTeacherDashboard from "./Dashboards/ReportForHeadTeacherDashboard";
 
 export default function Teacher() {
   const [showLoadingErr, setshowLoadingErr] = useState("");
@@ -148,6 +149,28 @@ export default function Teacher() {
   };
 
   return (
+    <>
+    {
+      !loader && <ReportForHeadTeacherDashboard />
+    }
+    <p className="text-center text-success">দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে  </p>
+    {/* <ReportForHeadTeacherDashboard /> */}
+    </>
+
+  ) 
+  
+  // (
+  //   <div>
+  //   {
+  //     !loader && <ReportForHeadTeacherDashboard />
+  //   }
+    
+  //   <p className="text-center text-success">দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে  </p>
+  //   </div>
+  // )
+  
+
+  return (
     <div className="content mb-5 teacher_compo_bg">
       {showLoadingErr ? (
         <p className="text-danger text-center">{showLoadingErr}</p>
@@ -160,6 +183,8 @@ export default function Teacher() {
           )}
         </>
       )}
+
+      
 
       {!ShowProfile && (
         <BreadcumbHome
@@ -393,6 +418,9 @@ export default function Teacher() {
           </section>
         </div>
       )}
+
+
+<p className="text-center text-success">সকাল ৯টা থেকে দুপুর ১টা পর্যন্ত রিপোর্ট কার্ড ডাউনলোড অপশন চালু থাকবে</p>
       <style
         dangerouslySetInnerHTML={{
           __html:

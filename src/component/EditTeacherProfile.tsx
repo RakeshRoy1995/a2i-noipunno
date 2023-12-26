@@ -303,7 +303,10 @@ const EditTeacherProfile = () => {
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label">ইমেইল আইডি </label>
                         <div className="input-group">
-                          <input type="text" id="pin" className="form-control" readOnly
+                          <input type="email"
+                            id="pin"
+                            className="form-control"
+                            readOnly
                             name="email"
                             defaultValue={email} />
                         </div>

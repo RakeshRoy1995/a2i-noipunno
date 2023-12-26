@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import techerAvatar from "../assets/project_ca_html/icons/teacher.svg";
 import { all_district, all_division, all_upozila, teacher_designation } from "../Request";
-
+import maleTeacherAvatar from "../../src/assets/project_ca_html/teacher_img/male_teacher.png";
+import femaleTeacherAvatar from "../../src/assets/project_ca_html/teacher_img/female_teacher.png";
 
 
 const AmarProfile = () => {
@@ -166,7 +167,12 @@ const AmarProfile = () => {
 
             <div className="container" style={{ backgroundColor: "#E4FEFF" }}>
               <div className="w-75 text-sm-center text-md-center mx-auto ">
-                <img src={techerAvatar} loading="lazy" width="150rem" className="img-fluid my-3 border  border-info" />
+                <img src={
+                  (gender == "1") && maleTeacherAvatar ||
+                  (gender == "2") && femaleTeacherAvatar ||
+                  (gender == "3") && techerAvatar
+                  
+                } loading="lazy" width="150rem" className="img-fluid my-5 border  border-info" />
               </div>
 
               <table className="table w-75 text-sm mx-auto ">

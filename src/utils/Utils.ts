@@ -703,4 +703,5 @@ export function save_PI_BI_again(data :any) {
 
 export const show_report_open_time_msg =
   "সকাল ৯টা থেকে দুপুর ১টা পর্যন্ত রিপোর্ট কার্ড ডাউনলোড অপশন চালু থাকবে";
-export const show_report_OFF_time_msg = "দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে";
+// export const show_report_OFF_time_msg = "দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে";
+export const show_report_OFF_time_msg = "";

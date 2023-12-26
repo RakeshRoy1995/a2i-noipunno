@@ -104,7 +104,7 @@ export default function StudentReport() {
     });
     setall_bis(own_subjet.data.data.bis);
     setversion(teacher_dash?.data?.versions);
-    setinstititute(teacher_dash?.data?.branches);
+    setinstititute(teacher_dash?.data?.institute);
     setsubject(all_subject);
     setloader(false);
     setassesment(own_subjet?.data?.data?.assessments[0]?.assessment_details);

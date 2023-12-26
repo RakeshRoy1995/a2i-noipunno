@@ -40,10 +40,10 @@ const MyDocument = ({
     <Page size="A4" style={styles.page}>
       <View fixed>
         <Text style={[styles.h1]}>
-          {instititute?.branch_name}
+          {instititute?.institute_name}
           <br />
         </Text>
-        <Text style={[styles.h2]}>{instititute?.branch_location}</Text>
+        <Text style={[styles.h2]}>{instititute?.district?.district_name_bn || instititute?.district?.district_name_en  }</Text>
         {/* style={{ color: 'white', textAlign: 'center', margin: 30 }} */}
         <Text style={[styles.h3, { marginBottom: 30 }]}>
           বিষয়ভিত্তিক ট্রান্সক্রিপ্ট-
@@ -185,14 +185,6 @@ const MyDocument = ({
                     { marginBottom: "8px", marginLeft: "0px" },
                   ]}
                 >
-                  {/* {pi_data?.title_bn || pi_data?.title_en}{" "} */}
-
-                  {/* {pi_data?.title_bn?.split(' ').map((word, index) => (
-                    <React.Fragment key={index}>
-                      {index > 0 && index % 4 === 0 && <Text>{"\n"}</Text>}
-                      {word.trim()}{" "}
-                    </React.Fragment>
-                  ))} */}
 
                   {allFelter?.subject?.split("-")[0] == "ইংরেজি" ? (
                     <>
@@ -294,6 +286,7 @@ const RawPDFDownload = ({
   const subject_teacher = localStorage.getItem("teacher_dashboard")
     ? JSON.parse(localStorage.getItem("teacher_dashboard"))
     : "";
+
   return (
     <div>
       <div>

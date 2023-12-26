@@ -50,7 +50,7 @@ const MyDocument = ({
           <View
             style={{ flexDirection: "column", marginRight: 5, width: "80%" }}
           >
-            : <Text style={styles.dot}>{instititute?.branch_name} </Text>
+            : <Text style={styles.dot}>{instititute?.institute_name} </Text>
           </View>
         </View>
 

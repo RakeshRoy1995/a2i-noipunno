@@ -116,7 +116,7 @@ export default function StudentTranscriptBI() {
     });
     setall_bis(own_subjet.data.data.bis);
     setversion(teacher_dash?.data?.versions);
-    setinstititute(teacher_dash?.data?.branches);
+    setinstititute(teacher_dash?.data?.institute);
 
     console.log(`all_subject`, all_subject);
     setsubject(all_subject);

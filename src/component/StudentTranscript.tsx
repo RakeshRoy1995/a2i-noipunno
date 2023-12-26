@@ -1,51 +1,24 @@
-import React from "react";
-
-import Accordion from "react-bootstrap/Accordion";
 import {
   teacher_dashboard,
   teacher_own_subject,
-  get_pi_bi_evaluation_list,
-  get_pi_bi,
   get_pi_bi_by_student_student,
 } from "../Request";
-import html2pdf from "html2pdf.js";
-import { RotatingLines } from "react-loader-spinner";
-import { BsCheckCircle } from "react-icons/bs";
 import { useState, useEffect } from "react";
-import { PiBookOpenTextBold } from "react-icons/pi";
-import { BsFillFileEarmarkArrowDownFill, BsFiletypePdf } from "react-icons/bs";
-import { TiTick } from "react-icons/ti";
 import styles from "./Home.style.module.css";
-import { IoIosArrowUp } from "react-icons/io";
 import { SlBookOpen } from "react-icons/sl";
 import {
   section_name,
   shift_name,
-  teacher_name,
-  branch_name,
-  subject_name,
-  make_group_by,
-  all_students,
-  convertToBanglaNumber,
-  formate_teanscript_data,
   formate_teanscript_dataBy_single_student,
-  sortByNumericPropertyAscending,
   version_name,
   showReportDeleteEv,
   show_report_open_time_msg,
 } from "../utils/Utils";
 
 import Breadcumb from "../layout/Breadcumb";
-import Pdf from "./Pdf";
-// import { toPng } from "html-to-image";
-import { toPng } from "html-to-image";
-import { jsPDF } from "jspdf";
-import { Link } from "react-router-dom";
-import DownloadPDF_component from "./DownloadPDF";
 import RawPDFDownload from "./PDFMaker/PDFMaker";
 
 import TableComp from "./TableComp";
-import { Modal } from "react-bootstrap";
 
 export default function StudentTranscript() {
   const [err, seterr] = useState<any>("");
@@ -57,15 +30,12 @@ export default function StudentTranscript() {
   const [assesment, setassesment] = useState<any>([]);
   const [teacher, setteacher] = useState<any>("");
   const [loader, setloader] = useState(true);
-  const [selectedSunject, setselectedSunject] = useState<any>("");
   const [instititute, setinstititute] = useState<any>("");
   const [data, setdata] = useState<any>({});
   const [selected_student, setselected_student] = useState<any>([]);
   // const [data, setdata] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
   const [submittingLoading, setsubmittingLoading] = useState(false);
-  const [showModal, setshowModal] = useState(false);
-  const [pdfDownloading, setpdfDownloading] = useState(false);
 
   const fetchData = async () => {
     const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
@@ -120,7 +90,7 @@ export default function StudentTranscript() {
     });
     setall_bis(own_subjet.data.data.bis);
     setversion(teacher_dash?.data?.versions);
-    setinstititute(teacher_dash?.data?.branches);
+    setinstititute(teacher_dash?.data?.institute);
 
     setsubject(all_subject);
     setloader(false);
@@ -169,9 +139,6 @@ export default function StudentTranscript() {
     studnt.reduce((acc, obj) => ({ ...acc, [obj.uid]: obj }), {})
   );
 
-  const handleCloseModal = () => {
-    setshowModal(false);
-  };
 
   const fetchDataFromAPI = async (student_uid) => {
     setsubmittingLoading(true);
@@ -214,10 +181,6 @@ export default function StudentTranscript() {
       return true;
     }
   });
-
-
- 
-  console.log("new_student", new_student);
 
   return (
     <div className="report_page mb-4">
@@ -310,21 +273,29 @@ export default function StudentTranscript() {
                                   "সপ্তম"}{" "}
                                 {" শ্রেণী"}
                                 {"-"}
-                                {"-"}
+                                {"শাখা"}
+                                (
                                 {section_name(
                                   data?.own_subjet.class_room.section_id
-                                )}{" "}
-                                শাখা
+                                )}
+                                )
+                                {" "}
+                                
                                 {"-"}
+                                সেশন (
                                 {shift_name(
                                   data?.own_subjet.class_room.shift_id
-                                )}{" "}
-                                সেশন
+                                )}
+                                )
+                                {" "}
+                                
                                 {"-"}
+                                ভার্সন (
                                 {version_name(
                                   data?.own_subjet.class_room.version_id
-                                )}{" "}
-                                ভার্সন
+                                )}
+                                ){" "}
+                                
                               </option>
                             ))}
                           </select>

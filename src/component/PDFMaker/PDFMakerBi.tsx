@@ -319,13 +319,13 @@ const MyDocument = ({
     <Page size="A4" style={styles.page}>
       <View fixed>
         <Text style={[styles.h1]}>
-          {instititute?.branch_name}
+        {instititute?.institute_name}
           <br />
         </Text>
-        <Text style={[styles.h2]}>{instititute?.branch_location}</Text>
+        <Text style={[styles.h2]}>{instititute?.district?.district_name_bn || instititute?.district?.district_name_en  }</Text>
         {/* style={{ color: 'white', textAlign: 'center', margin: 30 }} */}
         <Text style={[styles.h3, { marginBottom: 30 }]}>
-          বিষয়ভিত্তিক ট্রান্সক্রিপ্ট-
+          আচরণগত ট্রান্সক্রিপ্ট-
           {convertToBanglaNumber(student_info_pdf?.registration_year)}
         </Text>
       </View>

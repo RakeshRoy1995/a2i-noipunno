@@ -14,6 +14,7 @@ import {
   Pi_save,
   get_pi_bi_evaluation_list,
   get_pi_evaluation_by_pi,
+  pi_review,
   teacher_own_subject,
 } from "../Request";
 import { GoPerson } from "react-icons/go";
@@ -44,15 +45,17 @@ export default function StudentMullayonModal({
 }: any) {
   const [teacher, setteacher] = useState<any>({});
   const [comment_status, setcomment_status] = useState<any>(false);
+  const [showReview, setshowReview] = useState<any>(false);
   const [submitObj, setsubmitObj] = useState<any>({});
   const [msg, setmsg] = useState<any>("");
   const [err, seterr] = useState<any>("");
+  const [reviewText, setreviewText] = useState<any>("");
   const [submitData, setsubmitData] = useState<any>([]);
   const [submitObj_wid_null, setsubmitObj_wid_null] = useState<any>([]);
   const [submited, setsubmited] = useState<any>(false);
   const [firstRender, setfirstRender] = useState<any>(true);
 
-  console.log(`oviggota_uid`, oviggota_uid);
+  console.log(`oviggota_uid`, assessment_uid);
   const fetchData = async () => {
     const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
     const own_SUbjects = own_SUbjects__ ? JSON.parse(own_SUbjects__) : "";
@@ -71,9 +74,6 @@ export default function StudentMullayonModal({
       all_submited_PI.map((d: any) => {
         obj = { ...obj, [d.student_uid]: d };
       });
-
-      console.log(`all_submited_PI`, all_submited_PI);
-      // setsubmitData(all_submited_PI)
       setsubmitObj(obj);
       checkedIn(obj);
 
@@ -294,7 +294,7 @@ export default function StudentMullayonModal({
   };
 
   const checkedIn_comment = (obj: any) => {
-    let all_elem: any = document.getElementsByClassName("all_textarea");
+    const all_elem: any = document.getElementsByClassName("all_textarea");
 
     for (let index = 0; index < all_elem.length; index++) {
       const element: any = all_elem[index];
@@ -308,7 +308,7 @@ export default function StudentMullayonModal({
         const comment_id = "comment_id_" + x;
         const el: any = document.getElementsByClassName(x)[0];
         const el_comment: any = document.getElementById(comment_id);
-        
+
         el.style.display = "none";
         el_comment.style.display = "none";
         sumbitArray.push(obj[x]);
@@ -400,6 +400,51 @@ export default function StudentMullayonModal({
       setfirstRender(false);
     }
   }, 300);
+
+  const requestToReview = async (e: any) => {
+    try {
+      setmsg("");
+      seterr("");
+
+      if (reviewText) {
+        Swal.fire({
+          title: "আপনি কি অবশ্যই পর্যালোচনা করতে চান?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "না",
+          confirmButtonText: "হ্যাঁ",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            const res = {
+              ...all_submited_PI[0],
+              remark: reviewText,
+              oviggota_uid:
+                assessment_uid == 1234567892 || assessment_uid == 1234567891
+                  ? null
+                  : oviggota_uid,
+            };
+
+            await pi_review(res);
+            Swal.fire({
+              title:
+                "অনুগ্রহ করে আপনার পর্যালোচনা অনুরোধ গ্রহণ করার জন্য অপেক্ষা করুন। আপনার অনুরোধ গ্রহণ করার পরে আপনি এটি আবার পর্যালোচনা করতে পারেন",
+              icon: "success",
+            });
+            setShowModal(false);
+            setreviewText("");
+          }
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "কিছু ভুল হয়েছে",
+        confirmButtonText: "হ্যাঁ",
+      });
+    }
+  };
 
   return (
     <div className="content">
@@ -606,33 +651,63 @@ export default function StudentMullayonModal({
 
         <div className="d-flex justify-content-end align-items-center pe-5 mb-5">
           {is_draft == "2" ? (
-            <div className="col-md-12">
-              <div className="row p-1">
-                <p className="text-success text-center">
-                  ইতোমধ্যে আপনার চূড়ান্ত তথ্য সংরক্ষণ করা হয়েছে
-                </p>
+            <>
+              <div className="col-md-6">
+                <div className="row p-1">
+                  <p className="text-success text-center">
+                    ইতোমধ্যে আপনার চূড়ান্ত তথ্য সংরক্ষণ করা হয়েছে
+                  </p>
+                </div>
               </div>
-            </div>
+
+              <div className="col-md-6">
+                <div className="row p-1">
+                  {showReview ? (
+                    <div className="d-flex justify-content-end align-items-center">
+                      <textarea
+                        className="form-control"
+                        placeholder="আপনি কেন এটি পর্যালোচনা করতে চান তার একটি কারণ দিন"
+                        cols={30}
+                        rows={5}
+                        onChange={(e) => setreviewText(e.target.value)}
+                      ></textarea>
+
+                      {reviewText && (
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-outline-secondary m-1"
+                          onClick={(e) => requestToReview(e)}
+                        >
+                          Submit
+                        </button>
+                      )}
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-outline-secondary"
+                      onClick={(e) => setshowReview(true)}
+                    >
+                      <div className=" d-flex justify-content-center align-items-center gap-2 p-1">
+                        <span className="text-sm">
+                          পর্যালোচনা করার জন্য পুনরায় অনুরোধ করুন
+                        </span>
+                        <span style={{ marginBottom: "0.1rem" }}>
+                          {" "}
+                          <IoIosArrowForward />{" "}
+                        </span>
+                      </div>
+                    </button>
+                  )}
+                </div>
+              </div>
+            </>
           ) : (
             <>
               {msg && <h6 className="text-success mx-1">{msg}</h6>}
 
               {err && <h6 className="text-danger mx-1">{err}</h6>}
               {!submited && (
-                // <button
-                //   type="button"
-                //   className="btn btn-warning  my-2"
-                //   style={{
-
-                //     color: "#000",
-                //     paddingLeft: "90px",
-                //     paddingRight: "90px",
-                //   }}
-                //   onClick={(e) => handleSave(e, 1)}
-                // >
-                //   খসড়া
-                // </button>
-
                 <button
                   type="button"
                   className="btn btn-sm btn-outline-secondary"
@@ -649,21 +724,6 @@ export default function StudentMullayonModal({
               )}
 
               {!submited && (
-                // <button
-                //   type="button"
-                //   className="btn btn-primay px-5 "
-                //   style={{
-                //     backgroundColor: "#428F92",
-                //     color: "#fff",
-                //   }}
-                //   onClick={(e) => handleSave(e, 2)}
-                // >
-                //   <span>
-                //     জমা দিন {"   "}
-                //     {/* {"   "}<MdOutlineArrowForwardIos  /> */}
-                //     <img src="/assets/images/arrow-right.png" alt="" />
-                //   </span>
-                // </button>
                 <button
                   type="button"
                   className="btn btn-sm mx-1"

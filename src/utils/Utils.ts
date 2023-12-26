@@ -614,24 +614,40 @@ export const show_sub_by_religion = (religion: any, subject_name: any) => {
     return true;
   }
 
+  return false;
+};
 
-  return false
-}
-
-
-export const accessBIandReport = ()=>{
-
+export const accessBIandReport = () => {
   const data = localStorage.getItem("teacher_dashboard");
   const storageData = JSON.parse(data);
 
-  return storageData?.data?.teachers[0].is_class_teacher?.uid ? true : false
-}
+  return storageData?.data?.teachers[0].is_class_teacher?.uid ? true : false;
+};
 
-export const showReportDeleteEv = ()=>{
+export const showReportDeleteEv = () => {
+  const res = JSON.parse(VITE_REACT_APP_SHOW_REPORT);
+  return res;
+};
 
-  const res = JSON.parse(VITE_REACT_APP_SHOW_REPORT) 
-  return res
-}
+export const showPiBiSubject = (data: any) => {
+  const teacher_dashboard = localStorage.getItem("teacher_dashboard");
+  const storageData = JSON.parse(teacher_dashboard);
 
-export const show_report_open_time_msg = "সকাল ৯টা থেকে দুপুর ১টা পর্যন্ত রিপোর্ট কার্ড ডাউনলোড অপশন চালু থাকবে"
-export const show_report_OFF_time_msg = "দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে"
+  const clss_teacher_info = storageData?.data?.teachers[0]?.is_class_teacher;
+
+  if (data?.class == clss_teacher_info?.class_id) {
+    if (
+      data?.shift == clss_teacher_info?.shift_id &&
+      data?.section == clss_teacher_info?.section_id &&
+      data?.own_subjet?.class_room?.version_id == clss_teacher_info.version_id
+    ) {
+      return true;
+    }
+  }
+
+  // return true
+};
+
+export const show_report_open_time_msg =
+  "সকাল ৯টা থেকে দুপুর ১টা পর্যন্ত রিপোর্ট কার্ড ডাউনলোড অপশন চালু থাকবে";
+export const show_report_OFF_time_msg = "দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে";

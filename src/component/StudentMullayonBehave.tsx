@@ -607,6 +607,7 @@ export default function StudentMullayonBehave({
               icon: "success",
             });
             // setShowModal(false);
+            setshowReview(false)
             setreviewText("");
           }
         });

@@ -12,6 +12,7 @@ import { BiCircle, BiRefresh, BiSquareRounded } from "react-icons/bi";
 import { FiSave, FiTriangle } from "react-icons/fi";
 import {
   Bi_save,
+  bi_review,
   get_bi_evaluation_by_bi,
   get_pi_bi_evaluation_list,
 } from "../Request";
@@ -53,10 +54,12 @@ export default function StudentMullayonBehave({
 
   const [msg, setmsg] = useState<any>("");
   const [err, seterr] = useState<any>("");
+  const [reviewText, setreviewText] = useState<any>("");
   const [submited, setsubmited] = useState<any>(false);
   const [firstRender, setfirstRender] = useState<any>(true);
   const [comment_status, setcomment_status] = useState<any>(false);
   const [showOffAll, setshowOffAll] = useState<any>(false);
+  const [showReview, setshowReview] = useState<any>(false);
 
   const handleSave = async (
     e: any,
@@ -163,39 +166,13 @@ export default function StudentMullayonBehave({
                 }
               }
 
-              // localStorage.setItem(
-              //   "pi_bi_evaluation_list",
-              //   JSON.stringify(own_subjet.data.data)
-              // );
-
-              // setsubmited(true);
-
-              // if (students.length == 0) {
-              //   Swal.fire({
-              //     title: "আপনার তথ্য সংরক্ষণ করা হয়েছে!",
-              //     icon: "success",
-              //   });
-              // } else {
-              //   Swal.fire({
-              //     icon: "error",
-              //     title:
-              //       "আপনি সব শিক্ষার্থীকে চিহ্নিত করেননি। অনুগ্রহ করে সকল শিক্ষার্থীকে চিহ্নিত করুন",
-              //     confirmButtonText: "হ্যাঁ",
-              //   });
-              // }
             }
           });
         } else {
-          console.log(`444`, 444);
           if (submitData.length > 0) {
             setcomment_status(true);
             checkedIn_comment(submitObj);
           } else {
-            // Swal.fire({
-            //   icon: "error",
-            //   title: "আপনি কোন কিছু নির্বাচন করেন নি!",
-            //   confirmButtonText: "হ্যাঁ",
-            // });
 
             const { value: text } = await Swal.fire({
               title: "আপনি কোন কিছু নির্বাচন করেন নি!",
@@ -213,8 +190,6 @@ export default function StudentMullayonBehave({
             });
 
             if (text) {
-              console.log(`all_bis`, all_bis);
-
               const result: any = [];
               all_bis.map((d) => {
                 d?.weights.map((w_d: any, k: any) => {
@@ -239,17 +214,11 @@ export default function StudentMullayonBehave({
                 icon: "success",
               });
 
-              // handleSave("" , next_uid ? 1 :2 , next_uid ? true : false)
-
               showOffCollaps(keynext, next_uid);
-
-              console.log(`result`, result);
-              // Swal.fire(`You entered: ${text}`);
             }
           }
         }
 
-        // seterr("");
       } else {
         if (submitData.length == 0) {
           const { value: text } = await Swal.fire({
@@ -608,6 +577,54 @@ export default function StudentMullayonBehave({
     }
   }, 300);
 
+
+  const requestToReview = async (e: any) => {
+    try {
+      setmsg("");
+      seterr("");
+
+      if (reviewText) {
+        Swal.fire({
+          title: "আপনি কি অবশ্যই পর্যালোচনা করতে চান?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "না",
+          confirmButtonText: "হ্যাঁ",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+
+
+            // const res = {
+            //   ...all_submited_PI[0],
+            //   remark: reviewText,
+            //   oviggota_uid:
+            //     assessment_uid == 1234567892 || assessment_uid == 1234567891
+            //       ? null
+            //       : oviggota_uid,
+            // };
+
+            // await bi_review(res);
+            Swal.fire({
+              title:
+                "অনুগ্রহ করে আপনার পর্যালোচনা অনুরোধ গ্রহণ করার জন্য অপেক্ষা করুন। আপনার অনুরোধ গ্রহণ করার পরে আপনি এটি আবার পর্যালোচনা করতে পারেন",
+              icon: "success",
+            });
+            // setShowModal(false);
+            setreviewText("");
+          }
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "কিছু ভুল হয়েছে",
+        confirmButtonText: "হ্যাঁ",
+      });
+    }
+  };
+
   return (
     <div className="content">
       <div className="row">
@@ -840,21 +857,6 @@ export default function StudentMullayonBehave({
                     )}
                   </>
                 )}
-                {/* {!submited && (
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-outline-secondary"
-                    onClick={(e) => handleSave(e, 1, false)}
-                  >
-                    <div className=" d-flex justify-content-center align-items-center gap-2 p-1">
-                      <span className="text-sm">খসড়া এবং মন্তব্য করুন</span>
-                      <span style={{ marginBottom: "0.1rem" }}>
-                        {" "}
-                        <IoIosArrowForward />{" "}
-                      </span>
-                    </div>
-                  </button>
-                )} */}
 
                 {msg && <h6 className="text-success">{msg}</h6>}
 
@@ -905,6 +907,8 @@ export default function StudentMullayonBehave({
                 )}
               </>
             ) : (
+
+              <>
               <div className="col-md-12">
                 <div className="row p-1">
                   <p className="text-success text-center">
@@ -912,6 +916,8 @@ export default function StudentMullayonBehave({
                   </p>
                 </div>
               </div>
+              </>
+
             )}
           </div>
         </div>

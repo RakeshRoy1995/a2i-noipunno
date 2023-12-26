@@ -66,7 +66,7 @@ const MyDocument = ({
           >
             <Text style={styles.dot}>
               {" "}
-              {student?.student_name_bn || student?.student_name_en} {" "}
+              {student?.student_name_bn || student?.student_name_en}{" "}
             </Text>
           </View>
           <View style={[styles.columnX]}>
@@ -79,7 +79,7 @@ const MyDocument = ({
             style={{ flexDirection: "column", marginRight: 5, width: "15%" }}
           >
             <Text style={styles.dot}>
-              {convertToBanglaNumber(student?.roll)} { " "}
+              {convertToBanglaNumber(student?.roll)}{" "}
             </Text>
           </View>
         </View>
@@ -92,7 +92,7 @@ const MyDocument = ({
             style={{ flexDirection: "column", marginRight: 5, width: "45%" }}
           >
             <Text style={styles.dot}>
-              {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"} {" "}
+              {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}{" "}
             </Text>
           </View>
           <View style={{ flexDirection: "column", width: "15%" }}>
@@ -102,7 +102,7 @@ const MyDocument = ({
             style={{ flexDirection: "column", marginRight: 5, width: "15%" }}
           >
             <Text style={styles.dot}>
-              {convertToBanglaNumber(student?.registration_year)} {" "}
+              {convertToBanglaNumber(student?.registration_year)}{" "}
             </Text>
           </View>
         </View>
@@ -138,7 +138,7 @@ const MyDocument = ({
                   index < 5 && (
                     <Text style={styles.text}>
                       <Image src="../graduation-cap.png" />{" "}
-                      {subject_name(item[0])} {" "}
+                      {subject_name(item[0])}{" "}
                     </Text>
                   )
                 );
@@ -157,7 +157,7 @@ const MyDocument = ({
                   index >= 5 && (
                     <Text style={styles.text}>
                       <Image src="../graduation-cap.png" />{" "}
-                      {subject_name(item[0])} {" "}
+                      {subject_name(item[0])}{" "}
                     </Text>
                   )
                 );
@@ -187,13 +187,13 @@ const MyDocument = ({
                   styles.cardHeaderBG,
 
                   {
-                    marginTop:5,
+                    marginTop: 5,
                     fontFamily: "Kalpurush",
-      fontSize: 16,
-      fontWeight: 500,
-      padding: "5px",
-      textAlign: "center",
-                  }
+                    fontSize: 16,
+                    fontWeight: 500,
+                    padding: "5px",
+                    textAlign: "center",
+                  },
                 ]}
               >
                 {" "}
@@ -339,7 +339,7 @@ const MyDocument = ({
               <View style={[styles.box1]}>
                 <View style={[styles.card]}>
                   <View style={[styles.cardTitle]}>
-                    <Text style={[styles.h3]}>{data?.dimension_title} {" "} </Text>
+                    <Text style={[styles.h3]}>{data?.dimension_title} </Text>
                   </View>
 
                   <View style={[styles.cardRow]}>
@@ -833,42 +833,41 @@ const BiRawPDFDownload = ({
   return (
     <div>
       <div>
-        {
-          selected_student.length > 0 && biData.length > 0 ?
-        
-        <PDFDownloadLink
-          document={
-            <MyDocument
-              selected_student={selected_student}
-              student={student}
-              instititute={instititute}
-              subject_name={subject_name}
-              biData={biData}
-            />
-          }
-          fileName={pdf_name}
-        >
-          {({ blob, url, loading, error }: any) =>
-            loading ? (
-              <>
-                {" "}
-                <BsFiletypePdf
-                  title="loading"
-                  className="fs-4 me-2 text-secoundery"
-                />
-                {"loading"}
-                {"..."}{" "}
-              </>
-            ) : (
-              <BsFiletypePdf
-                title="download"
-                className="fs-4 me-2 text-success"
+        {selected_student.length > 0 && biData.length > 0 ? (
+          <PDFDownloadLink
+            document={
+              <MyDocument
+                selected_student={selected_student}
+                student={student}
+                instititute={instititute}
+                subject_name={subject_name}
+                biData={biData}
               />
-            )
-          }
-        </PDFDownloadLink>:
-        "Loading..."
-        }
+            }
+            fileName={pdf_name}
+          >
+            {({ blob, url, loading, error }: any) =>
+              loading ? (
+                <>
+                  {" "}
+                  <BsFiletypePdf
+                    title="loading"
+                    className="fs-4 me-2 text-secoundery"
+                  />
+                  {"loading"}
+                  {"..."}{" "}
+                </>
+              ) : (
+                <BsFiletypePdf
+                  title="download"
+                  className="fs-4 me-2 text-success"
+                />
+              )
+            }
+          </PDFDownloadLink>
+        ) : (
+          "Loading..."
+        )}
       </div>
       {/* <PDFViewer width={1200} height={800}>
         <MyDocument

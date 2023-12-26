@@ -45,7 +45,6 @@ export default function DetailsShikhonMullayonSannasikBarshik({
       ""
     );
 
-    // const ovigota_uid = showDetailsshikhonKalinMullayon.uid
     const ev_data = data?.data?.evaluation.filter((d)=>  d.oviggota_uid == null )
 
     setall_submited_PI(ev_data);
@@ -54,7 +53,6 @@ export default function DetailsShikhonMullayonSannasikBarshik({
     }
     setShowModal(true);
 
-    // console.log(`data`, data);
   };
 
   return (

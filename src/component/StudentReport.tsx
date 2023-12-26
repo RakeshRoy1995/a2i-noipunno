@@ -10,28 +10,19 @@ import {
   bi_report_card_by_student,
   bi_report_card_details,
 } from "../Request";
-import html2pdf from "html2pdf.js";
-import { RotatingLines } from "react-loader-spinner";
-import { BsCheckCircle } from "react-icons/bs";
 import { useState, useEffect } from "react";
-import { PiBookOpenTextBold } from "react-icons/pi";
-import { BsFillFileEarmarkArrowDownFill, BsFiletypePdf } from "react-icons/bs";
-import { TiTick } from "react-icons/ti";
 import styles from "./Home.style.module.css";
-import { IoIosArrowUp } from "react-icons/io";
 import { SlBookOpen } from "react-icons/sl";
 import {
   section_name,
   shift_name,
-  branch_name,
   all_students,
-  convertToBanglaNumber,
   formate_report_data,
-  subject_name,
   version_name,
   accessBIandReport,
   showReportDeleteEv,
   show_report_open_time_msg,
+  showPiBiSubject,
 } from "../utils/Utils";
 // import {handleConvertToPdf} from "./Pdf"
 import Breadcumb from "../layout/Breadcumb";
@@ -331,58 +322,63 @@ export default function StudentReport() {
                               }}
                             >
                               <option value={""}>বিষয় নির্বাচন করুন</option>
-                              {subject?.map((data, index) => (
-                                <option
-                                  key={index}
-                                  value={
-                                    data?.subject?.subject_info?.uid +
-                                    "-" +
-                                    data?.subject?.subject_info?.class_uid +
-                                    "-" +
-                                    data?.own_subjet.class_room.section_id +
-                                    "-" +
-                                    data?.own_subjet.class_room.shift_id +
-                                    "-" +
-                                    data?.own_subjet.class_room.version_id +
-                                    "-" +
-                                    data?.own_subjet.class_room.branch_id +
-                                    "-" +
-                                    (data?.own_subjet.class_room.class_teacher
-                                      .name_bn ||
-                                      data?.own_subjet.class_room.class_teacher
-                                        .name_en)
-                                  }
-                                >
-                                  {data?.subject?.subject_info?.name}
-                                  {"-"}
-                                  {data?.subject?.subject_info?.class_uid ==
-                                    6 && "ষষ্ঠ"}{" "}
-                                  {data?.subject?.subject_info?.class_uid ==
-                                    7 && "সপ্তম"}{" "}
-                                  {" শ্রেণী"}
-                                  {"-"}
-                                  {"-"}
-                                  {section_name(
-                                    data?.own_subjet.class_room.section_id
-                                  )}{" "}
-                                  শাখা
-                                  {"-"}
-                                  {shift_name(
-                                    data?.own_subjet.class_room.shift_id
-                                  )}{" "}
-                                  সেশন
-                                  {"-"}
-                                  {version_name(
-                                    data?.own_subjet.class_room.version_id
-                                  )}{" "}
-                                  ভার্সন
-                                </option>
+
+                              {subject.map((data) => (
+                                <>
+                                  {showPiBiSubject(data) && (
+                                    <option
+                                      key={data.uid}
+                                      value={
+                                        data?.subject?.subject_info?.uid +
+                                        "-" +
+                                        data?.subject?.subject_info?.class_uid +
+                                        "-" +
+                                        data?.own_subjet.class_room.section_id +
+                                        "-" +
+                                        data?.own_subjet.class_room.shift_id +
+                                        "-" +
+                                        data?.own_subjet.class_room.version_id +
+                                        "-" +
+                                        data?.own_subjet.class_room.branch_id +
+                                        "-" +
+                                        (data?.own_subjet.class_room
+                                          .class_teacher.name_bn ||
+                                          data?.own_subjet.class_room
+                                            .class_teacher.name_en)
+                                      }
+                                    >
+                                      {data?.subject?.subject_info?.class_uid ==
+                                        6 && "ষষ্ঠ"}{" "}
+                                      {data?.subject?.subject_info?.class_uid ==
+                                        7 && "সপ্তম"}{" "}
+                                      {" শ্রেণী"}
+                                      {"-"}
+                                      শাখা(
+                                      {section_name(
+                                        data?.own_subjet.class_room.section_id
+                                      )}
+                                      ){"-"}
+                                      সেশন (
+                                      {shift_name(
+                                        data?.own_subjet.class_room.shift_id
+                                      )}
+                                      ) {"-"}
+                                      ভার্সন (
+                                      {version_name(
+                                        data?.own_subjet.class_room.version_id
+                                      )}
+                                      )
+                                    </option>
+                                  )}
+                                </>
                               ))}
                             </select>
                           </div>
                         </div>
 
-                        {err && <p className="text-center text-danger p-2">{err}</p>}
+                        {err && (
+                          <p className="text-center text-danger p-2">{err}</p>
+                        )}
 
                         <TableComp
                           new_student={new_student}

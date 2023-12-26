@@ -34,6 +34,7 @@ import {
   version_name,
   showReportDeleteEv,
   show_report_open_time_msg,
+  showPiBiSubject,
 } from "../utils/Utils";
 
 import Breadcumb from "../layout/Breadcumb";
@@ -274,52 +275,59 @@ export default function StudentTranscriptBI() {
                                 }}
                               >
                                 <option value={""}>বিষয় নির্বাচন করুন</option>
-                                {subject?.map((data, index) => (
-                                  <option
-                                    key={index}
-                                    value={
-                                      data?.subject?.subject_info?.uid +
-                                      "-" +
-                                      data?.subject?.subject_info?.class_uid +
-                                      "-" +
-                                      data?.own_subjet.class_room.section_id +
-                                      "-" +
-                                      data?.own_subjet.class_room.shift_id +
-                                      "-" +
-                                      data?.own_subjet.class_room.version_id +
-                                      "-" +
-                                      data?.own_subjet.class_room.branch_id +
-                                      "-" +
-                                      (data?.own_subjet.class_room.class_teacher
-                                        .name_bn ||
-                                        data?.own_subjet.class_room
-                                          .class_teacher.name_en)
-                                    }
-                                  >
-                                    {data?.subject?.subject_info?.name}
-                                    {"-"}
-                                    {data?.subject?.subject_info?.class_uid ==
-                                      6 && "ষষ্ঠ"}{" "}
-                                    {data?.subject?.subject_info?.class_uid ==
-                                      7 && "সপ্তম"}{" "}
-                                    {" শ্রেণী"}
-                                    {"-"}
-                                    {"-"}
-                                    {section_name(
-                                      data?.own_subjet.class_room.section_id
-                                    )}{" "}
-                                    শাখা
-                                    {"-"}
-                                    {shift_name(
-                                      data?.own_subjet.class_room.shift_id
-                                    )}{" "}
-                                    সেশন
-                                    {"-"}
-                                    {version_name(
-                                      data?.own_subjet.class_room.version_id
-                                    )}{" "}
-                                    ভার্সন
-                                  </option>
+
+                                {subject.map((data) => (
+                                  <>
+                                    {showPiBiSubject(data) && (
+                                      <option
+                                        key={data.uid}
+                                        value={
+                                          data?.subject?.subject_info?.uid +
+                                          "-" +
+                                          data?.subject?.subject_info
+                                            ?.class_uid +
+                                          "-" +
+                                          data?.own_subjet.class_room
+                                            .section_id +
+                                          "-" +
+                                          data?.own_subjet.class_room.shift_id +
+                                          "-" +
+                                          data?.own_subjet.class_room
+                                            .version_id +
+                                          "-" +
+                                          data?.own_subjet.class_room
+                                            .branch_id +
+                                          "-" +
+                                          (data?.own_subjet.class_room
+                                            .class_teacher.name_bn ||
+                                            data?.own_subjet.class_room
+                                              .class_teacher.name_en)
+                                        }
+                                      >
+                                        {data?.subject?.subject_info
+                                          ?.class_uid == 6 && "ষষ্ঠ"}{" "}
+                                        {data?.subject?.subject_info
+                                          ?.class_uid == 7 && "সপ্তম"}{" "}
+                                        {" শ্রেণী"}
+                                        {"-"}
+                                        শাখা(
+                                        {section_name(
+                                          data?.own_subjet.class_room.section_id
+                                        )}
+                                        ){"-"}
+                                        সেশন (
+                                        {shift_name(
+                                          data?.own_subjet.class_room.shift_id
+                                        )}
+                                        ) {"-"}
+                                        ভার্সন (
+                                        {version_name(
+                                          data?.own_subjet.class_room.version_id
+                                        )}
+                                        )
+                                      </option>
+                                    )}
+                                  </>
                                 ))}
                               </select>
                             </div>
@@ -327,7 +335,9 @@ export default function StudentTranscriptBI() {
                         </div>
                       </div>
                     </div>
-                    {err && <p className="text-center text-danger p-2">{err}</p>}
+                    {err && (
+                      <p className="text-center text-danger p-2">{err}</p>
+                    )}
 
                     <TableComp
                       new_student={new_student}

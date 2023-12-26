@@ -595,23 +595,19 @@ export default function StudentMullayonBehave({
         }).then(async (result) => {
           if (result.isConfirmed) {
 
+            const res = {
+              ...submitData[0],
+              remark: reviewText,
+            };
 
-            // const res = {
-            //   ...all_submited_PI[0],
-            //   remark: reviewText,
-            //   oviggota_uid:
-            //     assessment_uid == 1234567892 || assessment_uid == 1234567891
-            //       ? null
-            //       : oviggota_uid,
-            // };
-
-            // await bi_review(res);
+            await bi_review(res);
             Swal.fire({
               title:
                 "অনুগ্রহ করে আপনার পর্যালোচনা অনুরোধ গ্রহণ করার জন্য অপেক্ষা করুন। আপনার অনুরোধ গ্রহণ করার পরে আপনি এটি আবার পর্যালোচনা করতে পারেন",
               icon: "success",
             });
             // setShowModal(false);
+            setshowReview(false)
             setreviewText("");
           }
         });
@@ -909,13 +905,58 @@ export default function StudentMullayonBehave({
             ) : (
 
               <>
-              <div className="col-md-12">
+              <div className="col-md-6">
                 <div className="row p-1">
                   <p className="text-success text-center">
                     ইতোমধ্যে আপনার চূড়ান্ত তথ্য সংরক্ষণ করা হয়েছে
                   </p>
                 </div>
               </div>
+
+              <div className="col-md-6">
+                <div className="row p-1">
+                  {showReview ? (
+                    <div className="d-flex justify-content-end align-items-center">
+                      <textarea
+                        className="form-control"
+                        placeholder="আপনি কেন এটি পর্যালোচনা করতে চান তার একটি কারণ দিন"
+                        cols={30}
+                        rows={5}
+                        onChange={(e) => setreviewText(e.target.value)}
+                      ></textarea>
+
+                      {reviewText && (
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-outline-secondary m-1"
+                          onClick={(e) => requestToReview(e)}
+                        >
+                          Submit
+                        </button>
+                      )}
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-outline-secondary"
+                      onClick={(e) => setshowReview(true)}
+                    >
+                      <div className=" d-flex justify-content-center align-items-center gap-2 p-1">
+                        <span className="text-sm">
+                          পর্যালোচনা করার জন্য পুনরায় অনুরোধ করুন
+                        </span>
+                        <span style={{ marginBottom: "0.1rem" }}>
+                          {" "}
+                          <IoIosArrowForward />{" "}
+                        </span>
+                      </div>
+                    </button>
+                  )}
+                </div>
+              </div>
+
+
+
               </>
 
             )}

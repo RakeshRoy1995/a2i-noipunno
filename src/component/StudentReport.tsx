@@ -10,24 +10,14 @@ import {
   bi_report_card_by_student,
   bi_report_card_details,
 } from "../Request";
-import html2pdf from "html2pdf.js";
-import { RotatingLines } from "react-loader-spinner";
-import { BsCheckCircle } from "react-icons/bs";
 import { useState, useEffect } from "react";
-import { PiBookOpenTextBold } from "react-icons/pi";
-import { BsFillFileEarmarkArrowDownFill, BsFiletypePdf } from "react-icons/bs";
-import { TiTick } from "react-icons/ti";
 import styles from "./Home.style.module.css";
-import { IoIosArrowUp } from "react-icons/io";
 import { SlBookOpen } from "react-icons/sl";
 import {
   section_name,
   shift_name,
-  branch_name,
   all_students,
-  convertToBanglaNumber,
   formate_report_data,
-  subject_name,
   version_name,
   accessBIandReport,
   showReportDeleteEv,

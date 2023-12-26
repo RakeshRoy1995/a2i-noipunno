@@ -23,7 +23,7 @@ import { MdArrowBackIosNew } from "react-icons/md";
 import Swal from "sweetalert2";
 import "./Home.style.module.css";
 import { useNavigate } from "react-router-dom";
-import { convertToBanglaNumber, show_comment_box_Pi } from "../utils/Utils";
+import { convertToBanglaNumber, save_PI_BI_again, show_comment_box_Pi } from "../utils/Utils";
 
 const class_room_id = localStorage.getItem("class_room_id");
 
@@ -125,14 +125,9 @@ export default function StudentMullayonModal({
             confirmButtonText: "হ্যাঁ",
           }).then(async (result) => {
             if (result.isConfirmed) {
-              // let own_subjet: any = await get_pi_bi_evaluation_list(2);
-
-              // localStorage.setItem(
-              //   "pi_bi_evaluation_list",
-              //   JSON.stringify(own_subjet.data.data)
-              // );
-              // console.log(`111111`, 111111);
               await Pi_save(data);
+
+              save_PI_BI_again(data)
               setsubmited(true);
               setShowModal(false);
               Swal.fire({

@@ -609,7 +609,7 @@ export const show_sub_by_religion = (religion: any, subject_name: any) => {
     religion == "Buddhism" &&
     (subject_name == "ইসলাম শিক্ষা" ||
       subject_name == "খ্রীষ্টধর্ম শিক্ষা" ||
-      subject_name == "বৌদ্ধধর্ম শিক্ষা")
+      subject_name == "হিন্দুধর্ম শিক্ষা")
   ) {
     return true;
   }

@@ -14,6 +14,8 @@ import {
 import icon from "../../../src/assets/project_ca_html/icons/OK_Icon.png";
 // import myIcon from 'icons/myIcon.svg'
 import {
+  branch_location,
+  branch_name,
   convertToBanglaNumber,
   section_name,
   subject_name,
@@ -322,7 +324,9 @@ const MyDocument = ({
         {instititute?.institute_name}
           <br />
         </Text>
-        <Text style={[styles.h2]}>{instititute?.district?.district_name_bn || instititute?.district?.district_name_en  }</Text>
+        <Text style={[styles.h2]}> { branch_name(allFelter.branch) } , { branch_location(allFelter?.branch) || instititute?.district?.district_name_bn || instititute?.district?.district_name_en  } </Text>
+
+        {/* <Text style={[styles.h2]}>{instititute?.district?.district_name_bn || instititute?.district?.district_name_en  }</Text> */}
         {/* style={{ color: 'white', textAlign: 'center', margin: 30 }} */}
         <Text style={[styles.h3, { marginBottom: 30 }]}>
           আচরণগত ট্রান্সক্রিপ্ট-

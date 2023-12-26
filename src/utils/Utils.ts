@@ -31,6 +31,18 @@ export const branch_name = (branch_id: any) => {
   }
 };
 
+
+export const branch_location = (branch_id: any) => {
+  const data = localStorage.getItem("teacher_dashboard");
+  const storageData = JSON.parse(data);
+  if (storageData) {
+    const branch = storageData.data.branches.find(
+      (branches) => branches.uid == branch_id
+    );
+    return branch?.branch_location;
+  }
+};
+
 export const section_name = (id: any) => {
   const data = localStorage.getItem("teacher_dashboard");
   const storageData = JSON.parse(data);

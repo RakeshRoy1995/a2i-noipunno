@@ -182,6 +182,8 @@ export default function StudentTranscript() {
     }
   });
 
+  console.log(`subject`, subject);
+
   return (
     <div className="report_page mb-4">
       {showReportDeleteEv() ? (

@@ -119,6 +119,38 @@ export function Bi_save(data: any) {
   return axios(options);
 }
 
+export function pi_review(data: any) {
+  const page_list = `${EVULATION_API}/v2/pi-review`;
+
+  const options = {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
+
+export function bi_review(data: any) {
+  const page_list = `${EVULATION_API}/v2/bi-review`;
+
+  const options = {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
+
 export function clssWiseSubject(data: any) {
   const page_list = `${API_URL}/v2/class-wise-subjects?class_id=${data}`;
 

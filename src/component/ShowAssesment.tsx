@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Home.style.module.css";
 import { SlBookOpen } from "react-icons/sl";
 import { Link } from "react-router-dom";
-import { pis_list_func } from "../utils/Utils";
+import { make_group_by_PI_BI, pis_list_func } from "../utils/Utils";
 import { get_pi_bi_evaluation_list } from "../Request";
 
 export default function ShowAssesment({
@@ -36,16 +36,22 @@ export default function ShowAssesment({
 
       let own_subjet: any = "";
       if (pi_bi_evaluation_list) {
-        own_subjet = pi_bi_evaluation_list;
-      } else {
-        own_subjet = await get_pi_bi_evaluation_list(2);
+        const list =  make_group_by_PI_BI(pi_bi_evaluation_list)
+        own_subjet = list
 
         localStorage.setItem(
           "pi_bi_evaluation_list",
-          JSON.stringify(own_subjet.data.data)
+          JSON.stringify(list)
+        );
+
+      } else {
+        own_subjet = await get_pi_bi_evaluation_list(2);
+        const list =  make_group_by_PI_BI(own_subjet.data.data)
+        localStorage.setItem(
+          "pi_bi_evaluation_list",
+          JSON.stringify(list)
         );
       }
-
 
       seshowCompitance(true);
       setparodorshita_acoron_tab(0);
@@ -64,7 +70,6 @@ export default function ShowAssesment({
 
   const tabAcorongoto = async (key: number) => {
     try {
-      console.log(`own_data?.assessments`, own_data?.assessments[key]?.assessment_details , key);
       setassessment_uid(own_data?.assessments[key]?.assessment_details[0].uid);
       setShowSecounderyTab({
         ...ShowSecounderyTab,
@@ -94,13 +99,10 @@ export default function ShowAssesment({
       const subject = pi_selection.find((data) => data.assessment_type == key);
       const pi_list = subject?.pi_list || []
 
-      console.log(`pi_listpi_list`, pi_list , pi_selection, key);
       let check_sannasik_barsik_or_not = false
       if (key == 1234567892 || key == 1234567891) {
         check_sannasik_barsik_or_not = true
       }
-
-      console.log(`check_sannasik_barsik_or_not`, check_sannasik_barsik_or_not );
 
       pis_list_func(allCompitance, pi_list, check_sannasik_barsik_or_not);
     } catch (error: any) { }
@@ -109,8 +111,6 @@ export default function ShowAssesment({
   useEffect(() => {
     fetchData();
   }, []);
-
-  console.log(`ShowSecounderyTab`, ShowSecounderyTab);
 
   // console.log(`parodorshita_acoron_tab`, ShowSecounderyTab, parodorshita_acoron_tab);
 

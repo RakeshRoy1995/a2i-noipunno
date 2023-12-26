@@ -1482,17 +1482,6 @@ body {
   padding: 35px 16px;
 }
 
-.subject-container .subject-number .icon {
-  width: 82px;
-  height: 82px;
-  padding: 8px;
-  border-radius: 49px;
-  background-color: #e4feff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
-}
 
 .subject-container .subject-number .icon img {
   width: 38px;

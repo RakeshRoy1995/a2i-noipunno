@@ -1,3 +1,4 @@
+const VITE_REACT_APP_SHOW_REPORT = import.meta.env.VITE_REACT_APP_SHOW_REPORT;
 export const weightId = (allWeight: any, id: any) => {
   let name;
   allWeight.map((al_d: any) => {
@@ -390,7 +391,6 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
     const student_dta = all_studentsData.filter(
       (d: any) => d.uid == stu.student_uid
     );
-
     const all_PI_array = [];
 
     for (let y = 0; y < allPi.length; y++) {
@@ -400,13 +400,13 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
         ...pi,
         student_data: student_dta[0],
         pi_data: pi_data[0],
-        pi_no: pi_data[0].pi_no.replaceAll(".", ""),
+        pi_no: pi_data[0]?.pi_no?.replaceAll(".", "") || 0,
       };
       all_PI_array.push(Pi_obj);
     }
 
     all_PI_array.sort((a, b) => {
-      return a.pi_no - b.pi_no;
+      return a?.pi_no - b?.pi_no;
     });
 
     obj = {
@@ -488,7 +488,7 @@ export const teacher_list = () => {
     }, []);
   };
 
-  let all_teachers = removeDuplicates(all_teachers_with_duplicate, "pdsid");
+  const all_teachers = removeDuplicates(all_teachers_with_duplicate, "pdsid");
   return all_teachers;
 };
 
@@ -614,5 +614,24 @@ export const show_sub_by_religion = (religion: any, subject_name: any) => {
     return true;
   }
 
-  return false;
-};
+
+  return false
+}
+
+
+export const accessBIandReport = ()=>{
+
+  const data = localStorage.getItem("teacher_dashboard");
+  const storageData = JSON.parse(data);
+
+  return storageData?.data?.teachers[0].is_class_teacher?.uid ? true : false
+}
+
+export const showReportDeleteEv = ()=>{
+
+  const res = JSON.parse(VITE_REACT_APP_SHOW_REPORT) 
+  return res
+}
+
+export const show_report_open_time_msg = "সকাল ৯টা থেকে দুপুর ১টা পর্যন্ত রিপোর্ট কার্ড ডাউনলোড অপশন চালু থাকবে"
+export const show_report_OFF_time_msg = "দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে"

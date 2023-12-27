@@ -670,7 +670,7 @@ export const showPiBiSubject = (data: any) => {
     }
   }
 
-  // return true
+  return true
 };
 
 

@@ -26,7 +26,7 @@ const TeacherProfileCard = () => {
     gender,
     designation_id,
     pdsid,
-    caid } = teacher_details;
+    caid } :any = teacher_details;
 
   const fetchData = async () => {
     const designation_data = await teacher_designation();

@@ -152,7 +152,14 @@ export default function StudentReport() {
         student_name
       );
 
-      const dimentions_details = await bi_report_card_details();
+      const bi_report_card_data: any = localStorage.getItem("bi_report_card_details") || "";
+      let dimentions_details :any = bi_report_card_data ? JSON.parse(bi_report_card_data) : "";
+
+      if (dimentions_details == "") {
+        dimentions_details =  await bi_report_card_details();
+
+        localStorage.setItem("bi_report_card_details" , JSON.stringify(dimentions_details) )
+      }
      
       const clssWiseSub_data: any = localStorage.getItem("clssWiseSub_data") || "";
       let clssWiseSub = clssWiseSub_data ? JSON.parse(clssWiseSub_data) : "";
@@ -168,14 +175,14 @@ export default function StudentReport() {
 
       clssWiseSub.data.data.sort((a, b) => a.subject_no - b.subject_no);
 
-      let res: any = [];
+      const res: any = [];
 
       report_data.data.report_card.map((d) => {
         d.subject_result.map((s_d) => {
           res.push(s_d);
         });
       });
-      let bi_res: any = [];
+      const bi_res: any = [];
       get_bi_report_card.data.report_card.map((data) => {
         bi_res.push(data);
       });

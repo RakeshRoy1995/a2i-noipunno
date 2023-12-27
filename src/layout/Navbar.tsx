@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 import noipunnologo from "../assets/navbar_materials/images/noipunno-new-logo.svg";
-import teacherIcon from "../assets/navbar_materials/icons/teacher.svg";
-import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
+
 import amarProfileIcon from "../assets/navbar_materials/icons/profile-icon.svg";
 import signoutIcon from "../assets/navbar_materials/icons/sign-out.svg";
 import mobileMenuIcon from "../assets/navbar_materials/icons/menu.png";
@@ -17,6 +16,10 @@ import shikkarthiIcon from "../assets/navbar_materials/icons/student-icon.svg";
 import shreniIcon from "../assets/navbar_materials/icons/class-icon.svg";
 import onurudhGoliIcon from "../assets/navbar_materials/icons/requests.svg";
 import doublecheckPng from "../assets/navbar_materials/icons/double-check.png";
+import teacherIcon from "../assets/navbar_materials/icons/teacher.svg";
+import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
+import maleTeacherAvatar from "../assets/project_ca_html/teacher_img/male_teacher.png";
+import femaleTeacherAvatar from "../assets/project_ca_html/teacher_img/female_teacher.png";
 
 import { useLocation } from "react-router-dom";
 import { teacher_dashboard, reloadteacher_own_subject } from "../Request";

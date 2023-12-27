@@ -66,3 +66,4 @@ export const toast = (type: any, msg: any) => {
     alert(msg);
   }
 };
+

@@ -68,7 +68,7 @@ const TeacherProfileCard = () => {
 
 
   return (
-    <div className="col-lg-2 col-md-6">
+    <div className="col-lg-3 col-md-6">
       <div className="card teacher-profile border-0">
         <div className="card-header border-0">
           <Link to={"/edit-teacher-profile"}>
@@ -76,7 +76,7 @@ const TeacherProfileCard = () => {
               <img src={editIcon} alt="edit-icon" />
             </div>
           </Link>
-          
+
           <div className="profile-img">
             <img src={
               (gender == "1") ? teacherProfileImg : femaleProfileImg
@@ -85,7 +85,7 @@ const TeacherProfileCard = () => {
           <div className="teacher-title">
             <h2>
               {/* {teacherDesignation} */}
-              {isClassTeacher &&  "শ্রেণি শিক্ষক" }
+              {isClassTeacher && "শ্রেণি শিক্ষক"}
             </h2>
           </div>
           <div className="icon">

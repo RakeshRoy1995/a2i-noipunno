@@ -58,9 +58,13 @@ const FAQ = () => {
                       aria-labelledby={`heading${item.id}`}
                       data-bs-parent="#accordionExample"
                     >
-                      <div className="accordion-body">
+                      <div className="accordion-body"
+                        dangerouslySetInnerHTML={{ __html: item.answer }}
+                      />
+
+                      {/* <div className="accordion-body">
                         {item.answer}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 ))}

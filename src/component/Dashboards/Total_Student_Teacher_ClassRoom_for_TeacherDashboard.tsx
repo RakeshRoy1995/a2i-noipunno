@@ -124,14 +124,14 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
         </div>
       </div>
 
-      <div className="col-lg-8 col-md-6 ">
+      <div className="col-lg-7 col-md-6 ">
         <div className="teacher-student-card gy-5 text-center">
           <div className="card">
             {showReportDeleteEv() ? (
               <div className="card-body">
                 <div className="text-center">
                   {
-                  show_report_OFF_time_msg
+                    show_report_OFF_time_msg
                   }
                 </div>
               </div>

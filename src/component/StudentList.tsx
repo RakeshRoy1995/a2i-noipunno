@@ -38,6 +38,8 @@ const StudentList = () => {
     setStudent(uniqueObjectsArray);
   };
 
+
+
   const handleShowModal = (item: any) => {
     setSelectedItem(item);
     setShowModal(true);
@@ -104,7 +106,7 @@ const StudentList = () => {
                     <div className="d-flex flex-column justify-content-center align-items-start gap-1">
                       <div className="d-flex flex-column justify-content-center align-items-start gap-1">
                         <h5 className={styles.teacherName}>
-                          নামঃ {student?.student_name_bn || "no-entry"}{" "}
+                          নামঃ {student?.student_name_bn || student?.student_name_en|| "no-entry"}{" "}
                         </h5>
                         <h5 className={styles.teacherName}>
                           রোলঃ {student?.roll || "no-entry"}{" "}

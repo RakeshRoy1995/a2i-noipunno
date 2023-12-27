@@ -80,7 +80,7 @@ const TeacherProfileCard = () => {
           </Link>
 
           <div className="profile-img">
-            <img src={ (gender == "1") ? teacherProfileImg : femaleProfileImg } alt="teacher-profile" />
+            <img src={(gender == "1") ? teacherProfileImg : teacherProfileImg } alt="teacher-profile" />
           </div>
           <div className="teacher-title">
             <h2>

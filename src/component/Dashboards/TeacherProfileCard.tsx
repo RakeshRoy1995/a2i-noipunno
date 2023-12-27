@@ -61,6 +61,8 @@ const TeacherProfileCard = () => {
     getUserDetails();
     fetchData();
   }, [])
+
+
   useEffect(() => {
     setAllStateData()
   }, [allDesignation])
@@ -78,9 +80,7 @@ const TeacherProfileCard = () => {
           </Link>
 
           <div className="profile-img">
-            <img src={
-              (gender == "1") ? teacherProfileImg : femaleProfileImg
-            } alt="teacher-profile" />
+            <img src={ (gender == "1") ? teacherProfileImg : femaleProfileImg } alt="teacher-profile" />
           </div>
           <div className="teacher-title">
             <h2>
@@ -102,11 +102,11 @@ const TeacherProfileCard = () => {
         </div>
         <div className="teacher-info">
           <h2 className="card-title text-two-line" >
-            {/* আতাউর রহমান */}
+            
             {name_bn || name_en || ''}
           </h2>
           <p className="card-text">
-            {/* 95481468716473 */}
+     
             {pdsid || caid}
           </p>
           {/* <p className="card-text">পাবনা জিলা স্কুল, পাবনা</p> */}

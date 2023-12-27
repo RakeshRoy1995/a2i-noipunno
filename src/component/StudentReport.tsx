@@ -35,22 +35,12 @@ import TableComp from "./TableComp";
 export default function StudentReport() {
   const [err, seterr] = useState<any>("");
   const [subject, setsubject] = useState([]);
-  const [student_name, setstudent_name] = useState<any>("");
-  const [version, setversion] = useState<any>([]);
-  const [own_data, setown_data] = useState<any>([]);
-  const [all_bis, setall_bis] = useState<any>([]);
-  const [assesment, setassesment] = useState<any>([]);
-  const [teacher, setteacher] = useState<any>("");
-  const [sub_name, setsubject_name] = useState<any>("");
-  const [loader, setloader] = useState(true);
   const [instititute, setinstititute] = useState<any>("");
   const [biData, setbiData] = useState<any>([]);
   const [selected_student, setselected_student] = useState<any>([]);
   const [all_subject, setall_subject] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
-  const [student, setstudent] = useState<any>({});
   const [data, setdata] = useState<any>({});
-  const [submittingLoading, setsubmittingLoading] = useState(false);
 
   const fetchData = async () => {
     const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
@@ -75,10 +65,6 @@ export default function StudentReport() {
       localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
     }
 
-    // const al_teacher: any = await all_teachers();
-    setown_data(own_subjet?.data?.data);
-    setteacher(own_subjet.data.data.user);
-
     let all_subject: any = [];
 
     own_subjet.data.data.subjects.map((d: any) => {
@@ -102,29 +88,8 @@ export default function StudentReport() {
         }
       });
     });
-    setall_bis(own_subjet.data.data.bis);
-    setversion(teacher_dash?.data?.versions);
     setinstititute(teacher_dash?.data?.institute);
     setsubject(all_subject);
-    setloader(false);
-    setassesment(own_subjet?.data?.data?.assessments[0]?.assessment_details);
-
-    const all_Pi: any = [];
-    own_subjet.data.data.subjects.map((d: any) => {
-      d.oviggota.map((ovigota_data) => {
-        ovigota_data.pis.map((pis_data) => {
-          all_Pi.push(pis_data);
-        });
-      });
-    });
-
-    own_subjet.data.data.subjects.map((d: any) => {
-      d.pi_selection.map((pi_selection) => {
-        pi_selection.pi_list.map((pis_list_data) => {
-          all_Pi.push(pis_list_data);
-        });
-      });
-    });
   };
 
   useEffect(() => {
@@ -151,9 +116,8 @@ export default function StudentReport() {
   );
 
   const fetchDataFromAPI = async (student_name: any) => {
-    setsubmittingLoading(true);
+    seterr("")
     try {
-      setteacher(allFelter.subject.split("-")[2]);
       setselected_student([]);
 
       const dimension_data: any = localStorage.getItem("dimension_by_subject") || "";
@@ -218,8 +182,6 @@ export default function StudentReport() {
 
       const bi_data = formate_report_data(bi_res, dimentions_details.data.data);
       const data = formate_report_data(res, dimentions.data.data);
-      const student_data = all_students(student_name);
-      const subject_data = subject_name(allFelter.subject.split("-")[0]);
       // console.log("dimentions", dimentions, res, bi_data);
 
       const all_sub = clssWiseSub.data.data;
@@ -239,20 +201,16 @@ export default function StudentReport() {
       }
 
       if (final_data.length) {
-        setstudent(student_data);
-        setsubject_name(subject_data);
         setbiData(bi_data);
         setall_subject(clssWiseSub.data.data);
         setselected_student(final_data);
       }
     } catch (error) {
 
-      console.log(`error`, error);
       seterr(
         "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। ডেটা লোড করতে অনুগ্রহ করে আবার ক্লিক করুন"
       );
     }
-    setsubmittingLoading(false);
   };
 
   const new_student = Stuent_result.filter((d: any) => {
@@ -273,8 +231,6 @@ export default function StudentReport() {
       return subject?.name;
     }
   };
-
-  console.log(`biData`, biData);
 
   return (
     <div className="report_page">

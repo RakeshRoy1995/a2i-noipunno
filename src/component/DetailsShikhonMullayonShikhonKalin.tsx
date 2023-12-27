@@ -90,11 +90,11 @@ export default function DetailsShikhonMullayonShikhonKalin({
 
                               setpi_name(d?.name_bn);
                               setpi_id(d?.pi_no);
-                              setloadingspinner(false)
+                              setloadingspinner(true)
                             }}
                             className="text-decoration text-success  ps-2 pointer"
                           >
-                            <h6>{d?.name_bn}  {check_pi_submitted(d , assessment_uid ) && <i className="fa-regular fa-circle-check"></i>} { showModal && <Spinner animation="border" /> }    </h6>
+                            <h6>{d?.name_bn}  {check_pi_submitted(d , assessment_uid , showDetailsshikhonKalinMullayon.uid ) && <i className="fa-regular fa-circle-check"></i>} { showModal && <Spinner animation="border" /> }    </h6>
                           </div>
                         </div>
                       </div>

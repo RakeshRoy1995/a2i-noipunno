@@ -13,6 +13,7 @@ import { convertToBanglaNumber, show_sub_by_religion } from "../../utils/Utils";
 import React from "react";
 
 import { styles } from "./ReportStyleSheet";
+import { BsFiletypePdf } from "react-icons/bs";
 
 // Font.register({ family: "Nikosh", src: "Nikosh.ttf", format: "truetype" });
 Font.register({
@@ -49,7 +50,7 @@ const MyDocument = ({
           <View
             style={{ flexDirection: "column", marginRight: 5, width: "80%" }}
           >
-            : <Text style={styles.dot}>{instititute?.branch_name} </Text>
+            : <Text style={styles.dot}>{instititute?.institute_name} </Text>
           </View>
         </View>
 
@@ -65,7 +66,7 @@ const MyDocument = ({
           >
             <Text style={styles.dot}>
               {" "}
-              {student?.student_name_bn || student?.student_name_en} {" "}
+              {student?.student_name_bn || student?.student_name_en}{" "}
             </Text>
           </View>
           <View style={[styles.columnX]}>
@@ -78,30 +79,30 @@ const MyDocument = ({
             style={{ flexDirection: "column", marginRight: 5, width: "15%" }}
           >
             <Text style={styles.dot}>
-              {convertToBanglaNumber(student?.roll)} { " "}
+              {convertToBanglaNumber(student?.roll)}{" "}
             </Text>
           </View>
         </View>
 
         <View style={[styles.row]}>
-          <View style={{ flexDirection: "column", width: "15%" }}>
+          <View style={{ flexDirection: "column", width: "20%" }}>
             <Text style={[styles.h2, styles.colortext]}> শ্রেণী : </Text>
           </View>
           <View
-            style={{ flexDirection: "column", marginRight: 5, width: "45%" }}
+            style={{ flexDirection: "column", marginRight: 4, width: "45%" }}
           >
             <Text style={styles.dot}>
-              {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"} {" "}
+              {student?.class == "6" ? "ষষ্ঠ শ্রেণী" : "সপ্তম শ্রেণী"}{" "}
             </Text>
           </View>
-          <View style={{ flexDirection: "column", width: "15%" }}>
+          <View style={{ flexDirection: "column", width: "20%" }}>
             <Text style={[styles.h2, styles.colortext]}> শিক্ষাবর্ষ : </Text>
           </View>
           <View
             style={{ flexDirection: "column", marginRight: 5, width: "15%" }}
           >
             <Text style={styles.dot}>
-              {convertToBanglaNumber(student?.registration_year)} {" "}
+              {convertToBanglaNumber(student?.registration_year)}{" "}
             </Text>
           </View>
         </View>
@@ -133,11 +134,13 @@ const MyDocument = ({
                 ) {
                   return null;
                 }
+
+                console.log(`subject_name(item[0])`, subject_name(item[0]));
                 return (
                   index < 5 && (
                     <Text style={styles.text}>
                       <Image src="../graduation-cap.png" />{" "}
-                      {subject_name(item[0])} {" "}
+                      {subject_name(item[0])}{" "}
                     </Text>
                   )
                 );
@@ -156,7 +159,7 @@ const MyDocument = ({
                   index >= 5 && (
                     <Text style={styles.text}>
                       <Image src="../graduation-cap.png" />{" "}
-                      {subject_name(item[0])} {" "}
+                      {subject_name(item[0])}{" "}
                     </Text>
                   )
                 );
@@ -186,13 +189,13 @@ const MyDocument = ({
                   styles.cardHeaderBG,
 
                   {
-                    marginTop:5,
+                    marginTop: 5,
                     fontFamily: "Kalpurush",
-      fontSize: 16,
-      fontWeight: 500,
-      padding: "5px",
-      textAlign: "center",
-                  }
+                    fontSize: 16,
+                    fontWeight: 500,
+                    padding: "5px",
+                    textAlign: "center",
+                  },
                 ]}
               >
                 {" "}
@@ -205,7 +208,7 @@ const MyDocument = ({
                 <View style={[styles.box1]}>
                   <View style={[styles.card]}>
                     <View style={[styles.cardTitle]}>
-                      <Text style={[styles.h3]}> {data?.dimension_title} </Text>
+                      <Text style={[styles.h3]}> {data?.dimension_title} {" "} </Text>
                     </View>
                     <View style={[styles.cardbody]}>
                       <View>
@@ -217,24 +220,27 @@ const MyDocument = ({
                                   .split(" ")
                                   .map((word, index) => (
                                     <React.Fragment key={index}>
-                                      {index > 0 && index % 5 === 0 && (
-                                        <Text>{"\n"}</Text>
+                                      {student?.class == 7 &&
+                                      (subject_name(item[0]) ==
+                                        "ইসলাম শিক্ষা" ||
+                                        subject_name(item[0]) ==
+                                          "স্বাস্থ্য সুরক্ষা") ? (
+                                        <>
+                                          {index > 0 && index % 6 === 0 && (
+                                            <Text>{"\n"}</Text>
+                                          )}
+                                        </>
+                                      ) : (
+                                        <>
+                                          {index > 0 && index % 5 === 0 && (
+                                            <Text>{"\n"}</Text>
+                                          )}
+                                        </>
                                       )}
+
                                       {word}{" "}
                                     </React.Fragment>
-                                  ))}
-                            {/* {data?.dimension_details
-                              .split(" ")
-                              .map((word, index) => (
-                                <React.Fragment key={index}>
-                                  {index > 0 && index % 5 === 0 && (
-                                    <Text>{"\n"}</Text>
-                                  )}
-                                  {word}{" "}
-                                </React.Fragment>
-                              ))} */}
-                            {/* কোন ঘটনা বা বিষয়ে সম্পর্কে নিজের মত দিয়েছে ও অন্যের মতের গঠনমূলক সমালোচনা করছে
-                            {data?.dimension_details} {" "} {" "} */}
+                                  ))} {"\n"}{" "}
                           </Text>
                         </View>
                       </View>
@@ -246,7 +252,7 @@ const MyDocument = ({
                           <Text></Text>
                         </View>
                       ) : (
-                        <View style={[styles.cardColumn]}>
+                        <View style={[styles.cardColumn ]}>
                           <Text></Text>
                         </View>
                       )}
@@ -256,7 +262,7 @@ const MyDocument = ({
                           <Text></Text>
                         </View>
                       ) : (
-                        <View style={[styles.cardColumn]}>
+                        <View style={[styles.cardColumn ]}>
                           <Text></Text>
                         </View>
                       )}
@@ -266,7 +272,7 @@ const MyDocument = ({
                           <Text></Text>
                         </View>
                       ) : (
-                        <View style={[styles.cardColumn]}>
+                        <View style={[styles.cardColumn ]}>
                           <Text></Text>
                         </View>
                       )}
@@ -276,7 +282,7 @@ const MyDocument = ({
                           <Text></Text>
                         </View>
                       ) : (
-                        <View style={[styles.cardColumn]}>
+                        <View style={[styles.cardColumn ]}>
                           <Text></Text>
                         </View>
                       )}
@@ -286,7 +292,7 @@ const MyDocument = ({
                           <Text></Text>
                         </View>
                       ) : (
-                        <View style={[styles.cardColumn]}>
+                        <View style={[styles.cardColumn ]}>
                           <Text></Text>
                         </View>
                       )}
@@ -296,7 +302,7 @@ const MyDocument = ({
                           <Text></Text>
                         </View>
                       ) : (
-                        <View style={[styles.cardColumn]}>
+                        <View style={[styles.cardColumn ]}>
                           <Text></Text>
                         </View>
                       )}
@@ -306,8 +312,8 @@ const MyDocument = ({
                           <Text></Text>
                         </View>
                       ) : (
-                        <View style={[styles.cardColumn]}>
-                          <Text></Text>
+                        <View style={[styles.cardColumn ]}>
+                          <Text> </Text>
                         </View>
                       )}
                     </View>
@@ -828,28 +834,47 @@ const BiRawPDFDownload = ({
     "-report-card-result-roll-" +
     student?.roll +
     ".pdf";
-  // console.log(`student`, student, biData);
+  console.log(`student`, student, biData);
   return (
     <div>
       <div>
-        <PDFDownloadLink
-          document={
-            <MyDocument
-              selected_student={selected_student}
-              student={student}
-              instititute={instititute}
-              subject_name={subject_name}
-              biData={biData}
-            />
-          }
-          fileName={pdf_name}
-        >
-          {({ blob, url, loading, error }: any) =>
-            loading ? "Loading document..." : "Download PDF"
-          }
-        </PDFDownloadLink>
+        {selected_student.length > 0 && biData.length > 0 ? (
+          <PDFDownloadLink
+            document={
+              <MyDocument
+                selected_student={selected_student}
+                student={student}
+                instititute={instititute}
+                subject_name={subject_name}
+                biData={biData}
+              />
+            }
+            fileName={pdf_name}
+          >
+            {({ blob, url, loading, error }: any) =>
+              loading ? (
+                <>
+                  {" "}
+                  <BsFiletypePdf
+                    title="loading"
+                    className="fs-4 me-2 text-secoundery"
+                  />
+                  {"loading"}
+                  {"..."}{" "}
+                </>
+              ) : (
+                <BsFiletypePdf
+                  title="download"
+                  className="fs-4 me-2 text-success"
+                />
+              )
+            }
+          </PDFDownloadLink>
+        ) : (
+          "Loading..."
+        )}
       </div>
-      <PDFViewer width={1200} height={800}>
+      {/* <PDFViewer width={200} height={800}>
         <MyDocument
           selected_student={selected_student}
           student={student}
@@ -857,7 +882,7 @@ const BiRawPDFDownload = ({
           subject_name={subject_name}
           biData={biData}
         />
-      </PDFViewer>
+      </PDFViewer> */}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+const VITE_REACT_APP_SHOW_REPORT = import.meta.env.VITE_REACT_APP_SHOW_REPORT;
 export const weightId = (allWeight: any, id: any) => {
   let name;
   allWeight.map((al_d: any) => {
@@ -19,14 +20,35 @@ export const shift_name = (shifts_id: any) => {
   }
 };
 
-export const branch_name = (branch_id: any) => {
+export const branch_name = (branch_id: any , showInPDF=false) => {
+  const data = localStorage.getItem("teacher_dashboard");
+  const storageData = JSON.parse(data);
+  if (storageData && !showInPDF ) {
+    const branch = storageData.data.branches.find(
+      (branches) => branches.uid == branch_id
+    );
+    return branch?.branch_name;
+  }else{
+
+    if (storageData?.data?.branches.length > 1) {
+      const branch = storageData.data.branches.find(
+        (branches) => branches.uid == branch_id
+      );
+      return branch?.branch_name + " ,"
+    }
+    return ""
+  }
+};
+
+
+export const branch_location = (branch_id: any) => {
   const data = localStorage.getItem("teacher_dashboard");
   const storageData = JSON.parse(data);
   if (storageData) {
     const branch = storageData.data.branches.find(
       (branches) => branches.uid == branch_id
     );
-    return branch?.branch_name;
+    return branch?.branch_location;
   }
 };
 
@@ -183,7 +205,8 @@ export const show_comment_box_Pi = (
   return "";
 };
 
-export function check_pi_submitted(pis_id: any, assessment_uid: any) {
+export function check_pi_submitted(pis_id: any, assessment_uid: any , oviggota_uid :any =null) {
+
   const pi_bi_evaluation_list = JSON.parse(
     localStorage.getItem("pi_bi_evaluation_list")
   );
@@ -193,11 +216,11 @@ export function check_pi_submitted(pis_id: any, assessment_uid: any) {
 
   for (let index = 0; index < pi_list.length; index++) {
     const pi_d = pi_list[index];
-
     if (
       pi_d.evaluate_type == assessment_uid &&
       pis_id.uid == pi_d.pi_uid &&
-      pi_d.class_room_uid == class_room_id
+      pi_d.class_room_uid == class_room_id &&
+      pi_d.oviggota_uid == oviggota_uid
     ) {
       return true;
       break;
@@ -577,6 +600,7 @@ export const make_group_by_report_data = (studentData: any) => {
 };
 
 export const show_sub_by_religion = (religion: any, subject_name: any) => {
+
   if (
     religion == "Islam" &&
     (subject_name == "হিন্দুধর্ম শিক্ষা" ||
@@ -592,6 +616,8 @@ export const show_sub_by_religion = (religion: any, subject_name: any) => {
       subject_name == "খ্রীষ্টধর্ম শিক্ষা" ||
       subject_name == "বৌদ্ধধর্ম শিক্ষা")
   ) {
+
+    
     return true;
   }
 
@@ -608,20 +634,96 @@ export const show_sub_by_religion = (religion: any, subject_name: any) => {
     religion == "Buddhism" &&
     (subject_name == "ইসলাম শিক্ষা" ||
       subject_name == "খ্রীষ্টধর্ম শিক্ষা" ||
-      subject_name == "বৌদ্ধধর্ম শিক্ষা")
+      subject_name == "হিন্দুধর্ম শিক্ষা")
   ) {
     return true;
   }
 
+  return false;
+};
 
-  return false
-}
-
-
-export const accessBIandReport = ()=>{
-
+export const accessBIandReport = () => {
   const data = localStorage.getItem("teacher_dashboard");
   const storageData = JSON.parse(data);
 
-  return storageData?.data?.teachers[0].is_class_teacher?.uid ? true : false
+  return storageData?.data?.teachers[0].is_class_teacher?.uid ? true : false;
+};
+
+export const showReportDeleteEv = () => {
+  const res = JSON.parse(VITE_REACT_APP_SHOW_REPORT);
+  return res;
+};
+
+export const showPiBiSubject = (data: any) => {
+  const teacher_dashboard = localStorage.getItem("teacher_dashboard");
+  const storageData = JSON.parse(teacher_dashboard);
+
+  const clss_teacher_info = storageData?.data?.teachers[0]?.is_class_teacher;
+
+  if (data?.class == clss_teacher_info?.class_id) {
+    if (
+      data?.shift == clss_teacher_info?.shift_id &&
+      data?.section == clss_teacher_info?.section_id &&
+      data?.own_subjet?.class_room?.version_id == clss_teacher_info.version_id
+    ) {
+      return true;
+    }
+  }
+
+  
+  // return true
+};
+
+
+export const make_group_by_PI_BI = (studentData: any) => {
+
+  console.log(`studentData`,studentData );
+  const groupedByStudentId = studentData.pi_evaluation_list.reduce((acc, student) => {
+    const { oviggota_uid , pi_uid , evaluate_type, competence_uid , class_room_uid , teacher_uid} = student;
+
+    const makeIndex = oviggota_uid +"" + pi_uid +"" + evaluate_type +"" + competence_uid +"" + class_room_uid + "" + teacher_uid
+    if (!acc[makeIndex]) {
+      acc[makeIndex] = [];
+    }
+    acc[makeIndex].push(student);
+
+    return acc;
+  }, {});
+
+  const result = []
+
+  for (let x in groupedByStudentId) {
+    result.push(groupedByStudentId[x][0])
+  }
+
+  studentData.pi_evaluation_list = result
+
+  console.log(`studentData`, studentData);
+
+  return studentData;
+};
+
+
+export function save_PI_BI_again(data :any) {
+
+  const pi_bi_evaluation_list__: any =
+                localStorage.getItem("pi_bi_evaluation_list") || "";
+              let pi_bi_evaluation_list = pi_bi_evaluation_list__
+                ? JSON.parse(pi_bi_evaluation_list__)
+                : "";
+
+              const getData = pi_bi_evaluation_list?.pi_evaluation_list || [];
+
+              getData.push(data[0]);
+
+              pi_bi_evaluation_list.pi_evaluation_list = getData;
+              localStorage.setItem(
+                "pi_bi_evaluation_list",
+                JSON.stringify(pi_bi_evaluation_list)
+              );
 }
+
+export const show_report_open_time_msg =
+  "সকাল ৯টা থেকে দুপুর ১টা পর্যন্ত রিপোর্ট কার্ড ডাউনলোড অপশন চালু থাকবে";
+// export const show_report_OFF_time_msg = "দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে";
+export const show_report_OFF_time_msg = "";

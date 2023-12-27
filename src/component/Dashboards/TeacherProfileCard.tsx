@@ -10,35 +10,77 @@ import starIcon from "../../assets/dashboard_materials/images/dashboard/ico.svg"
 import messageIcon from "../../assets/dashboard_materials/images/dashboard/message.svg";
 import darkMoodIcon from "../../assets/dashboard_materials/images/dashboard/moon.svg";
 import eyeIcon from "../../assets/dashboard_materials/images/dashboard/eye.svg";
+import { teacher_designation } from "../../Request";
 // import { logged_teacher_details } from "../../utils/Utils";
 
 const TeacherProfileCard = () => {
-  const [loading, setloading] = useState<any>(true);
-  const [teacherInfos, setTeacherInfos] = useState<any>({});
   const [schoolName, setSchoolName] = useState<any>("");
+  const [allDesignation, setAllDesignation] = useState<any>([])
+  const [teacherDesignation, setTeacherDesignation] = useState('');
+  const [teacher_details, setTeacher_details] = useState({});
+  const [isClassTeacher, setIsClassTeacher] = useState(false)
+  const [loading, setLoadin] = useState(true);
 
-  const teacherDashboard = JSON.parse(
-    localStorage.getItem("teacher_dashboard")
-  );
+  const {
+    name_en,
+    name_bn,
+    gender,
+    designation_id,
+    pdsid,
+    caid }: any = teacher_details;
+  
 
-  setTimeout(() => {
-    if (loading) {
-      const items = JSON.parse(localStorage.getItem("customer_login_auth"));
+  const fetchData = async () => {
+    const designation_data = await teacher_designation();
+    setAllDesignation(designation_data.data.data);
+  };
 
-      if (items) {
-        setTeacherInfos(items?.user);
+
+  const getUserDetails = () => {
+    const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
+    if (get_teachers_details) {
+      setTeacher_details(get_teachers_details?.data?.teachers[0]);
+      
+      get_teachers_details?.data?.institute?.map((item) =>
+        setSchoolName(item.institute_name)
+      );
+
+      const isClassTeacherValid = get_teachers_details?.data?.teachers[0]?.is_class_teacher;
+      if (isClassTeacherValid) {
+        setIsClassTeacher(true)
       }
-      if (teacherDashboard) {
-        teacherDashboard?.data?.institute?.map((item) =>
-          setSchoolName(item.institute_name)
-        );
-        setloading(false);
-      }
+
+      setLoadin(false)
     }
-  }, 1000);
+  }
+
+
+  const setAllStateData = () => {
+    if (designation_id) {
+      const find_current_user_designation = allDesignation?.filter(designation => designation?.uid == designation_id)
+      find_current_user_designation.map(item => setTeacherDesignation(item.designation_name))
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+
+  useEffect(() => {
+    setAllStateData()
+  }, [allDesignation])
+  
+
+  setInterval(() => {
+    if (loading) {
+      getUserDetails()
+    }
+  }, 4000);
+
 
   return (
-    <div className="col-lg-2 col-md-6">
+    <div className="col-lg-3 col-md-6">
       <div className="card teacher-profile border-0">
         <div className="card-header border-0">
           <Link to={"/edit-teacher-profile"}>
@@ -48,13 +90,12 @@ const TeacherProfileCard = () => {
           </Link>
 
           <div className="profile-img">
-            <img src={teacherProfileImg} alt="teacher-profile" />
+            <img src={(gender == "1") ? teacherProfileImg : teacherProfileImg } alt="teacher-profile" />
           </div>
           <div className="teacher-title">
             <h2>
-              {(teacherInfos?.user_type_id == 1 && "শিক্ষক") ||
-                (teacherInfos?.user_type_id == 2 && "সহকারী শিক্ষক") ||
-                (teacherInfos?.user_type_id == 3 && "প্রধান শিক্ষক")}
+              {/* {teacherDesignation} */}
+              {isClassTeacher && "শ্রেণি শিক্ষক"}
             </h2>
           </div>
           <div className="icon">
@@ -71,12 +112,12 @@ const TeacherProfileCard = () => {
         </div>
         <div className="teacher-info">
           <h2 className="card-title text-two-line" >
-            {/* আতাউর রহমান */}
-            {teacherInfos?.name}
+            
+            {name_bn || name_en || ''}
           </h2>
           <p className="card-text">
-            {/* 95481468716473 */}
-            {teacherInfos?.pdsid || teacherInfos?.caid}
+     
+            {pdsid || caid}
           </p>
           {/* <p className="card-text">পাবনা জিলা স্কুল, পাবনা</p> */}
           <p className="card-text">{schoolName}</p>

@@ -5,7 +5,7 @@ import Breadcumb from "../layout/Breadcumb";
 import { Button, Modal, Spinner } from "react-bootstrap";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { section_name, shift_name, version_name } from "../utils/Utils";
-import female_avt_img from "../../public/assets/images/user_avatar/female_std.png";
+import female_avt_img from "../assets/project_ca_html/student_img/female_std.png";
 import male_avt_img from "../../public/assets/images/user_avatar/male_std.png";
 
 
@@ -37,6 +37,8 @@ const StudentList = () => {
 
     setStudent(uniqueObjectsArray);
   };
+
+
 
   const handleShowModal = (item: any) => {
     setSelectedItem(item);
@@ -73,7 +75,7 @@ const StudentList = () => {
     };
   }, []);
 
-  // console.log("student", student);
+  console.log("student", student);
 
   return (
     <section className="student_list_page">
@@ -92,10 +94,10 @@ const StudentList = () => {
                   <div className="d-flex justify-content-start align-items-center gap-4 ">
                     <div>
                       <img
-                        src={
-                          student.gender === "Male"
-                            ? male_avt_img
-                            : female_avt_img || male_avt_img
+                        src=
+                        {
+                          (student?.gender == "Male") && male_avt_img || 
+                          (student?.gender == "Female") && female_avt_img
                         }
                         width="60rem"
                         className="img-fluid"
@@ -104,7 +106,7 @@ const StudentList = () => {
                     <div className="d-flex flex-column justify-content-center align-items-start gap-1">
                       <div className="d-flex flex-column justify-content-center align-items-start gap-1">
                         <h5 className={styles.teacherName}>
-                          নামঃ {student?.student_name_bn || "no-entry"}{" "}
+                          নামঃ {student?.student_name_bn || student?.student_name_en|| "no-entry"}{" "}
                         </h5>
                         <h5 className={styles.teacherName}>
                           রোলঃ {student?.roll || "no-entry"}{" "}
@@ -138,7 +140,7 @@ const StudentList = () => {
                     শিক্ষার্থীর নামঃ{" "}
                     {selectedItem?.student_name_bn ||
                       selectedItem?.student_name_en ||
-                      "no-entry"}
+                      "not-assigned"}
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -157,9 +159,8 @@ const StudentList = () => {
                     >
                       <img
                         src={
-                          selectedItem?.gender === "Male"
-                            ? male_avt_img
-                            : female_avt_img
+                          ( selectedItem?.gender == "Male") && male_avt_img || 
+                          ( selectedItem?.gender == "Female") && female_avt_img
                         }
                         width="100rem"
                         className="img-fluid border border-info p-1"
@@ -191,9 +192,7 @@ const StudentList = () => {
                           <td className="p-1">
                             {(selectedItem?.class === "6" && "ষষ্ঠ") ||
                               (selectedItem?.class === "7" && "সপ্তম") ||
-                              (selectedItem?.class === "8" && "অষ্টম") ||
-                              (selectedItem?.class === "9" && "নবম") ||
-                              (selectedItem?.class === "10" && "দশম") ||
+                              
                               "no-entry"}
                           </td>
                         </tr>

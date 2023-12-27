@@ -82,8 +82,8 @@ export  const styles = StyleSheet.create({
     h3: {
       fontFamily: "Kalpurush",
       textAlign: "center",
-      fontSize: 10,
-      padding: "5px",
+      fontSize: 9,
+      padding: "1px",
     },
     h4: {
       fontFamily: "Kalpurush",
@@ -202,9 +202,9 @@ export  const styles = StyleSheet.create({
     },
   
     box1: {
-      width: "30%",
-      margin: "1.33%",
-      height: 100,
+      width: "31%",
+      margin: "1%",
+      height: 105,
     },
   
     column2: {
@@ -270,7 +270,7 @@ export  const styles = StyleSheet.create({
   
     cardbody: {
       padding: "1px",
-      height: "70px",
+      height: "75px",
     },
   
     footerBox: {
@@ -308,9 +308,15 @@ export  const styles = StyleSheet.create({
       // backgroundColor: 'white',
       borderLeft: "1px solid black",
     },
-  
+
     itemBG2: {
       backgroundColor: "#6C6D70",
+      // backgroundColor: 'white',
+      borderLeft: "1px solid black",
+    },
+  
+    itemBGW: {
+      backgroundColor: "red",
       borderLeft: "1px solid black",
     },
   

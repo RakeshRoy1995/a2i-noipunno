@@ -119,6 +119,38 @@ export function Bi_save(data: any) {
   return axios(options);
 }
 
+export function pi_review(data: any) {
+  const page_list = `${EVULATION_API}/v2/pi-review`;
+
+  const options = {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
+
+export function bi_review(data: any) {
+  const page_list = `${EVULATION_API}/v2/bi-review`;
+
+  const options = {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
+
 export function clssWiseSubject(data: any) {
   const page_list = `${API_URL}/v2/class-wise-subjects?class_id=${data}`;
 
@@ -536,6 +568,9 @@ export function dimension_by_subject(subject_uid) {
   // const page_list = `https://competence.noipunno.gov.bd/api/dimension-by-subject`;
   // const page_list = `/assets/dimension.json`;
 
+
+  
+
   const options = {
     method: "get",
     headers: { "content-type": "application/json" },
@@ -585,8 +620,8 @@ export function all_division() {
 }
 
 export function teacher_designation() {
-  const page_list = `${EVULATION_API}/v2/designation`;
-  // const page_list = `https://training.api.project-ca.com/api/v2/designation`;
+  // const page_list = `${EVULATION_API}/v2/designation`;
+  const page_list = `https://training.api.project-ca.com/api/v2/designation`;
   // const page_list = `https://api.noipunno.gov.bd/api/v2/designation`;
 
   const options = {

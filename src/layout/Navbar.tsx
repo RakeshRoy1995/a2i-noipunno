@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
 import noipunnologo from "../assets/navbar_materials/images/noipunno-new-logo.svg";
-import teacherIcon from "../assets/navbar_materials/icons/teacher.svg";
-import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
+
 import amarProfileIcon from "../assets/navbar_materials/icons/profile-icon.svg";
 import signoutIcon from "../assets/navbar_materials/icons/sign-out.svg";
 import mobileMenuIcon from "../assets/navbar_materials/icons/menu.png";
@@ -17,9 +16,14 @@ import shikkarthiIcon from "../assets/navbar_materials/icons/student-icon.svg";
 import shreniIcon from "../assets/navbar_materials/icons/class-icon.svg";
 import onurudhGoliIcon from "../assets/navbar_materials/icons/requests.svg";
 import doublecheckPng from "../assets/navbar_materials/icons/double-check.png";
+import teacherIcon from "../assets/navbar_materials/icons/teacher.svg";
+import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
+import maleTeacherAvatar from "../assets/project_ca_html/teacher_img/male_teacher.png";
+import femaleTeacherAvatar from "../assets/project_ca_html/teacher_img/female_teacher.png";
 
 import { useLocation } from "react-router-dom";
 import { teacher_dashboard, reloadteacher_own_subject } from "../Request";
+import { showReportDeleteEv } from "../utils/Utils";
 
 const Navbar = () => {
   const [userDetails, setuserDetails] = useState<any>({});
@@ -90,13 +94,12 @@ const Navbar = () => {
 
       window.location.reload();
     } catch (error) {
-
       Swal.fire({
         icon: "error",
-        title: "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন",
+        title:
+          "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন",
         confirmButtonText: "হ্যাঁ",
       });
-
     }
   };
 
@@ -401,61 +404,67 @@ const Navbar = () => {
                                 />
                               </a>
                               <ul className="dropdown-menu border-0 dropdown-menu-item-style">
-                                <li>
-                                  <NavLink
-                                    to="/student-transcript-pi"
-                                    className="dropdown-item"
-                                  >
-                                    <div
-                                      // activeClassName='active'
-                                      className="dropdown-list-item-style d-flex align-items-center"
-                                    >
-                                      <img
-                                        src={unOrderListIcon}
-                                        className="img-fluid dropdown-list-item-icon"
-                                        alt="icon"
-                                      />
-                                      <p className="dropdown-class-list">
-                                        শিক্ষার্থীর ট্রান্সক্রিপ্ট (PI)
-                                      </p>
-                                    </div>
-                                  </NavLink>
-                                </li>
-                                <li>
-                                  <NavLink
-                                    to="/student-transcript-bi"
-                                    className="dropdown-item"
-                                  >
-                                    <div
-                                      // activeClassName='active'
-                                      className="dropdown-list-item-style d-flex align-items-center"
-                                    >
-                                      <img
-                                        src={unOrderListIcon}
-                                        className="img-fluid dropdown-list-item-icon"
-                                        alt="icon"
-                                      />
-                                      <p className="dropdown-class-list">
-                                        শিক্ষার্থীর ট্রান্সক্রিপ্ট (BI)
-                                      </p>
-                                    </div>
-                                  </NavLink>
-                                </li>
-                                <li>
-                                  <NavLink to={"shikkarthir-report-card"} className="dropdown-item" >
-                                    <div className="dropdown-list-item-style d-flex align-items-center">
-                                      <img
-                                        src={unOrderListIcon}
-                                        className="img-fluid dropdown-list-item-icon"
-                                        alt="icon"
-                                      />
-                                      <p className="dropdown-class-list">
-                                        শিক্ষার্থীদের রিপোর্ট কার্ড
-                                      </p>
-                                    </div>
-                                  </NavLink>
-                                </li>
-
+                                {showReportDeleteEv() && (
+                                  <>
+                                    <li>
+                                      <NavLink
+                                        to="/student-transcript-pi"
+                                        className="dropdown-item"
+                                      >
+                                        <div
+                                          // activeClassName='active'
+                                          className="dropdown-list-item-style d-flex align-items-center"
+                                        >
+                                          <img
+                                            src={unOrderListIcon}
+                                            className="img-fluid dropdown-list-item-icon"
+                                            alt="icon"
+                                          />
+                                          <p className="dropdown-class-list">
+                                            শিক্ষার্থীর ট্রান্সক্রিপ্ট (PI)
+                                          </p>
+                                        </div>
+                                      </NavLink>
+                                    </li>
+                                    <li>
+                                      <NavLink
+                                        to="/student-transcript-bi"
+                                        className="dropdown-item"
+                                      >
+                                        <div
+                                          // activeClassName='active'
+                                          className="dropdown-list-item-style d-flex align-items-center"
+                                        >
+                                          <img
+                                            src={unOrderListIcon}
+                                            className="img-fluid dropdown-list-item-icon"
+                                            alt="icon"
+                                          />
+                                          <p className="dropdown-class-list">
+                                            শিক্ষার্থীর মূল্যায়ন (BI)
+                                          </p>
+                                        </div>
+                                      </NavLink>
+                                    </li>
+                                    <li>
+                                      <NavLink
+                                        to={"shikkarthir-report-card"}
+                                        className="dropdown-item"
+                                      >
+                                        <div className="dropdown-list-item-style d-flex align-items-center">
+                                          <img
+                                            src={unOrderListIcon}
+                                            className="img-fluid dropdown-list-item-icon"
+                                            alt="icon"
+                                          />
+                                          <p className="dropdown-class-list">
+                                            শিক্ষার্থীদের রিপোর্ট কার্ড
+                                          </p>
+                                        </div>
+                                      </NavLink>
+                                    </li>
+                                  </>
+                                )}
                               </ul>
                             </li>
 
@@ -517,7 +526,6 @@ const Navbar = () => {
                                     </div>
                                   </NavLink>
                                 </li>
-
                               </ul>
                             </li>
                             <li className="nav-item dropdown nav-item-style">

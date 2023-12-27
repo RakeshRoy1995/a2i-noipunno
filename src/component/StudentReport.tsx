@@ -109,7 +109,7 @@ export default function StudentReport() {
     setloader(false);
     setassesment(own_subjet?.data?.data?.assessments[0]?.assessment_details);
 
-    let all_Pi: any = [];
+    const all_Pi: any = [];
     own_subjet.data.data.subjects.map((d: any) => {
       d.oviggota.map((ovigota_data) => {
         ovigota_data.pis.map((pis_data) => {
@@ -125,7 +125,6 @@ export default function StudentReport() {
         });
       });
     });
-    // console.log("own_subjet", all_Pi);
   };
 
   useEffect(() => {
@@ -157,10 +156,17 @@ export default function StudentReport() {
       setteacher(allFelter.subject.split("-")[2]);
       setselected_student([]);
 
-      const dimentions = await dimension_by_subject(
-        // allFelter.subject.split("-")[0]
-        ""
-      );
+      const dimension_data: any = localStorage.getItem("dimension_by_subject") || "";
+      let dimentions = dimension_data ? JSON.parse(dimension_data) : "";
+
+      if (dimentions == "") {
+        dimentions =  await dimension_by_subject(
+          // allFelter.subject.split("-")[0]
+          ""
+        );
+
+        localStorage.setItem("dimension_by_subject" , JSON.stringify(dimentions) )
+      }
 
       const report_data = await get_report_card(
         "",
@@ -183,9 +189,18 @@ export default function StudentReport() {
       );
 
       const dimentions_details = await bi_report_card_details();
-      const clssWiseSub: any = await clssWiseSubject(
-        allFelter.subject.split("-")[1]
-      );
+     
+      const clssWiseSub_data: any = localStorage.getItem("clssWiseSub_data") || "";
+      let clssWiseSub = clssWiseSub_data ? JSON.parse(clssWiseSub_data) : "";
+
+      if (clssWiseSub == "") {
+        clssWiseSub =  await clssWiseSubject(
+          ""
+        );
+
+        localStorage.setItem("clssWiseSub_data" , JSON.stringify(clssWiseSub) )
+      }
+
 
       clssWiseSub.data.data.sort((a, b) => a.subject_no - b.subject_no);
 
@@ -231,6 +246,8 @@ export default function StudentReport() {
         setselected_student(final_data);
       }
     } catch (error) {
+
+      console.log(`error`, error);
       seterr(
         "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। ডেটা লোড করতে অনুগ্রহ করে আবার ক্লিক করুন"
       );
@@ -264,7 +281,7 @@ export default function StudentReport() {
       {showReportDeleteEv() ? (
         <div className="container">
           <div className="row">
-            <Breadcumb title={"মূল্যায়ন প্রতিবেদন"} />
+            <Breadcumb title={"রিপোর্ট কার্ড"} />
             <div className="d-flex align-items-center">
               <div className="card shadow-lg border-0 w-100 rounded">
                 <ul className="nav d-flex mt-2 justify-content-around py-1">

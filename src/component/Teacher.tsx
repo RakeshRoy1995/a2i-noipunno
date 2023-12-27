@@ -68,8 +68,6 @@ export default function Teacher() {
       const own_subjet_: any = localStorage.getItem("own_subjet") || "";
       let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
 
-      console.log(`own_subjetown_subjet`, own_subjet);
-
       if (own_subjet == "") {
         own_subjet = await teacher_own_subject();
       }

@@ -19,6 +19,7 @@ const TeacherProfileCard = () => {
   const [teacherDesignation, setTeacherDesignation] = useState('');
   const [teacher_details, setTeacher_details] = useState({});
   const [isClassTeacher, setIsClassTeacher] = useState(false)
+  const [loading, setLoadin] = useState(true);
 
   const {
     name_en,
@@ -26,7 +27,8 @@ const TeacherProfileCard = () => {
     gender,
     designation_id,
     pdsid,
-    caid } :any = teacher_details;
+    caid }: any = teacher_details;
+  
 
   const fetchData = async () => {
     const designation_data = await teacher_designation();
@@ -38,6 +40,7 @@ const TeacherProfileCard = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
     if (get_teachers_details) {
       setTeacher_details(get_teachers_details?.data?.teachers[0]);
+      
       get_teachers_details?.data?.institute?.map((item) =>
         setSchoolName(item.institute_name)
       );
@@ -46,6 +49,8 @@ const TeacherProfileCard = () => {
       if (isClassTeacherValid) {
         setIsClassTeacher(true)
       }
+
+      setLoadin(false)
     }
   }
 
@@ -58,7 +63,6 @@ const TeacherProfileCard = () => {
   }
 
   useEffect(() => {
-    getUserDetails();
     fetchData();
   }, [])
 
@@ -66,7 +70,13 @@ const TeacherProfileCard = () => {
   useEffect(() => {
     setAllStateData()
   }, [allDesignation])
+  
 
+  setInterval(() => {
+    if (loading) {
+      getUserDetails()
+    }
+  }, 4000);
 
 
   return (

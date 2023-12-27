@@ -20,14 +20,23 @@ export const shift_name = (shifts_id: any) => {
   }
 };
 
-export const branch_name = (branch_id: any) => {
+export const branch_name = (branch_id: any , showInPDF=false) => {
   const data = localStorage.getItem("teacher_dashboard");
   const storageData = JSON.parse(data);
-  if (storageData) {
+  if (storageData && !showInPDF ) {
     const branch = storageData.data.branches.find(
       (branches) => branches.uid == branch_id
     );
     return branch?.branch_name;
+  }else{
+
+    if (storageData?.data?.branches.length > 1) {
+      const branch = storageData.data.branches.find(
+        (branches) => branches.uid == branch_id
+      );
+      return branch?.branch_name + " ,"
+    }
+    return ""
   }
 };
 

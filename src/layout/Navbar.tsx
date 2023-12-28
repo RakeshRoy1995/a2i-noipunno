@@ -95,7 +95,6 @@ const Navbar = () => {
       window.location.reload();
     } catch (error) {
 
-      console.log(`error`, error);
       Swal.fire({
         icon: "error",
         title:
@@ -104,6 +103,8 @@ const Navbar = () => {
       });
     }
   };
+
+
 
   useEffect(() => {
     activeRoute();
@@ -118,7 +119,7 @@ const Navbar = () => {
             <div className="container">
               <div className="row">
                 <div className="d-flex justify-content-between align-items-center py-2">
-                  <div>
+                  <div onClick={(e)=> window.location.reload() } className="pointer">
                     <img
                       src={noipunnologo}
                       className="img-fluid"
@@ -126,34 +127,6 @@ const Navbar = () => {
                     />
                   </div>
                   <div className="d-flex justify-content-between align-items-center">
-                    {/* <div className="d-none d-lg-block" >
-                  <a href="#">
-                    <img src={searchIcon} className="img-fluid mx-2" alt="search icon" />
-                  </a>
-                </div> */}
-                    {/* 
-                <div className="d-none d-lg-block">
-                  {" "}
-                  <a href="#">
-                    <img src={startIcon} className="img-fluid mx-2" alt="=favourite logo" />
-                  </a>
-                </div> */}
-
-                    {/* <div className="d-none d-lg-block" >
-                  <a href="#">
-                    <img src={dark_light_mode_icon} className="img-fluid mx-2 tick-icons" alt="main logo" />
-                  </a>
-                </div> */}
-
-                    {/* <div className=" position-relative">
-                  <a href="#">
-                    <img src={notificationIcon} className="img-fluid" alt="main logo" />
-                    <span className="position-absolute top-0 start-50 translate-middle d-flex mt-1  mx-2 justify-content-center align-items-center badge notification-badge rounded-pill bg-danger">
-                      4
-                    </span>
-                  </a>
-                </div> */}
-
                     <div className="btn-group position-relative">
                       <a
                         className="navbar-menu-item d-flex align-items-center ms-2"

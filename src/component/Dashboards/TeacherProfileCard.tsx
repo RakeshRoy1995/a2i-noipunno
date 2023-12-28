@@ -76,7 +76,7 @@ const TeacherProfileCard = () => {
     if (loading) {
       getUserDetails()
     }
-  }, 4000);
+  }, 500);
 
 
   return (

@@ -94,6 +94,8 @@ const Navbar = () => {
 
       window.location.reload();
     } catch (error) {
+
+      console.log(`error`, error);
       Swal.fire({
         icon: "error",
         title:

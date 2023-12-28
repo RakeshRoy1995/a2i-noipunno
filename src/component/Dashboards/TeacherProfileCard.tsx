@@ -95,7 +95,8 @@ const TeacherProfileCard = () => {
           <div className="teacher-title">
             <h2>
               {/* {teacherDesignation} */}
-              {isClassTeacher && "শ্রেণি শিক্ষক"}
+              {isClassTeacher && "শ্রেণি "}
+              শিক্ষক
             </h2>
           </div>
           <div className="icon">

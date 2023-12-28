@@ -629,3 +629,45 @@ export function teacher_designation() {
 
   return axios(options);
 }
+
+
+export function sent_otp(data: any) {
+  const page_list = `${API_URL}/v2/account-otp`;
+
+  const options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
+export function confirm_otp(data: any) {
+  const page_list = `${API_URL}/v2/account-otp-verify-change-pin`;
+
+  const options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
+export function confirm_pass(data: any) {
+  const page_list = `${API_URL}/v2/account-change-password`;
+
+  const options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
+

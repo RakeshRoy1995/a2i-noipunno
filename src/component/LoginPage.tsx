@@ -25,6 +25,11 @@ const LoginPage = () => {
   const [userId_from_Cookie, setUserId_from_Cookie] = useState("");
   const [userPin_from_Cookie, setUserPin_from_Cookie] = useState("");
 
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
+
   const setCookie = (name, value, days) => {
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + days);
@@ -298,8 +303,9 @@ const LoginPage = () => {
                             href="https://docs.google.com/document/d/e/2PACX-1vTfzi4vy5b8RbL0rnIAt8t7stJFN0F70qwTOUM_ZxEyveq794GnjdXzIzd_RY-a0tVQqGdhwAOyd1NQ/pub"
                             target="_blank"
                           >
-                            সচরাচর জিজ্ঞাসা
+                            সচরাচর জিজ্ঞাসা-old
                           </a>
+                          <a> সচরাচর জিজ্ঞাসা </a>
                         </div>
                       </div>
                     </ul>
@@ -332,7 +338,9 @@ const LoginPage = () => {
             <PopUpAppInfo />
           </div>
         </div>
-        {/* bootstrap 5.0.2 min.js */}
+     
+        
+
       </section>
     </>
   );

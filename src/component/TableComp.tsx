@@ -125,7 +125,6 @@ function TableComp({ new_student, fetchDataFromAPI, setdata, pdf, data }: any) {
     setAll_student(new_student);
   }, [new_student]);
 
-  console.log("new_student...iiiiii..", all_student);
   return (
     <div>
       {new_student.length > 0 && (

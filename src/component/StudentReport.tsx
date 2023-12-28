@@ -35,22 +35,12 @@ import TableComp from "./TableComp";
 export default function StudentReport() {
   const [err, seterr] = useState<any>("");
   const [subject, setsubject] = useState([]);
-  const [student_name, setstudent_name] = useState<any>("");
-  const [version, setversion] = useState<any>([]);
-  const [own_data, setown_data] = useState<any>([]);
-  const [all_bis, setall_bis] = useState<any>([]);
-  const [assesment, setassesment] = useState<any>([]);
-  const [teacher, setteacher] = useState<any>("");
-  const [sub_name, setsubject_name] = useState<any>("");
-  const [loader, setloader] = useState(true);
   const [instititute, setinstititute] = useState<any>("");
   const [biData, setbiData] = useState<any>([]);
   const [selected_student, setselected_student] = useState<any>([]);
   const [all_subject, setall_subject] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
-  const [student, setstudent] = useState<any>({});
   const [data, setdata] = useState<any>({});
-  const [submittingLoading, setsubmittingLoading] = useState(false);
 
   const fetchData = async () => {
     const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
@@ -75,10 +65,6 @@ export default function StudentReport() {
       localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
     }
 
-    // const al_teacher: any = await all_teachers();
-    setown_data(own_subjet?.data?.data);
-    setteacher(own_subjet.data.data.user);
-
     let all_subject: any = [];
 
     own_subjet.data.data.subjects.map((d: any) => {
@@ -102,30 +88,8 @@ export default function StudentReport() {
         }
       });
     });
-    setall_bis(own_subjet.data.data.bis);
-    setversion(teacher_dash?.data?.versions);
     setinstititute(teacher_dash?.data?.institute);
     setsubject(all_subject);
-    setloader(false);
-    setassesment(own_subjet?.data?.data?.assessments[0]?.assessment_details);
-
-    let all_Pi: any = [];
-    own_subjet.data.data.subjects.map((d: any) => {
-      d.oviggota.map((ovigota_data) => {
-        ovigota_data.pis.map((pis_data) => {
-          all_Pi.push(pis_data);
-        });
-      });
-    });
-
-    own_subjet.data.data.subjects.map((d: any) => {
-      d.pi_selection.map((pi_selection) => {
-        pi_selection.pi_list.map((pis_list_data) => {
-          all_Pi.push(pis_list_data);
-        });
-      });
-    });
-    // console.log("own_subjet", all_Pi);
   };
 
   useEffect(() => {
@@ -152,15 +116,21 @@ export default function StudentReport() {
   );
 
   const fetchDataFromAPI = async (student_name: any) => {
-    setsubmittingLoading(true);
+    seterr("")
     try {
-      setteacher(allFelter.subject.split("-")[2]);
       setselected_student([]);
 
-      const dimentions = await dimension_by_subject(
-        // allFelter.subject.split("-")[0]
-        ""
-      );
+      const dimension_data: any = localStorage.getItem("dimension_by_subject") || "";
+      let dimentions = dimension_data ? JSON.parse(dimension_data) : "";
+
+      if (dimentions == "") {
+        dimentions =  await dimension_by_subject(
+          // allFelter.subject.split("-")[0]
+          ""
+        );
+
+        localStorage.setItem("dimension_by_subject" , JSON.stringify(dimentions) )
+      }
 
       const report_data = await get_report_card(
         "",
@@ -182,29 +152,43 @@ export default function StudentReport() {
         student_name
       );
 
-      const dimentions_details = await bi_report_card_details();
-      const clssWiseSub: any = await clssWiseSubject(
-        allFelter.subject.split("-")[1]
-      );
+      const bi_report_card_data: any = localStorage.getItem("bi_report_card_details") || "";
+      let dimentions_details :any = bi_report_card_data ? JSON.parse(bi_report_card_data) : "";
+
+      if (dimentions_details == "") {
+        dimentions_details =  await bi_report_card_details();
+
+        localStorage.setItem("bi_report_card_details" , JSON.stringify(dimentions_details) )
+      }
+     
+      const clssWiseSub_data: any = localStorage.getItem("clssWiseSub_data") || "";
+      let clssWiseSub = clssWiseSub_data ? JSON.parse(clssWiseSub_data) : "";
+
+      if (clssWiseSub == "") {
+        clssWiseSub =  await clssWiseSubject(
+          ""
+        );
+
+        localStorage.setItem("clssWiseSub_data" , JSON.stringify(clssWiseSub) )
+      }
+
 
       clssWiseSub.data.data.sort((a, b) => a.subject_no - b.subject_no);
 
-      let res: any = [];
+      const res: any = [];
 
       report_data.data.report_card.map((d) => {
         d.subject_result.map((s_d) => {
           res.push(s_d);
         });
       });
-      let bi_res: any = [];
+      const bi_res: any = [];
       get_bi_report_card.data.report_card.map((data) => {
         bi_res.push(data);
       });
 
       const bi_data = formate_report_data(bi_res, dimentions_details.data.data);
       const data = formate_report_data(res, dimentions.data.data);
-      const student_data = all_students(student_name);
-      const subject_data = subject_name(allFelter.subject.split("-")[0]);
       // console.log("dimentions", dimentions, res, bi_data);
 
       const all_sub = clssWiseSub.data.data;
@@ -224,18 +208,16 @@ export default function StudentReport() {
       }
 
       if (final_data.length) {
-        setstudent(student_data);
-        setsubject_name(subject_data);
         setbiData(bi_data);
         setall_subject(clssWiseSub.data.data);
         setselected_student(final_data);
       }
     } catch (error) {
+
       seterr(
         "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। ডেটা লোড করতে অনুগ্রহ করে আবার ক্লিক করুন"
       );
     }
-    setsubmittingLoading(false);
   };
 
   const new_student = Stuent_result.filter((d: any) => {
@@ -257,14 +239,12 @@ export default function StudentReport() {
     }
   };
 
-  console.log(`biData`, biData);
-
   return (
     <div className="report_page">
       {showReportDeleteEv() ? (
         <div className="container">
           <div className="row">
-            <Breadcumb title={"মূল্যায়ন প্রতিবেদন"} />
+            <Breadcumb title={"রিপোর্ট কার্ড"} />
             <div className="d-flex align-items-center">
               <div className="card shadow-lg border-0 w-100 rounded">
                 <ul className="nav d-flex mt-2 justify-content-around py-1">

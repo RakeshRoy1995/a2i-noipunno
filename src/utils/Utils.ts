@@ -646,7 +646,19 @@ export const accessBIandReport = () => {
   const data = localStorage.getItem("teacher_dashboard");
   const storageData = JSON.parse(data);
 
-  return storageData?.data?.teachers[0].is_class_teacher?.uid ? true : false;
+  const ch_Class_teacher = storageData?.data?.teachers[0].is_class_teacher?.uid ? true : false
+  if (ch_Class_teacher) {
+    return true
+  } else {
+
+    const data = localStorage.getItem("own_subjet");
+    const storageData = JSON.parse(data);
+
+  // console.log(`storageData`, storageData.data.data.subjects);
+
+    return false
+  }
+  
 };
 
 export const showReportDeleteEv = () => {
@@ -670,6 +682,7 @@ export const showPiBiSubject = (data: any) => {
     }
   }
 
+  
   // return true
 };
 

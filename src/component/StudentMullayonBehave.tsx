@@ -43,7 +43,7 @@ export default function StudentMullayonBehave({
   Showcollaps,
   all_student,
 }: any) {
-  // console.log(`is_draft`, is_draft);
+  console.log(`is_draft`, is_draft);
 
   console.log(`teacher_uid`, teacher_uid);
   const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
@@ -305,7 +305,7 @@ export default function StudentMullayonBehave({
       console.log(`error`, error);
       Swal.fire({
         icon: "error",
-        title: "কিছু ভুল হয়েছে!",
+        title: "সার্ভার ত্রুটি ঘটেছে! অনুগ্রহ করে আবার চেষ্টা করুন।",
         confirmButtonText: "হ্যাঁ",
       });
       // seterr(" কিছু ভুল হয়েছে");
@@ -649,17 +649,17 @@ export default function StudentMullayonBehave({
                     id={
                       Showcollaps
                         ? "comment_id_" +
-                          w_d.uid +
-                          "_" +
-                          student?.uid +
-                          "_" +
-                          assessment_uid
+                        w_d.uid +
+                        "_" +
+                        student?.uid +
+                        "_" +
+                        assessment_uid
                         : "comment_id__" +
-                          w_d.uid +
-                          "_" +
-                          student?.uid +
-                          "_" +
-                          assessment_uid
+                        w_d.uid +
+                        "_" +
+                        student?.uid +
+                        "_" +
+                        assessment_uid
                     }
                   >
                     {!comment_status && (
@@ -710,14 +710,14 @@ export default function StudentMullayonBehave({
                             >
                               {weightId(pi_attribute_weight, w_d?.weight_uid) ==
                                 "Square" && (
-                                <BiSquareRounded className="fs-5 mt-1" />
-                              )}
+                                  <BiSquareRounded className="fs-5 mt-1" />
+                                )}
                               {weightId(pi_attribute_weight, w_d?.weight_uid) ==
                                 "Circle" && <BiCircle className="fs-5 mt-1" />}
                               {weightId(pi_attribute_weight, w_d?.weight_uid) ==
                                 "Triangle" && (
-                                <FiTriangle className="fs-5 mt-1" />
-                              )}
+                                  <FiTriangle className="fs-5 mt-1" />
+                                )}
 
                               {/* <TiTick className={`${styles.tick_mark}`} /> */}
                             </div>
@@ -755,14 +755,14 @@ export default function StudentMullayonBehave({
                             >
                               {weightId(pi_attribute_weight, w_d?.weight_uid) ==
                                 "Square" && (
-                                <BiSquareRounded className="fs-5 mt-1" />
-                              )}
+                                  <BiSquareRounded className="fs-5 mt-1" />
+                                )}
                               {weightId(pi_attribute_weight, w_d?.weight_uid) ==
                                 "Circle" && <BiCircle className="fs-5 mt-1" />}
                               {weightId(pi_attribute_weight, w_d?.weight_uid) ==
                                 "Triangle" && (
-                                <FiTriangle className="fs-5 mt-1" />
-                              )}
+                                  <FiTriangle className="fs-5 mt-1" />
+                                )}
 
                               {/* <TiTick className={`${styles.tick_mark}`} /> */}
                             </div>
@@ -811,13 +811,13 @@ export default function StudentMullayonBehave({
                             className={
                               Showcollaps
                                 ? "all_textarea form-control __" +
-                                  student?.uid +
-                                  " " +
-                                  w_d.bi_uid +
-                                  "_" +
-                                  student?.uid +
-                                  "_" +
-                                  assessment_uid
+                                student?.uid +
+                                " " +
+                                w_d.bi_uid +
+                                "_" +
+                                student?.uid +
+                                "_" +
+                                assessment_uid
                                 : ""
                             }
                             id=""
@@ -905,55 +905,55 @@ export default function StudentMullayonBehave({
             ) : (
 
               <>
-              <div className="col-md-6">
-                <div className="row p-1">
-                  <p className="text-success text-center">
-                    ইতোমধ্যে আপনার চূড়ান্ত তথ্য সংরক্ষণ করা হয়েছে
-                  </p>
+                <div className="col-md-6">
+                  <div className="row p-1">
+                    <p className="text-success text-center">
+                      ইতোমধ্যে আপনার চূড়ান্ত তথ্য সংরক্ষণ করা হয়েছে
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="col-md-6">
-                <div className="row p-1">
-                  {showReview ? (
-                    <div className="d-flex justify-content-end align-items-center">
-                      <textarea
-                        className="form-control"
-                        placeholder="আপনি কেন এটি পর্যালোচনা করতে চান তার একটি কারণ দিন"
-                        cols={30}
-                        rows={5}
-                        onChange={(e) => setreviewText(e.target.value)}
-                      ></textarea>
+                <div className="col-md-6">
+                  <div className="row p-1">
+                    {showReview ? (
+                      <div className="d-flex justify-content-end align-items-center">
+                        <textarea
+                          className="form-control"
+                          placeholder="আপনি কেন এটি পর্যালোচনা করতে চান তার একটি কারণ দিন"
+                          cols={30}
+                          rows={5}
+                          onChange={(e) => setreviewText(e.target.value)}
+                        ></textarea>
 
-                      {reviewText && (
-                        <button
-                          type="button"
-                          className="btn btn-sm btn-outline-secondary m-1"
-                          onClick={(e) => requestToReview(e)}
-                        >
-                          Submit
-                        </button>
-                      )}
-                    </div>
-                  ) : (
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-outline-secondary"
-                      onClick={(e) => setshowReview(true)}
-                    >
-                      <div className=" d-flex justify-content-center align-items-center gap-2 p-1">
-                        <span className="text-sm">
-                          পর্যালোচনা করার জন্য পুনরায় অনুরোধ করুন
-                        </span>
-                        <span style={{ marginBottom: "0.1rem" }}>
-                          {" "}
-                          <IoIosArrowForward />{" "}
-                        </span>
+                        {reviewText && (
+                          <button
+                            type="button"
+                            className="btn btn-sm btn-outline-secondary m-1"
+                            onClick={(e) => requestToReview(e)}
+                          >
+                            Submit
+                          </button>
+                        )}
                       </div>
-                    </button>
-                  )}
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={(e) => setshowReview(true)}
+                      >
+                        <div className=" d-flex justify-content-center align-items-center gap-2 p-1">
+                          <span className="text-sm">
+                            পর্যালোচনা করার জন্য পুনরায় অনুরোধ করুন
+                          </span>
+                          <span style={{ marginBottom: "0.1rem" }}>
+                            {" "}
+                            <IoIosArrowForward />{" "}
+                          </span>
+                        </div>
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
 
 
 

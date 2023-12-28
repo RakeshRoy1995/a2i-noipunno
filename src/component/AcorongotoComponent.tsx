@@ -65,6 +65,9 @@ export default function AcorongotoComponent({
 
     const all_submited_PI_ = data?.data?.evaluation;
 
+    // console.log("data.data?.evaluation", data.data?.evaluation);
+
+
     if (data.data?.evaluation?.length) {
       // console.log(`data.data?.evaluation[0]?.submit_status`, data.data?.evaluation[0]);
       setis_draft(data.data?.evaluation[0]?.submit_status);
@@ -139,7 +142,7 @@ export default function AcorongotoComponent({
                     <div className="d-flex justify-content-between align-items-center w-100 px-1">
                       <div className="py-2" style={{ color: "#428F92" }}>
                         <PiBookOpenText className="me-2" />
-                        {d?.student_name_bn || d?.student_name_en }
+                        {d?.student_name_bn || d?.student_name_en}
                       </div>
 
                       <div

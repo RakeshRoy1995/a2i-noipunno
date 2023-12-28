@@ -16,10 +16,10 @@ import shikkarthiIcon from "../assets/navbar_materials/icons/student-icon.svg";
 import shreniIcon from "../assets/navbar_materials/icons/class-icon.svg";
 import onurudhGoliIcon from "../assets/navbar_materials/icons/requests.svg";
 import doublecheckPng from "../assets/navbar_materials/icons/double-check.png";
+import resetPass from "../assets/project_ca_html/icons/setting-2.svg";
 import teacherIcon from "../assets/navbar_materials/icons/teacher.svg";
 import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
-import maleTeacherAvatar from "../assets/project_ca_html/teacher_img/male_teacher.png";
-import femaleTeacherAvatar from "../assets/project_ca_html/teacher_img/female_teacher.png";
+
 
 import { useLocation } from "react-router-dom";
 import { teacher_dashboard, reloadteacher_own_subject } from "../Request";
@@ -184,6 +184,19 @@ const Navbar = () => {
                                 alt="profile icon"
                               />
                               আমার প্রোফাইল
+                            </div>
+                          </NavLink>
+                        </li>
+
+                        <li>
+                          <NavLink to="reset-password">
+                            <div className="topnav-dropdown-style dropdown-item profile-style">
+                              <img
+                                src={resetPass}
+                                className="img-fluid icon-right-space"
+                                alt="profile icon"
+                              />
+                              রিসেট  পাসওয়ার্ড
                             </div>
                           </NavLink>
                         </li>

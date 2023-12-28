@@ -31,8 +31,8 @@ const TeacherProfileCard = () => {
   
 
   const fetchData = async () => {
-    const designation_data = await teacher_designation();
-    setAllDesignation(designation_data.data.data);
+    // const designation_data = await teacher_designation();
+    // setAllDesignation(designation_data.data.data);
   };
 
 

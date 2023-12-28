@@ -94,9 +94,9 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
                   <h3>
                     সর্বমোট
                     <br />
-                    <span>শিক্ষক</span>
+                    <span>বিষয় </span>
                   </h3>
-                  <h6>আপনার স্কুল এ</h6>
+                  {/* <h6>আপনার স্কুল এ</h6> */}
                 </div>
                 <div className="circle">
                   <h5>{all_teacher?.length || "00"}</h5>

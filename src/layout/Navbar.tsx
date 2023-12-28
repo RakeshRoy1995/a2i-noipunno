@@ -16,10 +16,10 @@ import shikkarthiIcon from "../assets/navbar_materials/icons/student-icon.svg";
 import shreniIcon from "../assets/navbar_materials/icons/class-icon.svg";
 import onurudhGoliIcon from "../assets/navbar_materials/icons/requests.svg";
 import doublecheckPng from "../assets/navbar_materials/icons/double-check.png";
+import resetPass from "../assets/project_ca_html/icons/setting-2.svg";
 import teacherIcon from "../assets/navbar_materials/icons/teacher.svg";
 import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
-import maleTeacherAvatar from "../assets/project_ca_html/teacher_img/male_teacher.png";
-import femaleTeacherAvatar from "../assets/project_ca_html/teacher_img/female_teacher.png";
+
 
 import { useLocation } from "react-router-dom";
 import { teacher_dashboard, reloadteacher_own_subject } from "../Request";
@@ -94,6 +94,7 @@ const Navbar = () => {
 
       window.location.reload();
     } catch (error) {
+
       Swal.fire({
         icon: "error",
         title:
@@ -102,6 +103,8 @@ const Navbar = () => {
       });
     }
   };
+
+
 
   useEffect(() => {
     activeRoute();
@@ -116,7 +119,7 @@ const Navbar = () => {
             <div className="container">
               <div className="row">
                 <div className="d-flex justify-content-between align-items-center py-2">
-                  <div>
+                  <div onClick={(e)=> window.location.reload() } className="pointer">
                     <img
                       src={noipunnologo}
                       className="img-fluid"
@@ -124,34 +127,6 @@ const Navbar = () => {
                     />
                   </div>
                   <div className="d-flex justify-content-between align-items-center">
-                    {/* <div className="d-none d-lg-block" >
-                  <a href="#">
-                    <img src={searchIcon} className="img-fluid mx-2" alt="search icon" />
-                  </a>
-                </div> */}
-                    {/* 
-                <div className="d-none d-lg-block">
-                  {" "}
-                  <a href="#">
-                    <img src={startIcon} className="img-fluid mx-2" alt="=favourite logo" />
-                  </a>
-                </div> */}
-
-                    {/* <div className="d-none d-lg-block" >
-                  <a href="#">
-                    <img src={dark_light_mode_icon} className="img-fluid mx-2 tick-icons" alt="main logo" />
-                  </a>
-                </div> */}
-
-                    {/* <div className=" position-relative">
-                  <a href="#">
-                    <img src={notificationIcon} className="img-fluid" alt="main logo" />
-                    <span className="position-absolute top-0 start-50 translate-middle d-flex mt-1  mx-2 justify-content-center align-items-center badge notification-badge rounded-pill bg-danger">
-                      4
-                    </span>
-                  </a>
-                </div> */}
-
                     <div className="btn-group position-relative">
                       <a
                         className="navbar-menu-item d-flex align-items-center ms-2"
@@ -209,6 +184,19 @@ const Navbar = () => {
                                 alt="profile icon"
                               />
                               আমার প্রোফাইল
+                            </div>
+                          </NavLink>
+                        </li>
+
+                        <li>
+                          <NavLink to="reset-password">
+                            <div className="topnav-dropdown-style dropdown-item profile-style">
+                              <img
+                                src={resetPass}
+                                className="img-fluid icon-right-space"
+                                alt="profile icon"
+                              />
+                              রিসেট  পাসওয়ার্ড
                             </div>
                           </NavLink>
                         </li>

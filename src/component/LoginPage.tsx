@@ -19,11 +19,16 @@ import PopUpAppInfo from "./PopUpAppInfo/PopUpAppInfo";
 const LoginPage = () => {
   const [error, seterror] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [value, setValue] = useState("");
+  const [loading, setloading] = useState(false);
   const [savePin, setSavePin] = useState(false);
 
   const [userId_from_Cookie, setUserId_from_Cookie] = useState("");
   const [userPin_from_Cookie, setUserPin_from_Cookie] = useState("");
+
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
   const setCookie = (name, value, days) => {
     const expirationDate = new Date();
@@ -45,6 +50,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    localStorage.clear();
     const datas = new FormData(event.target);
     const userId = event.target.caid.value;
     const userPin = event.target.pin.value;
@@ -52,12 +58,11 @@ const LoginPage = () => {
     if (savePin) {
       setCookie("userId", userId, 7);
       setCookie("userPin", userPin, 7);
-      // console.log('Pin saved:', savePin);
-      // console.log('userId', userId);
-      // console.log('userPin', userPin);
     }
 
     try {
+      setloading(true)
+      seterror("")
       const { data }: any = await loginPassword(datas);
       // console.log("data", data.status);
 
@@ -71,13 +76,14 @@ const LoginPage = () => {
       } else {
         seterror("পাসওয়ার্ড মেলেনি");
       }
+      setloading(false)
     } catch (error) {
       seterror(
         error?.response?.data?.error?.message ||
         error?.response?.data?.error ||
         "Something went wrong!"
       );
-      console.log(`error`, error);
+      setloading(false)
     }
   };
 
@@ -96,7 +102,7 @@ const LoginPage = () => {
     }
   }, []);
 
-
+  console.log(`loading`, loading);
   return (
     <>
       <Helmet>
@@ -248,8 +254,8 @@ const LoginPage = () => {
                         </label>
                       </div>
                     </div>
-                    <button type="submit" className="btn login-btn w-100">
-                      লগ ইন করুন
+                    <button type="submit" disabled={loading} className="btn login-btn w-100">
+                      লগ ইন করুন {loading && "loading......"}
                     </button>
                     <div className="form-group my-2">
                       <p className="mb-1">
@@ -298,8 +304,9 @@ const LoginPage = () => {
                             href="https://docs.google.com/document/d/e/2PACX-1vTfzi4vy5b8RbL0rnIAt8t7stJFN0F70qwTOUM_ZxEyveq794GnjdXzIzd_RY-a0tVQqGdhwAOyd1NQ/pub"
                             target="_blank"
                           >
-                            সচরাচর জিজ্ঞাসা
+                            সচরাচর জিজ্ঞাসা-old
                           </a>
+                          <a> সচরাচর জিজ্ঞাসা </a>
                         </div>
                       </div>
                     </ul>
@@ -332,7 +339,9 @@ const LoginPage = () => {
             <PopUpAppInfo />
           </div>
         </div>
-        {/* bootstrap 5.0.2 min.js */}
+     
+        
+
       </section>
     </>
   );

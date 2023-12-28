@@ -4,6 +4,7 @@ import StudentMullayonModal from "./StudentMullayonModal";
 import { Button, Modal, Spinner } from "react-bootstrap";
 import { get_pi_evaluation_by_pi } from "../Request";
 import { check_pi_submitted, show_pis , convertToBanglaNumber } from "../utils/Utils";
+import Swal from "sweetalert2";
 
 export default function DetailsShikhonMullayonShikhonKalin({
   showDetailsshikhonKalinMullayon,
@@ -34,22 +35,37 @@ export default function DetailsShikhonMullayonShikhonKalin({
     setpi_uid_(pi_uid)
     setis_draft(1);
     setall_submited_PI([]);
-    const class_room_id: any = localStorage.getItem("class_room_id");
-    const { data }: any = await get_pi_evaluation_by_pi(
-      class_room_id,
-      pi_uid,
-      assessment_uid,
-      ovigota_uid
-    );
 
-    
-    const ev_data = data?.data?.evaluation.filter((d)=>  d.oviggota_uid == ovigota_uid )
+    try {
 
-    setall_submited_PI(ev_data);
-    if (ev_data?.length) {
-      setis_draft(ev_data[0]?.submit_status || 1);
+
+      const class_room_id: any = localStorage.getItem("class_room_id");
+      const { data }: any = await get_pi_evaluation_by_pi(
+        class_room_id,
+        pi_uid,
+        assessment_uid,
+        ovigota_uid
+      );
+
+      
+      const ev_data = data?.data?.evaluation.filter((d)=>  d.oviggota_uid == ovigota_uid )
+
+      setall_submited_PI(ev_data);
+      if (ev_data?.length) {
+        setis_draft(ev_data[0]?.submit_status || 1);
+      }
+      setShowModal(true);
+      setloadingspinner(false)
+
+    } catch (error) {
+      setloadingspinner(false)
+      Swal.fire({
+        icon: "error",
+        title: "একটি সার্ভার ত্রুটি ঘটেছে। অনুগ্রহ করে আবার চেষ্টা করুন",
+        confirmButtonText: "হ্যাঁ",
+      });
     }
-    setShowModal(true);
+    
 
     // console.log(`data`, data);
   };
@@ -150,6 +166,7 @@ export default function DetailsShikhonMullayonShikhonKalin({
             setShowModal={setShowModal}
             get_all_pi_evaluation_by_pi={get_all_pi_evaluation_by_pi}
             pi_uid_={pi_uid_}
+            setloadingspinner={setloadingspinner}
           />
         </Modal.Body>
       </Modal >

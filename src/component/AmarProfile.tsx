@@ -50,7 +50,15 @@ const AmarProfile = () => {
     const division_data = await all_division();
     const district_data = await all_district();
     const upozila_data = await all_upozila();
-    const designation_data = await teacher_designation();
+
+    const designation_data_: any = localStorage.getItem("designation_data") || "";
+    let designation_data = designation_data_ ? JSON.parse(designation_data_) : "";
+
+    if (designation_data == "") {
+      designation_data = await teacher_designation();
+      localStorage.setItem("designation_data" , designation_data)
+    }
+
     setAllDivision(division_data?.data?.data);
     setAllDistrict(district_data?.data?.data);
     setAllUpozila(upozila_data?.data?.data);

@@ -31,8 +31,8 @@ const TeacherProfileCard = () => {
   
 
   const fetchData = async () => {
-    const designation_data = await teacher_designation();
-    setAllDesignation(designation_data.data.data);
+    // const designation_data = await teacher_designation();
+    // setAllDesignation(designation_data.data.data);
   };
 
 
@@ -76,7 +76,7 @@ const TeacherProfileCard = () => {
     if (loading) {
       getUserDetails()
     }
-  }, 4000);
+  }, 500);
 
 
   return (
@@ -95,7 +95,8 @@ const TeacherProfileCard = () => {
           <div className="teacher-title">
             <h2>
               {/* {teacherDesignation} */}
-              {isClassTeacher && "শ্রেণি শিক্ষক"}
+              {isClassTeacher && "শ্রেণি "}
+              শিক্ষক
             </h2>
           </div>
           <div className="icon">

@@ -31,6 +31,8 @@ import StudentTranscriptBI from "./component/StudentTranscriptBI";
 // import PdfGenerator from "./component/Dashboards/TestCase/PdfGenerator";
 import GeneratePdf from "./component/generatePdf/GeneratePdf";
 import CustomlyMakePDF from "./component/Dashboards/TestCase/CustomlyMakePDF";
+import ResetPassword from "./component/ResetPassword";
+
 
 function App() {
   const [topbar, settopbar] = useState(false);
@@ -86,6 +88,7 @@ function App() {
           <Route path="/head-teacher-dashboard" element={<HeadTeacherDashboard />} />
           <Route path="/shikkarthir-report-card" element={<StudentReport />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
           {/* <Route path="/test-case1" element={<GeneratePdf/>} /> */}
           {/* <Route path="/test-case2" element={<CustomlyMakePDF />} /> */}

@@ -134,7 +134,6 @@ export function pi_review(data: any) {
   return axios(options);
 }
 
-
 export function bi_review(data: any) {
   const page_list = `${EVULATION_API}/v2/bi-review`;
 
@@ -149,7 +148,6 @@ export function bi_review(data: any) {
 
   return axios(options);
 }
-
 
 export function clssWiseSubject(data: any) {
   const page_list = `${API_URL}/v2/class-wise-subjects?class_id=${data}`;
@@ -241,9 +239,11 @@ export async function reloadteacher_own_subject() {
           app_PI.push(data);
         });
       });
-
-      std_data.class_room.students.map((stu_data: any) => {
-        student.push(stu_data);
+    });
+    
+    cls_room.data.data.subjects.map((stu_data: any) => {
+      stu_data.class_room.students.map((stdnt): any => {
+        student.push(stdnt);
       });
     });
 
@@ -544,7 +544,6 @@ export function get_report_card(
   const page_list = `${EVULATION_API}/v2/report-card-by-student`;
   // const page_list = `/assets/report_card.json`;
 
-
   const options = {
     method: "get",
     headers: { "content-type": "application/json" },
@@ -567,9 +566,6 @@ export function dimension_by_subject(subject_uid) {
   const page_list = `${API_URL}/v2/dimension-by-subject`;
   // const page_list = `https://competence.noipunno.gov.bd/api/dimension-by-subject`;
   // const page_list = `/assets/dimension.json`;
-
-
-  
 
   const options = {
     method: "get",
@@ -632,3 +628,45 @@ export function teacher_designation() {
 
   return axios(options);
 }
+
+
+export function sent_otp(data: any) {
+  const page_list = `${API_URL}/v2/account-otp`;
+
+  const options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
+export function confirm_otp(data: any) {
+  const page_list = `${API_URL}/v2/account-otp-verify-change-pin`;
+
+  const options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
+export function confirm_pass(data: any) {
+  const page_list = `${API_URL}/v2/account-change-password`;
+
+  const options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
+

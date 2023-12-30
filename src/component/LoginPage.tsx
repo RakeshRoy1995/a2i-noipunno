@@ -15,20 +15,19 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { loginPassword } from "../Request";
 import PopUpAppInfo from "./PopUpAppInfo/PopUpAppInfo";
+import { Button, Modal } from "react-bootstrap";
 
 const LoginPage = () => {
   const [error, seterror] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setloading] = useState(false);
   const [savePin, setSavePin] = useState(false);
-
   const [userId_from_Cookie, setUserId_from_Cookie] = useState("");
   const [userPin_from_Cookie, setUserPin_from_Cookie] = useState("");
 
-  const [showModal, setShowModal] = useState(false);
 
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+
+
 
   const setCookie = (name, value, days) => {
     const expirationDate = new Date();
@@ -102,7 +101,16 @@ const LoginPage = () => {
     }
   }, []);
 
-  console.log(`loading`, loading);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
       <Helmet>
@@ -304,9 +312,9 @@ const LoginPage = () => {
                             href="https://docs.google.com/document/d/e/2PACX-1vTfzi4vy5b8RbL0rnIAt8t7stJFN0F70qwTOUM_ZxEyveq794GnjdXzIzd_RY-a0tVQqGdhwAOyd1NQ/pub"
                             target="_blank"
                           >
-                            সচরাচর জিজ্ঞাসা-old
+                            সচরাচর জিজ্ঞাসা
                           </a>
-                          <a> সচরাচর জিজ্ঞাসা </a>
+                          {/* <a onClick={() => handleShowModal()}> সচরাচর জিজ্ঞাসা-New </a> */}
                         </div>
                       </div>
                     </ul>
@@ -339,8 +347,139 @@ const LoginPage = () => {
             <PopUpAppInfo />
           </div>
         </div>
-     
-        
+        <Modal
+          className="mx-auto pl-0"
+          show={showModal}
+          onHide={handleCloseModal}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header>
+            <Modal.Title className="container text-center">
+              নৈপুণ্য’ ওয়েব সম্পর্কিত সচরাচর জিজ্ঞাসিত প্রশ্নের উত্তর
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="container">
+
+              <div className="d-flex flex-column gap-2 mb-2">
+                <h6 className="fw-semibold"> আপডেট:</h6>
+
+                <h6 className="fw-semibold">৮ তারিখের পর থেকেও শিক্ষা প্রতিষ্ঠানগুলো ‘নৈপুণ্য’ অ্যাপে ওয়েভ ভার্সনের কাজ করতে পারবেন। যারা SMS পাচ্ছেন না তাদের তথ্য যাচাই শেষে এসএমএস পাবেন। সিস্টেমে কাজ করতে গিয়ে সমস্যা পেলে অনুগ্রহ করে অপেক্ষা করুন।
+                </h6>
+              </div>
+
+              <div className="d-flex flex-column gap-3">
+
+                <div className="d-flex flex-column gap-1">
+                  <div className="d-flex gap-1">
+                    <span>১।</span>
+                    <h6 className="fw-semibold">প্রধান শিক্ষকের পিডিএস আইডি না থাকলে নৈপুণ্য ওয়েবে কীভাবে যুক্ত হবেন ?
+                    </h6>
+                  </div>
+
+                  <div className="d-flex gap-1">
+                    <span className="fw-semibold">উত্তর:</span>
+                    <h6 className="">master.noipunno.gov.bd ক্লিক করলে লগইন লেখার উপরে   প্রতিষ্ঠান প্রধান হিসেবে লগইন এসএমএস না পেয়ে থাকলে এখানে ক্লিক করুন লেখায় ক্লিক করে প্রয়োজনীয় তথ্য দিয়ে ফর্মটি সাবমিট করুন। সময়মত আপনার মোবাইলে এসএসএস পেয়ে যাবেন।
+                    </h6>
+                  </div>
+                </div>
+                
+                <div className="d-flex flex-column gap-1">
+                  <div className="d-flex gap-1">
+                    <span>২।</span>
+                    <h6 className="fw-semibold">প্রতিষ্ঠানের ইন (EIIN) নম্বর না থাকলে ‘নৈপুণ্য’ ওয়েবে যুক্ত হওয়া যাবে কি?
+                    </h6>
+                  </div>
+
+                  <div className="d-flex gap-1">
+                    <span className="fw-semibold">উত্তর-</span>
+                    <h6 className="">EIIN বিহীন প্রতিষ্ঠানগুলো ‘নৈপুণ্য’ অ্যাপে যুক্ত হতে অপেক্ষা করতে হবে।  কর্তৃপক্ষের নির্দেশনার পাওয়ার পরে যুক্ত হতে পারেন।
+                    </h6>
+                  </div>
+                </div>
+
+                <div className="d-flex flex-column gap-2">
+                  <div className="d-flex gap-1">
+                    <span>৩।</span>
+                    <h6 className="fw-semibold"> কিছু প্রাথমিক বিদ্যালয়ে ষষ্ঠ-অষ্টম শ্রেণিতে পাঠদান করা হচ্ছে। সেসব স্কুলের প্রধান শিক্ষকের PDS নম্বর নেই। তারা SMS পাননি। এসব স্কুলগুলো কীভাবে লগইন করবেন?
+                    </h6>
+                  </div>
+
+                  <div className="d-flex gap-1">
+                    <span className="fw-semibold">উত্তর-</span>
+                    <h6 className="">
+                      প্রাথমিক বিদ্যালয়গুলো প্রাথমিক শিক্ষা অধিদপ্তরের অধীন। এ ব্যাপার পরবর্তী নির্দেশনার জন্য অপেক্ষা করতে হবে।
+                    </h6>
+                  </div>
+                </div>
+
+                <div className="d-flex flex-column gap-1">
+                  <div className="d-flex gap-1">
+                    <span>৪।</span>
+                    <h6 className="fw-semibold">
+                      প্রাথমিক বিদ্যালয়গুলো প্রাথমিক শিক্ষা অধিদপ্তরের অধীন। এ ব্যাপার পরবর্তী নির্দেশনার জন্য অপেক্ষা করতে হবে।
+                    </h6>
+                  </div>
+
+                  <div className="d-flex gap-1">
+                    <span className="fw-semibold">উত্তর-</span>
+                    <h6 className="">
+                      Answer
+                    </h6>
+                  </div>
+                </div>
+                
+                <div className="d-flex flex-column gap-1">
+                  <div className="d-flex gap-1">
+                    <span>serisl no</span>
+                    <h6 className="fw-semibold">
+                      question
+                    </h6>
+                  </div>
+
+                  <div className="d-flex gap-1">
+                    <span className="fw-semibold">উত্তর-</span>
+                    <h6 className="">
+                      Answer
+                    </h6>
+                  </div>
+                </div>
+                
+                
+
+
+
+                  
+
+
+                 
+
+
+                  
+
+
+
+                 
+
+
+
+                
+              </div>
+
+
+
+            </div>
+
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              বন্ধ করুন
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
 
       </section>
     </>

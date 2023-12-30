@@ -492,9 +492,9 @@ const LoginPage = () => {
 
                 <section className="d-flex flex-column gap-1">
                   <div className="d-flex gap-1">
-                    <span>serisl no</span>
+                    <span>৮।</span>
                     <h6 className="fw-semibold">
-                      ৮। বিষয় শিক্ষক যুক্ত করা হয়েছে এবং লগইন করে পরবর্তীতে যখন লগইন করা তখন ৪০৩ এরোর আসে। করণীয় কী?
+                       বিষয় শিক্ষক যুক্ত করা হয়েছে এবং লগইন করে পরবর্তীতে যখন লগইন করা তখন ৪০৩ এরোর আসে। করণীয় কী?
                     </h6>
                   </div>
 

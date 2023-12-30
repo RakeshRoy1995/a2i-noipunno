@@ -115,7 +115,7 @@ export default function StudentReport() {
     studnt.reduce((acc, obj) => ({ ...acc, [obj.uid]: obj }), {})
   );
 
-  const fetchDataFromAPI = async (student_name: any) => {
+  const fetchDataFromAPI = async (student_name: any , l_loop:any = 1) => {
     seterr("")
     try {
       setselected_student([]);
@@ -214,9 +214,17 @@ export default function StudentReport() {
       }
     } catch (error) {
 
-      seterr(
-        "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। ডেটা লোড করতে অনুগ্রহ করে আবার ক্লিক করুন"
-      );
+      console.log(`l_loop`, l_loop);
+
+      if (l_loop==10) {
+        seterr(
+          "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। ডেটা লোড করতে অনুগ্রহ করে আবার ক্লিক করুন"
+        );
+      }else{
+        l_loop++
+        fetchDataFromAPI(student_name , l_loop);
+      }
+      
     }
   };
 

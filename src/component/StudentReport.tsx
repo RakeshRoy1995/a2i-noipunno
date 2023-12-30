@@ -115,21 +115,25 @@ export default function StudentReport() {
     studnt.reduce((acc, obj) => ({ ...acc, [obj.uid]: obj }), {})
   );
 
-  const fetchDataFromAPI = async (student_name: any , l_loop:any = 1) => {
-    seterr("")
+  const fetchDataFromAPI = async (student_name: any, l_loop: any = 1) => {
+    seterr("");
     try {
       setselected_student([]);
 
-      const dimension_data: any = localStorage.getItem("dimension_by_subject") || "";
+      const dimension_data: any =
+        localStorage.getItem("dimension_by_subject") || "";
       let dimentions = dimension_data ? JSON.parse(dimension_data) : "";
 
       if (dimentions == "") {
-        dimentions =  await dimension_by_subject(
+        dimentions = await dimension_by_subject(
           // allFelter.subject.split("-")[0]
           ""
         );
 
-        localStorage.setItem("dimension_by_subject" , JSON.stringify(dimentions) )
+        localStorage.setItem(
+          "dimension_by_subject",
+          JSON.stringify(dimentions)
+        );
       }
 
       const report_data = await get_report_card(
@@ -152,79 +156,91 @@ export default function StudentReport() {
         student_name
       );
 
-      const bi_report_card_data: any = localStorage.getItem("bi_report_card_details") || "";
-      let dimentions_details :any = bi_report_card_data ? JSON.parse(bi_report_card_data) : "";
-
-      if (dimentions_details == "") {
-        dimentions_details =  await bi_report_card_details();
-
-        localStorage.setItem("bi_report_card_details" , JSON.stringify(dimentions_details) )
-      }
-     
-      const clssWiseSub_data: any = localStorage.getItem("clssWiseSub_data") || "";
-      let clssWiseSub = clssWiseSub_data ? JSON.parse(clssWiseSub_data) : "";
-
-      if (clssWiseSub == "") {
-        clssWiseSub =  await clssWiseSubject(
-          ""
+      if (
+        get_bi_report_card.data.report_card.length == 0 ||
+        report_data.data.report_card.length == 0
+      ) {
+        seterr(
+          "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। আপনি শিক্ষার্থীর মূল্যায়ন করেননি"
         );
+      } else {
+        const bi_report_card_data: any =
+          localStorage.getItem("bi_report_card_details") || "";
+        let dimentions_details: any = bi_report_card_data
+          ? JSON.parse(bi_report_card_data)
+          : "";
 
-        localStorage.setItem("clssWiseSub_data" , JSON.stringify(clssWiseSub) )
-      }
+        if (dimentions_details == "") {
+          dimentions_details = await bi_report_card_details();
 
+          localStorage.setItem(
+            "bi_report_card_details",
+            JSON.stringify(dimentions_details)
+          );
+        }
 
-      clssWiseSub.data.data.sort((a, b) => a.subject_no - b.subject_no);
+        const clssWiseSub_data: any =
+          localStorage.getItem("clssWiseSub_data") || "";
+        let clssWiseSub = clssWiseSub_data ? JSON.parse(clssWiseSub_data) : "";
 
-      const res: any = [];
+        if (clssWiseSub == "") {
+          clssWiseSub = await clssWiseSubject("");
 
-      report_data.data.report_card.map((d) => {
-        d.subject_result.map((s_d) => {
-          res.push(s_d);
+          localStorage.setItem("clssWiseSub_data", JSON.stringify(clssWiseSub));
+        }
+
+        clssWiseSub.data.data.sort((a, b) => a.subject_no - b.subject_no);
+
+        const res: any = [];
+
+        report_data.data.report_card.map((d) => {
+          d.subject_result.map((s_d) => {
+            res.push(s_d);
+          });
         });
-      });
-      const bi_res: any = [];
-      get_bi_report_card.data.report_card.map((data) => {
-        bi_res.push(data);
-      });
+        const bi_res: any = [];
+        get_bi_report_card.data.report_card.map((data) => {
+          bi_res.push(data);
+        });
 
-      const bi_data = formate_report_data(bi_res, dimentions_details.data.data);
-      const data = formate_report_data(res, dimentions.data.data);
-      // console.log("dimentions", dimentions, res, bi_data);
+        const bi_data = formate_report_data(
+          bi_res,
+          dimentions_details.data.data
+        );
+        const data = formate_report_data(res, dimentions.data.data);
+        // console.log("dimentions", dimentions, res, bi_data);
 
-      const all_sub = clssWiseSub.data.data;
+        const all_sub = clssWiseSub.data.data;
 
-      const final_data = [];
+        const final_data = [];
 
-      for (let index = 0; index < all_sub.length; index++) {
-        const sub_data = all_sub[index];
-        for (let z = 0; z < data.length; z++) {
-          const report_data = data[z];
+        for (let index = 0; index < all_sub.length; index++) {
+          const sub_data = all_sub[index];
+          for (let z = 0; z < data.length; z++) {
+            const report_data = data[z];
 
-          if (sub_data.uid == report_data[0]) {
-            final_data.push(report_data);
-            break;
+            if (sub_data.uid == report_data[0]) {
+              final_data.push(report_data);
+              break;
+            }
           }
         }
-      }
 
-      if (final_data.length) {
-        setbiData(bi_data);
-        setall_subject(clssWiseSub.data.data);
-        setselected_student(final_data);
+        if (final_data.length) {
+          setbiData(bi_data);
+          setall_subject(clssWiseSub.data.data);
+          setselected_student(final_data);
+        }
       }
     } catch (error) {
-
-      console.log(`l_loop`, l_loop);
-
-      if (l_loop==10) {
+      if (l_loop == 10) {
         seterr(
           "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। ডেটা লোড করতে অনুগ্রহ করে আবার ক্লিক করুন"
         );
-      }else{
-        l_loop++
-        fetchDataFromAPI(student_name , l_loop);
+      } else {
+        l_loop++;
+        fetchDataFromAPI(student_name, l_loop);
       }
-      
     }
   };
 

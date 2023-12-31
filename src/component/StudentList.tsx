@@ -345,6 +345,7 @@ const StudentList = () => {
                   </Button>
                 </Modal.Footer>
               </Modal>
+              
             </div>
           </section>
         </div>

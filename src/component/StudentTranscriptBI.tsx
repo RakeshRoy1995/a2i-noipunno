@@ -8,6 +8,7 @@ import {
   get_pi_bi_by_student_student,
   get_bi_report,
   bi_info,
+  class_teacher_all_student_data,
 } from "../Request";
 import html2pdf from "html2pdf.js";
 import { RotatingLines } from "react-loader-spinner";
@@ -23,27 +24,14 @@ import {
   section_name,
   shift_name,
   teacher_name,
-  branch_name,
-  subject_name,
-  make_group_by,
-  all_students,
-  convertToBanglaNumber,
-  formate_teanscript_data,
   formate_Bi_teanscript_dataBy_single_student,
   accessBIandReport,
   version_name,
   showReportDeleteEv,
   show_report_open_time_msg,
-  showPiBiSubject,
 } from "../utils/Utils";
 
 import Breadcumb from "../layout/Breadcumb";
-import Pdf from "./Pdf";
-// import { toPng } from "html-to-image";
-import { toPng } from "html-to-image";
-import { jsPDF } from "jspdf";
-import { Link } from "react-router-dom";
-import DownloadPDF_component from "./DownloadPDF";
 import PDFMakerBiTranscript from "./PDFMaker/PDFMakerBi";
 import TableComp from "./TableComp";
 import { Spinner } from "react-bootstrap";
@@ -51,10 +39,12 @@ import { Spinner } from "react-bootstrap";
 export default function StudentTranscriptBI() {
   const [err, seterr] = useState<any>("");
   const [subject, setsubject] = useState([]);
+  const [new_student, setnew_student] = useState<any>([]);
   const [teacher, setteacher] = useState<any>("");
   const [instititute, setinstititute] = useState<any>("");
   const [data, setdata] = useState<any>({});
   const [selected_student, setselected_student] = useState<any>([]);
+  const [all_student_and_class, setall_student_and_class] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
   const [submittingLoading, setsubmittingLoading] = useState(false);
   const [loader, setloader] = useState(true);
@@ -71,7 +61,29 @@ export default function StudentTranscriptBI() {
     const teacher_dash__: any = localStorage.getItem("teacher_dashboard") || "";
     const teacher_dash = teacher_dash__ ? JSON.parse(teacher_dash__) : "";
 
+    const class_teacher_student__: any =
+      localStorage.getItem("class_teacher_student") || "";
+    const class_teacher_student = class_teacher_student__
+      ? JSON.parse(class_teacher_student__)
+      : "";
+
     try {
+      let class_teacher_student_data: any = "";
+      if (class_teacher_student) {
+        class_teacher_student_data = class_teacher_student;
+      } else {
+        const data_dash: any = await class_teacher_all_student_data();
+        class_teacher_student_data = data_dash;
+        localStorage.setItem(
+          "class_teacher_student",
+          JSON.stringify(class_teacher_student_data)
+        );
+      }
+
+      if (class_teacher_student_data.data.data.students.length) {
+        setall_student_and_class(class_teacher_student_data.data.data.students);
+      }
+
       let data: any = "";
       if (teacher_dash) {
         data = teacher_dash;
@@ -121,22 +133,6 @@ export default function StudentTranscriptBI() {
 
       setsubject(all_subject);
 
-      let all_Pi: any = [];
-      own_subjet.data.data.subjects.map((d: any) => {
-        d.oviggota.map((ovigota_data) => {
-          ovigota_data.pis.map((pis_data) => {
-            all_Pi.push(pis_data);
-          });
-        });
-      });
-
-      own_subjet.data.data.subjects.map((d: any) => {
-        d.pi_selection.map((pi_selection) => {
-          pi_selection.pi_list.map((pis_list_data) => {
-            all_Pi.push(pis_list_data);
-          });
-        });
-      });
 
       setloader(false);
     } catch (error) {
@@ -161,24 +157,6 @@ export default function StudentTranscriptBI() {
     fetchData();
   }, []);
 
-  const uniquestudents = [
-    ...new Set(subject.map((data) => data?.own_subjet?.class_room?.students)),
-  ];
-
-  const studnt: any = [];
-
-  for (let index = 0; index < uniquestudents.length; index++) {
-    const element = uniquestudents[index];
-
-    for (let i = 0; i < element.length; i++) {
-      const element2 = element[i];
-      studnt.push(element2);
-    }
-  }
-
-  const Stuent_result = Object.values(
-    studnt.reduce((acc, obj) => ({ ...acc, [obj.uid]: obj }), {})
-  );
 
   const fetchDataFromAPI = async (student_uid: any) => {
     setsubmittingLoading(true);
@@ -210,17 +188,7 @@ export default function StudentTranscriptBI() {
     setsubmittingLoading(false);
   };
 
-  const new_student = Stuent_result.filter((d: any) => {
-    if (
-      d.class == allFelter?.subject?.split("-")[1] &&
-      d.branch == allFelter.branch &&
-      allFelter.shift == d.shift &&
-      allFelter.section == d.section &&
-      allFelter.version == d.version
-    ) {
-      return true;
-    }
-  });
+
 
   return (
     <div className="report_page">
@@ -261,27 +229,24 @@ export default function StudentTranscriptBI() {
                       >
                         <div className="row p-5">
                           <div className="col-6 col-sm-6 col-md-6">
-
-
-                          {showLoadingErr ? (
-                          <p className="text-danger text-center">
-                            {showLoadingErr}
-                          </p>
-                        ) : (
-                          <>
-                            {loader && (
-                              <div>
+                            {showLoadingErr ? (
+                              <p className="text-danger text-center">
+                                {showLoadingErr}
+                              </p>
+                            ) : (
+                              <>
                                 {loader && (
-                                  <>
-                                    <Spinner animation="border" /> ডেটা লোড
-                                    হচ্ছে। দয়া করে অপেক্ষা করুন...
-                                  </>
+                                  <div>
+                                    {loader && (
+                                      <>
+                                        <Spinner animation="border" /> ডেটা লোড
+                                        হচ্ছে। দয়া করে অপেক্ষা করুন...
+                                      </>
+                                    )}
+                                  </div>
                                 )}
-                              </div>
+                              </>
                             )}
-                          </>
-                        )}
-
 
                             <div className="mb-3" style={{ fontSize: "12px" }}>
                               <label className="form-label">
@@ -293,6 +258,9 @@ export default function StudentTranscriptBI() {
                                 style={{ fontSize: "12px" }}
                                 onChange={(e) => {
                                   const value = e.target.value.split("-");
+                                  setnew_student(
+                                    all_student_and_class[value[0]].students
+                                  );
 
                                   let obj = {
                                     ...allFelter,
@@ -314,67 +282,45 @@ export default function StudentTranscriptBI() {
                               >
                                 <option value={""}>বিষয় নির্বাচন করুন</option>
 
-                                {subject.map((data) => (
-                                  <>
-                                    {showPiBiSubject(data) && (
-                                      <option
-                                        key={data.uid}
-                                        value={
-                                          data?.subject?.subject_info?.uid +
-                                          "-" +
-                                          data?.subject?.subject_info
-                                            ?.class_uid +
-                                          "-" +
-                                          data?.own_subjet.class_room
-                                            .section_id +
-                                          "-" +
-                                          data?.own_subjet.class_room.shift_id +
-                                          "-" +
-                                          data?.own_subjet.class_room
-                                            .version_id +
-                                          "-" +
-                                          data?.own_subjet.class_room
-                                            .branch_id +
-                                          "-" +
-                                          (data?.own_subjet.class_room
-                                            .class_teacher.name_bn ||
-                                            data?.own_subjet.class_room
-                                              .class_teacher.name_en)
-                                        }
-                                      >
-                                        {data?.subject?.subject_info
-                                          ?.class_uid == 6 && "ষষ্ঠ"}{" "}
-                                        {data?.subject?.subject_info
-                                          ?.class_uid == 7 && "সপ্তম"}{" "}
-                                        {" শ্রেণী"}
-                                        {"-"}
-                                        শাখা(
-                                        {section_name(
-                                          data?.own_subjet.class_room.section_id
-                                        )}
-                                        ){"-"}
-                                        সেশন (
-                                        {shift_name(
-                                          data?.own_subjet.class_room.shift_id
-                                        )}
-                                        ) {"-"}
-                                        ভার্সন (
-                                        {version_name(
-                                          data?.own_subjet.class_room.version_id
-                                        )}
-                                        )
-                                      </option>
-                                    )}
-                                  </>
-                                ))}
+                                {all_student_and_class.map(
+                                  (data: any, key: number) => (
+                                    <option
+                                      key={key}
+                                      value={
+                                        key +
+                                        "-" +
+                                        data?.class_id +
+                                        "-" +
+                                        data?.section_id +
+                                        "-" +
+                                        data?.shift_id +
+                                        "-" +
+                                        data?.version_id +
+                                        "-" +
+                                        data?.branch_id +
+                                        "-" +
+                                        teacher_name(data?.class_teacher_id)
+                                      }
+                                    >
+                                      {data?.class_id == 6 && "ষষ্ঠ"}{" "}
+                                      {data?.class_id == 7 && "সপ্তম"}{" "}
+                                      {" শ্রেণী"}
+                                      {"-"}
+                                      শাখা(
+                                      {section_name(data?.section_id)}){"-"}
+                                      সেশন ({shift_name(data?.shift_id)}) {"-"}
+                                      ভার্সন ({version_name(data?.version_id)})
+                                    </option>
+                                  )
+                                )}
                               </select>
                             </div>
 
                             {subject.length == 0 && (
-                            <label className="form-label text-danger">
-                              আপনি কোনও বিষয় পাননি
-                            </label>
-                          )}
+                              <label className="form-label text-danger">
+                                আপনি কোনও বিষয় পাননি
+                              </label>
+                            )}
                           </div>
                         </div>
                       </div>

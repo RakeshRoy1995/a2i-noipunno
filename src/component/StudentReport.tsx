@@ -30,6 +30,7 @@ import Pdf from "./Pdf";
 import ShikarthirReportCard from "./ShikarthirReportCard";
 import BiRawPDFDownload from "./PDFMaker/ReportPdf";
 import TableComp from "./TableComp";
+import { Spinner } from "react-bootstrap";
 // import "../../src/styles/noipunno_custom_styles.css";
 
 export default function StudentReport() {
@@ -41,58 +42,107 @@ export default function StudentReport() {
   const [all_subject, setall_subject] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
   const [data, setdata] = useState<any>({});
+  const [loader, setloader] = useState(true);
+  let [numberOfRender, setnumberOfRender] = useState(1);
+  const [showLoadingErr, setshowLoadingErr] = useState("");
 
   const fetchData = async () => {
+    setloader(true);
+    setshowLoadingErr("");
+
     const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
     const own_SUbjects = own_SUbjects__ ? JSON.parse(own_SUbjects__) : "";
 
     const teacher_dash__: any = localStorage.getItem("teacher_dashboard") || "";
     const teacher_dash = teacher_dash__ ? JSON.parse(teacher_dash__) : "";
 
-    let own_subjet: any = "";
-    if (own_SUbjects) {
-      own_subjet = own_SUbjects;
-    } else {
-      own_subjet = await teacher_own_subject();
-      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
-    }
-    let data: any = "";
-    if (teacher_dash) {
-      data = teacher_dash;
-    } else {
-      const data_dash: any = await teacher_dashboard();
-      data = data_dash.data;
-      localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
-    }
+    try {
+      let data: any = "";
+      if (teacher_dash) {
+        data = teacher_dash;
+      } else {
+        const data_dash: any = await teacher_dashboard();
+        data = data_dash.data;
+        localStorage.setItem(
+          "teacher_dashboard",
+          JSON.stringify(data_dash.data)
+        );
+      }
 
-    let all_subject: any = [];
+      let own_subjet: any = "";
+      if (own_SUbjects) {
+        own_subjet = own_SUbjects;
+      } else {
+        own_subjet = await teacher_own_subject();
+        localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+      }
 
-    own_subjet.data.data.subjects.map((d: any) => {
-      data.data.subjects.map((d_2: any) => {
-        if (d_2.subject_id === d.subject_id) {
-          data.data.teachers.map((al_tech: any) => {
-            if (d.teacher_id == al_tech.uid) {
-              let obj: any = {
-                subject: d_2,
-                own_subjet: d,
-                teacher: al_tech,
-                section: d.class_room.section_id,
-                class: d.class_room.class_id,
-                shift: d.class_room.shift_id,
-                students: d.class_room.students.student_name_bn,
-              };
+      // const al_teacher: any = await all_teachers();
 
-              all_subject.push(obj);
-            }
-          });
-        }
+      let all_subject: any = [];
+
+      own_subjet.data.data.subjects.map((d: any) => {
+        data.data.subjects.map((d_2: any) => {
+          if (d_2.subject_id === d.subject_id) {
+            data.data.teachers.map((al_tech: any) => {
+              if (d.teacher_id == al_tech.uid) {
+                let obj: any = {
+                  subject: d_2,
+                  own_subjet: d,
+                  teacher: al_tech,
+                  section: d.class_room.section_id,
+                  class: d.class_room.class_id,
+                  shift: d.class_room.shift_id,
+                  students: d.class_room.students.student_name_bn,
+                };
+
+                all_subject.push(obj);
+              }
+            });
+          }
+        });
       });
-    });
-    setinstititute(teacher_dash?.data?.institute);
-    setsubject(all_subject);
+      setinstititute(teacher_dash?.data?.institute);
+
+      setsubject(all_subject);
+
+      let all_Pi: any = [];
+      own_subjet.data.data.subjects.map((d: any) => {
+        d.oviggota.map((ovigota_data) => {
+          ovigota_data.pis.map((pis_data) => {
+            all_Pi.push(pis_data);
+          });
+        });
+      });
+
+      own_subjet.data.data.subjects.map((d: any) => {
+        d.pi_selection.map((pi_selection) => {
+          pi_selection.pi_list.map((pis_list_data) => {
+            all_Pi.push(pis_list_data);
+          });
+        });
+      });
+
+      setloader(false);
+    } catch (error) {
+      setshowLoadingErr("");
+
+      numberOfRender++;
+
+      if (numberOfRender <= 10) {
+        setnumberOfRender(numberOfRender);
+        fetchData();
+      } else {
+        setloader(false);
+        setshowLoadingErr(
+          "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
+        );
+      }
+    }
   };
 
   useEffect(() => {
+    setloader(true);
     fetchData();
   }, []);
 
@@ -235,7 +285,7 @@ export default function StudentReport() {
     } catch (error) {
       if (l_loop == 10) {
         seterr(
-          "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। ডেটা লোড করতে অনুগ্রহ করে আবার ক্লিক করুন"
+          "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। অনুগ্রহ করে আবার ক্লিক করুন"
         );
       } else {
         l_loop++;
@@ -300,6 +350,26 @@ export default function StudentReport() {
                     >
                       <div className="row p-5">
                         <div className="col-6 col-sm-6 col-md-6">
+
+                        {showLoadingErr ? (
+                          <p className="text-danger text-center">
+                            {showLoadingErr}
+                          </p>
+                        ) : (
+                          <>
+                            {loader && (
+                              <div>
+                                {loader && (
+                                  <>
+                                    <Spinner animation="border" /> ডেটা লোড
+                                    হচ্ছে। দয়া করে অপেক্ষা করুন...
+                                  </>
+                                )}
+                              </div>
+                            )}
+                          </>
+                        )}
+
                           <div className="mb-3" style={{ fontSize: "12px" }}>
                             <label className="form-label">
                               বিষয় নির্বাচন করুন
@@ -378,6 +448,12 @@ export default function StudentReport() {
                               ))}
                             </select>
                           </div>
+
+                          {subject.length == 0 && (
+                            <label className="form-label text-danger">
+                              আপনি কোনও বিষয় পাননি
+                            </label>
+                          )}
                         </div>
 
                         {err && (

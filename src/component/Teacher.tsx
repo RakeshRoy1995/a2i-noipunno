@@ -60,19 +60,11 @@ export default function Teacher() {
   ] = useState([]);
 
   const fetchData = async () => {
+    setshowLoadingErr("")
     try {
       const teacher_dash__: any =
         localStorage.getItem("teacher_dashboard") || "";
       const teacher_dash = teacher_dash__ ? JSON.parse(teacher_dash__) : "";
-
-      const own_subjet_: any = localStorage.getItem("own_subjet") || "";
-      let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
-
-      if (own_subjet == "") {
-        own_subjet = await teacher_own_subject();
-      }
-
-      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
 
       let data: any = "";
       if (teacher_dash) {
@@ -86,7 +78,19 @@ export default function Teacher() {
         );
       }
 
-      // const al_teacher: any = await all_teachers();
+      const own_subjet_: any = localStorage.getItem("own_subjet") || "";
+      let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
+
+      
+
+      if (own_subjet == "") {
+        own_subjet = await teacher_own_subject();
+      }
+
+      if (own_subjet?.success == false) {
+        setshowLoadingErr(own_subjet.msg);
+      }else{
+
       setown_data(own_subjet?.data?.data);
       setteacher(own_subjet.data.data.user);
 
@@ -113,6 +117,10 @@ export default function Teacher() {
       setallCompitance(compitnc_obj);
       setsubject(all_subject);
       setloader(false);
+
+      }
+
+      
     } catch (error) {
       setshowLoadingErr("");
 

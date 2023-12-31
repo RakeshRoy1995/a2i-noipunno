@@ -171,6 +171,33 @@ export async function teacher_own_subject() {
     url: page_list,
   };
 
+  const own_sub = await axios(options);
+
+  const object: any = {};
+  if (own_sub.data.data.subjects.length == 0) {
+    object.success = false;
+    object.msg = "আপনি কোনও বিষয় পাননি";
+    return object;
+  }
+
+
+  let common_info: any = localStorage.getItem("common_room")
+    ? JSON.parse(localStorage.getItem("common_room"))
+    : "";
+  if (common_info == "") {
+    common_info = await get_common_info();
+    localStorage.setItem("common_room", JSON.stringify(common_info));
+  }
+
+  let bi: any = localStorage.getItem("bi")
+    ? JSON.parse(localStorage.getItem("bi"))
+    : "";
+
+  if (bi == "") {
+    bi = await bi_info();
+    localStorage.setItem("bi", JSON.stringify(bi));
+  }
+
   let cls_room: any = localStorage.getItem("cls_room")
     ? JSON.parse(localStorage.getItem("cls_room"))
     : "";
@@ -181,33 +208,19 @@ export async function teacher_own_subject() {
     console.log(`cls_room enter`);
   }
 
-  let common_info: any = localStorage.getItem("common_room")
-    ? JSON.parse(localStorage.getItem("common_room"))
-    : "";
-  if (common_info == "") {
-    common_info = await get_common_info();
-    localStorage.setItem("common_room", JSON.stringify(common_info));
-    console.log(`get_common_info enter`);
-  }
-
-  let bi: any = localStorage.getItem("bi")
-    ? JSON.parse(localStorage.getItem("bi"))
-    : "";
-
-  if (bi == "") {
-    bi = await bi_info();
-    localStorage.setItem("bi", JSON.stringify(bi));
-    console.log(`bi_info enter`);
+  if (cls_room.data.data.subjects.length == 0) {
+    object.success = false;
+    object.msg = "আপনি কোনও বিষয় পাননি";
+    return object;
   }
 
   if (bi !== "" && common_info !== "" && cls_room !== "") {
-    const own_sub = await axios(options);
-
     const data = formate_own_subject_data(own_sub, cls_room);
     data.data.data.assessments = common_info.data.data.assessments;
     data.data.data.pi_attribute_weight =
       common_info.data.data.pi_attribute_weight;
     data.data.data.bis = bi.data.data.bis;
+    data.success = true;
     localStorage.removeItem("common_room");
     localStorage.removeItem("cls_room");
     return data;
@@ -240,7 +253,7 @@ export async function reloadteacher_own_subject() {
         });
       });
     });
-    
+
     cls_room.data.data.subjects.map((stu_data: any) => {
       stu_data.class_room.students.map((stdnt): any => {
         student.push(stdnt);
@@ -629,7 +642,6 @@ export function teacher_designation() {
   return axios(options);
 }
 
-
 export function sent_otp(data: any) {
   const page_list = `${API_URL}/v2/account-otp`;
 
@@ -668,5 +680,3 @@ export function confirm_pass(data: any) {
 
   return axios(options);
 }
-
-

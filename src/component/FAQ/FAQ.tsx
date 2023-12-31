@@ -4,7 +4,7 @@ import './faq.css';
 
 const FAQ = () => {
   const [question_bank, setQuestion_bank] = useState([]);
-  
+
   const fetchData = async () => {
     try {
       const response = await fetch('faq_question_list.json');
@@ -13,7 +13,7 @@ const FAQ = () => {
       }
 
       const data = await response.json();
-      setQuestion_bank(data); 
+      setQuestion_bank(data);
 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -22,8 +22,10 @@ const FAQ = () => {
 
   useEffect(() => {
     fetchData();
-  },[])
-  
+  }, [])
+
+
+
 
   return (
     <section className='faq_page_bg_color'>

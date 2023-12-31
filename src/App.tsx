@@ -25,12 +25,9 @@ import LoginPage from "./component/LoginPage";
 import PasswordReset from "./component/PasswordReset";
 import StudentReport from "./component/StudentReport";
 import PDFMaker from "./component/PDFMaker/PDFMaker";
-import TestCase from "./component/Dashboards/TestCase/TestCase";
 import BiRawPDFDownload from "./component/PDFMaker/ReportPdf";
 import StudentTranscriptBI from "./component/StudentTranscriptBI";
-// import PdfGenerator from "./component/Dashboards/TestCase/PdfGenerator";
 import GeneratePdf from "./component/generatePdf/GeneratePdf";
-import CustomlyMakePDF from "./component/Dashboards/TestCase/CustomlyMakePDF";
 import ResetPassword from "./component/ResetPassword";
 
 
@@ -90,11 +87,8 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
-          {/* <Route path="/test-case1" element={<GeneratePdf/>} /> */}
-          {/* <Route path="/test-case2" element={<CustomlyMakePDF />} /> */}
-          <Route path="/test-case" element={<TestCase />} />
-
-
+          
+        
           {/* <Route path="/bi-pdf-maker2" element={<BiRawPDFDownload />} /> */}
         </Route>
         <Route path="/login" element={<LoginPage />} />

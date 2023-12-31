@@ -689,7 +689,6 @@ export const showPiBiSubject = (data: any) => {
 
 export const make_group_by_PI_BI = (studentData: any) => {
 
-  console.log(`studentData`,studentData );
   const groupedByStudentId = studentData.pi_evaluation_list.reduce((acc, student) => {
     const { oviggota_uid , pi_uid , evaluate_type, competence_uid , class_room_uid , teacher_uid} = student;
 

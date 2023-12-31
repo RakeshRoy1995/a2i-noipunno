@@ -46,102 +46,118 @@ import { Link } from "react-router-dom";
 import DownloadPDF_component from "./DownloadPDF";
 import PDFMakerBiTranscript from "./PDFMaker/PDFMakerBi";
 import TableComp from "./TableComp";
+import { Spinner } from "react-bootstrap";
 
 export default function StudentTranscriptBI() {
   const [err, seterr] = useState<any>("");
   const [subject, setsubject] = useState([]);
-  const [student_name, setstudent_name] = useState<any>("");
-  const [version, setversion] = useState<any>([]);
-  const [own_data, setown_data] = useState<any>([]);
-  const [all_bis, setall_bis] = useState<any>([]);
-  const [assesment, setassesment] = useState<any>([]);
   const [teacher, setteacher] = useState<any>("");
-  const [loader, setloader] = useState(true);
   const [instititute, setinstititute] = useState<any>("");
   const [data, setdata] = useState<any>({});
   const [selected_student, setselected_student] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
   const [submittingLoading, setsubmittingLoading] = useState(false);
+  const [loader, setloader] = useState(true);
+  let [numberOfRender, setnumberOfRender] = useState(1);
+  const [showLoadingErr, setshowLoadingErr] = useState("");
 
   const fetchData = async () => {
+    setloader(true);
+    setshowLoadingErr("");
+
     const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
     const own_SUbjects = own_SUbjects__ ? JSON.parse(own_SUbjects__) : "";
 
     const teacher_dash__: any = localStorage.getItem("teacher_dashboard") || "";
     const teacher_dash = teacher_dash__ ? JSON.parse(teacher_dash__) : "";
 
-    let own_subjet: any = "";
-    if (own_SUbjects) {
-      own_subjet = own_SUbjects;
-    } else {
-      own_subjet = await teacher_own_subject();
-      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
-    }
+    try {
+      let data: any = "";
+      if (teacher_dash) {
+        data = teacher_dash;
+      } else {
+        const data_dash: any = await teacher_dashboard();
+        data = data_dash.data;
+        localStorage.setItem(
+          "teacher_dashboard",
+          JSON.stringify(data_dash.data)
+        );
+      }
 
-    let data: any = "";
-    if (teacher_dash) {
-      data = teacher_dash;
-    } else {
-      const data_dash: any = await teacher_dashboard();
-      data = data_dash.data;
-      localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
-    }
+      let own_subjet: any = "";
+      if (own_SUbjects) {
+        own_subjet = own_SUbjects;
+      } else {
+        own_subjet = await teacher_own_subject();
+        localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+      }
 
-    // const al_teacher: any = await all_teachers();
-    setown_data(own_subjet?.data?.data);
-    setteacher(own_subjet.data.data.user);
+      // const al_teacher: any = await all_teachers();
 
-    let all_subject: any = [];
+      let all_subject: any = [];
 
-    own_subjet.data.data.subjects.map((d: any) => {
-      data.data.subjects.map((d_2: any) => {
-        if (d_2.subject_id === d.subject_id) {
-          data.data.teachers.map((al_tech: any) => {
-            if (d.teacher_id == al_tech.uid) {
-              let obj: any = {
-                subject: d_2,
-                own_subjet: d,
-                teacher: al_tech,
-                section: d.class_room.section_id,
-                class: d.class_room.class_id,
-                shift: d.class_room.shift_id,
-                students: d.class_room.students.student_name_bn,
-              };
+      own_subjet.data.data.subjects.map((d: any) => {
+        data.data.subjects.map((d_2: any) => {
+          if (d_2.subject_id === d.subject_id) {
+            data.data.teachers.map((al_tech: any) => {
+              if (d.teacher_id == al_tech.uid) {
+                let obj: any = {
+                  subject: d_2,
+                  own_subjet: d,
+                  teacher: al_tech,
+                  section: d.class_room.section_id,
+                  class: d.class_room.class_id,
+                  shift: d.class_room.shift_id,
+                  students: d.class_room.students.student_name_bn,
+                };
 
-              all_subject.push(obj);
-            }
+                all_subject.push(obj);
+              }
+            });
+          }
+        });
+      });
+      setinstititute(teacher_dash?.data?.institute);
+
+      setsubject(all_subject);
+
+      let all_Pi: any = [];
+      own_subjet.data.data.subjects.map((d: any) => {
+        d.oviggota.map((ovigota_data) => {
+          ovigota_data.pis.map((pis_data) => {
+            all_Pi.push(pis_data);
           });
-        }
-      });
-    });
-    setall_bis(own_subjet.data.data.bis);
-    setversion(teacher_dash?.data?.versions);
-    setinstititute(teacher_dash?.data?.institute);
-
-    console.log(`all_subject`, all_subject);
-    setsubject(all_subject);
-    setloader(false);
-    setassesment(own_subjet?.data?.data?.assessments[0]?.assessment_details);
-
-    let all_Pi: any = [];
-    own_subjet.data.data.subjects.map((d: any) => {
-      d.oviggota.map((ovigota_data) => {
-        ovigota_data.pis.map((pis_data) => {
-          all_Pi.push(pis_data);
         });
       });
-    });
 
-    own_subjet.data.data.subjects.map((d: any) => {
-      d.pi_selection.map((pi_selection) => {
-        pi_selection.pi_list.map((pis_list_data) => {
-          all_Pi.push(pis_list_data);
+      own_subjet.data.data.subjects.map((d: any) => {
+        d.pi_selection.map((pi_selection) => {
+          pi_selection.pi_list.map((pis_list_data) => {
+            all_Pi.push(pis_list_data);
+          });
         });
       });
-    });
+
+      setloader(false);
+    } catch (error) {
+      setshowLoadingErr("");
+
+      numberOfRender++;
+
+      if (numberOfRender <= 10) {
+        setnumberOfRender(numberOfRender);
+        fetchData();
+      } else {
+        setloader(false);
+        setshowLoadingErr(
+          "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
+        );
+      }
+    }
   };
 
   useEffect(() => {
+    setloader(true);
     fetchData();
   }, []);
 
@@ -245,6 +261,28 @@ export default function StudentTranscriptBI() {
                       >
                         <div className="row p-5">
                           <div className="col-6 col-sm-6 col-md-6">
+
+
+                          {showLoadingErr ? (
+                          <p className="text-danger text-center">
+                            {showLoadingErr}
+                          </p>
+                        ) : (
+                          <>
+                            {loader && (
+                              <div>
+                                {loader && (
+                                  <>
+                                    <Spinner animation="border" /> ডেটা লোড
+                                    হচ্ছে। দয়া করে অপেক্ষা করুন...
+                                  </>
+                                )}
+                              </div>
+                            )}
+                          </>
+                        )}
+
+
                             <div className="mb-3" style={{ fontSize: "12px" }}>
                               <label className="form-label">
                                 বিষয় নির্বাচন করুন
@@ -331,6 +369,12 @@ export default function StudentTranscriptBI() {
                                 ))}
                               </select>
                             </div>
+
+                            {subject.length == 0 && (
+                            <label className="form-label text-danger">
+                              আপনি কোনও বিষয় পাননি
+                            </label>
+                          )}
                           </div>
                         </div>
                       </div>

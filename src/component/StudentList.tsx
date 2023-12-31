@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Breadcumb from "../layout/Breadcumb";
 import { Button, Modal, Spinner } from "react-bootstrap";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { section_name, shift_name, version_name } from "../utils/Utils";
+import { convertToBanglaNumber, section_name, shift_name, version_name } from "../utils/Utils";
 import female_avt_img from "../assets/project_ca_html/student_img/female_std.png";
 import male_avt_img from "../../public/assets/images/user_avatar/male_std.png";
 
@@ -109,7 +109,7 @@ const StudentList = () => {
                           নামঃ {student?.student_name_bn || student?.student_name_en|| "no-entry"}{" "}
                         </h5>
                         <h5 className={styles.teacherName}>
-                          রোলঃ {student?.roll || "no-entry"}{" "}
+                          রোলঃ {convertToBanglaNumber(student?.roll || "no-entry")}{" "}
                         </h5>
                       </div>
                       <div className="d-flex justify-content-center align-items-center">

@@ -24,7 +24,6 @@ import { Spinner } from "react-bootstrap";
 export default function StudentTranscript() {
   const [err, seterr] = useState<any>("");
   const [subject, setsubject] = useState([]);
-  const [student_name, setstudent_name] = useState<any>("");
   const [version, setversion] = useState<any>([]);
   const [own_data, setown_data] = useState<any>([]);
   const [all_bis, setall_bis] = useState<any>([]);
@@ -337,11 +336,7 @@ export default function StudentTranscript() {
                             ))}
                           </select>
                         </div>
-                        {subject.length == 0 && (
-                          <label className="form-label text-danger">
-                            আপনি কোনও বিষয় পাননি
-                          </label>
-                        )}
+                       
                       </div>
                     </div>
                   </div>

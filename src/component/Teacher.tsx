@@ -85,6 +85,7 @@ export default function Teacher() {
 
       if (own_subjet == "") {
         own_subjet = await teacher_own_subject();
+        localStorage.setItem("own_subjet" , JSON.stringify(own_subjet))
       }
 
       if (own_subjet?.success == false) {

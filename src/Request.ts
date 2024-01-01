@@ -680,3 +680,19 @@ export function confirm_pass(data: any) {
 
   return axios(options);
 }
+
+
+
+
+export function class_teacher_all_student_data() {
+  const page_list = `${API_URL}/v2/class-students`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+  };
+
+  return axios(options);
+}
+

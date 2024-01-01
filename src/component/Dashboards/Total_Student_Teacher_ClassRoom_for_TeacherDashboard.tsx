@@ -27,17 +27,17 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
       studentsData.data.data.subjects.map((std_data: any) => {
         obj = {
           ...obj,
-          [std_data.class_room.class_teacher.uid]:
-            std_data.class_room.class_teacher.uid,
+          [std_data?.class_room?.class_teacher?.uid]:
+            std_data?.class_room?.class_teacher?.uid,
         };
 
-        std_data.competence.map((conpitance_data: any) => {
-          conpitance_data.pis.map((data: any) => {
+        std_data?.competence.map((conpitance_data: any) => {
+          conpitance_data?.pis.map((data: any) => {
             app_PI.push(data);
           });
         });
 
-        return std_data.class_room.students.map((stu_data: any) => {
+        return std_data?.class_room?.students.map((stu_data: any) => {
           student.push(stu_data);
         });
       });

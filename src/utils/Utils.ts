@@ -332,8 +332,8 @@ export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
   const own_subject_data: any = [];
   own_subjet.data.data.subjects.map((d: any) => {
     let obj = {};
-    class_room.data.data.subjects.map((d_2: any) => {
-      if (d_2.subject_id === d.subject_id) {
+    class_room?.data?.data?.subjects.map((d_2: any) => {
+      if (d_2?.subject_id === d?.subject_id && d_2.class_room ) {
         obj = { ...d_2, ...d };
         own_subject_data.push(obj);
       }

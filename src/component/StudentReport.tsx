@@ -1,9 +1,7 @@
 import React from "react";
-import Accordion from "react-bootstrap/Accordion";
 import {
   teacher_dashboard,
   teacher_own_subject,
-  get_pi_bi_evaluation_list,
   get_report_card,
   dimension_by_subject,
   clssWiseSubject,
@@ -17,27 +15,20 @@ import { SlBookOpen } from "react-icons/sl";
 import {
   section_name,
   shift_name,
-  all_students,
   formate_report_data,
   version_name,
   accessBIandReport,
   showReportDeleteEv,
   show_report_open_time_msg,
-  showPiBiSubject,
   teacher_name,
 } from "../utils/Utils";
-// import {handleConvertToPdf} from "./Pdf"
 import Breadcumb from "../layout/Breadcumb";
-import Pdf from "./Pdf";
-import ShikarthirReportCard from "./ShikarthirReportCard";
 import BiRawPDFDownload from "./PDFMaker/ReportPdf";
 import TableComp from "./TableComp";
 import { Spinner } from "react-bootstrap";
-// import "../../src/styles/noipunno_custom_styles.css";
 
 export default function StudentReport() {  
   const [err, seterr] = useState<any>("");
-  const [subject, setsubject] = useState([]);
   const [instititute, setinstititute] = useState<any>("");
   const [biData, setbiData] = useState<any>([]);
   const [selected_student, setselected_student] = useState<any>([]);
@@ -86,10 +77,8 @@ export default function StudentReport() {
 
       let data: any = "";
       if (teacher_dash) {
-        data = teacher_dash;
       } else {
         const data_dash: any = await teacher_dashboard();
-        data = data_dash.data;
         localStorage.setItem(
           "teacher_dashboard",
           JSON.stringify(data_dash.data)
@@ -104,34 +93,7 @@ export default function StudentReport() {
         localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
       }
 
-      // const al_teacher: any = await all_teachers();
-
-      let all_subject: any = [];
-
-      own_subjet.data.data.subjects.map((d: any) => {
-        data.data.subjects.map((d_2: any) => {
-          if (d_2.subject_id === d.subject_id) {
-            data.data.teachers.map((al_tech: any) => {
-              if (d.teacher_id == al_tech.uid) {
-                let obj: any = {
-                  subject: d_2,
-                  own_subjet: d,
-                  teacher: al_tech,
-                  section: d.class_room.section_id,
-                  class: d.class_room.class_id,
-                  shift: d.class_room.shift_id,
-                  students: d.class_room.students.student_name_bn,
-                };
-
-                all_subject.push(obj);
-              }
-            });
-          }
-        });
-      });
       setinstititute(teacher_dash?.data?.institute);
-
-      setsubject(all_subject);
 
       setloader(false);
     } catch (error) {
@@ -408,11 +370,6 @@ export default function StudentReport() {
                             </select>
                           </div>
 
-                          {subject.length == 0 && (
-                            <label className="form-label text-danger">
-                              আপনি কোনও বিষয় পাননি
-                            </label>
-                          )}
                         </div>
 
                         {err && (

@@ -38,7 +38,6 @@ import { Spinner } from "react-bootstrap";
 
 export default function StudentTranscriptBI() {
   const [err, seterr] = useState<any>("");
-  const [subject, setsubject] = useState([]);
   const [new_student, setnew_student] = useState<any>([]);
   const [teacher, setteacher] = useState<any>("");
   const [instititute, setinstititute] = useState<any>("");
@@ -86,10 +85,8 @@ export default function StudentTranscriptBI() {
 
       let data: any = "";
       if (teacher_dash) {
-        data = teacher_dash;
       } else {
         const data_dash: any = await teacher_dashboard();
-        data = data_dash.data;
         localStorage.setItem(
           "teacher_dashboard",
           JSON.stringify(data_dash.data)
@@ -103,37 +100,8 @@ export default function StudentTranscriptBI() {
         own_subjet = await teacher_own_subject();
         localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
       }
-
-      // const al_teacher: any = await all_teachers();
-
-      let all_subject: any = [];
-
-      own_subjet.data.data.subjects.map((d: any) => {
-        data.data.subjects.map((d_2: any) => {
-          if (d_2.subject_id === d.subject_id) {
-            data.data.teachers.map((al_tech: any) => {
-              if (d.teacher_id == al_tech.uid) {
-                let obj: any = {
-                  subject: d_2,
-                  own_subjet: d,
-                  teacher: al_tech,
-                  section: d.class_room.section_id,
-                  class: d.class_room.class_id,
-                  shift: d.class_room.shift_id,
-                  students: d.class_room.students.student_name_bn,
-                };
-
-                all_subject.push(obj);
-              }
-            });
-          }
-        });
-      });
+     
       setinstititute(teacher_dash?.data?.institute);
-
-      setsubject(all_subject);
-
-
       setloader(false);
     } catch (error) {
       setshowLoadingErr("");
@@ -315,12 +283,6 @@ export default function StudentTranscriptBI() {
                                 )}
                               </select>
                             </div>
-
-                            {subject.length == 0 && (
-                              <label className="form-label text-danger">
-                                আপনি কোনও বিষয় পাননি
-                              </label>
-                            )}
                           </div>
                         </div>
                       </div>

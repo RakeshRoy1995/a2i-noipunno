@@ -65,7 +65,7 @@ const PopUpAppInfo = () => {
               <div className="popup-version-bottom">
                 <div className="d-flex align-items-center popup-version">
                   <p className="popup-version-info text-white">
-                    Version 1.1.3 &amp; Last release 31/12/23
+                    Version 1.1.4 &amp; Last release 1/1/24
                   </p>
                 </div>
               </div>

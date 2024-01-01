@@ -129,15 +129,11 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
           <div className="card">
             {showReportDeleteEv() ? (
               <div className="card-body">
-                <div className="text-center">
-                  {
-                    show_report_OFF_time_msg
-                  }
-                </div>
+                <div dangerouslySetInnerHTML={{__html: show_report_open_time_msg }}></div>
               </div>
             ) : (
               <div className="card-body">
-                <div className="text-center">{show_report_open_time_msg}</div>
+                <div dangerouslySetInnerHTML={{__html: show_report_open_time_msg }}></div>
               </div>
             )}
             <p className="card-body">

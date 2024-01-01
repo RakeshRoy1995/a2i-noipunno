@@ -112,9 +112,8 @@ const Navbar = () => {
 
   return (
     <>
-      {userDetails?.email && (
+      {(userDetails?.email || userDetails?.id || userDetails?.caid ) && (
         <>
-          {/* topnav */}
           <div className="topnav border-bottom">
             <div className="container">
               <div className="row">

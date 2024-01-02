@@ -288,14 +288,14 @@ export default function Teacher() {
                                       </div>
                                       <div className="total-student">
                                         <p>
-                                          {d.teacher.name_bn ||
-                                            d.teacher.name_en}
+                                          {d?.teacher?.name_bn ||
+                                            d?.teacher?.name_en}
                                         </p>
                                       </div>
                                       <div className="flex-md-row flex-lg-row d-flex  justify-content-center gap-2">
                                         <h6 className={styles.session}>
                                           {shift_name(
-                                            d.own_subjet.class_room.shift_id
+                                            d?.own_subjet?.class_room?.shift_id
                                           )}{" "}
                                           সেশন
                                         </h6>
@@ -304,7 +304,7 @@ export default function Teacher() {
                                         </h6>
                                         <h6 className={styles.branch}>
                                           {section_name(
-                                            d.own_subjet.class_room.section_id
+                                            d?.own_subjet?.class_room?.section_id
                                           )}{" "}
                                           শাখা
                                         </h6>

@@ -183,15 +183,7 @@ export default function StudentReport() {
           );
         }
 
-        const clssWiseSub_data: any =
-          localStorage.getItem("clssWiseSub_data") || "";
-        let clssWiseSub = clssWiseSub_data ? JSON.parse(clssWiseSub_data) : "";
-
-        if (clssWiseSub == "") {
-          clssWiseSub = await clssWiseSubject("");
-
-          localStorage.setItem("clssWiseSub_data", JSON.stringify(clssWiseSub));
-        }
+        const clssWiseSub = await clssWiseSubject(allFelter.subject.split("-")[1]);
 
         clssWiseSub.data.data.sort((a, b) => a.subject_no - b.subject_no);
 

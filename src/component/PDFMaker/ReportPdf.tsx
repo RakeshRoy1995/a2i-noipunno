@@ -1,11 +1,9 @@
 import {
-  PDFViewer,
   Document,
   View,
   Image,
   Page,
   Text,
-  StyleSheet,
   Font,
   PDFDownloadLink,
 } from "@react-pdf/renderer";

@@ -288,8 +288,8 @@ export default function Teacher() {
                                       </div>
                                       <div className="total-student">
                                         <p>
-                                          {d.teacher.name_bn ||
-                                            d.teacher.name_en}
+                                          {d.teacher?.name_bn ||
+                                            d.teacher?.name_en}
                                         </p>
                                       </div>
                                       <div className="flex-md-row flex-lg-row d-flex  justify-content-center gap-2">

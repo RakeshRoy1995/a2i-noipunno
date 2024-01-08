@@ -449,7 +449,7 @@ export default function StudentMullayonModal({
             <div className="col-md-12">
               <div className="row p-1">
                 <p className="text-success text-center">
-                  কোন ছাত্র পাওয়া যায়নি
+                  কোন শিক্ষার্থী পাওয়া যায়নি!
                 </p>
               </div>
             </div>

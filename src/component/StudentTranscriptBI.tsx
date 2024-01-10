@@ -304,6 +304,7 @@ export default function StudentTranscriptBI() {
                       fetchDataFromAPI={fetchDataFromAPI}
                       setdata={setdata}
                       data={data}
+                      err={err}
                       pdf={
                         <PDFMakerBiTranscript
                           data={selected_student[0]}

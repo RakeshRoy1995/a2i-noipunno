@@ -166,6 +166,7 @@ export default function StudentTranscript() {
 
   const fetchDataFromAPI = async (student_uid) => {
     setsubmittingLoading(true);
+    seterr("")
     try {
       setteacher(allFelter.subject.split("-")[2]);
       setselected_student([]);
@@ -359,6 +360,7 @@ export default function StudentTranscript() {
                   fetchDataFromAPI={fetchDataFromAPI}
                   setdata={setdata}
                   data={data}
+                  err={err}
                   pdf={
                     <RawPDFDownload
                       data={selected_student[0]}

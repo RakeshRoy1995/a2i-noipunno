@@ -39,7 +39,7 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
     <TextField
       id="search"
       type="text"
-      placeholder="Filter By Name"
+      placeholder="নাম দ্বারা অনুসন্ধান করুন"
       aria-label="Search Input"
       value={filterText}
       onChange={onFilter}
@@ -50,7 +50,14 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
   </>
 );
 
-function TableComp({ new_student, fetchDataFromAPI, setdata, pdf, data }: any) {
+function TableComp({
+  new_student,
+  fetchDataFromAPI,
+  setdata,
+  pdf,
+  data,
+  err,
+}: any) {
   const [all_student, setAll_student] = useState<any>([]);
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
@@ -104,7 +111,21 @@ function TableComp({ new_student, fetchDataFromAPI, setdata, pdf, data }: any) {
       cell: (row) => (
         <div>
           {data?.uid == row?.uid ? (
-            <div>{pdf}</div>
+            <div className="text-center">
+              {!err ? pdf : err}
+
+              {err && (
+                <button
+                  className={`${styles.download_btn} mx-1` }
+                  onClick={() => {
+                    setdata(row);
+                    fetchDataFromAPI(row.uid);
+                  }}
+                >
+                  Generate PDF
+                </button>
+              )}
+            </div>
           ) : (
             <button
               className={`${styles.download_btn}`}

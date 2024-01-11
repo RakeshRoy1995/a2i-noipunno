@@ -20,7 +20,6 @@ import resetPass from "../assets/project_ca_html/icons/setting-2.svg";
 import teacherIcon from "../assets/navbar_materials/icons/teacher.svg";
 import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
 
-
 import { useLocation } from "react-router-dom";
 import { teacher_dashboard, reloadteacher_own_subject } from "../Request";
 import { showReportDeleteEv } from "../utils/Utils";
@@ -86,15 +85,14 @@ const Navbar = () => {
 
   const fetchData = async () => {
     try {
-      const own_subjet: any = await reloadteacher_own_subject();
-      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
-
       const data_dash: any = await teacher_dashboard();
       localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
 
+      const own_subjet: any = await reloadteacher_own_subject();
+      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+
       window.location.reload();
     } catch (error) {
-
       Swal.fire({
         icon: "error",
         title:
@@ -104,21 +102,22 @@ const Navbar = () => {
     }
   };
 
-
-
   useEffect(() => {
     activeRoute();
   }, [location]);
 
   return (
     <>
-      {(userDetails?.email || userDetails?.id || userDetails?.caid ) && (
+      {(userDetails?.email || userDetails?.id || userDetails?.caid) && (
         <>
           <div className="topnav border-bottom">
             <div className="container">
               <div className="row">
                 <div className="d-flex justify-content-between align-items-center py-2">
-                  <div onClick={(e)=> window.location.reload() } className="pointer">
+                  <div
+                    onClick={(e) => window.location.reload()}
+                    className="pointer"
+                  >
                     <img
                       src={noipunnologo}
                       className="img-fluid"
@@ -195,7 +194,7 @@ const Navbar = () => {
                                 className="img-fluid icon-right-space"
                                 alt="profile icon"
                               />
-                              রিসেট  পাসওয়ার্ড
+                              রিসেট পাসওয়ার্ড
                             </div>
                           </NavLink>
                         </li>
@@ -625,21 +624,23 @@ const Navbar = () => {
                         ডেটা পুনরায় লোড করুন
                       </button>
 
-                      <Link
-                        to="/mollayon-koron"
-                        id="mollayon_koron_btn"
-                        className="nav-link navbar-menu-item nav-right-dorpdown d-flex align-items-center"
-                        role="button"
-                        // data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <img
-                          src={doublecheckPng}
-                          className="img-fluid "
-                          alt="add icon"
-                        />
-                        মূল্যায়ন শুরু করুন
-                      </Link>
+                      {!showReportDeleteEv() && (
+                        <Link
+                          to="/mollayon-koron"
+                          id="mollayon_koron_btn"
+                          className="nav-link navbar-menu-item nav-right-dorpdown d-flex align-items-center"
+                          role="button"
+                          // data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          <img
+                            src={doublecheckPng}
+                            className="img-fluid "
+                            alt="add icon"
+                          />
+                          মূল্যায়ন শুরু করুন
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>

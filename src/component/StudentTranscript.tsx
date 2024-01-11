@@ -166,6 +166,7 @@ export default function StudentTranscript() {
 
   const fetchDataFromAPI = async (student_uid) => {
     setsubmittingLoading(true);
+    seterr("")
     try {
       setteacher(allFelter.subject.split("-")[2]);
       setselected_student([]);
@@ -180,11 +181,22 @@ export default function StudentTranscript() {
         student_uid
       );
 
-      const data = formate_teanscript_dataBy_single_student(
-        pi_bi_data?.data?.transcript?.subject_result ||
-          pi_bi_data?.data?.transcript?.student_result
-      );
-      setselected_student(data);
+      if (pi_bi_data?.data?.transcript?.student_result.length === 0) {
+        seterr(
+          "আপনি এই শিক্ষার্থীর মূল্যায়ন করেননি"
+        )
+      }else{
+
+        const data = formate_teanscript_dataBy_single_student(
+          pi_bi_data?.data?.transcript?.subject_result ||
+            pi_bi_data?.data?.transcript?.student_result
+        );
+        
+        setselected_student(data);
+
+      }
+
+      
       // setshowModal(true);
     } catch (error) {
       seterr(
@@ -348,6 +360,7 @@ export default function StudentTranscript() {
                   fetchDataFromAPI={fetchDataFromAPI}
                   setdata={setdata}
                   data={data}
+                  err={err}
                   pdf={
                     <RawPDFDownload
                       data={selected_student[0]}

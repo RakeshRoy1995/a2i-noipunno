@@ -492,7 +492,7 @@ export const teacher_list = () => {
   const own_subject = JSON.parse(localStorage.getItem("own_subjet"));
   const all_teachers_with_duplicate = [];
 
-  if (own_subject) {
+  if (own_subject && own_subject?.data?.data?.subjects.length) {
     let subjects = [];
     subjects = [...own_subject?.data?.data?.subjects];
     subjects.map((item) =>
@@ -514,6 +514,8 @@ export const teacher_list = () => {
   };
 
   const all_teachers = removeDuplicates(all_teachers_with_duplicate, "uid");
+
+  console.log(`all_teachers`, all_teachers);
   return all_teachers;
 };
 

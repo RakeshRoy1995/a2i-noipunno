@@ -373,6 +373,7 @@ export default function StudentReport() {
                           fetchDataFromAPI={fetchDataFromAPI}
                           setdata={setdata}
                           data={data}
+                          err={err}
                           pdf={
                             <BiRawPDFDownload
                               selected_student={selected_student}

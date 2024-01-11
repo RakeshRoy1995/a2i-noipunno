@@ -512,9 +512,17 @@ const MyDocument = ({
         fixed
         style={{ height: 70, fontSize: 7, textAlign: "center", padding: "5px" }}
       >
+        <Text style={{ textAlign: "center", bottom: 0 }}>
+          {instititute?.institute_name} { " " }.
+          {student_info_pdf?.student_name_bn ||
+            student_info_pdf?.student_name_en} { " " } .
+          রোল : {convertToBanglaNumber(student_info_pdf?.roll)} { " " }
+        </Text>
+
         <Text style={{ textAlign: "left", bottom: 0 }}>
           এই প্রতিবেদনটি সিস্টেম দ্বারা তৈরি করা হয়েছে
         </Text>
+
         <Text
           style={{ fontSize: 7 }}
           render={({ pageNumber, totalPages }) =>

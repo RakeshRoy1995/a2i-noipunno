@@ -143,11 +143,19 @@ export default function StudentTranscriptBI() {
         student_uid
       );
 
-      const data = formate_Bi_teanscript_dataBy_single_student(
-        pi_bi_data?.data?.trancript,
-        student_uid
-      );
-      setselected_student(data);
+      if (pi_bi_data?.data?.trancript.length > 0) {
+        const data = formate_Bi_teanscript_dataBy_single_student(
+          pi_bi_data?.data?.trancript,
+          student_uid
+        );
+        setselected_student(data);
+      } else {
+        seterr(
+          "আপনি এই শিক্ষার্থীর মূল্যায়ন করেননি"
+        )
+      }
+
+      
     } catch (error) {
       seterr(
         "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। ডেটা লোড করতে অনুগ্রহ করে আবার ক্লিক করুন"
@@ -296,6 +304,7 @@ export default function StudentTranscriptBI() {
                       fetchDataFromAPI={fetchDataFromAPI}
                       setdata={setdata}
                       data={data}
+                      err={err}
                       pdf={
                         <PDFMakerBiTranscript
                           data={selected_student[0]}

@@ -235,17 +235,22 @@ export async function reloadteacher_own_subject() {
     headers: { "content-type": "application/json" },
     url: page_list,
   };
-
-  const cls_room: any = await class_room_info();
-  const common_info: any = await get_common_info();
+  
+  const own_sub = await axios(options);
   const bi: any = await bi_info();
-
+  const common_info: any = await get_common_info();
+  const cls_room: any = await class_room_info();
   const app_PI: any = [];
   const student: any = [];
 
   if (bi !== "" && common_info !== "" && cls_room !== "") {
-    const own_sub = await axios(options);
 
+    const data_dash: any = await class_teacher_all_student_data();
+    localStorage.setItem(
+      "class_teacher_student",
+      JSON.stringify(data_dash)
+    );
+    
     own_sub.data.data.subjects.map((std_data: any) => {
       std_data.competence.map((conpitance_data: any) => {
         conpitance_data.pis.map((data: any) => {

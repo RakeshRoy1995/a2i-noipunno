@@ -86,11 +86,14 @@ const Navbar = () => {
 
   const fetchData = async () => {
     try {
-      const own_subjet: any = await reloadteacher_own_subject();
-      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
 
       const data_dash: any = await teacher_dashboard();
       localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
+      
+      const own_subjet: any = await reloadteacher_own_subject();
+      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+
+      
 
       window.location.reload();
     } catch (error) {

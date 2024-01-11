@@ -2,7 +2,6 @@ import { useState } from "react";
 import "../../assets/dashboard_materials/css/total_student_teacher_classroom_for_teacher_dashboard.css";
 import {
   showReportDeleteEv,
-  show_report_OFF_time_msg,
   show_report_open_time_msg,
   teacher_list,
 } from "../../utils/Utils";
@@ -21,9 +20,9 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
     );
 
     let obj: any = {};
-    let app_PI: any = [];
-
-    if (studentsData && local_storege_data) {
+    const app_PI: any = [];
+    
+    if (studentsData && studentsData?.data?.data?.subjects?.length && local_storege_data) {
       studentsData.data.data.subjects.map((std_data: any) => {
         obj = {
           ...obj,

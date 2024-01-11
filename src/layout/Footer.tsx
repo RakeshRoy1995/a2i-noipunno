@@ -3,8 +3,6 @@ import { useState } from "react";
 export default function Footer() {
   const [userDetails, setuserDetails] = useState<any>("");
   
-
-
   setTimeout(() => {
     
     if (!userDetails?.email) {

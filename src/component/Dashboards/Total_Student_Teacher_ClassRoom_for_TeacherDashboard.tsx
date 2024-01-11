@@ -124,7 +124,7 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
         </div>
       </div>
 
-      <div className="col-lg-7 col-md-6 ">
+      {/* <div className="col-lg-7 col-md-6 ">
         <div className="teacher-student-card gy-5 text-center">
           <div className="card">
             {showReportDeleteEv() ? (
@@ -163,7 +163,8 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
+
     </>
   );
 };

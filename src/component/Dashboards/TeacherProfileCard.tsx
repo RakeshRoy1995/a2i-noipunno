@@ -28,7 +28,7 @@ const TeacherProfileCard = () => {
     designation_id,
     pdsid,
     caid }: any = teacher_details;
-  
+
 
   const fetchData = async () => {
     // const designation_data = await teacher_designation();
@@ -40,7 +40,7 @@ const TeacherProfileCard = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
     if (get_teachers_details) {
       setTeacher_details(get_teachers_details?.data?.teachers[0]);
-      
+
       get_teachers_details?.data?.institute?.map((item) =>
         setSchoolName(item.institute_name)
       );
@@ -70,7 +70,7 @@ const TeacherProfileCard = () => {
   useEffect(() => {
     setAllStateData()
   }, [allDesignation])
-  
+
 
   setInterval(() => {
     if (loading) {
@@ -80,7 +80,7 @@ const TeacherProfileCard = () => {
 
 
   return (
-    <div className="col-lg-3 col-md-6">
+    <div className="col-lg-2 col-md-6">
       <div className="card teacher-profile border-0">
         <div className="card-header border-0">
           <Link to={"/edit-teacher-profile"}>
@@ -90,7 +90,7 @@ const TeacherProfileCard = () => {
           </Link>
 
           <div className="profile-img">
-            <img src={(gender == "1") ? teacherProfileImg : teacherProfileImg } alt="teacher-profile" />
+            <img src={(gender == "1") ? teacherProfileImg : teacherProfileImg} alt="teacher-profile" />
           </div>
           <div className="teacher-title">
             <h2>
@@ -112,16 +112,14 @@ const TeacherProfileCard = () => {
           </div>
         </div>
         <div className="teacher-info">
-          <h2 className="card-title text-two-line" >
-            
+          <h2 className="card-title text-two-line" style={{lineHeight:"1"}} >
             {name_bn || name_en || ''}
           </h2>
           <p className="card-text">
-     
             {pdsid || caid}
           </p>
           {/* <p className="card-text">পাবনা জিলা স্কুল, পাবনা</p> */}
-          <p className="card-text">{schoolName}</p>
+          <p className="card-text text-center" >{schoolName}</p>
 
           <div className="button">
             <img src={eyeIcon} alt="eyeIcon" />

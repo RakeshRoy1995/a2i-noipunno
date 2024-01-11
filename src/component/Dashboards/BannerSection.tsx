@@ -13,10 +13,10 @@ const BannerSection = () => {
       <div className="card-container">
         <div className="row g-3 ">
           <TeacherProfileCard />
-          {/* <ShikkathirHaziraChart /> */}
+          <ShikkathirHaziraChart />
           {/* <Total_Student_Teacher_ClassRoom_for_HeadTeacherDashboard /> */}
           <Total_Student_Teacher_ClassRoom_for_TeacherDashboard />
-          {/* <OnorudhShomohu /> */}
+          <OnorudhShomohu />
         </div>
       </div>
     </section>

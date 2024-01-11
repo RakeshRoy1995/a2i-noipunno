@@ -375,6 +375,8 @@ export const formate_teanscript_data = (data: any) => {
       for (let y = 0; y < allPi.length; y++) {
         const pi = allPi[y];
         const pi_data = our_all_piData.filter((d: any) => d.uid == pi.pi_uid);
+
+        
         const Pi_obj = {
           ...pi,
           student_data: student_dta[0],
@@ -488,12 +490,13 @@ export const formate_Bi_teanscript_dataBy_single_student = (
 
 export const teacher_list = () => {
   const own_subject = JSON.parse(localStorage.getItem("own_subjet"));
-  let all_teachers_with_duplicate = [];
+  const all_teachers_with_duplicate = [];
 
   if (own_subject) {
     let subjects = [];
     subjects = [...own_subject?.data?.data?.subjects];
     subjects.map((item) =>
+    item.class_room?.class_teacher && 
       all_teachers_with_duplicate?.push(item.class_room?.class_teacher)
     );
   }
@@ -510,7 +513,7 @@ export const teacher_list = () => {
     }, []);
   };
 
-  const all_teachers = removeDuplicates(all_teachers_with_duplicate, "pdsid");
+  const all_teachers = removeDuplicates(all_teachers_with_duplicate, "uid");
   return all_teachers;
 };
 
@@ -708,8 +711,6 @@ export const make_group_by_PI_BI = (studentData: any) => {
   }
 
   studentData.pi_evaluation_list = result
-
-  console.log(`studentData`, studentData);
 
   return studentData;
 };

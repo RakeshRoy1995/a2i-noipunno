@@ -22,7 +22,7 @@ const OnorudhShomohu = () => {
         </div>
         <div className="tab-bar">
           <ul className="nav">
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a
                 className="nav-link active"
                 id="apply-tab"
@@ -32,7 +32,7 @@ const OnorudhShomohu = () => {
                 <img src={abedonIcon} alt="abedonIcon" />
                 <h2>আবেদন</h2>
               </a>
-            </li>
+            </li> */}
             <li className="nav-item">
               <a
                 className="nav-link"
@@ -48,7 +48,7 @@ const OnorudhShomohu = () => {
         </div>
         {/* Tab Content */}
         <div className="tab-content" id="tabContent">
-          <div
+          {/* <div
             className="tab-pane fade show active"
             id="apply"
             role="tabpanel"
@@ -81,6 +81,7 @@ const OnorudhShomohu = () => {
                 </div>
               </a>
             </div>
+
             <div className="tab-container">
               <a href="#">
                 <div className="heading">
@@ -108,6 +109,7 @@ const OnorudhShomohu = () => {
                 </div>
               </a>
             </div>
+
             <div className="tab-container">
               <a href="#">
                 <div className="heading">
@@ -126,7 +128,7 @@ const OnorudhShomohu = () => {
               <a>সব অনুরোধগুলি দেখুন</a>
               <img src={rightArrow} alt="rightArrow" />
             </div>
-          </div>
+          </div> */}
           <div
             className="tab-pane fade"
             id="notice"
@@ -170,7 +172,7 @@ const OnorudhShomohu = () => {
                       alt="icon"
                     />
                   </div>
-                  <h2>বিষয় পরিবর্তনের অনুরোধ করেছেন</h2>
+                  <h2>বিষয় পরিবর্তনের বিজ্ঞপ্তি</h2>
                 </div>
                 <div className="teachers">
                   <h3>সামিনা চৌধুরী</h3>
@@ -179,11 +181,11 @@ const OnorudhShomohu = () => {
                 </div>
                 <div className="class-section">
                   <div className="class-day-section">
-                    <h6>ষষ্ঠ শ্রেণী</h6>
+                    <h6>ষষ্ঠ শ্রেণী বিজ্ঞপ্তি</h6>
                     <h6>Day</h6>
                     <h6>Section A</h6>
                   </div>
-                  <p>অনুরোধ করেছেন ৬ অক্টোবর ২০২৩</p>
+                  <p>বিজ্ঞপ্তি ৬ অক্টোবর ২০২৩</p>
                 </div>
               </a>
             </div>
@@ -197,12 +199,12 @@ const OnorudhShomohu = () => {
                       alt="icon"
                     />
                   </div>
-                  <h2>ফোন নম্বর পরিবর্তনের অনুরোধ করেছেন</h2>
+                  <h2>ফোন নম্বর পরিবর্তনের বিজ্ঞপ্তি</h2>
                 </div>
               </a>
             </div>
             <div className="button">
-              <a>সব অনুরোধগুলি দেখুন</a>
+              <a>সব বিজ্ঞপ্তিগুলি দেখুন</a>
               <img src={rightArrow} alt="rightArrow" />
             </div>
           </div>

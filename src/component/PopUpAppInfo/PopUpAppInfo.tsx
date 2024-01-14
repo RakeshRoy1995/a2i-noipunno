@@ -23,7 +23,7 @@ const PopUpAppInfo = () => {
                 <h2 className="reserved-app-info p-0 m-0">
                   সর্বস্বত্ব সংরক্ষিত ২০২৩
                 </h2>
-              </div>
+              </div> 
               <div className="popup-card-body">
                 <div className="d-flex popup-card-icons">
                   <div className="">

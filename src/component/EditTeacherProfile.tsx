@@ -220,16 +220,18 @@ const EditTeacherProfile = () => {
                 <div className="tab-pane fade show active" id="expertness" role="tabpanel" aria-labelledby="expertness-tab" >
 
                   <form className="row m-4" onSubmit={handleTeacherProfileEdit}>
-                    <div className="form-group  col-sm-4 col-md-6">
+
+
+                    {/* <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label">ইউজার আইডি</label>
                         <div className="input-group">
                           <input type="text" id="pin" className="form-control" readOnly
-                            // name="xxxxx"
+                            
                             defaultValue={pdsid || caid} />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
 
 
 

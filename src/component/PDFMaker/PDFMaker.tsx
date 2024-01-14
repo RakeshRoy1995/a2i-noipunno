@@ -259,7 +259,7 @@ const MyDocument = ({
 
       <View
         fixed
-        style={{ height: 70, fontSize: 7, textAlign: "center", padding: "5px" }}
+        style={{ height: 30, fontSize: 7, textAlign: "center", padding: "5px" }}
       >
         <Text style={{ textAlign: "center", bottom: 0 }}>
           {instititute?.institute_name} { " " }.

@@ -49,7 +49,7 @@ const OnorudhShomohu = () => {
         </div>
         {/* Tab Content */}
         <div className="tab-content" id="tabContent">
-          {/* <div
+          <div
             className="tab-pane fade show active"
             id="apply"
             role="tabpanel"
@@ -129,7 +129,7 @@ const OnorudhShomohu = () => {
               <a>সব অনুরোধগুলি দেখুন</a>
               <img src={rightArrow} alt="rightArrow" />
             </div>
-          </div> */}
+          </div>
          
         </div>
       </div>

@@ -103,7 +103,7 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
               </div>
             </div>
           </a>
-          {/* <a href="#">
+          <a href="#">
           <div className="card-container">
             <div className="total-student">
               <div className="title">
@@ -119,7 +119,7 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
               </div>
             </div>
           </div>
-        </a> */}
+        </a>
         </div>
       </div>
 

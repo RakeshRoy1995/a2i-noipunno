@@ -512,6 +512,24 @@ const Navbar = () => {
                                     </div>
                                   </NavLink>
                                 </li>
+                                {/* <li>
+                                  <NavLink
+                                    to="/student-attendence"
+                                    // activeClassName='active'
+                                    className="dropdown-item"
+                                  >
+                                    <div className="dropdown-list-item-style d-flex align-items-center">
+                                      <img
+                                        src={shikkarthiIcon}
+                                        className="img-fluid dropdown-list-item-icon"
+                                        alt="icon"
+                                      />
+                                      <p className="dropdown-class-list">
+                                        শিক্ষার্থীর হাজিরা
+                                      </p>
+                                    </div>
+                                  </NavLink>
+                                </li> */}
                               </ul>
                             </li>
                             <li className="nav-item dropdown nav-item-style">

@@ -29,6 +29,7 @@ import BiRawPDFDownload from "./component/PDFMaker/ReportPdf";
 import StudentTranscriptBI from "./component/StudentTranscriptBI";
 import GeneratePdf from "./component/generatePdf/GeneratePdf";
 import ResetPassword from "./component/ResetPassword";
+import StudentAttendence from "./component/Attendence/StudentAttendence/StudentAttendence";
 
 
 function App() {
@@ -54,7 +55,7 @@ function App() {
   }, []);
 
   return (
-    <> 
+    <>
       {topbar && <Navbar />}
 
       <Routes>
@@ -87,8 +88,9 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
-          
-        
+          <Route path="/student-attendence" element={<StudentAttendence/>} />
+
+
           {/* <Route path="/bi-pdf-maker2" element={<BiRawPDFDownload />} /> */}
         </Route>
         <Route path="/login" element={<LoginPage />} />

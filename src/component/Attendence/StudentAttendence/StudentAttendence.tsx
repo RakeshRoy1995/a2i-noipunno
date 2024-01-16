@@ -1,94 +1,89 @@
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Form } from "react-router-dom";
+import { class_teacher_all_student_data } from "../../../Request";
+import moment from 'moment';
 
 const StudentAttendance = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const date = moment(selectedDate).format('YYYY-MM-DD');
+  const [students, setStudents] = useState([]);
+  const [attendance, setAttendance] = useState({});
 
-  const initialStudents = [
-    { id: 0, name: 'Mehdi Hasan Niloy', date: "", checked: false },
-    { id: 1, name: 'Rakesh Roy', date: "", checked: false },
-    { id: 2, name: 'Mouni Roy', date: "", checked: true },
-    { id: 3, name: 'Nipun Roy', date: "", checked: false },
-    { id: 4, name: 'Tamanna Vatiya', date: "", checked: false },
-    { id: 5, name: 'Ananiya Pandey', date: "", checked: false },
-    { id: 6, name: 'Jhanbi kapoor', date: "", checked: false },
 
-  ];
+  const fetchData = async () => {
+    const class_teacher_all_student = await class_teacher_all_student_data()
+    setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
+    console.log("class_teacher", class_teacher_all_student?.data?.data?.students[0]?.students);
 
-  const [students, setStudents] = useState(initialStudents);
+  }
 
-  const handleCheckboxChange = studentId => {
-    setStudents((prevStudents) =>
-      prevStudents.map((student) =>
-        student.id === studentId ? { ...student, checked: !student.checked, } : student
-      )
-    );
+  
+  const handleCheckboxChange = (studentId) => {
+    setAttendance((prevAttendance) => ({
+      ...prevAttendance,
+      [studentId]: !prevAttendance[studentId], 
+    }));
+   
 
-    
   };
 
   const handleSubmitAttendance = (event) => {
     event.preventDefault();
-    const formDatas = new FormData(event.target);
-    // formDatas.forEach((value, key) => {
-    //   const data = `${key}:${value}`;
-    //   console.log(data);
-    // })
-
-    const form= event.target;
-    const date = form.date.value;
-    console.log({date});
+    // console.log(attendance);
+    const datas = { ...attendance,  date };
+    console.log(datas);
     
-   
   };
 
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+
   return (
-    <div className="container" style={{marginBottom:"200px"}}>
+    <section className="container" style={{ marginBottom: "200px" }}>
 
-
-      <form onSubmit={handleSubmitAttendance}>
-        <div className="">
-          <div className="mb-3" style={{ fontSize: "16px" }}>
-            <label className="form-label">তারিখ</label>
-            <div className="input-group">
-              <DatePicker
-                className="form-control"
-                placeholderText={"তারিখ"}
-                name="date"
-                dateFormat="yyyy-MM-dd"
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
-              // readOnly
-
-              />
-            </div>
-          </div>
+      <div className="mb-2" style={{ fontSize: "16px" }}>
+        <label className="form-label">তারিখ</label>
+        <div className="input-group">
+          <DatePicker
+            className="form-control"
+            placeholderText={"তারিখ"}
+            dateFormat="yyyy-MM-dd"
+            name="date"
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+          // readOnly
+          />
         </div>
+      </div>
 
-        <table className="table">
+      <form  onSubmit={handleSubmitAttendance}>
+  
+        <table className="table ">
           <thead>
-            <tr>
-              <th scope="col">শিক্ষার্থীর রোল</th>
+            <tr >
+              <th scope="col" className="text-center">শিক্ষার্থীর রোল</th>
               <th scope="col">শিক্ষার্থীর নাম</th>
-              <th scope="col">উপস্থিতি</th>
+              <th scope="col" className="text-center">উপস্থিতি</th>
             </tr>
           </thead>
           <tbody>
-            {students.map((student) => (
-              <tr key={student.id}>
-                <th scope="row">{student.id}</th>
-                <td>{student.name}</td>
-                <td>
+            {students.map((student,key) => (
+              <tr key={key}>
+                <th scope="row" className="text-center" >{student?.roll}</th>
+                <td>{student?.student_name_bn || student?.student_name_en}</td>
+                <td className="text-center">
                   <input
-                    className="form-check-input"
+                    style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
+                    className="form-check-input "
                     type="checkbox"
-                    name="present"
-                    // checked={student.checked}
-                    // defaultValue={false}
-                    // onChange={() => handleCheckboxChange(student.id)}
+                    name={`attendance-${student?.id}`}
+                    onChange={() => handleCheckboxChange(student?.uid)}
                   />
                 </td>
               </tr>
@@ -105,7 +100,7 @@ const StudentAttendance = () => {
           </button>
         </div>
       </form>
-    </div>
+    </section>
   );
 };
 

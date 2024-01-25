@@ -515,7 +515,7 @@ export const teacher_list = () => {
 
   const all_teachers = removeDuplicates(all_teachers_with_duplicate, "uid");
 
-  console.log(`all_teachers`, all_teachers);
+  // console.log(`all_teachers`, all_teachers);
   return all_teachers;
 };
 

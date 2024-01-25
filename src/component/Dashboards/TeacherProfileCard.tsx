@@ -27,8 +27,10 @@ const TeacherProfileCard = () => {
     gender,
     designation_id,
     pdsid,
-    caid }: any = teacher_details;
+    caid,
+  image }: any = teacher_details;
 
+  const img_base_url = 'https://generic-common-storage.sgp1.vultrobjects.com/';
 
   const fetchData = async () => {
     // const designation_data = await teacher_designation();
@@ -78,6 +80,7 @@ const TeacherProfileCard = () => {
     }
   }, 500);
 
+// console.log(image);
 
   return (
     <div className="col-lg-2 col-md-6">
@@ -90,7 +93,8 @@ const TeacherProfileCard = () => {
           </Link>
 
           <div className="profile-img">
-            <img src={(gender == "1") ? teacherProfileImg : teacherProfileImg} alt="teacher-profile" />
+            {/* <img src={teacherProfileImg} alt="teacher-profile" /> */}
+            <img src={img_base_url + image || teacherProfileImg } alt="teacher-profile" />
           </div>
           <div className="teacher-title">
             <h2>

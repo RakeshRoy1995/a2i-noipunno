@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { convertToBanglaNumber } from "../utils/Utils";
 
 
 const EditTeacherProfile = () => {
@@ -40,13 +41,17 @@ const EditTeacherProfile = () => {
     upazilla_id,
     designation_id,
     pdsid,
-    caid } = userDetails;
+    caid,
+    image
+  } = userDetails;
 
-  // const designation_id = "10";
+  // const dpesignation_id = "10";
 
   const getUserDetails = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
     if (get_teachers_details) {
+      console.log("userDetaisl", get_teachers_details?.data?.teachers[0]);
+      
       setuserDetails(get_teachers_details?.data?.teachers[0]);
     }
   }
@@ -288,7 +293,7 @@ const EditTeacherProfile = () => {
                       </div>
                     </div>
 
-                    <div className="form-group  col-sm-4 col-md-6">
+                    {/* <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label">পদবী</label>
                         <div className="input-group">
@@ -298,7 +303,7 @@ const EditTeacherProfile = () => {
                             value={teacherDesignation} />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
 
 
                     <div className="form-group  col-sm-4 col-md-6">
@@ -333,6 +338,23 @@ const EditTeacherProfile = () => {
                       </div>
                     </div>
 
+
+                    <div className="form-group  col-sm-4 col-md-6">
+                      <div className="mb-3" style={{ fontSize: "16px" }}>
+                        <label className="form-label">ছবি আপলোড করুন </label>
+                        <div className="input-group">
+                          <input
+                            type="file"
+                            id="imageInput"
+                            accept="image/*"
+                            name="image"
+                          />
+                          
+                      
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="form-group col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label htmlFor="gender" className="form-label">লিঙ্গ</label>
@@ -350,6 +372,8 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
                     </div>
+
+                    
 
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>

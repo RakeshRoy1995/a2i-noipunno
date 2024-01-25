@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Form } from "react-router-dom";
-import { class_teacher_all_student_data } from "../../../Request";
+import { class_room_info, class_teacher_all_student_data } from "../../../Request";
 import moment from 'moment';
 
 const StudentAttendance = () => {
@@ -11,37 +11,80 @@ const StudentAttendance = () => {
   const date = moment(selectedDate).format('YYYY-MM-DD');
   const [students, setStudents] = useState([]);
   const [attendance, setAttendance] = useState({});
+  const [classTeacherInfos, setClassTeacherInfos] = useState({});
+  const [classRoomInfos, setClassRoomInfos] = useState([]);
+  const [classRoomId, setClassRoomId] = useState('');
+
 
 
   const fetchData = async () => {
     const class_teacher_all_student = await class_teacher_all_student_data()
     setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
-    console.log("class_teacher", class_teacher_all_student?.data?.data?.students[0]?.students);
+    // console.log("class_teacher", class_teacher_all_student?.data?.data?.students[0]);
+    setClassTeacherInfos(class_teacher_all_student?.data?.data?.students[0])
+
+
+    const class_room_infos = await class_room_info()
+    // console.log("class_room_info", class_room_infos?.data?.data?.subjects);
+    setClassRoomInfos(class_room_infos?.data?.data?.subjects);
+
 
   }
 
-  
+
   const handleCheckboxChange = (studentId) => {
     setAttendance((prevAttendance) => ({
       ...prevAttendance,
-      [studentId]: !prevAttendance[studentId], 
+      [studentId]: !prevAttendance[studentId],
     }));
-   
+
 
   };
 
   const handleSubmitAttendance = (event) => {
     event.preventDefault();
     // console.log(attendance);
-    const datas = { ...attendance,  date };
+    const datas = {
+      ...attendance, class_room_id: classRoomId, date, };
     console.log(datas);
-    
+
   };
 
 
   useEffect(() => {
     fetchData()
   }, [])
+
+
+  useEffect(() => {
+
+    classRoomInfos?.forEach((item) => {
+      const branch_id = item?.class_room?.branch_id;
+      const class_id = item?.class_room?.class_id;
+      const class_teacher_id = item?.class_room?.class_teacher_id;
+      const section_id = item?.class_room?.section_id;
+      const shift_id = item?.class_room?.shift_id;
+      const version_id = item?.class_room?.version_id;
+  
+      if (
+        classTeacherInfos?.branch_id === branch_id &&
+        classTeacherInfos?.class_id === class_id &&
+        classTeacherInfos?.class_teacher_id === class_teacher_id &&
+        classTeacherInfos?.section_id === section_id &&
+        classTeacherInfos?.shift_id === shift_id &&
+        classTeacherInfos?.version_id === version_id 
+      ) {
+
+        // console.log(item);
+        // console.log(item?.class_room_id);
+        setClassRoomId(item?.class_room_id);
+      }
+    })
+
+
+  }, [classTeacherInfos, classRoomInfos])
+
+
 
 
   return (
@@ -62,8 +105,8 @@ const StudentAttendance = () => {
         </div>
       </div>
 
-      <form  onSubmit={handleSubmitAttendance}>
-  
+      <form onSubmit={handleSubmitAttendance}>
+
         <table className="table ">
           <thead>
             <tr >
@@ -73,7 +116,8 @@ const StudentAttendance = () => {
             </tr>
           </thead>
           <tbody>
-            {students.map((student,key) => (
+
+            {students?.map((student, key) => (
               <tr key={key}>
                 <th scope="row" className="text-center" >{student?.roll}</th>
                 <td>{student?.student_name_bn || student?.student_name_en}</td>

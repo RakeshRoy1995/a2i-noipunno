@@ -5,6 +5,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Form } from "react-router-dom";
 import { class_room_info, class_teacher_all_student_data } from "../../../Request";
 import moment from 'moment';
+import { Breadcrumb } from "react-bootstrap";
+import BreadcumbHome from "../../../layout/BreadcumbHome";
+import Breadcumbtitle from "../../../layout/Breadcumb";
 
 const StudentAttendance = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -45,7 +48,8 @@ const StudentAttendance = () => {
     event.preventDefault();
     // console.log(attendance);
     const datas = {
-      ...attendance, class_room_id: classRoomId, date, };
+      ...attendance, class_room_id: classRoomId, date,
+    };
     console.log(datas);
 
   };
@@ -65,14 +69,14 @@ const StudentAttendance = () => {
       const section_id = item?.class_room?.section_id;
       const shift_id = item?.class_room?.shift_id;
       const version_id = item?.class_room?.version_id;
-  
+
       if (
         classTeacherInfos?.branch_id === branch_id &&
         classTeacherInfos?.class_id === class_id &&
         classTeacherInfos?.class_teacher_id === class_teacher_id &&
         classTeacherInfos?.section_id === section_id &&
         classTeacherInfos?.shift_id === shift_id &&
-        classTeacherInfos?.version_id === version_id 
+        classTeacherInfos?.version_id === version_id
       ) {
 
         // console.log(item);
@@ -88,10 +92,11 @@ const StudentAttendance = () => {
 
 
   return (
+    <>
+    <Breadcumbtitle title={"শিক্ষার্থীর হাজিরা"} />
     <section className="container" style={{ marginBottom: "200px" }}>
-
-      <div className="mb-2" style={{ fontSize: "16px" }}>
-        <label className="form-label">তারিখ</label>
+      <div className="my-1 d-flex flex-column justify-content-center" style={{ fontSize: "16px", }}>
+        <label>তারিখ</label>
         <div className="input-group">
           <DatePicker
             className="form-control"
@@ -106,7 +111,6 @@ const StudentAttendance = () => {
       </div>
 
       <form onSubmit={handleSubmitAttendance}>
-
         <table className="table ">
           <thead>
             <tr >
@@ -145,6 +149,7 @@ const StudentAttendance = () => {
         </div>
       </form>
     </section>
+    </>
   );
 };
 

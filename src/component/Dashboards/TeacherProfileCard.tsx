@@ -28,7 +28,8 @@ const TeacherProfileCard = () => {
     designation_id,
     pdsid,
     caid,
-  image }: any = teacher_details;
+    image
+  }: any = teacher_details;
 
   const img_base_url = 'https://generic-common-storage.sgp1.vultrobjects.com/';
 
@@ -93,8 +94,13 @@ const TeacherProfileCard = () => {
           </Link>
 
           <div className="profile-img">
-            {/* <img src={teacherProfileImg} alt="teacher-profile" /> */}
-            <img src={img_base_url + image || teacherProfileImg } alt="teacher-profile" />
+          
+            {image ? 
+              <img src={img_base_url + image } alt="teacher-profile" /> :
+              <img src={teacherProfileImg} alt="teacher-profile" />
+            }
+
+
           </div>
           <div className="teacher-title">
             <h2>

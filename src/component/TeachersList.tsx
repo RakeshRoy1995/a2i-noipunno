@@ -16,9 +16,6 @@ export default function TeachersList() {
 
 
   const all_teachers_list = teacher_list()
-  // console.log("all_teachers_list", all_teachers_list);
-
-
   const handleShowModal = (item: any) => {
     setSelectedItem(item);
     setShowModal(true);

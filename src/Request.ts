@@ -205,7 +205,6 @@ export async function teacher_own_subject() {
   if (cls_room == "") {
     cls_room = await class_room_info();
     localStorage.setItem("cls_room", JSON.stringify(cls_room));
-    console.log(`cls_room enter`);
   }
 
   if (cls_room.data.data.subjects.length == 0) {
@@ -357,7 +356,6 @@ export function update_teacher_profile(caid: any, data: any) {
   let obj = {};
   for (const [name, value] of data) {
     obj = { ...obj, [name]: value };
-    // console.log(`KeyName: ${name}, value: ${value}`);
   }
   const options = {
     method: "PUT",

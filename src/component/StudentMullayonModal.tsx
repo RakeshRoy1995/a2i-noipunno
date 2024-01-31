@@ -55,7 +55,6 @@ export default function StudentMullayonModal({
   const [submited, setsubmited] = useState<any>(false);
   const [firstRender, setfirstRender] = useState<any>(true);
 
-  console.log(`oviggota_uid`, assessment_uid);
   const fetchData = async () => {
     const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
     const own_SUbjects = own_SUbjects__ ? JSON.parse(own_SUbjects__) : "";
@@ -150,9 +149,6 @@ export default function StudentMullayonModal({
           const submit_obj = { ...submit_obj_, ...submitObj };
           localStorage.setItem("PI_saved", JSON.stringify(submit_obj));
 
-          // refresh()
-          // setmsg("আপনার খসড়া সংরক্ষণ করা হয়েছে");
-
           Swal.fire({
             title: "আপনার খসড়া সংরক্ষণ করা হয়েছে!",
             icon: "success",
@@ -169,10 +165,9 @@ export default function StudentMullayonModal({
         }
       }
     } catch (error) {
-      console.log("err", error);
       Swal.fire({
         icon: "error",
-        title: "কিছু ভুল হয়েছে",
+        title: "সার্ভার ত্রুটি ঘটেছে! অনুগ্রহ করে আবার চেষ্টা করুন।",
         confirmButtonText: "হ্যাঁ",
       });
     }
@@ -435,7 +430,7 @@ export default function StudentMullayonModal({
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "কিছু ভুল হয়েছে",
+        title: "সার্ভার ত্রুটি ঘটেছে! অনুগ্রহ করে আবার চেষ্টা করুন।",
         confirmButtonText: "হ্যাঁ",
       });
     }

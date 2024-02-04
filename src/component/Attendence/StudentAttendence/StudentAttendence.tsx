@@ -8,6 +8,7 @@ import moment from 'moment';
 import { Breadcrumb } from "react-bootstrap";
 import BreadcumbHome from "../../../layout/BreadcumbHome";
 import Breadcumbtitle from "../../../layout/Breadcumb";
+import { convertToBanglaNumber } from "../../../utils/Utils";
 
 const StudentAttendance = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -86,13 +87,42 @@ const StudentAttendance = () => {
     })
 
   }, [classTeacherInfos, classRoomInfos]);
-  
+
+
+
+
+  const [number, setNumber] = useState(0)
+  const hadleChange = (event) => {
+    event.preventDefault()
+    const number = event.target.value;
+    const result = convertToBanglaNumber(number)
+    setNumber(result)
+  }
+
+
+
 
   return (
     <>
       <Breadcumbtitle title={"শিক্ষার্থীর হাজিরা"} />
 
       <h3 className="container my-4 text-center"> {(classTeacherInfos?.class_id == 6) && "ষষ্ঠ" || (classTeacherInfos?.class_id == 6) && "সপ্তম"} শ্রেণির হাজিরা </h3>
+
+      <form className="container">
+        <div className="form-group  col-sm-4 col-md-6">
+          <div className="mb-3" style={{ fontSize: "16px" }}>
+            <label className="form-label">নাম্বারঃ {number}</label>
+            <div className="input-group">
+              <input type="text" id="pin" className="form-control"
+                // readOnly
+                name="number"
+                placeholder="নাম্বার দিন"
+                onChange={hadleChange}
+              />
+            </div>
+          </div>
+        </div>
+      </form>
 
       <section className="container" style={{ marginBottom: "200px" }}>
         <div className="my-1 d-flex flex-column justify-content-center" style={{ fontSize: "16px", }}>

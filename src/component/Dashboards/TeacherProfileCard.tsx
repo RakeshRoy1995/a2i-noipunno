@@ -27,20 +27,17 @@ const TeacherProfileCard = () => {
     gender,
     designation_id,
     pdsid,
-    caid }: any = teacher_details;
-  
+    caid,
+    image
+  }: any = teacher_details;
 
-  const fetchData = async () => {
-    // const designation_data = await teacher_designation();
-    // setAllDesignation(designation_data.data.data);
-  };
-
+  const img_base_url = 'https://generic-common-storage.sgp1.vultrobjects.com/';
 
   const getUserDetails = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
     if (get_teachers_details) {
       setTeacher_details(get_teachers_details?.data?.teachers[0]);
-      
+
       get_teachers_details?.data?.institute?.map((item) =>
         setSchoolName(item.institute_name)
       );
@@ -63,14 +60,9 @@ const TeacherProfileCard = () => {
   }
 
   useEffect(() => {
-    fetchData();
-  }, [])
-
-
-  useEffect(() => {
     setAllStateData()
   }, [allDesignation])
-  
+
 
   setInterval(() => {
     if (loading) {
@@ -78,6 +70,7 @@ const TeacherProfileCard = () => {
     }
   }, 500);
 
+// console.log(image);
 
   return (
     <div className="col-lg-3 col-md-6">
@@ -90,7 +83,13 @@ const TeacherProfileCard = () => {
           </Link>
 
           <div className="profile-img">
-            <img src={(gender == "1") ? teacherProfileImg : teacherProfileImg } alt="teacher-profile" />
+          
+            {image ? 
+              <img src={img_base_url + image } alt="teacher-profile" /> :
+              <img src={teacherProfileImg} alt="teacher-profile" />
+            }
+
+
           </div>
           <div className="teacher-title">
             <h2>
@@ -112,16 +111,14 @@ const TeacherProfileCard = () => {
           </div>
         </div>
         <div className="teacher-info">
-          <h2 className="card-title text-two-line" >
-            
+          <h2 className="card-title text-two-line" style={{lineHeight:"2"}} >
             {name_bn || name_en || ''}
           </h2>
           <p className="card-text">
-     
             {pdsid || caid}
           </p>
           {/* <p className="card-text">পাবনা জিলা স্কুল, পাবনা</p> */}
-          <p className="card-text">{schoolName}</p>
+          <p className="card-text text-center" >{schoolName}</p>
 
           <div className="button">
             <img src={eyeIcon} alt="eyeIcon" />

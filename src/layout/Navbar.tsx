@@ -174,7 +174,7 @@ const Navbar = () => {
                         </li>
 
                         <li>
-                          <NavLink to="teacher-profile">
+                          <NavLink to="edit-teacher-profile">
                             <div className="topnav-dropdown-style dropdown-item profile-style">
                               <img
                                 src={amarProfileIcon}
@@ -512,6 +512,24 @@ const Navbar = () => {
                                     </div>
                                   </NavLink>
                                 </li>
+                                {/* <li>
+                                  <NavLink
+                                    to="/student-attendence"
+                                    // activeClassName='active'
+                                    className="dropdown-item"
+                                  >
+                                    <div className="dropdown-list-item-style d-flex align-items-center">
+                                      <img
+                                        src={shikkarthiIcon}
+                                        className="img-fluid dropdown-list-item-icon"
+                                        alt="icon"
+                                      />
+                                      <p className="dropdown-class-list">
+                                        শিক্ষার্থীর হাজিরা
+                                      </p>
+                                    </div>
+                                  </NavLink>
+                                </li> */}
                               </ul>
                             </li>
                             <li className="nav-item dropdown nav-item-style">
@@ -624,7 +642,7 @@ const Navbar = () => {
                         ডেটা পুনরায় লোড করুন
                       </button>
 
-                      {!showReportDeleteEv() && (
+                      {showReportDeleteEv() && (
                         <Link
                           to="/mollayon-koron"
                           id="mollayon_koron_btn"

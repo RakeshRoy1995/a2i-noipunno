@@ -234,7 +234,7 @@ export async function reloadteacher_own_subject() {
     headers: { "content-type": "application/json" },
     url: page_list,
   };
-  
+
   const own_sub = await axios(options);
   const bi: any = await bi_info();
   const common_info: any = await get_common_info();
@@ -249,7 +249,7 @@ export async function reloadteacher_own_subject() {
       "class_teacher_student",
       JSON.stringify(data_dash)
     );
-    
+
     own_sub.data.data.subjects.map((std_data: any) => {
       std_data.competence.map((conpitance_data: any) => {
         conpitance_data.pis.map((data: any) => {
@@ -339,7 +339,6 @@ export function all_student() {
 
 // export function update_teacher_profile(caid: any, data: any) {
 //   const page_list = `${API_URL}/v2/account-update/${caid}`;
-
 //   const options = {
 //     method: "PUT",
 //     headers: { "content-type": "application/json" },
@@ -353,20 +352,38 @@ export function all_student() {
 export function update_teacher_profile(caid: any, data: any) {
   const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
 
-  let obj = {};
+
+  let obj = {}
   for (const [name, value] of data) {
-    obj = { ...obj, [name]: value };
+    if (name !== "image") {
+      obj = { ...obj, [name]: value };
+    }
+    // console.log(`KeyName: ${name}, value: ${value}`);
   }
+
+  console.log("obj==>", obj);
+
+  let img = {}
+  for (const [name, value] of data) {
+    if (name === "image") {
+      img = { ...img, [name]: value };
+    }
+  }
+  // console.log("img", img);
+
   const options = {
-    method: "PUT",
+    method: "POST",
     headers: { "content-type": "multipart/form-data" },
     url: page_list,
-    params: {
-      ...obj,
-    },
+    params: { ...obj },
+    data: { ...img }
   };
+
   return axios(options);
 }
+
+
+
 
 export function get_pi_evaluation_by_pi(
   class_room_uid: any,

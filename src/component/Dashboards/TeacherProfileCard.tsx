@@ -13,6 +13,8 @@ import eyeIcon from "../../assets/dashboard_materials/images/dashboard/eye.svg";
 import { teacher_designation } from "../../Request";
 // import { logged_teacher_details } from "../../utils/Utils";
 
+
+
 const TeacherProfileCard = () => {
   const [schoolName, setSchoolName] = useState<any>("");
   const [allDesignation, setAllDesignation] = useState<any>([])
@@ -31,7 +33,7 @@ const TeacherProfileCard = () => {
     image
   }: any = teacher_details;
 
-  const img_base_url = 'https://generic-common-storage.sgp1.vultrobjects.com/';
+  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
 
   const fetchData = async () => {
     // const designation_data = await teacher_designation();
@@ -81,7 +83,7 @@ const TeacherProfileCard = () => {
     }
   }, 500);
 
-// console.log(image);
+  // console.log(image);
 
   return (
     <div className="col-lg-2 col-md-6">
@@ -94,14 +96,9 @@ const TeacherProfileCard = () => {
           </Link>
 
           <div className="profile-img">
-          
-            {image ? 
-              <img src={img_base_url + image } alt="teacher-profile" /> :
-              <img src={teacherProfileImg} alt="teacher-profile" />
-            }
-
-
+            {image && <img src={img_base_url + image} alt="teacher-profile" />}
           </div>
+
           <div className="teacher-title">
             <h2>
               {/* {teacherDesignation} */}
@@ -122,7 +119,7 @@ const TeacherProfileCard = () => {
           </div>
         </div>
         <div className="teacher-info">
-          <h2 className="card-title text-two-line" style={{lineHeight:"1"}} >
+          <h2 className="card-title text-two-line" style={{ lineHeight: "1" }} >
             {name_bn || name_en || ''}
           </h2>
           <p className="card-text">

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { convertToBanglaNumber } from "../utils/Utils";
+import image_upload_icon from "../../src/assets/images/image-upload-icon/Image-upload-icon.jpg";
 
 
 const EditTeacherProfile = () => {
@@ -51,7 +52,7 @@ const EditTeacherProfile = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
     if (get_teachers_details) {
       console.log("userDetaisl", get_teachers_details?.data?.teachers[0]);
-      
+
       setuserDetails(get_teachers_details?.data?.teachers[0]);
     }
   }
@@ -67,7 +68,7 @@ const EditTeacherProfile = () => {
     setAllDesignation(designation_data.data.data);
   };
 
- 
+
   const getdistrictBydivisionID = id => {
     const divisionWiseDistric = allDistrict.filter(district => district.division_id == id)
     setdistrict(divisionWiseDistric)
@@ -103,7 +104,7 @@ const EditTeacherProfile = () => {
   }
 
   // console.log(teacherDesignation);
-  
+
 
 
 
@@ -199,6 +200,47 @@ const EditTeacherProfile = () => {
     }
   };
 
+  const [imagePreview, setImagePreview] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [warningMessage, setWarningMessage] = useState('ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Check file size
+      if (file.size > 100 * 1024) {
+        setWarningMessage('')
+        setErrorMessage('ছবির আকার ১০০ কিলোবাইট অতিক্রম করেছে, ছবির আকার ১০০ কিলোবাইটের (KB) ভিতর হতে হবে!');
+        return;
+      }
+
+      // Create an image element to get the image dimensions
+      const img = new Image();
+      img.onload = () => {
+        // Check image dimensions
+        if (img.width > 300 || img.height > 300) {
+          setWarningMessage('')
+          setErrorMessage('ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
+          return;
+        }
+
+        // If both size and dimensions are within limits, set the image preview
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImagePreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+        setErrorMessage('');
+        setWarningMessage('')
+      };
+      img.src = URL.createObjectURL(file);
+
+    } else {
+      setImagePreview(null);
+      setErrorMessage('');
+    }
+  };
+
+  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
 
   return (
     <section className="editTeacherProfilePage">
@@ -246,7 +288,7 @@ const EditTeacherProfile = () => {
                         <div className="input-group">
                           <input
                             type="text"
-                     
+
                             className={`form-control ${isBanglaValid ? '' : 'is-invalid'}`}
                             name="name_bn"
                             value={nameBn}
@@ -306,6 +348,7 @@ const EditTeacherProfile = () => {
                     </div> */}
 
 
+
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label">ইমেইল আইডি </label>
@@ -339,7 +382,7 @@ const EditTeacherProfile = () => {
                     </div>
 
 
-                    <div className="form-group  col-sm-4 col-md-6">
+                    {/* <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label">ছবি আপলোড করুন </label>
                         <div className="input-group">
@@ -349,11 +392,12 @@ const EditTeacherProfile = () => {
                             accept="image/*"
                             name="image"
                           />
-                          
-                      
                         </div>
                       </div>
-                    </div>
+                    </div> */}
+
+
+
 
                     <div className="form-group col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
@@ -373,7 +417,7 @@ const EditTeacherProfile = () => {
                       </div>
                     </div>
 
-                    
+
 
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
@@ -435,7 +479,6 @@ const EditTeacherProfile = () => {
                             </select>
                           </div>
                         </div>
-
                     }
 
                     {
@@ -479,6 +522,48 @@ const EditTeacherProfile = () => {
                           </div>
                         </div>
                     }
+
+                    <div className="form-group col-sm-4 col-md-6">
+                      <div className="d-flex align-items-center gap-3" style={{ width: "100%" }}>
+                        <div className="mb-3" style={{ fontSize: "16px", width: "50%" }}>
+                          <label className="form-label">
+                            ছবি আপলোড করুন
+                          </label>
+
+                          <div className="input-group ">
+                            <input
+                              className="mb-2"
+                              id="imageInput"
+                              name="image"
+                              type="file"
+                              accept="image/*"
+                              onChange={handleImageChange}
+                            />
+                            {warningMessage &&
+                              <small style={{ padding: "0px", margin: "0px", color: "red" }}>
+                                {warningMessage}
+                              </small>
+                            }
+                            {
+                              errorMessage &&
+                              <small style={{ padding: "0px", margin: "0px", color: "red" }}>
+                                {errorMessage}
+                              </small>
+                            }
+
+                          </div>
+                        </div>
+
+                        <div className="image-preview" style={{ width: "50%" }}>
+                          <img src={
+                            imagePreview ||
+                            // img_base_url + image ||
+                            image_upload_icon} alt="Preview" loading="lazy" style={{ maxWidth: '100%', maxHeight: '5rem' }} />
+                        </div>
+
+                      </div>
+                    </div>
+
 
                     <div className="d-flex justify-content-end align-items-center pt-3 pe-3">
                       <button type="submit" className="btn btn-primay px-5" style={{ backgroundColor: "#428F92", color: "#fff", }} > প্রোফাইল হালনাগাদ করুন{" "} <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem", }} />{" "} </button>

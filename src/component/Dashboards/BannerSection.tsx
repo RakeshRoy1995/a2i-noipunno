@@ -16,7 +16,7 @@ const BannerSection = () => {
           <ShikkathirHaziraChart />
           {/* <Total_Student_Teacher_ClassRoom_for_HeadTeacherDashboard /> */}
           <Total_Student_Teacher_ClassRoom_for_TeacherDashboard />
-          <OnorudhShomohu />
+          {/* <OnorudhShomohu /> */}
         </div>
       </div>
     </section>

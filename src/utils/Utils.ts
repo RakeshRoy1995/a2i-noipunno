@@ -457,15 +457,12 @@ export const formate_Bi_teanscript_dataBy_single_student = (
 
   let obj = {};
 
-  console.log(`data`, data);
 
   const stu = student_name;
   const allPi = data;
 
   if (stu) {
     const student_dta = all_studentsData.filter((d: any) => d.uid == stu);
-
-    console.log(`student_dta`, student_dta);
 
     const all_PI_array = [];
     for (let y = 0; y < allPi.length; y++) {
@@ -514,8 +511,6 @@ export const teacher_list = () => {
   };
 
   const all_teachers = removeDuplicates(all_teachers_with_duplicate, "uid");
-
-  // console.log(`all_teachers`, all_teachers);
   return all_teachers;
 };
 
@@ -738,6 +733,6 @@ export function save_PI_BI_again(data :any) {
 }
 
 export const show_report_open_time_msg =
-  'আগামী (সম্ভাব্য) ২০ জানুয়ারি থেকে নতুন ২০২৪ শিক্ষাবর্ষের শিক্ষক ও শিক্ষার্থী ব্যবস্থাপনার কাজ করা যাবে। এই সময়ের আগে অর্থাৎ ১৯ জানুয়ারি পর্যন্ত আপনারা কেউ নতুন শিক্ষাবর্ষের শিক্ষার্থী শিক্ষক বা এমন কোন তথ্য প্যানেলে যুক্ত করবেন না। </br> </br> শুধুমাত্র ২০২৩ শিক্ষাবর্ষের তথ্য চাইলে যোগ করতে পারেন। যদি ২০২৪ শিক্ষাবর্ষের কোন তথ্য নির্ধারিত তারিখের আগে প্যানেলে যুক্ত করেন তাহলে 20 তারিখের পরবর্তী সময়ে সেগুলো আর সিস্টেমে দেখা যাবে না। </br> ধন্যবাদ';
+  'সকলের অবগতির জন্য জানানো যাচ্ছে যে, ২০২৪ সালের শিক্ষাবর্ষের কার্যক্রম চালু করার লক্ষ্যে আগামী ১৭ জানুয়ারি সন্ধ্যা ছয়টা থেকে ২০ জানুয়ারি সন্ধ্যা ছয়টা পর্যন্ত  নৈপুণ্য এর কার্যক্রম সাময়িকভাবে বন্ধ থাকবে। সবার সহযোগিতার জন্যে ধন্যবাদ';
 // export const show_report_OFF_time_msg = "দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে";
 export const show_report_OFF_time_msg = "";

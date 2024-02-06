@@ -133,7 +133,6 @@ const MyDocument = ({
                   return null;
                 }
 
-                console.log(`subject_name(item[0])`, subject_name(item[0]) , item[0]);
                 return (
                   index < 5 && (
                     <Text style={styles.text}>

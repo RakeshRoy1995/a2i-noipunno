@@ -205,7 +205,6 @@ export async function teacher_own_subject() {
   if (cls_room == "") {
     cls_room = await class_room_info();
     localStorage.setItem("cls_room", JSON.stringify(cls_room));
-    console.log(`cls_room enter`);
   }
 
   if (cls_room.data.data.subjects.length == 0) {

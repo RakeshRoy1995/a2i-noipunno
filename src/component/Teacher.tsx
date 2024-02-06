@@ -158,7 +158,7 @@ export default function Teacher() {
 
   return (
     <>
-      {!showReportDeleteEv() ? (
+      {showReportDeleteEv() ? (
         <div className="content mb-5 teacher_compo_bg">
           {showLoadingErr ? (
             <p className="text-danger text-center">{showLoadingErr}</p>

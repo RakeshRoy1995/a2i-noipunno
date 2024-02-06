@@ -174,7 +174,7 @@ const Navbar = () => {
                         </li>
 
                         <li>
-                          <NavLink to="teacher-profile">
+                          <NavLink to="edit-teacher-profile">
                             <div className="topnav-dropdown-style dropdown-item profile-style">
                               <img
                                 src={amarProfileIcon}
@@ -642,7 +642,7 @@ const Navbar = () => {
                         ডেটা পুনরায় লোড করুন
                       </button>
 
-                      {!showReportDeleteEv() && (
+                      {showReportDeleteEv() && (
                         <Link
                           to="/mollayon-koron"
                           id="mollayon_koron_btn"

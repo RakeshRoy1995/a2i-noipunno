@@ -35,12 +35,6 @@ const TeacherProfileCard = () => {
 
   const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
 
-  const fetchData = async () => {
-    // const designation_data = await teacher_designation();
-    // setAllDesignation(designation_data.data.data);
-  };
-
-
   const getUserDetails = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
     if (get_teachers_details) {
@@ -68,11 +62,6 @@ const TeacherProfileCard = () => {
   }
 
   useEffect(() => {
-    fetchData();
-  }, [])
-
-
-  useEffect(() => {
     setAllStateData()
   }, [allDesignation])
 
@@ -86,7 +75,7 @@ const TeacherProfileCard = () => {
   // console.log(image);
 
   return (
-    <div className="col-lg-2 col-md-6">
+    <div className="col-lg-3 col-md-6">
       <div className="card teacher-profile border-0">
         <div className="card-header border-0">
           <Link to={"/edit-teacher-profile"}>
@@ -119,7 +108,7 @@ const TeacherProfileCard = () => {
           </div>
         </div>
         <div className="teacher-info">
-          <h2 className="card-title text-two-line" style={{ lineHeight: "1" }} >
+          <h2 className="card-title text-two-line" style={{lineHeight:"2"}} >
             {name_bn || name_en || ''}
           </h2>
           <p className="card-text">

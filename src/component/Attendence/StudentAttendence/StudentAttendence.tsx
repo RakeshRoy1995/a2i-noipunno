@@ -16,7 +16,7 @@ const StudentAttendance = () => {
   const [students, setStudents] = useState([]);
   const [attendance, setAttendance] = useState({});
   const [classTeacherInfos, setClassTeacherInfos] = useState({});
-  const [classRoomInfos, setClassRoomInfos] = useState([]);
+  const [classRoomInfos, setClassRoomInfos] = useState<any>({});
   const [classRoomId, setClassRoomId] = useState('');
 
 
@@ -63,28 +63,28 @@ const StudentAttendance = () => {
 
   useEffect(() => {
 
-    classRoomInfos?.forEach((item) => {
-      const branch_id = item?.class_room?.branch_id;
-      const class_id = item?.class_room?.class_id;
-      const class_teacher_id = item?.class_room?.class_teacher_id;
-      const section_id = item?.class_room?.section_id;
-      const shift_id = item?.class_room?.shift_id;
-      const version_id = item?.class_room?.version_id;
+    // classRoomInfos?.forEach((item) => {
+    //   const branch_id = item?.class_room?.branch_id;
+    //   const class_id = item?.class_room?.class_id;
+    //   const class_teacher_id = item?.class_room?.class_teacher_id;
+    //   const section_id = item?.class_room?.section_id;
+    //   const shift_id = item?.class_room?.shift_id;
+    //   const version_id = item?.class_room?.version_id;
 
-      if (
-        classTeacherInfos?.branch_id === branch_id &&
-        classTeacherInfos?.class_id === class_id &&
-        classTeacherInfos?.class_teacher_id === class_teacher_id &&
-        classTeacherInfos?.section_id === section_id &&
-        classTeacherInfos?.shift_id === shift_id &&
-        classTeacherInfos?.version_id === version_id
-      ) {
+    //   if (
+    //     classTeacherInfos?.branch_id === branch_id &&
+    //     classTeacherInfos?.class_id === class_id &&
+    //     classTeacherInfos?.class_teacher_id === class_teacher_id &&
+    //     classTeacherInfos?.section_id === section_id &&
+    //     classTeacherInfos?.shift_id === shift_id &&
+    //     classTeacherInfos?.version_id === version_id
+    //   ) {
 
-        // console.log(item);
-        // console.log(item?.class_room_id);
-        setClassRoomId(item?.class_room_id);
-      }
-    })
+    //     // console.log(item);
+    //     // console.log(item?.class_room_id);
+    //     setClassRoomId(item?.class_room_id);
+    //   }
+    // })
 
   }, [classTeacherInfos, classRoomInfos]);
 
@@ -106,7 +106,7 @@ const StudentAttendance = () => {
     <>
       <Breadcumbtitle title={"শিক্ষার্থীর হাজিরা"} />
 
-      <h3 className="container my-4 text-center"> {(classTeacherInfos?.class_id == 6) && "ষষ্ঠ" || (classTeacherInfos?.class_id == 6) && "সপ্তম"} শ্রেণির হাজিরা </h3>
+      {/* <h3 className="container my-4 text-center"> {(classTeacherInfos?.class_id == 6) && "ষষ্ঠ" || (classTeacherInfos?.class_id == 6) && "সপ্তম"} শ্রেণির হাজিরা </h3> */}
 
       <form className="container">
         <div className="form-group  col-sm-4 col-md-6">

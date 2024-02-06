@@ -8,7 +8,6 @@ import {
   PDFDownloadLink,
   View,
   Image,
-  Svg,
 } from "@react-pdf/renderer";
 // import icon from "../../assets/images/Vector.png"
 import icon from "../../../src/assets/project_ca_html/icons/OK_Icon.png";
@@ -18,7 +17,6 @@ import {
   branch_name,
   convertToBanglaNumber,
   section_name,
-  subject_name,
 } from "../../utils/Utils";
 import { BsFiletypePdf } from "react-icons/bs";
 import React from "react";
@@ -28,149 +26,6 @@ Font.register({
   src: "kalpurush.ttf",
   format: "truetype",
 });
-
-// const styles = StyleSheet.create({
-//   page: {
-//     fontFamily: "Kalpurush",
-//     padding: 4,
-//     textAlign: "left",
-//     marginTop: 10
-//   },
-//   h1: {
-//     fontFamily: "Kalpurush",
-//     fontSize: 16,
-//     textAlign: "center",
-//     fontWeight: 700,
-//     margin: 5,
-//     lineHeight: 1
-//   },
-//   h2: {
-//     fontFamily: "Kalpurush",
-//     textAlign: "center",
-//     fontSize: 12,
-//   },
-//   h3: {
-//     fontFamily: "Kalpurush",
-//     fontSize: 11,
-//     textAlign: "center",
-//   },
-//   h5: {
-//     fontSize: 10,
-//     fontWeight: 500,
-//   },
-
-//   table: {
-
-//     width: "95%",
-//     margin: 'auto'
-
-//   },
-//   tableRowTop: {
-//     flexDirection: "row",
-//     borderTopWidth: 1,
-//     borderLeftWidth: 1,
-
-//   },
-//   tableRowBottom: {
-//     flexDirection: "row",
-//     borderTopWidth: 0,
-//     borderLeftWidth: 0,
-//     borderBottomWidth: 1,
-//   },
-//   tableRow: {
-
-//     flexDirection: "row",
-//     borderStyle: "solid",
-//     borderWidth: '0.5',
-//   },
-//   tableCol: {
-//     width: "25%",
-//     borderStyle: "solid",
-//     borderWidth: '0.5',
-//     borderLeftWidth: 0,
-//     borderTopWidth: 0,
-
-//   },
-//   tableColPoint: {
-
-//   },
-//   tableColStdNameRoll: {
-//     width: "50%",
-//     borderStyle: "solid",
-//     borderWidth: 1,
-//     borderLeftWidth: 0,
-//     borderTopWidth: 0,
-//   },
-//   tableColTitle: {
-//     width: "100%",
-//     borderStyle: "solid",
-//     borderWidth: 1,
-//     borderLeftWidth: 0,
-//     borderTopWidth: 0,
-//   },
-//   tableCell: {
-//     fontFamily: "Kalpurush",
-//     padding: "5px",
-//     fontSize: 11,
-//     lineHeight: "1px",
-//     textOverflow: "ellipsis",
-//     width: '90%',
-
-//   },
-
-//   tableCellTikMark: {
-//     fontFamily: "Kalpurush",
-//     margin: "auto",
-//     marginTop: "3px",
-//     padding: 1,
-//     fontSize: 10,
-//     lineHeight: "1px",
-//     textOverflow: "ellipsis",
-//     height: "15px"
-//   },
-
-//   section: {
-//     margin: 20,
-//     padding: 10,
-//     flexGrow: 1,
-//   },
-
-//   tableHeader: {
-//     flexDirection: "row",
-//     borderBottomWidth: 1,
-//     borderColor: "#000",
-//     marginBottom: 10,
-//     fontWeight: "bold",
-//   },
-//   cell: {
-//     border: "1px solid #000 !important",
-//     padding: 1,
-//     flexGrow: 1,
-//     width: "25%",
-//   },
-
-//   tikMark: {
-//     marginLeft: 50,
-
-//     marginTop: 5,
-//     width: "12px",
-//     height: "10px",
-//   },
-
-//   teacherSignatureContainer: {
-//     marginTop: "50px",
-//     display: "flex",
-//     flexDirection: "row",
-//     gap: "150px",
-//   },
-//   teacherSignature: {
-//     fontFamily: "Kalpurush",
-//     color: "#000",
-//     marginTop: "10px",
-//     fontSize: 12,
-//     fontWeight: 600,
-//   },
-// });
 
 const styles = StyleSheet.create({
   page: {
@@ -325,9 +180,6 @@ const MyDocument = ({
           <br />
         </Text>
         <Text style={[styles.h2]}> { branch_name(allFelter.branch , true) }  { branch_location(allFelter?.branch) || instititute?.district?.district_name_bn || instititute?.district?.district_name_en  } </Text>
-
-        {/* <Text style={[styles.h2]}>{instititute?.district?.district_name_bn || instititute?.district?.district_name_en  }</Text> */}
-        {/* style={{ color: 'white', textAlign: 'center', margin: 30 }} */}
         <Text style={[styles.h3, { marginBottom: 30 }]}>
           আচরণগত ট্রান্সক্রিপ্ট-
           {convertToBanglaNumber(student_info_pdf?.registration_year)}
@@ -510,7 +362,7 @@ const MyDocument = ({
 
       <View
         fixed
-        style={{ height: 30, fontSize: 7, textAlign: "center", padding: "5px" }}
+        style={{ height: 50, fontSize: 7, textAlign: "center", padding: "5px" }}
       >
         <Text style={{ textAlign: "center", bottom: 0 }}>
           {instititute?.institute_name} { " " }.

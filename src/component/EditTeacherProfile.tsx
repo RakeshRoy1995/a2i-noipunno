@@ -640,7 +640,7 @@ const EditTeacherProfile = () => {
                         <div className="image-preview" style={{ width: "50%" }}>
                           <img src={
                             signaturePreview ||
-                            // img_base_url + signature ||
+                            img_base_url + signature ||
                             image_upload_icon} alt="Preview" loading="lazy" style={{ maxWidth: '100%', maxHeight: '5rem' }} />
                         </div>
 

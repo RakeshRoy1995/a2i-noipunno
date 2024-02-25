@@ -279,7 +279,7 @@ export default function Teacher() {
                                           {" "}
                                           {d?.subject?.class_uid == "6"
                                             ? "ষষ্ঠ "
-                                            : "সপ্তম "}{" "}
+                                            : <> {d?.subject?.class_uid == "7" ? "সপ্তম " : <>  {d?.subject?.class_uid == "8"  ? "অষ্টম" : "নবম"}  </> } </> }{" "}
                                           শ্রেণি{" "}
                                         </p>
                                       </div>

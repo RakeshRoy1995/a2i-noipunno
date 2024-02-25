@@ -37,7 +37,18 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
         });
 
         return std_data?.class_room?.students.map((stu_data: any) => {
-          student.push(stu_data);
+
+
+          const studnt :any = {
+            ...stu_data ,
+            ...stu_data?.student_info
+          }
+  
+          delete studnt['student_info']
+  
+          student.push(studnt);
+
+          // student.push(stu_data);
         });
       });
 

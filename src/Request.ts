@@ -365,7 +365,7 @@ export function update_teacher_profile(caid: any, data: any) {
 
   let img = {};
   for (const [name, value] of data) {
-    if ((name === "image" )) {
+    if ((name === "image" || name == "signature")) {
       img = { ...img, [name]: value };
     }
   }

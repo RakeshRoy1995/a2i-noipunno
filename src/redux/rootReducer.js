@@ -18,5 +18,4 @@ const rootReducer = combineReducers({
   allNotification: NotificationActionReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
-
 export default rootReducer;

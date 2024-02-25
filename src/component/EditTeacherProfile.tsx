@@ -43,7 +43,8 @@ const EditTeacherProfile = () => {
     designation_id,
     pdsid,
     caid,
-    image
+    image,
+    signature,
   } = userDetails;
 
   // const dpesignation_id = "10";
@@ -126,9 +127,9 @@ const EditTeacherProfile = () => {
         const data_dash: any = await teacher_dashboard();
         localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
 
-        setTimeout(() => {
-          window.location.replace("/");
-        }, 900)
+        // setTimeout(() => {
+        //   window.location.replace("/");
+        // }, 900)
 
       }
 
@@ -203,6 +204,7 @@ const EditTeacherProfile = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [warningMessage, setWarningMessage] = useState('ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -239,6 +241,48 @@ const EditTeacherProfile = () => {
       setErrorMessage('');
     }
   };
+
+
+  const [signaturePreview, setsSgnaturePreview] = useState(null);
+  const [signatureErrorMessage, setSignatureErrorMessage] = useState('');
+  const [signatureWarningMessage, setSignatureWarningMessage] = useState('সিগ্নেচার ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+
+  const handleSignatureImg = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Check file size
+      if (file.size > 100 * 1024) {
+        setSignatureWarningMessage('')
+        setSignatureErrorMessage('সিগ্নেচার ছবির আকার ১০০ কিলোবাইট অতিক্রম করেছে, ছবির আকার ১০০ কিলোবাইটের (KB) ভিতর হতে হবে!');
+        return;
+      }
+
+      // Create an image element to get the image dimensions
+      const img = new Image();
+      img.onload = () => {
+        // Check image dimensions
+        if (img.width > 300 || img.height > 300) {
+          setSignatureWarningMessage('')
+          setSignatureErrorMessage('সিগ্নেচার ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
+          return;
+        }
+
+        // If both size and dimensions are within limits, set the image preview
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setsSgnaturePreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+        setSignatureErrorMessage('');
+        setSignatureWarningMessage('')
+      };
+      img.src = URL.createObjectURL(file);
+
+    } else {
+      setsSgnaturePreview(null);
+      setSignatureErrorMessage('');
+    }
+  }
 
   const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
 
@@ -557,7 +601,46 @@ const EditTeacherProfile = () => {
                         <div className="image-preview" style={{ width: "50%" }}>
                           <img src={
                             imagePreview ||
-                            // img_base_url + image ||
+                            img_base_url + image ||
+                            image_upload_icon} alt="Preview" loading="lazy" style={{ maxWidth: '100%', maxHeight: '5rem' }} />
+                        </div>
+
+                      </div>
+                    </div>
+                    <div className="form-group col-sm-4 col-md-6">
+                      <div className="d-flex align-items-center gap-3" style={{ width: "100%" }}>
+                        <div className="mb-3" style={{ fontSize: "16px", width: "50%" }}>
+                          <label className="form-label">
+                            সিগ্নেচার আপলোড করুন
+                          </label>
+
+                          <div className="input-group ">
+                            <input
+                              className="mb-2"
+                              name="signature"
+                              type="file"
+                              accept="image/*"
+                              onChange={handleSignatureImg}
+                            />
+                            {signatureWarningMessage &&
+                              <small style={{ padding: "0px", margin: "0px", color: "red" }}>
+                                {signatureWarningMessage}
+                              </small>
+                            }
+                            {
+                              signatureErrorMessage &&
+                              <small style={{ padding: "0px", margin: "0px", color: "red" }}>
+                                {signatureErrorMessage}
+                              </small>
+                            }
+
+                          </div>
+                        </div>
+
+                        <div className="image-preview" style={{ width: "50%" }}>
+                          <img src={
+                            signaturePreview ||
+                            // img_base_url + signature ||
                             image_upload_icon} alt="Preview" loading="lazy" style={{ maxWidth: '100%', maxHeight: '5rem' }} />
                         </div>
 

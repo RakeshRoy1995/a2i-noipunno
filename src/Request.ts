@@ -353,23 +353,23 @@ export function update_teacher_profile(caid: any, data: any) {
   const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
 
 
-  let obj = {}
+  let obj = {};
   for (const [name, value] of data) {
-    if (name !== "image") {
+    if (name !== "image" && name !== "signature") {
       obj = { ...obj, [name]: value };
     }
-    // console.log(`KeyName: ${name}, value: ${value}`);
   }
 
-  console.log("obj==>", obj);
+  console.log(obj);
 
-  let img = {}
+
+  let img = {};
   for (const [name, value] of data) {
-    if (name === "image") {
+    if ((name === "image" )) {
       img = { ...img, [name]: value };
     }
   }
-  // console.log("img", img);
+  console.log("img", img);
 
   const options = {
     method: "POST",

@@ -1,6 +1,19 @@
-.root_styles {
+@font-face {
+  font-family: 'Kalpurush';
+  src: url('kalpurush.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
-  font-family: "Roboto";
+/* font-class Nikosh */
+.ff_niskosh {
+  /* background-color: blue; */
+  font-family: 'Kalpurush' !important;
+}
+
+.root_styles {
+  font-family: 'Kalpurush';
+  /* font-family: "Roboto"; */
   box-sizing: border-box;
   background-color: #efefef;
   color: #000000;

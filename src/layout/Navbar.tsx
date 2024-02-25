@@ -43,7 +43,9 @@ const Navbar = () => {
     window.location.reload();
   };
 
-  const location = useLocation();
+  const location = useLocation()
+  
+
   const [isReportPathActive, setIsReportPathActive] = useState(false);
   const [isShikkarthiPathActive, setIsShikkarthiPathActive] = useState(false);
   const [isSryniPathActive, setIsSryniPathActive] = useState(false);
@@ -51,7 +53,6 @@ const Navbar = () => {
 
   const activeRoute = () => {
     const pathName = location.pathname.slice(1);
-    // console.log("pathName", pathName);
     if (
       pathName === "student-transcript" ||
       pathName === "shikkarthir-report-card"
@@ -82,6 +83,9 @@ const Navbar = () => {
       setIsFAQpathActive(false);
     }
   };
+
+  
+
 
   const fetchData = async () => {
     try {

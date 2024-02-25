@@ -334,6 +334,25 @@ export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
     let obj = {};
     class_room?.data?.data?.subjects.map((d_2: any) => {
       if (d_2?.subject_id === d?.subject_id && d_2.class_room ) {
+
+        console.log(`d_2.class_room`, d_2.class_room);
+      const stdnt =   d_2.class_room.students.map((formate_stu)=>{
+
+        console.log(`formate_stu`, formate_stu);
+
+        const studnt :any = {
+          ...formate_stu ,
+          ...formate_stu?.student_info
+        }
+
+        delete studnt['student_info']
+
+        return studnt
+
+        })
+
+        d_2.class_room.students = stdnt
+
         obj = { ...d_2, ...d };
         own_subject_data.push(obj);
       }

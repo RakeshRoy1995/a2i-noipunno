@@ -260,7 +260,17 @@ export async function reloadteacher_own_subject() {
 
     cls_room.data.data.subjects.map((stu_data: any) => {
       stu_data.class_room.students.map((stdnt): any => {
-        student.push(stdnt);
+
+        const studnt :any = {
+          ...stdnt ,
+          ...stdnt?.student_info
+        }
+
+        console.log(`stdnt`, stdnt , studnt);
+
+        delete studnt['student_info']
+
+        student.push(studnt);
       });
     });
 
@@ -290,7 +300,7 @@ export function bi_info() {
 }
 
 export function class_room_info() {
-  const page_list = `${API_URL}/v2/class-room-info`;
+  const page_list = `${API_URL}/v2/class-room-information`;
 
   const options = {
     method: "get",

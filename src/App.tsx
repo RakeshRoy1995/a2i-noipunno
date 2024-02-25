@@ -55,7 +55,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="ff_niskosh">
       {topbar && <Navbar />}
 
       <Routes>
@@ -100,7 +100,7 @@ function App() {
 
       {topbar && <Footer />}
 
-    </>
+    </div>
   );
 }
 

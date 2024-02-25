@@ -260,17 +260,7 @@ export async function reloadteacher_own_subject() {
 
     cls_room.data.data.subjects.map((stu_data: any) => {
       stu_data.class_room.students.map((stdnt): any => {
-
-        const studnt :any = {
-          ...stdnt ,
-          ...stdnt?.student_info
-        }
-
-        console.log(`stdnt`, stdnt , studnt);
-
-        delete studnt['student_info']
-
-        student.push(studnt);
+        student.push(stdnt);
       });
     });
 
@@ -300,7 +290,7 @@ export function bi_info() {
 }
 
 export function class_room_info() {
-  const page_list = `${API_URL}/v2/class-room-information`;
+  const page_list = `${API_URL}/v2/class-room-info`;
 
   const options = {
     method: "get",
@@ -363,23 +353,23 @@ export function update_teacher_profile(caid: any, data: any) {
   const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
 
 
-  let obj = {}
+  let obj = {};
   for (const [name, value] of data) {
-    if (name !== "image") {
+    if (name !== "image" && name !== "signature") {
       obj = { ...obj, [name]: value };
     }
-    // console.log(`KeyName: ${name}, value: ${value}`);
   }
 
-  console.log("obj==>", obj);
+  console.log(obj);
 
-  let img = {}
+
+  let img = {};
   for (const [name, value] of data) {
-    if (name === "image") {
+    if ((name === "image" || name == "signature")) {
       img = { ...img, [name]: value };
     }
   }
-  // console.log("img", img);
+  console.log("img", img);
 
   const options = {
     method: "POST",

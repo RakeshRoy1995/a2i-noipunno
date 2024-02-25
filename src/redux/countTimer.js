@@ -10,8 +10,6 @@ export const countTimerLoginExpireReducer = createSlice({
   initialState,
   reducers: {
     countTimerLoginExpire: (state, action) => {
-
-      console.log(`action`,  action);
       state.value = action.payload;
     },
   },

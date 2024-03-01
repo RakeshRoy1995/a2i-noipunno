@@ -11,6 +11,7 @@ import image_upload_icon from "../../src/assets/images/image-upload-icon/Image-u
 
 
 const EditTeacherProfile = () => {
+  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL;
   const [userDetails, setuserDetails] = useState<any>({});
   const [allDivision, setAllDivision] = useState<any>([]);
   const [allDistrict, setAllDistrict] = useState<any>([]);
@@ -21,13 +22,16 @@ const EditTeacherProfile = () => {
   const [upozila, setupozila] = useState<any>([]);
   const [countdown, setCountdown] = useState(30);
   const [selectedDate, setSelectedDate] = useState(new Date());
-
   const [nameBn, setNameBn] = useState('');
   const [isBanglaValid, setIsBanglaValid] = useState(true);
-
   const [nameEn, setNameEn] = useState('');
   const [isEnglishValid, setisEnglishValid] = useState(true);
-
+  const [imagePreview, setImagePreview] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [warningMessage, setWarningMessage] = useState('ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+  const [signaturePreview, setsSgnaturePreview] = useState(null);
+  const [signatureErrorMessage, setSignatureErrorMessage] = useState('');
+  const [signatureWarningMessage, setSignatureWarningMessage] = useState('সিগ্নেচার ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
 
 
   const {
@@ -104,9 +108,6 @@ const EditTeacherProfile = () => {
     }
   }
 
-  // console.log(teacherDesignation);
-
-
 
 
   const handleTeacherProfileEdit = async (event: any) => {
@@ -127,35 +128,21 @@ const EditTeacherProfile = () => {
         const data_dash: any = await teacher_dashboard();
         localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
 
-        // setTimeout(() => {
-        //   window.location.replace("/");
-        // }, 900)
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 700)
 
       }
 
     } catch (error) {
-
-      // alert('হালনাগাদ সম্পন্ন হয়নি, আবার চেষ্টা করুন!');
       Swal.fire({
         icon: "error",
         title: "হালনাগাদ সম্পন্ন হয়নি!",
         text: "আবার চেষ্টা করুন!",
         confirmButtonText: "হ্যাঁ",
-        // footer: '<a href="#">Why do I have this issue?</a>'
       });
     }
   }
-
-  useEffect(() => {
-    fetchData();
-    getUserDetails();
-  }, []);
-
-  useEffect(() => {
-    setAllStateData()
-  }, [designation_id, allDesignation, date_of_birth, name_bn, name_en])
-
-
 
 
   const handleBanglaInputValidate = (event) => {
@@ -170,12 +157,8 @@ const EditTeacherProfile = () => {
     }
   };
 
-
-
   const handleEnglishInputValidate = (event) => {
     const inputValue = event.target.value;
-
-    // Regular expression to check if the input contains Bangla characters
     const englishPattern = /^[a-zA-Z\s]*$/;
 
     if (englishPattern.test(inputValue) || inputValue === '') {
@@ -186,9 +169,6 @@ const EditTeacherProfile = () => {
     }
   };
 
-  const [imagePreview, setImagePreview] = useState(null);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [warningMessage, setWarningMessage] = useState('ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -209,8 +189,6 @@ const EditTeacherProfile = () => {
           setErrorMessage('ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
           return;
         }
-
-        // If both size and dimensions are within limits, set the image preview
         const reader = new FileReader();
         reader.onloadend = () => {
           setImagePreview(reader.result);
@@ -227,10 +205,6 @@ const EditTeacherProfile = () => {
     }
   };
 
-
-  const [signaturePreview, setsSgnaturePreview] = useState(null);
-  const [signatureErrorMessage, setSignatureErrorMessage] = useState('');
-  const [signatureWarningMessage, setSignatureWarningMessage] = useState('সিগ্নেচার ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
 
   const handleSignatureImg = (e) => {
     const file = e.target.files[0];
@@ -269,7 +243,15 @@ const EditTeacherProfile = () => {
     }
   }
 
-  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
+  useEffect(() => {
+    fetchData();
+    getUserDetails();
+  }, []);
+
+  useEffect(() => {
+    setAllStateData()
+  }, [designation_id, allDesignation, date_of_birth, name_bn, name_en])
+
 
   return (
     <section className="editTeacherProfilePage">
@@ -356,7 +338,7 @@ const EditTeacherProfile = () => {
                             maxLength={11}
                             minLength={11}
                           />
-                          
+
                         </div>
                       </div>
                     </div>
@@ -372,8 +354,6 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
                     </div> */}
-
-
 
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
@@ -407,24 +387,6 @@ const EditTeacherProfile = () => {
                       </div>
                     </div>
 
-
-                    {/* <div className="form-group  col-sm-4 col-md-6">
-                      <div className="mb-3" style={{ fontSize: "16px" }}>
-                        <label className="form-label">ছবি আপলোড করুন </label>
-                        <div className="input-group">
-                          <input
-                            type="file"
-                            id="imageInput"
-                            accept="image/*"
-                            name="image"
-                          />
-                        </div>
-                      </div>
-                    </div> */}
-
-
-
-
                     <div className="form-group col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label htmlFor="gender" className="form-label">লিঙ্গ</label>
@@ -442,8 +404,6 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
                     </div>
-
-
 
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
@@ -629,11 +589,9 @@ const EditTeacherProfile = () => {
                       </div>
                     </div>
 
-
                     <div className="d-flex justify-content-end align-items-center pt-3 pe-3">
                       <button type="submit" className="btn btn-primay px-5" style={{ backgroundColor: "#428F92", color: "#fff", }} > প্রোফাইল হালনাগাদ করুন{" "} <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem", }} />{" "} </button>
                     </div>
-
                   </form>
                 </div>
               </div>

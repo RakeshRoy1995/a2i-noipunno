@@ -3,8 +3,6 @@ import { useState } from "react";
 export default function Footer() {
   const [userDetails, setuserDetails] = useState<any>("");
   
-
-
   setTimeout(() => {
     
     if (!userDetails?.email) {
@@ -17,10 +15,10 @@ export default function Footer() {
 
   return (
     <div className="container-fluid  fixed-bottom  mt-4">
-      {userDetails?.email && (
+      {(userDetails?.email || userDetails?.id || userDetails?.caid) && (
         <div className="container noipunno-footer d-flex justify-content-between ">
           <div style={{ fontWeight: "bold", fontSize: 12 }}>
-            সর্বস্বত্ব সংরক্ষিত © 2023 শিক্ষা মন্ত্রণালয়, গণপ্রজাতন্ত্রী
+            সর্বস্বত্ব সংরক্ষিত © {new Date().getFullYear()} শিক্ষা মন্ত্রণালয়, গণপ্রজাতন্ত্রী
             বাংলাদেশ সরকার
           </div>
           <div className="d-flex">

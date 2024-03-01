@@ -1,14 +1,13 @@
 import React from "react";
-import Accordion from "react-bootstrap/Accordion";
 import {
   teacher_dashboard,
   teacher_own_subject,
-  get_pi_bi_evaluation_list,
   get_report_card,
   dimension_by_subject,
   clssWiseSubject,
   bi_report_card_by_student,
   bi_report_card_details,
+  class_teacher_all_student_data,
 } from "../Request";
 import { useState, useEffect } from "react";
 import styles from "./Home.style.module.css";
@@ -16,104 +15,109 @@ import { SlBookOpen } from "react-icons/sl";
 import {
   section_name,
   shift_name,
-  all_students,
   formate_report_data,
   version_name,
   accessBIandReport,
   showReportDeleteEv,
   show_report_open_time_msg,
-  showPiBiSubject,
+  teacher_name,
 } from "../utils/Utils";
-// import {handleConvertToPdf} from "./Pdf"
 import Breadcumb from "../layout/Breadcumb";
-import Pdf from "./Pdf";
-import ShikarthirReportCard from "./ShikarthirReportCard";
 import BiRawPDFDownload from "./PDFMaker/ReportPdf";
 import TableComp from "./TableComp";
-// import "../../src/styles/noipunno_custom_styles.css";
+import { Spinner } from "react-bootstrap";
 
-export default function StudentReport() {
+export default function StudentReport() {  
   const [err, seterr] = useState<any>("");
-  const [subject, setsubject] = useState([]);
   const [instititute, setinstititute] = useState<any>("");
   const [biData, setbiData] = useState<any>([]);
   const [selected_student, setselected_student] = useState<any>([]);
   const [all_subject, setall_subject] = useState<any>([]);
   const [allFelter, setallFelter] = useState<any>({});
   const [data, setdata] = useState<any>({});
+  const [all_student_and_class, setall_student_and_class] = useState<any>([]);
+  const [new_student, setnew_student] = useState<any>([]);
+  const [loader, setloader] = useState(true);
+  let [numberOfRender, setnumberOfRender] = useState(1);
+  const [showLoadingErr, setshowLoadingErr] = useState("");
 
   const fetchData = async () => {
+    setloader(true);
+    setshowLoadingErr("");
+
     const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
     const own_SUbjects = own_SUbjects__ ? JSON.parse(own_SUbjects__) : "";
 
     const teacher_dash__: any = localStorage.getItem("teacher_dashboard") || "";
     const teacher_dash = teacher_dash__ ? JSON.parse(teacher_dash__) : "";
 
-    let own_subjet: any = "";
-    if (own_SUbjects) {
-      own_subjet = own_SUbjects;
-    } else {
-      own_subjet = await teacher_own_subject();
-      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+    const class_teacher_student__: any =
+      localStorage.getItem("class_teacher_student") || "";
+    const class_teacher_student = class_teacher_student__
+      ? JSON.parse(class_teacher_student__)
+      : "";
+
+    try {
+      let class_teacher_student_data: any = "";
+      if (class_teacher_student) {
+        class_teacher_student_data = class_teacher_student;
+      } else {
+        const data_dash: any = await class_teacher_all_student_data();
+        class_teacher_student_data = data_dash;
+        localStorage.setItem(
+          "class_teacher_student",
+          JSON.stringify(class_teacher_student_data)
+        );
+      }
+
+      if (class_teacher_student_data.data.data.students.length) {
+        setall_student_and_class(class_teacher_student_data.data.data.students);
+        
+      }
+
+      let data: any = "";
+      if (teacher_dash) {
+      } else {
+        const data_dash: any = await teacher_dashboard();
+        localStorage.setItem(
+          "teacher_dashboard",
+          JSON.stringify(data_dash.data)
+        );
+      }
+
+      let own_subjet: any = "";
+      if (own_SUbjects) {
+        own_subjet = own_SUbjects;
+      } else {
+        own_subjet = await teacher_own_subject();
+        localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+      }
+
+      setinstititute(teacher_dash?.data?.institute);
+
+      setloader(false);
+    } catch (error) {
+      setshowLoadingErr("");
+
+      numberOfRender++;
+
+      if (numberOfRender <= 10) {
+        setnumberOfRender(numberOfRender);
+        fetchData();
+      } else {
+        setloader(false);
+        setshowLoadingErr(
+          "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
+        );
+      }
     }
-    let data: any = "";
-    if (teacher_dash) {
-      data = teacher_dash;
-    } else {
-      const data_dash: any = await teacher_dashboard();
-      data = data_dash.data;
-      localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
-    }
-
-    let all_subject: any = [];
-
-    own_subjet.data.data.subjects.map((d: any) => {
-      data.data.subjects.map((d_2: any) => {
-        if (d_2.subject_id === d.subject_id) {
-          data.data.teachers.map((al_tech: any) => {
-            if (d.teacher_id == al_tech.uid) {
-              let obj: any = {
-                subject: d_2,
-                own_subjet: d,
-                teacher: al_tech,
-                section: d.class_room.section_id,
-                class: d.class_room.class_id,
-                shift: d.class_room.shift_id,
-                students: d.class_room.students.student_name_bn,
-              };
-
-              all_subject.push(obj);
-            }
-          });
-        }
-      });
-    });
-    setinstititute(teacher_dash?.data?.institute);
-    setsubject(all_subject);
   };
 
   useEffect(() => {
+    setloader(true);
     fetchData();
   }, []);
 
-  const uniquestudents = [
-    ...new Set(subject.map((data) => data?.own_subjet?.class_room?.students)),
-  ];
-
-  const studnt: any = [];
-
-  for (let index = 0; index < uniquestudents.length; index++) {
-    const element = uniquestudents[index];
-
-    for (let i = 0; i < element.length; i++) {
-      const element2 = element[i];
-      studnt.push(element2);
-    }
-  }
-
-  const Stuent_result = Object.values(
-    studnt.reduce((acc, obj) => ({ ...acc, [obj.uid]: obj }), {})
-  );
 
   const fetchDataFromAPI = async (student_name: any, l_loop: any = 1) => {
     seterr("");
@@ -179,15 +183,7 @@ export default function StudentReport() {
           );
         }
 
-        const clssWiseSub_data: any =
-          localStorage.getItem("clssWiseSub_data") || "";
-        let clssWiseSub = clssWiseSub_data ? JSON.parse(clssWiseSub_data) : "";
-
-        if (clssWiseSub == "") {
-          clssWiseSub = await clssWiseSubject("");
-
-          localStorage.setItem("clssWiseSub_data", JSON.stringify(clssWiseSub));
-        }
+        const clssWiseSub = await clssWiseSubject(allFelter.subject.split("-")[1]);
 
         clssWiseSub.data.data.sort((a, b) => a.subject_no - b.subject_no);
 
@@ -235,7 +231,7 @@ export default function StudentReport() {
     } catch (error) {
       if (l_loop == 10) {
         seterr(
-          "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। ডেটা লোড করতে অনুগ্রহ করে আবার ক্লিক করুন"
+          "ডেটা লোড করার সময় আপনি একটি ত্রুটির সম্মুখীন হয়েছেন। অনুগ্রহ করে আবার ক্লিক করুন"
         );
       } else {
         l_loop++;
@@ -243,18 +239,6 @@ export default function StudentReport() {
       }
     }
   };
-
-  const new_student = Stuent_result.filter((d: any) => {
-    if (
-      d.class == allFelter?.subject?.split("-")[1] &&
-      d.branch == allFelter.branch &&
-      allFelter.shift == d.shift &&
-      allFelter.section == d.section &&
-      allFelter.version == d.version
-    ) {
-      return true;
-    }
-  });
 
   const subject_name = (id: any) => {
     if (all_subject.length) {
@@ -300,6 +284,25 @@ export default function StudentReport() {
                     >
                       <div className="row p-5">
                         <div className="col-6 col-sm-6 col-md-6">
+                          {showLoadingErr ? (
+                            <p className="text-danger text-center">
+                              {showLoadingErr}
+                            </p>
+                          ) : (
+                            <>
+                              {loader && (
+                                <div>
+                                  {loader && (
+                                    <>
+                                      <Spinner animation="border" /> ডেটা লোড
+                                      হচ্ছে। দয়া করে অপেক্ষা করুন...
+                                    </>
+                                  )}
+                                </div>
+                              )}
+                            </>
+                          )}
+
                           <div className="mb-3" style={{ fontSize: "12px" }}>
                             <label className="form-label">
                               বিষয় নির্বাচন করুন
@@ -310,6 +313,7 @@ export default function StudentReport() {
                               style={{ fontSize: "12px" }}
                               onChange={(e) => {
                                 const value = e.target.value.split("-");
+                                setnew_student(all_student_and_class[value[0]].students   )
 
                                 let obj = {
                                   ...allFelter,
@@ -327,57 +331,37 @@ export default function StudentReport() {
                             >
                               <option value={""}>বিষয় নির্বাচন করুন</option>
 
-                              {subject.map((data) => (
-                                <>
-                                  {showPiBiSubject(data) && (
-                                    <option
-                                      key={data.uid}
-                                      value={
-                                        data?.subject?.subject_info?.uid +
-                                        "-" +
-                                        data?.subject?.subject_info?.class_uid +
-                                        "-" +
-                                        data?.own_subjet.class_room.section_id +
-                                        "-" +
-                                        data?.own_subjet.class_room.shift_id +
-                                        "-" +
-                                        data?.own_subjet.class_room.version_id +
-                                        "-" +
-                                        data?.own_subjet.class_room.branch_id +
-                                        "-" +
-                                        (data?.own_subjet.class_room
-                                          .class_teacher.name_bn ||
-                                          data?.own_subjet.class_room
-                                            .class_teacher.name_en)
-                                      }
-                                    >
-                                      {data?.subject?.subject_info?.class_uid ==
-                                        6 && "ষষ্ঠ"}{" "}
-                                      {data?.subject?.subject_info?.class_uid ==
-                                        7 && "সপ্তম"}{" "}
-                                      {" শ্রেণী"}
-                                      {"-"}
-                                      শাখা(
-                                      {section_name(
-                                        data?.own_subjet.class_room.section_id
-                                      )}
-                                      ){"-"}
-                                      সেশন (
-                                      {shift_name(
-                                        data?.own_subjet.class_room.shift_id
-                                      )}
-                                      ) {"-"}
-                                      ভার্সন (
-                                      {version_name(
-                                        data?.own_subjet.class_room.version_id
-                                      )}
-                                      )
-                                    </option>
-                                  )}
-                                </>
+                              {all_student_and_class.map((data:any, key:number) => (
+                                <option
+                                  key={key}
+                                  value={
+                                    key  +
+                                    "-" +
+                                    data?.class_id +
+                                    "-" +
+                                    data?.section_id +
+                                    "-" +
+                                    data?.shift_id +
+                                    "-" +
+                                    data?.version_id +
+                                    "-" +
+                                    data?.branch_id +
+                                    "-" +
+                                    teacher_name(data?.class_teacher_id)
+                                  }
+                                >
+                                  {data?.class_id == 6 && "ষষ্ঠ"}{" "}
+                                  {data?.class_id == 7 && "সপ্তম"} {" শ্রেণী"}
+                                  {"-"}
+                                  শাখা(
+                                  {section_name(data?.section_id)}){"-"}
+                                  সেশন ({shift_name(data?.shift_id)}) {"-"}
+                                  ভার্সন ({version_name(data?.version_id)})
+                                </option>
                               ))}
                             </select>
                           </div>
+
                         </div>
 
                         {err && (
@@ -389,6 +373,7 @@ export default function StudentReport() {
                           fetchDataFromAPI={fetchDataFromAPI}
                           setdata={setdata}
                           data={data}
+                          err={err}
                           pdf={
                             <BiRawPDFDownload
                               selected_student={selected_student}

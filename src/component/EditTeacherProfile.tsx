@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { convertToBanglaNumber } from "../utils/Utils";
+import image_upload_icon from "../../src/assets/images/image-upload-icon/Image-upload-icon.jpg";
 
 
 const EditTeacherProfile = () => {
@@ -40,13 +42,18 @@ const EditTeacherProfile = () => {
     upazilla_id,
     designation_id,
     pdsid,
-    caid } = userDetails;
+    caid,
+    image,
+    signature,
+  } = userDetails;
 
-  // const designation_id = "10";
+  // const dpesignation_id = "10";
 
   const getUserDetails = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
     if (get_teachers_details) {
+      console.log("userDetaisl", get_teachers_details?.data?.teachers[0]);
+
       setuserDetails(get_teachers_details?.data?.teachers[0]);
     }
   }
@@ -62,7 +69,7 @@ const EditTeacherProfile = () => {
     setAllDesignation(designation_data.data.data);
   };
 
- 
+
   const getdistrictBydivisionID = id => {
     const divisionWiseDistric = allDistrict.filter(district => district.division_id == id)
     setdistrict(divisionWiseDistric)
@@ -98,7 +105,7 @@ const EditTeacherProfile = () => {
   }
 
   // console.log(teacherDesignation);
-  
+
 
 
 
@@ -120,9 +127,9 @@ const EditTeacherProfile = () => {
         const data_dash: any = await teacher_dashboard();
         localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
 
-        setTimeout(() => {
-          window.location.replace("/");
-        }, 900)
+        // setTimeout(() => {
+        //   window.location.replace("/");
+        // }, 900)
 
       }
 
@@ -149,25 +156,10 @@ const EditTeacherProfile = () => {
   }, [designation_id, allDesignation, date_of_birth, name_bn, name_en])
 
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setCountdown(prevCountdown => (prevCountdown > 0 ? prevCountdown - 1 : 0));
-  //   }, 1000);
-  //   return () => {
-  //     clearInterval(timer);
-  //   };
-  // }, []);
-
-  // if ((allDivision.length == 0) && (countdown == 0)) {
-  //   window.location.replace("/");
-  // }
-
 
 
   const handleBanglaInputValidate = (event) => {
     const inputValue = event.target.value;
-
-    // Regular expression to check if the input contains Bangla characters
     const banglaRegex = /^[\u0980-\u09FF\s]+$/;
 
     if (banglaRegex.test(inputValue) || inputValue === '') {
@@ -194,19 +186,95 @@ const EditTeacherProfile = () => {
     }
   };
 
+  const [imagePreview, setImagePreview] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [warningMessage, setWarningMessage] = useState('ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Check file size
+      if (file.size > 100 * 1024) {
+        setWarningMessage('')
+        setErrorMessage('ছবির আকার ১০০ কিলোবাইট অতিক্রম করেছে, ছবির আকার ১০০ কিলোবাইটের (KB) ভিতর হতে হবে!');
+        return;
+      }
+
+      // Create an image element to get the image dimensions
+      const img = new Image();
+      img.onload = () => {
+        // Check image dimensions
+        if (img.width > 300 || img.height > 300) {
+          setWarningMessage('')
+          setErrorMessage('ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
+          return;
+        }
+
+        // If both size and dimensions are within limits, set the image preview
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImagePreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+        setErrorMessage('');
+        setWarningMessage('')
+      };
+      img.src = URL.createObjectURL(file);
+
+    } else {
+      setImagePreview(null);
+      setErrorMessage('');
+    }
+  };
+
+
+  const [signaturePreview, setsSgnaturePreview] = useState(null);
+  const [signatureErrorMessage, setSignatureErrorMessage] = useState('');
+  const [signatureWarningMessage, setSignatureWarningMessage] = useState('সিগ্নেচার ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+
+  const handleSignatureImg = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Check file size
+      if (file.size > 100 * 1024) {
+        setSignatureWarningMessage('')
+        setSignatureErrorMessage('সিগ্নেচার ছবির আকার ১০০ কিলোবাইট অতিক্রম করেছে, ছবির আকার ১০০ কিলোবাইটের (KB) ভিতর হতে হবে!');
+        return;
+      }
+
+      // Create an image element to get the image dimensions
+      const img = new Image();
+      img.onload = () => {
+        // Check image dimensions
+        if (img.width > 300 || img.height > 300) {
+          setSignatureWarningMessage('')
+          setSignatureErrorMessage('সিগ্নেচার ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
+          return;
+        }
+
+        // If both size and dimensions are within limits, set the image preview
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setsSgnaturePreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+        setSignatureErrorMessage('');
+        setSignatureWarningMessage('')
+      };
+      img.src = URL.createObjectURL(file);
+
+    } else {
+      setsSgnaturePreview(null);
+      setSignatureErrorMessage('');
+    }
+  }
+
+  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
 
   return (
     <section className="editTeacherProfilePage">
       <Breadcumbtitle title={"প্রোফাইল হালনাগাদ"} />
       {
-        // (allDivision.length !== 0) ?
-        //   <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-        //     <div className="spinner-border text-primary" role="status">
-        //       <span className="visually-hidden">Loading...</span>
-        //     </div>
-        //     <p className="mt-2">Server Busy, Please Wait...</p>
-        //     <p className="mt-2">Retry in {countdown} seconds</p>
-        //   </div>
 
         <div className="container my-3">
           <div className="d-flex align-items-center">
@@ -220,16 +288,18 @@ const EditTeacherProfile = () => {
                 <div className="tab-pane fade show active" id="expertness" role="tabpanel" aria-labelledby="expertness-tab" >
 
                   <form className="row m-4" onSubmit={handleTeacherProfileEdit}>
-                    <div className="form-group  col-sm-4 col-md-6">
+
+
+                    {/* <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label">ইউজার আইডি</label>
                         <div className="input-group">
                           <input type="text" id="pin" className="form-control" readOnly
-                            // name="xxxxx"
+                            
                             defaultValue={pdsid || caid} />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
 
 
 
@@ -239,12 +309,12 @@ const EditTeacherProfile = () => {
                         <div className="input-group">
                           <input
                             type="text"
-                     
                             className={`form-control ${isBanglaValid ? '' : 'is-invalid'}`}
                             name="name_bn"
                             value={nameBn}
                             onChange={handleBanglaInputValidate}
                             placeholder="আপনার নাম লিখুন (বাংলায়)"
+                            maxLength={40}
                           />
                           {!isBanglaValid && (
                             <div className="invalid-feedback">অনুগ্রহ করে বাংলায় নাম লিখুন!</div>
@@ -263,6 +333,7 @@ const EditTeacherProfile = () => {
                             value={nameEn}
                             onChange={handleEnglishInputValidate}
                             placeholder="আপনার নাম লিখুন (ইংরেজিতে)"
+                            maxLength={40}
                           />
                           {!isEnglishValid && (
                             <div className="invalid-feedback">অনুগ্রহ করে ইংরেজিতে নাম লিখুন!</div>
@@ -271,22 +342,26 @@ const EditTeacherProfile = () => {
                       </div>
                     </div>
 
-
-
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label">মোবাইল নাম্বার</label>
                         <div className="input-group">
-                          <input type="text" id="pin" className="form-control"
-                            // readOnly
+                          <input
+                            type="tel"
+                            id="pin"
+                            className="form-control"
                             name="mobile_no"
-                            placeholder="আপনার মোবাইল নাম্বার দিন"
-                            defaultValue={mobile_no} />
+                            placeholder="আপনার এগারো সংখ্যার মোবাইলটি নাম্বার দিন"
+                            defaultValue={mobile_no}
+                            maxLength={11}
+                            minLength={11}
+                          />
+                          
                         </div>
                       </div>
                     </div>
 
-                    <div className="form-group  col-sm-4 col-md-6">
+                    {/* <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label">পদবী</label>
                         <div className="input-group">
@@ -296,7 +371,8 @@ const EditTeacherProfile = () => {
                             value={teacherDesignation} />
                         </div>
                       </div>
-                    </div>
+                    </div> */}
+
 
 
                     <div className="form-group  col-sm-4 col-md-6">
@@ -331,12 +407,31 @@ const EditTeacherProfile = () => {
                       </div>
                     </div>
 
+
+                    {/* <div className="form-group  col-sm-4 col-md-6">
+                      <div className="mb-3" style={{ fontSize: "16px" }}>
+                        <label className="form-label">ছবি আপলোড করুন </label>
+                        <div className="input-group">
+                          <input
+                            type="file"
+                            id="imageInput"
+                            accept="image/*"
+                            name="image"
+                          />
+                        </div>
+                      </div>
+                    </div> */}
+
+
+
+
                     <div className="form-group col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label htmlFor="gender" className="form-label">লিঙ্গ</label>
                         <div className="input-group">
                           <select className="form-control"
                             name="gender"
+                            defaultValue={''}
                           // value={gender}
                           >
                             <option value={''}>লিঙ্গ নির্বাচন করুন</option>
@@ -348,11 +443,14 @@ const EditTeacherProfile = () => {
                       </div>
                     </div>
 
+
+
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label"> বিভাগ</label>
                         <select className="form-control"
                           name="division_id"
+                          defaultValue={''}
                           onChange={(e: any) => getdistrictBydivisionID(e.target.value)}>
                           <option value={''}>বিভাগ নির্বাচন করুন</option>
                           {
@@ -371,7 +469,9 @@ const EditTeacherProfile = () => {
                         <div className="form-group  col-sm-4 col-md-6">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label"> জেলা</label>
-                            <select className="form-control" name="district_id"
+                            <select className="form-control"
+                              name="district_id"
+                              defaultValue={''}
                               onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
                               <option value={''}>জেলা নির্বাচন করুন</option>
 
@@ -389,7 +489,9 @@ const EditTeacherProfile = () => {
                         <div className="form-group  col-sm-4 col-md-6">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label"> জেলা</label>
-                            <select className="form-control" name="district_id"
+                            <select className="form-control"
+                              name="district_id"
+                              defaultValue={''}
                               onChange={(e: any) => getDivisionByDistrictId(e.target.value)}>
                               <option value={''}>জেলা নির্বাচন করুন</option>
                               {
@@ -403,7 +505,6 @@ const EditTeacherProfile = () => {
                             </select>
                           </div>
                         </div>
-
                     }
 
                     {
@@ -411,7 +512,10 @@ const EditTeacherProfile = () => {
                         <div className="form-group  col-sm-4 col-md-6">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label">উপজেলা</label>
-                            <select className="form-control" name="upazilla_id">
+                            <select className="form-control"
+                              name="upazilla_id"
+                              defaultValue={''}
+                            >
                               <option value={''}>উপজেলা নির্বাচন করুন</option>
                               {
                                 upozila.map((d, k) =>
@@ -427,7 +531,10 @@ const EditTeacherProfile = () => {
                         <div className="form-group  col-sm-4 col-md-6">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label"> উপজেলা</label>
-                            <select className="form-control" name="upazilla_id">
+                            <select className="form-control"
+                              name="upazilla_id"
+                              defaultValue={''}
+                            >
                               <option value={''}>উপজেলা নির্বাচন করুন</option>
 
                               {
@@ -441,6 +548,87 @@ const EditTeacherProfile = () => {
                           </div>
                         </div>
                     }
+
+                    <div className="form-group col-sm-4 col-md-6">
+                      <div className="d-flex align-items-center gap-3" style={{ width: "100%" }}>
+                        <div className="mb-3" style={{ fontSize: "16px", width: "50%" }}>
+                          <label className="form-label">
+                            ছবি আপলোড করুন
+                          </label>
+
+                          <div className="input-group ">
+                            <input
+                              className="mb-2"
+                              id="imageInput"
+                              name="image"
+                              type="file"
+                              accept="image/*"
+                              onChange={handleImageChange}
+                            />
+                            {warningMessage &&
+                              <small style={{ padding: "0px", margin: "0px", color: "red" }}>
+                                {warningMessage}
+                              </small>
+                            }
+                            {
+                              errorMessage &&
+                              <small style={{ padding: "0px", margin: "0px", color: "red" }}>
+                                {errorMessage}
+                              </small>
+                            }
+
+                          </div>
+                        </div>
+
+                        <div className="image-preview" style={{ width: "50%" }}>
+                          <img src={
+                            imagePreview ||
+                            img_base_url + image ||
+                            image_upload_icon} alt="Preview" loading="lazy" style={{ maxWidth: '100%', maxHeight: '5rem' }} />
+                        </div>
+
+                      </div>
+                    </div>
+                    <div className="form-group col-sm-4 col-md-6">
+                      <div className="d-flex align-items-center gap-3" style={{ width: "100%" }}>
+                        <div className="mb-3" style={{ fontSize: "16px", width: "50%" }}>
+                          <label className="form-label">
+                            সিগ্নেচার আপলোড করুন
+                          </label>
+
+                          <div className="input-group ">
+                            <input
+                              className="mb-2"
+                              name="signature"
+                              type="file"
+                              accept="image/*"
+                              onChange={handleSignatureImg}
+                            />
+                            {signatureWarningMessage &&
+                              <small style={{ padding: "0px", margin: "0px", color: "red" }}>
+                                {signatureWarningMessage}
+                              </small>
+                            }
+                            {
+                              signatureErrorMessage &&
+                              <small style={{ padding: "0px", margin: "0px", color: "red" }}>
+                                {signatureErrorMessage}
+                              </small>
+                            }
+
+                          </div>
+                        </div>
+
+                        <div className="image-preview" style={{ width: "50%" }}>
+                          <img src={
+                            signaturePreview ||
+                            img_base_url + signature ||
+                            image_upload_icon} alt="Preview" loading="lazy" style={{ maxWidth: '100%', maxHeight: '5rem' }} />
+                        </div>
+
+                      </div>
+                    </div>
+
 
                     <div className="d-flex justify-content-end align-items-center pt-3 pe-3">
                       <button type="submit" className="btn btn-primay px-5" style={{ backgroundColor: "#428F92", color: "#fff", }} > প্রোফাইল হালনাগাদ করুন{" "} <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem", }} />{" "} </button>

@@ -56,7 +56,7 @@ const AmarProfile = () => {
 
     if (designation_data == "") {
       designation_data = await teacher_designation();
-      localStorage.setItem("designation_data" , designation_data)
+      localStorage.setItem("designation_data", designation_data)
     }
 
     setAllDivision(division_data?.data?.data);
@@ -179,7 +179,7 @@ const AmarProfile = () => {
                   (gender == "1") && maleTeacherAvatar ||
                   (gender == "2") && femaleTeacherAvatar ||
                   (gender == "3") && techerAvatar
-                  
+
                 } loading="lazy" width="150rem" className="img-fluid my-5 border  border-info" />
               </div>
 
@@ -235,16 +235,18 @@ const AmarProfile = () => {
                     <td className="">{date_of_birth}</td>
                   </tr>
 
-                  <tr className="border-1">
-                    <td className="p-1 v">
-                      <strong>লিঙ্গঃ</strong>
-                    </td>
-                    <td className="">
-                      {(gender === "1") && "পুরুষ"}
-                      {(gender === "2") && "মহিলা"}
-                      {(gender === "3") && "অন্যান্য"}
-                    </td>
-                  </tr>
+                  {gender &&
+                    <tr className="border-1">
+                      <td className="p-1 v">
+                        <strong>লিঙ্গঃ</strong>
+                      </td>
+                      <td className="">
+                        {(gender === "1") && "পুরুষ"}
+                        {(gender === "2") && "মহিলা"}
+                        {(gender === "3") && "অন্যান্য"}
+                      </td>
+                    </tr>
+                  }
 
                   {division &&
                     <tr className="border-1">

@@ -45,7 +45,13 @@ const MyDocument = ({
           {instititute?.institute_name}
           <br />
         </Text>
-        <Text style={[styles.h2]}> { branch_name(allFelter.branch , true) }  { branch_location(allFelter?.branch) || instititute?.district?.district_name_bn || instititute?.district?.district_name_en  } </Text>
+        <Text style={[styles.h2]}>
+          {" "}
+          {branch_name(allFelter.branch, true)}{" "}
+          {branch_location(allFelter?.branch) ||
+            instititute?.district?.district_name_bn ||
+            instititute?.district?.district_name_en}{" "}
+        </Text>
         {/* style={{ color: 'white', textAlign: 'center', margin: 30 }} */}
         <Text style={[styles.h3, { marginBottom: 30 }]}>
           বিষয়ভিত্তিক ট্রান্সক্রিপ্ট-
@@ -63,7 +69,7 @@ const MyDocument = ({
           </View>
           <View style={styles.tableColRoll}>
             <Text style={[styles.tableCell]}>
-              শিক্ষার্থীর আইডি: {convertToBanglaNumber(student_info_pdf?.roll)}
+              শিক্ষার্থীর রোল: {convertToBanglaNumber(student_info_pdf?.roll)}
             </Text>
           </View>
         </View>
@@ -187,7 +193,6 @@ const MyDocument = ({
                     { marginBottom: "8px", marginLeft: "0px" },
                   ]}
                 >
-
                   {allFelter?.subject?.split("-")[0] == "ইংরেজি" ? (
                     <>
                       {pi_data?.title_bn?.replaceAll("\r\n", " ") ||
@@ -254,11 +259,19 @@ const MyDocument = ({
 
       <View
         fixed
-        style={{ height: 70, fontSize: 7, textAlign: "center", padding: "5px" }}
+        style={{ height: 50, fontSize: 7, textAlign: "center", padding: "5px" }}
       >
+        <Text style={{ textAlign: "center", bottom: 0 }}>
+          {instititute?.institute_name} { " " }.
+          {student_info_pdf?.student_name_bn ||
+            student_info_pdf?.student_name_en} { " " } .
+          রোল : {convertToBanglaNumber(student_info_pdf?.roll)} { " " }
+        </Text>
+
         <Text style={{ textAlign: "left", bottom: 0 }}>
           এই প্রতিবেদনটি সিস্টেম দ্বারা তৈরি করা হয়েছে
         </Text>
+
         <Text
           style={{ fontSize: 7 }}
           render={({ pageNumber, totalPages }) =>
@@ -289,7 +302,6 @@ const RawPDFDownload = ({
     ? JSON.parse(localStorage.getItem("teacher_dashboard"))
     : "";
 
-    console.log(`allFelter`, allFelter);
 
   return (
     <div>

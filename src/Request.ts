@@ -171,15 +171,15 @@ export async function teacher_own_subject() {
     url: page_list,
   };
 
-  let cls_room: any = localStorage.getItem("cls_room")
-    ? JSON.parse(localStorage.getItem("cls_room"))
-    : "";
+  const own_sub = await axios(options);
 
-  if (cls_room == "") {
-    cls_room = await class_room_info();
-    localStorage.setItem("cls_room", JSON.stringify(cls_room));
-    console.log(`cls_room enter`);
+  const object: any = {};
+  if (own_sub.data.data.subjects.length == 0) {
+    object.success = false;
+    object.msg = "আপনি কোনও বিষয় পাননি";
+    return object;
   }
+
 
   let common_info: any = localStorage.getItem("common_room")
     ? JSON.parse(localStorage.getItem("common_room"))
@@ -187,7 +187,6 @@ export async function teacher_own_subject() {
   if (common_info == "") {
     common_info = await get_common_info();
     localStorage.setItem("common_room", JSON.stringify(common_info));
-    console.log(`get_common_info enter`);
   }
 
   let bi: any = localStorage.getItem("bi")
@@ -197,17 +196,30 @@ export async function teacher_own_subject() {
   if (bi == "") {
     bi = await bi_info();
     localStorage.setItem("bi", JSON.stringify(bi));
-    console.log(`bi_info enter`);
+  }
+
+  let cls_room: any = localStorage.getItem("cls_room")
+    ? JSON.parse(localStorage.getItem("cls_room"))
+    : "";
+
+  if (cls_room == "") {
+    cls_room = await class_room_info();
+    localStorage.setItem("cls_room", JSON.stringify(cls_room));
+  }
+
+  if (cls_room.data.data.subjects.length == 0) {
+    object.success = false;
+    object.msg = "আপনি কোনও বিষয় পাননি";
+    return object;
   }
 
   if (bi !== "" && common_info !== "" && cls_room !== "") {
-    const own_sub = await axios(options);
-
     const data = formate_own_subject_data(own_sub, cls_room);
     data.data.data.assessments = common_info.data.data.assessments;
     data.data.data.pi_attribute_weight =
       common_info.data.data.pi_attribute_weight;
     data.data.data.bis = bi.data.data.bis;
+    data.success = true;
     localStorage.removeItem("common_room");
     localStorage.removeItem("cls_room");
     return data;
@@ -223,15 +235,20 @@ export async function reloadteacher_own_subject() {
     url: page_list,
   };
 
-  const cls_room: any = await class_room_info();
-  const common_info: any = await get_common_info();
+  const own_sub = await axios(options);
   const bi: any = await bi_info();
-
+  const common_info: any = await get_common_info();
+  const cls_room: any = await class_room_info();
   const app_PI: any = [];
   const student: any = [];
 
   if (bi !== "" && common_info !== "" && cls_room !== "") {
-    const own_sub = await axios(options);
+
+    const data_dash: any = await class_teacher_all_student_data();
+    localStorage.setItem(
+      "class_teacher_student",
+      JSON.stringify(data_dash)
+    );
 
     own_sub.data.data.subjects.map((std_data: any) => {
       std_data.competence.map((conpitance_data: any) => {
@@ -240,7 +257,7 @@ export async function reloadteacher_own_subject() {
         });
       });
     });
-    
+
     cls_room.data.data.subjects.map((stu_data: any) => {
       stu_data.class_room.students.map((stdnt): any => {
         student.push(stdnt);
@@ -320,37 +337,42 @@ export function all_student() {
   return axios(options);
 }
 
-// export function update_teacher_profile(caid: any, data: any) {
-//   const page_list = `${API_URL}/v2/account-update/${caid}`;
-
-//   const options = {
-//     method: "PUT",
-//     headers: { "content-type": "application/json" },
-//     data,
-//     url: page_list,
-//   };
-
-//   return axios(options);
-// }
 
 export function update_teacher_profile(caid: any, data: any) {
   const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
 
+
   let obj = {};
   for (const [name, value] of data) {
-    obj = { ...obj, [name]: value };
-    // console.log(`KeyName: ${name}, value: ${value}`);
+    if (name !== "image" && name !== "signature") {
+      obj = { ...obj, [name]: value };
+    }
   }
+
+  console.log(obj);
+
+
+  let img = {};
+  for (const [name, value] of data) {
+    if ((name === "image" || name == "signature")) {
+      img = { ...img, [name]: value };
+    }
+  }
+  console.log("img", img);
+
   const options = {
-    method: "PUT",
+    method: "POST",
     headers: { "content-type": "multipart/form-data" },
     url: page_list,
-    params: {
-      ...obj,
-    },
+    params: { ...obj },
+    data: { ...img }
   };
+
   return axios(options);
 }
+
+
+
 
 export function get_pi_evaluation_by_pi(
   class_room_uid: any,
@@ -629,7 +651,6 @@ export function teacher_designation() {
   return axios(options);
 }
 
-
 export function sent_otp(data: any) {
   const page_list = `${API_URL}/v2/account-otp`;
 
@@ -670,4 +691,15 @@ export function confirm_pass(data: any) {
 }
 
 
+export function class_teacher_all_student_data() {
+  const page_list = `${API_URL}/v2/class-students`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+  };
+
+  return axios(options);
+}
 

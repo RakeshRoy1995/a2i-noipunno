@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Kalpurush';
+  src: url('kalpurush.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+
 * {
   padding: 0;
   margin: 0;
@@ -96,12 +106,12 @@ h6 {
   line-height: 39px;
   letter-spacing: 2px;
   text-align: left;
-  font-family: Noto Sans Bengali;
+   font-family: 'Kalpurush';
 }
 
 .np-login-subtitle {
   color: var(--text_dark);
-  font-family: Noto Sans Bengali;
+   font-family: 'Kalpurush';
   font-size: 16px;
   font-weight: 400;
   line-height: 26px;
@@ -116,7 +126,7 @@ h6 {
   letter-spacing: -0.02em;
   text-align: center;
   color: var(--text_blue_dark);
-  font-family: Noto Sans Bengali;
+   font-family: 'Kalpurush';
 }
 
 .login-container {
@@ -137,7 +147,7 @@ h6 {
   background: var(--primary-color-1);
   margin: 0 auto;
   width: 100%;
-  font-family: Noto Sans Bengali;
+   font-family: 'Kalpurush';
 }
 
 .login-button:hover {
@@ -161,7 +171,7 @@ h6 {
 }
 
 .collect-pin {
-  font-family: Noto Sans Bengali;
+   font-family: 'Kalpurush';
   font-size: 14px;
   font-weight: 500;
   line-height: 19px;
@@ -177,7 +187,7 @@ h6 {
 .login-btn {
   background-color: var(--bg_primary);
   color: var(--text_white);
-  font-family: Noto Sans Bengali;
+   font-family: 'Kalpurush';
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
@@ -185,7 +195,7 @@ h6 {
 }
 
 .forget-password {
-  font-family: Noto Sans Bengali;
+   font-family: 'Kalpurush';
   font-size: 14px;
   font-weight: 500;
   line-height: 19px;
@@ -231,7 +241,7 @@ label.form-check-label:focus,
 }
 
 .login-field-title {
-  font-family: Noto Sans Bengali;
+   font-family: 'Kalpurush';
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
@@ -338,7 +348,7 @@ label.form-check-label:focus,
 }
 
 .popup-card-institutions {
-  font-family: Noto Sans Bengali;
+   font-family: 'Kalpurush';
   font-size: 11px;
   font-weight: 400;
   height: 60px;

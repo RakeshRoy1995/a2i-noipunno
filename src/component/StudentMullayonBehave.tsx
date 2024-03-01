@@ -43,9 +43,6 @@ export default function StudentMullayonBehave({
   Showcollaps,
   all_student,
 }: any) {
-  console.log(`is_draft`, is_draft);
-
-  console.log(`teacher_uid`, teacher_uid);
   const own_SUbjects__: any = localStorage.getItem("own_subjet") || "";
   const own_SUbjects = own_SUbjects__ ? JSON.parse(own_SUbjects__) : "";
   const pi_attribute_weight =
@@ -237,7 +234,6 @@ export default function StudentMullayonBehave({
           });
 
           if (text) {
-            console.log(`all_bis`, all_bis);
 
             const result: any = [];
             all_bis.map((d) => {
@@ -267,7 +263,6 @@ export default function StudentMullayonBehave({
 
             showOffCollaps(keynext, next_uid);
 
-            console.log(`result`, result);
             // Swal.fire(`You entered: ${text}`);
           }
         } else {
@@ -279,8 +274,6 @@ export default function StudentMullayonBehave({
 
           // setmsg("আপনার খসড়া সংরক্ষণ করা হয়েছে");
           seterr("");
-
-          console.log(`33`, 33, next_uid);
 
           if (next_uid) {
             showOffCollaps(keynext, next_uid);
@@ -302,13 +295,11 @@ export default function StudentMullayonBehave({
         }
       }
     } catch (error) {
-      console.log(`error`, error);
       Swal.fire({
         icon: "error",
         title: "সার্ভার ত্রুটি ঘটেছে! অনুগ্রহ করে আবার চেষ্টা করুন।",
         confirmButtonText: "হ্যাঁ",
       });
-      // seterr(" কিছু ভুল হয়েছে");
     }
   };
 
@@ -615,7 +606,7 @@ export default function StudentMullayonBehave({
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "কিছু ভুল হয়েছে",
+        title: "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন",
         confirmButtonText: "হ্যাঁ",
       });
     }

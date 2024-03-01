@@ -14,45 +14,8 @@ export default function TeachersList() {
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [screenSize, setScreenSize] = useState<any>('');
 
-  // const fetchData = async () => {
-  //   const teachersData = JSON.parse(localStorage.getItem('teacher_dashboard'));
-  //   setTeachers(teachersData?.data?.teachers)
-  // };
-
-
-  // const teacher_list = () => {
-  //   const own_subject = JSON.parse(localStorage.getItem("own_subjet"));
-  //   let all_teachers_with_duplicate = [];
-
-  //   const removeDuplicates = (arr, uniqueKey) => {
-  //     const uniqueMap = {};
-  //     return arr.reduce((uniqueArray, obj) => {
-  //       const key = obj[uniqueKey];
-  //       if (!uniqueMap[key]) {
-  //         uniqueMap[key] = true;
-  //         uniqueArray.push(obj);
-  //       }
-  //       return uniqueArray;
-  //     }, []);
-  //   }
-
-  //   if (own_subject) {
-  //     let subjects = [];
-  //     subjects = [...own_subject?.data?.data?.subjects];
-  //     subjects.map(item => all_teachers_with_duplicate?.push(item.class_room?.class_teacher));
-
-  //   }
-
-  //   let all_teachers = removeDuplicates(all_teachers_with_duplicate, 'pdsid');
-
-  //   return all_teachers
-  // }
-
 
   const all_teachers_list = teacher_list()
-  // console.log("all_teachers_list", all_teachers_list);
-
-
   const handleShowModal = (item: any) => {
     setSelectedItem(item);
     setShowModal(true);

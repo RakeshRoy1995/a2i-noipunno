@@ -2,7 +2,6 @@ import { useState } from "react";
 import "../../assets/dashboard_materials/css/total_student_teacher_classroom_for_teacher_dashboard.css";
 import {
   showReportDeleteEv,
-  show_report_OFF_time_msg,
   show_report_open_time_msg,
   teacher_list,
 } from "../../utils/Utils";
@@ -21,24 +20,35 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
     );
 
     let obj: any = {};
-    let app_PI: any = [];
-
-    if (studentsData && local_storege_data) {
+    const app_PI: any = [];
+    
+    if (studentsData && studentsData?.data?.data?.subjects?.length && local_storege_data) {
       studentsData.data.data.subjects.map((std_data: any) => {
         obj = {
           ...obj,
-          [std_data.class_room.class_teacher.uid]:
-            std_data.class_room.class_teacher.uid,
+          [std_data?.class_room?.class_teacher?.uid]:
+            std_data?.class_room?.class_teacher?.uid,
         };
 
-        std_data.competence.map((conpitance_data: any) => {
-          conpitance_data.pis.map((data: any) => {
+        std_data?.competence.map((conpitance_data: any) => {
+          conpitance_data?.pis.map((data: any) => {
             app_PI.push(data);
           });
         });
 
-        return std_data.class_room.students.map((stu_data: any) => {
-          student.push(stu_data);
+        return std_data?.class_room?.students.map((stu_data: any) => {
+
+
+          const studnt :any = {
+            ...stu_data ,
+            ...stu_data?.student_info
+          }
+  
+          delete studnt['student_info']
+  
+          student.push(studnt);
+
+          // student.push(stu_data);
         });
       });
 
@@ -104,7 +114,7 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
               </div>
             </div>
           </a>
-          {/* <a href="#">
+          <a href="#">
           <div className="card-container">
             <div className="total-student">
               <div className="title">
@@ -120,24 +130,20 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
               </div>
             </div>
           </div>
-        </a> */}
+        </a>
         </div>
       </div>
 
-      <div className="col-lg-7 col-md-6 ">
+      {/* <div className="col-lg-7 col-md-6 ">
         <div className="teacher-student-card gy-5 text-center">
           <div className="card">
             {showReportDeleteEv() ? (
               <div className="card-body">
-                <div className="text-center">
-                  {
-                    show_report_OFF_time_msg
-                  }
-                </div>
+                <div dangerouslySetInnerHTML={{__html: show_report_open_time_msg }}></div>
               </div>
             ) : (
               <div className="card-body">
-                <div className="text-center">{show_report_open_time_msg}</div>
+                <div dangerouslySetInnerHTML={{__html: show_report_open_time_msg }}></div>
               </div>
             )}
             <p className="card-body">
@@ -167,7 +173,8 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
+
     </>
   );
 };

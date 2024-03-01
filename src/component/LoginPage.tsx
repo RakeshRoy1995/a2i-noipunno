@@ -1,3 +1,4 @@
+
 import "../assets/login_page_materials/login_page.css";
 // import "../assets/project_ca_html/css/public.css"
 import noipunnoLogo from "../assets/login_page_materials/images/noipunno-new-logo.svg";
@@ -54,36 +55,72 @@ const LoginPage = () => {
     const userId = event.target.caid.value;
     const userPin = event.target.pin.value;
 
+    const password = event.target.password.value;
+    console.log(password.length);
+
+    if ((password.length) == 6) {
+      try {
+        setloading(true)
+        seterror("")
+        const { data }: any = await loginPassword(datas);
+        // console.log("data", data.status);
+
+        if (data?.status === true) {
+          console.log("user Details", data?.data.user);
+          const token = data?.data?.access_token;
+          localStorage.setItem("customer_login_auth", JSON.stringify(data?.data));
+          localStorage.setItem("token", token);
+          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+          window.location.assign("/");
+        } else {
+          seterror("পাসওয়ার্ড মেলেনি");
+        }
+        setloading(false)
+      } catch (error) {
+        seterror(
+          error?.response?.data?.error?.message ||
+          error?.response?.data?.error ||
+          "Something went wrong!"
+        );
+        setloading(false)
+      }
+    } else {
+      seterror("পাসওয়ার্ড অবশ্যই ছয় অক্ষরের হতে হবে!");
+    }
+
+
     if (savePin) {
       setCookie("userId", userId, 7);
       setCookie("userPin", userPin, 7);
     }
 
-    try {
-      setloading(true)
-      seterror("")
-      const { data }: any = await loginPassword(datas);
-      // console.log("data", data.status);
+    // try {
+    //   setloading(true)
+    //   seterror("")
+    //   const { data }: any = await loginPassword(datas);
+    //   // console.log("data", data.status);
 
-      if (data?.status === true) {
-        console.log("user Details", data?.data.user);
-        const token = data?.data?.access_token;
-        localStorage.setItem("customer_login_auth", JSON.stringify(data?.data));
-        localStorage.setItem("token", token);
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        window.location.assign("/");
-      } else {
-        seterror("পাসওয়ার্ড মেলেনি");
-      }
-      setloading(false)
-    } catch (error) {
-      seterror(
-        error?.response?.data?.error?.message ||
-        error?.response?.data?.error ||
-        "Something went wrong!"
-      );
-      setloading(false)
-    }
+    //   if (data?.status === true) {
+    //     console.log("user Details", data?.data.user);
+    //     const token = data?.data?.access_token;
+    //     localStorage.setItem("customer_login_auth", JSON.stringify(data?.data));
+    //     localStorage.setItem("token", token);
+    //     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    //     window.location.assign("/");
+    //   } else {
+    //     seterror("পাসওয়ার্ড মেলেনি");
+    //   }
+    //   setloading(false)
+    // } catch (error) {
+    //   seterror(
+    //     error?.response?.data?.error?.message ||
+    //     error?.response?.data?.error ||
+    //     "Something went wrong!"
+    //   );
+    //   setloading(false)
+    // }
+
+
   };
 
 
@@ -163,6 +200,7 @@ const LoginPage = () => {
                             fontFamily: '"Times New Roman", Times, serif',
                             fontWeight: 400,
                           }}
+                          defaultValue={''}
                         >
                           <option value={1} selected>
                             শিক্ষক
@@ -314,7 +352,7 @@ const LoginPage = () => {
                           >
                             সচরাচর জিজ্ঞাসা
                           </a> */}
-                          <a className="ps-2" onClick={() => handleShowModal()} style={{cursor:"pointer"}}>
+                          <a className="ps-2" onClick={() => handleShowModal()} style={{ cursor: "pointer" }}>
                             সচরাচর জিজ্ঞাসা <span className="bi bi-hand"></span>
                           </a>
 
@@ -494,7 +532,7 @@ const LoginPage = () => {
                   <div className="d-flex gap-1">
                     <span>৮।</span>
                     <h6 className="fw-semibold">
-                       বিষয় শিক্ষক যুক্ত করা হয়েছে এবং লগইন করে পরবর্তীতে যখন লগইন করা তখন ৪০৩ এরোর আসে। করণীয় কী?
+                      বিষয় শিক্ষক যুক্ত করা হয়েছে এবং লগইন করে পরবর্তীতে যখন লগইন করা তখন ৪০৩ এরোর আসে। করণীয় কী?
                     </h6>
                   </div>
 
@@ -768,7 +806,7 @@ const LoginPage = () => {
                   <div className="d-flex gap-1">
                     <span>২৫।</span>
                     <h6 className="fw-semibold">
-                       মোবাইলে নৈপুণ্য অ্যাপ ডাউনলোড করা যাচ্ছে না, কী করতে পারি?
+                      মোবাইলে নৈপুণ্য অ্যাপ ডাউনলোড করা যাচ্ছে না, কী করতে পারি?
                     </h6>
                   </div>
 
@@ -783,7 +821,7 @@ const LoginPage = () => {
                   <div className="d-flex gap-1">
                     <span>২৬।</span>
                     <h6 className="fw-semibold">
-                       ‘Sarver Not Found’ লিখা আসছে কেন?
+                      ‘Sarver Not Found’ লিখা আসছে কেন?
                     </h6>
                   </div>
 
@@ -798,7 +836,7 @@ const LoginPage = () => {
                   <div className="d-flex gap-1">
                     <span>২৭।</span>
                     <h6 className="fw-semibold">
-                       পিন ভুলে গেলে ওটিপি দিলে  ‘PIN Expired’ দেখাচ্ছে কেন?
+                      পিন ভুলে গেলে ওটিপি দিলে  ‘PIN Expired’ দেখাচ্ছে কেন?
                     </h6>
                   </div>
 
@@ -813,7 +851,7 @@ const LoginPage = () => {
                   <div className="d-flex gap-1">
                     <span> ২৮। </span>
                     <h6 className="fw-semibold">
-                     এমএমএস না পেলে কোনো অফিসে গেলে কি সরাসরি সহায়তা পাওয়া যাবে?
+                      এমএমএস না পেলে কোনো অফিসে গেলে কি সরাসরি সহায়তা পাওয়া যাবে?
                     </h6>
                   </div>
 

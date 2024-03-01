@@ -23,7 +23,7 @@ const PopUpAppInfo = () => {
                 <h2 className="reserved-app-info p-0 m-0">
                   সর্বস্বত্ব সংরক্ষিত ২০২৩
                 </h2>
-              </div>
+              </div> 
               <div className="popup-card-body">
                 <div className="d-flex popup-card-icons">
                   <div className="">
@@ -65,7 +65,7 @@ const PopUpAppInfo = () => {
               <div className="popup-version-bottom">
                 <div className="d-flex align-items-center popup-version">
                   <p className="popup-version-info text-white">
-                    Version 1.1.1 &amp; Last release 27/12/23
+                    Version 1.1.6 &amp; Last release 15/1/24
                   </p>
                 </div>
               </div>

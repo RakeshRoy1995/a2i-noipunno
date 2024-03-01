@@ -332,8 +332,27 @@ export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
   const own_subject_data: any = [];
   own_subjet.data.data.subjects.map((d: any) => {
     let obj = {};
-    class_room.data.data.subjects.map((d_2: any) => {
-      if (d_2.subject_id === d.subject_id) {
+    class_room?.data?.data?.subjects.map((d_2: any) => {
+      if (d_2?.subject_id === d?.subject_id && d_2.class_room ) {
+
+        console.log(`d_2.class_room`, d_2.class_room);
+      const stdnt =   d_2.class_room.students.map((formate_stu)=>{
+
+        console.log(`formate_stu`, formate_stu);
+
+        const studnt :any = {
+          ...formate_stu ,
+          ...formate_stu?.student_info
+        }
+
+        delete studnt['student_info']
+
+        return studnt
+
+        })
+
+        d_2.class_room.students = stdnt
+
         obj = { ...d_2, ...d };
         own_subject_data.push(obj);
       }
@@ -375,6 +394,8 @@ export const formate_teanscript_data = (data: any) => {
       for (let y = 0; y < allPi.length; y++) {
         const pi = allPi[y];
         const pi_data = our_all_piData.filter((d: any) => d.uid == pi.pi_uid);
+
+        
         const Pi_obj = {
           ...pi,
           student_data: student_dta[0],
@@ -455,15 +476,12 @@ export const formate_Bi_teanscript_dataBy_single_student = (
 
   let obj = {};
 
-  console.log(`data`, data);
 
   const stu = student_name;
   const allPi = data;
 
   if (stu) {
     const student_dta = all_studentsData.filter((d: any) => d.uid == stu);
-
-    console.log(`student_dta`, student_dta);
 
     const all_PI_array = [];
     for (let y = 0; y < allPi.length; y++) {
@@ -488,12 +506,13 @@ export const formate_Bi_teanscript_dataBy_single_student = (
 
 export const teacher_list = () => {
   const own_subject = JSON.parse(localStorage.getItem("own_subjet"));
-  let all_teachers_with_duplicate = [];
+  const all_teachers_with_duplicate = [];
 
-  if (own_subject) {
+  if (own_subject && own_subject?.data?.data?.subjects.length) {
     let subjects = [];
     subjects = [...own_subject?.data?.data?.subjects];
     subjects.map((item) =>
+    item.class_room?.class_teacher && 
       all_teachers_with_duplicate?.push(item.class_room?.class_teacher)
     );
   }
@@ -510,7 +529,7 @@ export const teacher_list = () => {
     }, []);
   };
 
-  const all_teachers = removeDuplicates(all_teachers_with_duplicate, "pdsid");
+  const all_teachers = removeDuplicates(all_teachers_with_duplicate, "uid");
   return all_teachers;
 };
 
@@ -709,8 +728,6 @@ export const make_group_by_PI_BI = (studentData: any) => {
 
   studentData.pi_evaluation_list = result
 
-  console.log(`studentData`, studentData);
-
   return studentData;
 };
 
@@ -735,6 +752,6 @@ export function save_PI_BI_again(data :any) {
 }
 
 export const show_report_open_time_msg =
-  "সকাল ৯টা থেকে দুপুর ১টা পর্যন্ত রিপোর্ট কার্ড ডাউনলোড অপশন চালু থাকবে";
+  'সকলের অবগতির জন্য জানানো যাচ্ছে যে, ২০২৪ সালের শিক্ষাবর্ষের কার্যক্রম চালু করার লক্ষ্যে আগামী ১৭ জানুয়ারি সন্ধ্যা ছয়টা থেকে ২০ জানুয়ারি সন্ধ্যা ছয়টা পর্যন্ত  নৈপুণ্য এর কার্যক্রম সাময়িকভাবে বন্ধ থাকবে। সবার সহযোগিতার জন্যে ধন্যবাদ';
 // export const show_report_OFF_time_msg = "দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে";
 export const show_report_OFF_time_msg = "";

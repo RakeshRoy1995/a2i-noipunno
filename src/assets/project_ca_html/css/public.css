@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Kalpurush';
+  src: url('kalpurush.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -29,7 +36,7 @@ h6 {
 }
 
 body {
-  font-family: "Roboto";
+  font-family: 'Kalpurush';
   box-sizing: border-box;
 }
 
@@ -105,7 +112,7 @@ body {
 
 .np-login-subtitle {
   color: var(--text_dark);
-  font-family: Noto Sans Bengali;
+font-family: 'Kalpurush';
   font-size: 16px;
   font-weight: 400;
   line-height: 26px;
@@ -121,7 +128,7 @@ body {
   letter-spacing: -0.02em;
   text-align: center;
   color: var(--text_blue_dark);
-  font-family: Noto Sans Bengali;
+font-family: 'Kalpurush';
 }
 
 .login-container {
@@ -142,7 +149,7 @@ body {
   background: var(--primary-color-1);
   margin: 0 auto;
   width: 100%;
-  font-family: Noto Sans Bengali;
+font-family: 'Kalpurush';
 }
 
 .login-button:hover {
@@ -166,7 +173,7 @@ body {
 }
 
 .collect-pin {
-  font-family: Noto Sans Bengali;
+font-family: 'Kalpurush';
   font-size: 14px;
   font-weight: 500;
   line-height: 19px;
@@ -182,7 +189,7 @@ body {
 .login-btn {
   background-color: var(--bg_primary);
   color: var(--text_white);
-  font-family: Noto Sans Bengali;
+font-family: 'Kalpurush';
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
@@ -190,7 +197,7 @@ body {
 }
 
 .forget-password {
-  font-family: Noto Sans Bengali;
+font-family: 'Kalpurush';
   font-size: 14px;
   font-weight: 500;
   line-height: 19px;
@@ -236,7 +243,7 @@ label.form-check-label:focus,
 }
 
 .login-field-title {
-  font-family: Noto Sans Bengali;
+font-family: 'Kalpurush';
   font-size: 16px;
   font-weight: 600;
   line-height: 20px;
@@ -271,7 +278,7 @@ label.form-check-label:focus,
 }
 
 .helpedBy p {
-  font-family: Public Sans;
+font-family: 'Kalpurush';
   font-size: 10px;
   font-weight: 400;
   line-height: 10px;
@@ -343,7 +350,7 @@ label.form-check-label:focus,
 }
 
 .popup-card-institutions {
-  font-family: Noto Sans Bengali;
+font-family: 'Kalpurush';
   font-size: 11px;
   font-weight: 400;
   height: 60px;
@@ -366,7 +373,7 @@ label.form-check-label:focus,
 }
 
 .reserved-app-info {
-  font-family: Public Sans;
+font-family: 'Kalpurush';
   font-size: 14px;
   font-weight: 400;
   height: 19px;
@@ -397,7 +404,7 @@ label.form-check-label:focus,
 
 .popup-version {
   padding: 19px 13px 19px 13px;
-  font-family: Public Sans;
+font-family: 'Kalpurush';
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;
@@ -406,7 +413,7 @@ label.form-check-label:focus,
 }
 
 .popup-version-info {
-  font-family: Public Sans;
+font-family: 'Kalpurush';
   font-size: 14px;
   font-weight: 400;
   line-height: 22px;

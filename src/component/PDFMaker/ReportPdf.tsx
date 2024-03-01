@@ -1,11 +1,9 @@
 import {
-  PDFViewer,
   Document,
   View,
   Image,
   Page,
   Text,
-  StyleSheet,
   Font,
   PDFDownloadLink,
 } from "@react-pdf/renderer";
@@ -135,7 +133,6 @@ const MyDocument = ({
                   return null;
                 }
 
-                console.log(`subject_name(item[0])`, subject_name(item[0]) , item[0]);
                 return (
                   index < 5 && (
                     <Text style={styles.text}>
@@ -167,6 +164,29 @@ const MyDocument = ({
             </View>
           </View>
         </View>
+      </View>
+
+      <View
+        fixed
+        style={{ height: 30, fontSize: 7, textAlign: "center", padding: "5px" , fontFamily: "kalpurush" }}
+      >
+        <Text style={{ textAlign: "center", bottom: 0 }}>
+          {instititute?.institute_name} { " " }.
+          {student?.student_name_bn ||
+            student?.student_name_en} { " " } .
+          রোল : {convertToBanglaNumber(student?.roll)} { " " }
+        </Text>
+
+        <Text style={{ textAlign: "left", bottom: 0 }}>
+          এই প্রতিবেদনটি সিস্টেম দ্বারা তৈরি করা হয়েছে
+        </Text>
+
+        <Text
+          style={{ fontSize: 7 }}
+          render={({ pageNumber, totalPages }) =>
+            `${pageNumber} / ${totalPages}`
+          }
+        />
       </View>
     </Page>
 
@@ -324,6 +344,31 @@ const MyDocument = ({
           </View>
         );
       })}
+
+
+<View
+        fixed
+        style={{ height: 30, fontSize: 7, textAlign: "center", padding: "5px" , fontFamily: "kalpurush" }}
+      >
+        <Text style={{ textAlign: "center", bottom: 0 }}>
+          {instititute?.institute_name} { " " }.
+          {student?.student_name_bn ||
+            student?.student_name_en} { " " } .
+          রোল : {convertToBanglaNumber(student?.roll)} { " " }
+        </Text>
+
+        <Text style={{ textAlign: "left", bottom: 0 }}>
+          এই প্রতিবেদনটি সিস্টেম দ্বারা তৈরি করা হয়েছে
+        </Text>
+
+        <Text
+          style={{ fontSize: 7 }}
+          render={({ pageNumber, totalPages }) =>
+            `${pageNumber} / ${totalPages}`
+          }
+        />
+      </View>
+
     </Page>
     {/* Dynamic Subject Page */}
 
@@ -817,7 +862,33 @@ const MyDocument = ({
           </View>
         </View>
       </View>
+
+      <View
+        fixed
+        style={{ height: 30, fontSize: 7, textAlign: "center", padding: "5px" , fontFamily: "kalpurush" }}
+      >
+        <Text style={{ textAlign: "center", bottom: 0 }}>
+          {instititute?.institute_name} { " " }.
+          {student?.student_name_bn ||
+            student?.student_name_en} { " " } .
+          রোল : {convertToBanglaNumber(student?.roll)} { " " }
+        </Text>
+
+        <Text style={{ textAlign: "left", bottom: 0 }}>
+          এই প্রতিবেদনটি সিস্টেম দ্বারা তৈরি করা হয়েছে
+        </Text>
+
+        <Text
+          style={{ fontSize: 7 }}
+          render={({ pageNumber, totalPages }) =>
+            `${pageNumber} / ${totalPages}`
+          }
+        />
+      </View>
     </Page>
+
+
+    
   </Document>
 );
 

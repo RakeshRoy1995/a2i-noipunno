@@ -5,6 +5,7 @@ import biggoftiIcon from '../../assets/dashboard_materials/images/dashboard/info
 import PhoneNuberChangeiIcon from '../../assets/dashboard_materials/images/dashboard/ico2.svg';
 import bishoiPoribortonIcon from '../../assets/dashboard_materials/images/dashboard/arrow-right2.svg';
 import rightArrow from '../../assets/dashboard_materials/images/dashboard/arrow-right.svg';
+import { showReportDeleteEv, show_report_open_time_msg } from '../../utils/Utils';
 
 const OnorudhShomohu = () => {
   return (
@@ -22,7 +23,7 @@ const OnorudhShomohu = () => {
         </div>
         <div className="tab-bar">
           <ul className="nav">
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a
                 className="nav-link active"
                 id="apply-tab"
@@ -32,7 +33,7 @@ const OnorudhShomohu = () => {
                 <img src={abedonIcon} alt="abedonIcon" />
                 <h2>আবেদন</h2>
               </a>
-            </li>
+            </li> */}
             <li className="nav-item">
               <a
                 className="nav-link"
@@ -81,6 +82,7 @@ const OnorudhShomohu = () => {
                 </div>
               </a>
             </div>
+
             <div className="tab-container">
               <a href="#">
                 <div className="heading">
@@ -108,6 +110,7 @@ const OnorudhShomohu = () => {
                 </div>
               </a>
             </div>
+
             <div className="tab-container">
               <a href="#">
                 <div className="heading">
@@ -127,85 +130,7 @@ const OnorudhShomohu = () => {
               <img src={rightArrow} alt="rightArrow" />
             </div>
           </div>
-          <div
-            className="tab-pane fade"
-            id="notice"
-            role="tabpanel"
-            aria-labelledby="notice-tab"
-          >
-            <div className="tab-container">
-              <a href="#">
-                <div className="heading">
-                  <div className="icon">
-                    <img
-                      src={PhoneNuberChangeiIcon}
-                      className="img-fluid"
-                      alt="icon"
-                    />
-                  </div>
-                  <h2>ফোন নম্বর পরিবর্তনের অনুরোধ করেছেন</h2>
-                </div>
-                <div className="teachers">
-                  <h3>সামিনা চৌধুরী</h3>
-                  <h3>|</h3>
-                  <h3>সহকারী শিক্ষক</h3>
-                </div>
-                <div className="class-section">
-                  <div className="class-day-section">
-                    <h6>ষষ্ঠ শ্রেণী</h6>
-                    <h6>Day</h6>
-                    <h6>Section A</h6>
-                  </div>
-                  <p>অনুরোধ করেছেন ৬ অক্টোবর ২০২৩</p>
-                </div>
-              </a>
-            </div>
-            <div className="tab-container">
-              <a href="#">
-                <div className="heading">
-                  <div className="icon">
-                    <img
-                      src={bishoiPoribortonIcon}
-                      className="img-fluid"
-                      alt="icon"
-                    />
-                  </div>
-                  <h2>বিষয় পরিবর্তনের অনুরোধ করেছেন</h2>
-                </div>
-                <div className="teachers">
-                  <h3>সামিনা চৌধুরী</h3>
-                  <h3>|</h3>
-                  <h3>সহকারী শিক্ষক</h3>
-                </div>
-                <div className="class-section">
-                  <div className="class-day-section">
-                    <h6>ষষ্ঠ শ্রেণী</h6>
-                    <h6>Day</h6>
-                    <h6>Section A</h6>
-                  </div>
-                  <p>অনুরোধ করেছেন ৬ অক্টোবর ২০২৩</p>
-                </div>
-              </a>
-            </div>
-            <div className="tab-container">
-              <a href="#">
-                <div className="heading">
-                  <div className="icon">
-                    <img
-                      src={PhoneNuberChangeiIcon}
-                      className="img-fluid"
-                      alt="icon"
-                    />
-                  </div>
-                  <h2>ফোন নম্বর পরিবর্তনের অনুরোধ করেছেন</h2>
-                </div>
-              </a>
-            </div>
-            <div className="button">
-              <a>সব অনুরোধগুলি দেখুন</a>
-              <img src={rightArrow} alt="rightArrow" />
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>

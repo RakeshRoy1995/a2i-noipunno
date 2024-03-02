@@ -198,7 +198,7 @@ const Navbar = () => {
                                 className="img-fluid icon-right-space"
                                 alt="profile icon"
                               />
-                              রিসেট পাসওয়ার্ড
+                              রিসেট পিন
                             </div>
                           </NavLink>
                         </li>

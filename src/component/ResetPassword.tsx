@@ -94,14 +94,14 @@ setconfirmOtoSuccess(false);
   return (
     <div>
       <section className="editTeacherProfilePage">
-        <Breadcumbtitle title={"রিসেট পাসওয়ার্ড"} />
+        <Breadcumbtitle title={"রিসেট পিন"} />
         {
           <div className="container my-3">
             <div className="d-flex align-items-center">
               <div className="card shadow-lg border-0 w-100 rounded">
                 <ul className="nav d-flex mt-2 justify-content-around py-1">
                   <li className={`nav-item`}>
-                    <h4> রিসেট পাসওয়ার্ড </h4>
+                    <h4> রিসেট পিন </h4>
                   </li>
                 </ul>
 

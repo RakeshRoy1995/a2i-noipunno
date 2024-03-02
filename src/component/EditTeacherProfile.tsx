@@ -11,6 +11,7 @@ import image_upload_icon from "../../src/assets/images/image-upload-icon/Image-u
 
 
 const EditTeacherProfile = () => {
+  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL;
   const [userDetails, setuserDetails] = useState<any>({});
   const [allDivision, setAllDivision] = useState<any>([]);
   const [allDistrict, setAllDistrict] = useState<any>([]);
@@ -21,13 +22,10 @@ const EditTeacherProfile = () => {
   const [upozila, setupozila] = useState<any>([]);
   const [countdown, setCountdown] = useState(30);
   const [selectedDate, setSelectedDate] = useState(new Date());
-
   const [nameBn, setNameBn] = useState('');
   const [isBanglaValid, setIsBanglaValid] = useState(true);
-
   const [nameEn, setNameEn] = useState('');
   const [isEnglishValid, setisEnglishValid] = useState(true);
-
 
 
   const {
@@ -104,9 +102,6 @@ const EditTeacherProfile = () => {
     }
   }
 
-  // console.log(teacherDesignation);
-
-
 
 
   const handleTeacherProfileEdit = async (event: any) => {
@@ -134,47 +129,18 @@ const EditTeacherProfile = () => {
       }
 
     } catch (error) {
-
-      // alert('হালনাগাদ সম্পন্ন হয়নি, আবার চেষ্টা করুন!');
       Swal.fire({
         icon: "error",
         title: "হালনাগাদ সম্পন্ন হয়নি!",
         text: "আবার চেষ্টা করুন!",
         confirmButtonText: "হ্যাঁ",
-        // footer: '<a href="#">Why do I have this issue?</a>'
       });
     }
   }
 
-  useEffect(() => {
-    fetchData();
-    getUserDetails();
-  }, []);
-
-  useEffect(() => {
-    setAllStateData()
-  }, [designation_id, allDesignation, date_of_birth, name_bn, name_en])
-
-
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setCountdown(prevCountdown => (prevCountdown > 0 ? prevCountdown - 1 : 0));
-  //   }, 1000);
-  //   return () => {
-  //     clearInterval(timer);
-  //   };
-  // }, []);
-
-  // if ((allDivision.length == 0) && (countdown == 0)) {
-  //   window.location.replace("/");
-  // }
-
-
 
   const handleBanglaInputValidate = (event) => {
     const inputValue = event.target.value;
-
-    // Regular expression to check if the input contains Bangla characters
     const banglaRegex = /^[\u0980-\u09FF\s]+$/;
 
     if (banglaRegex.test(inputValue) || inputValue === '') {
@@ -185,12 +151,8 @@ const EditTeacherProfile = () => {
     }
   };
 
-
-
   const handleEnglishInputValidate = (event) => {
     const inputValue = event.target.value;
-
-    // Regular expression to check if the input contains Bangla characters
     const englishPattern = /^[a-zA-Z\s]*$/;
 
     if (englishPattern.test(inputValue) || inputValue === '') {
@@ -224,8 +186,6 @@ const EditTeacherProfile = () => {
           setErrorMessage('ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
           return;
         }
-
-        // If both size and dimensions are within limits, set the image preview
         const reader = new FileReader();
         reader.onloadend = () => {
           setImagePreview(reader.result);
@@ -284,20 +244,20 @@ const EditTeacherProfile = () => {
     }
   }
 
-  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
+  useEffect(() => {
+    fetchData();
+    getUserDetails();
+  }, []);
+
+  useEffect(() => {
+    setAllStateData()
+  }, [designation_id, allDesignation, date_of_birth, name_bn, name_en])
+
 
   return (
     <section className="editTeacherProfilePage">
       <Breadcumbtitle title={"প্রোফাইল হালনাগাদ"} />
       {
-        // (allDivision.length !== 0) ?
-        //   <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-        //     <div className="spinner-border text-primary" role="status">
-        //       <span className="visually-hidden">Loading...</span>
-        //     </div>
-        //     <p className="mt-2">Server Busy, Please Wait...</p>
-        //     <p className="mt-2">Retry in {countdown} seconds</p>
-        //   </div>
 
         <div className="container my-3">
           <div className="d-flex align-items-center">
@@ -332,12 +292,12 @@ const EditTeacherProfile = () => {
                         <div className="input-group">
                           <input
                             type="text"
-
                             className={`form-control ${isBanglaValid ? '' : 'is-invalid'}`}
                             name="name_bn"
                             value={nameBn}
                             onChange={handleBanglaInputValidate}
                             placeholder="আপনার নাম লিখুন (বাংলায়)"
+                            maxLength={40}
                           />
                           {!isBanglaValid && (
                             <div className="invalid-feedback">অনুগ্রহ করে বাংলায় নাম লিখুন!</div>
@@ -356,6 +316,7 @@ const EditTeacherProfile = () => {
                             value={nameEn}
                             onChange={handleEnglishInputValidate}
                             placeholder="আপনার নাম লিখুন (ইংরেজিতে)"
+                            maxLength={40}
                           />
                           {!isEnglishValid && (
                             <div className="invalid-feedback">অনুগ্রহ করে ইংরেজিতে নাম লিখুন!</div>
@@ -364,17 +325,21 @@ const EditTeacherProfile = () => {
                       </div>
                     </div>
 
-
-
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label">মোবাইল নাম্বার</label>
                         <div className="input-group">
-                          <input type="text" id="pin" className="form-control"
-                            // readOnly
+                          <input
+                            type="tel"
+                            id="pin"
+                            className="form-control"
                             name="mobile_no"
-                            placeholder="আপনার মোবাইল নাম্বার দিন"
-                            defaultValue={mobile_no} />
+                            placeholder="আপনার এগারো সংখ্যার মোবাইলটি নাম্বার দিন"
+                            defaultValue={mobile_no}
+                            maxLength={11}
+                            minLength={11}
+                          />
+
                         </div>
                       </div>
                     </div>
@@ -390,8 +355,6 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
                     </div> */}
-
-
 
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
@@ -425,24 +388,6 @@ const EditTeacherProfile = () => {
                       </div>
                     </div>
 
-
-                    {/* <div className="form-group  col-sm-4 col-md-6">
-                      <div className="mb-3" style={{ fontSize: "16px" }}>
-                        <label className="form-label">ছবি আপলোড করুন </label>
-                        <div className="input-group">
-                          <input
-                            type="file"
-                            id="imageInput"
-                            accept="image/*"
-                            name="image"
-                          />
-                        </div>
-                      </div>
-                    </div> */}
-
-
-
-
                     <div className="form-group col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label htmlFor="gender" className="form-label">লিঙ্গ</label>
@@ -460,8 +405,6 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
                     </div>
-
-
 
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
@@ -647,11 +590,9 @@ const EditTeacherProfile = () => {
                       </div>
                     </div>
 
-
                     <div className="d-flex justify-content-end align-items-center pt-3 pe-3">
                       <button type="submit" className="btn btn-primay px-5" style={{ backgroundColor: "#428F92", color: "#fff", }} > প্রোফাইল হালনাগাদ করুন{" "} <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem", }} />{" "} </button>
                     </div>
-
                   </form>
                 </div>
               </div>

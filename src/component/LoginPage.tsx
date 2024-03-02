@@ -282,7 +282,7 @@ const LoginPage = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="d-flex gap-2 align-items-center py-3 collect-pin">
+                    {/* <div className="d-flex gap-2 align-items-center py-3 collect-pin">
                       <div className="form-check form-check-style">
                         <input
                           className="form-check-input fs-5"
@@ -299,7 +299,7 @@ const LoginPage = () => {
                           <p className="pt-2 pin-collect">পিন সংরক্ষণ করুণ</p>
                         </label>
                       </div>
-                    </div>
+                    </div> */}
                     <button type="submit" disabled={loading} className="btn login-btn w-100">
                       লগ ইন করুন {loading && "loading......"}
                     </button>
@@ -568,7 +568,7 @@ const LoginPage = () => {
 
                       অথবা,
 
-                      আমার প্রতিষ্ঠান প্রধান এর PDS আইডি ও ডিফল্ট পাসওয়ার্ড দিয়েও লগইন হয়নি। গুগল ফর্ম পূরন করে দিয়েছি। এখনো কোন মেসেজ পাইনি। কি করা যায়?
+                      আমার প্রতিষ্ঠান প্রধান এর PDS আইডি ও ডিফল্ট পিন দিয়েও লগইন হয়নি। গুগল ফর্ম পূরন করে দিয়েছি। এখনো কোন মেসেজ পাইনি। কি করা যায়?
                     </h6>
                   </div>
 

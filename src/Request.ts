@@ -339,17 +339,6 @@ export function all_student() {
   return axios(options);
 }
 
-// export function update_teacher_profile(caid: any, data: any) {
-//   const page_list = `${API_URL}/v2/account-update/${caid}`;
-//   const options = {
-//     method: "PUT",
-//     headers: { "content-type": "application/json" },
-//     data,
-//     url: page_list,
-//   };
-
-//   return axios(options);
-// }
 
 export function update_teacher_profile(caid: any, data: any) {
   const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
@@ -702,8 +691,6 @@ export function confirm_pass(data: any) {
 
   return axios(options);
 }
-
-
 
 
 export function class_teacher_all_student_data() {

@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Kalpurush';
-  src: url('kalpurush.ttf') format('truetype');
+  font-family: 'SolaimanLipi';
+  src: url('SolaimanLipi.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -53,7 +53,7 @@
 
 .profile-style {
   color: #4b465c;
-font-family: 'Kalpurush';
+font-family: 'SolaimanLipi';
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -94,7 +94,7 @@ font-family: 'Kalpurush';
 }
 
 .navbar-btn {
-font-family: 'Kalpurush';
+font-family: 'SolaimanLipi';
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
@@ -108,7 +108,7 @@ font-family: 'Kalpurush';
 }
 
 .main-nav .nav-link {
-font-family: 'Kalpurush';
+font-family: 'SolaimanLipi';
   font-size: 15px;
   font-weight: 400;
   line-height: 22px;
@@ -174,7 +174,7 @@ font-family: 'Kalpurush';
 }
 
 .dropdown-class-list {
-font-family: 'Kalpurush';
+font-family: 'SolaimanLipi';
   font-size: 15px;
   padding-left: 8px;
   font-weight: 400;
@@ -186,7 +186,7 @@ font-family: 'Kalpurush';
   background-color: var(--bg_primary);
   border-radius: 4px;
   color: var(--text_white);
-font-family: 'Kalpurush';
+font-family: 'SolaimanLipi';
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;

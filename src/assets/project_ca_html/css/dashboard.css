@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Kalpurush';
-  src: url('kalpurush.ttf') format('truetype');
+  font-family: 'SolaimanLipi';
+  src: url('SolaimanLipi.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -8,7 +8,7 @@
 /* font-class Nikosh */
 .ff_niskosh {
   /* background-color: blue; */
-  font-family: 'Kalpurush' !important;
+  font-family: 'SolaimanLipi' !important;
 }
 
 * {
@@ -35,7 +35,7 @@ h6 {
 
 body {
   background-color: #ffffff;
-  font-family: 'Kalpurush';
+  font-family: 'SolaimanLipi';
 }
 
 :root {
@@ -145,7 +145,7 @@ body {
 }
 
 .teacher-profile .card-header .teacher-title h2 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 12px;
   font-weight: 400;
   line-height: 18px;
@@ -182,7 +182,7 @@ body {
 }
 
 .teacher-profile .teacher-info h2 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 20px;
   font-weight: 400;
   line-height: 30px;
@@ -193,7 +193,7 @@ body {
 }
 
 .teacher-profile .teacher-info p {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 10px;
   font-weight: 400;
   line-height: 16px;
@@ -261,7 +261,7 @@ body {
 }
 
 .student-chart .header .timeline h4 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 10px;
   font-weight: 600;
   line-height: 18px;
@@ -295,7 +295,7 @@ body {
 }
 
 .student-chart .header .all h4 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 10px;
   font-weight: 600;
   line-height: 18px;
@@ -414,7 +414,7 @@ body {
 }
 
 .report-container h2 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 24px;
   font-weight: 400;
   line-height: 34px;
@@ -463,7 +463,7 @@ body {
 
 /* subject info */
 .subject-container h2 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 24px;
   font-weight: 400;
   line-height: 34px;
@@ -782,7 +782,7 @@ body {
 }
 
 .teacher-list .title h3 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 24px;
   font-weight: 400;
   line-height: 34px;
@@ -792,7 +792,7 @@ body {
 }
 
 .teacher-list .title a {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 16px;
   font-weight: 400;
   line-height: 26px;
@@ -844,7 +844,7 @@ body {
 }
 
 .teacher-list .teacher-container .teacher h3 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 12px;
   font-weight: 500;
   line-height: 18px;
@@ -855,7 +855,7 @@ body {
 }
 
 .teacher-list .teacher-container .teacher h4 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 10px;
   font-weight: 400;
   line-height: 16px;
@@ -925,7 +925,7 @@ body {
 }
 
 .class-routine-container .class-routine-header .class-routine-selector .timeline h4 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 12px;
   font-weight: 600;
   line-height: 18px;
@@ -956,7 +956,7 @@ body {
 }
 
 .class-routine-container .class-routine-header .class-routine-selector .all h4 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 12px;
   font-weight: 600;
   line-height: 18px;
@@ -1050,7 +1050,7 @@ body {
 .dataTables_length label {
   font-size: 16px;
   margin: 16px 0px 16px 0px;
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0em;
@@ -1060,7 +1060,7 @@ body {
 .dataTables_filter label {
   font-size: 16px;
   margin: 16px 0px 16px 0px;
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0em;
@@ -1074,7 +1074,7 @@ body {
 .dataTables_paginate {
   font-size: 16px;
   margin: 16px 0px 16px 0px !important;
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-weight: 500;
   line-height: 20px;
   letter-spacing: 0em;
@@ -1121,7 +1121,7 @@ body {
 }
 
 .class-routine-table .tab-th-style {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -1146,7 +1146,7 @@ body {
 }
 
 .class-routine-table .tab-first-td-style {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -1157,7 +1157,7 @@ body {
 }
 
 .class-routine-table .tab-td-style {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -1343,7 +1343,7 @@ body {
 }
 
 .head-master-profile .card-header .teacher-title h2 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 12px;
   font-weight: 400;
   line-height: 18px;
@@ -1380,7 +1380,7 @@ body {
 }
 
 .head-master-profile .teacher-info h2 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 20px;
   font-weight: 400;
   line-height: 30px;
@@ -1391,7 +1391,7 @@ body {
 }
 
 .head-master-profile .teacher-info p {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 10px;
   font-weight: 400;
   line-height: 16px;
@@ -1452,7 +1452,7 @@ body {
 /* =================================== Class 6 ================================= */
 
 .class-six-container h2 {
-   font-family: 'Kalpurush';
+   font-family: 'SolaimanLipi';
   font-size: 24px;
   font-weight: 400;
   line-height: 34px;

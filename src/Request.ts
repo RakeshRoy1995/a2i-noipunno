@@ -38,16 +38,35 @@ export function resetPassword(data: any) {
   return axios(options);
 }
 
-export function otpComfirm(data: any) {
-  const page_list = `${API_URL}/v2/account-otp-verify`;
+export function userInfo(data: any) {
+  const page_list = `${API_URL}/v2/auth/account-info?caid=${data}`;
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+  };
+  return axios(options);
+}
 
+export function otpComfirm(data: any) {
+  const page_list = `${API_URL}/v2/account-otp-verify-change-pin`;
   const options = {
     method: "POST",
     headers: { "content-type": "application/json" },
     data,
     url: page_list,
   };
+  return axios(options);
+}
 
+export function changePin(data: any) {
+  const page_list = `${API_URL}/v2/account-change-pin`;
+  const options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data,
+    url: page_list,
+  };
   return axios(options);
 }
 
@@ -372,9 +391,6 @@ export function update_teacher_profile(caid: any, data: any) {
 
   return axios(options);
 }
-
-
-
 
 export function get_pi_evaluation_by_pi(
   class_room_uid: any,

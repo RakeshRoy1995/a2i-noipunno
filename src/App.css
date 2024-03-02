@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Kalpurush';
-  src: url('kalpurush.ttf') format('truetype');
+  font-family: 'SolaimanLipi';
+  src: url('SolaimanLipi.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -8,16 +8,15 @@
 /* font-class Nikosh */
 .ff_niskosh {
   /* background-color: blue; */
-  font-family: 'Kalpurush' !important;
+  font-family: 'SolaimanLipi' !important;
 }
 
 .root_styles {
-  font-family: 'Kalpurush';
+  font-family: 'SolaimanLipi';
   /* font-family: "Roboto"; */
   box-sizing: border-box;
   background-color: #efefef;
   color: #000000;
-
 }
 
 #root {

@@ -30,6 +30,7 @@ import StudentTranscriptBI from "./component/StudentTranscriptBI";
 import GeneratePdf from "./component/generatePdf/GeneratePdf";
 import ResetPassword from "./component/ResetPassword";
 import StudentAttendence from "./component/Attendence/StudentAttendence/StudentAttendence";
+import PasswordReset2 from "./component/_PasswordReset";
 
 
 function App() {
@@ -95,6 +96,7 @@ function App() {
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/password/reset" element={<PasswordReset />} />
+        <Route path="/pin/reset" element={<PasswordReset2 />} />
 
       </Routes>
 

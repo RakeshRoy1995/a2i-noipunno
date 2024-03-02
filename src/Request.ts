@@ -215,6 +215,8 @@ export async function teacher_own_subject() {
 
   if (bi !== "" && common_info !== "" && cls_room !== "") {
     const data = formate_own_subject_data(own_sub, cls_room);
+
+    console.log(`data -----   ---`, data);
     data.data.data.assessments = common_info.data.data.assessments;
     data.data.data.pi_attribute_weight =
       common_info.data.data.pi_attribute_weight;
@@ -290,7 +292,7 @@ export function bi_info() {
 }
 
 export function class_room_info() {
-  const page_list = `${API_URL}/v2/class-room-info`;
+  const page_list = `${API_URL}/v2/class-room-information`;
 
   const options = {
     method: "get",

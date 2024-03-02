@@ -127,9 +127,9 @@ const EditTeacherProfile = () => {
         const data_dash: any = await teacher_dashboard();
         localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
 
-        // setTimeout(() => {
-        //   window.location.replace("/");
-        // }, 900)
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 900)
 
       }
 
@@ -203,7 +203,7 @@ const EditTeacherProfile = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const [warningMessage, setWarningMessage] = useState('ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+  const [warningMessage, setWarningMessage] = useState('ছবির আকার ১০০ KB এবং দৈর্ঘ্য-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -245,15 +245,15 @@ const EditTeacherProfile = () => {
 
   const [signaturePreview, setsSgnaturePreview] = useState(null);
   const [signatureErrorMessage, setSignatureErrorMessage] = useState('');
-  const [signatureWarningMessage, setSignatureWarningMessage] = useState('সিগ্নেচার ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+  const [signatureWarningMessage, setSignatureWarningMessage] = useState('সিগনেচার ছবির আকার ৬০ KB এবং দৈর্ঘ্য-প্রস্থ (৩০০ X ৮০) পিক্সেলের হতে হবে!');
 
   const handleSignatureImg = (e) => {
     const file = e.target.files[0];
     if (file) {
       // Check file size
-      if (file.size > 100 * 1024) {
+      if (file.size > 60 * 1024) {
         setSignatureWarningMessage('')
-        setSignatureErrorMessage('সিগ্নেচার ছবির আকার ১০০ কিলোবাইট অতিক্রম করেছে, ছবির আকার ১০০ কিলোবাইটের (KB) ভিতর হতে হবে!');
+        setSignatureErrorMessage('সিগ্নেচার ছবির আকার 60 কিলোবাইট অতিক্রম করেছে, ছবির আকার 60 কিলোবাইটের (KB) ভিতর হতে হবে!');
         return;
       }
 
@@ -261,9 +261,9 @@ const EditTeacherProfile = () => {
       const img = new Image();
       img.onload = () => {
         // Check image dimensions
-        if (img.width > 300 || img.height > 300) {
+        if (img.width > 300 || img.height > 80) {
           setSignatureWarningMessage('')
-          setSignatureErrorMessage('সিগ্নেচার ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
+          setSignatureErrorMessage('সিগ্নেচার ছবির প্রস্থ-উচ্চতা 300X80 পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা 300X80 পিক্সেলের (PX) ভিতর হতে হবে!');
           return;
         }
 
@@ -611,7 +611,7 @@ const EditTeacherProfile = () => {
                       <div className="d-flex align-items-center gap-3" style={{ width: "100%" }}>
                         <div className="mb-3" style={{ fontSize: "16px", width: "50%" }}>
                           <label className="form-label">
-                            সিগ্নেচার আপলোড করুন
+                          সিগনেচার আপলোড করুন
                           </label>
 
                           <div className="input-group ">

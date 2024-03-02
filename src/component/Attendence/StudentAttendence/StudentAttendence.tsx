@@ -91,7 +91,7 @@ const StudentAttendance = () => {
 
 
 
-  const [number, setNumber] = useState(0)
+  const [number, setNumber] = useState<any>(0)
   const hadleChange = (event) => {
     event.preventDefault()
     const number = event.target.value;

@@ -5,7 +5,9 @@
   font-style: normal;
 }
 
-
+.bn{
+  font-family: 'Kalpurush';
+}
 
 
 * {
@@ -31,16 +33,74 @@ h6 {
 }
 
 .min-vh-90-100 {
-  height: calc(100vh - 100px);
+  height: calc(90vh - 90px);
 }
 
 .max-width-540 {
-  max-width: 540px;
+  max-width: 450px;
+  border: none;
+}
+
+.login-card-padding{
+  padding: 38px !important;
+}
+
+.card-footer-image{
+  width: 70px;
+  height: 70px;
 }
 
 #body {
   font-family: "Roboto";
   box-sizing: border-box;
+  overflow-x: hidden; /* Disables horizontal scrolling */
+  overflow-y: hidden; /* Disables vertical scrolling */
+}
+
+.custom-card-frontend{
+  border: none;
+  margin-bottom: 10px;
+}
+
+.media-btn-custom:hover{
+  background-color: #198754;
+  color: white;
+}
+
+.according-custom:hover{
+  background-color: #198754;
+  color: white;
+}
+
+.btn-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-title{
+  font-size: 18px !important;
+}
+
+.transparent-card{
+  border: none;
+  background-color: #f6f6f883;
+  margin-right: -80px;
+}
+
+.footer-card-custom{
+  margin-right: -120px;
+}
+
+.card-body-custom{
+  padding: 10px;
+  color: black;
+  background-color: #ffffff56;
+  width: 80%;
+  margin: auto;
+  border-radius: 10px;
+  margin-bottom: 140px;
+  font-family: 'Kalpurush';
 }
 
 :root {
@@ -60,7 +120,7 @@ h6 {
 
 /* ---------login page start------------------- */
 .login-page {
-  background: linear-gradient(180deg, #befdff 0%, #a2f3f5 100%);
+  background: linear-gradient(180deg, #befdff 0%, #48b8b9 100%);
 }
 
 .login-bg {
@@ -89,8 +149,8 @@ h6 {
 }
 
 .loginLogo {
-  height: 95px;
-  width: 226px;
+  height: 44px;
+  width: 100px;
 }
 
 .login-page .loginCard {
@@ -100,19 +160,19 @@ h6 {
 }
 
 .teacher-login-title {
-  color: var(--text_dark);
+  color: #181C32;
   font-size: 30px;
   font-weight: 700;
   line-height: 39px;
   letter-spacing: 2px;
   text-align: left;
-   font-family: 'Kalpurush';
+  font-family: 'Kalpurush';
 }
 
 .np-login-subtitle {
   color: var(--text_dark);
-   font-family: 'Kalpurush';
-  font-size: 16px;
+  font-family: 'Kalpurush';
+  font-size: 17px;
   font-weight: 400;
   line-height: 26px;
   letter-spacing: 0em;
@@ -120,7 +180,7 @@ h6 {
 }
 
 .login-title {
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 700;
   line-height: 30px;
   letter-spacing: -0.02em;
@@ -190,7 +250,7 @@ h6 {
    font-family: 'Kalpurush';
   font-size: 18px;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 36px;
   letter-spacing: 0.0225em;
 }
 
@@ -235,9 +295,10 @@ label.form-check-label:focus,
 /* --------- */
 .np-login-form-field {
   border-radius: 5px !important;
-  background-color: #f5f8fa;
+  background-color: #E8F0FE;
   padding: 0.775rem 2.75rem;
   border: none;
+  height: 40px;
 }
 
 .login-field-title {
@@ -432,11 +493,36 @@ label.form-check-label:focus,
   .helpedBy {
     width: 350px;
   }
+
+  .transparent-card{
+    border: none;
+    background-color: #f6f6f844;
+    margin-right: 0px;
+  }
+
+  .footer-card-custom{
+    margin-right: 0px;
+  }
+
 }
 
 @media screen and (min-width: 768px) and (max-width: 991.98px) {
   .teacher-login-title {
-    font-size: 16px;
+    color: #181C32;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 39px;
+  }
+
+  .footer-card-custom{
+    margin-right: 0px;
+  }
+
+  .transparent-card{
+    border: none;
+    background-color: #f6f6f883;
+    margin-right: 0px;
   }
 
   .np-login-subtitle {
@@ -449,6 +535,7 @@ label.form-check-label:focus,
 
   .np-login-form-field {
     padding: 0.775rem 2.75rem;
+
   }
 
   .helpedBy {
@@ -457,14 +544,39 @@ label.form-check-label:focus,
 
   .loginCard ::placeholder {
     font-size: 14px;
-    padding-left: 10px;
+    padding-left: 0px;
   }
+
+  .card-footer-image{
+    width: 60px;
+    height: 60px;
+  }
+  
 }
 
 @media screen and (min-width: 576px) and (max-width: 767.98px) {
   .loginLogo {
     height: 50px;
     width: 100px;
+  }
+
+  .footer-card-custom{
+    margin-right: 0px;
+  }
+
+  .transparent-card{
+    border: none;
+    background-color: #f6f6f883;
+    margin-right: 0px;
+  }
+
+  .card-body-custom{
+    margin-bottom: 0px;
+  }
+
+  .card-footer-image{
+    width: 60px;
+    height: 60px;
   }
 
   .teacher-login-title {
@@ -511,17 +623,62 @@ label.form-check-label:focus,
 }
 
 @media screen and (min-width: 376px) and (max-width: 575.98px) {
+  .np-login-field-icon {
+    position: absolute;
+    left: 2%;
+    z-index: 100;
+    top: 30%;
+    width: 20px;
+  }
+
+  .mobile-view{
+    text-align: center;
+  }
+
+  .centered-image{
+    display: block;
+    margin: 0 auto;
+  }
+
+  .login-card-padding{
+    margin-bottom: 20px !important;
+  }
+  
+  .np-login-form-field::placeholder {
+    margin-left: 1px;
+    border: none;
+  }
+
   .loginLogo {
     height: 50px;
     width: 100px;
   }
 
+  .footer-card-custom{
+    margin-right: 0px;
+  }
+
+  .transparent-card{
+    border: none;
+    background-color: #f6f6f883;
+    margin-right: 0px;
+  }
+
+  .card-body-custom{
+    margin-bottom: 30px;
+  }
+
+  .card-footer-image{
+    width: 60px;
+    height: 60px;
+  }
+
   .teacher-login-title {
-    font-size: 12px !important;
+    font-size: 20px !important;
   }
 
   .np-login-subtitle {
-    font-size: 10px;
+    font-size: 16px;
   }
 
   .login-field-title {
@@ -541,16 +698,9 @@ label.form-check-label:focus,
     padding-bottom: 20px;
   }
 
-  .np-login-form-field {
-    border-radius: 5px !important;
-    background-color: #f5f8fa;
-    padding: 0.2rem 0.5rem;
-    border: none;
-  }
-
-  .np-login-subtitle {
+  /* .np-login-subtitle {
     display: none;
-  }
+  } */
 
   .footer-menus {
     display: none;

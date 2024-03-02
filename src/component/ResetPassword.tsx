@@ -31,7 +31,6 @@ function ResetPassword() {
       setconfirmOtoSuccess(true);
     } catch (error) {
       console.log("error", error);
-
       seterrmsg(error.message);
     }
   };
@@ -46,11 +45,11 @@ function ResetPassword() {
       const { data }: any = await confirm_otp(otp);
       console.log("otp", data);
       setmsg(data.message);
-setconfirmOtoSuccess(false);
+      setconfirmOtoSuccess(false);
       setconfirmPINSuccess(true);
       console.log("setconfirmPINSuccess", setconfirmPINSuccess);
     } catch (error) {
-      console.log("eee", error.response);
+      //console.log("eee", error.response);
       seterrmsg(error?.response?.data?.error?.message || "সার্ভার জনিত সমস্যার কারণে দুঃখিত । পুনরায় চেষ্টা করুন ।");
     }
   };
@@ -65,12 +64,11 @@ setconfirmOtoSuccess(false);
       const { data }: any = await confirm_pass(pass);
       console.log("pass", data);
       setmsg("আপনার পিন সফলভাবে আপডেট করা হয়েছে।");
-      
       setconfirmPINSuccess(true);
       console.log("setconfirmPINSuccess", setconfirmPINSuccess);
     } catch (error) {
 
-      console.log("eee", error.response);
+      //console.log("eee", error.response);
       
       seterrmsg(error?.response?.data?.error?.message?.password || "সার্ভার জনিত সমস্যার কারণে দুঃখিত । পুনরায় চেষ্টা করুন ।");
     }
@@ -104,7 +102,6 @@ setconfirmOtoSuccess(false);
                     <h4> রিসেট পাসওয়ার্ড </h4>
                   </li>
                 </ul>
-
                 
                 <div
                   className="tab-content"
@@ -294,7 +291,7 @@ setconfirmOtoSuccess(false);
                         <div className="form-group  col-sm-4 col-md-6">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label">
-                              নতুন পাসওয়ার্ড
+                              নতুন পিন
                             </label>
                             <div className="input-group">
                               <input
@@ -302,7 +299,7 @@ setconfirmOtoSuccess(false);
                                 id="pin"
                                 className="form-control"
                                 name="password"
-                                placeholder="পাসওয়ার্ড"
+                                placeholder="পিন"
                               />
                             </div>
                           </div>
@@ -311,7 +308,7 @@ setconfirmOtoSuccess(false);
                         <div className="form-group  col-sm-4 col-md-6">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label">
-                              পাসওয়ার্ড নিশ্চিত করুন
+                              পিন নিশ্চিত করুন
                             </label>
                             <div className="input-group">
                               <input
@@ -342,7 +339,7 @@ setconfirmOtoSuccess(false);
                             }}
                           >
                             {" "}
-                            পাসওয়ার্ড পরিবর্তন সম্পূর্ণ করুন{" "}
+                            পিন পরিবর্তন সম্পূর্ণ করুন{" "}
                             <MdOutlineKeyboardArrowRight
                               className="fs-3"
                               style={{ marginTop: "-0.3rem" }}

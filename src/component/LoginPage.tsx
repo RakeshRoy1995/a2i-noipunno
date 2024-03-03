@@ -78,7 +78,7 @@ const LoginPage = () => {
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
           window.location.assign("/");
         } else {
-          seterror("পাসওয়ার্ড মেলেনি");
+          seterror("পিন মেলেনি");
         }
         setloading(false)
       } catch (error) {
@@ -90,7 +90,7 @@ const LoginPage = () => {
         setloading(false)
       }
     } else {
-      seterror("পাসওয়ার্ড অবশ্যই ছয় অক্ষরের হতে হবে!");
+      seterror("পিন অবশ্যই ছয় অক্ষরের হতে হবে!");
     }
 
 
@@ -113,7 +113,7 @@ const LoginPage = () => {
     //     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     //     window.location.assign("/");
     //   } else {
-    //     seterror("পাসওয়ার্ড মেলেনি");
+    //     seterror("পিন মেলেনি");
     //   }
     //   setloading(false)
     // } catch (error) {
@@ -247,37 +247,11 @@ const LoginPage = () => {
                   {error && <div className="alert alert-danger text-white">{error}</div>}
 
                   <form onSubmit={handleSubmit}>
-                    <div className="form-group my-1">
-                      <label
-                        htmlFor="user_type_id"
-                        className="login-field-title"
-                      >
-                        ইউজার টাইপ
-                      </label>
-                      <div className="input-group">
-                        <select
-                          className="form-select form-control"
-                          name="user_type_id"
-                          required
-                          style={{
-                            fontSize: 16,
-                            fontFamily: '"Times New Roman", Times, serif',
-                            fontWeight: 400,
-                          }}
-                          defaultValue={''}
-                        >
-                          <option value={1} selected>
-                            শিক্ষক
-                          </option>
-                          {/* <option value="Option2">Option2</option>
-                        <option value="Option3">Option3</option>
-                        <option value="Option4">Option4</option>
-                        <option value="Option5">Option5</option> */}
-                        </select>
-                      </div>
-                    </div>
+                   
+                      <input type="hidden" name="user_type_id" value="1"/>
+                  
                     <div className="form-group mb-1">
-                      <label htmlFor="caid" className="login-field-title">
+                      <label htmlFor="caid" className="login-field-title mb-2">
                         বিষয় ভিত্তিক শিক্ষকের আইডি
                       </label>
                       <div className="input-group">
@@ -292,7 +266,7 @@ const LoginPage = () => {
                         </div>
                         <input
                           // onChange={handleChange}
-                          className="form-control np-login-form-field custom-input"
+                          className="form-control np-login-form-field custom-input mb-2"
                           type="text"
                           // value={value}
                           defaultValue={userId_from_Cookie}
@@ -305,7 +279,7 @@ const LoginPage = () => {
                       </div>
                     </div>
                     <div className="form-group mb-1">
-                      <label htmlFor="pin" className="login-field-title">
+                      <label htmlFor="pin" className="login-field-title mb-2">
                         পিন নম্বর
                       </label>
                       <div className="input-group">
@@ -321,7 +295,7 @@ const LoginPage = () => {
                           id="pin"
                           name="password"
                           required
-                          placeholder="আপনার পাসওয়ার্ড দিন"
+                          placeholder="আপনার পিন দিন"
                         />
                         <div className="input-group-append password-toggle">
                           {/* <span>
@@ -364,7 +338,7 @@ const LoginPage = () => {
                         </label>
                       </div>
                     </div> */}
-                    <button type="submit" disabled={loading} className="btn login-btn w-100">
+                    <button type="submit" disabled={loading} className="btn login-btn w-100 mt-2">
                       লগ ইন করুন {loading && "loading......"}
                     </button>
                     <div className="form-group my-2">
@@ -373,7 +347,7 @@ const LoginPage = () => {
                           to="/password/reset"
                           className="forget-password"
                         >
-                          পাসওয়ার্ড ভুলে গেছেন?
+                          পিন ভুলে গেছেন?
                         </Link>
                       </p>
                     </div>
@@ -383,74 +357,7 @@ const LoginPage = () => {
             </div>
           </div>
 
-          <div className="row">
-            <div className="login_footer position-absolute bottom-0">
-              <div className="d-flex flex-column flex-md-row justify-content-between align-items-end sm-row-reverse ps-5 pe-3 my-2">
-                <div className="">
-                  <div className="d-flex gap-2 py-2 justify-content-start">
-                    <ul className="d-flex gap-2">
-                      <div className="d-flex gap-2 flex-column flex-md-row">
-                        <div className="footer-menus">
-                          <a className="ps-2" href="#">
-                            © ২০২৩ সর্বস্বত্ব সংরক্ষিত
-                          </a>
-                          <a className="ps-2" href="#">
-                            গোপনীয়তা নীতি
-                          </a>
-                          <a className="ps-2" href="tel:০৯৬৩৮৬০০৭০০">
-                            হেল্প ডেস্ক নম্বর: ৯৬৩৮৬০০৭০০
-                          </a>
-                          <a
-                            className="ps-2 "
-                            href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQJyc51nkExJh5Zti4RVaeC0OyXWNz6Y5fcO-9zjNxq1kmjOb65EZ6r9jLzPpeyZYeOFyNJAqZeGRum/pubhtml?gid=0&single=true"
-                            target="_blank"
-                          >
-                            {" "}
-                            অ্যাপ সংক্রান্ত তথ্যসেবা পেতে জেলাভিত্তিক নির্ধারিত
-                            নম্বরসূমহে যোগাযোগ করুন
-                          </a>
-                          {/* <a
-                            className="ps-2 "
-                            href="https://docs.google.com/document/d/e/2PACX-1vTfzi4vy5b8RbL0rnIAt8t7stJFN0F70qwTOUM_ZxEyveq794GnjdXzIzd_RY-a0tVQqGdhwAOyd1NQ/pub"
-                            target="_blank"
-                          >
-                            সচরাচর জিজ্ঞাসা
-                          </a> */}
-                          <a className="ps-2" onClick={() => handleShowModal()} style={{ cursor: "pointer" }}>
-                            সচরাচর জিজ্ঞাসা <span className="bi bi-hand"></span>
-                          </a>
-
-                        </div>
-                      </div>
-                    </ul>
-                  </div>
-                </div>
-                <div className="helpedBy">
-                  <div className="d-flex gap-2 px-5 py-2 justify-content-center bg-light rounded-pill">
-                    <div>
-                      <div>
-                        <p className="">পরিকল্পনা ও বাস্তবায়নে</p>
-                      </div>
-                      <div className="d-flex justify-content-around align-items-center gap-1">
-                        <img src={govtLogo} className="img-fluid" />
-                        <img src={nctbLogo} className="img-fluid" />
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <p className="">কারিগরি সহায়তায়</p>
-                      </div>
-                      <div className="d-flex justify-content-around align-items-center gap-1">
-                        <img src={unicef} className="img-fluid" />
-                        <img src={A2I} className="img-fluid" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <PopUpAppInfo />
-          </div>
+         
         </div>
         <Modal
           className="mx-auto pl-0"

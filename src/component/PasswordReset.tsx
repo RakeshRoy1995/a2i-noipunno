@@ -253,18 +253,18 @@ const PasswordReset = () => {
                         buttonSHow && <button type="submit" className="btn login-btn w-100 mt-2">{showVarify ? "ওটিপি পাঠান" : "তথ্য যাচাই করুন"}</button>
                     }
 
-                    <div className="form-group my-2">
-                      <p className="mb-1 text-center">
+                    <div className="form-group">
+                      <p className="mb-1 mt-3 text-center">
                         <Link
                           to="/login"
                           className="forget-password"
-                          style={{ color: '#428F92', fontSize: '14px' }}
+                          style={{ color: '#428F92', fontSize: '16px' }}
                         >
                           লগইন পেজ এ ফিরে যেতে ক্লিক করুন
                         </Link>
                       </p>
                     </div>
-                    
+
                   </form>
 
                   :

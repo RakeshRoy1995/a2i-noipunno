@@ -190,13 +190,13 @@ const LoginPage = () => {
                           <p className="mb-2" style={{ letterSpacing: '0.5px', textAlign: 'justify' }}>
                             সকলের অবগতির জন্য জানানো যাচ্ছে যে, বর্তমানে ব্রাঞ্চ, শিফট, ভার্সন, সেকশন, শিক্ষক ও বিদ্যালয়ের তথ্য আপডেট করা যাবে এবং বিষয় শিক্ষক নির্বাচন করতে হবে। বিদ্যালয়ের তথ্য সম্পাদনা করে বোর্ড নির্বাচন করতে হবে। সবার সহযোগিতার জন্য ধন্যবাদ।
                           </p>
-                          <br />
+                          <br/>
                         </div>
                         <div className="carousel-item active">
                           <p className="mb-2" style={{ letterSpacing: '0.5px', textAlign: 'justify' }}>
                             আগামী (সম্ভাব্য) ২০ জানুয়ারি থেকে নতুন ২০২৪ শিক্ষাবর্ষের শিক্ষক ও শিক্ষার্থী ব্যবস্থাপনার কাজ করা যাবে। এই সময়ের আগে অর্থাৎ ১৯ জানুয়ারি পর্যন্ত আপনারা কেউ নতুন শিক্ষাবর্ষের শিক্ষার্থী শিক্ষক বা এমন কোন তথ্য প্যানেলে যুক্ত করবেন না।
                           </p>
-                          <br />
+                          <br/>
                         </div>
                         <div className="carousel-item">
                           <p className="mb-2" style={{ letterSpacing: '0.5px', textAlign: 'justify' }}>
@@ -346,7 +346,7 @@ const LoginPage = () => {
                         <Link
                           to="/password/reset"
                           className="forget-password"
-                          style={{ fontSize: '16px' }}
+                          style={{ color: '#428F92', fontSize: '16px' }}
                         >
                           পিন ভুলে গেছেন? এখানে ক্লিক করুন
                         </Link>
@@ -846,9 +846,7 @@ const LoginPage = () => {
           </Modal.Footer>
         </Modal>
 
-
       </section>
-
 
       <div className="modal fade" id="exampleModal1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -857,344 +855,345 @@ const LoginPage = () => {
               <h1 className="modal-title fs-5" id="exampleModalLabel">যোগাযোগ</h1>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            
             <div className="modal-body">
               {/* <div className="">
                   <h5 className="bn">নাম্বার: +৮৮০ ১৮৪১১১৭০০১</h5>
                   <h5 className="mt-2"><span className="bn">ইমেইল: </span> <span style={{ fontFamily: 'arial' }}>support@report.gov.bd</span></h5>
               </div>         */}
 
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th scope="col">সিরিয়াল</th>
-                    <th scope="col">জেলার নাম</th>
-                    <th scope="col">মোবাইল নাম্বার</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">১</th>
-                    <td>বাগেরহাট</td>
-                    <td>০১৭১২৬৮৮১৬১৬</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২</th>
-                    <td>বান্দরবান</td>
-                    <td>০১৭৩৯৩৪৫৮৭৮</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩</th>
-                    <td>বরগুনা</td>
-                    <td>০১৭১৮১৬৫৯২০</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪</th>
-                    <td>বরিশাল</td>
-                    <td>০১৭৫৭৫৮৫৯৯২</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫</th>
-                    <td>ভোলা</td>
-                    <td>০১৭৩৪০৫৬৮৪৭</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৬</th>
-                    <td>বগুড়া</td>
-                    <td>০১৮৩৩৭৯৪১২৪</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৭</th>
-                    <td>ব্রাহ্মণবাড়িয়া</td>
-                    <td>০১৬০১৯৩৬৫৬১</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৮</th>
-                    <td>চাঁদপুর</td>
-                    <td>০১৯১৩৬৩৪৫৫০</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৯</th>
-                    <td>চট্টগ্রাম</td>
-                    <td>০১৮১৮১২৭১৩৩</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১০</th>
-                    <td>চুয়াডাঙ্গা</td>
-                    <td>০১৭১৬১০৪২০২</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১১</th>
-                    <td>কক্সবাজার</td>
-                    <td>০১৯৭৩২৭৬৮৮৭</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১২</th>
-                    <td>কুমিল্লা</td>
-                    <td>০১৬৪৭৩৭৩৭৫৭</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৩</th>
-                    <td>ঢাকা</td>
-                    <td>০১৭১৬১৫৮২৪৭</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৪</th>
-                    <td>দিনাজপুর</td>
-                    <td>০১৭২৮৮৬৬৪৮৪</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৫</th>
-                    <td>ফরিদপুর</td>
-                    <td>০১৭২১০০১২৫৫</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৬</th>
-                    <td>ফেনী</td>
-                    <td>০১৭১৭৮৮১০৮৪</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৭</th>
-                    <td>গাইবান্ধা</td>
-                    <td>০১৭১৭০১৬১৪০</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৮</th>
-                    <td>গাজীপুর</td>
-                    <td>০১৭২১৯৯৬৬৩৭</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৯</th>
-                    <td>গোপালগঞ্জ</td>
-                    <td>০১৭১১২২২৯৩৪</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২০</th>
-                    <td>হবিগঞ্জ</td>
-                    <td>০১৭১১৯১০০১৬</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২১</th>
-                    <td>জামালপুর</td>
-                    <td>০১৭১২৭২৫৪৬১</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২২</th>
-                    <td>যশোর</td>
-                    <td>০১৯৩৬০১১১০২</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৩</th>
-                    <td>ঝালকাঠি</td>
-                    <td>০১৭০৯৯০২৩৬৬</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৪</th>
-                    <td>ঝিনাইদহ</td>
-                    <td>০১৭১৬১০৭৫৭৭</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৫</th>
-                    <td>জয়পুরহাট</td>
-                    <td>০১৯১৬৩১৬১৬০</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৬</th>
-                    <td>খাগড়াছড়ি</td>
-                    <td>015৫৬৭৭১৫৫৫</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৭</th>
-                    <td>খুলনা</td>
-                    <td>০১৭১৭০০৬৯১০</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৮</th>
-                    <td>কিশোরগঞ্জ</td>
-                    <td>০১৭৫১৬২৬৬৭৯</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৯</th>
-                    <td>কুড়িগ্রাম</td>
-                    <td>০১৭১৭১৭১৭৪১</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩০</th>
-                    <td>কুষ্টিয়া</td>
-                    <td>০১৭১৯৪৭৮৪২৬</td>
-                  </tr>
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">সিরিয়াল</th>
+                      <th scope="col">জেলার নাম</th>
+                      <th scope="col">মোবাইল নাম্বার</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">১</th>
+                      <td>বাগেরহাট</td>
+                      <td>০১৭১২৬৮৮১৬১৬</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২</th>
+                      <td>বান্দরবান</td>
+                      <td>০১৭৩৯৩৪৫৮৭৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩</th>
+                      <td>বরগুনা</td>
+                      <td>০১৭১৮১৬৫৯২০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪</th>
+                      <td>বরিশাল</td>
+                      <td>০১৭৫৭৫৮৫৯৯২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫</th>
+                      <td>ভোলা</td>
+                      <td>০১৭৩৪০৫৬৮৪৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৬</th>
+                      <td>বগুড়া</td>
+                      <td>০১৮৩৩৭৯৪১২৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৭</th>
+                      <td>ব্রাহ্মণবাড়িয়া</td>
+                      <td>০১৬০১৯৩৬৫৬১</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৮</th>
+                      <td>চাঁদপুর</td>
+                      <td>০১৯১৩৬৩৪৫৫০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৯</th>
+                      <td>চট্টগ্রাম</td>
+                      <td>০১৮১৮১২৭১৩৩</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১০</th>
+                      <td>চুয়াডাঙ্গা</td>
+                      <td>০১৭১৬১০৪২০২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১১</th>
+                      <td>কক্সবাজার</td>
+                      <td>০১৯৭৩২৭৬৮৮৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১২</th>
+                      <td>কুমিল্লা</td>
+                      <td>০১৬৪৭৩৭৩৭৫৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৩</th>
+                      <td>ঢাকা</td>
+                      <td>০১৭১৬১৫৮২৪৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৪</th>
+                      <td>দিনাজপুর</td>
+                      <td>০১৭২৮৮৬৬৪৮৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৫</th>
+                      <td>ফরিদপুর</td>
+                      <td>০১৭২১০০১২৫৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৬</th>
+                      <td>ফেনী</td>
+                      <td>০১৭১৭৮৮১০৮৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৭</th>
+                      <td>গাইবান্ধা</td>
+                      <td>০১৭১৭০১৬১৪০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৮</th>
+                      <td>গাজীপুর</td>
+                      <td>০১৭২১৯৯৬৬৩৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৯</th>
+                      <td>গোপালগঞ্জ</td>
+                      <td>০১৭১১২২২৯৩৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২০</th>
+                      <td>হবিগঞ্জ</td>
+                      <td>০১৭১১৯১০০১৬</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২১</th>
+                      <td>জামালপুর</td>
+                      <td>০১৭১২৭২৫৪৬১</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২২</th>
+                      <td>যশোর</td>
+                      <td>০১৯৩৬০১১১০২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৩</th>
+                      <td>ঝালকাঠি</td>
+                      <td>০১৭০৯৯০২৩৬৬</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৪</th>
+                      <td>ঝিনাইদহ</td>
+                      <td>০১৭১৬১০৭৫৭৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৫</th>
+                      <td>জয়পুরহাট</td>
+                      <td>০১৯১৬৩১৬১৬০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৬</th>
+                      <td>খাগড়াছড়ি</td>
+                      <td>015৫৬৭৭১৫৫৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৭</th>
+                      <td>খুলনা</td>
+                      <td>০১৭১৭০০৬৯১০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৮</th>
+                      <td>কিশোরগঞ্জ</td>
+                      <td>০১৭৫১৬২৬৬৭৯</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৯</th>
+                      <td>কুড়িগ্রাম</td>
+                      <td>০১৭১৭১৭১৭৪১</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩০</th>
+                      <td>কুষ্টিয়া</td>
+                      <td>০১৭১৯৪৭৮৪২৬</td>
+                    </tr>
 
-                  <tr>
-                    <th scope="row">৩১</th>
-                    <td>লক্ষ্মীপুর</td>
-                    <td>০১৭১৭২৯৬১২৮</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩২</th>
-                    <td>লালমনিরহাট</td>
-                    <td>০১৭১৯০৬৮৯৬০</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৩</th>
-                    <td>মাদারীপুর</td>
-                    <td>০১৭১২৭৮৩৯১০</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৪</th>
-                    <td>মাগুরা</td>
-                    <td>০১৭২৮২৯৫৮৮৯</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৫</th>
-                    <td>মানিকগঞ্জ</td>
-                    <td>০১৭১৩৫২৪৩৭০</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৬</th>
-                    <td>মেহেরপুর</td>
-                    <td>০১৯১৯১৩১৭০০</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৭</th>
-                    <td>মৌলভীবাজার</td>
-                    <td>০১৭১১৪৭৬৮৯৫</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৮</th>
-                    <td>মুন্সিগঞ্জ</td>
-                    <td>016৭৫৪৯০০০৫</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৯</th>
-                    <td>ময়মনসিংহ</td>
-                    <td>০১৭২০৬৮২৫০০</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪০</th>
-                    <td>নওগাঁ</td>
-                    <td>০১৭২৮৪৬০০০১</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪১</th>
-                    <td>নড়াইল</td>
-                    <td>০১৭৩০১৯২৭৪২</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪২</th>
-                    <td>নারায়ণগঞ্জ</td>
-                    <td>016৭৮৭১৩৮০৮</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৩</th>
-                    <td>নরসিংদী</td>
-                    <td>০১৭১০২৫৬১৮৪</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৪</th>
-                    <td>নাটোর</td>
-                    <td>০১৭৮৩০৭০৩০৮</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৫</th>
-                    <td>চাঁপাই নবাবগঞ্জ</td>
-                    <td>০১৭৩৭২৭২৩০৮</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৬</th>
-                    <td>নেত্রকোনা</td>
-                    <td>০১৭১১১২৯৭০৯</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৭</th>
-                    <td>নীলফামারী</td>
-                    <td>০১৭২২৬৭৮৫৫৩</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৮</th>
-                    <td>নোয়াখালী</td>
-                    <td>০১৮১৫৩২৫৩২৩</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৯</th>
-                    <td>পাবনা</td>
-                    <td>০১৭১০৭৯৭৮৬৮</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫০</th>
-                    <td>পঞ্চগড়</td>
-                    <td>০১৭২৩২০৯৭২১</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫১</th>
-                    <td>পটুয়াখালী</td>
-                    <td>০১৭১২৪১৪০৭৯</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫২</th>
-                    <td>পিরোজপুর</td>
-                    <td>০১৭৪০৫৮৩২৯২</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৩</th>
-                    <td>রাজবাড়ী</td>
-                    <td>০১৭১১২৮৯৯০৮</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৪</th>
-                    <td>রাজশাহী</td>
-                    <td>০১৭১৮০৬২০২০</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৫</th>
-                    <td>রাঙ্গামাটি</td>
-                    <td>০১৮২৭১৮৫৩৯৫</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৬</th>
-                    <td>রংপুর</td>
-                    <td>০১৭১৭৫৯০৯৬৭</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৭</th>
-                    <td>সাতক্ষীরা</td>
-                    <td>০১৭৩৩১৬৩৮৯৫</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৮</th>
-                    <td>শরীয়তপুর</td>
-                    <td>০১৯৮৯৯৫৭৩৬৪</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৯</th>
-                    <td>শেরপুর</td>
-                    <td>০১৭১২৮৯৬৯০৫</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৬০</th>
-                    <td>সিরাজগঞ্জ</td>
-                    <td>০১৭৩৭২৩০৯০৪</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৬১</th>
-                    <td>সুনামগঞ্জ</td>
-                    <td>০১৭৪০৯১৯২০২</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৬২</th>
-                    <td>সিলেট</td>
-                    <td>০১৭১২৯৬১৮৯২</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৬৩</th>
-                    <td>টাঙ্গাইল</td>
-                    <td>০১৭৪৬২৩৯২৩৭</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৬৪</th>
-                    <td>ঠাকুরগাঁও</td>
-                    <td>০১৭১৪৫৬৯৬৫০</td>
-                  </tr>
-                </tbody>
-              </table>
+                    <tr>
+                      <th scope="row">৩১</th>
+                      <td>লক্ষ্মীপুর</td>
+                      <td>০১৭১৭২৯৬১২৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩২</th>
+                      <td>লালমনিরহাট</td>
+                      <td>০১৭১৯০৬৮৯৬০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৩</th>
+                      <td>মাদারীপুর</td>
+                      <td>০১৭১২৭৮৩৯১০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৪</th>
+                      <td>মাগুরা</td>
+                      <td>০১৭২৮২৯৫৮৮৯</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৫</th>
+                      <td>মানিকগঞ্জ</td>
+                      <td>০১৭১৩৫২৪৩৭০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৬</th>
+                      <td>মেহেরপুর</td>
+                      <td>০১৯১৯১৩১৭০০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৭</th>
+                      <td>মৌলভীবাজার</td>
+                      <td>০১৭১১৪৭৬৮৯৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৮</th>
+                      <td>মুন্সিগঞ্জ</td>
+                      <td>016৭৫৪৯০০০৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৯</th>
+                      <td>ময়মনসিংহ</td>
+                      <td>০১৭২০৬৮২৫০০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪০</th>
+                      <td>নওগাঁ</td>
+                      <td>০১৭২৮৪৬০০০১</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪১</th>
+                      <td>নড়াইল</td>
+                      <td>০১৭৩০১৯২৭৪২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪২</th>
+                      <td>নারায়ণগঞ্জ</td>
+                      <td>016৭৮৭১৩৮০৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৩</th>
+                      <td>নরসিংদী</td>
+                      <td>০১৭১০২৫৬১৮৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৪</th>
+                      <td>নাটোর</td>
+                      <td>০১৭৮৩০৭০৩০৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৫</th>
+                      <td>চাঁপাই নবাবগঞ্জ</td>
+                      <td>০১৭৩৭২৭২৩০৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৬</th>
+                      <td>নেত্রকোনা</td>
+                      <td>০১৭১১১২৯৭০৯</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৭</th>
+                      <td>নীলফামারী</td>
+                      <td>০১৭২২৬৭৮৫৫৩</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৮</th>
+                      <td>নোয়াখালী</td>
+                      <td>০১৮১৫৩২৫৩২৩</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৯</th>
+                      <td>পাবনা</td>
+                      <td>০১৭১০৭৯৭৮৬৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫০</th>
+                      <td>পঞ্চগড়</td>
+                      <td>০১৭২৩২০৯৭২১</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫১</th>
+                      <td>পটুয়াখালী</td>
+                      <td>০১৭১২৪১৪০৭৯</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫২</th>
+                      <td>পিরোজপুর</td>
+                      <td>০১৭৪০৫৮৩২৯২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৩</th>
+                      <td>রাজবাড়ী</td>
+                      <td>০১৭১১২৮৯৯০৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৪</th>
+                      <td>রাজশাহী</td>
+                      <td>০১৭১৮০৬২০২০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৫</th>
+                      <td>রাঙ্গামাটি</td>
+                      <td>০১৮২৭১৮৫৩৯৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৬</th>
+                      <td>রংপুর</td>
+                      <td>০১৭১৭৫৯০৯৬৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৭</th>
+                      <td>সাতক্ষীরা</td>
+                      <td>০১৭৩৩১৬৩৮৯৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৮</th>
+                      <td>শরীয়তপুর</td>
+                      <td>০১৯৮৯৯৫৭৩৬৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৯</th>
+                      <td>শেরপুর</td>
+                      <td>০১৭১২৮৯৬৯০৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৬০</th>
+                      <td>সিরাজগঞ্জ</td>
+                      <td>০১৭৩৭২৩০৯০৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৬১</th>
+                      <td>সুনামগঞ্জ</td>
+                      <td>০১৭৪০৯১৯২০২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৬২</th>
+                      <td>সিলেট</td>
+                      <td>০১৭১২৯৬১৮৯২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৬৩</th>
+                      <td>টাঙ্গাইল</td>
+                      <td>০১৭৪৬২৩৯২৩৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৬৪</th>
+                      <td>ঠাকুরগাঁও</td>
+                      <td>০১৭১৪৫৬৯৬৫০</td>
+                    </tr>
+                  </tbody>
+                </table>
 
             </div>
             <div className="modal-footer">

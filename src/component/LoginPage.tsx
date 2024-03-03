@@ -341,11 +341,12 @@ const LoginPage = () => {
                     <button type="submit" disabled={loading} className="btn login-btn w-100 mt-2">
                       লগ ইন করুন {loading && "loading......"}
                     </button>
-                    <div className="form-group my-2">
-                      <p className="mb-0 mt-2">
+                    <div className="form-group">
+                      <p className="mb-0 mt-3 text-center">
                         <Link
                           to="/password/reset"
                           className="forget-password"
+                          style={{ fontSize: '16px' }}
                         >
                           পিন ভুলে গেছেন? এখানে ক্লিক করুন
                         </Link>

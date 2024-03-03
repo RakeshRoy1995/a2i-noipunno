@@ -248,7 +248,7 @@ const LoginPage = () => {
 
                     <div className="form-group mb-1">
                       <label htmlFor="caid" className="login-field-title mb-2">
-                        বিষয় ভিত্তিক শিক্ষকের আইডি
+                      ইউজার আইডি
                       </label>
                       <div className="input-group">
                         <div className="input-group-prepend">

@@ -50,7 +50,7 @@ function ResetPassword() {
       console.log("setconfirmPINSuccess", setconfirmPINSuccess);
     } catch (error) {
       //console.log("eee", error.response);
-      seterrmsg(error?.response?.data?.error?.message || "সার্ভার জনিত সমস্যার কারণে দুঃখিত । পুনরায় চেষ্টা করুন ।");
+      seterrmsg(error?.response?.data?.error?.message || "সার্ভার জনিত সমস্যার কারণে দুঃখিত। পুনরায় চেষ্টা করুন। ");
     }
   };
 
@@ -63,20 +63,20 @@ function ResetPassword() {
       const pass = new FormData(event.target);
       const { data }: any = await confirm_pass(pass);
       console.log("pass", data);
-      setmsg("আপনার পিন সফলভাবে আপডেট করা হয়েছে।");
+      setmsg("আপনার পিন সফলভাবে আপডেট করা হয়েছে। ");
       setconfirmPINSuccess(true);
       console.log("setconfirmPINSuccess", setconfirmPINSuccess);
     } catch (error) {
 
       //console.log("eee", error.response);
       
-      seterrmsg(error?.response?.data?.error?.message?.password || "সার্ভার জনিত সমস্যার কারণে দুঃখিত । পুনরায় চেষ্টা করুন ।");
+      seterrmsg(error?.response?.data?.error?.message?.password || "সার্ভার জনিত সমস্যার কারণে দুঃখিত। পুনরায় চেষ্টা করুন। ");
     }
     setconfirmPINSuccess(false);
     Swal.fire({
       position: "center",
       icon: "success",
-      title: "আপনার একাউন্টটি সফলভাবে হালনাগাদ হয়েছে!",
+      title: "আপনার একাউন্টটি সফলভাবে হালনাগাদ হয়েছে। ",
       showConfirmButton: false,
       timer: 2500
     })

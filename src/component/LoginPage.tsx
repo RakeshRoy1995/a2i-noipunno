@@ -31,10 +31,6 @@ const LoginPage = () => {
   const [userId_from_Cookie, setUserId_from_Cookie] = useState("");
   const [userPin_from_Cookie, setUserPin_from_Cookie] = useState("");
 
-
-
-
-
   const setCookie = (name, value, days) => {
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + days);
@@ -225,7 +221,7 @@ const LoginPage = () => {
                     </div>
                     <div>
                       {/* <p className="text-center bn">
-                        <a href="https://training.report.gov.bd/privacy-policy" className="text-light" style={{ fontSize: '18px', textDecoration: 'underline' }} target="_blank">গোপনীয়তার নীতিমালা</a>
+                        <a href="#" className="text-light" style={{ fontSize: '18px', textDecoration: 'underline' }} target="_blank">গোপনীয়তার নীতিমালা</a>
                       </p> */}
 
                       {/* <p className="text-center bn">

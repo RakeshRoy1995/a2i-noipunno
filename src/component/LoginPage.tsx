@@ -31,10 +31,6 @@ const LoginPage = () => {
   const [userId_from_Cookie, setUserId_from_Cookie] = useState("");
   const [userPin_from_Cookie, setUserPin_from_Cookie] = useState("");
 
-
-
-
-
   const setCookie = (name, value, days) => {
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + days);
@@ -78,7 +74,7 @@ const LoginPage = () => {
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
           window.location.assign("/");
         } else {
-          seterror("পাসওয়ার্ড মেলেনি");
+          seterror("পিন মেলেনি");
         }
         setloading(false)
       } catch (error) {
@@ -90,7 +86,7 @@ const LoginPage = () => {
         setloading(false)
       }
     } else {
-      seterror("পাসওয়ার্ড অবশ্যই ছয় অক্ষরের হতে হবে!");
+      seterror("পিন অবশ্যই ছয় অক্ষরের হতে হবে!");
     }
 
 
@@ -113,7 +109,7 @@ const LoginPage = () => {
     //     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     //     window.location.assign("/");
     //   } else {
-    //     seterror("পাসওয়ার্ড মেলেনি");
+    //     seterror("পিন মেলেনি");
     //   }
     //   setloading(false)
     // } catch (error) {
@@ -188,19 +184,19 @@ const LoginPage = () => {
                       <div className="carousel-inner">
                         <div className="carousel-item">
                           <p className="mb-2" style={{ letterSpacing: '0.5px', textAlign: 'justify' }}>
-                          সকলের অবগতির জন্য জানানো যাচ্ছে যে, বর্তমানে ব্রাঞ্চ, শিফট, ভার্সন, সেকশন, শিক্ষক ও বিদ্যালয়ের তথ্য আপডেট করা যাবে এবং বিষয় শিক্ষক নির্বাচন করতে হবে। বিদ্যালয়ের তথ্য সম্পাদনা করে বোর্ড নির্বাচন করতে হবে। সবার সহযোগিতার জন্য ধন্যবাদ।
+                            সকলের অবগতির জন্য জানানো যাচ্ছে যে, বর্তমানে ব্রাঞ্চ, শিফট, ভার্সন, সেকশন, শিক্ষক ও বিদ্যালয়ের তথ্য আপডেট করা যাবে এবং বিষয় শিক্ষক নির্বাচন করতে হবে। বিদ্যালয়ের তথ্য সম্পাদনা করে বোর্ড নির্বাচন করতে হবে। সবার সহযোগিতার জন্য ধন্যবাদ।
                           </p>
-                          <br />
+                          <br/>
                         </div>
                         <div className="carousel-item active">
                           <p className="mb-2" style={{ letterSpacing: '0.5px', textAlign: 'justify' }}>
-                          আগামী (সম্ভাব্য) ২০ জানুয়ারি থেকে নতুন ২০২৪ শিক্ষাবর্ষের শিক্ষক ও শিক্ষার্থী ব্যবস্থাপনার কাজ করা যাবে। এই সময়ের আগে অর্থাৎ ১৯ জানুয়ারি পর্যন্ত আপনারা কেউ নতুন শিক্ষাবর্ষের শিক্ষার্থী শিক্ষক বা এমন কোন তথ্য প্যানেলে যুক্ত করবেন না।
+                            আগামী (সম্ভাব্য) ২০ জানুয়ারি থেকে নতুন ২০২৪ শিক্ষাবর্ষের শিক্ষক ও শিক্ষার্থী ব্যবস্থাপনার কাজ করা যাবে। এই সময়ের আগে অর্থাৎ ১৯ জানুয়ারি পর্যন্ত আপনারা কেউ নতুন শিক্ষাবর্ষের শিক্ষার্থী শিক্ষক বা এমন কোন তথ্য প্যানেলে যুক্ত করবেন না।
                           </p>
-                          <br />
+                          <br/>
                         </div>
                         <div className="carousel-item">
                           <p className="mb-2" style={{ letterSpacing: '0.5px', textAlign: 'justify' }}>
-                          শুধুমাত্র ২০২৩ শিক্ষাবর্ষের তথ্য চাইলে যোগ করতে পারেন। যদি ২০২৪ শিক্ষাবর্ষের কোন তথ্য নির্ধারিত তারিখের আগে প্যানেলে যুক্ত করেন তাহলে 20 তারিখের পরবর্তী সময়ে সেগুলো আর সিস্টেমে দেখা যাবে না।
+                            শুধুমাত্র ২০২৩ শিক্ষাবর্ষের তথ্য চাইলে যোগ করতে পারেন। যদি ২০২৪ শিক্ষাবর্ষের কোন তথ্য নির্ধারিত তারিখের আগে প্যানেলে যুক্ত করেন তাহলে 20 তারিখের পরবর্তী সময়ে সেগুলো আর সিস্টেমে দেখা যাবে না।
                           </p>
                           <br />
                         </div>
@@ -215,25 +211,25 @@ const LoginPage = () => {
                       <p className="text-center bn text-light" style={{ fontSize: '17px' }}> হেল্প ডেস্ক: &nbsp;</p>
                     </div>
                     <div className="d-flex justify-content-center">
-                      <img src={ supportIcon } data-bs-toggle="modal" data-bs-target="#exampleModal1" className="card-footer-image" alt="Logo 1" />
+                      <img src={supportIcon} data-bs-toggle="modal" data-bs-target="#exampleModal1" className="card-footer-image" alt="Logo 1" />
                     </div>
                     <div className="d-flex justify-content-center">
-                      <img src={ listIcon } data-bs-toggle="modal" data-bs-target="#exampleModal2" className="card-footer-image" alt="Logo 2" />
+                      <img src={listIcon} data-bs-toggle="modal" data-bs-target="#exampleModal2" className="card-footer-image" alt="Logo 2" />
                     </div>
                     <div className="d-flex justify-content-center">
-                      <img src={ chatIcon } data-bs-toggle="modal" data-bs-target="#exampleModal3" className="card-footer-image" alt="Logo 3" />
+                      <img src={chatIcon} data-bs-toggle="modal" data-bs-target="#exampleModal3" className="card-footer-image" alt="Logo 3" />
                     </div>
                     <div>
                       {/* <p className="text-center bn">
-                        <a href="https://training.report.gov.bd/privacy-policy" className="text-light" style={{ fontSize: '18px', textDecoration: 'underline' }} target="_blank">গোপনীয়তার নীতিমালা</a>
+                        <a href="#" className="text-light" style={{ fontSize: '18px', textDecoration: 'underline' }} target="_blank">গোপনীয়তার নীতিমালা</a>
                       </p> */}
-                      
+
                       {/* <p className="text-center bn">
                       &nbsp; <Link to="/privary-policy" className="text-light" style={{ fontSize: '17px', textDecoration: 'underline' }} target="_blank"> গোপনীয়তার নীতিমালা </Link>
                       </p> */}
 
                       <p className="text-center bn">
-                      &nbsp; <Link to="#" className="text-light" style={{ fontSize: '17px', textDecoration: 'underline' }}> গোপনীয়তার নীতিমালা </Link>
+                        &nbsp; <Link to="#" className="text-light" style={{ fontSize: '17px', textDecoration: 'underline' }}> গোপনীয়তার নীতিমালা </Link>
                       </p>
                     </div>
                   </div>
@@ -247,37 +243,11 @@ const LoginPage = () => {
                   {error && <div className="alert alert-danger text-white">{error}</div>}
 
                   <form onSubmit={handleSubmit}>
-                    <div className="form-group my-1">
-                      <label
-                        htmlFor="user_type_id"
-                        className="login-field-title"
-                      >
-                        ইউজার টাইপ
-                      </label>
-                      <div className="input-group">
-                        <select
-                          className="form-select form-control"
-                          name="user_type_id"
-                          required
-                          style={{
-                            fontSize: 16,
-                            fontFamily: '"Times New Roman", Times, serif',
-                            fontWeight: 400,
-                          }}
-                          defaultValue={''}
-                        >
-                          <option value={1} selected>
-                            শিক্ষক
-                          </option>
-                          {/* <option value="Option2">Option2</option>
-                        <option value="Option3">Option3</option>
-                        <option value="Option4">Option4</option>
-                        <option value="Option5">Option5</option> */}
-                        </select>
-                      </div>
-                    </div>
+
+                    <input type="hidden" name="user_type_id" value="1" />
+
                     <div className="form-group mb-1">
-                      <label htmlFor="caid" className="login-field-title">
+                      <label htmlFor="caid" className="login-field-title mb-2">
                         বিষয় ভিত্তিক শিক্ষকের আইডি
                       </label>
                       <div className="input-group">
@@ -292,7 +262,7 @@ const LoginPage = () => {
                         </div>
                         <input
                           // onChange={handleChange}
-                          className="form-control np-login-form-field custom-input"
+                          className="form-control np-login-form-field custom-input mb-2"
                           type="text"
                           // value={value}
                           defaultValue={userId_from_Cookie}
@@ -305,7 +275,7 @@ const LoginPage = () => {
                       </div>
                     </div>
                     <div className="form-group mb-1">
-                      <label htmlFor="pin" className="login-field-title">
+                      <label htmlFor="pin" className="login-field-title mb-2">
                         পিন নম্বর
                       </label>
                       <div className="input-group">
@@ -321,7 +291,7 @@ const LoginPage = () => {
                           id="pin"
                           name="password"
                           required
-                          placeholder="আপনার পাসওয়ার্ড দিন"
+                          placeholder="আপনার পিন দিন"
                         />
                         <div className="input-group-append password-toggle">
                           {/* <span>
@@ -364,16 +334,17 @@ const LoginPage = () => {
                         </label>
                       </div>
                     </div> */}
-                    <button type="submit" disabled={loading} className="btn login-btn w-100">
+                    <button type="submit" disabled={loading} className="btn login-btn w-100 mt-2">
                       লগ ইন করুন {loading && "loading......"}
                     </button>
-                    <div className="form-group my-2">
-                      <p className="mb-1">
+                    <div className="form-group">
+                      <p className="mb-0 mt-3 text-center">
                         <Link
                           to="/password/reset"
                           className="forget-password"
+                          style={{ color: '#428F92', fontSize: '16px' }}
                         >
-                          পাসওয়ার্ড ভুলে গেছেন?
+                          পিন ভুলে গেছেন? এখানে ক্লিক করুন
                         </Link>
                       </p>
                     </div>
@@ -383,74 +354,7 @@ const LoginPage = () => {
             </div>
           </div>
 
-          <div className="row">
-            <div className="login_footer position-absolute bottom-0">
-              <div className="d-flex flex-column flex-md-row justify-content-between align-items-end sm-row-reverse ps-5 pe-3 my-2">
-                <div className="">
-                  <div className="d-flex gap-2 py-2 justify-content-start">
-                    <ul className="d-flex gap-2">
-                      <div className="d-flex gap-2 flex-column flex-md-row">
-                        <div className="footer-menus">
-                          <a className="ps-2" href="#">
-                            © ২০২৩ সর্বস্বত্ব সংরক্ষিত
-                          </a>
-                          <a className="ps-2" href="#">
-                            গোপনীয়তা নীতি
-                          </a>
-                          <a className="ps-2" href="tel:০৯৬৩৮৬০০৭০০">
-                            হেল্প ডেস্ক নম্বর: ৯৬৩৮৬০০৭০০
-                          </a>
-                          <a
-                            className="ps-2 "
-                            href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQJyc51nkExJh5Zti4RVaeC0OyXWNz6Y5fcO-9zjNxq1kmjOb65EZ6r9jLzPpeyZYeOFyNJAqZeGRum/pubhtml?gid=0&single=true"
-                            target="_blank"
-                          >
-                            {" "}
-                            অ্যাপ সংক্রান্ত তথ্যসেবা পেতে জেলাভিত্তিক নির্ধারিত
-                            নম্বরসূমহে যোগাযোগ করুন
-                          </a>
-                          {/* <a
-                            className="ps-2 "
-                            href="https://docs.google.com/document/d/e/2PACX-1vTfzi4vy5b8RbL0rnIAt8t7stJFN0F70qwTOUM_ZxEyveq794GnjdXzIzd_RY-a0tVQqGdhwAOyd1NQ/pub"
-                            target="_blank"
-                          >
-                            সচরাচর জিজ্ঞাসা
-                          </a> */}
-                          <a className="ps-2" onClick={() => handleShowModal()} style={{ cursor: "pointer" }}>
-                            সচরাচর জিজ্ঞাসা <span className="bi bi-hand"></span>
-                          </a>
 
-                        </div>
-                      </div>
-                    </ul>
-                  </div>
-                </div>
-                <div className="helpedBy">
-                  <div className="d-flex gap-2 px-5 py-2 justify-content-center bg-light rounded-pill">
-                    <div>
-                      <div>
-                        <p className="">পরিকল্পনা ও বাস্তবায়নে</p>
-                      </div>
-                      <div className="d-flex justify-content-around align-items-center gap-1">
-                        <img src={govtLogo} className="img-fluid" />
-                        <img src={nctbLogo} className="img-fluid" />
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <p className="">কারিগরি সহায়তায়</p>
-                      </div>
-                      <div className="d-flex justify-content-around align-items-center gap-1">
-                        <img src={unicef} className="img-fluid" />
-                        <img src={A2I} className="img-fluid" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <PopUpAppInfo />
-          </div>
         </div>
         <Modal
           className="mx-auto pl-0"
@@ -938,9 +842,7 @@ const LoginPage = () => {
           </Modal.Footer>
         </Modal>
 
-
       </section>
-
 
       <div className="modal fade" id="exampleModal1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -949,344 +851,345 @@ const LoginPage = () => {
               <h1 className="modal-title fs-5" id="exampleModalLabel">যোগাযোগ</h1>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            
             <div className="modal-body">
               {/* <div className="">
                   <h5 className="bn">নাম্বার: +৮৮০ ১৮৪১১১৭০০১</h5>
                   <h5 className="mt-2"><span className="bn">ইমেইল: </span> <span style={{ fontFamily: 'arial' }}>support@report.gov.bd</span></h5>
               </div>         */}
 
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th scope="col">সিরিয়াল</th>
-                    <th scope="col">জেলার নাম</th>
-                    <th scope="col">মোবাইল নাম্বার</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">১</th>
-                    <td>Bagerhat</td>
-                    <td>01712686816</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২</th>
-                    <td>Bandarban</td>
-                    <td>01739345878</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩</th>
-                    <td>Barguna</td>
-                    <td>01718165920</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪</th>
-                    <td>Barishal</td>
-                    <td>01757585992</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫</th>
-                    <td>Bhola</td>
-                    <td>01734056847</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৬</th>
-                    <td>Bogura</td>
-                    <td>01833794124</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৭</th>
-                    <td>Brahmanbaria</td>
-                    <td>01601936561</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৮</th>
-                    <td>Chadpur</td>
-                    <td>01913634550</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৯</th>
-                    <td>Chattogram</td>
-                    <td>01818127133</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১০</th>
-                    <td>Chuadanga</td>
-                    <td>01716104202</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১১</th>
-                    <td>Cox'Sbazar</td>
-                    <td>01973276887</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১২</th>
-                    <td>Cumilla</td>
-                    <td>01647373757</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৩</th>
-                    <td>Dhaka</td>
-                    <td>01716158247</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৪</th>
-                    <td>Dinajpur</td>
-                    <td>01728866484</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৫</th>
-                    <td>Faridpur</td>
-                    <td>01721001255</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৬</th>
-                    <td>Feni</td>
-                    <td>01717881084</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৭</th>
-                    <td>Gaibandha</td>
-                    <td>01717016140</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৮</th>
-                    <td>Gazipur</td>
-                    <td>01721996637</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">১৯</th>
-                    <td>Gopalganj</td>
-                    <td>01711222934</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২০</th>
-                    <td>Habigonj</td>
-                    <td>01711910016</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২১</th>
-                    <td>Jamalpur</td>
-                    <td>01712725461</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২২</th>
-                    <td>Jashore</td>
-                    <td>01936011102</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৩</th>
-                    <td>Jhalokathi</td>
-                    <td>01709902366</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৪</th>
-                    <td>Jhenaidah</td>
-                    <td>01716107577</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৫</th>
-                    <td>Joypurhat</td>
-                    <td>01916316160</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৬</th>
-                    <td>Khagrachari</td>
-                    <td>01556771555</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৭</th>
-                    <td>Khulna</td>
-                    <td>01717006910</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৮</th>
-                    <td>Kishoreganj</td>
-                    <td>01751626679</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">২৯</th>
-                    <td>Kurigram</td>
-                    <td>01717171741</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩০</th>
-                    <td>Kushtia</td>
-                    <td>01719478426</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩১</th>
-                    <td>Lakshmipur</td>
-                    <td>01717296128</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩২</th>
-                    <td>Lalmonirhat</td>
-                    <td>01719068960</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৩</th>
-                    <td>Madaripur</td>
-                    <td>01712783910</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৪</th>
-                    <td>Magura</td>
-                    <td>01728295889</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৫</th>
-                    <td>Manikganj</td>
-                    <td>01713524370</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৬</th>
-                    <td>Meherpur</td>
-                    <td>01919131700</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৭</th>
-                    <td>Moulvibazar</td>
-                    <td>01711476895</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৮</th>
-                    <td>Munshiganj</td>
-                    <td>01675490005</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৩৯</th>
-                    <td>Mymensingh</td>
-                    <td>01720682500</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪০</th>
-                    <td>Naogaon</td>
-                    <td>01728460001</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪১</th>
-                    <td>Narail</td>
-                    <td>01730192742</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪২</th>
-                    <td>Narayanganj</td>
-                    <td>01678713808</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৩</th>
-                    <td>Narsingdi</td>
-                    <td>01710256184</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৪</th>
-                    <td>Natore</td>
-                    <td>01783070308</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৫</th>
-                    <td>Chapai Nawabganj</td>
-                    <td>01737272308</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৬</th>
-                    <td>Netrakona</td>
-                    <td>01711129709</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৭</th>
-                    <td>Nilphamari</td>
-                    <td>01722678553</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৮</th>
-                    <td>Noakhali</td>
-                    <td>01815325323</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৪৯</th>
-                    <td>Pabna</td>
-                    <td>01710797868</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫০</th>
-                    <td>Panchagarh</td>
-                    <td>01723209721</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫১</th>
-                    <td>Patuakhali</td>
-                    <td>01712414079</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫২</th>
-                    <td>Pirojpur</td>
-                    <td>01740583292</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৩</th>
-                    <td>Rajbari</td>
-                    <td>01711289908</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৪</th>
-                    <td>Rajshahi</td>
-                    <td>01718062020</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৫</th>
-                    <td>Rangamati</td>
-                    <td>01827185395</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৬</th>
-                    <td>Rangpur</td>
-                    <td>01717590967</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৭</th>
-                    <td>Satkhira</td>
-                    <td>01733163895</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৮</th>
-                    <td>Shariatpur</td>
-                    <td>01989957364</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৫৯</th>
-                    <td>Sherpur</td>
-                    <td>01712896905</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৬০</th>
-                    <td>Sirajganj</td>
-                    <td>01737230904</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৬১</th>
-                    <td>Sunamganj</td>
-                    <td>01740919202</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৬২</th>
-                    <td>Sylhet</td>
-                    <td>01712961892</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৬৩</th>
-                    <td>Tangail</td>
-                    <td>01746239237</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">৬৪</th>
-                    <td>Thakurgaon</td>
-                    <td>01714569650</td>
-                  </tr>
-                  
-                </tbody>
-              </table>
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">সিরিয়াল</th>
+                      <th scope="col">জেলার নাম</th>
+                      <th scope="col">মোবাইল নাম্বার</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">১</th>
+                      <td>বাগেরহাট</td>
+                      <td>০১৭১২৬৮৮১৬১৬</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২</th>
+                      <td>বান্দরবান</td>
+                      <td>০১৭৩৯৩৪৫৮৭৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩</th>
+                      <td>বরগুনা</td>
+                      <td>০১৭১৮১৬৫৯২০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪</th>
+                      <td>বরিশাল</td>
+                      <td>০১৭৫৭৫৮৫৯৯২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫</th>
+                      <td>ভোলা</td>
+                      <td>০১৭৩৪০৫৬৮৪৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৬</th>
+                      <td>বগুড়া</td>
+                      <td>০১৮৩৩৭৯৪১২৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৭</th>
+                      <td>ব্রাহ্মণবাড়িয়া</td>
+                      <td>০১৬০১৯৩৬৫৬১</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৮</th>
+                      <td>চাঁদপুর</td>
+                      <td>০১৯১৩৬৩৪৫৫০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৯</th>
+                      <td>চট্টগ্রাম</td>
+                      <td>০১৮১৮১২৭১৩৩</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১০</th>
+                      <td>চুয়াডাঙ্গা</td>
+                      <td>০১৭১৬১০৪২০২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১১</th>
+                      <td>কক্সবাজার</td>
+                      <td>০১৯৭৩২৭৬৮৮৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১২</th>
+                      <td>কুমিল্লা</td>
+                      <td>০১৬৪৭৩৭৩৭৫৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৩</th>
+                      <td>ঢাকা</td>
+                      <td>০১৭১৬১৫৮২৪৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৪</th>
+                      <td>দিনাজপুর</td>
+                      <td>০১৭২৮৮৬৬৪৮৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৫</th>
+                      <td>ফরিদপুর</td>
+                      <td>০১৭২১০০১২৫৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৬</th>
+                      <td>ফেনী</td>
+                      <td>০১৭১৭৮৮১০৮৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৭</th>
+                      <td>গাইবান্ধা</td>
+                      <td>০১৭১৭০১৬১৪০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৮</th>
+                      <td>গাজীপুর</td>
+                      <td>০১৭২১৯৯৬৬৩৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">১৯</th>
+                      <td>গোপালগঞ্জ</td>
+                      <td>০১৭১১২২২৯৩৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২০</th>
+                      <td>হবিগঞ্জ</td>
+                      <td>০১৭১১৯১০০১৬</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২১</th>
+                      <td>জামালপুর</td>
+                      <td>০১৭১২৭২৫৪৬১</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২২</th>
+                      <td>যশোর</td>
+                      <td>০১৯৩৬০১১১০২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৩</th>
+                      <td>ঝালকাঠি</td>
+                      <td>০১৭০৯৯০২৩৬৬</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৪</th>
+                      <td>ঝিনাইদহ</td>
+                      <td>০১৭১৬১০৭৫৭৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৫</th>
+                      <td>জয়পুরহাট</td>
+                      <td>০১৯১৬৩১৬১৬০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৬</th>
+                      <td>খাগড়াছড়ি</td>
+                      <td>015৫৬৭৭১৫৫৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৭</th>
+                      <td>খুলনা</td>
+                      <td>০১৭১৭০০৬৯১০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৮</th>
+                      <td>কিশোরগঞ্জ</td>
+                      <td>০১৭৫১৬২৬৬৭৯</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">২৯</th>
+                      <td>কুড়িগ্রাম</td>
+                      <td>০১৭১৭১৭১৭৪১</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩০</th>
+                      <td>কুষ্টিয়া</td>
+                      <td>০১৭১৯৪৭৮৪২৬</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">৩১</th>
+                      <td>লক্ষ্মীপুর</td>
+                      <td>০১৭১৭২৯৬১২৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩২</th>
+                      <td>লালমনিরহাট</td>
+                      <td>০১৭১৯০৬৮৯৬০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৩</th>
+                      <td>মাদারীপুর</td>
+                      <td>০১৭১২৭৮৩৯১০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৪</th>
+                      <td>মাগুরা</td>
+                      <td>০১৭২৮২৯৫৮৮৯</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৫</th>
+                      <td>মানিকগঞ্জ</td>
+                      <td>০১৭১৩৫২৪৩৭০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৬</th>
+                      <td>মেহেরপুর</td>
+                      <td>০১৯১৯১৩১৭০০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৭</th>
+                      <td>মৌলভীবাজার</td>
+                      <td>০১৭১১৪৭৬৮৯৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৮</th>
+                      <td>মুন্সিগঞ্জ</td>
+                      <td>016৭৫৪৯০০০৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৩৯</th>
+                      <td>ময়মনসিংহ</td>
+                      <td>০১৭২০৬৮২৫০০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪০</th>
+                      <td>নওগাঁ</td>
+                      <td>০১৭২৮৪৬০০০১</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪১</th>
+                      <td>নড়াইল</td>
+                      <td>০১৭৩০১৯২৭৪২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪২</th>
+                      <td>নারায়ণগঞ্জ</td>
+                      <td>016৭৮৭১৩৮০৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৩</th>
+                      <td>নরসিংদী</td>
+                      <td>০১৭১০২৫৬১৮৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৪</th>
+                      <td>নাটোর</td>
+                      <td>০১৭৮৩০৭০৩০৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৫</th>
+                      <td>চাঁপাই নবাবগঞ্জ</td>
+                      <td>০১৭৩৭২৭২৩০৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৬</th>
+                      <td>নেত্রকোনা</td>
+                      <td>০১৭১১১২৯৭০৯</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৭</th>
+                      <td>নীলফামারী</td>
+                      <td>০১৭২২৬৭৮৫৫৩</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৮</th>
+                      <td>নোয়াখালী</td>
+                      <td>০১৮১৫৩২৫৩২৩</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৪৯</th>
+                      <td>পাবনা</td>
+                      <td>০১৭১০৭৯৭৮৬৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫০</th>
+                      <td>পঞ্চগড়</td>
+                      <td>০১৭২৩২০৯৭২১</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫১</th>
+                      <td>পটুয়াখালী</td>
+                      <td>০১৭১২৪১৪০৭৯</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫২</th>
+                      <td>পিরোজপুর</td>
+                      <td>০১৭৪০৫৮৩২৯২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৩</th>
+                      <td>রাজবাড়ী</td>
+                      <td>০১৭১১২৮৯৯০৮</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৪</th>
+                      <td>রাজশাহী</td>
+                      <td>০১৭১৮০৬২০২০</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৫</th>
+                      <td>রাঙ্গামাটি</td>
+                      <td>০১৮২৭১৮৫৩৯৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৬</th>
+                      <td>রংপুর</td>
+                      <td>০১৭১৭৫৯০৯৬৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৭</th>
+                      <td>সাতক্ষীরা</td>
+                      <td>০১৭৩৩১৬৩৮৯৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৮</th>
+                      <td>শরীয়তপুর</td>
+                      <td>০১৯৮৯৯৫৭৩৬৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৫৯</th>
+                      <td>শেরপুর</td>
+                      <td>০১৭১২৮৯৬৯০৫</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৬০</th>
+                      <td>সিরাজগঞ্জ</td>
+                      <td>০১৭৩৭২৩০৯০৪</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৬১</th>
+                      <td>সুনামগঞ্জ</td>
+                      <td>০১৭৪০৯১৯২০২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৬২</th>
+                      <td>সিলেট</td>
+                      <td>০১৭১২৯৬১৮৯২</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৬৩</th>
+                      <td>টাঙ্গাইল</td>
+                      <td>০১৭৪৬২৩৯২৩৭</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">৬৪</th>
+                      <td>ঠাকুরগাঁও</td>
+                      <td>০১৭১৪৫৬৯৬৫০</td>
+                    </tr>
+                  </tbody>
+                </table>
 
             </div>
             <div className="modal-footer">
@@ -1298,7 +1201,7 @@ const LoginPage = () => {
 
       <div className="modal fade" id="exampleModal2" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content"  style={{ border: 'none' }}>
+          <div className="modal-content" style={{ border: 'none' }}>
             <div className="modal-header bg-success text-light">
               <h1 className="modal-title fs-5" id="exampleModalLabel">ব্যবহার সহায়িকা</h1>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -1331,7 +1234,7 @@ const LoginPage = () => {
 
       <div className="modal fade" id="exampleModal3" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-          <div className="modal-content"  style={{ border: 'none' }}>
+          <div className="modal-content" style={{ border: 'none' }}>
             <div className="modal-header bg-success text-light">
               <h1 className="modal-title fs-5" id="exampleModalLabel">আপনার জিজ্ঞাসা</h1>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

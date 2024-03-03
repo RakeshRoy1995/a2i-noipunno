@@ -254,19 +254,17 @@ const PasswordReset = () => {
                     }
 
                     <div className="form-group my-2">
-                      <p className="mb-1">
+                      <p className="mb-1 text-center">
                         <Link
                           to="/login"
                           className="forget-password"
-                          style={{ color: '#428F92', fontSize: '17px' }}
+                          style={{ color: '#428F92', fontSize: '14px' }}
                         >
                           লগইন পেজ এ ফিরে যেতে ক্লিক করুন
                         </Link>
                       </p>
                     </div>
-
                     
-
                   </form>
 
                   :

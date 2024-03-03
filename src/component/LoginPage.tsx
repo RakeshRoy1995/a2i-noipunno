@@ -5,6 +5,9 @@ import inputFieldUserIcon from "../assets/login_page_materials/icons/user-square
 import pinNumberFieldUserIcon from "../assets/login_page_materials/icons/lock.svg";
 import passwordHideEyeIcon from "../assets/login_page_materials/icons/eye-slash.svg";
 import mediaFileIcon from "../assets/login_page_materials/new/media-file-svgrepo-com.svg";
+import chatIcon from "../assets/login_page_materials/chat.svg";
+import listIcon from "../assets/login_page_materials/list.svg";
+import supportIcon from "../assets/login_page_materials/support.svg";
 import pdfIcon from "../assets/login_page_materials/new/pdf-svgrepo-com.svg";
 
 import govtLogo from "../assets/login_page_materials/icons/Vector.png";
@@ -183,7 +186,8 @@ const LoginPage = () => {
             </div>
           </div> */}
 
-          <div className="container-fluid mt-5">
+
+          <div className="container-fluid login-container">
             <div className="row">
               <div className="col-sm-12 col-md-6">
                 <div className="card transparent-card mb-3">
@@ -200,19 +204,19 @@ const LoginPage = () => {
                       <div className="carousel-inner">
                         <div className="carousel-item">
                           <p className="mb-2" style={{ letterSpacing: '0.5px', textAlign: 'justify' }}>
-                            অনলাইন রিপোর্ট ম্যানেজমেন্ট সিস্টেম বাংলাদেশ সরকারের একটি বৃহৎ তথ্যভান্ডার। যার মাধ্যমে সকল মন্ত্রণালয়, দপ্তর/অধিদপ্তর, বিভাগ, জেলা, উপজেলা, ইউনিয়নের প্রতিবেদন তৈরি, প্রেরণ ও গ্রহণের করা সম্ভব। তৈরিকৃত প্রতিবেদন স্বয়ংকৃতভাবে সংকলিত হয়ে ঊর্ধ্বতন অফিসে প্রেরিত হয়। সিস্টেমটি ব্যবহারে সরকারি কর্মদক্ষতা বৃদ্ধি পাবে, সময় বাঁচবে, খরচ কমবে ও জটিলতা হ্রাস পাবে। সিস্টেমের ড্যাশবোর্ডের মাধ্যমে সরকারের সর্বোচ্চ পর্যায়ে সিদ্ধান্ত গ্রহণে সহায়ক হবে।
+                          সকলের অবগতির জন্য জানানো যাচ্ছে যে, বর্তমানে ব্রাঞ্চ, শিফট, ভার্সন, সেকশন, শিক্ষক ও বিদ্যালয়ের তথ্য আপডেট করা যাবে এবং বিষয় শিক্ষক নির্বাচন করতে হবে। বিদ্যালয়ের তথ্য সম্পাদনা করে বোর্ড নির্বাচন করতে হবে। সবার সহযোগিতার জন্য ধন্যবাদ।
                           </p>
                           <br />
                         </div>
                         <div className="carousel-item active">
                           <p className="mb-2" style={{ letterSpacing: '0.5px', textAlign: 'justify' }}>
-                            অনলাইন রিপোর্ট ম্যানেজমেন্ট সিস্টেম বাংলাদেশ সরকারের একটি বৃহৎ তথ্যভান্ডার। যার মাধ্যমে সকল মন্ত্রণালয়, দপ্তর/অধিদপ্তর, বিভাগ, জেলা, উপজেলা, ইউনিয়নের প্রতিবেদন তৈরি, প্রেরণ ও গ্রহণের করা সম্ভব। তৈরিকৃত প্রতিবেদন স্বয়ংকৃতভাবে সংকলিত হয়ে ঊর্ধ্বতন অফিসে প্রেরিত হয়। সিস্টেমটি ব্যবহারে সরকারি কর্মদক্ষতা বৃদ্ধি পাবে, সময় বাঁচবে, খরচ কমবে ও জটিলতা হ্রাস পাবে। সিস্টেমের ড্যাশবোর্ডের মাধ্যমে সরকারের সর্বোচ্চ পর্যায়ে সিদ্ধান্ত গ্রহণে সহায়ক হবে।
+                          আগামী (সম্ভাব্য) ২০ জানুয়ারি থেকে নতুন ২০২৪ শিক্ষাবর্ষের শিক্ষক ও শিক্ষার্থী ব্যবস্থাপনার কাজ করা যাবে। এই সময়ের আগে অর্থাৎ ১৯ জানুয়ারি পর্যন্ত আপনারা কেউ নতুন শিক্ষাবর্ষের শিক্ষার্থী শিক্ষক বা এমন কোন তথ্য প্যানেলে যুক্ত করবেন না।
                           </p>
                           <br />
                         </div>
                         <div className="carousel-item">
                           <p className="mb-2" style={{ letterSpacing: '0.5px', textAlign: 'justify' }}>
-                            অনলাইন রিপোর্ট ম্যানেজমেন্ট সিস্টেম বাংলাদেশ সরকারের একটি বৃহৎ তথ্যভান্ডার। যার মাধ্যমে সকল মন্ত্রণালয়, দপ্তর/অধিদপ্তর, বিভাগ, জেলা, উপজেলা, ইউনিয়নের প্রতিবেদন তৈরি, প্রেরণ ও গ্রহণের করা সম্ভব। তৈরিকৃত প্রতিবেদন স্বয়ংকৃতভাবে সংকলিত হয়ে ঊর্ধ্বতন অফিসে প্রেরিত হয়। সিস্টেমটি ব্যবহারে সরকারি কর্মদক্ষতা বৃদ্ধি পাবে, সময় বাঁচবে, খরচ কমবে ও জটিলতা হ্রাস পাবে। সিস্টেমের ড্যাশবোর্ডের মাধ্যমে সরকারের সর্বোচ্চ পর্যায়ে সিদ্ধান্ত গ্রহণে সহায়ক হবে।
+                          শুধুমাত্র ২০২৩ শিক্ষাবর্ষের তথ্য চাইলে যোগ করতে পারেন। যদি ২০২৪ শিক্ষাবর্ষের কোন তথ্য নির্ধারিত তারিখের আগে প্যানেলে যুক্ত করেন তাহলে 20 তারিখের পরবর্তী সময়ে সেগুলো আর সিস্টেমে দেখা যাবে না।
                           </p>
                           <br />
                         </div>
@@ -224,23 +228,24 @@ const LoginPage = () => {
                 <div className="footer-card-custom d-flex justify-content-center">
                   <div className="d-flex align-items-center">
                     <div>
-                      <p className="text-center bn text-light" style={{ fontSize: '18px' }}>হেল্প ডেস্ক: </p>
+                      <p className="text-center bn text-light" style={{ fontSize: '17px' }}> হেল্প ডেস্ক: &nbsp;</p>
                     </div>
                     <div className="d-flex justify-content-center">
-                      <img src="https://training.report.gov.bd/login_new/assets/support.svg" data-bs-toggle="modal" data-bs-target="#exampleModal1" className="card-footer-image" alt="Logo 1" />
+                      <img src={ supportIcon } data-bs-toggle="modal" data-bs-target="#exampleModal1" className="card-footer-image" alt="Logo 1" />
                     </div>
                     <div className="d-flex justify-content-center">
-                      <img src="https://training.report.gov.bd/login_new/assets/list.svg" data-bs-toggle="modal" data-bs-target="#exampleModal2" className="card-footer-image" alt="Logo 2" />
+                      <img src={ listIcon } data-bs-toggle="modal" data-bs-target="#exampleModal2" className="card-footer-image" alt="Logo 2" />
                     </div>
                     <div className="d-flex justify-content-center">
-                      <img src="https://training.report.gov.bd/login_new/assets/chat.svg" data-bs-toggle="modal" data-bs-target="#exampleModal3" className="card-footer-image" alt="Logo 3" />
+                      <img src={ chatIcon } data-bs-toggle="modal" data-bs-target="#exampleModal3" className="card-footer-image" alt="Logo 3" />
                     </div>
                     <div>
                       {/* <p className="text-center bn">
                         <a href="https://training.report.gov.bd/privacy-policy" className="text-light" style={{ fontSize: '18px', textDecoration: 'underline' }} target="_blank">গোপনীয়তার নীতিমালা</a>
                       </p> */}
+                      
                       <p className="text-center bn">
-                        <a href="#" className="text-light" style={{ fontSize: '18px', textDecoration: 'underline' }} target="_blank">গোপনীয়তার নীতিমালা</a>
+                      &nbsp; <Link to="/privary-policy" className="text-light" style={{ fontSize: '17px', textDecoration: 'underline' }} target="_blank"> গোপনীয়তার নীতিমালা </Link>
                       </p>
                     </div>
                   </div>
@@ -248,8 +253,8 @@ const LoginPage = () => {
 
               </div>
 
-              <div className="col-sm-12 col-md-6">
-                <div className="card loginCard max-width-540 login-card-padding m-auto mt-3">
+              <div className="col-sm-12 col-md-6 order-mobile-first">
+                <div className="card loginCard max-width-540 login-card-padding m-auto mt-0">
                   <p className="login-title text-center mb-3">লগ ইন</p>
                   {error && <div className="alert alert-danger text-white">{error}</div>}
 
@@ -855,7 +860,7 @@ const LoginPage = () => {
 
 
       <div className="modal fade" id="exampleModal1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div className="modal-content" style={{ border: 'none' }}>
             <div className="modal-header bg-success text-light">
               <h1 className="modal-title fs-5" id="exampleModalLabel">যোগাযোগ</h1>
@@ -865,8 +870,340 @@ const LoginPage = () => {
               {/* <div className="">
                   <h5 className="bn">নাম্বার: +৮৮০ ১৮৪১১১৭০০১</h5>
                   <h5 className="mt-2"><span className="bn">ইমেইল: </span> <span style={{ fontFamily: 'arial' }}>support@report.gov.bd</span></h5>
-                </div>         */}
+              </div>         */}
 
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">সিরিয়াল</th>
+                    <th scope="col">জেলার নাম</th>
+                    <th scope="col">মোবাইল নাম্বার</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">১</th>
+                    <td>Bagerhat</td>
+                    <td>01712686816</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">২</th>
+                    <td>Bandarban</td>
+                    <td>01739345878</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৩</th>
+                    <td>Barguna</td>
+                    <td>01718165920</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৪</th>
+                    <td>Barishal</td>
+                    <td>01757585992</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৫</th>
+                    <td>Bhola</td>
+                    <td>01734056847</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৬</th>
+                    <td>Bogura</td>
+                    <td>01833794124</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৭</th>
+                    <td>Brahmanbaria</td>
+                    <td>01601936561</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৮</th>
+                    <td>Chadpur</td>
+                    <td>01913634550</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৯</th>
+                    <td>Chattogram</td>
+                    <td>01818127133</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">১০</th>
+                    <td>Chuadanga</td>
+                    <td>01716104202</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">১১</th>
+                    <td>Cox'Sbazar</td>
+                    <td>01973276887</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">১২</th>
+                    <td>Cumilla</td>
+                    <td>01647373757</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">১৩</th>
+                    <td>Dhaka</td>
+                    <td>01716158247</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">১৪</th>
+                    <td>Dinajpur</td>
+                    <td>01728866484</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">১৫</th>
+                    <td>Faridpur</td>
+                    <td>01721001255</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">১৬</th>
+                    <td>Feni</td>
+                    <td>01717881084</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">১৭</th>
+                    <td>Gaibandha</td>
+                    <td>01717016140</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">১৮</th>
+                    <td>Gazipur</td>
+                    <td>01721996637</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">১৯</th>
+                    <td>Gopalganj</td>
+                    <td>01711222934</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">২০</th>
+                    <td>Habigonj</td>
+                    <td>01711910016</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">২১</th>
+                    <td>Jamalpur</td>
+                    <td>01712725461</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">২২</th>
+                    <td>Jashore</td>
+                    <td>01936011102</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">২৩</th>
+                    <td>Jhalokathi</td>
+                    <td>01709902366</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">২৪</th>
+                    <td>Jhenaidah</td>
+                    <td>01716107577</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">২৫</th>
+                    <td>Joypurhat</td>
+                    <td>01916316160</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">২৬</th>
+                    <td>Khagrachari</td>
+                    <td>01556771555</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">২৭</th>
+                    <td>Khulna</td>
+                    <td>01717006910</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">২৮</th>
+                    <td>Kishoreganj</td>
+                    <td>01751626679</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">২৯</th>
+                    <td>Kurigram</td>
+                    <td>01717171741</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৩০</th>
+                    <td>Kushtia</td>
+                    <td>01719478426</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৩১</th>
+                    <td>Lakshmipur</td>
+                    <td>01717296128</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৩২</th>
+                    <td>Lalmonirhat</td>
+                    <td>01719068960</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৩৩</th>
+                    <td>Madaripur</td>
+                    <td>01712783910</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৩৪</th>
+                    <td>Magura</td>
+                    <td>01728295889</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৩৫</th>
+                    <td>Manikganj</td>
+                    <td>01713524370</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৩৬</th>
+                    <td>Meherpur</td>
+                    <td>01919131700</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৩৭</th>
+                    <td>Moulvibazar</td>
+                    <td>01711476895</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৩৮</th>
+                    <td>Munshiganj</td>
+                    <td>01675490005</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৩৯</th>
+                    <td>Mymensingh</td>
+                    <td>01720682500</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৪০</th>
+                    <td>Naogaon</td>
+                    <td>01728460001</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৪১</th>
+                    <td>Narail</td>
+                    <td>01730192742</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৪২</th>
+                    <td>Narayanganj</td>
+                    <td>01678713808</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৪৩</th>
+                    <td>Narsingdi</td>
+                    <td>01710256184</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৪৪</th>
+                    <td>Natore</td>
+                    <td>01783070308</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৪৫</th>
+                    <td>Chapai Nawabganj</td>
+                    <td>01737272308</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৪৬</th>
+                    <td>Netrakona</td>
+                    <td>01711129709</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৪৭</th>
+                    <td>Nilphamari</td>
+                    <td>01722678553</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৪৮</th>
+                    <td>Noakhali</td>
+                    <td>01815325323</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৪৯</th>
+                    <td>Pabna</td>
+                    <td>01710797868</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৫০</th>
+                    <td>Panchagarh</td>
+                    <td>01723209721</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৫১</th>
+                    <td>Patuakhali</td>
+                    <td>01712414079</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৫২</th>
+                    <td>Pirojpur</td>
+                    <td>01740583292</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৫৩</th>
+                    <td>Rajbari</td>
+                    <td>01711289908</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৫৪</th>
+                    <td>Rajshahi</td>
+                    <td>01718062020</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৫৫</th>
+                    <td>Rangamati</td>
+                    <td>01827185395</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৫৬</th>
+                    <td>Rangpur</td>
+                    <td>01717590967</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৫৭</th>
+                    <td>Satkhira</td>
+                    <td>01733163895</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৫৮</th>
+                    <td>Shariatpur</td>
+                    <td>01989957364</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৫৯</th>
+                    <td>Sherpur</td>
+                    <td>01712896905</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৬০</th>
+                    <td>Sirajganj</td>
+                    <td>01737230904</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৬১</th>
+                    <td>Sunamganj</td>
+                    <td>01740919202</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৬২</th>
+                    <td>Sylhet</td>
+                    <td>01712961892</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৬৩</th>
+                    <td>Tangail</td>
+                    <td>01746239237</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">৬৪</th>
+                    <td>Thakurgaon</td>
+                    <td>01714569650</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
 
             </div>
             <div className="modal-footer">
@@ -897,6 +1234,8 @@ const LoginPage = () => {
                     </div>
                   </div>
                 </div> */}
+
+                <h6>ব্যবহার সহায়িকা খুব শীঘ্রই আসিতেছে......</h6>
 
               </div>
             </div>

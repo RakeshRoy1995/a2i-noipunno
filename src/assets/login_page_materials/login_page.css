@@ -46,8 +46,8 @@ h6 {
 }
 
 .card-footer-image{
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
 }
 
 #body {
@@ -92,6 +92,10 @@ h6 {
   margin-right: -120px;
 }
 
+.login-container{
+  margin-top: 30px;
+}
+
 .card-body-custom{
   padding: 10px;
   color: black;
@@ -99,7 +103,7 @@ h6 {
   width: 80%;
   margin: auto;
   border-radius: 10px;
-  margin-bottom: 140px;
+  margin-bottom: 80px;
   font-family: 'SolaimanLipi';
 }
 
@@ -629,6 +633,10 @@ label.form-check-label:focus,
     z-index: 100;
     top: 30%;
     width: 20px;
+  }
+
+  .order-mobile-first {
+    order: -1; 
   }
 
   .mobile-view{

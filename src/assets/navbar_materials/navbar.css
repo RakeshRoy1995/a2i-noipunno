@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'SolaimanLipi';
+  font-family: 'SolaimanLipi, sans-serif ';
   src: url('SolaimanLipi.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
@@ -53,7 +53,7 @@
 
 .profile-style {
   color: #4b465c;
-font-family: 'SolaimanLipi';
+font-family: 'SolaimanLipi, sans-serif ';
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -94,7 +94,7 @@ font-family: 'SolaimanLipi';
 }
 
 .navbar-btn {
-font-family: 'SolaimanLipi';
+font-family: 'SolaimanLipi, sans-serif ';
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
@@ -108,7 +108,7 @@ font-family: 'SolaimanLipi';
 }
 
 .main-nav .nav-link {
-font-family: 'SolaimanLipi';
+font-family: 'SolaimanLipi, sans-serif ';
   font-size: 15px;
   font-weight: 400;
   line-height: 22px;
@@ -174,7 +174,7 @@ font-family: 'SolaimanLipi';
 }
 
 .dropdown-class-list {
-font-family: 'SolaimanLipi';
+font-family: 'SolaimanLipi, sans-serif ';
   font-size: 15px;
   padding-left: 8px;
   font-weight: 400;
@@ -186,7 +186,7 @@ font-family: 'SolaimanLipi';
   background-color: var(--bg_primary);
   border-radius: 4px;
   color: var(--text_white);
-font-family: 'SolaimanLipi';
+font-family: 'SolaimanLipi, sans-serif ';
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;

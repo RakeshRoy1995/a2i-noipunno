@@ -208,17 +208,21 @@ export default function StudentTranscript() {
 
   const new_student = Stuent_result.filter((d: any) => {
     if (
-      d.class == allFelter?.subject?.split("-")[1] &&
-      d.branch == allFelter.branch &&
-      allFelter.shift == d.shift &&
-      allFelter.section == d.section &&
-      allFelter.version == d.version
+      
+      d?.class == allFelter?.subject?.split("-")[1] &&
+      d?.branch == allFelter?.branch &&
+      allFelter?.shift == d?.shift &&
+      allFelter?.section == d?.section &&
+      allFelter?.version == d?.version 
     ) {
+
+    console.log(`111111`, 111111);
       return true;
     }
+    // return false
   });
 
-  console.log(`subject`, showLoadingErr, loader);
+  console.log(`subject`, allFelter, Stuent_result,  new_student, loader);
 
   return (
     <div className="report_page mb-4">

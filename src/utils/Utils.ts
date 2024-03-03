@@ -342,7 +342,12 @@ export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
 
         const studnt :any = {
           ...formate_stu ,
-          ...formate_stu?.student_info
+          ...formate_stu?.student_info,
+          ['branch'] : d_2?.class_room?.branch_id,
+          ['section'] : d_2?.class_room?.section_id,
+          ['shift'] : d_2?.class_room?.shift_id,
+          ['version'] : d_2?.class_room?.version_id,
+          ['class'] : d_2?.class_room?.class_id,
         }
 
         delete studnt['student_info']

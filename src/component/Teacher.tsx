@@ -235,7 +235,7 @@ export default function Teacher() {
                               <>
                                 {subject.map((d: any, key: any) => (
                                   <div
-                                    className="col-sm-12 col-md-6 col-lg-3 col-xl-2 g-2"
+                                    className="col-sm-12 col-md-12 col-lg-4 col-xl-4 g-2"
                                     style={{ cursor: "pointer" }}
                                     key={key}
                                     onClick={(e) => {

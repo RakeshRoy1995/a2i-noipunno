@@ -234,8 +234,6 @@ export async function teacher_own_subject() {
 
   if (bi !== "" && common_info !== "" && cls_room !== "") {
     const data = formate_own_subject_data(own_sub, cls_room);
-
-    console.log(`data -----   ---`, data);
     data.data.data.assessments = common_info.data.data.assessments;
     data.data.data.pi_attribute_weight =
       common_info.data.data.pi_attribute_weight;
@@ -370,8 +368,6 @@ export function update_teacher_profile(caid: any, data: any) {
     }
   }
 
-  console.log(obj);
-
 
   let img = {};
   for (const [name, value] of data) {
@@ -379,7 +375,6 @@ export function update_teacher_profile(caid: any, data: any) {
       img = { ...img, [name]: value };
     }
   }
-  console.log("img", img);
 
   const options = {
     method: "POST",

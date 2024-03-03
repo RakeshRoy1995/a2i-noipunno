@@ -78,7 +78,7 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
 
   return (
     <>
-      <div className="col-lg-2 col-md-6 ">
+      <div className="col-lg-2 col-md-3 ">
         <div className="teacher-student-card gy-5">
           <a href="#">
             <div className="card-container">

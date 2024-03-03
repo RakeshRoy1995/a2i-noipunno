@@ -1,11 +1,15 @@
 import '../../assets/dashboard_materials/css/dashboard.css';
 import chart from '../../assets/dashboard_materials/images/dashboard/Chart.png';
+import Teacher from '../Teacher';
 
 
 const ShikkathirHaziraChart = () => {
   return (
     <div className="col-lg-7 col-md-6">
-      <div className="student-chart">
+
+
+      <Teacher />
+      {/* <div className="student-chart">
         <div className="header">
           <h3>শিক্ষার্থীর হাজিরা</h3>
           <div className="timeline">
@@ -34,7 +38,7 @@ const ShikkathirHaziraChart = () => {
         <div className="chart">
           <img src={chart} alt="chart" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

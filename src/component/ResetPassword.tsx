@@ -232,7 +232,7 @@ function ResetPassword() {
                     {/* <p>আপনার সঠিক ওটিপি কোডটি লিখুন এবং চেক করুন</p> */}
                     </Alert>}
 
-{errmsg && <Alert className="m-2 d-flex justify-content-center text-white" variant="danger">{errmsg}</Alert>}
+                      {errmsg && <Alert className="m-2 d-flex justify-content-center text-white" variant="danger">{errmsg}</Alert>}
                           <button
                             type="submit"
                             className="btn btn-primay px-5"
@@ -329,7 +329,7 @@ function ResetPassword() {
                     {/* <p>আপনার সঠিক ওটিপি কোডটি লিখুন এবং চেক করুন</p> */}
                     </Alert>}
 
-{errmsg && <Alert className="m-2 d-flex justify-content-center text-white" variant="danger">{errmsg}</Alert>}
+                      {errmsg && <Alert className="m-2 d-flex justify-content-center text-white" variant="danger">{errmsg}</Alert>}
                           <button
                             type="submit"
                             className="btn btn-primay px-5"

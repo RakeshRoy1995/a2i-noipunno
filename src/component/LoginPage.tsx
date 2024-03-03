@@ -244,8 +244,12 @@ const LoginPage = () => {
                         <a href="https://training.report.gov.bd/privacy-policy" className="text-light" style={{ fontSize: '18px', textDecoration: 'underline' }} target="_blank">গোপনীয়তার নীতিমালা</a>
                       </p> */}
                       
-                      <p className="text-center bn">
+                      {/* <p className="text-center bn">
                       &nbsp; <Link to="/privary-policy" className="text-light" style={{ fontSize: '17px', textDecoration: 'underline' }} target="_blank"> গোপনীয়তার নীতিমালা </Link>
+                      </p> */}
+
+                      <p className="text-center bn">
+                      &nbsp; <Link to="#" className="text-light" style={{ fontSize: '17px', textDecoration: 'underline' }}> গোপনীয়তার নীতিমালা </Link>
                       </p>
                     </div>
                   </div>

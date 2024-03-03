@@ -7,7 +7,7 @@ export default function PrivacyPolicy() {
       <hr />
 
       <p>
-      Privacy policy coming soon...
+        Privacy policy coming soon...
       </p>
 
     </div>

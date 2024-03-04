@@ -10,6 +10,8 @@ import chatIcon from "../assets/login_page_materials/chat.svg";
 import listIcon from "../assets/login_page_materials/list.svg";
 import supportIcon from "../assets/login_page_materials/support.svg";
 import pdfIcon from "../assets/login_page_materials/new/pdf-svgrepo-com.svg";
+import playStore1 from "../assets/login_page_materials/play-store-logo.png";
+import playStore2 from "../assets/login_page_materials/play-store-logo2.png";
 
 import govtLogo from "../assets/login_page_materials/icons/Vector.png";
 import nctbLogo from "../assets/login_page_materials/icons/NCTB_logo.png";
@@ -182,7 +184,8 @@ const LoginPage = () => {
                         <li style={{ width: '15px', height: '15px', backgroundColor: '#92278f', borderRadius: '50%' }} data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" className="active" aria-current="true"></li>
                         <li style={{ width: '15px', height: '15px', backgroundColor: '#92278f', borderRadius: '50%' }} data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" className=""></li>
                       </ol>
-                      <div className="carousel-inner">
+
+                      <div className="carousel-inner carousel-inner-custom">
                         <div className="carousel-item">
                           <p className="mb-2" style={{ letterSpacing: '0.5px', textAlign: 'justify' }}>
                             সকলের অবগতির জন্য জানানো যাচ্ছে যে, বর্তমানে ব্রাঞ্চ, শিফট, ভার্সন, সেকশন, শিক্ষক ও বিদ্যালয়ের তথ্য আপডেট করা যাবে এবং বিষয় শিক্ষক নির্বাচন করতে হবে। বিদ্যালয়ের তথ্য সম্পাদনা করে বোর্ড নির্বাচন করতে হবে। সবার সহযোগিতার জন্য ধন্যবাদ।
@@ -204,6 +207,15 @@ const LoginPage = () => {
                       </div>
                     </div>
                   </div>
+
+                  <div className="container noipunno-app mb-2">
+                      <div className="row">
+                          <div className="col-sm-5 text-center bn"><p className="mt-2 mb-2">অ্যাপ ডাউনলোড করতে ক্লিক করুন</p></div>
+                          <div className="col-sm-3 mb-2 app-download" style={{ marginRight: '7px' }}><a href="https://accounts.noipunno.gov.bd/app/noipunno.apk" download><img height="40px" src={ playStore1 }/></a></div>
+                          <div className="col-sm-3 mb-2 app-download"><a href="https://play.google.com/store/apps/details?id=bd.gov.noipunno" target="_blank"><img height="40px" src={ playStore2 } /></a></div>
+                      </div>
+                  </div>
+                            
 
                 </div>
 
@@ -290,7 +302,7 @@ const LoginPage = () => {
                         />
                         <div className="input-group-append password-toggle">
                           {/* <span>
-                            <i id="password-toggle_2" class="fa fa-eye"></i>
+                            <i id="password-toggle_2" className="fa fa-eye"></i>
                             <img src={passwordHideEyeIcon} className="img-fluid" alt="eye-slash" />
                           </span> */}
                           <span>

@@ -198,7 +198,7 @@ const Navbar = () => {
                                 className="img-fluid icon-right-space"
                                 alt="profile icon"
                               />
-                              রিসেট পাসওয়ার্ড
+                              রিসেট পিন
                             </div>
                           </NavLink>
                         </li>
@@ -356,8 +356,8 @@ const Navbar = () => {
                         </li> */}
 
                             <li className="nav-item dropdown nav-item-style ">
-                              <NavLink
-                                to="/"
+                              <a
+                                href="/"
                                 // activeClassName='active'
                                 className="nav-link navbar-menu-item d-flex align-items-center"
                                 role="button"
@@ -370,7 +370,7 @@ const Navbar = () => {
                                   alt="main logo"
                                 />
                                 প্রথম পাতা
-                              </NavLink>
+                              </a>
                             </li>
 
                             <li className="nav-item dropdown nav-item-style">

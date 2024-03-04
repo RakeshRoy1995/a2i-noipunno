@@ -38,16 +38,35 @@ export function resetPassword(data: any) {
   return axios(options);
 }
 
-export function otpComfirm(data: any) {
-  const page_list = `${API_URL}/v2/account-otp-verify`;
+export function userInfo(data: any) {
+  const page_list = `${API_URL}/v2/auth/account-info?caid=${data}`;
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+  };
+  return axios(options);
+}
 
+export function otpComfirm(data: any) {
+  const page_list = `${API_URL}/v2/account-otp-verify-change-pin`;
   const options = {
     method: "POST",
     headers: { "content-type": "application/json" },
     data,
     url: page_list,
   };
+  return axios(options);
+}
 
+export function changePin(data: any) {
+  const page_list = `${API_URL}/v2/account-change-pin`;
+  const options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data,
+    url: page_list,
+  };
   return axios(options);
 }
 
@@ -290,7 +309,7 @@ export function bi_info() {
 }
 
 export function class_room_info() {
-  const page_list = `${API_URL}/v2/class-room-info`;
+  const page_list = `${API_URL}/v2/class-room-information`;
 
   const options = {
     method: "get",
@@ -337,17 +356,6 @@ export function all_student() {
   return axios(options);
 }
 
-// export function update_teacher_profile(caid: any, data: any) {
-//   const page_list = `${API_URL}/v2/account-update/${caid}`;
-//   const options = {
-//     method: "PUT",
-//     headers: { "content-type": "application/json" },
-//     data,
-//     url: page_list,
-//   };
-
-//   return axios(options);
-// }
 
 export function update_teacher_profile(caid: any, data: any) {
   const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
@@ -360,8 +368,6 @@ export function update_teacher_profile(caid: any, data: any) {
     }
   }
 
-  console.log(obj);
-
 
   let img = {};
   for (const [name, value] of data) {
@@ -369,7 +375,6 @@ export function update_teacher_profile(caid: any, data: any) {
       img = { ...img, [name]: value };
     }
   }
-  console.log("img", img);
 
   const options = {
     method: "POST",
@@ -381,9 +386,6 @@ export function update_teacher_profile(caid: any, data: any) {
 
   return axios(options);
 }
-
-
-
 
 export function get_pi_evaluation_by_pi(
   class_room_uid: any,
@@ -700,8 +702,6 @@ export function confirm_pass(data: any) {
 
   return axios(options);
 }
-
-
 
 
 export function class_teacher_all_student_data() {

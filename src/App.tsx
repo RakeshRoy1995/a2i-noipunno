@@ -30,6 +30,8 @@ import StudentTranscriptBI from "./component/StudentTranscriptBI";
 import GeneratePdf from "./component/generatePdf/GeneratePdf";
 import ResetPassword from "./component/ResetPassword";
 import StudentAttendence from "./component/Attendence/StudentAttendence/StudentAttendence";
+import PasswordReset2 from "./component/_PasswordReset";
+import PrivacyPolicy from "./component/PrivacyPolicy";
 
 
 function App() {
@@ -93,10 +95,15 @@ function App() {
 
           {/* <Route path="/bi-pdf-maker2" element={<BiRawPDFDownload />} /> */}
         </Route>
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/password/reset" element={<PasswordReset />} />
+        <Route path="/pin/reset" element={<PasswordReset2 />} />
+
+        <Route path="/privary-policy" element={<PrivacyPolicy />} />
 
       </Routes>
+
 
       {topbar && <Footer />}
 

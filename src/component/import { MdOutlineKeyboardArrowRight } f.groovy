@@ -14,6 +14,7 @@ import { motion } from "framer-motion"
 
 
 const EditTeacherProfile = () => {
+  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL;
   const [userDetails, setuserDetails] = useState<any>({});
   const [allDivision, setAllDivision] = useState<any>([]);
   const [allDistrict, setAllDistrict] = useState<any>([]);
@@ -24,18 +25,19 @@ const EditTeacherProfile = () => {
   const [upozila, setupozila] = useState<any>([]);
   const [countdown, setCountdown] = useState(30);
   const [selectedDate, setSelectedDate] = useState(new Date());
+<<<<<<< HEAD
   const [selectedJoiningDate, setSelectedJoiningDate] = useState(new Date())
 
   // default img test
   // const image_upload_icon =  "../assets/images/image-upload-icon/preview-65.png";
 
 
+=======
+>>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
   const [nameBn, setNameBn] = useState('');
   const [isBanglaValid, setIsBanglaValid] = useState(true);
-
   const [nameEn, setNameEn] = useState('');
   const [isEnglishValid, setisEnglishValid] = useState(true);
-
 
 
   const {
@@ -113,9 +115,6 @@ const EditTeacherProfile = () => {
     }
   }
 
-  // console.log(teacherDesignation);
-
-
 
 
   const handleTeacherProfileEdit = async (event: any) => {
@@ -136,54 +135,25 @@ const EditTeacherProfile = () => {
         const data_dash: any = await teacher_dashboard();
         localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
 
-        // setTimeout(() => {
-        //   window.location.replace("/");
-        // }, 900)
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 900)
 
       }
 
     } catch (error) {
-
-      // alert('হালনাগাদ সম্পন্ন হয়নি, আবার চেষ্টা করুন!');
       Swal.fire({
         icon: "error",
         title: "হালনাগাদ সম্পন্ন হয়নি!",
         text: "আবার চেষ্টা করুন!",
         confirmButtonText: "হ্যাঁ",
-        // footer: '<a href="#">Why do I have this issue?</a>'
       });
     }
   }
 
-  useEffect(() => {
-    fetchData();
-    getUserDetails();
-  }, []);
-
-  useEffect(() => {
-    setAllStateData()
-  }, [designation_id, allDesignation, date_of_birth, name_bn, name_en])
-
-
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setCountdown(prevCountdown => (prevCountdown > 0 ? prevCountdown - 1 : 0));
-  //   }, 1000);
-  //   return () => {
-  //     clearInterval(timer);
-  //   };
-  // }, []);
-
-  // if ((allDivision.length == 0) && (countdown == 0)) {
-  //   window.location.replace("/");
-  // }
-
-
 
   const handleBanglaInputValidate = (event) => {
     const inputValue = event.target.value;
-
-    // Regular expression to check if the input contains Bangla characters
     const banglaRegex = /^[\u0980-\u09FF\s]+$/;
 
     if (banglaRegex.test(inputValue) || inputValue === '') {
@@ -194,12 +164,8 @@ const EditTeacherProfile = () => {
     }
   };
 
-
-
   const handleEnglishInputValidate = (event) => {
     const inputValue = event.target.value;
-
-    // Regular expression to check if the input contains Bangla characters
     const englishPattern = /^[a-zA-Z\s]*$/;
 
     if (englishPattern.test(inputValue) || inputValue === '') {
@@ -212,7 +178,7 @@ const EditTeacherProfile = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const [warningMessage, setWarningMessage] = useState('ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+  const [warningMessage, setWarningMessage] = useState('ছবির আকার ১০০ KB এবং দৈর্ঘ্য-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
 
   // img upload
   // const handleImageChange = (e) => {
@@ -270,8 +236,6 @@ const EditTeacherProfile = () => {
           setErrorMessage('ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
           return;
         }
-
-        // If both size and dimensions are within limits, set the image preview
         const reader = new FileReader();
         reader.onloadend = () => {
           setImagePreview(reader.result);
@@ -291,15 +255,15 @@ const EditTeacherProfile = () => {
 
   const [signaturePreview, setsSgnaturePreview] = useState(null);
   const [signatureErrorMessage, setSignatureErrorMessage] = useState('');
-  const [signatureWarningMessage, setSignatureWarningMessage] = useState('সিগ্নেচার ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+  const [signatureWarningMessage, setSignatureWarningMessage] = useState('সিগনেচার ছবির আকার ৬০ KB এবং দৈর্ঘ্য-প্রস্থ (৩০০ X ৮০) পিক্সেলের হতে হবে!');
 
   const handleSignatureImg = (e) => {
     const file = e.target.files[0];
     if (file) {
       // Check file size
-      if (file.size > 100 * 1024) {
+      if (file.size > 60 * 1024) {
         setSignatureWarningMessage('')
-        setSignatureErrorMessage('সিগ্নেচার ছবির আকার ১০০ কিলোবাইট অতিক্রম করেছে, ছবির আকার ১০০ কিলোবাইটের (KB) ভিতর হতে হবে!');
+        setSignatureErrorMessage('সিগ্নেচার ছবির আকার 60 কিলোবাইট অতিক্রম করেছে, ছবির আকার 60 কিলোবাইটের (KB) ভিতর হতে হবে!');
         return;
       }
 
@@ -307,9 +271,9 @@ const EditTeacherProfile = () => {
       const img = new Image();
       img.onload = () => {
         // Check image dimensions
-        if (img.width > 300 || img.height > 300) {
+        if (img.width > 300 || img.height > 80) {
           setSignatureWarningMessage('')
-          setSignatureErrorMessage('সিগ্নেচার ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
+          setSignatureErrorMessage('সিগ্নেচার ছবির প্রস্থ-উচ্চতা 300X80 পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা 300X80 পিক্সেলের (PX) ভিতর হতে হবে!');
           return;
         }
 
@@ -330,7 +294,15 @@ const EditTeacherProfile = () => {
     }
   }
 
-  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
+  useEffect(() => {
+    fetchData();
+    getUserDetails();
+  }, []);
+
+  useEffect(() => {
+    setAllStateData()
+  }, [designation_id, allDesignation, date_of_birth, name_bn, name_en])
+
 
   // tooltip  for signature field
   useEffect(() => {
@@ -351,14 +323,6 @@ const EditTeacherProfile = () => {
 
       <Breadcumbtitle title={"প্রোফাইল হালনাগাদ"} />
       {
-        // (allDivision.length !== 0) ?
-        //   <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-        //     <div className="spinner-border text-primary" role="status">
-        //       <span className="visually-hidden">Loading...</span>
-        //     </div>
-        //     <p className="mt-2">Server Busy, Please Wait...</p>
-        //     <p className="mt-2">Retry in {countdown} seconds</p>
-        //   </div>
 
         // added framer  motion
         <motion.div
@@ -401,19 +365,23 @@ const EditTeacherProfile = () => {
                         <div className="input-group">
                           <input
                             type="text"
-
                             className={`form-control ${isBanglaValid ? '' : 'is-invalid'}`}
                             name="name_bn"
                             value={nameBn}
                             onChange={handleBanglaInputValidate}
                             placeholder="আপনার নাম লিখুন (বাংলায়)"
+<<<<<<< HEAD
                             data-tooltip="অনুগ্রহ করে বাংলায় নাম লিখুন!"
+=======
+                            maxLength={40}
+>>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                           />
                           {!isBanglaValid && (
                             <div className="invalid-feedback">অনুগ্রহ করে বাংলায় নাম লিখুন!</div>
                           )}
                         </div>
                       </div>
+<<<<<<< HEAD
                     </div> */}
 
                       {/* শিক্ষা প্রতিষ্ঠানের নাম */}
@@ -433,9 +401,29 @@ const EditTeacherProfile = () => {
                               data-tooltip="শিক্ষা প্রতিষ্ঠানের নাম"
                             />
                           </div>
+=======
+                    </div>
+                    <div className="form-group col-sm-4 col-md-6">
+                      <div className="mb-3" style={{ fontSize: "16px" }}>
+                        <label className="form-label">নাম (ইংরেজি)</label>
+                        <div className="input-group">
+                          <input
+                            type="text"
+                            className={`form-control ${isEnglishValid ? '' : 'is-invalid'}`}
+                            name="name_en"
+                            value={nameEn}
+                            onChange={handleEnglishInputValidate}
+                            placeholder="আপনার নাম লিখুন (ইংরেজিতে)"
+                            maxLength={40}
+                          />
+                          {!isEnglishValid && (
+                            <div className="invalid-feedback">অনুগ্রহ করে ইংরেজিতে নাম লিখুন!</div>
+                          )}
+>>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                         </div>
                       </div>
 
+<<<<<<< HEAD
                       {/* যোগদানের তারিখ */}
                       {/* <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
@@ -469,6 +457,23 @@ const EditTeacherProfile = () => {
                               style={{ width: '100%', maxWidth: '100%', background: '#f9f9f9' }}
                             />
                           </div>
+=======
+                    <div className="form-group  col-sm-4 col-md-6">
+                      <div className="mb-3" style={{ fontSize: "16px" }}>
+                        <label className="form-label">মোবাইল নাম্বার</label>
+                        <div className="input-group">
+                          <input
+                            type="tel"
+                            id="pin"
+                            className="form-control"
+                            name="mobile_no"
+                            placeholder="আপনার এগারো সংখ্যার মোবাইলটি নাম্বার দিন"
+                            defaultValue={mobile_no}
+                            maxLength={11}
+                            minLength={11}
+                          />
+
+>>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                         </div>
                       </div>
 
@@ -517,7 +522,7 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
-
+                      {/* phone number */}
                       {/* Mobile Number Field */}
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
@@ -569,8 +574,9 @@ const EditTeacherProfile = () => {
                       </div>
                     </div> */}
 
+<<<<<<< HEAD
 
-
+                      {/* user id */}
                       {/* User ID Field */}
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
@@ -587,10 +593,22 @@ const EditTeacherProfile = () => {
                               data-tooltip="User ID"
                             />
                           </div>
+=======
+                    <div className="form-group  col-sm-4 col-md-6">
+                      <div className="mb-3" style={{ fontSize: "16px" }}>
+                        <label className="form-label">ইমেইল আইডি </label>
+                        <div className="input-group">
+                          <input type="email"
+                            id="pin"
+                            className="form-control"
+                            readOnly
+                            name="email"
+                            defaultValue={email} />
+>>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                         </div>
                       </div>
 
-
+                      {/* email */}
                       {/* Email ID Field */}
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
@@ -610,6 +628,7 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
+<<<<<<< HEAD
                       {/* birthday */}
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
@@ -723,10 +742,26 @@ const EditTeacherProfile = () => {
                                 {d?.division_name_bn || d?.division_name_en}
                               </option>
                             ))}
+=======
+                    <div className="form-group col-sm-4 col-md-6">
+                      <div className="mb-3" style={{ fontSize: "16px" }}>
+                        <label htmlFor="gender" className="form-label">লিঙ্গ</label>
+                        <div className="input-group">
+                          <select className="form-control"
+                            name="gender"
+                            defaultValue={''}
+                          // value={gender}
+                          >
+                            <option value={''}>লিঙ্গ নির্বাচন করুন</option>
+                            <option value={"1"} selected={(gender === "1")}>পুরুষ</option>
+                            <option value={"2"} selected={(gender === "2")}>মহিলা</option>
+                            <option value={"3"} selected={(gender === "3")}>অন্যান্য</option>
+>>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                           </select>
                         </div>
                       </div>
 
+<<<<<<< HEAD
                       {/* জেলা */}
                       <div className="form-group col-sm-4 col-md-6 ">
                         <div className="mb-3 d-flex" style={{ fontSize: "16px" }}>
@@ -748,8 +783,26 @@ const EditTeacherProfile = () => {
                             )}
                           </select>
                         </div>
+=======
+                    <div className="form-group  col-sm-4 col-md-6">
+                      <div className="mb-3" style={{ fontSize: "16px" }}>
+                        <label className="form-label"> বিভাগ</label>
+                        <select className="form-control"
+                          name="division_id"
+                          defaultValue={''}
+                          onChange={(e: any) => getdistrictBydivisionID(e.target.value)}>
+                          <option value={''}>বিভাগ নির্বাচন করুন</option>
+                          {
+                            allDivision.map((d, k) =>
+                              <option key={k} value={d?.uid} selected={d?.uid == division_id}>
+                                {d?.division_name_bn || d?.division_name_en}
+                              </option>)
+                          }
+
+                        </select>
+>>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                       </div>
-                        {/* উপজেলা */}
+
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3 d-flex" style={{ fontSize: "16px" }}>
                           <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>উপজেলা<span className="text-danger">*</span></label>
@@ -850,17 +903,10 @@ const EditTeacherProfile = () => {
                                 />
                               ) : (
                                 <img
-                                className=""
                                   src={image_upload_icon} // Use the default image path here
                                   alt="Preview"
                                   loading="lazy"
-                                  style={{
-                                    width: '5rem', // Set the width to create a box shape
-                                    height: '5rem', // Set the height to match the width for a box shape
-                                    objectFit: 'cover',
-                                    // Maintain the aspect ratio of the image
-                                    border:'2px solid black'
-                                  }}
+                                  style={{ maxWidth: '100%', maxHeight: '5rem' }}
                                 />
                               )}
                             </div>
@@ -939,17 +985,10 @@ const EditTeacherProfile = () => {
                                 />
                               ) : (
                                 <img
-                                className=""
                                   src={image_upload_icon} // Use the default image path here
                                   alt="Preview"
                                   loading="lazy"
-                                  style={{
-                                    width: '5rem', // Set the width to create a box shape
-                                    height: '5rem', // Set the height to match the width for a box shape
-                                    objectFit: 'cover',
-                                    // Maintain the aspect ratio of the image
-                                    border:'2px solid black'
-                                  }}
+                                  style={{ maxWidth: '100%', maxHeight: '5rem' }}
                                 />
                               )}
                             </div>
@@ -957,6 +996,16 @@ const EditTeacherProfile = () => {
                         </div>
 
                       </div>
+<<<<<<< HEAD
+=======
+                    </div>
+                    <div className="form-group col-sm-4 col-md-6">
+                      <div className="d-flex align-items-center gap-3" style={{ width: "100%" }}>
+                        <div className="mb-3" style={{ fontSize: "16px", width: "50%" }}>
+                          <label className="form-label">
+                          সিগনেচার আপলোড করুন
+                          </label>
+>>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
 
 
                       {/* প্রোফাইল হালনাগাদ করুন btn */}
@@ -965,10 +1014,17 @@ const EditTeacherProfile = () => {
                         </button>
                       </div>
 
+<<<<<<< HEAD
 
                     </form>
 
                   </div>
+=======
+                    <div className="d-flex justify-content-end align-items-center pt-3 pe-3">
+                      <button type="submit" className="btn btn-primay px-5" style={{ backgroundColor: "#428F92", color: "#fff", }} > প্রোফাইল হালনাগাদ করুন{" "} <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem", }} />{" "} </button>
+                    </div>
+                  </form>
+>>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                 </div>
               </div>
             </div>

@@ -75,7 +75,7 @@ const TeacherProfileCard = () => {
   // console.log(image);
 
   return (
-    <div className="col-lg-3 col-md-6">
+    <div className="col-lg-3 col-md-3">
       <div className="card teacher-profile border-0">
         <div className="card-header border-0">
           <Link to={"/edit-teacher-profile"}>

@@ -67,51 +67,52 @@ const ClassWiseSubject = () => {
             <section>
               <div className="container subject-container">
                 <h2>{(id == "6") && "ষষ্ঠ" || (id == "7") && "সপ্তম"} শ্রেণির বিষয় সমুহ </h2>
-                     {/* added framer motion */}
+                {/* added framer motion */}
                 <motion.div
-                        initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 1.5 }}>
-                <div className="row">
-                  {subjects?.map((subject, index) => (
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}>
+                  <div className="row">
+                    {subjects?.map((subject, index) => (
 
-                    <div key={index} className="col-sm-12 col-md-6 col-lg-4 col-xl-3 g-2">
 
-                      <a href="#" className="subject-number">
-                        <div className="icon">
-                          <img src={bookIcon} alt="bookIcon" />
-                        </div>
-                        <h2 className="mt-3">{subject?.name}</h2>
-                        <div className="total-student">
-                          <p>
-                            {
-                              (subject?.class_uid === "6") && "ষষ্ঠ শ্রেণি" ||
-                              (subject?.class_uid === "7") && "সপ্তম শ্রেণি"
-                            }
-                          </p>
-                        </div>
+                      <div key={index} className="col-sm-12 col-md-6 col-lg-4 col-xl-3 g-2">
 
-                        {/* style for hover over cards */}
-                        <style>
-                                {`
+                        <a href="#" className="subject-number">
+                          <div className="icon">
+                            <img src={bookIcon} alt="bookIcon" />
+                          </div>
+                          <h2 className="mt-3">{subject?.name}</h2>
+                          <div className="total-student">
+                            <p>
+                              {
+                                (subject?.class_uid === "6") && "ষষ্ঠ শ্রেণি" ||
+                                (subject?.class_uid === "7") && "সপ্তম শ্রেণি"
+                              }
+                            </p>
+                          </div>
+
+                          {/* style for hover over cards */}
+                          <style>
+                            {`
                                 .subject-number:hover,
-                                  .subject-number:hover h2,
-                                  .subject-number:hover p{
+                                  .subject-number:hover h2
+                                  {
                                     /* Increase size on hover */
-                                    transform: scale(1.1);
+                                    transform: scale(1);
                                     /* Change background color on hover */
                                     background-color: #428F92;
                                      /* Add a text color on hover */
-                                    color: white
+                                    color: #fff;
                                   }
                                 `}
                           </style>
-                      </a>
+                        </a>
 
-                    </div>
+                      </div>
 
-                  ))}
-                </div>
+                    ))}
+                  </div>
                 </motion.div>
               </div>
             </section>

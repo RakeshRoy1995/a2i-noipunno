@@ -76,19 +76,17 @@ const ClassWiseSubject = () => {
                     {subjects?.map((subject, index) => (
 
 
-                      <div key={index} className="col-sm-12 col-md-6 col-lg-4 col-xl-3 g-2">
 
+                      <div key={index} className="col-sm-12 col-md-6 col-lg-4 col-xl-3 g-2">
                         <a href="#" className="subject-number">
                           <div className="icon">
-                            <img src={bookIcon} alt="bookIcon" />
+                            <img src={bookIcon} alt="bookIcon" style={{fill:"black"}}/>
                           </div>
                           <h2 className="mt-3">{subject?.name}</h2>
                           <div className="total-student">
                             <p>
-                              {
-                                (subject?.class_uid === "6") && "ষষ্ঠ শ্রেণি" ||
-                                (subject?.class_uid === "7") && "সপ্তম শ্রেণি"
-                              }
+                              {(subject?.class_uid === "6" && "ষষ্ঠ শ্রেণি") ||
+                                (subject?.class_uid === "7" && "সপ্তম শ্রেণি")}
                             </p>
                           </div>
 
@@ -96,20 +94,25 @@ const ClassWiseSubject = () => {
                           <style>
                             {`
                                 .subject-number:hover,
-                                  .subject-number:hover h2
-                                  {
-                                    /* Increase size on hover */
-                                    transform: scale(1);
-                                    /* Change background color on hover */
-                                    background-color: #428F92;
-                                     /* Add a text color on hover */
-                                    color: #fff;
-                                  }
-                                `}
-                          </style>
-                        </a>
+                                .subject-number:hover h2 {
+                                  /* Increase size on hover */
+                                  transform: scale(1);
+                                  /* Change background color on hover */
+                                  background-color: #428F92;
+                                  /* Add a text color on hover */
+                                  color: #fff;
+                                }
 
+                                /* Change text color of p tag inside .total-student on hover */
+                                .subject-number:hover .total-student p {
+                                  color: #fff;
+                                }
+                              `}
+                          </style>
+                          {/* style total-student p tag */}
+                        </a>
                       </div>
+
 
                     ))}
                   </div>

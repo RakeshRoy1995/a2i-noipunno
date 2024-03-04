@@ -53,7 +53,11 @@ const EditTeacherProfile = () => {
     caid,
     image,
     signature,
-    nid
+    nid,
+    emergency_contact,
+    blood_group,
+    uid
+
   } = userDetails;
 
   // const dpesignation_id = "10";
@@ -214,13 +218,14 @@ const EditTeacherProfile = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [warningMessage, setWarningMessage] = useState('ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
 
-  // img upload
+  // image change
   // const handleImageChange = (e) => {
   //   const file = e.target.files[0];
   //   if (file) {
+
   //     // Check file size
   //     if (file.size > 100 * 1024) {
-  //       setWarningMessage('')
+  //       setWarningMessage('');
   //       setErrorMessage('ছবির আকার ১০০ কিলোবাইট অতিক্রম করেছে, ছবির আকার ১০০ কিলোবাইটের (KB) ভিতর হতে হবে!');
   //       return;
   //     }
@@ -230,7 +235,7 @@ const EditTeacherProfile = () => {
   //     img.onload = () => {
   //       // Check image dimensions
   //       if (img.width > 300 || img.height > 300) {
-  //         setWarningMessage('')
+  //         setWarningMessage('');
   //         setErrorMessage('ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
   //         return;
   //       }
@@ -242,18 +247,26 @@ const EditTeacherProfile = () => {
   //       };
   //       reader.readAsDataURL(file);
   //       setErrorMessage('');
-  //       setWarningMessage('')
+  //       setWarningMessage('');
   //     };
   //     img.src = URL.createObjectURL(file);
-
   //   } else {
-  //     setImagePreview(image_upload_icon);
+  //     // Set default image when no file is selected
+  //     setImagePreview(image_upload_icon); // Change 'image_upload_icon' to the actual path of your default image
   //     setErrorMessage('');
+  //     setWarningMessage('');
   //   }
   // };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      const fileType = file.type;
+      if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+        setWarningMessage('');
+        setErrorMessage('ছবিতে কেবলমাত্র JPEG এবং PNG ফরম্যাট অনুমোদিত রয়েছে।');
+        return;
+      }
+
       // Check file size
       if (file.size > 100 * 1024) {
         setWarningMessage('');
@@ -289,16 +302,19 @@ const EditTeacherProfile = () => {
     }
   };
 
-  const [signaturePreview, setsSgnaturePreview] = useState(null);
+
+  // signature
+  const [signaturePreview, setsSignaturePreview] = useState(null);
   const [signatureErrorMessage, setSignatureErrorMessage] = useState('');
   const [signatureWarningMessage, setSignatureWarningMessage] = useState('সিগ্নেচার ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
 
   const handleSignatureImg = (e) => {
     const file = e.target.files[0];
     if (file) {
+
       // Check file size
       if (file.size > 100 * 1024) {
-        setSignatureWarningMessage('')
+        setSignatureWarningMessage('');
         setSignatureErrorMessage('সিগ্নেচার ছবির আকার ১০০ কিলোবাইট অতিক্রম করেছে, ছবির আকার ১০০ কিলোবাইটের (KB) ভিতর হতে হবে!');
         return;
       }
@@ -308,7 +324,7 @@ const EditTeacherProfile = () => {
       img.onload = () => {
         // Check image dimensions
         if (img.width > 300 || img.height > 300) {
-          setSignatureWarningMessage('')
+          setSignatureWarningMessage('');
           setSignatureErrorMessage('সিগ্নেচার ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
           return;
         }
@@ -316,19 +332,20 @@ const EditTeacherProfile = () => {
         // If both size and dimensions are within limits, set the image preview
         const reader = new FileReader();
         reader.onloadend = () => {
-          setsSgnaturePreview(reader.result);
+          setsSignaturePreview(reader.result);
         };
         reader.readAsDataURL(file);
         setSignatureErrorMessage('');
-        setSignatureWarningMessage('')
+        setSignatureWarningMessage('');
       };
       img.src = URL.createObjectURL(file);
-
     } else {
-      setsSgnaturePreview(image_upload_icon);
+      setsSignaturePreview(image_upload_icon);
       setSignatureErrorMessage('');
+      setSignatureWarningMessage('');
     }
-  }
+  };
+
 
   const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
 
@@ -341,10 +358,6 @@ const EditTeacherProfile = () => {
       });
     })
   }, [])
-  // for broken image
-  // const handleImageError = (event) => {
-  //   event.target.src = 'https://ibb.co/LCkn1DR'; // Replace 'path_to_fallback_image.jpg' with the path to your fallback image
-  // };
 
   return (
     <section className="editTeacherProfilePage">
@@ -532,6 +545,7 @@ const EditTeacherProfile = () => {
                               placeholder="আপনার মোবাইল নাম্বার দিন"
                               defaultValue={mobile_no}
                               data-tooltip="অনুগ্রহ করে সঠিক ফোন নম্বর লিখুন"
+                              maxLength={11}
                             />
                           </div>
                         </div>
@@ -550,8 +564,9 @@ const EditTeacherProfile = () => {
                               className="form-control"
                               name="emergency_contact"
                               placeholder="জরুরী যোগাযোগের নম্বর"
-                              // defaultValue={ } // assuming you have this value
+                              defaultValue={emergency_contact } // assuming you have this value
                               data-tooltip="জরুরী যোগাযোগের নম্বর"
+                              maxLength={11}
                             />
                           </div>
                         </div>
@@ -583,6 +598,7 @@ const EditTeacherProfile = () => {
                               className="form-control"
                               name="user_id"
                               placeholder="User ID"
+                              defaultValue={uid}
                               readOnly // if it's supposed to be read-only
                               data-tooltip="User ID"
                             />
@@ -695,22 +711,23 @@ const EditTeacherProfile = () => {
                               className="form-control"
                               style={{ background: "#F9F9F9" }}
                               name="blood_group"
-                              defaultValue=""
+                              defaultValue={blood_group}
                               data-tooltip="রক্তের গ্রুপ"
                             >
                               <option value="">রক্তের গ্রুপ নির্বাচন করুন</option>
-                              <option value="A+">A+</option>
-                              <option value="A-">A-</option>
-                              <option value="B+">B+</option>
-                              <option value="B-">B-</option>
-                              <option value="AB+">AB+</option>
-                              <option value="AB-">AB-</option>
-                              <option value="O+">O+</option>
-                              <option value="O-">O-</option>
+                              <option value="A+" selected={blood_group==="A+"}>A+</option>
+                              <option value="A-" selected={blood_group==="A-"}>A-</option>
+                              <option value="B+"selected={blood_group==="B+"}>B+</option>
+                              <option value="B-"selected={blood_group==="B-"}>B-</option>
+                              <option value="AB+"selected={blood_group==="AB+"}>AB+</option>
+                              <option value="AB-"selected={blood_group==="AB-"}>AB-</option>
+                              <option value="O+"selected={blood_group==="O+"}>O+</option>
+                              <option value="O-"selected={blood_group==="O-"}>O-</option>
                             </select>
                           </div>
                         </div>
                       </div>
+
 
                       {/* বিভাগ */}
                       <div className="form-group col-sm-4 col-md-6">
@@ -812,7 +829,7 @@ const EditTeacherProfile = () => {
                             </div>
                           </div>
                         </div> */}
-
+                        {/* img upload */}
                         <div className="form-group col-sm-4 col-md-6">
                           <div className="d-flex align-items-center gap-3" style={{ width: "100%" }}>
                             <div className="mb-3" style={{ fontSize: "16px", width: "50%" }}>
@@ -823,9 +840,9 @@ const EditTeacherProfile = () => {
                                   id="imageInput"
                                   name="image"
                                   type="file"
-                                  accept="image/*"
                                   onChange={handleImageChange}
                                   data-tooltip="অনুগ্রহ করে আপনার  ছবি আপলোড করুন"
+                                  accept="image/png, image/jpeg, image/jpg"
                                 />
                                 {warningMessage && (
                                   <small style={{ padding: "0px", margin: "0px", color: "red", fontWeight: "bold" }}>
@@ -913,7 +930,7 @@ const EditTeacherProfile = () => {
                                   className="mb-2"
                                   name="signature"
                                   type="file"
-                                  accept="image/*"
+                                 accept="image/png, image/jpeg,image/jpg"
                                   onChange={handleSignatureImg}
                                 />
                                 {signatureWarningMessage && (

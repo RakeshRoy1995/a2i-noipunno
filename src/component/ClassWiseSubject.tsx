@@ -7,8 +7,7 @@ import Breadcumbtitle from "../layout/Breadcumb";
 import { Spinner } from "react-bootstrap";
 import bookIcon from '../assets/dashboard_materials/images/dashboard/bicon.svg';
 import card from '../assets/dashboard_materials/css/dashboard.css';
-
-
+import { motion } from "framer-motion"
 
 
 const ClassWiseSubject = () => {
@@ -27,8 +26,12 @@ const ClassWiseSubject = () => {
 
   return (
     <section className="class_wise_subject_page">
+
+
+
       <div className="container row mx-auto ">
         <Breadcumbtitle title={(id == "6") && "ষষ্ঠ শ্রেণির বিষয় " || (id == "7") && "সপ্তম শ্রেণির বিষয় "} />
+
 
         {/* <div className="my-4">
         <h4> {(id == "6") && "ষষ্ঠ" || (id == "7") && "সপ্তম"} শ্রেণির বিষয় সমুহ </h4>
@@ -64,9 +67,16 @@ const ClassWiseSubject = () => {
             <section>
               <div className="container subject-container">
                 <h2>{(id == "6") && "ষষ্ঠ" || (id == "7") && "সপ্তম"} শ্রেণির বিষয় সমুহ </h2>
+                     {/* added framer motion */}
+                <motion.div
+                        initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 1.5 }}>
                 <div className="row">
                   {subjects?.map((subject, index) => (
+
                     <div key={index} className="col-sm-12 col-md-6 col-lg-4 col-xl-3 g-2">
+
                       <a href="#" className="subject-number">
                         <div className="icon">
                           <img src={bookIcon} alt="bookIcon" />
@@ -80,14 +90,37 @@ const ClassWiseSubject = () => {
                             }
                           </p>
                         </div>
+
+                        {/* style for hover over cards */}
+                        <style>
+                                {`
+                                .subject-number:hover,
+                                  .subject-number:hover h2,
+                                  .subject-number:hover p{
+                                    /* Increase size on hover */
+                                    transform: scale(1.1);
+                                    /* Change background color on hover */
+                                    background-color: #428F92;
+                                     /* Add a text color on hover */
+                                    color: white
+                                  }
+                                `}
+                          </style>
                       </a>
+
                     </div>
+
                   ))}
                 </div>
+                </motion.div>
               </div>
             </section>
+
+
         }
       </div>
+
+
     </section>
 
   );

@@ -39,3 +39,21 @@
     border: unset;
 
 }
+
+.btn.btn-primary.btn-default {
+    background-color: #428F92; /* Set default background color to white */
+    color: #000; /* Set default text color to black */
+    transition: background-color 0.3s, transform 0.3s; /* Apply transition */
+  }
+.btn.btn-primary.btn-hover:hover {
+    /* #BCFDFF */
+    /* background-color: #C0218D; */
+    color: #000;
+
+    transform: scale(1.05); /* Increase size on hover */
+  }
+/* hover effect for Amar Profile submit button */
+
+.hover-effect:hover {
+    transform: scale(1.05);
+  }

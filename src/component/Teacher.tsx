@@ -6,7 +6,8 @@ import {
   teacher_dashboard,
   teacher_own_subject,
 } from "../Request";
-
+import Lottie from "lottie-react";
+import loadingAnimation from "../assets/loadingAnimation/loading.json"
 import { Spinner } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import BreadcumbHome from "../layout/BreadcumbHome";
@@ -26,7 +27,9 @@ import bookIcon from "../../src/assets/dashboard_materials/images/dashboard/bico
 import "../../src/assets/project_ca_html/css/dashboard.css";
 import ReportForHeadTeacherDashboard from "./Dashboards/ReportForHeadTeacherDashboard";
 
+
 export default function Teacher() {
+
   const [showLoadingErr, setshowLoadingErr] = useState("");
   let [numberOfRender, setnumberOfRender] = useState(1);
   const [subject, setsubject] = useState([]);
@@ -81,7 +84,7 @@ export default function Teacher() {
       const own_subjet_: any = localStorage.getItem("own_subjet") || "";
       let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
 
-      
+
 
       if (own_subjet == "") {
         own_subjet = await teacher_own_subject();
@@ -121,7 +124,7 @@ export default function Teacher() {
 
       }
 
-      
+
     } catch (error) {
       setshowLoadingErr("");
 
@@ -166,7 +169,8 @@ export default function Teacher() {
             <>
               {loader && (
                 <div className={loader && styles.loading_container}>
-                  {loader && <Spinner animation="border" />}
+                  {/* {loader && <Spinner animation="border" />} */}
+                  <Lottie animationData={loadingAnimation}/>
                 </div>
               )}
             </>
@@ -417,7 +421,7 @@ export default function Teacher() {
             </div>
           )}
 
-          
+
           <style
             dangerouslySetInnerHTML={{
               __html:
@@ -435,7 +439,8 @@ export default function Teacher() {
             <>
               {loader && (
                 <div className={loader && styles.loading_container}>
-                  {loader && <Spinner animation="border" />}
+                  {/* {loader && <Spinner animation="border" />} */}
+                  {loader && <Lottie animationData={loadingAnimation} />}
                 </div>
               )}
 

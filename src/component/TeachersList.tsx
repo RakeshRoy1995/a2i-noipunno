@@ -6,7 +6,8 @@ import Breadcumb from "../layout/Breadcumb";
 import { Button, Modal, Spinner } from 'react-bootstrap';
 import { subject_name, teacher_list } from "../utils/Utils";
 import female_tec_avatar from "../../public/assets/images/teacher_avatar/female_tec_avatar.png";
-
+import Lottie from 'lottie-react';
+import LoadingAnimation from "../assets/loadingAnimation/loading.json"
 
 export default function TeachersList() {
   const [teachers, setTeachers] = useState<any>([]);
@@ -64,7 +65,8 @@ export default function TeachersList() {
       {
         (teachers?.length == 0) ?
           <div className={styles.loading_container}>
-            <Spinner animation="border" />
+            {/* <Spinner animation="border" /> */}
+            <Lottie animationData={LoadingAnimation}/>
           </div>
           :
           <div className="container">

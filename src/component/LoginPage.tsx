@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { loginPassword } from "../Request";
 import PopUpAppInfo from "./PopUpAppInfo/PopUpAppInfo";
 import { Button, Modal } from "react-bootstrap";
+import { motion } from "framer-motion"
 
 const LoginPage = () => {
   const [error, seterror] = useState("");
@@ -153,8 +154,14 @@ const LoginPage = () => {
       <Helmet>
         <title>নৈপুণ্য - লগ ইন</title>
       </Helmet>
-
+      {/* added framer motion */}
+      <motion.div
+    initial={{ opacity: 0, scale: 0.5 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 1 }}
+  >
       <section id="body" className="login-page">
+
         <div className="login-bg min-vh-100 position-relative">
           {/* <div className="marque-notification pointer" onClick={redirect} >
             <div className="marquee-container">
@@ -300,9 +307,13 @@ const LoginPage = () => {
                         </label>
                       </div>
                     </div>
+
+                              {/* login btn */}
+
                     <button type="submit" disabled={loading} className="btn login-btn w-100">
                       লগ ইন করুন {loading && "loading......"}
-                    </button>
+
+                      </button>
                     <div className="form-group my-2">
                       <p className="mb-1">
                         <Link
@@ -320,7 +331,7 @@ const LoginPage = () => {
           </div>
 
           <div className="row">
-            <div className="login_footer position-absolute bottom-0">
+            <div className="login_footer position-absolute bottom-0 ">
               <div className="d-flex flex-column flex-md-row justify-content-between align-items-end sm-row-reverse ps-5 pe-3 my-2">
                 <div className="">
                   <div className="d-flex gap-2 py-2 justify-content-start">
@@ -361,8 +372,10 @@ const LoginPage = () => {
                     </ul>
                   </div>
                 </div>
-                <div className="helpedBy">
-                  <div className="d-flex gap-2 px-5 py-2 justify-content-center bg-light rounded-pill">
+
+                {/* helpedBy section start */}
+                <div className="helpedBy ">
+                  <div className="d-flex gap-2 px-5 py-2 mt-lg-5 justify-content-center bg-light rounded-pill ">
                     <div>
                       <div>
                         <p className="">পরিকল্পনা ও বাস্তবায়নে</p>
@@ -383,6 +396,9 @@ const LoginPage = () => {
                     </div>
                   </div>
                 </div>
+                 {/* helpedBy  end */}
+
+
               </div>
             </div>
             <PopUpAppInfo />
@@ -876,6 +892,7 @@ const LoginPage = () => {
 
 
       </section>
+      </motion.div>
     </>
   );
 };

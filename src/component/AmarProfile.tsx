@@ -6,6 +6,7 @@ import techerAvatar from "../assets/project_ca_html/icons/teacher.svg";
 import { all_district, all_division, all_upozila, teacher_designation } from "../Request";
 import maleTeacherAvatar from "../../src/assets/project_ca_html/teacher_img/male_teacher.png";
 import femaleTeacherAvatar from "../../src/assets/project_ca_html/teacher_img/female_teacher.png";
+import { motion } from "framer-motion"
 
 
 const AmarProfile = () => {
@@ -164,6 +165,11 @@ const AmarProfile = () => {
   return (
     <section className="mx-auto myProfilePage">
       <Breadcumbtitle title={"আমার প্রোফাইল"} />
+      <motion.div
+    initial={{ opacity: 0, scale: 0.5 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5 }}
+  >
       <div className="container  py-3 mx-auto">
         <div className="d-flex align-items-center">
           <div className="card shadow-sm border-1 w-100 rounded">
@@ -183,8 +189,8 @@ const AmarProfile = () => {
                 } loading="lazy" width="150rem" className="img-fluid my-5 border  border-info" />
               </div>
 
-              <table className="table w-75 text-sm mx-auto ">
-                <tbody className="rounded border border-ligh">
+              <table className="table w-75  text-sm  mx-auto rounded-bottom">
+                <tbody className="rounded border border-light">
 
                   <tr className="border-1">
                     <td className="">
@@ -320,11 +326,12 @@ const AmarProfile = () => {
 
                 </tbody>
               </table>
-              <div className="d-flex justify-content-end align-items-center py-3 pe-5">
+
+              <div className="d-flex justify-content-center justify-content-lg-end align-items-center py-3 pe-5">
                 <Link to={"/edit-teacher-profile"}>
                   <button
                     type="submit"
-                    className="btn btn-primay px-3"
+                    className="btn btn-primary px-3 hover-effect"
                     style={{ backgroundColor: "#428F92", color: "#fff" }}
                   >
                     {" "}
@@ -340,6 +347,7 @@ const AmarProfile = () => {
           </div>
         </div>
       </div>
+      </motion.div>
     </section>
   );
 };

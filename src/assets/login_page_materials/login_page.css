@@ -72,6 +72,10 @@ h6 {
   color: white;
 }
 
+.carousel-inner-custom{
+  height: 140px;
+}
+
 .btn-center{
   display: flex;
   justify-content: center;
@@ -80,6 +84,10 @@ h6 {
 
 .card-title{
   font-size: 18px !important;
+}
+
+.noipunno-app{
+  width: 80%;
 }
 
 .transparent-card{
@@ -103,7 +111,7 @@ h6 {
   width: 80%;
   margin: auto;
   border-radius: 10px;
-  margin-bottom: 126px;
+  margin-bottom: 30px;
   font-family: 'SolaimanLipi, sans-serif ';
 }
 
@@ -568,6 +576,11 @@ label.form-check-label:focus,
     margin-right: 0px;
   }
 
+  .app-download{
+    margin: auto;
+    text-align: center;
+  }
+
   .transparent-card{
     border: none;
     background-color: #f6f6f883;
@@ -576,6 +589,7 @@ label.form-check-label:focus,
 
   .card-body-custom{
     margin-bottom: 0px;
+    width: 90%;
   }
 
   .card-footer-image{
@@ -635,6 +649,20 @@ label.form-check-label:focus,
     width: 20px;
   }
 
+  .login-container {
+    margin-top: 20px !important;
+  }
+
+  .app-download{
+    margin: auto;
+    text-align: center;
+    padding: 2px;
+  }
+
+  .carousel-inner-custom{
+    height: 200px;
+  }
+
   .order-mobile-first {
     order: -1; 
   }
@@ -673,7 +701,8 @@ label.form-check-label:focus,
   }
 
   .card-body-custom{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    width: 90%;
   }
 
   .card-footer-image{

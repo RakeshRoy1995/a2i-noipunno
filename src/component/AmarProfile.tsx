@@ -7,6 +7,9 @@ import { all_district, all_division, all_upozila, teacher_designation } from "..
 import maleTeacherAvatar from "../../src/assets/project_ca_html/teacher_img/male_teacher.png";
 import femaleTeacherAvatar from "../../src/assets/project_ca_html/teacher_img/female_teacher.png";
 import { motion } from "framer-motion"
+import "../styles/profile_picture.css"
+import { GiTeacher } from "react-icons/gi";
+
 
 
 const AmarProfile = () => {
@@ -36,9 +39,19 @@ const AmarProfile = () => {
     upazilla_id,
     designation_id,
     pdsid,
-    caid } = userDetails;
+    caid,
+    uid,
+    image,
+    blood_group,
+    emergency_contact,
+    signature,
+    designation: userDesignation,
 
+  } = userDetails;
+  console.log(userDetails)
   // const designation_id = "10";
+  // image
+  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
 
   const getUserDetails = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
@@ -116,16 +129,11 @@ const AmarProfile = () => {
 
           return;
         } else {
-
           setshowSign(true)
-
           alert(
             "Success"
           );
-
         }
-
-
       };
 
       const reader: any = new FileReader();
@@ -163,190 +171,166 @@ const AmarProfile = () => {
 
 
   return (
-    <section className="mx-auto myProfilePage">
+    <section className="container mx-auto myProfilePage">
       <Breadcumbtitle title={"আমার প্রোফাইল"} />
       <motion.div
-    initial={{ opacity: 0, scale: 0.5 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.5 }}
-  >
-      <div className="container  py-3 mx-auto">
-        <div className="d-flex align-items-center">
-          <div className="card shadow-sm border-1 w-100 rounded">
-            <ul className="nav d-flex mt-2 justify-content-around py-1">
-              <li className={`nav-item`}>
-                <h4> আমার প্রোফাইল </h4>
-              </li>
-            </ul>
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="container  py-3 mx-auto">
+          <div className="d-flex align-items-center justify-content-center">
+            <div className="card shadow-sm border-1 w-100 rounded">
+              <ul className="nav d-flex mt-2 justify-content-around py-1">
+                {/* <li className={`nav-item`}>
+                  <h4> আমার প্রোফাইল </h4>
+                </li> */}
+              </ul>
 
-            <div className="container" style={{ backgroundColor: "#E4FEFF" }}>
-              <div className="w-75 text-sm-center text-md-center mx-auto ">
-                <img src={
-                  (gender == "1") && maleTeacherAvatar ||
-                  (gender == "2") && femaleTeacherAvatar ||
-                  (gender == "3") && techerAvatar
+              <div className="container" >
 
-                } loading="lazy" width="150rem" className="img-fluid my-5 border  border-info" />
-              </div>
+                {/* testing  purpose only */}
+                <div className="mt-5 ps-lg-5 w-full d-flex justify-content-center align-item-center  text-sm  mx-auto rounded-bottom" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
 
-              <table className="table w-75  text-sm  mx-auto rounded-bottom">
-                <tbody className="rounded border border-light">
+                  <div className="" style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
 
-                  <tr className="border-1">
-                    <td className="">
-                      <strong>ইউজার আইডিঃ</strong>
-                    </td>
-                    <td className="">{pdsid || caid}</td>
-                  </tr>
+                    {/* profile pic div */}
+                    <div className="ms-1 rounded-5">
 
-                  <tr className="border-1 rounded">
-                    <td className="">
-                      <strong>নাম (বাংলা)</strong>
-                    </td>
-                    <td className="">{name_bn}</td>
-                  </tr>
-                  <tr className="border-1 rounded">
-                    <td className="">
-                      <strong>নাম (ইংরেজি)</strong>
-                    </td>
-                    <td className="">{name_en}</td>
-                  </tr>
-
-                  {designation &&
-                    <tr className="border-1">
-                      <td className="">
-                        <strong>পদবীঃ</strong>
-                      </td>
-                      <td className="">{designation}</td>
-                    </tr>
-                  }
-
-                  <tr className="border-1">
-                    <td className="">
-                      <strong>ইমেইলঃ</strong>
-                    </td>
-                    <td className="">{email}</td>
-                  </tr>
-                  <tr className="border-1">
-                    <td className="p-1 v">
-                      <strong>মোবাইল নাম্বারঃ</strong>
-                    </td>
-                    <td className="">{mobile_no}</td>
-                  </tr>
-
-                  <tr className="border-1">
-                    <td className="p-1 v">
-                      <strong>জন্ম তারিখঃ</strong>
-                    </td>
-                    <td className="">{date_of_birth}</td>
-                  </tr>
-
-                  {gender &&
-                    <tr className="border-1">
-                      <td className="p-1 v">
-                        <strong>লিঙ্গঃ</strong>
-                      </td>
-                      <td className="">
-                        {(gender === "1") && "পুরুষ"}
-                        {(gender === "2") && "মহিলা"}
-                        {(gender === "3") && "অন্যান্য"}
-                      </td>
-                    </tr>
-                  }
-
-                  {division &&
-                    <tr className="border-1">
-                      <td className="p-1 v">
-                        <strong>বিভাগঃ</strong>
-                      </td>
-                      <td className="">{division}</td>
-                    </tr>
-                  }
-
-                  {
-                    district &&
-                    <tr className="border-1">
-                      <td className="p-1 v">
-                        <strong>জেলাঃ</strong>
-                      </td>
-                      <td className="">{district}</td>
-                    </tr>
-                  }
+                      <div className="d-flex justify-content-start align-align-items-start">
+                        {/* img */}
+                        <div className="me-2">
+                          <div className="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                            {image && <img src={img_base_url + image} alt="teacher-profile" style={{ border: "3px solid black" }} />}
+                          </div>
+                        </div>
 
 
-                  {upazila &&
-                    <tr className="border-1">
-                      <td className="p-1 v">
-                        <strong>উপজেলাঃ</strong>
-                      </td>
-                      <td className="">{upazila}</td>
-                    </tr>
-                  }
+                        <div className="d-flex justify-content-between align-item-start  mb-2">
+                          <div className="d-flex flex-column">
+                            {/* profile name */}
+                            <div className="d-flex align-item-center mb-2 w-100">
+                              <h2>{name_bn}</h2>
+                            </div>
+                            {/* info  email and designation and more will be added in  future*/}
+                            <div className="d-flex flex-column flex-wrap fw-semibold fs-6 mb-4 pe-2">
+                              <div className="d-flex justify-content-center align-items-center gap-2">
+                                <GiTeacher />
+                                <p className="text-gray-500 mt-2 me-2 mb-2">{userDesignation}</p>
+                              </div>
 
 
-                  {/* <tr className="border-1">
-                    <td className="p-1 v">
-                      <strong>সাইন আপলোড করুন</strong>
-                      <div
-                        style={{
-                          fontSize: "9px",
-                          width: "70%",
-                          marginLeft: "6px",
-                        }}
-                      >
-                        ছবি {convertToBanglaNumber(200)} PX প্রস্থ এবং {convertToBanglaNumber(150)} PX এর
-                        সর্বাধিক উচ্চতা অতিক্রম করা উচিত নয় এবং ছবির আকার {convertToBanglaNumber(100)}
-                        KB সীমা অতিক্রম করা উচিত নয়।
-                        {
-                          error && <h5 className="text-danger">{error}</h5>
-                        }
+                              {/* <p className="d-flex align-items-center  me-5 mb-2">{email}</p> */}
+                              {/* <p className="d-flex align-items-center text-gray-500 me-5 mb-2">city</p> */}
+                            </div>
 
+                          </div>
+                        </div>
                       </div>
-                    </td>
-                    <td>
-                      <div className="d-flex" >
-                        <input
-                          type="file"
-                          id="imageInput"
-                          accept="image/*"
-                          onChange={uploadImage}
-                        />
 
-                        <img
-                          id="previewImage"
-                          style={{ maxWidth: 80, maxHeight: 60 }}
-                          src={signTeacher}
-                          alt="Preview"
-                        />
+                    </div>
 
-                        <input type="file" id="imageInput" accept="image/*" onChange={getImageSize} />
+                    {/* all user details */}
+                    <div className="card-title mt-5 ms-5">
+                      <h3 className="m-0 ">আমার প্রোফাইল</h3>
+                    </div>
+                    <div className="profile-body p-5">
+                      <div className="row mb-3">
+                        <label className="col-lg-4 text-muted fw-semibold">ইউজার আইডি:</label>
+                        <div className="col-lg-8">
+                          <span className="fw-bold fs-6 text-gray-800">{uid}</span>
+                        </div>
                       </div>
-                    </td>
-                  </tr> */}
+                      <div className="row mb-3">
+                        <label className="col-lg-4 text-muted fw-semibold">নাম (বাংলা):</label>
+                        <div className="col-lg-8">
+                          <span className="fw-bold fs-6 text-gray-800">{name_bn}</span>
+                        </div>
+                      </div>
+                      <div className="row mb-3">
+                        <label className="col-lg-4 text-muted fw-semibold">নাম (ইংরেজি):</label>
+                        <div className="col-lg-8">
+                          <span className="fw-bold fs-6 text-gray-800">{name_en}</span>
+                        </div>
+                      </div>
+                      <div className="row mb-3">
+                        <label className="col-lg-4 text-muted fw-semibold">ইমেইল:</label>
+                        <div className="col-lg-8">
+                          <span className="fw-bold fs-6 text-gray-800">{email}</span>
+                        </div>
+                      </div>
+                      <div className="row mb-3">
+                        <label className="col-lg-4 text-muted fw-semibold">মোবাইল নাম্বার:</label>
+                        <div className="col-lg-8">
+                          <span className="fw-bold fs-6 text-gray-800">{mobile_no}</span>
+                        </div>
+                      </div>
+                      <div className="row mb-3">
+                        <label className="col-lg-4 text-muted fw-semibold">জন্ম তারিখ:</label>
+                        <div className="col-lg-8">
+                          <span className="fw-bold fs-6 text-gray-800">{date_of_birth}</span>
+                        </div>
+                      </div>
+                      {gender &&
+                        <div className="row mb-3">
+                          <label className="col-lg-4 text-muted fw-semibold">লিঙ্গ:</label>
 
-                </tbody>
-              </table>
+                          <div className="col-lg-8">
+                            <span className="fw-bold fs-6 text-gray-800">{gender === "1" ? "পুরুষ" : (gender === "2" ? "মহিলা" : "অন্যান্য")}</span>
+                          </div>
+                        </div>
+                      }
+                      <div className="row mb-3">
+                        <label className="col-lg-4 text-muted fw-semibold">রক্তের গ্রুপ:</label>
+                        <div className="col-lg-8">
+                          <span className="fw-bold fs-6 text-gray-800">{blood_group}</span>
+                        </div>
+                      </div>
+                      <div className="row mb-3">
+                        <label className="col-lg-4 text-muted fw-semibold">জরুরী যোগাযোগের নম্বর:</label>
+                        <div className="col-lg-8">
+                          <span className="fw-bold fs-6 text-gray-800">{emergency_contact}</span>
+                        </div>
+                      </div>
+                      {/* <div className="row mb-5">
+                        <label className="col-lg-4 text-muted fw-semibold">রক্তের গ্রুপ:</label>
+                        <div className="col-lg-8">
+                          <span className="fw-bold fs-6 text-gray-800">{}</span>
+                        </div>
+                      </div> */}
+                      {/* <div className="row mb-5">
+                        <label className="col-lg-4 text-muted fw-semibold">রক্তের গ্রুপ:</label>
+                        <div className="col-lg-8">
+                          <span className="fw-bold fs-6 text-gray-800">{blood_group}</span>
+                        </div>
+                      </div> */}
+                    </div>
 
-              <div className="d-flex justify-content-center justify-content-lg-end align-items-center py-3 pe-5">
-                <Link to={"/edit-teacher-profile"}>
-                  <button
-                    type="submit"
-                    className="btn btn-primary px-3 hover-effect"
-                    style={{ backgroundColor: "#428F92", color: "#fff" }}
-                  >
-                    {" "}
-                    প্রোফাইল হালনাগাদ{" "}
-                    <MdOutlineKeyboardArrowRight
-                      className="fs-3"
-                      style={{ marginTop: "-0.3rem" }}
-                    />{" "}
-                  </button>
-                </Link>
+
+                    {/*edit profile  button  */}
+                    <div className="d-flex justify-content-center justify-content-lg-end  align-items-center py-3 pe-5">
+                      <Link to={"/edit-teacher-profile"}>
+                        <button
+                          type="submit"
+                          className="btn btn-primary px-3 hover-effect"
+                          style={{ backgroundColor: "#428F92", color: "#fff" }}
+                        >
+                          {" "}
+                          প্রোফাইল হালনাগাদ{" "}
+                          <MdOutlineKeyboardArrowRight
+                            className="fs-3"
+                            style={{ marginTop: "-0.3rem" }}
+                          />{" "}
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
       </motion.div>
     </section>
   );

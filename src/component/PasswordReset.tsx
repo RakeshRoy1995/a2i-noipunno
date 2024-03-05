@@ -13,6 +13,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { userInfo, resetPassword, otpComfirm, changePin } from "../Request";
 import PopUpAppInfo from "./PopUpAppInfo/PopUpAppInfo";
+import LoginPageCommonLeft from "./LoginPageCommonLeft";
+import LoginPageModalCommon from "./LoginPageModalCommon";
 
 const PasswordReset = () => {
   const [error, seterror] = useState("");
@@ -153,25 +155,16 @@ const PasswordReset = () => {
             </div>
           </div> */}
 
-          <div className="container mt-3">
+          <div className="container-fluid login-container">
 
-            <div className="row min-vh-90-100 position-relative d-flex align-items-center justify-content-center py-3">
-              <div className="col-sm-12 col-md-5 py-2">
-                <div className="mobile-view">
-                  <img src={noipunnoLogo} alt="logo" className="loginLogo centered-image" />
-                </div>
-
-                <h1 className="teacher-login-title mobile-view">
-                  বিষয়ভিত্তিক মূল্যায়ন অ্যাপ্লিকেশন
-                </h1>
-                <p className="np-login-subtitle mt-3 mobile-view">
-                  অনুগ্রহ করে আপনার অ্যাকাউন্টে রিসেট পিন করুন এবং অ্যাডভেঞ্চার শুরু করুন
-                </p>
+            <div className="row">
+              <div className="col-sm-12 col-md-7">
+                  <LoginPageCommonLeft/>
               </div>
 
-              <div className="col-sm-12 col-md-7 py-2">
-                <div className="card loginCard max-width-540 login-card-padding m-auto">
-                  <p className="login-title text-center mb-4">
+              <div className="col-sm-12 col-md-5 order-mobile-first">
+                <div className="card loginCard max-width-540 login-card-padding m-auto mt-0">
+                  <p className="login-title text-center mb-3">
                     {showVarify ? "রিসেট পিন" : "রিসেট পিন"}
                   </p>
                   {error && <p className="text-center text-danger">{error}</p>}
@@ -199,7 +192,10 @@ const PasswordReset = () => {
                                 :
                                 <>ইউজার আইডি প্রদান করুন</>
                             }
+
                           </label>
+
+                          
                           <div className="input-group">
                             <div className="input-group-prepend">
                               <span>
@@ -250,7 +246,7 @@ const PasswordReset = () => {
                         )}
 
                         {
-                          buttonSHow && <button type="submit" className="btn login-btn w-100 mt-2">{showVarify ? "ওটিপি পাঠান" : "তথ্য যাচাই করুন"}</button>
+                          buttonSHow && <button type="submit" className="btn login-button mt-3">{showVarify ? "ওটিপি পাঠান" : "তথ্য যাচাই করুন"}</button>
                         }
 
                         <div className="form-group">
@@ -296,7 +292,20 @@ const PasswordReset = () => {
                                 <input type="hidden" id="caid" name="caid" defaultValue={getCaid} />
                               </div>
                             </div>
-                            <button type="submit" className="btn login-btn w-100 mt-3">নিশ্চিত</button>
+                            <button type="submit" className="btn login-button mt-3">নিশ্চিত</button>
+
+                            <div className="form-group">
+                              <p className="mb-1 mt-3 text-center">
+                                <Link
+                                  to="/login"
+                                  className="forget-password"
+                                  style={{ color: '#428F92', fontSize: '16px' }}
+                                >
+                                  লগইন পেজ এ ফিরে যেতে ক্লিক করুন
+                                </Link>
+                              </p>
+                            </div>
+
                           </form>
                         }
                       </>
@@ -348,7 +357,7 @@ const PasswordReset = () => {
                           </div>
                         </div>
                         <input type="hidden" id="caid" name="caid" defaultValue={getCaid} />
-                        <button type="submit" className="btn login-btn w-100 mt-3">নিশ্চিত</button>
+                        <button type="submit" className="btn login-button mt-3">নিশ্চিত</button>
 
                         {/* <div className="form-group my-2">
                                 <p className="mb-1">
@@ -369,6 +378,8 @@ const PasswordReset = () => {
               </div>
             </div>
           </div>
+
+          <LoginPageModalCommon/>
 
         </div>
         {/* bootstrap 5.0.2 min.js */}

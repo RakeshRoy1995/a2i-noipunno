@@ -273,7 +273,9 @@ const PasswordReset = () => {
                                 placeholder="ইউজার আইডি"
                                 name="caid"
                                 id="caid"
-                                
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title="প্রতিষ্ঠান হিসেবে লগইন করার জন্য EIIN/SGN প্রদান করুন"
                               />
                              
                           </div>

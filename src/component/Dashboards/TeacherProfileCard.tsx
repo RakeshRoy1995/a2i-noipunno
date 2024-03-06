@@ -23,6 +23,7 @@ const TeacherProfileCard = () => {
   const [isClassTeacher, setIsClassTeacher] = useState(false)
   const [loading, setLoadin] = useState(true);
 
+
   const {
     name_en,
     name_bn,
@@ -32,7 +33,7 @@ const TeacherProfileCard = () => {
     caid,
     image
   }: any = teacher_details;
-
+  console.log(teacher_details);
   const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
 
   const getUserDetails = () => {
@@ -91,8 +92,9 @@ const TeacherProfileCard = () => {
           <div className="teacher-title">
             <h2>
               {/* {teacherDesignation} */}
-              {isClassTeacher && "শ্রেণি "}
-              শিক্ষক
+              {/* {isClassTeacher && "শ্রেণি "}
+              শিক্ষক */}
+              { }
             </h2>
           </div>
           <div className="icon">
@@ -108,19 +110,23 @@ const TeacherProfileCard = () => {
           </div>
         </div>
         <div className="teacher-info">
-          <h2 className="card-title text-two-line" style={{lineHeight:"2"}} >
+          <h2 className="card-title text-two-line" style={{ lineHeight: "2" }}>
             {name_bn || name_en || ''}
           </h2>
-          <p className="card-text">
+          <p className="card-text" style={{ fontSize: "15px ", fontWeight: "bolder" ,color:"black"}}>
             {pdsid || caid}
           </p>
-          {/* <p className="card-text">পাবনা জিলা স্কুল, পাবনা</p> */}
-          <p className="card-text text-center" >{schoolName}</p>
+          <p className="card-text text-center" style={{ fontSize: "15px", fontWeight: "bolder",color:"black" }}>{schoolName}</p>
 
-          <div className="button">
-            <img src={eyeIcon} alt="eyeIcon" />
-            <Link to={"/teacher-profile"}>আমার প্রোফাইল</Link>
-          </div>
+
+
+          <Link className="d-flex justify-content-center align-align-items-center" to={"/teacher-profile"}>
+            <div className="button  " style={{ cursor: "pointer", color: "#000" }}>
+              <img src={eyeIcon} alt="eyeIcon" />
+              আমার প্রোফাইল
+            </div>
+          </Link>
+
         </div>
       </div>
     </div>

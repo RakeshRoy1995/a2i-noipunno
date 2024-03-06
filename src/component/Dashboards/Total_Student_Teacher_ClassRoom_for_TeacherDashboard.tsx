@@ -21,7 +21,7 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
 
     let obj: any = {};
     const app_PI: any = [];
-    
+
     if (studentsData && studentsData?.data?.data?.subjects?.length && local_storege_data) {
       studentsData.data.data.subjects.map((std_data: any) => {
         obj = {
@@ -43,9 +43,9 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
             ...stu_data ,
             ...stu_data?.student_info
           }
-  
+
           delete studnt['student_info']
-  
+
           student.push(studnt);
 
           // student.push(stu_data);
@@ -80,6 +80,8 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
     <>
       <div className="col-lg-2 col-md-3 ">
         <div className="teacher-student-card gy-5">
+          {/* total student in a class */}
+          
           <a href="#">
             <div className="card-container">
               <div className="total-student">
@@ -97,6 +99,8 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
               </div>
             </div>
           </a>
+
+{/* total subject */}
           <a href="#">
             <div className="card-container">
               <div className="total-student">
@@ -114,6 +118,8 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
               </div>
             </div>
           </a>
+
+          {/* total classroom */}
           <a href="#">
           <div className="card-container">
             <div className="total-student">

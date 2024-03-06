@@ -9,7 +9,7 @@ import femaleTeacherAvatar from "../../src/assets/project_ca_html/teacher_img/fe
 import { motion } from "framer-motion"
 import "../styles/profile_picture.css"
 import { GiTeacher } from "react-icons/gi";
-
+import indicator from "../assets/navbar_materials/icons/Status.svg"
 
 
 const AmarProfile = () => {
@@ -46,9 +46,10 @@ const AmarProfile = () => {
     emergency_contact,
     signature,
     designation: userDesignation,
+    eiin
 
   } = userDetails;
-  console.log(userDetails)
+  // console.log(userDetails)
   // const designation_id = "10";
   // image
   const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
@@ -58,6 +59,7 @@ const AmarProfile = () => {
     if (get_teachers_details) {
       setuserDetails(get_teachers_details?.data?.teachers[0]);
     }
+    console.log(get_teachers_details);
   }
 
   const fetchData = async () => {
@@ -77,8 +79,8 @@ const AmarProfile = () => {
     setAllDistrict(district_data?.data?.data);
     setAllUpozila(upozila_data?.data?.data);
     setAllDesignation(designation_data.data.data);
+    console.log(division_data);
   };
-
 
   const setAllStateData = () => {
     if (designation_id) {
@@ -104,8 +106,6 @@ const AmarProfile = () => {
   }
 
   // console.log(designation);
-
-
 
   function uploadImage() {
     const input: any = document.getElementById("imageInput");
@@ -158,7 +158,7 @@ const AmarProfile = () => {
   } else {
     localStorage.setItem("teacher_sign_show", "false");
   }
-
+  console.log(showSign);
   useEffect(() => {
     fetchData()
     getUserDetails()
@@ -202,6 +202,9 @@ const AmarProfile = () => {
                         <div className="me-2">
                           <div className="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
                             {image && <img src={img_base_url + image} alt="teacher-profile" style={{ border: "3px solid black" }} />}
+                            <div className="online-indicator">
+                              <img src={indicator} alt="" />
+                            </div>
                           </div>
                         </div>
 
@@ -214,7 +217,7 @@ const AmarProfile = () => {
                             </div>
                             {/* info  email and designation and more will be added in  future*/}
                             <div className="d-flex flex-column flex-wrap fw-semibold fs-6 mb-4 pe-2">
-                              <div className="d-flex justify-content-center align-items-center gap-2">
+                              <div className="d-flex justify-content-start align-items-center gap-2">
                                 <GiTeacher />
                                 <p className="text-gray-500 mt-2 me-2 mb-2">{userDesignation}</p>
                               </div>
@@ -231,10 +234,11 @@ const AmarProfile = () => {
                     </div>
 
                     {/* all user details */}
-                    <div className="card-title mt-5 ms-5">
+                    <div className="card-title mt-3 ms-3">
                       <h3 className="m-0 ">আমার প্রোফাইল</h3>
                     </div>
-                    <div className="profile-body p-5">
+                    <hr />
+                    <div className="profile-body p-3">
                       <div className="row mb-3">
                         <label className="col-lg-4 text-muted fw-semibold">ইউজার আইডি:</label>
                         <div className="col-lg-8">
@@ -308,11 +312,11 @@ const AmarProfile = () => {
 
 
                     {/*edit profile  button  */}
-                    <div className="d-flex justify-content-center justify-content-lg-end  align-items-center py-3 pe-5">
+                    <div className="d-flex justify-content-end justify-content-lg-end  align-items-center py-3 pe-5">
                       <Link to={"/edit-teacher-profile"}>
                         <button
                           type="submit"
-                          className="btn btn-primary px-3 hover-effect"
+                          className="btn btn-primary px-3 hover-effect "
                           style={{ backgroundColor: "#428F92", color: "#fff" }}
                         >
                           {" "}

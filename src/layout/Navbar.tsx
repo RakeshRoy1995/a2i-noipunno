@@ -26,7 +26,39 @@ import { showReportDeleteEv } from "../utils/Utils";
 
 const Navbar = () => {
   const [userDetails, setuserDetails] = useState<any>({});
+  const [loading, setLoadin] = useState(true);
+  const [teacher_details, setTeacher_details] = useState({});
+  // teacher profile
+  const {
+    image
+  }: any = teacher_details;
+console.log(teacher_details);
 
+const getUserDetails = () => {
+  const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
+  if (get_teachers_details) {
+    setTeacher_details(get_teachers_details?.data?.teachers[0]);
+
+    // get_teachers_details?.data?.institute?.map((item) =>
+    //   setSchoolName(item.institute_name)
+    // );
+
+    const isClassTeacherValid = get_teachers_details?.data?.teachers[0]?.is_class_teacher;
+    if (isClassTeacherValid) {
+      setIsClassTeacher(true)
+    }
+
+    setLoadin(false)
+  }
+}
+setInterval(() => {
+  if (loading) {
+    getUserDetails()
+  }
+}, 500);
+// end teacher profile img
+
+  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
   setTimeout(() => {
     if (!userDetails?.email) {
       const items = JSON.parse(localStorage.getItem("customer_login_auth"));
@@ -44,7 +76,7 @@ const Navbar = () => {
   };
 
   const location = useLocation()
-  
+
 
   const [isReportPathActive, setIsReportPathActive] = useState(false);
   const [isShikkarthiPathActive, setIsShikkarthiPathActive] = useState(false);
@@ -83,8 +115,6 @@ const Navbar = () => {
       setIsFAQpathActive(false);
     }
   };
-
-  
 
 
   const fetchData = async () => {
@@ -138,11 +168,12 @@ const Navbar = () => {
                         aria-expanded="false"
                       >
                         {" "}
-                        <img
+                        {/* <img
                           src={teacherIcon}
                           className="img-fluid topnav-profile-icon-style"
                           alt="moon icon"
-                        />
+                        /> */}
+                          {image && <img  src={img_base_url + image} alt="teacher-profile" style={{width:"38px", height:"38px"}}/>}
                         {/* active icon */}
                         <img
                           src={teacherActiveIcon}
@@ -155,11 +186,12 @@ const Navbar = () => {
                           <div className="border-bottom topnav-dropdown-style">
                             <div className="d-flex align-items-center gap-2">
                               <div>
-                                <img
+                                {/* <img
                                   src={teacherIcon}
                                   className="img-fluid icon-right-space"
                                   alt="profile icon"
-                                />
+                                /> */}
+                                     {image && <img src={img_base_url + image} alt="teacher-profile" style={{width:"38px", height:"38px"}}/>}
                               </div>
                               <div>
                                 <h6 className="profile-style">

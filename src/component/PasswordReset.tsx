@@ -24,6 +24,7 @@ const PasswordReset = () => {
   const [showVarify, setshowVarify] = useState(false);
   const [buttonSHow, setbuttonSHow] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
   const [otpSubmit, setOtpSubmitButton] = useState(false);
   const [resetPwd, setResetPassword] = useState(false);
   const [getCaid, setCaid] = useState('');
@@ -101,6 +102,7 @@ const PasswordReset = () => {
         setOtpSubmitButton(true)
         setResetPassword(true)
         setmsg("")
+        seterror("");
       } else {
         seterror("আপনার ওটিপিটি সঠিক নয়।");
       }
@@ -187,6 +189,14 @@ const PasswordReset = () => {
     if (event.key === 'Backspace' && !otp[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
+  };
+
+
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // Replace non-digit characters with an empty string
+    const sanitizedValue = event.target.value.replace(/\D/g, '');
+    // Update the input value
+    event.target.value = sanitizedValue;
   };
 
   return (
@@ -404,6 +414,9 @@ const PasswordReset = () => {
                   {
                     resetPwd && <>
                       <form onSubmit={handleNewPaswordSubmit}>
+
+                      {error && <p className="text-center text-danger bn">{error}</p>}
+
                         <div className="form-group mb-1">
                           <label htmlFor="pin" className="login-field-title mb-2">
                             নতুন পিন দিন
@@ -416,12 +429,33 @@ const PasswordReset = () => {
                             />
                             <input
                               className="form-control np-login-form-field no-spinners custom-input bn"
-                              type={showPassword ? "number" : "password"}
+                              type={showPassword ? "text" : "password"}
                               id="password"
                               name="password"
                               required
                               placeholder="নতুন পিন দিন"
+                              data-toggle="tooltip" data-placement="top"
+                              title="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
+                              maxLength={6} 
+                              onInput={handleInput}
                             />
+                            <div className="input-group-append password-toggle">
+                            <span>
+                              {showPassword ? (
+                                <i
+                                  onClick={() => setShowPassword(!showPassword)}
+                                  // id="password-toggle_2"
+                                  className="fa fa-eye img-fluid"
+                                />
+                              ) : (
+                                <i
+                                  onClick={() => setShowPassword(!showPassword)}
+                                  // id="password-toggle"
+                                  className="fa fa-eye-slash"
+                                />
+                              )}
+                            </span>
+                          </div>
                           </div>
                         </div>
 
@@ -437,12 +471,33 @@ const PasswordReset = () => {
                             />
                             <input
                               className="form-control np-login-form-field no-spinners custom-input bn"
-                              type={showPassword ? "number" : "password"}
+                              type={showPassword2 ? "text" : "password"}
                               id="password_confirmation"
                               name="password_confirmation"
                               required
                               placeholder="নতুন পিনটি পুনরায় দিন"
+                              data-toggle="tooltip" data-placement="top"
+                              title="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
+                              maxLength={6}
+                              onInput={handleInput}
                             />
+                            <div className="input-group-append password-toggle">
+                            <span>
+                              {showPassword2 ? (
+                                <i
+                                  onClick={() => setShowPassword2(!showPassword2)}
+                                  // id="password-toggle_2"
+                                  className="fa fa-eye img-fluid"
+                                />
+                              ) : (
+                                <i
+                                  onClick={() => setShowPassword2(!showPassword2)}
+                                  // id="password-toggle"
+                                  className="fa fa-eye-slash"
+                                />
+                              )}
+                            </span>
+                          </div>
                           </div>
                         </div>
                         <input type="hidden" id="caid" name="caid" defaultValue={getCaid} />

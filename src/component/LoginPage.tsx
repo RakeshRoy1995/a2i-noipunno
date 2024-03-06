@@ -148,6 +148,13 @@ const LoginPage = () => {
     setShowModal(false);
   };
 
+  const [value, setValue] = useState('');
+  const handleInput = (event) => {
+    const inputValue = event.target.value;
+    const sanitizedValue = inputValue.replace(/\D/g, ''); // Remove non-numeric characters
+    setValue(sanitizedValue); // Update the state with the sanitized value
+  };
+
   return (
     <>
       <Helmet>
@@ -221,6 +228,7 @@ const LoginPage = () => {
                           />
                         </div>
                       </div>
+
                       <div className="form-group mb-1">
                         <label htmlFor="pin" className="login-field-title mb-2">
                           পিন নম্বর
@@ -240,12 +248,12 @@ const LoginPage = () => {
                             required
                             placeholder="123456"
                             data-toggle="tooltip" data-placement="top" title="পিন প্রদান করুন"
+                            pattern="[0-9]{6}"
+                            maxLength={6}
+                            value={value}
+                            onChange={handleInput}
                           />
                           <div className="input-group-append password-toggle">
-                            {/* <span>
-                            <i id="password-toggle_2" className="fa fa-eye"></i>
-                            <img src={passwordHideEyeIcon} className="img-fluid" alt="eye-slash" />
-                          </span> */}
                             <span>
                               {showPassword ? (
                                 <i

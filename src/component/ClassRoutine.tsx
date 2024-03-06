@@ -5,7 +5,7 @@ import { HiOutlineUsers } from "react-icons/hi2";
 export default function ClassRoutine() {
   const [tab, settab] = useState<any>({ six: true });
 
-  console.log(`tab`, tab);
+  // console.log(`tab`, tab);
 
   const tabActive = (type: any) => {
     let obj = tab;

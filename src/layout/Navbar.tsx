@@ -68,7 +68,7 @@ setInterval(() => {
     }
   }, 500);
 
-  // console.log("userDetails", userDetails);
+  // // console.log("userDetails", userDetails);
 
   const handleLogout = (e: any) => {
     localStorage.clear();

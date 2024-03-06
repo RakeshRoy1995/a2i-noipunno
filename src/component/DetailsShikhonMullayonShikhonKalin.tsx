@@ -67,7 +67,7 @@ export default function DetailsShikhonMullayonShikhonKalin({
     }
     
 
-    // console.log(`data`, data);
+    // // console.log(`data`, data);
   };
 
 

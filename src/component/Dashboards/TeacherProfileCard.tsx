@@ -73,7 +73,7 @@ const TeacherProfileCard = () => {
     }
   }, 500);
 
-  // console.log(image);
+  // // console.log(image);
 
   return (
     <div className="col-lg-3 col-md-3">

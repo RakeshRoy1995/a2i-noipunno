@@ -216,13 +216,13 @@ export default function StudentTranscript() {
       allFelter?.version == d?.version 
     ) {
 
-    console.log(`111111`, 111111);
+    // console.log(`111111`, 111111);
       return true;
     }
     // return false
   });
 
-  console.log(`subject`, allFelter, Stuent_result,  new_student, loader);
+  // console.log(`subject`, allFelter, Stuent_result,  new_student, loader);
 
   return (
     <div className="report_page mb-4">

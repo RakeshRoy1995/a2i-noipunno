@@ -303,7 +303,7 @@ export default function StudentMullayonBehave({
     }
   };
 
-  // console.log("showModal", showModal);
+  // // console.log("showModal", showModal);
 
   const save_PI_evalution_data_make_for_comment = (
     pi_uid: any,
@@ -331,7 +331,7 @@ export default function StudentMullayonBehave({
 
       return params;
     } catch (error) {
-      console.log(`error`, error);
+      // console.log(`error`, error);
     }
   };
 
@@ -409,7 +409,7 @@ export default function StudentMullayonBehave({
         }
       }
     } catch (error) {
-      console.log(`error`, error);
+      // console.log(`error`, error);
     }
   };
 
@@ -431,7 +431,7 @@ export default function StudentMullayonBehave({
         el.style.background = "#69CB1C";
       }
 
-      // console.log(`el`, el);
+      // // console.log(`el`, el);
 
       sumbitArray.push(obj[x]);
     }
@@ -497,7 +497,7 @@ export default function StudentMullayonBehave({
   ) => {
     if (remark) {
       form_arry_comment(obj);
-      // console.log(`11111111`, 11111111 , obj);
+      // // console.log(`11111111`, 11111111 , obj);
     } else {
       if (remark == null && weight_uid == null) {
         delete obj[bi_uid + "_" + student_id + "_" + assessment_uid];

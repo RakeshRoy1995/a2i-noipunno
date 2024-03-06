@@ -6,7 +6,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:8080` }),
   extractRehydrationInfo(action, { reducerPath }) {
-    console.log(reducerPath);
+    // console.log(reducerPath);
     if (action.type === REHYDRATE) {
       return action.payload?.[reducerPath];
     }

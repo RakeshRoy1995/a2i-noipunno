@@ -105,7 +105,7 @@ const AmarProfile = () => {
 
   }
 
-  // console.log(designation);
+  // // console.log(designation);
 
   function uploadImage() {
     const input: any = document.getElementById("imageInput");
@@ -141,13 +141,13 @@ const AmarProfile = () => {
       reader.onload = function (e: any) {
         preview.src = e.target.result;
         setsignTeacher(e.target.result);
-        console.log(`reader ddd`, reader);
+        // console.log(`reader ddd`, reader);
         localStorage.setItem("teacher_sign", reader.result);
       };
 
       reader.readAsDataURL(input.files[0]);
 
-      // console.log(`reader`, reader);
+      // // console.log(`reader`, reader);
 
       img.src = URL.createObjectURL(input.files[0]);
     }

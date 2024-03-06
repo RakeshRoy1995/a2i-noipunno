@@ -95,7 +95,7 @@ export default function StudentMullayonModal({
         }
       }
       setsubmitObj_wid_null(null_pi);
-      // console.log(`is_draft`, all_submited_PI, obj);
+      // // console.log(`is_draft`, all_submited_PI, obj);
     }
   };
 
@@ -244,7 +244,7 @@ export default function StudentMullayonModal({
         submit_object_common_func(remark, obj, pi_uid, student_id, weight_uid);
       }
     } catch (error) {
-      console.log(`error`, error);
+      // console.log(`error`, error);
     }
   };
 

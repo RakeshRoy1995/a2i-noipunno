@@ -24,12 +24,12 @@ const StudentAttendance = () => {
   const fetchData = async () => {
     const class_teacher_all_student = await class_teacher_all_student_data()
     setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
-    // console.log("class_teacher", class_teacher_all_student?.data?.data?.students[0]);
+    // // console.log("class_teacher", class_teacher_all_student?.data?.data?.students[0]);
     setClassTeacherInfos(class_teacher_all_student?.data?.data?.students[0])
 
 
     const class_room_infos = await class_room_info()
-    // console.log("class_room_info", class_room_infos?.data?.data?.subjects);
+    // // console.log("class_room_info", class_room_infos?.data?.data?.subjects);
     setClassRoomInfos(class_room_infos?.data?.data?.subjects);
 
 
@@ -47,11 +47,11 @@ const StudentAttendance = () => {
 
   const handleSubmitAttendance = (event) => {
     event.preventDefault();
-    // console.log(attendance);
+    // // console.log(attendance);
     const datas = {
       ...attendance, class_room_id: classRoomId, date,
     };
-    console.log(datas);
+    // console.log(datas);
 
   };
 
@@ -80,8 +80,8 @@ const StudentAttendance = () => {
     //     classTeacherInfos?.version_id === version_id
     //   ) {
 
-    //     // console.log(item);
-    //     // console.log(item?.class_room_id);
+    //     // // console.log(item);
+    //     // // console.log(item?.class_room_id);
     //     setClassRoomId(item?.class_room_id);
     //   }
     // })

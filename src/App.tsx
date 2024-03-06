@@ -98,6 +98,7 @@ function App() {
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/password/reset" element={<PasswordReset />} />
+        <Route path="/password/reset/:getUserId" element={<PasswordReset />} />
         <Route path="/pin/reset" element={<PasswordReset2 />} />
 
         <Route path="/privary-policy" element={<PrivacyPolicy />} />

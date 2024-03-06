@@ -162,8 +162,8 @@ export default function Teacher() {
     all_class();
   }, []);
 
-  // console.log("all_student", all_student);
-  // console.log("all_teacher", all_teacher);
+  // // console.log("all_student", all_student);
+  // // console.log("all_teacher", all_teacher);
 
 
   return (

@@ -52,7 +52,7 @@ const PasswordReset = () => {
       }
     } catch (error) {
         seterror("আপনার ওটিপিটি সঠিক নয়।");
-      console.log(`error`, error);
+      // console.log(`error`, error);
     }
   };
 

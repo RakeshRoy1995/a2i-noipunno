@@ -10,7 +10,7 @@ import A2I from "../assets/login_page_materials/icons/Aspire_to_Innovate_Seal 2.
 import { Helmet } from "react-helmet";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { userInfo, resetPassword, otpComfirm, changePin } from "../Request";
 import PopUpAppInfo from "./PopUpAppInfo/PopUpAppInfo";
 import LoginPageCommonLeft from "./LoginPageCommonLeft";
@@ -28,7 +28,27 @@ const PasswordReset = () => {
   const [resetPwd, setResetPassword] = useState(false);
   const [getCaid, setCaid] = useState('');
 
+  const { getUserId } = useParams();
+
   const [userId_from_Cookie, setUserId_from_Cookie] = useState("");
+
+  if(getUserId){
+    async function fetchData() {
+      try {
+        const { data }: any = await userInfo(getUserId);
+        setPhone(data.data.phone_no);
+        setCaid(data.data.caid);
+        seterror("");
+        setUserId_from_Cookie(getUserId);
+        setshowVarify(true);
+        setshoOtpVarify(true);
+      } catch (error) {
+        setUserId_from_Cookie(getUserId);
+        seterror("ভুল আইডি");
+      }
+    }
+    fetchData();
+  }
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -43,8 +63,10 @@ const PasswordReset = () => {
         const { data }: any = await userInfo(caId);
         setPhone(data.data.phone_no);
         setCaid(data.data.caid);
+        seterror("");
         setshowVarify(true);
         setshoOtpVarify(true);
+        setUserId_from_Cookie(caId);
       } catch (error) {
         seterror("ভুল আইডি");
       }
@@ -52,7 +74,7 @@ const PasswordReset = () => {
     } else {
       //alert('otp sending..')
       const { data }: any = await resetPassword(datas);
-      console.log(data);
+      //console.log(data);
       if (data?.status === true) {
         setmsg("আপনার নম্বরে ওটিপিটি পাঠানো হয়েছে।")
         setbuttonSHow(false)
@@ -167,7 +189,8 @@ const PasswordReset = () => {
                   <p className="login-title text-center mb-3">
                     {showVarify ? "রিসেট পিন" : "রিসেট পিন"}
                   </p>
-                  {error && <p className="text-center text-danger">{error}</p>}
+
+                
                   {msg && <p className="text-center text-success">{msg}</p>}
 
                   {
@@ -175,10 +198,14 @@ const PasswordReset = () => {
 
                       <form onSubmit={handleSubmit}>
                         {
-                          showVarify && <>
+                          showVarify ? <>
                             <div className="alert alert-info mb-4" style={{ backgroundColor: '#17A2B8', color: 'white', fontFamily: 'Kalpurush' }}>
                               নিচের মোবাইল নম্বরটি সঠিক না থাকলে কাস্টমার সাপোর্টে (<a style={{ color: 'white', textDecoration: 'underline' }} href="tel:09638600700">০৯৬৩৮৬০০৭০০</a>) যোগাযোগ করুন।
                             </div>
+                          </>
+                          :
+                          <>
+                            {error && <p className="text-center text-danger">{error}</p>}
                           </>
                         }
 
@@ -194,7 +221,6 @@ const PasswordReset = () => {
                             }
 
                           </label>
-
                           
                           <div className="input-group">
                             <div className="input-group-prepend">
@@ -206,43 +232,49 @@ const PasswordReset = () => {
                                 />
                               </span>
                             </div>
-                            <input
-                              // onChange={handleChange}
-                              className="form-control np-login-form-field custom-input"
-                              type="text"
-                              // value={value}
-                              defaultValue={userId_from_Cookie}
-                              required
-                              autoComplete="off"
-                              placeholder="ইউজার আইডি"
-                              name="caid"
-                              id="caid"
-                            />
+                            
+                              <input
+                                // onChange={handleChange}
+                                className="form-control np-login-form-field custom-input"
+                                type="text"
+                                // value={value}
+                                defaultValue={userId_from_Cookie}
+                                required
+                                autoComplete="off"
+                                placeholder="ইউজার আইডি"
+                                name="caid"
+                                id="caid"
+                                
+                              />
+                             
                           </div>
                         </div>
 
                         {showVarify && (
-                          <div className="form-group mb-1 mt-3">
-                            <label htmlFor="pin" className="login-field-title mt-2 mb-2">
-                              মোবাইল নম্বর
-                            </label>
-                            <div className="input-group">
-                              <img
-                                src={pinNumberFieldUserIcon}
-                                className="np-login-field-icon"
-                                alt="logo"
-                              />
-                              <input
-                                className="form-control np-login-form-field no-spinners custom-input"
-                                type="text"
-                                id="pin"
-                                name="pin"
-                                required
-                                defaultValue={modifiedNumber}
-                                placeholder="মোবাইল নম্বর"
-                              />
+                          <>
+                            <div className="form-group mb-1 mt-3">
+                              <label htmlFor="pin" className="login-field-title mt-2 mb-2">
+                                মোবাইল নম্বর
+                              </label>
+                              <div className="input-group">
+                                <img
+                                  src={pinNumberFieldUserIcon}
+                                  className="np-login-field-icon"
+                                  alt="logo"
+                                />
+                                <input
+                                  className="form-control np-login-form-field no-spinners custom-input"
+                                  type="text"
+                                  id="pin"
+                                  name="pin"
+                                  required
+                                  defaultValue={modifiedNumber}
+                                  placeholder="মোবাইল নম্বর"
+                                  disabled
+                                />
+                              </div>
                             </div>
-                          </div>
+                          </>
                         )}
 
                         {
@@ -309,7 +341,6 @@ const PasswordReset = () => {
                           </form>
                         }
                       </>
-
                   }
 
                   {

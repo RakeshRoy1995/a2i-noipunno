@@ -27,6 +27,7 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setloading] = useState(false);
   const [savePin, setSavePin] = useState(false);
+  const [userId, setUserId] = useState('');
   const [userId_from_Cookie, setUserId_from_Cookie] = useState("");
   const [userPin_from_Cookie, setUserPin_from_Cookie] = useState("");
 
@@ -213,6 +214,7 @@ const LoginPage = () => {
                             placeholder="আপনার ইউজার আইডি দিন"
                             name="caid"
                             id="caid"
+                            onChange={e => setUserId(e.target.value)} 
                           />
                         </div>
                       </div>
@@ -281,14 +283,23 @@ const LoginPage = () => {
                       </button>
                       <div className="form-group">
                         <p className="mb-0 mt-3 text-center">
-                          <Link
-                            to="/password/reset"
-                            className="forget-password"
-                            style={{ color: '#428F92', fontSize: '16px' }}
-                          >
-                            পিন ভুলে গেছেন? এখানে ক্লিক করুন
-                          </Link>
-                        
+                          {
+                            userId ?
+                            <Link
+                              to={`/password/reset/${userId}`}
+                              className="forget-password"
+                              style={{ color: '#428F92', fontSize: '16px' }}>
+                              পিন ভুলে গেছেন? এখানে ক্লিক করুন
+                            </Link>
+                            :
+                            <Link
+                              to="/password/reset"
+                              className="forget-password"
+                              style={{ color: '#428F92', fontSize: '16px' }}>
+                              পিন ভুলে গেছেন? এখানে ক্লিক করুন
+                            </Link>
+                          }
+
                         </p>
                       </div>
                     </form>
@@ -298,6 +309,7 @@ const LoginPage = () => {
             </div>
 
           </div>
+          
           <Modal
             className="mx-auto pl-0"
             show={showModal}

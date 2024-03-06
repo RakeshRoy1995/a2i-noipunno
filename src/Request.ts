@@ -691,7 +691,7 @@ export function confirm_otp(data: any) {
 }
 
 export function confirm_pass(data: any) {
-  const page_list = `${API_URL}/v2/account-change-password`;
+  const page_list = `${API_URL}/v2/account-change-pin`;
 
   const options = {
     method: "POST",

@@ -57,17 +57,17 @@ const LoginPage = () => {
     const userPin = event.target.pin.value;
 
     const password = event.target.password.value;
-    console.log(password.length);
+    //// console.log(password.length);
 
     if ((password.length) == 6) {
       try {
         setloading(true)
         seterror("")
         const { data }: any = await loginPassword(datas);
-        // console.log("data", data.status);
+        // // console.log("data", data.status);
 
         if (data?.status === true) {
-          console.log("user Details", data?.data.user);
+          //// console.log("user Details", data?.data.user);
           const token = data?.data?.access_token;
           localStorage.setItem("customer_login_auth", JSON.stringify(data?.data));
           localStorage.setItem("token", token);
@@ -99,10 +99,10 @@ const LoginPage = () => {
     //   setloading(true)
     //   seterror("")
     //   const { data }: any = await loginPassword(datas);
-    //   // console.log("data", data.status);
+    //   // // console.log("data", data.status);
 
     //   if (data?.status === true) {
-    //     console.log("user Details", data?.data.user);
+    //     // console.log("user Details", data?.data.user);
     //     const token = data?.data?.access_token;
     //     localStorage.setItem("customer_login_auth", JSON.stringify(data?.data));
     //     localStorage.setItem("token", token);
@@ -130,8 +130,8 @@ const LoginPage = () => {
     localStorage.removeItem("customer_login_auth");
     localStorage.removeItem("token");
 
-    // console.log("userId_Cookes", userId_Cookes);
-    // console.log("userPin_Cookies", userPin_Cookies);
+    // // console.log("userId_Cookes", userId_Cookes);
+    // // console.log("userPin_Cookies", userPin_Cookies);
     if (userId_Cookes && userPin_Cookies) {
       setUserId_from_Cookie(userId_Cookes);
       setUserPin_from_Cookie(userPin_Cookies);
@@ -161,7 +161,7 @@ const LoginPage = () => {
       >
         <section id="body" className="login-page">
 
-          <div className="login-bg min-vh-100 position-relative">
+          <div className="login-bg min-vh-100 position-relative" style={{ overflow: 'hidden' }}>
             {/* <div className="marque-notification pointer" onClick={redirect} >
             <div className="marquee-container">
               <div className="marquee-content">
@@ -181,7 +181,7 @@ const LoginPage = () => {
                 </div>
 
                 <div className="col-sm-12 col-md-5 order-mobile-first">
-                  <div className="card loginCard max-width-540 login-card-padding m-auto mt-0">
+                  <div className="card loginCard max-width-540 login-card-padding">
                     <p className="login-title text-center mb-3">লগ ইন</p>
                     {error && <div className="alert alert-danger text-white">{error}</div>}
 
@@ -205,16 +205,19 @@ const LoginPage = () => {
                           </div>
                           <input
                             // onChange={handleChange}
-                            className="form-control np-login-form-field custom-input mb-2"
+                            className="form-control np-login-form-field custom-input mb-2 bn"
                             type="text"
                             // value={value}
                             defaultValue={userId_from_Cookie}
                             required
                             autoComplete="off"
-                            placeholder="আপনার ইউজার আইডি দিন"
+                            placeholder="ইউজার আইডি"
                             name="caid"
                             id="caid"
                             onChange={e => setUserId(e.target.value)} 
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="প্রতিষ্ঠান হিসেবে লগইন করার জন্য EIIN/SGN প্রদান করুন"
                           />
                         </div>
                       </div>
@@ -235,7 +238,8 @@ const LoginPage = () => {
                             id="pin"
                             name="password"
                             required
-                            placeholder="আপনার পিন দিন"
+                            placeholder="123456"
+                            data-toggle="tooltip" data-placement="top" title="পিন প্রদান করুন"
                           />
                           <div className="input-group-append password-toggle">
                             {/* <span>

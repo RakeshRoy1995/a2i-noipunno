@@ -39,6 +39,7 @@ h6 {
 .max-width-540 {
   max-width: 460px;
   border: none;
+  min-height: 400px;
 }
 
 .login-card-padding{
@@ -130,16 +131,14 @@ h6 {
 .transparent-card{
   border: none;
   background-color: #f6f6f883;
-  width: 100%;
+  width: 95%;
+  margin-left: 30px;
 }
 
 .footer-card-custom{
   margin-right: -120px;
 }
 
-.login-container{
-  margin-top: 30px;
-}
 
 .card-body-custom{
   padding: 10px;
@@ -148,7 +147,7 @@ h6 {
   width: 80%;
   margin: auto;
   border-radius: 10px;
-  margin-bottom: 32px;
+  margin-bottom: 55px;
   font-family: 'SolaimanLipi, sans-serif ';
 }
 
@@ -238,8 +237,7 @@ h6 {
 }
 
 .login-container {
-  padding-top: 6%;
-  padding-bottom: 4%;
+  margin-top: 90px !important;
 }
 
 .np-login-checbox-text {
@@ -262,8 +260,9 @@ h6 {
 .max-width-540 {
   max-width: 450px;
   border: none;
-  min-height: 376px;
+  min-height: 400px;
 }
+
 
 
 .password-toggle {
@@ -347,10 +346,14 @@ label.form-check-label:focus,
 /* --------- */
 .np-login-form-field {
   border-radius: 5px !important;
-  background-color: #E8F0FE;
+  background-color: #e3f3ff !important;
   padding: 0.775rem 2.75rem;
   border: none;
   height: 40px;
+}
+
+.form-control::placeholder{
+  color: rgba(112, 111, 111, 0.849) !important;   
 }
 
 .login-field-title {
@@ -737,6 +740,8 @@ label.form-check-label:focus,
   .transparent-card{
     border: none;
     background-color: #f6f6f883;
+    margin-left: 0px;
+    width: 100%;
   }
 
   .card-body-custom{

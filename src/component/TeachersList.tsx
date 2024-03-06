@@ -55,8 +55,8 @@ export default function TeachersList() {
   }, []);
 
 
-  // console.log("teachers", teachers);
-  // teachers.map(item => console.log(item.name_bn));
+  // // console.log("teachers", teachers);
+  // teachers.map(item => // console.log(item.name_bn));
 
 
   return (

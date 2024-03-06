@@ -899,13 +899,13 @@ const BiRawPDFDownload = ({
   instititute,
   biData,
 }) => {
-  // console.log(`student --- `, student);
+  // // console.log(`student --- `, student);
   const pdf_name =
     student?.student_name_en +
     "-report-card-result-roll-" +
     student?.roll +
     ".pdf";
-  console.log(`student`, student, biData);
+  // console.log(`student`, student, biData);
   return (
     <div>
       <div>

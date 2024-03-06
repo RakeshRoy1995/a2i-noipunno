@@ -48,7 +48,7 @@ const AmarProfile = () => {
     designation: userDesignation,
 
   } = userDetails;
-  console.log(userDetails)
+  // console.log(userDetails)
   // const designation_id = "10";
   // image
   const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
@@ -103,7 +103,7 @@ const AmarProfile = () => {
 
   }
 
-  // console.log(designation);
+  // // console.log(designation);
 
 
 
@@ -141,13 +141,13 @@ const AmarProfile = () => {
       reader.onload = function (e: any) {
         preview.src = e.target.result;
         setsignTeacher(e.target.result);
-        console.log(`reader ddd`, reader);
+        // console.log(`reader ddd`, reader);
         localStorage.setItem("teacher_sign", reader.result);
       };
 
       reader.readAsDataURL(input.files[0]);
 
-      // console.log(`reader`, reader);
+      // // console.log(`reader`, reader);
 
       img.src = URL.createObjectURL(input.files[0]);
     }

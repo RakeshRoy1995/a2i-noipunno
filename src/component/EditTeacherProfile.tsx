@@ -65,7 +65,7 @@ const EditTeacherProfile = () => {
   const getUserDetails = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
     if (get_teachers_details) {
-      console.log("userDetaisl", get_teachers_details?.data?.teachers[0]);
+      // console.log("userDetaisl", get_teachers_details?.data?.teachers[0]);
 
       setuserDetails(get_teachers_details?.data?.teachers[0]);
     }
@@ -117,7 +117,7 @@ const EditTeacherProfile = () => {
     }
   }
 
-  // console.log(teacherDesignation);
+  // // console.log(teacherDesignation);
 
 
 

@@ -25,12 +25,12 @@ function ResetPassword() {
       const datas = new FormData(event.target);
       const { data }: any = await sent_otp(datas);
       setmsg(data.message);
-      console.log("data", data);
+      // console.log("data", data);
 
       setsendOtoSuccess(true);
       setconfirmOtoSuccess(true);
     } catch (error) {
-      console.log("error", error);
+      // console.log("error", error);
       seterrmsg(error.message);
     }
   };
@@ -43,13 +43,13 @@ function ResetPassword() {
     try {
       const otp = new FormData(event.target);
       const { data }: any = await confirm_otp(otp);
-      console.log("otp", data);
+      // console.log("otp", data);
       setmsg(data.message);
       setconfirmOtoSuccess(false);
       setconfirmPINSuccess(true);
-      console.log("setconfirmPINSuccess", setconfirmPINSuccess);
+      // console.log("setconfirmPINSuccess", setconfirmPINSuccess);
     } catch (error) {
-      //console.log("eee", error.response);
+      //// console.log("eee", error.response);
       seterrmsg(error?.response?.data?.error?.message || "সার্ভার জনিত সমস্যার কারণে দুঃখিত। পুনরায় চেষ্টা করুন। ");
     }
   };
@@ -62,13 +62,13 @@ function ResetPassword() {
     try {
       const pass = new FormData(event.target);
       const { data }: any = await confirm_pass(pass);
-      console.log("pass", data);
+      // console.log("pass", data);
       setmsg("আপনার পিন সফলভাবে আপডেট করা হয়েছে। ");
       setconfirmPINSuccess(true);
-      console.log("setconfirmPINSuccess", setconfirmPINSuccess);
+      // console.log("setconfirmPINSuccess", setconfirmPINSuccess);
     } catch (error) {
 
-      //console.log("eee", error.response);
+      //// console.log("eee", error.response);
       
       seterrmsg(error?.response?.data?.error?.message?.password || "সার্ভার জনিত সমস্যার কারণে দুঃখিত। পুনরায় চেষ্টা করুন। ");
     }
@@ -86,7 +86,7 @@ function ResetPassword() {
     const userCaid = JSON.parse(localStorage.getItem("teacher_dashboard"));
     // setUser_Caid("110324520230002");
     setUser_Caid(userCaid?.data?.teachers[0]?.caid);
-    console.log("user_Caid:", user_Caid);
+    // console.log("user_Caid:", user_Caid);
   }, []);
 
   return (

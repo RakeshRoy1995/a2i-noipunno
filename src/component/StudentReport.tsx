@@ -204,7 +204,7 @@ export default function StudentReport() {
           dimentions_details.data.data
         );
         const data = formate_report_data(res, dimentions.data.data);
-        // console.log("dimentions", dimentions, res, bi_data);
+        // // console.log("dimentions", dimentions, res, bi_data);
 
         const all_sub = clssWiseSub.data.data;
 

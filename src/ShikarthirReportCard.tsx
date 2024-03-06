@@ -17,7 +17,7 @@ const ShikarthirReportCard = () => {
       html2canvas: { scale: 1 },
       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
     };
-    console.log("hello");
+    // console.log("hello");
 
     const pdf = html2pdf().from(element).set(options).outputPdf();
     pdf.save();

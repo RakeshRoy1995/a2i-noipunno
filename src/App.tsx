@@ -32,6 +32,9 @@ import ResetPassword from "./component/ResetPassword";
 import StudentAttendence from "./component/Attendence/StudentAttendence/StudentAttendence";
 import PasswordReset2 from "./component/_PasswordReset";
 import PrivacyPolicy from "./component/PrivacyPolicy";
+import ShowAssesment from "./component/ShowAssesment";
+import Test from "./component/test/AptBehavAssessment";
+import AptBehavAssessment from "./component/test/AptBehavAssessment";
 
 
 function App() {
@@ -91,6 +94,8 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
           <Route path="/student-attendence" element={<StudentAttendence/>} />
+          {/* testing */}
+          <Route path="/পারদর্শিতা এবং আচরণগত মূল্যায়ন" element={<AptBehavAssessment/>}/>
 
 
           {/* <Route path="/bi-pdf-maker2" element={<BiRawPDFDownload />} /> */}

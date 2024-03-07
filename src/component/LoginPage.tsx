@@ -21,6 +21,8 @@ import { Button, Modal } from "react-bootstrap";
 import { motion } from "framer-motion"
 import LoginPageCommonLeft from "./LoginPageCommonLeft";
 import LoginPageModalCommon from "./LoginPageModalCommon";
+import tippy from "tippy.js";
+import 'tippy.js/dist/tippy.css';
 
 const LoginPage = () => {
   const [error, seterror] = useState("");
@@ -221,7 +223,7 @@ const LoginPage = () => {
                             placeholder="ইউজার আইডি"
                             name="caid"
                             id="caid"
-                            onChange={e => setUserId(e.target.value)} 
+                            onChange={e => setUserId(e.target.value)}
                             data-toggle="tooltip"
                             data-placement="top"
                             title="প্রতিষ্ঠান হিসেবে লগইন করার জন্য EIIN/SGN প্রদান করুন"
@@ -321,7 +323,7 @@ const LoginPage = () => {
             </div>
 
           </div>
-          
+
           <Modal
             className="mx-auto pl-0"
             show={showModal}

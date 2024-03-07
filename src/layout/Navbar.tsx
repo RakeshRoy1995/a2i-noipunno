@@ -173,7 +173,13 @@ const Navbar = () => {
                           className="img-fluid topnav-profile-icon-style"
                           alt="moon icon"
                         /> */}
-                        {image && <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px" }} />}
+                        {/* {image && <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px"}}  className="rounded-5"/>} */}
+
+                        {image ? (
+                          <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px" }} className="rounded-5" />
+                        ) : (
+                          <img src="/public/assets/images/User-avatar.png" alt="default-profile" />
+                        )}
                         {/* active icon */}
                         <img
                           src={teacherActiveIcon}

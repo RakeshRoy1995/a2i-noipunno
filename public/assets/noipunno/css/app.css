@@ -169,13 +169,16 @@
 .total-student-show .text {
     position: relative;
     line-height: 20px;
+    font-size: 14px;
 }
 
 .total-student-show .success {
     position: relative;
     line-height: 14px;
     font-weight: 500;
+    font-weight:bolder !important
 }
+
 
 .total-student-show .badge {
     border-radius: 4px;
@@ -186,6 +189,7 @@
     justify-content: flex-start;
     padding: 2px 5px;
     color: #69cb1c;
+
 }
 
 .total-student-show .bottom {
@@ -228,7 +232,7 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
     font-weight: 600;
     width      : 200px;
   }
-  
+
   .std-identity .dots {
     color      : var(--text_dark);
     font-family: Roboto;
@@ -237,7 +241,7 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
     font-weight: 600;
     line-height: 38px;
   }
-  
+
   .sucjects {
     color      : var(--text_dark);
     font-family: Roboto;
@@ -246,7 +250,7 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
     font-weight: 400;
     line-height: 38px;
   }
-  
+
   .subjucts-icon-name .icon {
     color      : var(--text_dark);
     font-family: Roboto;
@@ -263,7 +267,7 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
     font-weight: 600;
     line-height: 15px;
   }
-  
+
   .report-card-design-title {
     color           : var(--text_dark);
     font-family     : Roboto;
@@ -275,7 +279,7 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
     margin          : 16px 0xp 8px 0px;
     font-weight     : 600;
   }
-  
+
   .report-card-design-subject-title {
     color      : #231F20;
     font-family: Roboto;
@@ -284,7 +288,7 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
     font-weight: 600;
     line-height: 38px;
   }
-  
+
   .report-card-design-subject-assessment {
     color         : #231F20;
     font-family   : Roboto;
@@ -295,13 +299,13 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
     letter-spacing: 0px;
     padding       : 20px 10px 16px 10px;
   }
-  
+
   .assessment-mark-light-first {
     border-top: 2px solid #000000;
     height    : 30px;
     width     : 14.285%;
   }
-  
+
   .assessment-mark-light {
     border-top : 2px solid #000000;
     border-left: 2px solid #000000;
@@ -321,7 +325,7 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
     margin: 16px 0xp 8px 0px;
     font-weight: 600;
   }
-  
+
   .report-card-design-subject-title {
     color: #231f20;
     font-family: Roboto;
@@ -330,7 +334,7 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
     font-weight: 600;
     line-height: 38px;
   }
-  
+
   .report-card-design-subject-assessment {
     color: #231f20;
     font-family: Roboto;
@@ -341,13 +345,13 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
     letter-spacing: 0px;
     padding: 20px 10px 16px 10px;
   }
-  
+
   .assessment-mark-light-first {
     border-top: 2px solid #000000;
     height: 30px;
     width: 14.285%;
   }
-  
+
   .assessment-mark-light {
     border-top: 2px solid #000000;
     border-left: 2px solid #000000;
@@ -386,7 +390,7 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-            line-clamp: 2; 
+            line-clamp: 2;
     -webkit-box-orient: vertical;
  }
 

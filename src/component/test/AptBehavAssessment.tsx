@@ -1,16 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import React from 'react'
 import { useEffect, useState } from "react";
 import {
   class_room_info,
   get_common_info,
   teacher_dashboard,
   teacher_own_subject,
-} from "../Request";
+} from "../../Request";
 import Lottie from "lottie-react";
-import loadingAnimation from "../assets/loadingAnimation/loading.json"
-import { Spinner } from "react-bootstrap";
+import loadingAnimation from "../../assets/loadingAnimation/loading.json"
+
 import { Link, useLocation } from "react-router-dom";
-import BreadcumbHome from "../layout/BreadcumbHome";
+import BreadcumbHome from "../../layout/BreadcumbHome";
 import {
   formate_own_subject_data,
   section_name,
@@ -18,17 +18,20 @@ import {
   showReportDeleteEv,
   show_report_open_time_msg,
   teacher_name,
-} from "../utils/Utils";
-import AcorongotoComponent from "./AcorongotoComponent";
-import styles from "./Home.style.module.css";
-import ParodorshitaComponent from "./ParodorshitaComponent";
-import ShowAssesment from "./ShowAssesment";
-import bookIcon from "../../src/assets/dashboard_materials/images/dashboard/bicon.svg";
-import "../../src/assets/project_ca_html/css/dashboard.css";
-import ReportForHeadTeacherDashboard from "./Dashboards/ReportForHeadTeacherDashboard";
+} from "../../utils/Utils";
+
+import AcorongotoComponent from "../AcorongotoComponent";
+import styles from "../Home.style.module.css";
+import ParodorshitaComponent from "../ParodorshitaComponent";
+import ShowAssesment from "../ShowAssesment";
+import bookIcon from "../../../src/assets/dashboard_materials/images/dashboard/bicon.svg";
+import "../../../src/assets/project_ca_html/css/dashboard.css";
+import ReportForHeadTeacherDashboard from "../Dashboards/ReportForHeadTeacherDashboard";
 
 
-export default function Teacher() {
+
+
+export default function AptBehavAssessment(){
 
   const [showLoadingErr, setshowLoadingErr] = useState("");
   let [numberOfRender, setnumberOfRender] = useState(1);
@@ -294,7 +297,6 @@ export default function Teacher() {
                                             শ্রেণি{" "}
                                           </p>
                                         </div>
-                                        <div className="d-flex gap-1">
                                         <div className="total-student">
                                           <p> শ্রেণি শিক্ষক : </p>
                                         </div>
@@ -303,7 +305,6 @@ export default function Teacher() {
                                             {d?.teacher?.name_bn ||
                                               d?.teacher?.name_en}
                                           </p>
-                                        </div>
                                         </div>
                                         <div className="flex-md-row flex-lg-row d-flex  justify-content-center gap-2">
                                           <h6 className={styles.session}>
@@ -344,7 +345,6 @@ export default function Teacher() {
                                 </>
                               )}
                             </div>
-
                           {/* </Link> */}
                         </div>
 

@@ -233,32 +233,33 @@ function ResetPassword() {
                             </div>
                           </div>
                         </div> */}
-                              <div className="form-group text-center mx-auto" style={{ width: '400px' }}>
+                              <div className="text-center mx-auto otp-card">
 
-                      
+  
                                   <p className="text-center p-2 mb-2">ওটিপি</p>
 
-                                  <div className="row">
+                                  <div className="d-flex">
                                         {otp.map((digit, index) => (
-                                          <div className="col-sm-3">
-                                         
+                                          <div className="flex-fill">
                                                 <input
                                                     key={index}
                                                     type="text"
-                                                    className="form-control"
+                                                    className="form-control otp-box"
                                                     maxLength={1}
                                                     value={digit}
                                                     onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(index, e.target.value)}
                                                     onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyDown(index, e)}
                                                     ref={(ref) => ref && (inputRefs.current[index] = ref)}
-                                                    style={{ float:'left', width: '80px',  border: '1px solid #1d2327'  }}
+                                                    style={{ float:'left',  border: '1px solid #1d2327'  }}
                                                     required
                                                   />
                                             
                                           </div>
                                         ))}
                                   </div>
+
                                 </div>
+
                                   <input type="hidden" value={numberString} id="pin" name="pin" />
 
 

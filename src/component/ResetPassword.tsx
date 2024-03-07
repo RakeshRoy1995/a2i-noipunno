@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, ChangeEvent } from "react";
 import Breadcumbtitle from "../layout/Breadcumb";
 
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
@@ -92,6 +92,8 @@ function ResetPassword() {
     }
   };
 
+
+
   useEffect(() => {
     const userCaid = JSON.parse(localStorage.getItem("teacher_dashboard"));
     // setUser_Caid("110324520230002");
@@ -104,6 +106,35 @@ function ResetPassword() {
     const sanitizedValue = event.target.value.replace(/\D/g, '');
     // Update the input value
     event.target.value = sanitizedValue;
+  };
+
+
+  const [otp, setOtp] = useState<string[]>(['', '', '', '']);
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+
+  const numberString: string = otp.join('');
+
+  useEffect(() => {
+    inputRefs.current[0]?.focus();
+  }, []);
+
+  const handleChange = (index: number, value: string) => {
+    if (!isNaN(Number(value))) {
+    const newOtp = [...otp];
+    newOtp[index] = value;
+
+    setOtp(newOtp);
+
+    if (value && index < otp.length - 1) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  }
+  };
+
+  const handleKeyDown = (index: number, event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Backspace' && !otp[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
   };
 
   return (
@@ -164,7 +195,7 @@ function ResetPassword() {
 
                         <input type="hidden" id="pin" name="user_type_id" defaultValue={1}/>
                         <input type="hidden" id="pin" name="caid" defaultValue={user_Caid}/>
-                    
+{/*                     
                         <div className="form-group">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label">ওটিপি</label>
@@ -180,11 +211,39 @@ function ResetPassword() {
                               />
                             </div>
                           </div>
-                        </div>
+                        </div> */}
+                              <div className="form-group text-center mx-auto" style={{ width: '400px' }}>
+
+                      
+                                  <p className="text-center p-2 mb-2">ওটিপি</p>
+
+                                  <div className="row">
+                                        {otp.map((digit, index) => (
+                                          <div className="col-sm-3">
+                                         
+                                                <input
+                                                    key={index}
+                                                    type="text"
+                                                    className="form-control"
+                                                    maxLength={1}
+                                                    value={digit}
+                                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(index, e.target.value)}
+                                                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyDown(index, e)}
+                                                    ref={(ref) => ref && (inputRefs.current[index] = ref)}
+                                                    style={{ float:'left', width: '80px' }}
+                                                    required
+                                                  />
+                                            
+                                          </div>
+                                        ))}
+                                  </div>
+                                </div>
+                                  <input type="hidden" value={numberString} id="pin" name="pin" />
+
 
                           <button
                                 type="submit"
-                                className="btn login-button px-5"
+                                className="btn login-button px-5 mt-3"
                                 style={{
                                   backgroundColor: "#428F92",
                                   color: "#fff",

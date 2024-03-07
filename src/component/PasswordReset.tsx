@@ -261,7 +261,7 @@ const PasswordReset = () => {
                       <form onSubmit={handleSubmit}>
                         {
                           showVarify ? <>
-                            <div className="alert alert-info mb-4" style={{ backgroundColor: '#17A2B8', color: 'white', fontFamily: 'Kalpurush' }}>
+                            <div className="alert alert-info mb-4 bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>
                               নিচের মোবাইল নম্বরটি সঠিক না থাকলে কাস্টমার সাপোর্টে (<a style={{ color: 'white', textDecoration: 'underline' }} href="tel:09638600700">০৯৬৩৮৬০০৭০০</a>) যোগাযোগ করুন।
                             </div>
                           </>

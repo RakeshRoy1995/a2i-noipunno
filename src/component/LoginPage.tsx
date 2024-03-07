@@ -74,7 +74,8 @@ const LoginPage = () => {
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
           window.location.assign("/");
         } else {
-          seterror("পিন মেলেনি");
+          //seterror("আপনার ইউজার অথবা পিনটি ভুল হয়েছে। অনুগ্রহ করে সঠিক ইউজার এবং পিন দিন।");
+          seterror(data.message);
         }
         setloading(false)
       } catch (error) {
@@ -190,7 +191,7 @@ const LoginPage = () => {
                 <div className="col-sm-12 col-md-5 order-mobile-first">
                   <div className="card loginCard max-width-540 login-card-padding">
                     <p className="login-title text-center mb-3">লগ ইন</p>
-                    {error && <div className="alert alert-danger text-white">{error}</div>}
+                    {error && <div className="alert alert-danger text-white bn">{error}</div>}
 
                     <form onSubmit={handleSubmit}>
 

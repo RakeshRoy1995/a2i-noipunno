@@ -173,7 +173,7 @@ function ResetPassword() {
             <div className="row">
               <div className="col-sm-3"></div>
               <div className="col-sm-6">
-                <div className="card" style={{ border: 'none', minHeight: '300px' }}>
+                <div className="card shadow" style={{ border: 'none', minHeight: '300px' }}>
                   <div className="card-header"><h4 className="bn text-center p-2"> রিসেট পিন </h4></div>
                   <div className="card-body">
                     {/* send reset otp */}
@@ -261,7 +261,6 @@ function ResetPassword() {
                                 </div>
 
                                   <input type="hidden" value={numberString} id="pin" name="pin" />
-
 
                           <button
                                 type="submit"

@@ -222,7 +222,6 @@ export default function StudentTranscript() {
     // return false
   });
 
-  console.log(`subject`, allFelter, Stuent_result,  new_student, loader);
 
   return (
     <div className="report_page mb-4">

@@ -150,6 +150,7 @@ function ResetPassword() {
       seterrmsg('');
     } else {
       seterrmsg('নতুন পিন এবং পুনরায় পিন মিল নেই।');
+      setmsg("");
     }
   };
 
@@ -158,6 +159,7 @@ function ResetPassword() {
       seterrmsg('');
     } else {
       seterrmsg('নতুন পিন এবং পুনরায় পিন মিল নেই।');
+      setmsg("");
     }
   };
 
@@ -199,12 +201,7 @@ function ResetPassword() {
                               width: '200px',
                             }}
                           >
-                            {" "}
-                            ওটিপি পাঠান{" "}
-                            <MdOutlineKeyboardArrowRight
-                              className="fs-3"
-                              style={{ marginTop: "-0.3rem" }}
-                            />{" "}
+                            ওটিপি পাঠান
                           </button>
               
                       </form>
@@ -254,7 +251,7 @@ function ResetPassword() {
                                                     onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(index, e.target.value)}
                                                     onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyDown(index, e)}
                                                     ref={(ref) => ref && (inputRefs.current[index] = ref)}
-                                                    style={{ float:'left', width: '80px' }}
+                                                    style={{ float:'left', width: '80px',  border: '1px solid #1d2327'  }}
                                                     required
                                                   />
                                             
@@ -274,12 +271,9 @@ function ResetPassword() {
                                   width: '250px',
                                 }}
                               >
-                                {" "}
-                                ওটিপি চেক করুন{" "}
-                                <MdOutlineKeyboardArrowRight
-                                  className="fs-3"
-                                  style={{ marginTop: "-0.3rem" }}
-                                />{" "}
+                                
+                                নিশ্চিত
+                                
                               </button>
                         
                        

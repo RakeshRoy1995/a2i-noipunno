@@ -402,7 +402,7 @@ const PasswordReset = () => {
                                             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(index, e.target.value)}
                                             onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyDown(index, e)}
                                             ref={(ref) => ref && (inputRefs.current[index] = ref)}
-                                            style={{ float:'left' }}
+                                            style={{ float:'left'}}
                                             required
                                           />
                                         </div>
@@ -462,7 +462,6 @@ const PasswordReset = () => {
                               maxLength={6} 
                               onInput={handleInput}
                               onChange={handlePasswordChange}
-                             
                             />
                             <div className="input-group-append password-toggle">
                             <span>

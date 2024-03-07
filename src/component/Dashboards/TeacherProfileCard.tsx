@@ -29,11 +29,12 @@ const TeacherProfileCard = () => {
     name_bn,
     gender,
     designation_id,
+    designation,
     pdsid,
     caid,
     image
   }: any = teacher_details;
-  console.log(teacher_details);
+  // console.log(teacher_details);
   const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
 
   const getUserDetails = () => {
@@ -88,15 +89,17 @@ const TeacherProfileCard = () => {
           <div className="profile-img">
             {image && <img src={img_base_url + image} alt="teacher-profile" />}
           </div>
-
+          {/* teacher designation */}
           <div className="teacher-title">
-            <h2>
+            <h2 style={{ fontWeight: "bold", color: "black" }}>
               {/* {teacherDesignation} */}
               {/* {isClassTeacher && "শ্রেণি "}
               শিক্ষক */}
+              {designation ? `${designation}` : "শ্রেণি শিক্ষক"}
               { }
             </h2>
           </div>
+
           <div className="icon">
             <div className="single-icon">
               <img src={starIcon} alt="starIcon" />
@@ -110,13 +113,13 @@ const TeacherProfileCard = () => {
           </div>
         </div>
         <div className="teacher-info">
-          <h2 className="card-title text-two-line" style={{ lineHeight: "2" }}>
+          <h2 className="card-title text-two-line" style={{ lineHeight: "2", fontWeight: "bolder" }}>
             {name_bn || name_en || ''}
           </h2>
-          <p className="card-text" style={{ fontSize: "15px ", fontWeight: "bolder" ,color:"black"}}>
+          <p className="card-text" style={{ fontSize: "15px ", fontWeight: "bold", color: "gray" }}>
             {pdsid || caid}
           </p>
-          <p className="card-text text-center" style={{ fontSize: "15px", fontWeight: "bolder",color:"black" }}>{schoolName}</p>
+          <p className="card-text text-center mt-2" style={{ fontSize: "15px", fontWeight: "bold", color: "gray" }}>{schoolName}</p>
 
 
 

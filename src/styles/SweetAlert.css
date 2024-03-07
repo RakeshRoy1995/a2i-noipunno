@@ -1,0 +1,19 @@
+.custom-popup-class .swal2-title {
+    font-size: 20px; /* Adjust font size as needed */
+  }
+
+  .custom-popup-class .swal2-content {
+    font-size: 20px; /* Adjust font size as needed */
+  }
+
+  .custom-popup-class .swal2-popup {
+     /* Adjust card width as needed */
+    /* background: #428F92; */
+  }
+  /* .bg-color-class {
+    background-color: #428F92;
+  } */
+  .swal2-popup {
+padding-top: 20px;
+padding-bottom: 20px;
+  }

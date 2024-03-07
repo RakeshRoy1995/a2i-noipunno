@@ -32,31 +32,31 @@ const Navbar = () => {
   const {
     image
   }: any = teacher_details;
-console.log(teacher_details);
+  // console.log(teacher_details);
 
-const getUserDetails = () => {
-  const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
-  if (get_teachers_details) {
-    setTeacher_details(get_teachers_details?.data?.teachers[0]);
+  const getUserDetails = () => {
+    const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
+    if (get_teachers_details) {
+      setTeacher_details(get_teachers_details?.data?.teachers[0]);
 
-    // get_teachers_details?.data?.institute?.map((item) =>
-    //   setSchoolName(item.institute_name)
-    // );
+      // get_teachers_details?.data?.institute?.map((item) =>
+      //   setSchoolName(item.institute_name)
+      // );
 
-    const isClassTeacherValid = get_teachers_details?.data?.teachers[0]?.is_class_teacher;
-    if (isClassTeacherValid) {
-      setIsClassTeacher(true)
+      const isClassTeacherValid = get_teachers_details?.data?.teachers[0]?.is_class_teacher;
+      if (isClassTeacherValid) {
+        // setIsClassTeacher(true)
+      }
+
+      setLoadin(false)
     }
-
-    setLoadin(false)
   }
-}
-setInterval(() => {
-  if (loading) {
-    getUserDetails()
-  }
-}, 500);
-// end teacher profile img
+  setInterval(() => {
+    if (loading) {
+      getUserDetails()
+    }
+  }, 500);
+  // end teacher profile img
 
   const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
   setTimeout(() => {
@@ -173,7 +173,7 @@ setInterval(() => {
                           className="img-fluid topnav-profile-icon-style"
                           alt="moon icon"
                         /> */}
-                          {image && <img  src={img_base_url + image} alt="teacher-profile" style={{width:"38px", height:"38px"}}/>}
+                        {image && <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px" }} />}
                         {/* active icon */}
                         <img
                           src={teacherActiveIcon}
@@ -191,7 +191,7 @@ setInterval(() => {
                                   className="img-fluid icon-right-space"
                                   alt="profile icon"
                                 /> */}
-                                     {image && <img src={img_base_url + image} alt="teacher-profile" style={{width:"38px", height:"38px"}}/>}
+                                {image && <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px" }} />}
                               </div>
                               <div>
                                 <h6 className="profile-style">
@@ -626,6 +626,61 @@ setInterval(() => {
                                     </div>
                                   </NavLink>
                                 </li>
+                                <li>
+                                  <NavLink
+                                    to="/class/8"
+                                    // activeClassName='active'
+                                    className="dropdown-item"
+                                  >
+                                    <div className="dropdown-list-item-style d-flex align-items-center">
+                                      <img
+                                        src={unOrderListIcon}
+                                        className="img-fluid dropdown-list-item-icon"
+                                        alt="icon"
+                                      />
+                                      <p className="dropdown-class-list">
+                                        অষ্টম শ্রেণী
+                                      </p>
+                                    </div>
+                                  </NavLink>
+                                </li>
+                                <li>
+                                  <NavLink
+                                    to="/class/9"
+                                    // activeClassName='active'
+                                    className="dropdown-item"
+                                  >
+                                    <div className="dropdown-list-item-style d-flex align-items-center">
+                                      <img
+                                        src={unOrderListIcon}
+                                        className="img-fluid dropdown-list-item-icon"
+                                        alt="icon"
+                                      />
+                                      <p className="dropdown-class-list">
+                                        নবম শ্রেণী
+                                      </p>
+                                    </div>
+                                  </NavLink>
+                                </li>
+
+                                {/* <li>
+                                  <NavLink
+                                    to="/class/7"
+                                    // activeClassName='active'
+                                    className="dropdown-item"
+                                  >
+                                    <div className="dropdown-list-item-style d-flex align-items-center">
+                                      <img
+                                        src={unOrderListIcon}
+                                        className="img-fluid dropdown-list-item-icon"
+                                        alt="icon"
+                                      />
+                                      <p className="dropdown-class-list">
+                                        দশম শ্রেণী
+                                      </p>
+                                    </div>
+                                  </NavLink>
+                                </li> */}
                               </ul>
                             </li>
                             {/* <li className="nav-item dropdown nav-item-style">

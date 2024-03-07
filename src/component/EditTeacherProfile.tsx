@@ -3,7 +3,7 @@ import { useEffect, useId, useState } from "react";
 import { all_district, all_division, all_upozila, teacher_dashboard, teacher_designation, update_teacher_profile } from "../Request";
 import Breadcumbtitle from "../layout/Breadcumb";
 import Swal from "sweetalert2";
-
+import 'animate.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { convertToBanglaNumber } from "../utils/Utils";
@@ -12,6 +12,7 @@ import tippy from "tippy.js";
 import 'tippy.js/dist/tippy.css';
 import { motion } from "framer-motion"
 import "../styles/DatePicker.css"
+import "../styles/SweetAlert.css"
 
 const EditTeacherProfile = () => {
   const [userDetails, setuserDetails] = useState<any>({});
@@ -130,13 +131,34 @@ const EditTeacherProfile = () => {
     try {
       const { data }: any = await update_teacher_profile(caid, formDatas);
       if (data.status === true) {
+        // Swal.fire({
+        //   position: "top-right",
+        //   icon: "success",
+        //   title: "আপনার একাউন্টটি সফলভাবে হালনাগাদ হয়েছে!",
+        //   showConfirmButton: false,
+        //   timer: 1500
+        // })
+
         Swal.fire({
-          position: "center",
-          icon: "success",
           title: "আপনার একাউন্টটি সফলভাবে হালনাগাদ হয়েছে!",
-          showConfirmButton: false,
-          timer: 1500
-        })
+          showClass: {
+            popup: "animate__animated animate__backInDown animate__faster"
+          },
+          hideClass: {
+            popup: "animate__animated animate__backOutDown animate__faster"
+          },
+          width: 'auto', // Set width to auto to fit the content
+          heightAuto: false, // Set heightAuto to false to adjust the height manually
+          customClass: {
+            confirmButton: 'btn-confirm-class',
+            // popup:"bg-color-class"
+          },
+          confirmButtonText: 'ধন্যবাদ' // Change the text of the "Okay" button
+        });
+
+
+
+
 
         const data_dash: any = await teacher_dashboard();
         localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
@@ -217,7 +239,7 @@ const EditTeacherProfile = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const [warningMessage, setWarningMessage] = useState('ছবির  ২০০ KB এবং (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+  const [warningMessage, setWarningMessage] = useState('ছবি  ২০০ KB এবং (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
 
   // image change
   // const handleImageChange = (e) => {
@@ -271,7 +293,7 @@ const EditTeacherProfile = () => {
       // Check file size
       if (file.size > 100 * 1024) {
         setWarningMessage('');
-        setErrorMessage('ছবি ১০০ কিলোবাইট অতিক্রম করেছে, ছবির  ১০০ (KB) ভিতর হতে হবে!');
+        setErrorMessage('ছবি ১০০ (KB) অতিক্রম করেছে, ছবি  ১০০ (KB) ভিতর হতে হবে!');
         return;
       }
 
@@ -281,7 +303,7 @@ const EditTeacherProfile = () => {
         // Check image dimensions
         if (img.width > 300 || img.height > 300) {
           setWarningMessage('');
-          setErrorMessage('ছবির ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির ৩০০X৩০০ (PX) ভিতর হতে হবে!');
+          setErrorMessage('ছবি ৩০০X৩০০  (PX) অতিক্রম করেছে, ছবি ৩০০X৩০০ (PX) ভিতর হতে হবে!');
           return;
         }
 
@@ -316,7 +338,7 @@ const EditTeacherProfile = () => {
       // Check file size
       if (file.size > 100 * 1024) {
         setSignatureWarningMessage('');
-        setSignatureErrorMessage('সিগ্নেচার ছবি ১০০ KB অতিক্রম করেছে, ছবির আকার ১০০ (KB) ভিতর হতে হবে!');
+        setSignatureErrorMessage('স্বাক্ষর ছবি ১০০ KB অতিক্রম করেছে, ছবির আকার ১০০ (KB) ভিতর হতে হবে!');
         return;
       }
 
@@ -326,7 +348,7 @@ const EditTeacherProfile = () => {
         // Check image dimensions
         if (img.width > 300 || img.height > 300) {
           setSignatureWarningMessage('');
-          setSignatureErrorMessage('সিগ্নেচার ছবি ৩০০X৩০০ (PX) অতিক্রম করেছে, ছবি ৩০০X৩০০ (PX) ভিতর হতে হবে!');
+          setSignatureErrorMessage('স্বাক্ষর ছবি ৩০০X৩০০ (PX) অতিক্রম করেছে, ছবি ৩০০X৩০০ (PX) ভিতর হতে হবে!');
           return;
         }
 

@@ -9,7 +9,7 @@ import {
 import Lottie from "lottie-react";
 import loadingAnimation from "../assets/loadingAnimation/loading.json"
 import { Spinner } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import BreadcumbHome from "../layout/BreadcumbHome";
 import {
   formate_own_subject_data,
@@ -90,39 +90,39 @@ export default function Teacher() {
         own_subjet = await teacher_own_subject();
 
         // console.log(`own_subjet`, own_subjet);
-        localStorage.setItem("own_subjet" , JSON.stringify(own_subjet))
+        localStorage.setItem("own_subjet", JSON.stringify(own_subjet))
       }
 
       if (own_subjet?.success == false) {
         setshowLoadingErr(own_subjet.msg);
-      }else{
+      } else {
 
-      setown_data(own_subjet?.data?.data);
-      setteacher(own_subjet.data.data.user);
+        setown_data(own_subjet?.data?.data);
+        setteacher(own_subjet.data.data.user);
 
-      const all_subject: any = [];
+        const all_subject: any = [];
 
-      let compitnc_obj = {};
-      own_subjet.data.data.subjects.map((d: any) => {
-        data.data.subjects.map((d_2: any) => {
-          if (d_2.subject_id === d.subject_id) {
-            const obj: any = {
-              subject: d_2.subject_info,
-              own_subjet: d,
-              teacher: d.class_room.class_teacher,
-            };
-            d.oviggota.map((competnc) => {
-              compitnc_obj = { ...compitnc_obj, [competnc.uid]: competnc };
-            });
-            all_subject.push(obj);
-          }
+        let compitnc_obj = {};
+        own_subjet.data.data.subjects.map((d: any) => {
+          data.data.subjects.map((d_2: any) => {
+            if (d_2.subject_id === d.subject_id) {
+              const obj: any = {
+                subject: d_2.subject_info,
+                own_subjet: d,
+                teacher: d.class_room.class_teacher,
+              };
+              d.oviggota.map((competnc) => {
+                compitnc_obj = { ...compitnc_obj, [competnc.uid]: competnc };
+              });
+              all_subject.push(obj);
+            }
+          });
         });
-      });
 
-      setall_bis(own_subjet.data.data.bis);
-      setallCompitance(compitnc_obj);
-      setsubject(all_subject);
-      setloader(false);
+        setall_bis(own_subjet.data.data.bis);
+        setallCompitance(compitnc_obj);
+        setsubject(all_subject);
+        setloader(false);
 
       }
 
@@ -172,7 +172,7 @@ export default function Teacher() {
               {loader && (
                 <div className={loader && styles.loading_container}>
                   {/* {loader && <Spinner animation="border" />} */}
-                  <Lottie animationData={loadingAnimation}/>
+                  <Lottie animationData={loadingAnimation} />
                 </div>
               )}
             </>
@@ -226,6 +226,7 @@ export default function Teacher() {
                           </h5>
                         </div>
                       </div>
+
                       <div className="row">
                         <div className="container subject-container">
                           {ShowProfile && (
@@ -234,6 +235,8 @@ export default function Teacher() {
                             </h2>
                           )}
 
+                          {/* card collection */}
+                            {/* <Link to={"/পারদর্শিতা এবং আচরণগত মূল্যায়ন"}> */}
                           <div className="row">
                             {showSubject && (
                               <>
@@ -285,7 +288,7 @@ export default function Teacher() {
                                           {" "}
                                           {d?.subject?.class_uid == "6"
                                             ? "ষষ্ঠ "
-                                            : <> {d?.subject?.class_uid == "7" ? "সপ্তম " : <>  {d?.subject?.class_uid == "8"  ? "অষ্টম" : "নবম"}  </> } </> }{" "}
+                                            : <> {d?.subject?.class_uid == "7" ? "সপ্তম " : <>  {d?.subject?.class_uid == "8" ? "অষ্টম" : "নবম"}  </>} </>}{" "}
                                           শ্রেণি{" "}
                                         </p>
                                       </div>
@@ -319,7 +322,7 @@ export default function Teacher() {
                                       <div className="total-student-show">
                                         <div className="bottom">
                                           <div className="text">
-                                            Total Student{" "}
+                                            মোট শিক্ষার্থী{" "}
                                           </div>
                                           <div className="badge">
                                             <div className="success">
@@ -337,6 +340,7 @@ export default function Teacher() {
                               </>
                             )}
                           </div>
+                            {/* </Link> */}
                         </div>
 
                         {ShowProfile === false && (

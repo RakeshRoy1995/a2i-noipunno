@@ -216,7 +216,7 @@ export default function StudentTranscript() {
       allFelter?.version == d?.version 
     ) {
 
-    console.log(`111111`, 111111);
+    // console.log(`111111`, 111111);
       return true;
     }
     // return false

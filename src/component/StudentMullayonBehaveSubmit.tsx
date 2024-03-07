@@ -88,13 +88,13 @@ export default function StudentMullayonBehaveSubmit({
 
       checkedIn(obj);
     } catch (error) {
-      console.log(`error`, error);
+      // console.log(`error`, error);
     }
   };
 
   const checkedIn = (obj: any) => {
 
-    console.log(`submitData obj`, obj);
+    // console.log(`submitData obj`, obj);
     let all_elem: any = document.getElementsByClassName("all_pi_arrtiburte");
 
     for (let index = 0; index < all_elem.length; index++) {
@@ -108,7 +108,7 @@ export default function StudentMullayonBehaveSubmit({
       let id: any = obj[x].weight_uid + "_" + obj[x].student_uid  ;
       let el: any = document.getElementById(id);
 
-      console.log(`el`, id);
+      // console.log(`el`, id);
       el.style.background = "#69CB1C";
       sumbitArray.push(obj[x]);
     }
@@ -116,7 +116,7 @@ export default function StudentMullayonBehaveSubmit({
     setsubmitData(sumbitArray);
   };
 
-  console.log(`submitData`, teacher , al_pi_attr);
+  // console.log(`submitData`, teacher , al_pi_attr);
 
   return (
     <div className="content">

@@ -3,7 +3,7 @@ import { useEffect, useId, useState } from "react";
 import { all_district, all_division, all_upozila, teacher_dashboard, teacher_designation, update_teacher_profile } from "../Request";
 import Breadcumbtitle from "../layout/Breadcumb";
 import Swal from "sweetalert2";
-
+// import 'animate.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { convertToBanglaNumber } from "../utils/Utils";
@@ -11,7 +11,8 @@ import image_upload_icon from "../../src/assets/images/image-upload-icon/Image-u
 import tippy from "tippy.js";
 import 'tippy.js/dist/tippy.css';
 import { motion } from "framer-motion"
-
+import "../styles/DatePicker.css"
+import "../styles/SweetAlert.css"
 
 const EditTeacherProfile = () => {
   const [userDetails, setuserDetails] = useState<any>({});
@@ -53,15 +54,20 @@ const EditTeacherProfile = () => {
     caid,
     image,
     signature,
-    nid
+    nid,
+    emergency_contact,
+    blood_group,
+    uid
+
   } = userDetails;
+  console.log(userDetails);
 
   // const dpesignation_id = "10";
 
   const getUserDetails = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
     if (get_teachers_details) {
-      console.log("userDetaisl", get_teachers_details?.data?.teachers[0]);
+      // console.log("userDetaisl", get_teachers_details?.data?.teachers[0]);
 
       setuserDetails(get_teachers_details?.data?.teachers[0]);
     }
@@ -113,7 +119,7 @@ const EditTeacherProfile = () => {
     }
   }
 
-  // console.log(teacherDesignation);
+  // // console.log(teacherDesignation);
 
 
 
@@ -125,13 +131,34 @@ const EditTeacherProfile = () => {
     try {
       const { data }: any = await update_teacher_profile(caid, formDatas);
       if (data.status === true) {
+        // Swal.fire({
+        //   position: "top-right",
+        //   icon: "success",
+        //   title: "আপনার একাউন্টটি সফলভাবে হালনাগাদ হয়েছে!",
+        //   showConfirmButton: false,
+        //   timer: 1500
+        // })
+
         Swal.fire({
-          position: "center",
-          icon: "success",
           title: "আপনার একাউন্টটি সফলভাবে হালনাগাদ হয়েছে!",
-          showConfirmButton: false,
-          timer: 1500
-        })
+          showClass: {
+            popup: "animate__animated animate__backInDown animate__faster"
+          },
+          hideClass: {
+            popup: "animate__animated animate__backOutDown animate__faster"
+          },
+          width: 'auto', // Set width to auto to fit the content
+          heightAuto: false, // Set heightAuto to false to adjust the height manually
+          customClass: {
+            confirmButton: 'btn-confirm-class',
+            // popup:"bg-color-class"
+          },
+          confirmButtonText: 'ধন্যবাদ' // Change the text of the "Okay" button
+        });
+
+
+
+
 
         const data_dash: any = await teacher_dashboard();
         localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
@@ -212,15 +239,16 @@ const EditTeacherProfile = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const [warningMessage, setWarningMessage] = useState('ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+  const [warningMessage, setWarningMessage] = useState('ছবি  ২০০ KB এবং (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
 
-  // img upload
+  // image change
   // const handleImageChange = (e) => {
   //   const file = e.target.files[0];
   //   if (file) {
+
   //     // Check file size
   //     if (file.size > 100 * 1024) {
-  //       setWarningMessage('')
+  //       setWarningMessage('');
   //       setErrorMessage('ছবির আকার ১০০ কিলোবাইট অতিক্রম করেছে, ছবির আকার ১০০ কিলোবাইটের (KB) ভিতর হতে হবে!');
   //       return;
   //     }
@@ -230,7 +258,7 @@ const EditTeacherProfile = () => {
   //     img.onload = () => {
   //       // Check image dimensions
   //       if (img.width > 300 || img.height > 300) {
-  //         setWarningMessage('')
+  //         setWarningMessage('');
   //         setErrorMessage('ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
   //         return;
   //       }
@@ -242,22 +270,30 @@ const EditTeacherProfile = () => {
   //       };
   //       reader.readAsDataURL(file);
   //       setErrorMessage('');
-  //       setWarningMessage('')
+  //       setWarningMessage('');
   //     };
   //     img.src = URL.createObjectURL(file);
-
   //   } else {
-  //     setImagePreview(image_upload_icon);
+  //     // Set default image when no file is selected
+  //     setImagePreview(image_upload_icon); // Change 'image_upload_icon' to the actual path of your default image
   //     setErrorMessage('');
+  //     setWarningMessage('');
   //   }
   // };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      const fileType = file.type;
+      if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+        setWarningMessage('');
+        setErrorMessage('ছবিতে কেবলমাত্র JPEG এবং PNG ফরম্যাট অনুমোদিত রয়েছে।');
+        return;
+      }
+
       // Check file size
       if (file.size > 100 * 1024) {
         setWarningMessage('');
-        setErrorMessage('ছবির আকার ১০০ কিলোবাইট অতিক্রম করেছে, ছবির আকার ১০০ কিলোবাইটের (KB) ভিতর হতে হবে!');
+        setErrorMessage('ছবি ১০০ (KB) অতিক্রম করেছে, ছবি  ১০০ (KB) ভিতর হতে হবে!');
         return;
       }
 
@@ -267,7 +303,7 @@ const EditTeacherProfile = () => {
         // Check image dimensions
         if (img.width > 300 || img.height > 300) {
           setWarningMessage('');
-          setErrorMessage('ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
+          setErrorMessage('ছবি ৩০০X৩০০  (PX) অতিক্রম করেছে, ছবি ৩০০X৩০০ (PX) ভিতর হতে হবে!');
           return;
         }
 
@@ -289,17 +325,20 @@ const EditTeacherProfile = () => {
     }
   };
 
-  const [signaturePreview, setsSgnaturePreview] = useState(null);
+
+  // signature
+  const [signaturePreview, setsSignaturePreview] = useState(null);
   const [signatureErrorMessage, setSignatureErrorMessage] = useState('');
-  const [signatureWarningMessage, setSignatureWarningMessage] = useState('সিগ্নেচার ছবির আকার ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+  const [signatureWarningMessage, setSignatureWarningMessage] = useState('স্বাক্ষর ছবি ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০)  হতে হবে!');
 
   const handleSignatureImg = (e) => {
     const file = e.target.files[0];
     if (file) {
+
       // Check file size
       if (file.size > 100 * 1024) {
-        setSignatureWarningMessage('')
-        setSignatureErrorMessage('সিগ্নেচার ছবির আকার ১০০ কিলোবাইট অতিক্রম করেছে, ছবির আকার ১০০ কিলোবাইটের (KB) ভিতর হতে হবে!');
+        setSignatureWarningMessage('');
+        setSignatureErrorMessage('স্বাক্ষর ছবি ১০০ KB অতিক্রম করেছে, ছবির আকার ১০০ (KB) ভিতর হতে হবে!');
         return;
       }
 
@@ -308,27 +347,28 @@ const EditTeacherProfile = () => {
       img.onload = () => {
         // Check image dimensions
         if (img.width > 300 || img.height > 300) {
-          setSignatureWarningMessage('')
-          setSignatureErrorMessage('সিগ্নেচার ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
+          setSignatureWarningMessage('');
+          setSignatureErrorMessage('স্বাক্ষর ছবি ৩০০X৩০০ (PX) অতিক্রম করেছে, ছবি ৩০০X৩০০ (PX) ভিতর হতে হবে!');
           return;
         }
 
         // If both size and dimensions are within limits, set the image preview
         const reader = new FileReader();
         reader.onloadend = () => {
-          setsSgnaturePreview(reader.result);
+          setsSignaturePreview(reader.result);
         };
         reader.readAsDataURL(file);
         setSignatureErrorMessage('');
-        setSignatureWarningMessage('')
+        setSignatureWarningMessage('');
       };
       img.src = URL.createObjectURL(file);
-
     } else {
-      setsSgnaturePreview(image_upload_icon);
+      setsSignaturePreview(image_upload_icon);
       setSignatureErrorMessage('');
+      setSignatureWarningMessage('');
     }
-  }
+  };
+
 
   const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
 
@@ -341,10 +381,6 @@ const EditTeacherProfile = () => {
       });
     })
   }, [])
-  // for broken image
-  // const handleImageError = (event) => {
-  //   event.target.src = 'https://ibb.co/LCkn1DR'; // Replace 'path_to_fallback_image.jpg' with the path to your fallback image
-  // };
 
   return (
     <section className="editTeacherProfilePage">
@@ -457,16 +493,16 @@ const EditTeacherProfile = () => {
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
                           <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>যোগদানের তারিখ</label>
-                          <div className="input-group" style={{ flex: 1 }}>
+                          <div className="input-group">
                             <DatePicker
                               id="joining_date"
-                              className="form-control w-100"
+                              className="form-control w-100 myDatePicker"
                               placeholderText="যোগদানের তারিখ"
                               name="joining_date"
                               dateFormat="yyyy-MM-dd"
                               selected={selectedJoiningDate}
                               onChange={(date) => setSelectedJoiningDate(date)}
-                              style={{ width: '100%', maxWidth: '100%', background: '#f9f9f9' }}
+                              style={{ background: '#f9f9f9' }}
                             />
                           </div>
                         </div>
@@ -532,6 +568,7 @@ const EditTeacherProfile = () => {
                               placeholder="আপনার মোবাইল নাম্বার দিন"
                               defaultValue={mobile_no}
                               data-tooltip="অনুগ্রহ করে সঠিক ফোন নম্বর লিখুন"
+                              maxLength={11}
                             />
                           </div>
                         </div>
@@ -550,8 +587,9 @@ const EditTeacherProfile = () => {
                               className="form-control"
                               name="emergency_contact"
                               placeholder="জরুরী যোগাযোগের নম্বর"
-                              // defaultValue={ } // assuming you have this value
+                              defaultValue={emergency_contact} // assuming you have this value
                               data-tooltip="জরুরী যোগাযোগের নম্বর"
+                              maxLength={11}
                             />
                           </div>
                         </div>
@@ -574,7 +612,7 @@ const EditTeacherProfile = () => {
                       {/* User ID Field */}
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
-                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>User ID</label>
+                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>ইউজার আইডি</label>
                           <div className="input-group" style={{ flex: 1 }}>
                             <input
                               style={{ background: "#F9F9F9", width: "100%" }}
@@ -582,9 +620,10 @@ const EditTeacherProfile = () => {
                               id="user_id"
                               className="form-control"
                               name="user_id"
-                              placeholder="User ID"
+                              placeholder="ইউজার আইডি"
+                              defaultValue={uid}
                               readOnly // if it's supposed to be read-only
-                              data-tooltip="User ID"
+                              data-tooltip="ইউজার আইডি"
                             />
                           </div>
                         </div>
@@ -695,22 +734,23 @@ const EditTeacherProfile = () => {
                               className="form-control"
                               style={{ background: "#F9F9F9" }}
                               name="blood_group"
-                              defaultValue=""
+                              defaultValue={blood_group}
                               data-tooltip="রক্তের গ্রুপ"
                             >
                               <option value="">রক্তের গ্রুপ নির্বাচন করুন</option>
-                              <option value="A+">A+</option>
-                              <option value="A-">A-</option>
-                              <option value="B+">B+</option>
-                              <option value="B-">B-</option>
-                              <option value="AB+">AB+</option>
-                              <option value="AB-">AB-</option>
-                              <option value="O+">O+</option>
-                              <option value="O-">O-</option>
+                              <option value="A+" selected={blood_group === "A+"}>A+</option>
+                              <option value="A-" selected={blood_group === "A-"}>A-</option>
+                              <option value="B+" selected={blood_group === "B+"}>B+</option>
+                              <option value="B-" selected={blood_group === "B-"}>B-</option>
+                              <option value="AB+" selected={blood_group === "AB+"}>AB+</option>
+                              <option value="AB-" selected={blood_group === "AB-"}>AB-</option>
+                              <option value="O+" selected={blood_group === "O+"}>O+</option>
+                              <option value="O-" selected={blood_group === "O-"}>O-</option>
                             </select>
                           </div>
                         </div>
                       </div>
+
 
                       {/* বিভাগ */}
                       <div className="form-group col-sm-4 col-md-6">
@@ -749,7 +789,8 @@ const EditTeacherProfile = () => {
                           </select>
                         </div>
                       </div>
-                        {/* উপজেলা */}
+
+                      {/* উপজেলা */}
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3 d-flex" style={{ fontSize: "16px" }}>
                           <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>উপজেলা<span className="text-danger">*</span></label>
@@ -772,71 +813,37 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
-                      {/* test for broken img */}
+
                       <div className="d-flex row flex-lg-row mt-5">
                         {/* profile picture upload */}
-                        {/* <div className="form-group col-sm-4 col-md-6">
-                          <div className="d-flex align-items-center gap-3" style={{ width: "100%" }}>
-                            <div className="mb-3" style={{ fontSize: "16px", width: "50%" }}>
-                              <label className="form-label">ছবি আপলোড করুন</label>
-                              <div className="input-group">
-                                <input
-                                  className="mb-2"
-                                  id="imageInput"
-                                  name="image"
-                                  type="file"
-                                  accept="image/*"
-                                  onChange={handleImageChange}
-                                  data-tooltip="অনুগ্রহ করে আপনার  ছবি আপলোড করুন"
-                                />
-                                {warningMessage && (
-                                  <small style={{ padding: "0px", margin: "0px", color: "red", fontWeight: "bold" }}>
-                                    {warningMessage}
-                                  </small>
-                                )}
-                                {errorMessage && (
-                                  <small style={{ padding: "0px", margin: "0px", color: "red" }}>
-                                    {errorMessage}
-                                  </small>
-                                )}
-                              </div>
-                            </div>
-                            <div className="image-preview" style={{ width: "50%" }}>
-                              <img
-                                src={imagePreview || img_base_url + image || image_upload_icon}
-                                alt="Preview"
-                                // onError={handleImageError}
-                                loading="lazy"
-                                style={{ maxWidth: '100%', maxHeight: '5rem' }}
-                              />
-                            </div>
-                          </div>
-                        </div> */}
 
+                        {/* img upload */}
                         <div className="form-group col-sm-4 col-md-6">
                           <div className="d-flex align-items-center gap-3" style={{ width: "100%" }}>
-                            <div className="mb-3" style={{ fontSize: "16px", width: "50%" }}>
-                              <label className="form-label">ছবি আপলোড করুন</label>
-                              <div className="input-group">
+                            <div className="mb-3 " style={{ fontSize: "16px", width: "50%" }}>
+                              <label className="form-label me-2">ছবি আপলোড করুন: </label>
+                              {warningMessage && (
+                                <small style={{ padding: "0px", margin: "0px", color: "red", fontWeight: "bold" }}>
+                                  {warningMessage}
+                                </small>
+                              )}
+                              {errorMessage && (
+                                <small style={{ padding: "0px", margin: "0px", color: "red",fontWeight:"bold" }}>
+                                  {errorMessage}
+                                </small>
+                              )}
+
+                              <div className="input-group mt-3">
                                 <input
                                   className="mb-2"
                                   id="imageInput"
                                   name="image"
                                   type="file"
-                                  accept="image/*"
                                   onChange={handleImageChange}
                                   data-tooltip="অনুগ্রহ করে আপনার  ছবি আপলোড করুন"
+                                  accept="image/png, image/jpeg, image/jpg"
                                 />
-                                {warningMessage && (
-                                  <small style={{ padding: "0px", margin: "0px", color: "red", fontWeight: "bold" }}>
-                                    {warningMessage}
-                                  </small>
-                                )}
-                                {errorMessage && (
-                                  <small style={{ padding: "0px", margin: "0px", color: "red" }}>
-                                    {errorMessage}
-                                  </small>
-                                )}
+
                               </div>
                             </div>
                             <div className="image-preview" style={{ width: "50%" }}>
@@ -850,7 +857,7 @@ const EditTeacherProfile = () => {
                                 />
                               ) : (
                                 <img
-                                className=""
+                                  className=""
                                   src={image_upload_icon} // Use the default image path here
                                   alt="Preview"
                                   loading="lazy"
@@ -859,7 +866,7 @@ const EditTeacherProfile = () => {
                                     height: '5rem', // Set the height to match the width for a box shape
                                     objectFit: 'cover',
                                     // Maintain the aspect ratio of the image
-                                    border:'2px solid black'
+                                    border: '2px solid black'
                                   }}
                                 />
                               )}
@@ -868,64 +875,30 @@ const EditTeacherProfile = () => {
                         </div>
 
                         {/* signature upload */}
-                        {/* <div className="form-group col-sm-4 col-md-6">
-                          <div className="d-flex align-items-center gap-3" style={{ width: "100%" }}>
-                            <div className="mb-3" style={{ fontSize: "16px", width: "50%" }}>
-                              <label className="form-label">সিগ্নেচার আপলোড করুন</label>
-                              <div className="input-group">
-                                <input
-                                  className="mb-2"
-                                  name="signature"
-                                  type="file"
-                                  accept="image/*"
-                                  onChange={handleSignatureImg}
-                                />
-                                {signatureWarningMessage && (
-                                  <small style={{ padding: "0px", margin: "0px", color: "red", fontWeight: "bold" }}>
-                                    {signatureWarningMessage}
-                                  </small>
-                                )}
-                                {signatureErrorMessage && (
-                                  <small style={{ padding: "0px", margin: "0px", color: "red" }}>
-                                    {signatureErrorMessage}
-                                  </small>
-                                )}
-                              </div>
-                            </div>
-                            <div className="image-preview" style={{ width: "50%" }}>
-                              <img
-                                src={signaturePreview || img_base_url + signature || image_upload_icon}
-                                alt="Preview"
-                                // onError={handleImageError}
-                                loading="lazy"
-                                style={{ maxWidth: '100%', maxHeight: '5rem' }}
-                              />
-                            </div>
-                          </div>
-                        </div> */}
-
                         <div className="form-group col-sm-4 col-md-6">
                           <div className="d-flex align-items-center gap-3" style={{ width: "100%" }}>
                             <div className="mb-3" style={{ fontSize: "16px", width: "50%" }}>
-                              <label className="form-label">সিগ্নেচার আপলোড করুন</label>
-                              <div className="input-group">
-                                <input
-                                  className="mb-2"
-                                  name="signature"
-                                  type="file"
-                                  accept="image/*"
-                                  onChange={handleSignatureImg}
-                                />
-                                {signatureWarningMessage && (
+                              <label className="form-label me-2">স্বাক্ষর ছবি আপলোড করুন: </label>
+                              {signatureWarningMessage && (
                                   <small style={{ padding: "0px", margin: "0px", color: "red", fontWeight: "bold" }}>
                                     {signatureWarningMessage}
                                   </small>
                                 )}
                                 {signatureErrorMessage && (
-                                  <small style={{ padding: "0px", margin: "0px", color: "red" }}>
+                                  <small style={{ padding: "0px", margin: "0px", color: "red", fontWeight:"bold" }}>
                                     {signatureErrorMessage}
                                   </small>
                                 )}
+
+                              <div className="input-group mt-3">
+                                <input
+                                  className="mb-2"
+                                  name="signature"
+                                  type="file"
+                                  accept="image/png, image/jpeg,image/jpg"
+                                  onChange={handleSignatureImg}
+                                />
+
                               </div>
                             </div>
                             <div className="image-preview" style={{ width: "50%" }}>
@@ -939,7 +912,7 @@ const EditTeacherProfile = () => {
                                 />
                               ) : (
                                 <img
-                                className=""
+                                  className=""
                                   src={image_upload_icon} // Use the default image path here
                                   alt="Preview"
                                   loading="lazy"
@@ -948,7 +921,7 @@ const EditTeacherProfile = () => {
                                     height: '5rem', // Set the height to match the width for a box shape
                                     objectFit: 'cover',
                                     // Maintain the aspect ratio of the image
-                                    border:'2px solid black'
+                                    border: '2px solid black'
                                   }}
                                 />
                               )}

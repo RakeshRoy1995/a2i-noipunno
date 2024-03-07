@@ -17,7 +17,17 @@
 @import url("./widget/noipunno-accordion.css");
 @import url("./widget/modal.css");
 
+@import url('https://fonts.maateen.me/solaiman-lipi/font.css');
+@import url('https://fonts.maateen.me/kalpurush/font.css');
+@import url('https://fonts.maateen.me/adorsho-lipi/font.css');
+
+
 @import url("./components/badge.css");
+
+*{
+  font-family: SolaimanLipi, sans-serif !important;
+}
+
 
 .np-breadcrumbs-card {
     margin-top: 10px;
@@ -380,7 +390,7 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
 .text-two-line {
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2; / number of lines to show /
+    -webkit-line-clamp: 2;
             line-clamp: 2; 
     -webkit-box-orient: vertical;
  }

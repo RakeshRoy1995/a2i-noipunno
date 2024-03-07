@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, ChangeEvent } from "react";
 import Breadcumbtitle from "../layout/Breadcumb";
 
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { confirm_otp, confirm_pass, sent_otp } from "../Request";
 import { Alert } from "react-bootstrap";
 import Swal from "sweetalert2";
+import tippy from "tippy.js";
 
 function ResetPassword() {
   const [user_Caid, setUser_Caid] = useState("");
@@ -25,12 +26,12 @@ function ResetPassword() {
       const datas = new FormData(event.target);
       const { data }: any = await sent_otp(datas);
       setmsg(data.message);
-      console.log("data", data);
+      // console.log("data", data);
 
       setsendOtoSuccess(true);
       setconfirmOtoSuccess(true);
     } catch (error) {
-      console.log("error", error);
+      // console.log("error", error);
       seterrmsg(error.message);
     }
   };
@@ -43,13 +44,13 @@ function ResetPassword() {
     try {
       const otp = new FormData(event.target);
       const { data }: any = await confirm_otp(otp);
-      console.log("otp", data);
+      // console.log("otp", data);
       setmsg(data.message);
       setconfirmOtoSuccess(false);
       setconfirmPINSuccess(true);
-      console.log("setconfirmPINSuccess", setconfirmPINSuccess);
+      // console.log("setconfirmPINSuccess", setconfirmPINSuccess);
     } catch (error) {
-      //console.log("eee", error.response);
+      //// console.log("eee", error.response);
       seterrmsg(error?.response?.data?.error?.message || "সার্ভার জনিত সমস্যার কারণে দুঃখিত। পুনরায় চেষ্টা করুন। ");
     }
   };
@@ -59,69 +60,138 @@ function ResetPassword() {
     setmsg("");
     seterrmsg("");
 
-    try {
-      const pass = new FormData(event.target);
-      const { data }: any = await confirm_pass(pass);
-      console.log("pass", data);
-      setmsg("আপনার পিন সফলভাবে আপডেট করা হয়েছে। ");
-      setconfirmPINSuccess(true);
-      console.log("setconfirmPINSuccess", setconfirmPINSuccess);
-    } catch (error) {
+    const password = event.target.password.value;
+    const password_confirmation = event.target.password_confirmation.value;
 
-      //console.log("eee", error.response);
-      
-      seterrmsg(error?.response?.data?.error?.message?.password || "সার্ভার জনিত সমস্যার কারণে দুঃখিত। পুনরায় চেষ্টা করুন। ");
+    if (password.length == 6) {
+      if (password === password_confirmation) {
+        try {
+          const pass = new FormData(event.target);
+          const { data }: any = await confirm_pass(pass);
+          if (data?.status === true) {
+            setconfirmPINSuccess(false);
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "আপনার একাউন্টটি সফলভাবে হালনাগাদ হয়েছে। ",
+                showConfirmButton: false,
+                timer: 2500
+            })
+            window.location.href = '/';
+          } else {
+            seterrmsg("পিন পরিবর্তন হয়নাই।");
+          }
+
+        } catch (error) {
+          seterrmsg("সার্ভার জনিত সমস্যার কারণে দুঃখিত। পুনরায় চেষ্টা করুন।");
+        }
+      } else {
+        seterrmsg("নতুন পিন এবং পুনরায় পিন মিল নেই।");
+      }
+    } else {
+      seterrmsg("পিন অবশ্যই ছয় অক্ষরের হতে হবে! ");
     }
-    setconfirmPINSuccess(false);
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "আপনার একাউন্টটি সফলভাবে হালনাগাদ হয়েছে। ",
-      showConfirmButton: false,
-      timer: 2500
-    })
   };
+
+
 
   useEffect(() => {
     const userCaid = JSON.parse(localStorage.getItem("teacher_dashboard"));
     // setUser_Caid("110324520230002");
     setUser_Caid(userCaid?.data?.teachers[0]?.caid);
-    console.log("user_Caid:", user_Caid);
+    // console.log("user_Caid:", user_Caid);
   }, []);
+
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // Replace non-digit characters with an empty string
+    const sanitizedValue = event.target.value.replace(/\D/g, '');
+    // Update the input value
+    event.target.value = sanitizedValue;
+  };
+
+
+  const [otp, setOtp] = useState<string[]>(['', '', '', '']);
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+
+  const numberString: string = otp.join('');
+
+  useEffect(() => {
+    inputRefs.current[0]?.focus();
+  }, []);
+
+  const handleChange = (index: number, value: string) => {
+    if (!isNaN(Number(value))) {
+    const newOtp = [...otp];
+    newOtp[index] = value;
+
+    setOtp(newOtp);
+
+    if (value && index < otp.length - 1) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  }
+  };
+
+  const handleKeyDown = (index: number, event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Backspace' && !otp[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+    if (password === confirmPassword) {
+      seterrmsg('');
+    } else {
+      seterrmsg('নতুন পিন এবং পুনরায় পিন মিল নেই।');
+      setmsg("");
+    }
+  };
+
+  const handleBlur = () => {
+    if (password === confirmPassword) {
+      seterrmsg('');
+    } else {
+      seterrmsg('নতুন পিন এবং পুনরায় পিন মিল নেই।');
+      setmsg("");
+    }
+  };
+
+      // tooltip  for signature field
+      useEffect(() => {
+        const elementWithDataTooltip = document.querySelectorAll('[data-tooltip ]');
+        elementWithDataTooltip.forEach(element => {
+          tippy(element, {
+            content: element.getAttribute("data-tooltip")
+          });
+        })
+      }, [])
 
   return (
     <div>
       <section className="editTeacherProfilePage">
         <Breadcumbtitle title={"রিসেট পিন"} />
         {
-          <div className="container my-3">
-            <div className="d-flex align-items-center">
-              <div className="card shadow-lg border-0 w-100 rounded">
-                <ul className="nav d-flex mt-2 justify-content-around py-1">
-                  <li className={`nav-item`}>
-                    <h4> রিসেট পিন </h4>
-                  </li>
-                </ul>
-                
-                <div
-                  className="tab-content"
-                  id="tabContent"
-                  style={{ backgroundColor: "#E4FEFF" }}
-                >
-                  
-                  <div
-                    className="tab-pane fade show active"
-                    id="expertness"
-                    role="tabpanel"
-                    aria-labelledby="expertness-tab"
-                  >
-                    {!sendOtoSuccess && (
-                      <form className="row m-4" onSubmit={sendOTP}>
-                        
+          <div className="container my-2 mb-5">
 
-                        <div className="form-group  col-sm-4 col-md-6">
+            <div className="row">
+              <div className="col-sm-3"></div>
+              <div className="col-sm-6">
+                <div className="card shadow" style={{ border: 'none', minHeight: '300px' }}>
+                  <div className="card-header"><h4 className="bn text-center p-2"> রিসেট পিন </h4></div>
+                  <div className="card-body">
+                    {/* send reset otp */}
+                    {!sendOtoSuccess && (
+                      <form onSubmit={sendOTP}>     
                           <div className="mb-3" style={{ fontSize: "16px" }}>
-                            <label className="form-label">আপনার সিএ আইডি</label>
+                            <label className="form-label">আপনার ইউজার আইডি</label>
                             <div className="input-group">
                               <input
                                 type="caid"
@@ -129,88 +199,36 @@ function ResetPassword() {
                                 className="form-control"
                                 readOnly
                                 name="caid"
-                                
+                            
                                 defaultValue={user_Caid}
                               />
                             </div>
                           </div>
-                        </div>
-
-
-                        <div className="form-group  col-sm-4 col-md-6">
-                          <div className="mb-3" style={{ fontSize: "16px" }}>
-                            <label className="form-label"></label>
-                            <div className="input-group">
-                              <input
-                                type="hidden"
-                                id="pin"
-                                className="form-control"
-                                // readOnly
-                                name="user_type_id"
-                                placeholder=""
-                                defaultValue={1}
-                              />
-                            </div>
-                          </div>
-                        </div>
-
-
-                        <div className="d-flex justify-content-end align-items-center pt-3 ">
-                          <button
-                            type="submit"
-                            className="btn btn-primay px-5"
+                          <input type="hidden" id="pin" name="user_type_id" defaultValue={1} />
+                          <button  type="submit" className="btn login-button px-5"
                             style={{
                               backgroundColor: "#428F92",
                               color: "#fff",
+                              width: '200px',
                             }}
                           >
-                            {" "}
-                            ওটিপি পাঠান{" "}
-                            <MdOutlineKeyboardArrowRight
-                              className="fs-3"
-                              style={{ marginTop: "-0.3rem" }}
-                            />{" "}
+                            ওটিপি পাঠান
                           </button>
-                        </div>
+              
                       </form>
                     )}
 
+                    {/* otp confirmation */}
                     {confirmOtoSuccess && (
-                      <form className="row m-4" onSubmit={confimOTP}>
-                        <div className="form-group  col-sm-4 col-md-6">
-                          <div className="mb-3" style={{ fontSize: "16px" }}>
-                            <label className="form-label"></label>
-                            <div className="input-group">
-                              <input
-                                type="hidden"
-                                id="pin"
-                                className="form-control"
-                                // readOnly
-                                name="user_type_id"
-                                placeholder=""
-                                defaultValue={1}
-                              />
-                            </div>
-                          </div>
-                        </div>
+                      <form onSubmit={confimOTP}>
 
-                        <div className="form-group  col-sm-4 col-md-6">
-                          <div className="mb-3" style={{ fontSize: "16px" }}>
-                            <label className="form-label"></label>
-                            <div className="input-group">
-                              <input
-                                type="hidden"
-                                id="pin"
-                                className="form-control"
-                                readOnly
-                                name="caid"
-                                placeholder="আপনার caid নাম্বার"
-                                defaultValue={user_Caid}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="form-group  col-sm-4 col-md-6">
+                        {msg && <Alert className="d-flex justify-content-center " variant="success" >{msg}</Alert> }
+                        {errmsg && <Alert className="d-flex justify-content-center text-white" variant="danger">{errmsg}</Alert>}
+
+                        <input type="hidden" id="pin" name="user_type_id" defaultValue={1}/>
+                        <input type="hidden" id="pin" name="caid" defaultValue={user_Caid}/>
+{/*                     
+                        <div className="form-group">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label">ওটিপি</label>
                             <div className="input-group">
@@ -220,78 +238,72 @@ function ResetPassword() {
                                 className="form-control"
                                 name="pin"
                                 placeholder="ওটিপি কোড"
+                                maxLength={4} 
+                                onInput={handleInput}
                               />
                             </div>
                           </div>
-                        </div>
-                        
-                        <div className="d-flex justify-content-end align-items-center pt-3 ">
-                        {msg && 
-                    <Alert className="m-2 d-flex justify-content-center " variant="success" >
-                    {msg}
-                    {/* <p>আপনার সঠিক ওটিপি কোডটি লিখুন এবং চেক করুন</p> */}
-                    </Alert>}
+                        </div> */}
+                              <div className="text-center mx-auto otp-card">
 
-                      {errmsg && <Alert className="m-2 d-flex justify-content-center text-white" variant="danger">{errmsg}</Alert>}
+  
+                                  <p className="text-center p-2 mb-2">ওটিপি</p>
+
+                                  <div className="d-flex">
+                                        {otp.map((digit, index) => (
+                                          <div className="flex-fill">
+                                                <input
+                                                    key={index}
+                                                    type="text"
+                                                    className="form-control otp-box"
+                                                    maxLength={1}
+                                                    value={digit}
+                                                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(index, e.target.value)}
+                                                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyDown(index, e)}
+                                                    ref={(ref) => ref && (inputRefs.current[index] = ref)}
+                                                    style={{ float:'left',  border: '1px solid #1d2327'  }}
+                                                    required
+                                                  />
+                                            
+                                          </div>
+                                        ))}
+                                  </div>
+
+                                </div>
+
+                                  <input type="hidden" value={numberString} id="pin" name="pin" />
+
                           <button
-                            type="submit"
-                            className="btn btn-primay px-5"
-                            style={{
-                              backgroundColor: "#428F92",
-                              color: "#fff",
-                            }}
-                          >
-                            {" "}
-                            ওটিপি চেক করুন{" "}
-                            <MdOutlineKeyboardArrowRight
-                              className="fs-3"
-                              style={{ marginTop: "-0.3rem" }}
-                            />{" "}
-                          </button>
-                        </div>
+                                type="submit"
+                                className="btn login-button px-5 mt-3"
+                                style={{
+                                  backgroundColor: "#428F92",
+                                  color: "#fff",
+                                  width: '250px',
+                                }}
+                              >
+                                
+                                নিশ্চিত
+                                
+                              </button>
+                        
+                       
                       </form>
                     )}
 
+                    {/* new pin  */}
                     {confirmPINSuccess && (
-                      <form className="row m-4" onSubmit={confimPass}>
-                        <div className="form-group  col-sm-4 col-md-6">
-                          <div className="mb-3" style={{ fontSize: "16px" }}>
-                            <label className="form-label"></label>
-                            <div className="input-group">
-                              <input
-                                type="hidden"
-                                id="pin"
-                                className="form-control"
-                                // readOnly
-                                name="user_type_id"
-                                placeholder=""
-                                defaultValue={1}
-                              />
-                            </div>
-                          </div>
-                        </div>
+                      <form onSubmit={confimPass}>
+                        {msg && <Alert className="d-flex justify-content-center" variant="success">{msg}</Alert>}
+                        {errmsg && <Alert className="m-2 d-flex justify-content-center text-white" variant="danger">{errmsg}</Alert>}
 
-                        <div className="form-group  col-sm-4 col-md-6">
-                          <div className="mb-3" style={{ fontSize: "16px" }}>
-                            <label className="form-label"></label>
-                            <div className="input-group">
-                              <input
-                                type="hidden"
-                                id="pin"
-                                className="form-control"
-                                readOnly
-                                name="caid"
-                                placeholder="আপনার caid নাম্বার"
-                                defaultValue={user_Caid}
-                              />
-                            </div>
-                          </div>
-                        </div>
+                        <input type="hidden" id="pin" name="user_type_id" defaultValue={1}/>
+                        <input type="hidden" id="pin" name="caid" defaultValue={user_Caid}/>
 
-                        <div className="form-group  col-sm-4 col-md-6">
+                        <div className="form-group">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label">
-                              নতুন পিন
+                            নতুন পিন দিন
                             </label>
                             <div className="input-group">
                               <input
@@ -299,16 +311,20 @@ function ResetPassword() {
                                 id="pin"
                                 className="form-control"
                                 name="password"
-                                placeholder="পিন"
+                                placeholder="নতুন পিন দিন"
+                                data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
+                                maxLength={6} 
+                                onInput={handleInput}
+                                onChange={handlePasswordChange}
                               />
                             </div>
                           </div>
                         </div>
 
-                        <div className="form-group  col-sm-4 col-md-6">
+                        <div className="form-group">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label">
-                              পিন নিশ্চিত করুন
+                            নতুন পিনটি পুনরায় দিন
                             </label>
                             <div className="input-group">
                               <input
@@ -316,42 +332,36 @@ function ResetPassword() {
                                 id="pin"
                                 className="form-control"
                                 name="password_confirmation"
-                                placeholder="password_confirmation"
+                                placeholder="নতুন পিনটি পুনরায় দিন"
+                                data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
+                                maxLength={6} 
+                                onInput={handleInput}
+                                onChange={handleConfirmPasswordChange}
+                                onKeyUp={handleBlur}
                               />
                             </div>
                           </div>
                         </div>
                         
-                        <div className="d-flex justify-content-end align-items-center pt-3 ">
-                        {msg && 
-                    <Alert className="m-2 d-flex justify-content-center" variant="success" >
-                    <Alert.Heading>{msg}</Alert.Heading>
-                    {/* <p>আপনার সঠিক ওটিপি কোডটি লিখুন এবং চেক করুন</p> */}
-                    </Alert>}
-
-                      {errmsg && <Alert className="m-2 d-flex justify-content-center text-white" variant="danger">{errmsg}</Alert>}
                           <button
                             type="submit"
-                            className="btn btn-primay px-5"
+                            className="btn login-button"
                             style={{
                               backgroundColor: "#428F92",
                               color: "#fff",
+                              width: '250px',
                             }}
                           >
-                            {" "}
-                            পিন পরিবর্তন সম্পূর্ণ করুন{" "}
-                            <MdOutlineKeyboardArrowRight
-                              className="fs-3"
-                              style={{ marginTop: "-0.3rem" }}
-                            />{" "}
+                            নিশ্চিত
                           </button>
-                        </div>
+                       
                       </form>
                     )}
-                    
+
                   </div>
                 </div>
               </div>
+              <div className="col-sm-3"></div>
             </div>
           </div>
         }

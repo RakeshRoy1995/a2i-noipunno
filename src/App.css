@@ -1,21 +1,26 @@
 @font-face {
-  font-family: 'SolaimanLipi, sans-serif ';
+  font-family: SolaimanLipi, sans-serif;
   src: url('SolaimanLipi.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
+*{
+  font-family: SolaimanLipi, sans-serif !important;
+}
+
 /* font-class Nikosh */
 .ff_niskosh {
   /* background-color: blue; */
-  font-family: 'SolaimanLipi, sans-serif ' !important;
+  font-family: SolaimanLipi, sans-serif !important;
 }
 
 .root_styles {
-  font-family: 'SolaimanLipi, sans-serif ';
+  font-family: SolaimanLipi, sans-serif !important;
   /* font-family: "Roboto"; */
   box-sizing: border-box;
   background-color: #efefef;
+
   color: #000000;
 }
 

@@ -335,10 +335,10 @@ export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
     class_room?.data?.data?.subjects.map((d_2: any) => {
       if (d_2?.subject_id === d?.subject_id && d_2.class_room ) {
 
-        console.log(`d_2.class_room`, d_2.class_room);
+        // console.log(`d_2.class_room`, d_2.class_room);
       const stdnt =   d_2.class_room.students.map((formate_stu)=>{
 
-        console.log(`formate_stu`, formate_stu);
+        // console.log(`formate_stu`, formate_stu);
 
         const studnt :any = {
           ...formate_stu ,
@@ -434,7 +434,7 @@ export const formate_teanscript_dataBy_single_student = (data: any) => {
   const stu = data[0];
   const allPi = data;
 
-  // console.log("our_all_piData" , our_all_piData);
+  // // console.log("our_all_piData" , our_all_piData);
   if (stu) {
     const student_dta = all_studentsData.filter(
       (d: any) => d.uid == stu.student_uid
@@ -678,7 +678,7 @@ export const accessBIandReport = () => {
     const data = localStorage.getItem("own_subjet");
     const storageData = JSON.parse(data);
 
-  // console.log(`storageData`, storageData.data.data.subjects);
+  // // console.log(`storageData`, storageData.data.data.subjects);
 
     return false
   }

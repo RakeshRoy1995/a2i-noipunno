@@ -9,7 +9,7 @@ import Total_Student_Teacher_ClassRoom_for_TeacherDashboard from './Total_Studen
 const BannerSection = () => {
 
   return (
-    <section className="container my-3">
+    <section className="container my-3" style={{background:"while"}}>
       <div className="card-container">
         <div className="row g-3 ">
           <TeacherProfileCard />

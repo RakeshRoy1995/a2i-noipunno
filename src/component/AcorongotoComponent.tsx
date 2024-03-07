@@ -65,11 +65,11 @@ export default function AcorongotoComponent({
 
     const all_submited_PI_ = data?.data?.evaluation;
 
-    // console.log("data.data?.evaluation", data.data?.evaluation);
+    // // console.log("data.data?.evaluation", data.data?.evaluation);
 
 
     if (data.data?.evaluation?.length) {
-      // console.log(`data.data?.evaluation[0]?.submit_status`, data.data?.evaluation[0]);
+      // // console.log(`data.data?.evaluation[0]?.submit_status`, data.data?.evaluation[0]);
       setis_draft(data.data?.evaluation[0]?.submit_status);
     }
 

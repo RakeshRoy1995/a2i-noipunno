@@ -25,15 +25,6 @@ const EditTeacherProfile = () => {
   const [upozila, setupozila] = useState<any>([]);
   const [countdown, setCountdown] = useState(30);
   const [selectedDate, setSelectedDate] = useState(new Date());
-<<<<<<< HEAD
-  const [selectedJoiningDate, setSelectedJoiningDate] = useState(new Date())
-
-  // default img test
-  // const image_upload_icon =  "../assets/images/image-upload-icon/preview-65.png";
-
-
-=======
->>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
   const [nameBn, setNameBn] = useState('');
   const [isBanglaValid, setIsBanglaValid] = useState(true);
   const [nameEn, setNameEn] = useState('');
@@ -63,7 +54,7 @@ const EditTeacherProfile = () => {
   const getUserDetails = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
     if (get_teachers_details) {
-      console.log("userDetaisl", get_teachers_details?.data?.teachers[0]);
+      // console.log("userDetaisl", get_teachers_details?.data?.teachers[0]);
 
       setuserDetails(get_teachers_details?.data?.teachers[0]);
     }
@@ -370,38 +361,13 @@ const EditTeacherProfile = () => {
                             value={nameBn}
                             onChange={handleBanglaInputValidate}
                             placeholder="আপনার নাম লিখুন (বাংলায়)"
-<<<<<<< HEAD
-                            data-tooltip="অনুগ্রহ করে বাংলায় নাম লিখুন!"
-=======
                             maxLength={40}
->>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                           />
                           {!isBanglaValid && (
                             <div className="invalid-feedback">অনুগ্রহ করে বাংলায় নাম লিখুন!</div>
                           )}
                         </div>
                       </div>
-<<<<<<< HEAD
-                    </div> */}
-
-                      {/* শিক্ষা প্রতিষ্ঠানের নাম */}
-                      <div className="form-group col-sm-4 col-md-6">
-                        <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
-                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>শিক্ষা প্রতিষ্ঠানের নাম</label>
-                          <div className="input-group" style={{ flex: 1 }}>
-                            <input
-                              style={{ background: "#F9F9F9" }}
-                              type="text"
-                              id="institution_name"
-                              className="form-control"
-                              name="institution_name"
-                              placeholder="শিক্ষা প্রতিষ্ঠানের নাম"
-                              readOnly
-                              // defaultValue={ } // assuming you have this value
-                              data-tooltip="শিক্ষা প্রতিষ্ঠানের নাম"
-                            />
-                          </div>
-=======
                     </div>
                     <div className="form-group col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
@@ -419,45 +385,9 @@ const EditTeacherProfile = () => {
                           {!isEnglishValid && (
                             <div className="invalid-feedback">অনুগ্রহ করে ইংরেজিতে নাম লিখুন!</div>
                           )}
->>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                         </div>
                       </div>
 
-<<<<<<< HEAD
-                      {/* যোগদানের তারিখ */}
-                      {/* <div className="form-group col-sm-4 col-md-6">
-                        <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
-                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>যোগদানের তারিখ</label>
-                          <div className="input-group" style={{ flex: 1 }}>
-                            <input
-                              style={{ background: "#F9F9F9" }}
-                              type="date"
-                              id="joining_date"
-                              className="form-control"
-                              name="joining_date"
-                              placeholder="যোগদানের তারিখ"
-                              // defaultValue={""} // assuming you have this value
-                              data-tooltip="যোগদানের তারিখ"
-                            />
-                          </div>
-                        </div>
-                      </div> */}
-                      <div className="form-group col-sm-4 col-md-6">
-                        <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
-                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>যোগদানের তারিখ</label>
-                          <div className="input-group" style={{ flex: 1 }}>
-                            <DatePicker
-                              id="joining_date"
-                              className="form-control w-100"
-                              placeholderText="যোগদানের তারিখ"
-                              name="joining_date"
-                              dateFormat="yyyy-MM-dd"
-                              selected={selectedJoiningDate}
-                              onChange={(date) => setSelectedJoiningDate(date)}
-                              style={{ width: '100%', maxWidth: '100%', background: '#f9f9f9' }}
-                            />
-                          </div>
-=======
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label">মোবাইল নাম্বার</label>
@@ -473,7 +403,6 @@ const EditTeacherProfile = () => {
                             minLength={11}
                           />
 
->>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                         </div>
                       </div>
 
@@ -574,26 +503,6 @@ const EditTeacherProfile = () => {
                       </div>
                     </div> */}
 
-<<<<<<< HEAD
-
-                      {/* user id */}
-                      {/* User ID Field */}
-                      <div className="form-group col-sm-4 col-md-6">
-                        <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
-                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>User ID</label>
-                          <div className="input-group" style={{ flex: 1 }}>
-                            <input
-                              style={{ background: "#F9F9F9", width: "100%" }}
-                              type="text"
-                              id="user_id"
-                              className="form-control"
-                              name="user_id"
-                              placeholder="User ID"
-                              readOnly // if it's supposed to be read-only
-                              data-tooltip="User ID"
-                            />
-                          </div>
-=======
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label">ইমেইল আইডি </label>
@@ -604,7 +513,6 @@ const EditTeacherProfile = () => {
                             readOnly
                             name="email"
                             defaultValue={email} />
->>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                         </div>
                       </div>
 
@@ -628,121 +536,6 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
-<<<<<<< HEAD
-                      {/* birthday */}
-                      <div className="form-group col-sm-4 col-md-6">
-                        <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
-                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>জন্ম তারিখ</label>
-                          <div className="input-group" style={{ flex: 1 }} data-tooltip="অনুগ্রহ করে সঠিক জন্ম তারিখ দিন">
-                            <DatePicker
-                              id="pin"
-                              className="form-control w-100"
-
-                              placeholderText="আপনার জন্ম তারিখ দিন"
-                              name="date_of_birth"
-                              dateFormat="yyyy-MM-dd"
-                              selected={selectedDate}
-                              onChange={(date) => setSelectedDate(date)}
-                              style={{ width: '100%', maxWidth: '100%', background: '#f9f9f9' }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* <div className="form-group  col-sm-4 col-md-6">
-                      <div className="mb-3" style={{ fontSize: "16px" }}>
-                        <label className="form-label">ছবি আপলোড করুন </label>
-                        <div className="input-group">
-                          <input
-                            type="file"
-                            id="imageInput"
-                            accept="image/*"
-                            name="image"
-                          />
-                        </div>
-                      </div>
-                    </div> */}
-
-
-
-                      {/* gender */}
-                      <div className="form-group col-sm-4 col-md-6">
-                        <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
-                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>লিঙ্গ</label>
-                          <div className="input-group" style={{ flex: 1 }} data-tooltip="অনুগ্রহ করে লিঙ্গ নির্বাচন করুন">
-                            <select
-                              className="form-control"
-                              style={{ background: "#F9F9F9" }}
-                              name="gender"
-                              defaultValue=""
-                            >
-                              <option value="">লিঙ্গ নির্বাচন করুন</option>
-                              <option value="1" selected={gender === "1"}>পুরুষ</option>
-                              <option value="2" selected={gender === "2"}>মহিলা</option>
-                              <option value="3" selected={gender === "3"}>অন্যান্য</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-
-
-                      {/* জাতীয় পরিচয়পত্র নম্বর */}
-                      <div className="form-group col-sm-4 col-md-6">
-                        <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
-                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>জাতীয় পরিচয়পত্র নম্বর</label>
-                          <div className="input-group" style={{ flex: 1 }}>
-                            <input
-                              style={{ background: "#F9F9F9" }}
-                              type="text"
-                              id="national_id"
-                              className="form-control"
-                              name="national_id"
-                              placeholder="জাতীয় পরিচয়পত্র নম্বর"
-                              defaultValue={nid} // assuming you have this value
-                              data-tooltip="জাতীয় পরিচয়পত্র নম্বর"
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* রক্তের গ্রুপ */}
-                      <div className="form-group col-sm-4 col-md-6">
-                        <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
-                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>রক্তের গ্রুপ</label>
-                          <div className="input-group" style={{ flex: 1 }}>
-                            <select
-                              className="form-control"
-                              style={{ background: "#F9F9F9" }}
-                              name="blood_group"
-                              defaultValue=""
-                              data-tooltip="রক্তের গ্রুপ"
-                            >
-                              <option value="">রক্তের গ্রুপ নির্বাচন করুন</option>
-                              <option value="A+">A+</option>
-                              <option value="A-">A-</option>
-                              <option value="B+">B+</option>
-                              <option value="B-">B-</option>
-                              <option value="AB+">AB+</option>
-                              <option value="AB-">AB-</option>
-                              <option value="O+">O+</option>
-                              <option value="O-">O-</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* বিভাগ */}
-                      <div className="form-group col-sm-4 col-md-6">
-                        <div className="mb-3 d-flex" style={{ fontSize: "16px" }}>
-                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>বিভাগ<span className="text-danger">*</span></label>
-                          <select className="form-control" style={{ background: "#F9F9F9" }} name="division_id" defaultValue={''} onChange={(e: any) => getdistrictBydivisionID(e.target.value)} data-tooltip="অনুগ্রহ করে বিভাগ নির্বাচন করুন">
-                            <option value={''}>বিভাগ নির্বাচন করুন</option>
-                            {allDivision.map((d, k) => (
-                              <option key={k} value={d?.uid} selected={d?.uid == division_id}>
-                                {d?.division_name_bn || d?.division_name_en}
-                              </option>
-                            ))}
-=======
                     <div className="form-group col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label htmlFor="gender" className="form-label">লিঙ্গ</label>
@@ -756,34 +549,10 @@ const EditTeacherProfile = () => {
                             <option value={"1"} selected={(gender === "1")}>পুরুষ</option>
                             <option value={"2"} selected={(gender === "2")}>মহিলা</option>
                             <option value={"3"} selected={(gender === "3")}>অন্যান্য</option>
->>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                           </select>
                         </div>
                       </div>
 
-<<<<<<< HEAD
-                      {/* জেলা */}
-                      <div className="form-group col-sm-4 col-md-6 ">
-                        <div className="mb-3 d-flex" style={{ fontSize: "16px" }}>
-                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>জেলা<span className="text-danger">*</span></label>
-                          <select className="form-control" name="district_id" style={{ background: "#F9F9F9" }} defaultValue={''} onChange={(e: any) => getDivisionByDistrictId(e.target.value)} data-tooltip="অনুগ্রহ করে জেলা নির্বাচন করুন">
-                            <option value={''}>জেলা নির্বাচন করুন</option>
-                            {district.length > 0 ? (
-                              district.map((d, k) => (
-                                <option key={k} value={d?.uid} selected={d?.uid == district_id}>
-                                  {d?.district_name_bn || d?.district_name_en}
-                                </option>
-                              ))
-                            ) : (
-                              allDistrict.map((d, k) => (
-                                <option key={k} value={d?.uid} selected={d?.uid == district_id}>
-                                  {d?.district_name_bn || d?.district_name_en}
-                                </option>
-                              ))
-                            )}
-                          </select>
-                        </div>
-=======
                     <div className="form-group  col-sm-4 col-md-6">
                       <div className="mb-3" style={{ fontSize: "16px" }}>
                         <label className="form-label"> বিভাগ</label>
@@ -800,7 +569,6 @@ const EditTeacherProfile = () => {
                           }
 
                         </select>
->>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                       </div>
 
                       <div className="form-group col-sm-4 col-md-6">
@@ -996,8 +764,6 @@ const EditTeacherProfile = () => {
                         </div>
 
                       </div>
-<<<<<<< HEAD
-=======
                     </div>
                     <div className="form-group col-sm-4 col-md-6">
                       <div className="d-flex align-items-center gap-3" style={{ width: "100%" }}>
@@ -1005,7 +771,6 @@ const EditTeacherProfile = () => {
                           <label className="form-label">
                           সিগনেচার আপলোড করুন
                           </label>
->>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
 
 
                       {/* প্রোফাইল হালনাগাদ করুন btn */}
@@ -1014,17 +779,10 @@ const EditTeacherProfile = () => {
                         </button>
                       </div>
 
-<<<<<<< HEAD
-
-                    </form>
-
-                  </div>
-=======
                     <div className="d-flex justify-content-end align-items-center pt-3 pe-3">
                       <button type="submit" className="btn btn-primay px-5" style={{ backgroundColor: "#428F92", color: "#fff", }} > প্রোফাইল হালনাগাদ করুন{" "} <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem", }} />{" "} </button>
                     </div>
                   </form>
->>>>>>> 996b6e30186af429f44a518aefcb202ef5446d86
                 </div>
               </div>
             </div>

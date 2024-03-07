@@ -8,11 +8,14 @@ import nctbLogo from "../assets/login_page_materials/icons/NCTB_logo.png";
 import unicef from "../assets/login_page_materials/icons/Logo_Signature_Container_Circle_ENG_RGB-300x300 1.png";
 import A2I from "../assets/login_page_materials/icons/Aspire_to_Innovate_Seal 2.svg";
 import { Helmet } from "react-helmet";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, ChangeEvent } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { userInfo, resetPassword, otpComfirm, changePin } from "../Request";
 import PopUpAppInfo from "./PopUpAppInfo/PopUpAppInfo";
+import LoginPageCommonLeft from "./LoginPageCommonLeft";
+import LoginPageModalCommon from "./LoginPageModalCommon";
+import tippy from "tippy.js";
 
 const PasswordReset = () => {
   const [error, seterror] = useState("");
@@ -22,11 +25,32 @@ const PasswordReset = () => {
   const [showVarify, setshowVarify] = useState(false);
   const [buttonSHow, setbuttonSHow] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
   const [otpSubmit, setOtpSubmitButton] = useState(false);
   const [resetPwd, setResetPassword] = useState(false);
   const [getCaid, setCaid] = useState('');
+  
+  const { getUserId } = useParams();
 
   const [userId_from_Cookie, setUserId_from_Cookie] = useState("");
+
+  if(getUserId){
+    async function fetchData() {
+      try {
+        const { data }: any = await userInfo(getUserId);
+        setPhone(data.data.phone_no);
+        setCaid(data.data.caid);
+        //seterror("");
+        setUserId_from_Cookie(getUserId);
+        setshowVarify(true);
+        setshoOtpVarify(true);
+      } catch (error) {
+        setUserId_from_Cookie(getUserId);
+        seterror("ভুল আইডি");
+      }
+    }
+    fetchData();
+  }
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -41,8 +65,10 @@ const PasswordReset = () => {
         const { data }: any = await userInfo(caId);
         setPhone(data.data.phone_no);
         setCaid(data.data.caid);
+        seterror("");
         setshowVarify(true);
         setshoOtpVarify(true);
+        setUserId_from_Cookie(caId);
       } catch (error) {
         seterror("ভুল আইডি");
       }
@@ -50,7 +76,7 @@ const PasswordReset = () => {
     } else {
       //alert('otp sending..')
       const { data }: any = await resetPassword(datas);
-      console.log(data);
+      //// console.log(data);
       if (data?.status === true) {
         setmsg("আপনার নম্বরে ওটিপিটি পাঠানো হয়েছে।")
         setbuttonSHow(false)
@@ -59,15 +85,15 @@ const PasswordReset = () => {
         seterror("ভুল আইডি");
       }
     }
-
   }
 
   const handleOTPSubmit = async (event: any) => {
     event.preventDefault();
     const datas = new FormData(event.target);
+
     //const pin = event.target.pin.value;
-    setmsg("")
-    seterror("")
+    //setmsg("")
+    //seterror("")
     //alert(pin);
     try {
       const { data }: any = await otpComfirm(datas);
@@ -76,12 +102,14 @@ const PasswordReset = () => {
         setshowVarify(false)
         setOtpSubmitButton(true)
         setResetPassword(true)
+        setmsg("")
+        seterror("");
       } else {
         seterror("আপনার ওটিপিটি সঠিক নয়।");
       }
     } catch (error) {
       seterror("আপনার ওটিপিটি সঠিক নয়।");
-      console.log(`error`, error);
+     // // console.log(`error`, error);
     }
   }
 
@@ -136,6 +164,75 @@ const PasswordReset = () => {
     window.location.href = "https://forms.gle/sFrdsXavPaQryQ6k8";
   };
 
+  const [otp, setOtp] = useState<string[]>(['', '', '', '']);
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+
+  const numberString: string = otp.join('');
+
+  useEffect(() => {
+    inputRefs.current[0]?.focus();
+  }, []);
+
+  const handleChange = (index: number, value: string) => {
+      if (!isNaN(Number(value))) {
+      const newOtp = [...otp];
+      newOtp[index] = value;
+
+      setOtp(newOtp);
+
+      if (value && index < otp.length - 1) {
+        inputRefs.current[index + 1]?.focus();
+      }
+    }
+  };
+
+  const handleKeyDown = (index: number, event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Backspace' && !otp[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // Replace non-digit characters with an empty string
+    const sanitizedValue = event.target.value.replace(/\D/g, '');
+    // Update the input value
+    event.target.value = sanitizedValue;
+  };
+
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+    if (password === confirmPassword) {
+      seterror('');
+    } else {
+      seterror('নতুন পিন এবং পুনরায় পিন মিল নেই।');
+    }
+  };
+
+  const handleBlur = () => {
+    if (password === confirmPassword) {
+      seterror('');
+    } else {
+      seterror('নতুন পিন এবং পুনরায় পিন মিল নেই।');
+    }
+  };
+
+      // tooltip  for signature field
+      useEffect(() => {
+        const elementWithDataTooltip = document.querySelectorAll('[data-tooltip ]');
+        elementWithDataTooltip.forEach(element => {
+          tippy(element, {
+            content: element.getAttribute("data-tooltip")
+          });
+        })
+      }, [])
+
   return (
     <>
       <Helmet>
@@ -143,7 +240,7 @@ const PasswordReset = () => {
       </Helmet>
 
       <section id="body" className="login-page">
-        <div className="login-bg min-vh-100 position-relative">
+        <div className="login-bg min-vh-100 position-relative" style={{ overflow: 'hidden' }}>
           {/* <div className="marque-notification pointer" onClick={redirect}>
             <div className="marquee-container">
               <div className="marquee-content">
@@ -153,39 +250,35 @@ const PasswordReset = () => {
             </div>
           </div> */}
 
-          <div className="container mt-3">
+          <div className="container-fluid login-container">
 
-            <div className="row min-vh-90-100 position-relative d-flex align-items-center justify-content-center py-3">
-              <div className="col-sm-12 col-md-5 py-2">
-                <div className="mobile-view">
-                  <img src={noipunnoLogo} alt="logo" className="loginLogo centered-image" />
-                </div>
-
-                <h1 className="teacher-login-title mobile-view">
-                  বিষয়ভিত্তিক মূল্যায়ন অ্যাপ্লিকেশন
-                </h1>
-                <p className="np-login-subtitle mt-3 mobile-view">
-                  অনুগ্রহ করে আপনার অ্যাকাউন্টে রিসেট পিন করুন এবং অ্যাডভেঞ্চার শুরু করুন
-                </p>
+            <div className="row">
+              <div className="col-sm-12 col-md-7">
+                  <LoginPageCommonLeft/>
               </div>
 
-              <div className="col-sm-12 col-md-7 py-2">
-                <div className="card loginCard max-width-540 login-card-padding m-auto">
-                  <p className="login-title text-center mb-4">
+              <div className="col-sm-12 col-md-5 order-mobile-first">
+                <div className="card loginCard max-width-540 login-card-padding">
+                  <p className="login-title text-center mb-3">
                     {showVarify ? "রিসেট পিন" : "রিসেট পিন"}
                   </p>
-                  {error && <p className="text-center text-danger">{error}</p>}
-                  {msg && <p className="text-center text-success">{msg}</p>}
+
+                
+                  {msg && <p className="text-center text-success bn">{msg}</p>}
 
                   {
                     !otpSubmit ?
 
                       <form onSubmit={handleSubmit}>
                         {
-                          showVarify && <>
-                            <div className="alert alert-info mb-4" style={{ backgroundColor: '#17A2B8', color: 'white', fontFamily: 'Kalpurush' }}>
+                          showVarify ? <>
+                            <div className="alert alert-info mb-4 bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>
                               নিচের মোবাইল নম্বরটি সঠিক না থাকলে কাস্টমার সাপোর্টে (<a style={{ color: 'white', textDecoration: 'underline' }} href="tel:09638600700">০৯৬৩৮৬০০৭০০</a>) যোগাযোগ করুন।
                             </div>
+                          </>
+                          :
+                          <>
+                            {error && <p className="text-center text-danger bn">{error}</p>}
                           </>
                         }
 
@@ -199,7 +292,9 @@ const PasswordReset = () => {
                                 :
                                 <>ইউজার আইডি প্রদান করুন</>
                             }
+
                           </label>
+                          
                           <div className="input-group">
                             <div className="input-group-prepend">
                               <span>
@@ -210,47 +305,53 @@ const PasswordReset = () => {
                                 />
                               </span>
                             </div>
-                            <input
-                              // onChange={handleChange}
-                              className="form-control np-login-form-field custom-input"
-                              type="text"
-                              // value={value}
-                              defaultValue={userId_from_Cookie}
-                              required
-                              autoComplete="off"
-                              placeholder="ইউজার আইডি"
-                              name="caid"
-                              id="caid"
-                            />
+                            
+                              <input
+                                // onChange={handleChange}
+                                className="form-control np-login-form-field custom-input"
+                                type="text"
+                                // value={value}
+                                defaultValue={userId_from_Cookie}
+                                required
+                                autoComplete="off"
+                                placeholder="ইউজার আইডি"
+                                name="caid"
+                                id="caid"
+                                data-tooltip="শিক্ষক হিসেবে লগইন করার জন্য PDSID/INDEX/SGN প্রদান করুন"
+                              />
+                             
                           </div>
                         </div>
 
                         {showVarify && (
-                          <div className="form-group mb-1 mt-3">
-                            <label htmlFor="pin" className="login-field-title mt-2 mb-2">
-                              মোবাইল নম্বর
-                            </label>
-                            <div className="input-group">
-                              <img
-                                src={pinNumberFieldUserIcon}
-                                className="np-login-field-icon"
-                                alt="logo"
-                              />
-                              <input
-                                className="form-control np-login-form-field no-spinners custom-input"
-                                type="text"
-                                id="pin"
-                                name="pin"
-                                required
-                                defaultValue={modifiedNumber}
-                                placeholder="মোবাইল নম্বর"
-                              />
+                          <>
+                            <div className="form-group mb-1 mt-3">
+                              <label htmlFor="pin" className="login-field-title mt-2 mb-2">
+                                মোবাইল নম্বর
+                              </label>
+                              <div className="input-group">
+                                <img
+                                  src={pinNumberFieldUserIcon}
+                                  className="np-login-field-icon"
+                                  alt="logo"
+                                />
+                                <input
+                                  className="form-control np-login-form-field no-spinners custom-input"
+                                  type="text"
+                                  id="pin"
+                                  name="pin"
+                                  required
+                                  defaultValue={modifiedNumber}
+                                  placeholder="মোবাইল নম্বর"
+                                  disabled
+                                />
+                              </div>
                             </div>
-                          </div>
+                          </>
                         )}
 
                         {
-                          buttonSHow && <button type="submit" className="btn login-btn w-100 mt-2">{showVarify ? "ওটিপি পাঠান" : "তথ্য যাচাই করুন"}</button>
+                          buttonSHow && <button type="submit" className="btn login-button mt-3">{showVarify ? "ওটিপি পাঠান" : "তথ্য যাচাই করুন"}</button>
                         }
 
                         <div className="form-group">
@@ -271,19 +372,23 @@ const PasswordReset = () => {
                       <>
                         {
                           !resetPwd &&
+                          <> 
+
+                          {error && <p className="text-center text-danger bn">{error}</p>}
 
                           <form onSubmit={handleOTPSubmit}>
+                           
                             <input type="hidden" name="user_type_id" value="1" />
                             <div className="form-group mb-1">
                               <label htmlFor="pin" className="login-field-title mb-2">
                                 ওটিপি প্রদান করুন
                               </label>
                               <div className="input-group">
-                                <img
+                                {/* <img
                                   src={pinNumberFieldUserIcon}
                                   className="np-login-field-icon"
                                   alt="logo"
-                                />
+                                /> 
                                 <input
                                   className="form-control np-login-form-field no-spinners custom-input"
                                   type="number"
@@ -292,20 +397,58 @@ const PasswordReset = () => {
                                   name="pin"
                                   required
                                   placeholder="OTP"
-                                />
+                                />        */}
+
+                                  <div className="row">
+                                        {otp.map((digit, index) => (
+                                          <div className="col-sm-3">
+                                          <input
+                                            key={index}
+                                            type="text"
+                                            className="form-control"
+                                            maxLength={1}
+                                            value={digit}
+                                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(index, e.target.value)}
+                                            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyDown(index, e)}
+                                            ref={(ref) => ref && (inputRefs.current[index] = ref)}
+                                            style={{ float:'left'}}
+                                            required
+                                          />
+                                        </div>
+                                        ))}
+                                  </div>
+
+                                  <input type="hidden" value={numberString} id="pin" name="pin" />
+
                                 <input type="hidden" id="caid" name="caid" defaultValue={getCaid} />
                               </div>
                             </div>
-                            <button type="submit" className="btn login-btn w-100 mt-3">নিশ্চিত</button>
+                            <button type="submit" className="btn login-button mt-3">নিশ্চিত</button>
+
+                            <div className="form-group">
+                              <p className="mb-1 mt-3 text-center">
+                                <Link
+                                  to="/login"
+                                  className="forget-password"
+                                  style={{ color: '#428F92', fontSize: '16px' }}
+                                >
+                                  লগইন পেজ এ ফিরে যেতে ক্লিক করুন
+                                </Link>
+                              </p>
+                            </div>
+
                           </form>
+                          </>
                         }
                       </>
-
                   }
 
                   {
                     resetPwd && <>
                       <form onSubmit={handleNewPaswordSubmit}>
+
+                      {error && <p className="text-center text-danger bn">{error}</p>}
+
                         <div className="form-group mb-1">
                           <label htmlFor="pin" className="login-field-title mb-2">
                             নতুন পিন দিন
@@ -317,13 +460,35 @@ const PasswordReset = () => {
                               alt="logo"
                             />
                             <input
-                              className="form-control np-login-form-field no-spinners custom-input"
-                              type={showPassword ? "number" : "password"}
+                              className="form-control np-login-form-field custom-input"
+                              type={showPassword ? "text" : "password"}
                               id="password"
                               name="password"
                               required
+                              autoComplete="off"
                               placeholder="নতুন পিন দিন"
+                              data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
+                              maxLength={6} 
+                              onInput={handleInput}
+                              onChange={handlePasswordChange}
                             />
+                            <div className="input-group-append password-toggle">
+                            <span>
+                              {showPassword ? (
+                                <i
+                                  onClick={() => setShowPassword(!showPassword)}
+                                  // id="password-toggle_2"
+                                  className="fa fa-eye img-fluid"
+                                />
+                              ) : (
+                                <i
+                                  onClick={() => setShowPassword(!showPassword)}
+                                  // id="password-toggle"
+                                  className="fa fa-eye-slash"
+                                />
+                              )}
+                            </span>
+                          </div>
                           </div>
                         </div>
 
@@ -338,17 +503,39 @@ const PasswordReset = () => {
                               alt="logo"
                             />
                             <input
-                              className="form-control np-login-form-field no-spinners custom-input"
-                              type={showPassword ? "number" : "password"}
+                              className="form-control np-login-form-field custom-input"
+                              type={showPassword2 ? "text" : "password"}
                               id="password_confirmation"
                               name="password_confirmation"
                               required
                               placeholder="নতুন পিনটি পুনরায় দিন"
+                              data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
+                              maxLength={6}
+                              onInput={handleInput}
+                              onChange={handleConfirmPasswordChange}
+                              onKeyUp={handleBlur}
                             />
+                            <div className="input-group-append password-toggle">
+                            <span>
+                              {showPassword2 ? (
+                                <i
+                                  onClick={() => setShowPassword2(!showPassword2)}
+                                  // id="password-toggle_2"
+                                  className="fa fa-eye img-fluid"
+                                />
+                              ) : (
+                                <i
+                                  onClick={() => setShowPassword2(!showPassword2)}
+                                  // id="password-toggle"
+                                  className="fa fa-eye-slash"
+                                />
+                              )}
+                            </span>
+                          </div>
                           </div>
                         </div>
                         <input type="hidden" id="caid" name="caid" defaultValue={getCaid} />
-                        <button type="submit" className="btn login-btn w-100 mt-3">নিশ্চিত</button>
+                        <button type="submit" className="btn login-button mt-3">নিশ্চিত</button>
 
                         {/* <div className="form-group my-2">
                                 <p className="mb-1">
@@ -369,6 +556,8 @@ const PasswordReset = () => {
               </div>
             </div>
           </div>
+
+          <LoginPageModalCommon/>
 
         </div>
         {/* bootstrap 5.0.2 min.js */}

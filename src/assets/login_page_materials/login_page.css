@@ -32,13 +32,14 @@ h6 {
   text-decoration: none;
 }
 
-.min-vh-90-100 {
+/* .min-vh-90-100 {
   height: calc(90vh - 90px);
-}
+} */
 
 .max-width-540 {
-  max-width: 450px;
+  max-width: 460px;
   border: none;
+  min-height: 400px;
 }
 
 .login-card-padding{
@@ -57,6 +58,47 @@ h6 {
   overflow-y: hidden; /* Disables vertical scrolling */
 }
 
+/** new style add  */
+.btn.login-button {
+  --rotate: 180deg;
+  background: linear-gradient(var(--rotate), #92278f 0%, #662d91 100%);
+  color: white;
+  border: 0px solid rgba(0, 0, 0, 0);
+  line-height: 15px;
+  transform: translatey(0px);
+  transition: all .75s cubic-bezier(0.72, 0.11, 0.22, 0.92);
+  position: relative;
+  z-index: 10;
+  --hover-radius: 60px;
+  overflow: hidden
+}
+
+.otp-box{
+  width: 80px;
+}
+
+.btn.login-button::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .3);
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  opacity: 1;
+  transition: all .75s cubic-bezier(0.72, 0.11, 0.22, 0.92);
+  clip-path: circle(0% at 0% 0%)
+}
+
+.btn.login-button:is(:hover) {
+  transform: translatey(-1px)
+}
+
+.btn.login-button:is(:hover)::after {
+  clip-path: circle(150% at 0 0)
+}
+
 .custom-card-frontend{
   border: none;
   margin-bottom: 10px;
@@ -72,6 +114,10 @@ h6 {
   color: white;
 }
 
+.carousel-inner-custom{
+  height: 140px;
+}
+
 .btn-center{
   display: flex;
   justify-content: center;
@@ -82,19 +128,21 @@ h6 {
   font-size: 18px !important;
 }
 
+.noipunno-app{
+  width: 80%;
+}
+
 .transparent-card{
   border: none;
   background-color: #f6f6f883;
-  margin-right: -80px;
+  width: 95%;
+  margin-left: 30px;
 }
 
 .footer-card-custom{
   margin-right: -120px;
 }
 
-.login-container{
-  margin-top: 30px;
-}
 
 .card-body-custom{
   padding: 10px;
@@ -103,7 +151,7 @@ h6 {
   width: 80%;
   margin: auto;
   border-radius: 10px;
-  margin-bottom: 126px;
+  margin-bottom: 55px;
   font-family: 'SolaimanLipi, sans-serif ';
 }
 
@@ -157,9 +205,8 @@ h6 {
   width: 100px;
 }
 
-.login-page .loginCard {
+.loginCard {
   border-radius: 6px;
-  padding: 30px 20px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
@@ -194,8 +241,7 @@ h6 {
 }
 
 .login-container {
-  padding-top: 6%;
-  padding-bottom: 4%;
+  margin-top: 90px !important;
 }
 
 .np-login-checbox-text {
@@ -209,14 +255,19 @@ h6 {
   align-items: center;
   border-radius: 6px;
   background: var(--primary-color-1);
+  color: white;
   margin: 0 auto;
   width: 100%;
    font-family: 'SolaimanLipi, sans-serif ';
 }
 
-.login-button:hover {
-  background: #428f92;
+.max-width-540 {
+  max-width: 450px;
+  border: none;
+  min-height: 400px;
 }
+
+
 
 .password-toggle {
   position: absolute;
@@ -299,10 +350,14 @@ label.form-check-label:focus,
 /* --------- */
 .np-login-form-field {
   border-radius: 5px !important;
-  background-color: #E8F0FE;
+  background-color: #e3f3ff !important;
   padding: 0.775rem 2.75rem;
   border: none;
   height: 40px;
+}
+
+.form-control::placeholder{
+  color: rgba(112, 111, 111, 0.849) !important;   
 }
 
 .login-field-title {
@@ -485,12 +540,16 @@ label.form-check-label:focus,
   color: var(--text_white);
 }
 
-.loginCard ::placeholder {
+/* .loginCard ::placeholder {
   font-size: 16px;
   padding-left: 10px;
-}
+} */
 
 /* app info end */
+
+.otp-card{
+  width: 400px;
+}
 
 /* media query start */
 @media screen and (min-width: 992px) and (max-width: 1199.98px) {
@@ -533,7 +592,7 @@ label.form-check-label:focus,
     font-size: 12px;
   }
 
-  .login-page .loginCard {
+ .loginCard {
     padding: 20px 40px;
   }
 
@@ -568,6 +627,11 @@ label.form-check-label:focus,
     margin-right: 0px;
   }
 
+  .app-download{
+    margin: auto;
+    text-align: center;
+  }
+
   .transparent-card{
     border: none;
     background-color: #f6f6f883;
@@ -576,6 +640,7 @@ label.form-check-label:focus,
 
   .card-body-custom{
     margin-bottom: 0px;
+    width: 90%;
   }
 
   .card-footer-image{
@@ -595,7 +660,7 @@ label.form-check-label:focus,
     font-size: 12px;
   }
 
-  .login-page .loginCard {
+ .loginCard {
     padding: 30px 40px;
   }
 
@@ -635,6 +700,28 @@ label.form-check-label:focus,
     width: 20px;
   }
 
+  .otp-card{
+    width: 100%;
+  }
+
+  .otp-box{
+    width: 80%;
+  } 
+
+  .login-container {
+    margin-top: 20px !important;
+  }
+
+  .app-download{
+    margin: auto;
+    text-align: center;
+    padding: 2px;
+  }
+
+  .carousel-inner-custom{
+    height: 200px;
+  }
+
   .order-mobile-first {
     order: -1; 
   }
@@ -669,11 +756,13 @@ label.form-check-label:focus,
   .transparent-card{
     border: none;
     background-color: #f6f6f883;
-    margin-right: 0px;
+    margin-left: 0px;
+    width: 100%;
   }
 
   .card-body-custom{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    width: 90%;
   }
 
   .card-footer-image{
@@ -694,15 +783,15 @@ label.form-check-label:focus,
     padding-bottom: 10px;
   }
 
-  .login-page .loginCard {
+ .loginCard {
     padding: 45px 40px;
   }
 
-  .login-page .loginCard .form-group {
+ .loginCard .form-group {
     padding: 10px 0px;
   }
 
-  .login-page .loginCard .login-title {
+  .loginCard .login-title {
     padding-bottom: 20px;
   }
 
@@ -756,7 +845,7 @@ label.form-check-label:focus,
     font-size: 12px;
   }
 
-  .login-page .loginCard {
+  .loginCard {
     padding: 30px 40px;
   }
 

@@ -6,7 +6,6 @@ import pinNumberFieldUserIcon from "../assets/login_page_materials/icons/lock.sv
 import passwordHideEyeIcon from "../assets/login_page_materials/icons/eye-slash.svg";
 import mediaFileIcon from "../assets/login_page_materials/new/media-file-svgrepo-com.svg";
 import pdfIcon from "../assets/login_page_materials/new/pdf-svgrepo-com.svg";
-
 import govtLogo from "../assets/login_page_materials/icons/Vector.png";
 import nctbLogo from "../assets/login_page_materials/icons/NCTB_logo.png";
 import unicef from "../assets/login_page_materials/icons/Logo_Signature_Container_Circle_ENG_RGB-300x300 1.png";
@@ -22,7 +21,10 @@ import { motion } from "framer-motion"
 import LoginPageCommonLeft from "./LoginPageCommonLeft";
 import LoginPageModalCommon from "./LoginPageModalCommon";
 import tippy from "tippy.js";
+<<<<<<< HEAD
 import 'tippy.js/dist/tippy.css';
+=======
+>>>>>>> 39a1ee60614486474de4e5f4ea2efb011766c2ad
 
 const LoginPage = () => {
   const [error, seterror] = useState("");
@@ -76,7 +78,8 @@ const LoginPage = () => {
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
           window.location.assign("/");
         } else {
-          seterror("পিন মেলেনি");
+          //seterror("আপনার ইউজার অথবা পিনটি ভুল হয়েছে। অনুগ্রহ করে সঠিক ইউজার এবং পিন দিন।");
+          seterror(data.message);
         }
         setloading(false)
       } catch (error) {
@@ -157,6 +160,16 @@ const LoginPage = () => {
     setValue(sanitizedValue); // Update the state with the sanitized value
   };
 
+    // tooltip  for signature field
+    useEffect(() => {
+      const elementWithDataTooltip = document.querySelectorAll('[data-tooltip ]');
+      elementWithDataTooltip.forEach(element => {
+        tippy(element, {
+          content: element.getAttribute("data-tooltip")
+        });
+      })
+    }, [])
+
   return (
     <>
       <Helmet>
@@ -192,7 +205,7 @@ const LoginPage = () => {
                 <div className="col-sm-12 col-md-5 order-mobile-first">
                   <div className="card loginCard max-width-540 login-card-padding">
                     <p className="login-title text-center mb-3">লগ ইন</p>
-                    {error && <div className="alert alert-danger text-white">{error}</div>}
+                    {error && <div className="alert alert-danger text-white bn">{error}</div>}
 
                     <form onSubmit={handleSubmit}>
 
@@ -214,7 +227,7 @@ const LoginPage = () => {
                           </div>
                           <input
                             // onChange={handleChange}
-                            className="form-control np-login-form-field custom-input mb-2 bn"
+                            className="form-control np-login-form-field custom-input mb-2"
                             type="text"
                             // value={value}
                             defaultValue={userId_from_Cookie}
@@ -223,10 +236,16 @@ const LoginPage = () => {
                             placeholder="ইউজার আইডি"
                             name="caid"
                             id="caid"
+<<<<<<< HEAD
                             onChange={e => setUserId(e.target.value)}
                             data-toggle="tooltip"
                             data-placement="top"
                             title="প্রতিষ্ঠান হিসেবে লগইন করার জন্য EIIN/SGN প্রদান করুন"
+=======
+                            onChange={e => setUserId(e.target.value)} 
+                            data-tooltip="শিক্ষক হিসেবে লগইন করার জন্য PDSID/INDEX/SGN প্রদান করুন"
+                        
+>>>>>>> 39a1ee60614486474de4e5f4ea2efb011766c2ad
                           />
                         </div>
                       </div>
@@ -249,7 +268,7 @@ const LoginPage = () => {
                             name="password"
                             required
                             placeholder="123456"
-                            data-toggle="tooltip" data-placement="top" title="পিন প্রদান করুন"
+                            data-tooltip="পিন প্রদান করুন"
                             pattern="[0-9]{6}"
                             maxLength={6}
                             value={value}

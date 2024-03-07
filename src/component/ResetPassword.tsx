@@ -5,6 +5,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { confirm_otp, confirm_pass, sent_otp } from "../Request";
 import { Alert } from "react-bootstrap";
 import Swal from "sweetalert2";
+import tippy from "tippy.js";
 
 function ResetPassword() {
   const [user_Caid, setUser_Caid] = useState("");
@@ -163,6 +164,16 @@ function ResetPassword() {
     }
   };
 
+      // tooltip  for signature field
+      useEffect(() => {
+        const elementWithDataTooltip = document.querySelectorAll('[data-tooltip ]');
+        elementWithDataTooltip.forEach(element => {
+          tippy(element, {
+            content: element.getAttribute("data-tooltip")
+          });
+        })
+      }, [])
+
   return (
     <div>
       <section className="editTeacherProfilePage">
@@ -173,7 +184,7 @@ function ResetPassword() {
             <div className="row">
               <div className="col-sm-3"></div>
               <div className="col-sm-6">
-                <div className="card" style={{ border: 'none', minHeight: '300px' }}>
+                <div className="card shadow" style={{ border: 'none', minHeight: '300px' }}>
                   <div className="card-header"><h4 className="bn text-center p-2"> রিসেট পিন </h4></div>
                   <div className="card-body">
                     {/* send reset otp */}
@@ -188,7 +199,7 @@ function ResetPassword() {
                                 className="form-control"
                                 readOnly
                                 name="caid"
-                                
+                            
                                 defaultValue={user_Caid}
                               />
                             </div>
@@ -262,7 +273,6 @@ function ResetPassword() {
 
                                   <input type="hidden" value={numberString} id="pin" name="pin" />
 
-
                           <button
                                 type="submit"
                                 className="btn login-button px-5 mt-3"
@@ -302,6 +312,7 @@ function ResetPassword() {
                                 className="form-control"
                                 name="password"
                                 placeholder="নতুন পিন দিন"
+                                data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
                                 maxLength={6} 
                                 onInput={handleInput}
                                 onChange={handlePasswordChange}
@@ -322,6 +333,7 @@ function ResetPassword() {
                                 className="form-control"
                                 name="password_confirmation"
                                 placeholder="নতুন পিনটি পুনরায় দিন"
+                                data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
                                 maxLength={6} 
                                 onInput={handleInput}
                                 onChange={handleConfirmPasswordChange}

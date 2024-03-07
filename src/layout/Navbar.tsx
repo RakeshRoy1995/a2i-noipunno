@@ -152,17 +152,19 @@ const Navbar = () => {
                     onClick={(e) => window.location.reload()}
                     className="pointer"
                   >
-                    <img
+                   <NavLink to="/">
+                   <img
                       src={noipunnologo}
                       className="img-fluid"
                       alt="main logo"
-                    />
+                    /> 
+                   </NavLink>
                   </div>
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group position-relative">
-                      <a
+                      <NavLink
                         className="navbar-menu-item d-flex align-items-center ms-2"
-                        href="#"
+                        to="/"
                         role="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
@@ -186,7 +188,7 @@ const Navbar = () => {
                           className="img-fluid position-absolute bottom-0 end-0"
                           alt="Status icon"
                         />
-                      </a>
+                      </NavLink>
                       <ul className="dropdown-menu dropdown-menu-end">
                         <li>
                           <div className="border-bottom topnav-dropdown-style">
@@ -394,8 +396,8 @@ const Navbar = () => {
                         </li> */}
 
                             <li className="nav-item dropdown nav-item-style ">
-                              <a
-                                href="/"
+                              <NavLink
+                                to="/"
                                 // activeClassName='active'
                                 className="nav-link navbar-menu-item d-flex align-items-center"
                                 role="button"
@@ -408,7 +410,7 @@ const Navbar = () => {
                                   alt="main logo"
                                 />
                                 প্রথম পাতা
-                              </a>
+                              </NavLink>
                             </li>
 
                             <li className="nav-item dropdown nav-item-style">

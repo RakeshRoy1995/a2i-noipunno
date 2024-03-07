@@ -15,6 +15,7 @@ import { userInfo, resetPassword, otpComfirm, changePin } from "../Request";
 import PopUpAppInfo from "./PopUpAppInfo/PopUpAppInfo";
 import LoginPageCommonLeft from "./LoginPageCommonLeft";
 import LoginPageModalCommon from "./LoginPageModalCommon";
+import tippy from "tippy.js";
 
 const PasswordReset = () => {
   const [error, seterror] = useState("");
@@ -222,6 +223,16 @@ const PasswordReset = () => {
     }
   };
 
+      // tooltip  for signature field
+      useEffect(() => {
+        const elementWithDataTooltip = document.querySelectorAll('[data-tooltip ]');
+        elementWithDataTooltip.forEach(element => {
+          tippy(element, {
+            content: element.getAttribute("data-tooltip")
+          });
+        })
+      }, [])
+
   return (
     <>
       <Helmet>
@@ -261,7 +272,7 @@ const PasswordReset = () => {
                       <form onSubmit={handleSubmit}>
                         {
                           showVarify ? <>
-                            <div className="alert alert-info mb-4" style={{ backgroundColor: '#17A2B8', color: 'white', fontFamily: 'Kalpurush' }}>
+                            <div className="alert alert-info mb-4 bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>
                               নিচের মোবাইল নম্বরটি সঠিক না থাকলে কাস্টমার সাপোর্টে (<a style={{ color: 'white', textDecoration: 'underline' }} href="tel:09638600700">০৯৬৩৮৬০০৭০০</a>) যোগাযোগ করুন।
                             </div>
                           </>
@@ -297,7 +308,7 @@ const PasswordReset = () => {
                             
                               <input
                                 // onChange={handleChange}
-                                className="form-control np-login-form-field custom-input bn"
+                                className="form-control np-login-form-field custom-input"
                                 type="text"
                                 // value={value}
                                 defaultValue={userId_from_Cookie}
@@ -306,9 +317,7 @@ const PasswordReset = () => {
                                 placeholder="ইউজার আইডি"
                                 name="caid"
                                 id="caid"
-                                data-toggle="tooltip"
-                                data-placement="top"
-                                title="প্রতিষ্ঠান হিসেবে লগইন করার জন্য EIIN/SGN প্রদান করুন"
+                                data-tooltip="শিক্ষক হিসেবে লগইন করার জন্য PDSID/INDEX/SGN প্রদান করুন"
                               />
                              
                           </div>
@@ -451,14 +460,14 @@ const PasswordReset = () => {
                               alt="logo"
                             />
                             <input
-                              className="form-control np-login-form-field no-spinners custom-input bn"
+                              className="form-control np-login-form-field custom-input"
                               type={showPassword ? "text" : "password"}
                               id="password"
                               name="password"
                               required
+                              autoComplete="off"
                               placeholder="নতুন পিন দিন"
-                              data-toggle="tooltip" data-placement="top"
-                              title="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
+                              data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
                               maxLength={6} 
                               onInput={handleInput}
                               onChange={handlePasswordChange}
@@ -494,14 +503,13 @@ const PasswordReset = () => {
                               alt="logo"
                             />
                             <input
-                              className="form-control np-login-form-field no-spinners custom-input bn"
+                              className="form-control np-login-form-field custom-input"
                               type={showPassword2 ? "text" : "password"}
                               id="password_confirmation"
                               name="password_confirmation"
                               required
                               placeholder="নতুন পিনটি পুনরায় দিন"
-                              data-toggle="tooltip" data-placement="top"
-                              title="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
+                              data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
                               maxLength={6}
                               onInput={handleInput}
                               onChange={handleConfirmPasswordChange}

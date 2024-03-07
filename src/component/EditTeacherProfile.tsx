@@ -3,7 +3,7 @@ import { useEffect, useId, useState } from "react";
 import { all_district, all_division, all_upozila, teacher_dashboard, teacher_designation, update_teacher_profile } from "../Request";
 import Breadcumbtitle from "../layout/Breadcumb";
 import Swal from "sweetalert2";
-import 'animate.css';
+// import 'animate.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { convertToBanglaNumber } from "../utils/Utils";

@@ -173,16 +173,16 @@ const PasswordReset = () => {
   }, []);
 
   const handleChange = (index: number, value: string) => {
-    if (!isNaN(Number(value))) {
-    const newOtp = [...otp];
-    newOtp[index] = value;
+      if (!isNaN(Number(value))) {
+      const newOtp = [...otp];
+      newOtp[index] = value;
 
-    setOtp(newOtp);
+      setOtp(newOtp);
 
-    if (value && index < otp.length - 1) {
-      inputRefs.current[index + 1]?.focus();
+      if (value && index < otp.length - 1) {
+        inputRefs.current[index + 1]?.focus();
+      }
     }
-  }
   };
 
   const handleKeyDown = (index: number, event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -191,12 +191,35 @@ const PasswordReset = () => {
     }
   };
 
-
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     // Replace non-digit characters with an empty string
     const sanitizedValue = event.target.value.replace(/\D/g, '');
     // Update the input value
     event.target.value = sanitizedValue;
+  };
+
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+    if (password === confirmPassword) {
+      seterror('');
+    } else {
+      seterror('নতুন পিন এবং পুনরায় পিন মিল নেই।');
+    }
+  };
+
+  const handleBlur = () => {
+    if (password === confirmPassword) {
+      seterror('');
+    } else {
+      seterror('নতুন পিন এবং পুনরায় পিন মিল নেই।');
+    }
   };
 
   return (
@@ -379,7 +402,7 @@ const PasswordReset = () => {
                                             onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(index, e.target.value)}
                                             onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => handleKeyDown(index, e)}
                                             ref={(ref) => ref && (inputRefs.current[index] = ref)}
-                                            style={{ float:'left' }}
+                                            style={{ float:'left'}}
                                             required
                                           />
                                         </div>
@@ -438,6 +461,7 @@ const PasswordReset = () => {
                               title="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
                               maxLength={6} 
                               onInput={handleInput}
+                              onChange={handlePasswordChange}
                             />
                             <div className="input-group-append password-toggle">
                             <span>
@@ -480,6 +504,8 @@ const PasswordReset = () => {
                               title="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
                               maxLength={6}
                               onInput={handleInput}
+                              onChange={handleConfirmPasswordChange}
+                              onKeyUp={handleBlur}
                             />
                             <div className="input-group-append password-toggle">
                             <span>

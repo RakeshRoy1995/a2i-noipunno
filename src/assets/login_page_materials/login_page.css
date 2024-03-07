@@ -73,6 +73,10 @@ h6 {
   overflow: hidden
 }
 
+.otp-box{
+  width: 80px;
+}
+
 .btn.login-button::after {
   content: "";
   display: block;
@@ -543,6 +547,10 @@ label.form-check-label:focus,
 
 /* app info end */
 
+.otp-card{
+  width: 400px;
+}
+
 /* media query start */
 @media screen and (min-width: 992px) and (max-width: 1199.98px) {
   .helpedBy {
@@ -691,6 +699,14 @@ label.form-check-label:focus,
     top: 30%;
     width: 20px;
   }
+
+  .otp-card{
+    width: 100%;
+  }
+
+  .otp-box{
+    width: 80%;
+  } 
 
   .login-container {
     margin-top: 20px !important;

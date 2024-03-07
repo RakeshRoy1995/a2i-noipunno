@@ -24,6 +24,11 @@
 
 @import url("./components/badge.css");
 
+*{
+  font-family: SolaimanLipi, sans-serif !important;
+}
+
+
 .np-breadcrumbs-card {
     margin-top: 10px;
 }

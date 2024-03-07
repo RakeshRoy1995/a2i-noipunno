@@ -6,7 +6,6 @@ import pinNumberFieldUserIcon from "../assets/login_page_materials/icons/lock.sv
 import passwordHideEyeIcon from "../assets/login_page_materials/icons/eye-slash.svg";
 import mediaFileIcon from "../assets/login_page_materials/new/media-file-svgrepo-com.svg";
 import pdfIcon from "../assets/login_page_materials/new/pdf-svgrepo-com.svg";
-
 import govtLogo from "../assets/login_page_materials/icons/Vector.png";
 import nctbLogo from "../assets/login_page_materials/icons/NCTB_logo.png";
 import unicef from "../assets/login_page_materials/icons/Logo_Signature_Container_Circle_ENG_RGB-300x300 1.png";
@@ -21,6 +20,7 @@ import { Button, Modal } from "react-bootstrap";
 import { motion } from "framer-motion"
 import LoginPageCommonLeft from "./LoginPageCommonLeft";
 import LoginPageModalCommon from "./LoginPageModalCommon";
+import tippy from "tippy.js";
 
 const LoginPage = () => {
   const [error, seterror] = useState("");
@@ -156,6 +156,16 @@ const LoginPage = () => {
     setValue(sanitizedValue); // Update the state with the sanitized value
   };
 
+    // tooltip  for signature field
+    useEffect(() => {
+      const elementWithDataTooltip = document.querySelectorAll('[data-tooltip ]');
+      elementWithDataTooltip.forEach(element => {
+        tippy(element, {
+          content: element.getAttribute("data-tooltip")
+        });
+      })
+    }, [])
+
   return (
     <>
       <Helmet>
@@ -213,7 +223,7 @@ const LoginPage = () => {
                           </div>
                           <input
                             // onChange={handleChange}
-                            className="form-control np-login-form-field custom-input mb-2 bn"
+                            className="form-control np-login-form-field custom-input mb-2"
                             type="text"
                             // value={value}
                             defaultValue={userId_from_Cookie}
@@ -223,9 +233,8 @@ const LoginPage = () => {
                             name="caid"
                             id="caid"
                             onChange={e => setUserId(e.target.value)} 
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="প্রতিষ্ঠান হিসেবে লগইন করার জন্য EIIN/SGN প্রদান করুন"
+                            data-tooltip="শিক্ষক হিসেবে লগইন করার জন্য PDSID/INDEX/SGN প্রদান করুন"
+                        
                           />
                         </div>
                       </div>
@@ -248,7 +257,7 @@ const LoginPage = () => {
                             name="password"
                             required
                             placeholder="123456"
-                            data-toggle="tooltip" data-placement="top" title="পিন প্রদান করুন"
+                            data-tooltip="পিন প্রদান করুন"
                             pattern="[0-9]{6}"
                             maxLength={6}
                             value={value}

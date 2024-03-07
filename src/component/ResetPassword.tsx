@@ -5,6 +5,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { confirm_otp, confirm_pass, sent_otp } from "../Request";
 import { Alert } from "react-bootstrap";
 import Swal from "sweetalert2";
+import tippy from "tippy.js";
 
 function ResetPassword() {
   const [user_Caid, setUser_Caid] = useState("");
@@ -163,6 +164,16 @@ function ResetPassword() {
     }
   };
 
+      // tooltip  for signature field
+      useEffect(() => {
+        const elementWithDataTooltip = document.querySelectorAll('[data-tooltip ]');
+        elementWithDataTooltip.forEach(element => {
+          tippy(element, {
+            content: element.getAttribute("data-tooltip")
+          });
+        })
+      }, [])
+
   return (
     <div>
       <section className="editTeacherProfilePage">
@@ -188,7 +199,7 @@ function ResetPassword() {
                                 className="form-control"
                                 readOnly
                                 name="caid"
-                                
+                            
                                 defaultValue={user_Caid}
                               />
                             </div>
@@ -301,6 +312,7 @@ function ResetPassword() {
                                 className="form-control"
                                 name="password"
                                 placeholder="নতুন পিন দিন"
+                                data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
                                 maxLength={6} 
                                 onInput={handleInput}
                                 onChange={handlePasswordChange}
@@ -321,6 +333,7 @@ function ResetPassword() {
                                 className="form-control"
                                 name="password_confirmation"
                                 placeholder="নতুন পিনটি পুনরায় দিন"
+                                data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
                                 maxLength={6} 
                                 onInput={handleInput}
                                 onChange={handleConfirmPasswordChange}

@@ -137,6 +137,30 @@ function ResetPassword() {
     }
   };
 
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+    if (password === confirmPassword) {
+      seterrmsg('');
+    } else {
+      seterrmsg('নতুন পিন এবং পুনরায় পিন মিল নেই।');
+    }
+  };
+
+  const handleBlur = () => {
+    if (password === confirmPassword) {
+      seterrmsg('');
+    } else {
+      seterrmsg('নতুন পিন এবং পুনরায় পিন মিল নেই।');
+    }
+  };
+
   return (
     <div>
       <section className="editTeacherProfilePage">
@@ -285,6 +309,7 @@ function ResetPassword() {
                                 placeholder="নতুন পিন দিন"
                                 maxLength={6} 
                                 onInput={handleInput}
+                                onChange={handlePasswordChange}
                               />
                             </div>
                           </div>
@@ -304,6 +329,8 @@ function ResetPassword() {
                                 placeholder="নতুন পিনটি পুনরায় দিন"
                                 maxLength={6} 
                                 onInput={handleInput}
+                                onChange={handleConfirmPasswordChange}
+                                onKeyUp={handleBlur}
                               />
                             </div>
                           </div>

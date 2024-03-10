@@ -4,6 +4,7 @@ import noipunnoLogo from "../assets/login_page_materials/images/noipunno-new-log
 import inputFieldUserIcon from "../assets/login_page_materials/icons/user-square.svg";
 import pinNumberFieldUserIcon from "../assets/login_page_materials/icons/lock.svg";
 import passwordHideEyeIcon from "../assets/login_page_materials/icons/eye-slash.svg";
+import passwordShowEyeIcon from "../assets/login_page_materials/icons/eye-show.svg";
 import mediaFileIcon from "../assets/login_page_materials/new/media-file-svgrepo-com.svg";
 import pdfIcon from "../assets/login_page_materials/new/pdf-svgrepo-com.svg";
 import govtLogo from "../assets/login_page_materials/icons/Vector.png";
@@ -243,6 +244,7 @@ const LoginPage = () => {
                         <label htmlFor="pin" className="login-field-title mb-2">
                           পিন নম্বর
                         </label>
+        
                         <div className="input-group">
                           <img
                             src={pinNumberFieldUserIcon}
@@ -266,18 +268,20 @@ const LoginPage = () => {
                           <div className="input-group-append password-toggle">
                             <span>
                               {showPassword ? (
-                                <i
-                                  onClick={() => setShowPassword(!showPassword)}
-                                  // id="password-toggle_2"
-                                  className="fa fa-eye img-fluid"
-                                />
+                                // <i
+                                //   onClick={() => setShowPassword(!showPassword)}
+                                //   className="fa fa-eye img-fluid"
+                                // />
+                                <img onClick={() => setShowPassword(!showPassword)} src={passwordShowEyeIcon} style={{ width: '25px' }} alt="" />
                               ) : (
-                                <i
-                                  onClick={() => setShowPassword(!showPassword)}
-                                  // id="password-toggle"
-                                  className="fa fa-eye-slash"
-                                />
+                                // <i
+                                //   onClick={() => setShowPassword(!showPassword)}
+                                //   // id="password-toggle"
+                                //   className="fa fa-eye-slash"
+                                // />
+                                <img onClick={() => setShowPassword(!showPassword)} src={passwordHideEyeIcon}  alt="" />
                               )}
+                          
                             </span>
                           </div>
                         </div>

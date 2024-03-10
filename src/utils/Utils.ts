@@ -29,7 +29,6 @@ export const branch_name = (branch_id: any , showInPDF=false) => {
     );
     return branch?.branch_name;
   }else{
-
     if (storageData?.data?.branches.length > 1) {
       const branch = storageData.data.branches.find(
         (branches) => branches.uid == branch_id
@@ -674,11 +673,11 @@ export const accessBIandReport = () => {
   if (ch_Class_teacher) {
     return true
   } else {
-
+    
     const data = localStorage.getItem("own_subjet");
     const storageData = JSON.parse(data);
 
-  // // console.log(`storageData`, storageData.data.data.subjects);
+    // // console.log(`storageData`, storageData.data.data.subjects);
 
     return false
   }

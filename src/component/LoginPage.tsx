@@ -191,15 +191,15 @@ const LoginPage = () => {
           </div> */}
 
 
-            <div className="container-fluid login-container">
+            <div className="container login-container">
               <div className="row">
-                <div className="col-sm-12 col-md-7">
+                <div className="col-sm-12 col-md-7 col-xl-8">
 
                   <LoginPageCommonLeft/>
 
                 </div>
 
-                <div className="col-sm-12 col-md-5 order-mobile-first">
+                <div className="col-sm-12 col-md-5 col-xl-4 order-mobile-first">
                   <div className="card loginCard max-width-540 login-card-padding">
                     <p className="login-title text-center mb-3">লগ ইন</p>
                     {error && <div className="alert alert-danger text-white bn">{error}</div>}

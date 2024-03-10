@@ -447,7 +447,6 @@ const PasswordReset = () => {
                   {
                     resetPwd && <>
                       <form onSubmit={handleNewPaswordSubmit}>
-
                       {error && <p className="text-center text-danger bn">{error}</p>}
 
                         <div className="form-group mb-1">

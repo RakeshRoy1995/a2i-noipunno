@@ -33,7 +33,6 @@ import StudentAttendence from "./component/Attendence/StudentAttendence/StudentA
 import PasswordReset2 from "./component/_PasswordReset";
 import PrivacyPolicy from "./component/PrivacyPolicy";
 
-
 function App() {
   const [topbar, settopbar] = useState(false);
   const [render, setRender] = useState(true);
@@ -91,8 +90,6 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
           <Route path="/student-attendence" element={<StudentAttendence/>} />
-
-
           {/* <Route path="/bi-pdf-maker2" element={<BiRawPDFDownload />} /> */}
         </Route>
 

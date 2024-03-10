@@ -2,7 +2,8 @@ import "../assets/login_page_materials/login_page.css";
 import noipunnoLogo from "../assets/login_page_materials/images/noipunno-new-logo.svg";
 import inputFieldUserIcon from "../assets/login_page_materials/icons/user-square.svg";
 import pinNumberFieldUserIcon from "../assets/login_page_materials/icons/lock.svg";
-
+import passwordHideEyeIcon from "../assets/login_page_materials/icons/eye-slash.svg";
+import passwordShowEyeIcon from "../assets/login_page_materials/icons/eye-show.svg";
 import govtLogo from "../assets/login_page_materials/icons/Vector.png";
 import nctbLogo from "../assets/login_page_materials/icons/NCTB_logo.png";
 import unicef from "../assets/login_page_materials/icons/Logo_Signature_Container_Circle_ENG_RGB-300x300 1.png";
@@ -475,17 +476,19 @@ const PasswordReset = () => {
                             <div className="input-group-append password-toggle">
                             <span>
                               {showPassword ? (
-                                <i
-                                  onClick={() => setShowPassword(!showPassword)}
-                                  // id="password-toggle_2"
-                                  className="fa fa-eye img-fluid"
-                                />
+                                // <i
+                                //   onClick={() => setShowPassword(!showPassword)}
+                                //   // id="password-toggle_2"
+                                //   className="fa fa-eye img-fluid"
+                                // />
+                                <img onClick={() => setShowPassword(!showPassword)} src={passwordShowEyeIcon} style={{ width: '25px' }} alt="" />
                               ) : (
-                                <i
-                                  onClick={() => setShowPassword(!showPassword)}
-                                  // id="password-toggle"
-                                  className="fa fa-eye-slash"
-                                />
+                                // <i
+                                //   onClick={() => setShowPassword(!showPassword)}
+                                //   // id="password-toggle"
+                                //   className="fa fa-eye-slash"
+                                // />
+                                <img onClick={() => setShowPassword(!showPassword)} src={passwordHideEyeIcon}  alt="" />
                               )}
                             </span>
                           </div>
@@ -518,17 +521,19 @@ const PasswordReset = () => {
                             <div className="input-group-append password-toggle">
                             <span>
                               {showPassword2 ? (
-                                <i
-                                  onClick={() => setShowPassword2(!showPassword2)}
-                                  // id="password-toggle_2"
-                                  className="fa fa-eye img-fluid"
-                                />
+                                // <i
+                                //   onClick={() => setShowPassword2(!showPassword2)}
+                                //   // id="password-toggle_2"
+                                //   className="fa fa-eye img-fluid"
+                                // />
+                                <img onClick={() => setShowPassword2(!showPassword2)} src={passwordShowEyeIcon} style={{ width: '25px' }} alt="" />
                               ) : (
-                                <i
-                                  onClick={() => setShowPassword2(!showPassword2)}
-                                  // id="password-toggle"
-                                  className="fa fa-eye-slash"
-                                />
+                                // <i
+                                //   onClick={() => setShowPassword2(!showPassword2)}
+                                //   // id="password-toggle"
+                                //   className="fa fa-eye-slash"
+                                // />
+                                <img onClick={() => setShowPassword2(!showPassword2)} src={passwordHideEyeIcon}  alt="" />
                               )}
                             </span>
                           </div>

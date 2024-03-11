@@ -250,7 +250,7 @@ h6 {
 
 .login-button {
   display: flex;
-  padding: 15px 30px;
+  padding: 14px 30px;
   justify-content: center;
   align-items: center;
   border-radius: 6px;
@@ -258,7 +258,7 @@ h6 {
   color: white;
   margin: 0 auto;
   width: 100%;
-   font-family: 'SolaimanLipi, sans-serif ';
+  font-family: 'SolaimanLipi, sans-serif ';
 }
 
 .max-width-540 {

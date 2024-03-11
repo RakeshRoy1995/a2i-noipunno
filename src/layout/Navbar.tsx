@@ -157,11 +157,12 @@ const Navbar = () => {
                       src={noipunnologo}
                       className="img-fluid"
                       alt="main logo"
-                    /> 
+                    />
                    </NavLink>
                   </div>
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group position-relative">
+
                       <NavLink
                         className="navbar-menu-item d-flex align-items-center ms-2"
                         to="/"
@@ -170,7 +171,7 @@ const Navbar = () => {
                         aria-expanded="false"
                       >
                         {" "}
-                        {/* <img
+                        {/* <img/>
                           src={teacherIcon}
                           className="img-fluid topnav-profile-icon-style"
                           alt="moon icon"
@@ -180,7 +181,7 @@ const Navbar = () => {
                         {image ? (
                           <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px" }} className="rounded-5" />
                         ) : (
-                          <img src="/public/assets/images/User-avatar.png" alt="default-profile" />
+                          <img src="/public/assets/images/User-avatar.png" style={{ width: "38px", height: "38px" }} alt="default-profile" />
                         )}
                         {/* active icon */}
                         <img
@@ -189,6 +190,8 @@ const Navbar = () => {
                           alt="Status icon"
                         />
                       </NavLink>
+
+                      {/* drop down menu */}
                       <ul className="dropdown-menu dropdown-menu-end">
                         <li>
                           <div className="border-bottom topnav-dropdown-style">
@@ -199,7 +202,7 @@ const Navbar = () => {
                                   className="img-fluid icon-right-space"
                                   alt="profile icon"
                                 /> */}
-                                {image && <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px" }} />}
+                                {/* {image && <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px" }} />} */}
                               </div>
                               <div>
                                 <h6 className="profile-style">
@@ -294,7 +297,6 @@ const Navbar = () => {
                     </li> */}
 
                         <hr className="d-lg-none p-0 m-0" />
-
                         {/* <li>
                       <a href="#" className="d-lg-none">
                         <div className="topnav-dropdown-style dropdown-item profile-style" >
@@ -303,7 +305,7 @@ const Navbar = () => {
                         </div>
                       </a>
                     </li> */}
-
+{/* logout */}
                         <li onClick={handleLogout}>
                           <a href="#">
                             <div className="topnav-dropdown-style dropdown-item profile-style">

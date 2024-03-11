@@ -35,7 +35,8 @@ const TeacherProfileCard = () => {
     image,
     eiin
   }: any = teacher_details;
-  console.log(teacher_details);
+
+  // console.log(teacher_details);
   const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
 
   const getUserDetails = () => {
@@ -55,27 +56,26 @@ const TeacherProfileCard = () => {
       setLoadin(false)
     }
   }
-
-
   const setAllStateData = () => {
     if (designation_id) {
       const find_current_user_designation = allDesignation?.filter(designation => designation?.uid == designation_id)
       find_current_user_designation.map(item => setTeacherDesignation(item.designation_name))
     }
   }
-
   useEffect(() => {
     setAllStateData()
   }, [allDesignation])
+useEffect(()=>{
+const intervalId= setInterval(() => {
+  if (loading) {
+    getUserDetails()
+  }
+}, 500);
+return () => clearInterval(intervalId);
+},[])
 
 
-  setInterval(() => {
-    if (loading) {
-      getUserDetails()
-    }
-  }, 500);
-
-  // // console.log(image);
+  // console.log(image);
 
   return (
     <div className="col-lg-3 col-md-3">

@@ -15,7 +15,9 @@ import "../styles/DatePicker.css"
 import "../styles/SweetAlert.css"
 
 const EditTeacherProfile = () => {
-  const [userDetails, setuserDetails] = useState<any>({});
+  // const [userDetails, setuserDetails] = useState<any>({});
+  const [teacher_details, setTeacher_details] = useState({});
+  const [schoolName, setSchoolName] = useState<any>("");
   const [allDivision, setAllDivision] = useState<any>([]);
   const [allDistrict, setAllDistrict] = useState<any>([]);
   const [allUpozila, setAllUpozila] = useState<any>([]);
@@ -37,39 +39,69 @@ const EditTeacherProfile = () => {
   const [nameEn, setNameEn] = useState('');
   const [isEnglishValid, setisEnglishValid] = useState(true);
 
+// {schoolName}
 
+  // const {
+  //   name_en,
+  //   name_bn,
+  //   email,
+  //   mobile_no,
+  //   date_of_birth,
+  //   gender,
+  //   division_id,
+  //   district_id,
+  //   upazilla_id,
+  //   designation_id,
+  //   pdsid,
+  //   caid,
+  //   image,
+  //   signature,
+  //   nid,
+  //   emergency_contact,
+  //   blood_group,
+  //   uid
 
+  // } = userDetails;
+  // console.log(userDetails);
   const {
     name_en,
     name_bn,
-    email,
-    mobile_no,
-    date_of_birth,
     gender,
-    division_id,
-    district_id,
-    upazilla_id,
     designation_id,
+    designation,
     pdsid,
     caid,
     image,
-    signature,
-    nid,
+    eiin,
+    date_of_birth,
+    mobile_no,
     emergency_contact,
+    uid,
+    email,
+    nid,
     blood_group,
-    uid
-
-  } = userDetails;
-  console.log(userDetails);
-
+    upazilla_id,
+    division_id,
+    district_id
+  }: any = teacher_details;
+  console.log(teacher_details);
   // const dpesignation_id = "10";
 
   const getUserDetails = () => {
     const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
     if (get_teachers_details) {
-      // console.log("userDetaisl", get_teachers_details?.data?.teachers[0]);
+      setTeacher_details(get_teachers_details?.data?.teachers[0]);
 
-      setuserDetails(get_teachers_details?.data?.teachers[0]);
+      get_teachers_details?.data?.institute?.map((item) =>
+        setSchoolName(item.institute_name)
+      );
+
+      // const isClassTeacherValid = get_teachers_details?.data?.teachers[0]?.is_class_teacher;
+      // if (isClassTeacherValid) {
+      //   setIsClassTeacher(true)
+      // }
+
+      // setLoadin(false)
     }
   }
 
@@ -192,17 +224,23 @@ const EditTeacherProfile = () => {
   }, [designation_id, allDesignation, date_of_birth, name_bn, name_en])
 
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setCountdown(prevCountdown => (prevCountdown > 0 ? prevCountdown - 1 : 0));
-  //   }, 1000);
-  //   return () => {
-  //     clearInterval(timer);
-  //   };
-  // }, []);
 
-  // if ((allDivision.length == 0) && (countdown == 0)) {
-  //   window.location.replace("/");
+  // const getUserDetails = () => {
+  //   const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
+  //   if (get_teachers_details) {
+  //     setTeacher_details(get_teachers_details?.data?.teachers[0]);
+
+  //     get_teachers_details?.data?.institute?.map((item) =>
+  //       setSchoolName(item.institute_name)
+  //     );
+
+  //     const isClassTeacherValid = get_teachers_details?.data?.teachers[0]?.is_class_teacher;
+  //     if (isClassTeacherValid) {
+  //       setIsClassTeacher(true)
+  //     }
+
+  //     setLoadin(false)
+  //   }
   // }
 
 
@@ -241,45 +279,7 @@ const EditTeacherProfile = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [warningMessage, setWarningMessage] = useState('ছবি  ২০০ KB এবং (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
 
-  // image change
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
 
-  //     // Check file size
-  //     if (file.size > 100 * 1024) {
-  //       setWarningMessage('');
-  //       setErrorMessage('ছবির আকার ১০০ কিলোবাইট অতিক্রম করেছে, ছবির আকার ১০০ কিলোবাইটের (KB) ভিতর হতে হবে!');
-  //       return;
-  //     }
-
-  //     // Create an image element to get the image dimensions
-  //     const img = new Image();
-  //     img.onload = () => {
-  //       // Check image dimensions
-  //       if (img.width > 300 || img.height > 300) {
-  //         setWarningMessage('');
-  //         setErrorMessage('ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেল অতিক্রম করেছে, ছবির প্রস্থ-উচ্চতা ৩০০X৩০০ পিক্সেলের (PX) ভিতর হতে হবে!');
-  //         return;
-  //       }
-
-  //       // If both size and dimensions are within limits, set the image preview
-  //       const reader = new FileReader();
-  //       reader.onloadend = () => {
-  //         setImagePreview(reader.result);
-  //       };
-  //       reader.readAsDataURL(file);
-  //       setErrorMessage('');
-  //       setWarningMessage('');
-  //     };
-  //     img.src = URL.createObjectURL(file);
-  //   } else {
-  //     // Set default image when no file is selected
-  //     setImagePreview(image_upload_icon); // Change 'image_upload_icon' to the actual path of your default image
-  //     setErrorMessage('');
-  //     setWarningMessage('');
-  //   }
-  // };
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -465,31 +465,14 @@ const EditTeacherProfile = () => {
                               name="institution_name"
                               placeholder="শিক্ষা প্রতিষ্ঠানের নাম"
                               readOnly
-                              // defaultValue={ } // assuming you have this value
+                              defaultValue= {schoolName}  // assuming you have this value
                               data-tooltip="শিক্ষা প্রতিষ্ঠানের নাম"
                             />
                           </div>
                         </div>
                       </div>
 
-                      {/* যোগদানের তারিখ */}
-                      {/* <div className="form-group col-sm-4 col-md-6">
-                        <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
-                          <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>যোগদানের তারিখ</label>
-                          <div className="input-group" style={{ flex: 1 }}>
-                            <input
-                              style={{ background: "#F9F9F9" }}
-                              type="date"
-                              id="joining_date"
-                              className="form-control"
-                              name="joining_date"
-                              placeholder="যোগদানের তারিখ"
-                              // defaultValue={""} // assuming you have this value
-                              data-tooltip="যোগদানের তারিখ"
-                            />
-                          </div>
-                        </div>
-                      </div> */}
+                  {/* bod */}
                       <div className="form-group col-sm-4 col-md-6">
                         <div className="mb-3 d-flex align-items-center" style={{ fontSize: "16px" }}>
                           <label className="form-label" style={{ marginRight: "10px", minWidth: "180px" }}>যোগদানের তারিখ</label>
@@ -595,17 +578,7 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
-                      {/* <div className="form-group  col-sm-4 col-md-6">
-                      <div className="mb-3" style={{ fontSize: "16px" }}>
-                        <label className="form-label">পদবী</label>
-                        <div className="input-group">
-                          <input type="text" id="pin" className="form-control"
-                            readOnly
-                            // name="designation"
-                            value={teacherDesignation} />
-                        </div>
-                      </div>
-                    </div> */}
+                   
 
 
 
@@ -621,7 +594,8 @@ const EditTeacherProfile = () => {
                               className="form-control"
                               name="user_id"
                               placeholder="ইউজার আইডি"
-                              defaultValue={uid}
+                              defaultValue={  pdsid||
+                                caid}
                               readOnly // if it's supposed to be read-only
                               data-tooltip="ইউজার আইডি"
                             />

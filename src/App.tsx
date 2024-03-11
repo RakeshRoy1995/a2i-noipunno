@@ -33,8 +33,8 @@ import StudentAttendence from "./component/Attendence/StudentAttendence/StudentA
 import PasswordReset2 from "./component/_PasswordReset";
 import PrivacyPolicy from "./component/PrivacyPolicy";
 import ShowAssesment from "./component/ShowAssesment";
-import Test from "./component/test/AptBehavAssessment";
-import AptBehavAssessment from "./component/test/AptBehavAssessment";
+import Test from "./component/Assesment/AssessmentSection";
+import AptBehavAssessment from "./component/Assesment/AssessmentSection";
 
 function App() {
   const [topbar, settopbar] = useState(false);
@@ -92,7 +92,9 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
-          <Route path="/student-attendence" element={<StudentAttendence/>} />
+          <Route path="/student-attendence" element={<StudentAttendence />} />
+          <Route path="/পারদর্শিতা-এবং-আচরণগত-মূল্যায়ন" element={<AptBehavAssessment />} />
+
           {/* <Route path="/bi-pdf-maker2" element={<BiRawPDFDownload />} /> */}
         </Route>
 

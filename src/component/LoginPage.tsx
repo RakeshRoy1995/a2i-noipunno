@@ -21,10 +21,6 @@ import { motion } from "framer-motion"
 import LoginPageCommonLeft from "./LoginPageCommonLeft";
 import LoginPageModalCommon from "./LoginPageModalCommon";
 import tippy from "tippy.js";
-<<<<<<< HEAD
-import 'tippy.js/dist/tippy.css';
-=======
->>>>>>> 39a1ee60614486474de4e5f4ea2efb011766c2ad
 
 const LoginPage = () => {
   const [error, seterror] = useState("");
@@ -236,16 +232,9 @@ const LoginPage = () => {
                             placeholder="ইউজার আইডি"
                             name="caid"
                             id="caid"
-<<<<<<< HEAD
                             onChange={e => setUserId(e.target.value)}
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="প্রতিষ্ঠান হিসেবে লগইন করার জন্য EIIN/SGN প্রদান করুন"
-=======
-                            onChange={e => setUserId(e.target.value)} 
                             data-tooltip="শিক্ষক হিসেবে লগইন করার জন্য PDSID/INDEX/SGN প্রদান করুন"
-                        
->>>>>>> 39a1ee60614486474de4e5f4ea2efb011766c2ad
+
                           />
                         </div>
                       </div>

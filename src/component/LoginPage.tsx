@@ -3,7 +3,8 @@ import "../assets/login_page_materials/login_page.css";
 import noipunnoLogo from "../assets/login_page_materials/images/noipunno-new-logo.svg";
 import inputFieldUserIcon from "../assets/login_page_materials/icons/user-square.svg";
 import pinNumberFieldUserIcon from "../assets/login_page_materials/icons/lock.svg";
-import passwordHideEyeIcon from "../assets/login_page_materials/icons/eye-slash.svg";
+import passwordHideEyeIcon from "../assets/login_page_materials/hidden.png";
+import passwordShowEyeIcon from "../assets/login_page_materials/eye.png";
 import mediaFileIcon from "../assets/login_page_materials/new/media-file-svgrepo-com.svg";
 import pdfIcon from "../assets/login_page_materials/new/pdf-svgrepo-com.svg";
 import govtLogo from "../assets/login_page_materials/icons/Vector.png";
@@ -190,17 +191,17 @@ const LoginPage = () => {
           </div> */}
 
 
-            <div className="container-fluid login-container">
+            <div className="container login-container">
               <div className="row">
-                <div className="col-sm-12 col-md-7">
+                <div className="col-sm-12 col-md-7 col-xl-8">
 
                   <LoginPageCommonLeft/>
 
                 </div>
 
-                <div className="col-sm-12 col-md-5 order-mobile-first">
+                <div className="col-sm-12 col-md-5 col-xl-4 order-mobile-first">
                   <div className="card loginCard max-width-540 login-card-padding">
-                    <p className="login-title text-center mb-3">লগ ইন</p>
+                    <p className="login-title text-center mb-4">লগ ইন</p>
                     {error && <div className="alert alert-danger text-white bn">{error}</div>}
 
                     <form onSubmit={handleSubmit}>
@@ -243,6 +244,7 @@ const LoginPage = () => {
                         <label htmlFor="pin" className="login-field-title mb-2">
                           পিন নম্বর
                         </label>
+        
                         <div className="input-group">
                           <img
                             src={pinNumberFieldUserIcon}
@@ -266,18 +268,20 @@ const LoginPage = () => {
                           <div className="input-group-append password-toggle">
                             <span>
                               {showPassword ? (
-                                <i
-                                  onClick={() => setShowPassword(!showPassword)}
-                                  // id="password-toggle_2"
-                                  className="fa fa-eye img-fluid"
-                                />
+                                // <i
+                                //   onClick={() => setShowPassword(!showPassword)}
+                                //   className="fa fa-eye img-fluid"
+                                // />
+                                <img onClick={() => setShowPassword(!showPassword)} src={passwordShowEyeIcon} style={{ width: '20px', height: '22px' }} alt="" />
                               ) : (
-                                <i
-                                  onClick={() => setShowPassword(!showPassword)}
-                                  // id="password-toggle"
-                                  className="fa fa-eye-slash"
-                                />
+                                // <i
+                                //   onClick={() => setShowPassword(!showPassword)}
+                                //   // id="password-toggle"
+                                //   className="fa fa-eye-slash"
+                                // />
+                                <img onClick={() => setShowPassword(!showPassword)} src={passwordHideEyeIcon} style={{ width: '20px', height: '20px' }} alt="" />
                               )}
+                          
                             </span>
                           </div>
                         </div>
@@ -311,14 +315,14 @@ const LoginPage = () => {
                               to={`/password/reset/${userId}`}
                               className="forget-password"
                               style={{ color: '#428F92', fontSize: '16px' }}>
-                              পিন ভুলে গেছেন? এখানে ক্লিক করুন
+                              পিন ভুলে গেছেন? ক্লিক করুন
                             </Link>
                             :
                             <Link
                               to="/password/reset"
                               className="forget-password"
                               style={{ color: '#428F92', fontSize: '16px' }}>
-                              পিন ভুলে গেছেন? এখানে ক্লিক করুন
+                              পিন ভুলে গেছেন? ক্লিক করুন
                             </Link>
                           }
 

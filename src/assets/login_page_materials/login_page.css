@@ -135,8 +135,8 @@ h6 {
 .transparent-card{
   border: none;
   background-color: #f6f6f883;
-  width: 95%;
-  margin-left: 30px;
+  width: 100%;
+  margin-left: 0px;
 }
 
 .footer-card-custom{
@@ -624,6 +624,11 @@ label.form-check-label:focus,
   .card-footer-image{
     width: 60px;
     height: 60px;
+  }
+
+  .app-download{
+    margin: auto;
+    text-align: center;
   }
   
 }

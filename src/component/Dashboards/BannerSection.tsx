@@ -42,16 +42,24 @@ export default BannerSection;
 //     setShowTotalStudentTeacherClassRoom(false);
 //   };
 
-//   // console.log("showTeacherProfileCard:", showTeacherProfileCard);
-//   // console.log("showShikkathirHaziraChart:", showShikkathirHaziraChart);
-//   // console.log("showTotalStudentTeacherClassRoom:", showTotalStudentTeacherClassRoom);
 
+// const teacherDashboardData = localStorage.getItem("teacher_dashboard");
+
+// // Check if data exists
+// if (teacherDashboardData) {
+//     // Parse the JSON string to JavaScript object
+//     const teacherDashboard = JSON.parse(teacherDashboardData);
+
+//     // Now you can access the data
+//     console.log(teacherDashboard);
+// } else {
+//     // Handle the case where no data is found in local storage
+//     console.log("No data found in local storage");
+// }
 //   return (
 //     <section className="container my-3" style={{ background: "white" }}>
 //       <div className="card-container">
-//         {/* <div className="row g-3 "> */}
-//         <div className="row justify-content-center align-items-center ">
-
+//         <div className="row g-3 ">
 //           {showTeacherProfileCard && <TeacherProfileCard />}
 //           {showShikkathirHaziraChart && (
 //             <ShikkathirHaziraChart onClick={handleShikkathirHaziraChartClick} />

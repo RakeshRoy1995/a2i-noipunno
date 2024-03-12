@@ -93,7 +93,7 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
           <Route path="/student-attendence" element={<StudentAttendence />} />
-          <Route path="/পারদর্শিতা-এবং-আচরণগত-মূল্যায়ন" element={<AptBehavAssessment />} />
+          {/* <Route path="/পারদর্শিতা-এবং-আচরণগত-মূল্যায়ন" element={<AptBehavAssessment />} /> */}
 
           {/* <Route path="/bi-pdf-maker2" element={<BiRawPDFDownload />} /> */}
         </Route>

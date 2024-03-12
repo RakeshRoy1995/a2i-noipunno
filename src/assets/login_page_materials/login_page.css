@@ -250,7 +250,7 @@ h6 {
 
 .login-button {
   display: flex;
-  padding: 15px 30px;
+  padding: 14px 30px;
   justify-content: center;
   align-items: center;
   border-radius: 6px;
@@ -258,7 +258,7 @@ h6 {
   color: white;
   margin: 0 auto;
   width: 100%;
-   font-family: 'SolaimanLipi, sans-serif ';
+  font-family: 'SolaimanLipi, sans-serif ';
 }
 
 .max-width-540 {
@@ -551,6 +551,10 @@ label.form-check-label:focus,
   width: 400px;
 }
 
+.help-desk-mobile{
+  display: none !important;
+}
+
 /* media query start */
 @media screen and (min-width: 992px) and (max-width: 1199.98px) {
   .helpedBy {
@@ -570,6 +574,12 @@ label.form-check-label:focus,
 }
 
 @media screen and (min-width: 768px) and (max-width: 991.98px) {
+  .max-width-540 {
+    max-width: 100%;
+    border: none;
+    min-height: 400px;
+  }
+
   .teacher-login-title {
     color: #181C32;
     font-size: 30px;
@@ -586,6 +596,7 @@ label.form-check-label:focus,
     border: none;
     background-color: #f6f6f883;
     margin-right: 0px;
+    margin-left: 0px;
   }
 
   .np-login-subtitle {
@@ -617,7 +628,15 @@ label.form-check-label:focus,
   
 }
 
-@media screen and (min-width: 576px) and (max-width: 767.98px) {
+@media screen and (min-width: 601px) and (max-width: 767.98px) {
+  .order-mobile-first {
+    order: -1;
+  }
+
+  .loginCard{
+    margin-bottom: 20px;
+  }
+
   .loginLogo {
     height: 50px;
     width: 100px;
@@ -635,9 +654,10 @@ label.form-check-label:focus,
   .transparent-card{
     border: none;
     background-color: #f6f6f883;
-    margin-right: 0px;
+    width: 95%;
+    margin-left: 0px;
   }
-
+  
   .card-body-custom{
     margin-bottom: 0px;
     width: 90%;
@@ -691,143 +711,100 @@ label.form-check-label:focus,
   }
 }
 
-@media screen and (min-width: 376px) and (max-width: 575.98px) {
-  .np-login-field-icon {
-    position: absolute;
-    left: 2%;
-    z-index: 100;
-    top: 30%;
-    width: 20px;
+@media screen and (min-width: 376px) and (max-width: 600px) {
+  .order-mobile-first {
+    order: -1;
   }
 
-  .otp-card{
-    width: 100%;
+  .help-desk-desktop{
+    display: none !important;
   }
 
-  .otp-box{
-    width: 80%;
-  } 
+  .help-desk-mobile{
+    display: block !important;
+  }
 
   .login-container {
-    margin-top: 20px !important;
+      margin-top: 20px !important;
+  }
+  
+  .loginCard{
+    margin-bottom: 20px;
+  }
+
+  .transparent-card {
+      border: none;
+      background-color: #f6f6f883;
+      margin-right: 20px;
+      height: 520px;
+      width: 100%;
+      margin: auto;
+  }
+
+  .card-body-custom {
+    padding: 10px;
+    color: black;
+    background-color: #ffffff56;
+    width: 90%;
+    margin: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  .carousel-inner-custom{
+    height: 200px;
+  }
+  .app-download{
+      margin: auto;
+      text-align: center;
+  }
+
+}
+
+@media screen and (min-width: 0px) and (max-width: 375.98px) {
+  .order-mobile-first {
+    order: -1;
+  }
+  
+  .help-desk-desktop{
+    display: none !important;
+  }
+
+  .help-desk-mobile{
+    display: block !important;
+  }
+
+  .login-container {
+    margin-top: 10px !important;
   }
 
   .app-download{
     margin: auto;
     text-align: center;
-    padding: 2px;
   }
 
-  .carousel-inner-custom{
-    height: 200px;
+  .loginCard{
+    margin-bottom: 20px;
+    margin-top: 0px;
   }
 
-  .order-mobile-first {
-    order: -1; 
-  }
-
-  .mobile-view{
-    text-align: center;
-  }
-
-  .centered-image{
-    display: block;
-    margin: 0 auto;
-  }
-
-  .login-card-padding{
-    margin-bottom: 20px !important;
-  }
-  
-  .np-login-form-field::placeholder {
-    margin-left: 1px;
-    border: none;
-  }
-
-  .loginLogo {
-    height: 50px;
-    width: 100px;
-  }
-
-  .footer-card-custom{
-    margin-right: 0px;
-  }
-
-  .transparent-card{
+  .transparent-card {
     border: none;
     background-color: #f6f6f883;
-    margin-left: 0px;
+    margin-right: 20px;
+    height: 620px;
     width: 100%;
+    margin: auto;
   }
 
-  .card-body-custom{
-    margin-bottom: 20px;
-    width: 90%;
+  .card-body-custom {
+    padding: 5px;
+    color: black;
+    background-color: #ffffff56;
+    width: 95%;
+    margin: auto;
+    border-radius: 10px;
   }
 
-  .card-footer-image{
-    width: 60px;
-    height: 60px;
-  }
-
-  .teacher-login-title {
-    font-size: 20px !important;
-  }
-
-  .np-login-subtitle {
-    font-size: 16px;
-  }
-
-  .login-field-title {
-    font-size: 16px;
-    padding-bottom: 10px;
-  }
-
- .loginCard {
-    padding: 45px 40px;
-  }
-
- .loginCard .form-group {
-    padding: 10px 0px;
-  }
-
-  .loginCard .login-title {
-    padding-bottom: 20px;
-  }
-
-  /* .np-login-subtitle {
-    display: none;
-  } */
-
-  .footer-menus {
-    display: none;
-  }
-
-  .form-check-style {
-    padding-left: 45px;
-    font-size: 12px;
-  }
-
-  .helpedBy {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  .chat_box {
-    position: fixed;
-    right: 3px;
-    bottom: 58px;
-    z-index: 99;
-  }
-
-  .loginCard ::placeholder {
-    font-size: 12px;
-    padding-left: 45px;
-  }
-}
-
-@media screen and (min-width: 0px) and (max-width: 375.98px) {
   .loginLogo {
     height: 30px;
     width: 50px;
@@ -846,7 +823,11 @@ label.form-check-label:focus,
   }
 
   .loginCard {
-    padding: 30px 40px;
+    padding: 10px 40px;
+  }
+
+  .carousel-inner-custom{
+    height: 240px;
   }
 
   .np-login-form-field {
@@ -889,6 +870,7 @@ label.form-check-label:focus,
     bottom: 46px;
     z-index: 99;
   }
+
 }
 
 /* media query end */

@@ -122,8 +122,6 @@ const LoginPage = () => {
     //   );
     //   setloading(false)
     // }
-
-
   };
 
   useEffect(() => {

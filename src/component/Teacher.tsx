@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import {
   class_room_info,
   get_common_info,
@@ -61,7 +62,8 @@ const [
   shikhonKalinMullayon_sannasik_barsik,
   setshikhonKalinMullayon_sannasik_barsik,
 ] = useState([]);
-
+// navigate
+const navigate = useNavigate()
 const fetchData = async () => {
   setshowLoadingErr("")
 
@@ -190,6 +192,8 @@ return (
           />
         )}
 
+
+
         {!loader && (
           <div className="dashboard-section ">
             <section className="np-breadcumb-section pt-2 pb-5">
@@ -239,7 +243,7 @@ return (
                         )}
 
                         {/* card collection */}
-                        {/* <Link to={"/পারদর্শিতা-এবং-আচরণগত-মূল্যায়ন"}> */}
+                        {/* <Link to={"/ab"}> */}
                           <div className="row">
                             {showSubject && (
                               <>
@@ -297,7 +301,7 @@ return (
                                       </div>
                                       <div className="d-flex gap-1">
                                       <div className="total-student">
-                                        <p> শ্রেণি শিক্ষক : </p>
+                                        <p> শ্রেণি শিক্ষক:</p>
                                       </div>
                                       <div className="total-student">
                                         <p>

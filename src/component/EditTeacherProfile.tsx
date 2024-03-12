@@ -13,6 +13,8 @@ import 'tippy.js/dist/tippy.css';
 import { motion } from "framer-motion"
 import "../styles/DatePicker.css"
 import "../styles/SweetAlert.css"
+import { useNavigate } from "react-router-dom";
+
 
 const EditTeacherProfile = () => {
   // const [userDetails, setuserDetails] = useState<any>({});
@@ -28,7 +30,7 @@ const EditTeacherProfile = () => {
   const [countdown, setCountdown] = useState(30);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedJoiningDate, setSelectedJoiningDate] = useState(new Date())
-
+const navigate = useNavigate()
   // default img test
   // const image_upload_icon =  "../assets/images/image-upload-icon/preview-65.png";
 
@@ -163,13 +165,7 @@ const EditTeacherProfile = () => {
     try {
       const { data }: any = await update_teacher_profile(caid, formDatas);
       if (data.status === true) {
-        // Swal.fire({
-        //   position: "top-right",
-        //   icon: "success",
-        //   title: "আপনার একাউন্টটি সফলভাবে হালনাগাদ হয়েছে!",
-        //   showConfirmButton: false,
-        //   timer: 1500
-        // })
+
 
         Swal.fire({
           title: "আপনার একাউন্টটি সফলভাবে হালনাগাদ হয়েছে!",
@@ -187,9 +183,6 @@ const EditTeacherProfile = () => {
           },
           confirmButtonText: 'ধন্যবাদ' // Change the text of the "Okay" button
         });
-
-
-
 
 
         const data_dash: any = await teacher_dashboard();
@@ -212,8 +205,8 @@ const EditTeacherProfile = () => {
         // footer: '<a href="#">Why do I have this issue?</a>'
       });
     }
+    navigate("/teacher-profile");
   }
-
   useEffect(() => {
     fetchData();
     getUserDetails();
@@ -578,9 +571,6 @@ const EditTeacherProfile = () => {
                         </div>
                       </div>
 
-                   
-
-
 
                       {/* User ID Field */}
                       <div className="form-group col-sm-4 col-md-6">
@@ -908,7 +898,7 @@ const EditTeacherProfile = () => {
 
                       {/* প্রোফাইল হালনাগাদ করুন btn */}
                       <div className="d-flex  justify-content-center  justify-content-lg-end justify-content-md-end align-items-center pt-3 pe-3">
-                        <button type="submit" className="btn btn-primary px-4 btn-hover  login-btn">প্রোফাইল হালনাগাদ করুন{" "} <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem", }} />{" "}
+                        <button  type="submit" className="btn btn-primary px-4 btn-hover  login-btn">প্রোফাইল হালনাগাদ করুন{" "} <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem", }} />{" "}
                         </button>
                       </div>
 

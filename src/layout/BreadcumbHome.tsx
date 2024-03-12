@@ -3,9 +3,9 @@ import { AiOutlineHome } from "react-icons/ai";
 import { BiSidebar } from "react-icons/bi";
 import { MdArrowBackIosNew, MdOutlineArrowForwardIos } from "react-icons/md";
 import styles from "../component/Home.style.module.css";
-
+import { useNavigate } from 'react-router-dom';
 export default function BreadcumbHome({ showSubjectname, seshowSubject, setShowProfile, title, selected_subject }: any) {
-
+const navigate = useNavigate();
   return (
     <section className="container pt-3">
       <div className="d-flex align-items-center gap-2">
@@ -14,6 +14,7 @@ export default function BreadcumbHome({ showSubjectname, seshowSubject, setShowP
             className='border-0  rounded shadow-sm bg-white' onClick={() => {
               seshowSubject(true);
               setShowProfile(true)
+              navigate('/')
 
 
             }} style={{ padding: "1.2rem" }}>

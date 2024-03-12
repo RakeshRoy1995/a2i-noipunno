@@ -5,6 +5,8 @@ import { SlBookOpen } from "react-icons/sl";
 import { clssWiseSubject } from "../Request";
 import Breadcumbtitle from "../layout/Breadcumb";
 import { Spinner } from "react-bootstrap";
+import Lottie from "lottie-react";
+import loadingAnimation from "../assets/loadingAnimation/loading.json"
 import bookIcon from '../assets/dashboard_materials/images/dashboard/bicon.svg';
 import card from '../assets/dashboard_materials/css/dashboard.css';
 import { motion } from "framer-motion"
@@ -61,7 +63,8 @@ const ClassWiseSubject = () => {
         {
           (subjects?.length == 0) ?
             <div className={styles.loading_container}>
-              <Spinner animation="border" />
+              {/* <Spinner animation="border" /> */}
+              <Lottie animationData={loadingAnimation}/>
             </div>
             :
             <section>

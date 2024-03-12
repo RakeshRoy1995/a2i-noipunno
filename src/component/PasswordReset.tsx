@@ -2,8 +2,8 @@ import "../assets/login_page_materials/login_page.css";
 import noipunnoLogo from "../assets/login_page_materials/images/noipunno-new-logo.svg";
 import inputFieldUserIcon from "../assets/login_page_materials/icons/user-square.svg";
 import pinNumberFieldUserIcon from "../assets/login_page_materials/icons/lock.svg";
-import passwordHideEyeIcon from "../assets/login_page_materials/icons/eye-slash.svg";
-import passwordShowEyeIcon from "../assets/login_page_materials/icons/eye-show.svg";
+import passwordHideEyeIcon from "../assets/login_page_materials/hidden.png";
+import passwordShowEyeIcon from "../assets/login_page_materials/eye.png";
 import govtLogo from "../assets/login_page_materials/icons/Vector.png";
 import nctbLogo from "../assets/login_page_materials/icons/NCTB_logo.png";
 import unicef from "../assets/login_page_materials/icons/Logo_Signature_Container_Circle_ENG_RGB-300x300 1.png";
@@ -251,14 +251,14 @@ const PasswordReset = () => {
             </div>
           </div> */}
 
-          <div className="container-fluid login-container">
+          <div className="container login-container">
 
             <div className="row">
-              <div className="col-sm-12 col-md-7">
+              <div className="col-sm-12 col-md-7 col-xl-8">
                   <LoginPageCommonLeft/>
               </div>
 
-              <div className="col-sm-12 col-md-5 order-mobile-first">
+              <div className="col-sm-12 col-md-5 col-xl-4 order-mobile-first">
                 <div className="card loginCard max-width-540 login-card-padding">
                   <p className="login-title text-center mb-3">
                     {showVarify ? "রিসেট পিন" : "রিসেট পিন"}
@@ -447,7 +447,6 @@ const PasswordReset = () => {
                   {
                     resetPwd && <>
                       <form onSubmit={handleNewPaswordSubmit}>
-
                       {error && <p className="text-center text-danger bn">{error}</p>}
 
                         <div className="form-group mb-1">
@@ -481,14 +480,14 @@ const PasswordReset = () => {
                                 //   // id="password-toggle_2"
                                 //   className="fa fa-eye img-fluid"
                                 // />
-                                <img onClick={() => setShowPassword(!showPassword)} src={passwordShowEyeIcon} style={{ width: '25px' }} alt="" />
+                                <img onClick={() => setShowPassword(!showPassword)} src={passwordShowEyeIcon} style={{ width: '20px', height: '22px' }} alt="" />
                               ) : (
                                 // <i
                                 //   onClick={() => setShowPassword(!showPassword)}
                                 //   // id="password-toggle"
                                 //   className="fa fa-eye-slash"
                                 // />
-                                <img onClick={() => setShowPassword(!showPassword)} src={passwordHideEyeIcon}  alt="" />
+                                <img onClick={() => setShowPassword(!showPassword)} src={passwordHideEyeIcon} style={{ width: '20px', height: '20px' }} alt="" />
                               )}
                             </span>
                           </div>
@@ -526,14 +525,14 @@ const PasswordReset = () => {
                                 //   // id="password-toggle_2"
                                 //   className="fa fa-eye img-fluid"
                                 // />
-                                <img onClick={() => setShowPassword2(!showPassword2)} src={passwordShowEyeIcon} style={{ width: '25px' }} alt="" />
+                                <img onClick={() => setShowPassword2(!showPassword2)} src={passwordShowEyeIcon} style={{ width: '20px', height: '22px' }} alt="" />
                               ) : (
                                 // <i
                                 //   onClick={() => setShowPassword2(!showPassword2)}
                                 //   // id="password-toggle"
                                 //   className="fa fa-eye-slash"
                                 // />
-                                <img onClick={() => setShowPassword2(!showPassword2)} src={passwordHideEyeIcon}  alt="" />
+                                <img onClick={() => setShowPassword2(!showPassword2)} src={passwordHideEyeIcon} style={{ width: '20px', height: '20px' }}  alt="" />
                               )}
                             </span>
                           </div>

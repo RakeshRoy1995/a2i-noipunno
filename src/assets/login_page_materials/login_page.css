@@ -43,7 +43,7 @@ h6 {
 }
 
 .login-card-padding{
-  padding: 38px !important;
+  padding: 30px 25px !important;
 }
 
 .card-footer-image{
@@ -250,7 +250,7 @@ h6 {
 
 .login-button {
   display: flex;
-  padding: 14px 112px 14px 111px;
+  padding: 15px 30px;
   justify-content: center;
   align-items: center;
   border-radius: 6px;

@@ -24,9 +24,6 @@ const FAQ = () => {
     fetchData();
   }, [])
 
-
-
-
   return (
     <section className='faq_page_bg_color'>
       <div className="container py-5">

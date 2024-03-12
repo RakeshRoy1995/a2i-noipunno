@@ -32,8 +32,10 @@ const TeacherProfileCard = () => {
     designation,
     pdsid,
     caid,
-    image
+    image,
+    eiin
   }: any = teacher_details;
+
   // console.log(teacher_details);
   const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
 
@@ -54,27 +56,26 @@ const TeacherProfileCard = () => {
       setLoadin(false)
     }
   }
-
-
   const setAllStateData = () => {
     if (designation_id) {
       const find_current_user_designation = allDesignation?.filter(designation => designation?.uid == designation_id)
       find_current_user_designation.map(item => setTeacherDesignation(item.designation_name))
     }
   }
-
   useEffect(() => {
     setAllStateData()
   }, [allDesignation])
+useEffect(()=>{
+const intervalId= setInterval(() => {
+  if (loading) {
+    getUserDetails()
+  }
+}, 500);
+return () => clearInterval(intervalId);
+},[])
 
 
-  setInterval(() => {
-    if (loading) {
-      getUserDetails()
-    }
-  }, 500);
-
-  // // console.log(image);
+  // console.log(image);
 
   return (
     <div className="col-lg-3 col-md-3">
@@ -87,7 +88,12 @@ const TeacherProfileCard = () => {
           </Link>
 
           <div className="profile-img">
-            {image && <img src={img_base_url + image} alt="teacher-profile" />}
+            {image ? (
+              <img src={img_base_url + image} alt="teacher-profile" />
+            ) : (
+              <img src="/public/assets/images/User-avatar.png" alt="default-profile" />
+            )}
+
           </div>
           {/* teacher designation */}
           <div className="teacher-title">
@@ -116,10 +122,10 @@ const TeacherProfileCard = () => {
           <h2 className="card-title text-two-line" style={{ lineHeight: "2", fontWeight: "bolder" }}>
             {name_bn || name_en || ''}
           </h2>
-          <p className="card-text" style={{ fontSize: "15px ", fontWeight: "bold", color: "gray" }}>
+          <p className="card-text" style={{ fontSize: "12px ", fontWeight: 600, color: "##555555" }}>
             {pdsid || caid}
           </p>
-          <p className="card-text text-center mt-2" style={{ fontSize: "15px", fontWeight: "bold", color: "gray" }}>{schoolName}</p>
+          <p className="card-text text-center mt-2" style={{ fontSize: "12px", fontWeight: 600, color: "#555555" }}>{schoolName} ({eiin})</p>
 
 
 

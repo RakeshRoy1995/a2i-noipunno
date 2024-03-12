@@ -49,7 +49,7 @@ const AmarProfile = () => {
     eiin
 
   } = userDetails;
-  // console.log(userDetails)
+  console.log(userDetails)
   // const designation_id = "10";
   // image
   const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
@@ -158,7 +158,7 @@ const AmarProfile = () => {
   } else {
     localStorage.setItem("teacher_sign_show", "false");
   }
-  console.log(showSign);
+  // console.log(showSign);
   useEffect(() => {
     fetchData()
     getUserDetails()
@@ -211,10 +211,12 @@ const AmarProfile = () => {
 
                         <div className="d-flex justify-content-between align-item-start  mb-2">
                           <div className="d-flex flex-column">
+
                             {/* profile name */}
                             <div className="d-flex align-item-center mb-2 w-100">
                               <h2>{name_bn}</h2>
                             </div>
+
                             {/* info  email and designation and more will be added in  future*/}
                             <div className="d-flex flex-column flex-wrap fw-semibold fs-6 mb-4 pe-2">
                               <div className="d-flex justify-content-start align-items-center gap-2">
@@ -242,7 +244,7 @@ const AmarProfile = () => {
                       <div className="row mb-3">
                         <label className="col-lg-4 text-muted fw-semibold">ইউজার আইডি:</label>
                         <div className="col-lg-8">
-                          <span className="fw-bold fs-6 text-gray-800">{uid}</span>
+                          <span className="fw-bold fs-6 text-gray-800}">{pdsid || caid}</span>
                         </div>
                       </div>
                       <div className="row mb-3">
@@ -296,18 +298,7 @@ const AmarProfile = () => {
                           <span className="fw-bold fs-6 text-gray-800">{emergency_contact}</span>
                         </div>
                       </div>
-                      {/* <div className="row mb-5">
-                        <label className="col-lg-4 text-muted fw-semibold">রক্তের গ্রুপ:</label>
-                        <div className="col-lg-8">
-                          <span className="fw-bold fs-6 text-gray-800">{}</span>
-                        </div>
-                      </div> */}
-                      {/* <div className="row mb-5">
-                        <label className="col-lg-4 text-muted fw-semibold">রক্তের গ্রুপ:</label>
-                        <div className="col-lg-8">
-                          <span className="fw-bold fs-6 text-gray-800">{blood_group}</span>
-                        </div>
-                      </div> */}
+
                     </div>
 
 

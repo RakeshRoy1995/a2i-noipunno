@@ -12,6 +12,8 @@ import darkMoodIcon from "../../assets/dashboard_materials/images/dashboard/moon
 import eyeIcon from "../../assets/dashboard_materials/images/dashboard/eye.svg";
 import { teacher_designation } from "../../Request";
 // import { logged_teacher_details } from "../../utils/Utils";
+import DefaultPicture from "../../../public/assets/images/User-avatar.png"
+
 
 const TeacherProfileCard = () => {
   const [schoolName, setSchoolName] = useState<any>("");
@@ -89,8 +91,8 @@ return () => clearInterval(intervalId);
             {image ? (
               <img src={img_base_url + image} alt="teacher-profile" />
             ) : (
-              // <img src="../../../public/assets/images/User-avatar.png" alt="default-profile" />
-              <img src="../../../public/assets/images/user_avatar/teacher.png" alt="default-profile" />
+              <img src={DefaultPicture} alt="default-profile" />
+              // <img src="../../../public/assets/images/user_avatar/teacher.png" alt="default-profile" />
             )}
 
           </div>

@@ -10,7 +10,7 @@ import { motion } from "framer-motion"
 import "../styles/profile_picture.css"
 import { GiTeacher } from "react-icons/gi";
 import indicator from "../assets/navbar_materials/icons/Status.svg"
-
+import DefaultPicture from "../../public/assets/images/User-avatar.png"
 
 const AmarProfile = () => {
   const [userDetails, setuserDetails] = useState<any>({});
@@ -205,7 +205,7 @@ const AmarProfile = () => {
                             {image ? (
                               <img src={img_base_url + image} alt="teacher-profile" style={{ border: "3px solid black" }} />
                             ) : (
-                              <img src="../../../public/assets/images/User-avatar.png" alt="default-profile" style={{ border: "3px solid black" }}/>
+                              <img src={DefaultPicture} alt="default-profile" style={{ border: "3px solid black" }}/>
                             )}
                             <div className="online-indicator">
                               <img src={indicator} alt="" />

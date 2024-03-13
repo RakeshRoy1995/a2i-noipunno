@@ -23,7 +23,7 @@ import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
 import { useLocation } from "react-router-dom";
 import { teacher_dashboard, reloadteacher_own_subject } from "../Request";
 import { showReportDeleteEv } from "../utils/Utils";
-
+import DefaultPicture from "../../public/assets/images/User-avatar.png"
 const Navbar = () => {
   const [userDetails, setuserDetails] = useState<any>({});
   const [loading, setLoadin] = useState(true);
@@ -181,7 +181,7 @@ const Navbar = () => {
                         {image ? (
                           <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px" }} className="rounded-5" />
                         ) : (
-                          <img src="../../../public/assets/images/User-avatar.png" alt="default-profile" style={{ width: "38px", height: "38px" }} />
+                          <img src={DefaultPicture} alt="default-profile" style={{ width: "38px", height: "38px" }} />
                         )}
                         {/* active icon */}
                         <img

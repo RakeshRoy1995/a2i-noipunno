@@ -47,16 +47,18 @@ import '../../assets/dashboard_materials/css/dashboard.css';
 import chart from '../../assets/dashboard_materials/images/dashboard/Chart.png';
 import Teacher from '../Teacher';
 
-const ShikkathirHaziraChart = ({ onClick }) => {
-  const handleClick = () => {
-    onClick(); // Call the function passed from the parent component
-  };
+const ShikkathirHaziraChart = () => {
+  // { onClick }
+  // const handleClick = () => {
+  //   onClick();
+  // };
 
   return (
-    <div onClick={handleClick} className="col-lg-7 col-md-6">
+    <div className="col-lg-7 col-md-6">
+      {/*  onClick={handleClick} */}
       <Teacher />
-      {/* Your other chart content goes here */}
-    </div>
+
+    // </div>
   );
 };
 

@@ -201,7 +201,12 @@ const AmarProfile = () => {
                         {/* img */}
                         <div className="me-2">
                           <div className="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                            {image && <img src={img_base_url + image} alt="teacher-profile" style={{ border: "3px solid black" }} />}
+                            {/* {image && <img src={img_base_url + image} alt="teacher-profile" style={{ border: "3px solid black" }} />} */}
+                            {image ? (
+                              <img src={img_base_url + image} alt="teacher-profile" style={{ border: "3px solid black" }} />
+                            ) : (
+                              <img src="../../../public/assets/images/User-avatar.png" alt="default-profile" style={{ border: "3px solid black" }}/>
+                            )}
                             <div className="online-indicator">
                               <img src={indicator} alt="" />
                             </div>

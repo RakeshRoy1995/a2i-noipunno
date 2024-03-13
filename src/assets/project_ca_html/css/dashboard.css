@@ -508,9 +508,12 @@ body {
 }
 
 .subject-container .subject-number .total-student {
-  display: flex;
+  /* display: flex; */
   align-items: center;
-  
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+
 
 }
 

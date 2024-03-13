@@ -13,8 +13,6 @@ import eyeIcon from "../../assets/dashboard_materials/images/dashboard/eye.svg";
 import { teacher_designation } from "../../Request";
 // import { logged_teacher_details } from "../../utils/Utils";
 
-
-
 const TeacherProfileCard = () => {
   const [schoolName, setSchoolName] = useState<any>("");
   const [allDesignation, setAllDesignation] = useState<any>([])

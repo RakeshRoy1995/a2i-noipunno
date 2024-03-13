@@ -123,10 +123,10 @@ return () => clearInterval(intervalId);
           <h2 className="card-title text-two-line" style={{ lineHeight: "2", fontWeight: "bolder" }}>
             {name_bn || name_en || ''}
           </h2>
-          <p className="card-text" style={{ fontSize: "12px ", fontWeight: 600, color: "##555555" }}>
+          <p className="card-text" style={{ fontSize: "14px ", fontWeight: 600, color: "##555555" }}>
             {pdsid || caid}
           </p>
-          <p className="card-text text-center mt-2" style={{ fontSize: "12px", fontWeight: 600, color: "#555555" }}>{schoolName} ({eiin})</p>
+          <p className="card-text text-center mt-2" style={{ fontSize: "14px", fontWeight: 600, color: "#555555" }}>{schoolName} ({eiin})</p>
 
 
 

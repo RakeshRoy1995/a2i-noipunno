@@ -58,7 +58,7 @@ const ShikkathirHaziraChart = () => {
       {/*  onClick={handleClick} */}
       <Teacher />
 
-    // </div>
+     </div>
   );
 };
 

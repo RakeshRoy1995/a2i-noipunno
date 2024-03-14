@@ -28,7 +28,6 @@ import bookIcon from "../../src/assets/dashboard_materials/images/dashboard/bico
 import "../../src/assets/project_ca_html/css/dashboard.css";
 import ReportForHeadTeacherDashboard from "./Dashboards/ReportForHeadTeacherDashboard";
 
-
 export default function Teacher() {
 
   const [showLoadingErr, setshowLoadingErr] = useState("");

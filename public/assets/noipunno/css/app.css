@@ -386,10 +386,9 @@ a.alert-danger:focus,a.alert-danger:hover,a.alert-error:focus,a.alert-error:hove
     border-radius: 2px;
     border: 1px solid #000000;
   }
-.pdf_table_pi_show tr td {
-    font-size: 10px;
-}
-
+  .pdf_table_pi_show tr td {
+      font-size: 10px;
+  }
 
 .text-two-line {
     overflow: hidden;

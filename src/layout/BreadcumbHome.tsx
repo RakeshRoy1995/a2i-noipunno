@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function BreadcumbHome({ showSubjectname, seshowSubject, setShowProfile, title, selected_subject }: any) {
 const navigate = useNavigate();
   return (
-    <section className="container pt-3">
+    <section className="container pt-3 mb-3">
       <div className="d-flex align-items-center gap-2">
         <div className="card" style={{ backgroundColor: "white" }}>
           <button

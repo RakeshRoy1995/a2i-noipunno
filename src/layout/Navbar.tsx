@@ -221,7 +221,7 @@ const Navbar = () => {
                         </li>
 
                         <li>
-                          <NavLink to="edit-teacher-profile">
+                          <NavLink to="/teacher-profile">
                             <div className="topnav-dropdown-style dropdown-item profile-style">
                               <img
                                 src={amarProfileIcon}

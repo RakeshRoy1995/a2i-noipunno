@@ -20,6 +20,7 @@ import {
   show_report_open_time_msg,
   teacher_name,
 } from "../utils/Utils";
+
 import AcorongotoComponent from "./AcorongotoComponent";
 import styles from "./Home.style.module.css";
 import ParodorshitaComponent from "./ParodorshitaComponent";
@@ -65,6 +66,7 @@ export default function Teacher() {
   const navigate = useNavigate()
   const fetchData = async () => {
     setshowLoadingErr("")
+
 
     try {
       const teacher_dash__: any =
@@ -195,9 +197,9 @@ export default function Teacher() {
 
           {!loader && (
             <div className="dashboard-section ">
-              <section className="np-breadcumb-section pt-2 pb-5">
+              <section className="np-breadcumb-section  pb-5"  style={{backgroundColor: "#F1F1F2"}}>
                 <div className="container">
-                  <div className="row mt-1">
+                  <div className="row">
                     {/* {ShowProfile && (location.pathname !== "/mollayon-koron")  && (
                 <div className="col-md-3 mt-2">
                   <ProfileCard />
@@ -236,13 +238,14 @@ export default function Teacher() {
                       <div className="row">
                         <div className="container subject-container">
                           {ShowProfile && (
-                            <h2 className="m-0">
+                            <h2 className="m-0" style={{fontWeight:"bolder"}}>
                               বিষয় ভিত্তিক তথ্য ও মূল্যায়ন
                             </h2>
                           )}
 
                           {/* card collection */}
-                          {/* <Link to={"/ab"}> */}
+
+
                           <div className="row">
                             {showSubject && (
                               <>
@@ -348,9 +351,6 @@ export default function Teacher() {
                               </>
                             )}
                           </div>
-
-                          {/* </Link> */}
-
                         </div>
 
                         {/* ShowAssesment , ParodorshitaComponent,   AcorongotoComponent*/}

@@ -47,18 +47,15 @@ import '../../assets/dashboard_materials/css/dashboard.css';
 import chart from '../../assets/dashboard_materials/images/dashboard/Chart.png';
 import Teacher from '../Teacher';
 
-const ShikkathirHaziraChart = () => {
-  // { onClick }
-  // const handleClick = () => {
-  //   onClick();
-  // };
+const ShikkathirHaziraChart = ({ onClick }) => {
+  const handleClick = () => {
+    onClick();
+  };
 
   return (
-    <div className="col-lg-7 col-md-6">
-      {/*  onClick={handleClick} */}
+    <div className="col-lg col-md-6" onClick={handleClick}>
       <Teacher />
-
-     </div>
+    </div>
   );
 };
 

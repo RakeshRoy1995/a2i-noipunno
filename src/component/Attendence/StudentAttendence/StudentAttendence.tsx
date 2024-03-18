@@ -19,8 +19,6 @@ const StudentAttendance = () => {
   const [classRoomInfos, setClassRoomInfos] = useState<any>({});
   const [classRoomId, setClassRoomId] = useState('');
 
-
-
   const fetchData = async () => {
     const class_teacher_all_student = await class_teacher_all_student_data()
     setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
@@ -41,8 +39,6 @@ const StudentAttendance = () => {
       ...prevAttendance,
       [studentId]: !prevAttendance[studentId],
     }));
-
-
   };
 
   const handleSubmitAttendance = (event) => {
@@ -51,7 +47,7 @@ const StudentAttendance = () => {
     const datas = {
       ...attendance, class_room_id: classRoomId, date,
     };
-    // console.log(datas);
+     console.log(datas);
 
   };
 
@@ -98,8 +94,6 @@ const StudentAttendance = () => {
     const result = convertToBanglaNumber(number)
     setNumber(result)
   }
-
-
 
 
   return (

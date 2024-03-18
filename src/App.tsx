@@ -33,6 +33,7 @@ import StudentAttendence from "./component/Attendence/StudentAttendence/StudentA
 import PasswordReset2 from "./component/_PasswordReset";
 import PrivacyPolicy from "./component/PrivacyPolicy";
 import ShowAssesment from "./component/ShowAssesment";
+import AttendanceSubject from "./component/Attendence/StudentAttendence/AttendanceSubject";
 // import Test from "./component/Assesment/AssessmentSection";
 // import AptBehavAssessment from "./component/Assesment/AssessmentSection";
 // import AssessmentSection from "./component/Assesment/AssessmentSection";
@@ -93,6 +94,7 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/pdf-maker" element={<PDFMaker />} />
+          <Route path="/attendance-subject" element={<AttendanceSubject />} />
           <Route path="/student-attendence" element={<StudentAttendence />} />
 
 

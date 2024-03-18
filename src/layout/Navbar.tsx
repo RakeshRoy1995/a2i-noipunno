@@ -709,6 +709,25 @@ const Navbar = () => {
                             অনুরোধগুলি
                           </a>
                         </li> */}
+
+                            <li className="nav-item dropdown nav-item-style">
+                              <NavLink
+                                to="/attendance-subject"
+                                className={`nav-link navbar-menu-item d-flex align-items-center
+                            ${isFAQpathActive && "active"}`}
+                                role="button"
+                                // data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                              >
+                                <img
+                                  src={onurudhGoliIcon}
+                                  className="img-fluid icon-right-space"
+                                  alt="main logo"
+                                />
+                                শিক্ষার্থীর হাজিরা 
+                              </NavLink>
+                            </li>
+
                             <li className="nav-item dropdown nav-item-style">
                               <NavLink
                                 to="/faq"
@@ -726,6 +745,9 @@ const Navbar = () => {
                                 প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী
                               </NavLink>
                             </li>
+
+                           
+
                           </ul>
                         </div>
                       </nav>

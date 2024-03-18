@@ -37,7 +37,7 @@ const BannerSection = () => {
   const [showTotalStudentTeacherClassRoom, setShowTotalStudentTeacherClassRoom] = useState(true);
 
   const handleShikkathirHaziraChartClick = () => {
-    console.log("ShikkathirHaziraChart clicked");
+    // console.log("ShikkathirHaziraChart clicked");
     setShowTeacherProfileCard(false);
     setShowTotalStudentTeacherClassRoom(false);
   };

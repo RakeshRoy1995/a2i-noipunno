@@ -36,7 +36,7 @@ export default function ShowAssesment({
 
       let own_subjet: any = "";
       if (pi_bi_evaluation_list) {
-        const list =  make_group_by_PI_BI(pi_bi_evaluation_list)
+        const list = make_group_by_PI_BI(pi_bi_evaluation_list)
         own_subjet = list
 
         localStorage.setItem(
@@ -46,7 +46,7 @@ export default function ShowAssesment({
 
       } else {
         own_subjet = await get_pi_bi_evaluation_list(2);
-        const list =  make_group_by_PI_BI(own_subjet.data.data)
+        const list = make_group_by_PI_BI(own_subjet.data.data)
         localStorage.setItem(
           "pi_bi_evaluation_list",
           JSON.stringify(list)
@@ -61,7 +61,7 @@ export default function ShowAssesment({
         ["id"]: allassessmet[0].uid,
       });
       setMullayon_name(allassessmet[0]?.assessment_details_name_bn);
-      pis_list_func(allCompitance, [] , false);
+      pis_list_func(allCompitance, [], false);
     } catch (error: any) {
 
       // console.log(`error`, error);
@@ -84,8 +84,8 @@ export default function ShowAssesment({
 
       setclass_id(own_data.subjects[key].class_room.class_id)
       pis_list_func(allCompitance, []);
-      
-      
+
+
     } catch (error: any) { }
   };
 
@@ -119,8 +119,10 @@ export default function ShowAssesment({
       <div className="row">
         <div className="d-flex align-items-center">
           <div className="card shadow-lg border-0 w-100 rounded">
+
             <ul className="nav d-flex mt-2 justify-content-around py-1 assestment-tabs">
               {own_data?.assessments.map((d: any, key: any) => (
+
                 <li
                   className={`nav-item w-50 f-dlex justify-content-center ${styles.nav_tab_bottom_border}`}
                   key={key}
@@ -143,9 +145,13 @@ export default function ShowAssesment({
                     <SlBookOpen className="me-1" /> {d.assessment_name_bn}{" "}
                   </a>
                 </li>
-              ))}
+              )
+              )}
             </ul>
+            {/* card */}
 
+{/* uncommon after testing */}
+            {/* sub tab-1 */}
             <div className="tab-content" id="tabContent">
               {parodorshita_acoron_tab === 0 && (
                 <div
@@ -201,6 +207,7 @@ export default function ShowAssesment({
               )}
             </div>
 
+            {/* sub tab-2 */}
             <div className="tab-content" id="tabContent">
               {parodorshita_acoron_tab === 1 && (
                 <div
@@ -251,9 +258,161 @@ export default function ShowAssesment({
                 </div>
               )}
             </div>
+
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+
+
+
+
+
+// t2
+
+// import React, { useEffect, useState } from "react";
+// import styles from "./Home.style.module.css";
+// import { SlBookOpen } from "react-icons/sl";
+// import { Link } from "react-router-dom";
+// import { make_group_by_PI_BI, pis_list_func } from "../utils/Utils";
+// import { get_pi_bi_evaluation_list } from "../Request";
+// import Button from 'react-bootstrap/Button';
+// import Card from 'react-bootstrap/Card';
+
+// export default function ShowAssesment({
+//   seshowCompitance,
+//   setassessment_uid,
+//   setMullayon_name,
+//   allassessmet,
+//   own_data,
+//   setparodorshita_acoron_tab,
+//   parodorshita_acoron_tab,
+//   setallassessmet,
+//   pi_selection,
+//   allCompitance,
+//   setShowcollaps,
+// }: any) {
+//   const [ShowSecounderyTab, setShowSecounderyTab] = useState<any>({});
+//   const [class_id, setclass_id] = useState<any>('');
+//   const [clickedCard, setClickedCard] = useState<number | null>(null);
+
+//   const fetchData = async () => {
+//     try {
+//       // Your existing code
+//     } catch (error: any) {
+//       // Handle error
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchData();
+//   }, []);
+
+//   const handleCardClick = (index: number) => {
+//     console.log(`Card ${index + 1} clicked`);
+//     setClickedCard(index);
+//   }
+
+//   const tabAcorongoto = async (key: number) => {
+//     try {
+//       setassessment_uid(own_data?.assessments[key]?.assessment_details[0].uid);
+//       setShowSecounderyTab({
+//         ...ShowSecounderyTab,
+//         ["id"]: own_data?.assessments[key]?.assessment_details[0].uid,
+//       });
+//       setMullayon_name(
+//         own_data?.assessments[key]?.assessment_details[0]
+//           ?.assessment_details_name_bn
+//       );
+//       setparodorshita_acoron_tab(key);
+//       seshowCompitance(true);
+//       setclass_id(own_data.subjects[key].class_room.class_id)
+//       pis_list_func(allCompitance, []);
+//     } catch (error: any) { }
+//   };
+
+//   return (
+//     <div className="container">
+//       <div className="row">
+//         {/* sub tab-1 */}
+//         <div className="tab-content" id="provatiTabContent">
+//           {parodorshita_acoron_tab === 0 && (
+//             <div
+//               className="tab-pane fade show active"
+//               id="provati"
+//               role="tabpanel"
+//               aria-labelledby="provati-tab"
+//             >
+//               {/* Render additional content based on which card is clicked */}
+//               {clickedCard !== null && (
+//                 <div className="mt-3">
+//                   {clickedCard === 0 && (
+//                     // Render content for card 1 click
+//                     <div>Card 1 is clicked</div>
+//                   )}
+//                   {clickedCard === 1 && (
+//                     // Render content for card 2 click
+//                     <ul className="nav d-flex mt-2 justify-content-around py-1 assestment-tabs">
+//                     {own_data?.assessments.map((d: any, key: any) => (
+
+//                       <li
+//                         className={`nav-item w-50 f-dlex justify-content-center ${styles.nav_tab_bottom_border}`}
+//                         key={key}
+//                         style={{ fontSize: "15px" }}
+//                       >
+//                         <a
+//                           className={`nav-link link-secondary fw-bold  ${key === 0 ? "active " : ""
+//                             } `}
+//                           id="expertness-tab"
+//                           data-bs-toggle="tab"
+//                           data-bs-target="#expertness"
+//                           href="#"
+//                           onClick={(e) => {
+//                             setparodorshita_acoron_tab(key);
+//                             tabAcorongoto(key);
+//                             setallassessmet(d?.assessment_details);
+//                             setShowcollaps({});
+//                           }}
+//                         >
+//                           <SlBookOpen className="me-1" /> {d.assessment_name_bn}{" "}
+//                         </a>
+//                       </li>
+//                     )
+//                     )}
+//                   </ul>
+
+//                   )}
+//                   {clickedCard === 2 && (
+//                     // Render content for card 3 click
+//                     <div>Card 3 is clicked</div>
+//                   )}
+//                 </div>
+//               )}
+//               {clickedCard === null && (
+//                 <div className="container d-flex align-items-center justify-content-evenly flex-wrap">
+//                   {allassessmet?.map((ass_d: any, index: number) => (
+//                     <div key={index}>
+//                       <Card
+//                         style={{ width: '18rem', height: "10rem", boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)', cursor: "pointer" }}
+//                         onClick={() => handleCardClick(index)}
+//                       >
+//                         <SlBookOpen className="w-100 mx-auto mt-5" />
+//                         <Card.Body>
+//                           <Card.Title className="d-flex justify-content-center align-items-center mx-auto"> {ass_d.assessment_details_name_bn}</Card.Title>
+//                         </Card.Body>
+//                       </Card>
+//                     </div>
+//                   ))}
+//                 </div>
+//               )}
+//             </div>
+//           )}
+
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }

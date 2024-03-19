@@ -6,6 +6,7 @@ import {
   get_common_info,
   teacher_dashboard,
   teacher_own_subject,
+  class_teacher_all_student_data,
 } from "../Request";
 import Lottie from "lottie-react";
 import loadingAnimation from "../assets/loadingAnimation/loading.json"
@@ -65,6 +66,9 @@ export default function TeacherAttendance() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const date = moment(selectedDate).format('YYYY-MM-DD');
   const [students, setStudents] = useState([]);
+  const [classTeacherInfos, setClassTeacherInfos] = useState({});
+  const [classRoomInfos, setClassRoomInfos] = useState<any>({});
+
   const [
     shikhonKalinMullayon_sannasik_barsik,
     setshikhonKalinMullayon_sannasik_barsik,
@@ -157,7 +161,7 @@ export default function TeacherAttendance() {
   const skill_behaibor_count = async (datas: any) => {
     setShowModal(true);
     // seshowSkillBehaibor(true);
-     //seshowSubject(false);
+    //seshowSubject(false);
     // setselected_subject(datas);
     // setshikhonKalinMullayon(datas.own_subjet.oviggota);
     // setshikhonKalinMullayon_sannasik_barsik(datas.own_subjet.competence);
@@ -197,6 +201,20 @@ export default function TeacherAttendance() {
     }));
   };
 
+  const fetchData2 = async () => {
+    const class_teacher_all_student = await class_teacher_all_student_data()
+    setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
+    console.log("class_teacher", class_teacher_all_student?.data?.data?.students[0]);
+    setClassTeacherInfos(class_teacher_all_student?.data?.data?.students[0])
+
+    const class_room_infos = await class_room_info()
+    console.log("class_room_info", class_room_infos?.data?.data?.subjects);
+    setClassRoomInfos(class_room_infos?.data?.data?.subjects);
+  }
+
+  useEffect(() => {
+    fetchData2()
+  }, [])
 
 
   return (
@@ -431,17 +449,17 @@ export default function TeacherAttendance() {
                                 <tbody>
                                     {students?.map((student, key) => (
                                         <tr key={key}>
-                                        <th scope="row" className="text-center" >{student?.roll}</th>
-                                        <td>{student?.student_name_bn || student?.student_name_en}</td>
-                                        <td className="text-center">
-                                            <input
-                                            style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
-                                            className="form-check-input "
-                                            type="checkbox"
-                                            name={`attendance-${student?.id}`}
-                                            onChange={() => handleCheckboxChange(student?.uid)}
-                                            />
-                                        </td>
+                                          <th scope="row" className="text-center" >{student?.roll}</th>
+                                          <td>{student?.student_name_bn || student?.student_name_en}</td>
+                                          <td className="text-center">
+                                              <input
+                                              style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
+                                              className="form-check-input "
+                                              type="checkbox"
+                                              name={`attendance-${student?.id}`}
+                                              onChange={() => handleCheckboxChange(student?.uid)}
+                                              />
+                                          </td>
                                         </tr>
                                     ))}
                                 </tbody>

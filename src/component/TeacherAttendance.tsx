@@ -205,7 +205,7 @@ export default function TeacherAttendance() {
   const fetchData2 = async () => {
     const class_teacher_all_student = await class_teacher_all_student_data()
     setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
-    console.log("class_teacher", class_teacher_all_student?.data?.data?.students[0]?.students);
+    console.log("class_teacher", class_teacher_all_student?.data?.data?.students);
     setClassTeacherInfos(class_teacher_all_student?.data?.data?.students[0])
 
     const class_room_infos = await class_room_info()

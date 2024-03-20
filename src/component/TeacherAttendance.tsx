@@ -30,6 +30,7 @@ import bookIcon from "../../src/assets/dashboard_materials/images/dashboard/bico
 import "../../src/assets/project_ca_html/css/dashboard.css";
 import ReportForHeadTeacherDashboard from "./Dashboards/ReportForHeadTeacherDashboard";
 import moment from 'moment';
+import { PiSelectionSlashDuotone } from "react-icons/pi";
 
 export default function TeacherAttendance() {
 
@@ -200,22 +201,24 @@ export default function TeacherAttendance() {
       [studentId]: !prevAttendance[studentId],
     }));
   };
-
+  
   const fetchData2 = async () => {
     const class_teacher_all_student = await class_teacher_all_student_data()
     setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
-    console.log("class_teacher", class_teacher_all_student?.data?.data?.students[0]);
+    console.log("class_teacher", class_teacher_all_student?.data?.data?.students[0]?.students);
     setClassTeacherInfos(class_teacher_all_student?.data?.data?.students[0])
 
     const class_room_infos = await class_room_info()
-    console.log("class_room_info", class_room_infos?.data?.data?.subjects);
+    console.log("class_room_info", class_room_infos?.data?.data?.students);
     setClassRoomInfos(class_room_infos?.data?.data?.subjects);
+    //setStudents(class_room_infos?.data?.data?.subjects)
   }
 
   useEffect(() => {
     fetchData2()
   }, [])
 
+  console.log('Students Data:', students)
 
   return (
     <>
@@ -291,7 +294,7 @@ export default function TeacherAttendance() {
                         <div className="container subject-container">
                           {ShowProfile && (
                             <h2 className="m-0" style={{fontWeight:"bolder"}}>
-                              বিষয় ভিত্তিক তথ্য ও মূল্যায়ন  ****
+                              বিষয় ভিত্তিক তথ্য ও মূল্যায়ন 
                             </h2>
                           )}
 
@@ -450,7 +453,7 @@ export default function TeacherAttendance() {
                                     {students?.map((student, key) => (
                                         <tr key={key}>
                                           <th scope="row" className="text-center" >{student?.roll}</th>
-                                          <td>{student?.student_name_bn || student?.student_name_en}</td>
+                                          <td>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}</td>
                                           <td className="text-center">
                                               <input
                                               style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
@@ -476,15 +479,7 @@ export default function TeacherAttendance() {
                     </form>
 
                     </div>
-                    <div className="modal-footer">
-                    <button
-                        type="button"
-                        className="btn btn-secondary"
-                        onClick={closeModal}
-                    >
-                        বন্ধ করুন
-                    </button>
-                    </div>
+                    
                 </div>
                 </div>
             </div>

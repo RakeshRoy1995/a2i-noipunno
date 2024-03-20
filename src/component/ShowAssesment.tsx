@@ -281,6 +281,8 @@ export default function ShowAssesment({
 // import { get_pi_bi_evaluation_list } from "../Request";
 // import Button from 'react-bootstrap/Button';
 // import Card from 'react-bootstrap/Card';
+// import Breadcumbtitle from "../layout/Breadcumb";
+
 
 // export default function ShowAssesment({
 //   seshowCompitance,
@@ -294,10 +296,13 @@ export default function ShowAssesment({
 //   pi_selection,
 //   allCompitance,
 //   setShowcollaps,
+//   setClickedCardIndex
 // }: any) {
 //   const [ShowSecounderyTab, setShowSecounderyTab] = useState<any>({});
 //   const [class_id, setclass_id] = useState<any>('');
 //   const [clickedCard, setClickedCard] = useState<number | null>(null);
+//   // t1
+//   const [cardData, setCardData] = useState<any[]>([]);
 
 //   const fetchData = async () => {
 //     try {
@@ -310,11 +315,6 @@ export default function ShowAssesment({
 //   useEffect(() => {
 //     fetchData();
 //   }, []);
-
-//   const handleCardClick = (index: number) => {
-//     console.log(`Card ${index + 1} clicked`);
-//     setClickedCard(index);
-//   }
 
 //   const tabAcorongoto = async (key: number) => {
 //     try {
@@ -334,9 +334,24 @@ export default function ShowAssesment({
 //     } catch (error: any) { }
 //   };
 
+//   const handleCardClick = async (index: number) => {
+//     console.log(`Card ${index + 1} clicked`);
+//     setClickedCard(index);
+
+//     if (index === 0) {
+//       // Handle logic for the first card click
+//       // Call the same logic as the onClick of the <a> tag
+//       setparodorshita_acoron_tab(0);
+//       await tabAcorongoto(0);
+//       setallassessmet(own_data?.assessments[0]?.assessment_details);
+//       setShowcollaps({});
+//     }
+//   }
+
 //   return (
 //     <div className="container">
 //       <div className="row">
+
 //         {/* sub tab-1 */}
 //         <div className="tab-content" id="provatiTabContent">
 //           {parodorshita_acoron_tab === 0 && (
@@ -351,46 +366,49 @@ export default function ShowAssesment({
 //                 <div className="mt-3">
 //                   {clickedCard === 0 && (
 //                     // Render content for card 1 click
-//                     <div>Card 1 is clicked</div>
+//                     <h5>শিখনকালীন মূল্যায়ন</h5>
 //                   )}
+
 //                   {clickedCard === 1 && (
 //                     // Render content for card 2 click
+//                     <>
+//                     <h5>ষাষ্মাসিক সামষ্টিক মূল্যায়ন</h5>
 //                     <ul className="nav d-flex mt-2 justify-content-around py-1 assestment-tabs">
-//                     {own_data?.assessments.map((d: any, key: any) => (
-
-//                       <li
-//                         className={`nav-item w-50 f-dlex justify-content-center ${styles.nav_tab_bottom_border}`}
-//                         key={key}
-//                         style={{ fontSize: "15px" }}
-//                       >
-//                         <a
-//                           className={`nav-link link-secondary fw-bold  ${key === 0 ? "active " : ""
-//                             } `}
-//                           id="expertness-tab"
-//                           data-bs-toggle="tab"
-//                           data-bs-target="#expertness"
-//                           href="#"
-//                           onClick={(e) => {
-//                             setparodorshita_acoron_tab(key);
-//                             tabAcorongoto(key);
-//                             setallassessmet(d?.assessment_details);
-//                             setShowcollaps({});
-//                           }}
+//                       {own_data?.assessments.map((d: any, key: any) => (
+//                         <li
+//                           className={`nav-item w-50 f-dlex justify-content-center ${styles.nav_tab_bottom_border}`}
+//                           key={key}
+//                           style={{ fontSize: "15px" }}
 //                         >
-//                           <SlBookOpen className="me-1" /> {d.assessment_name_bn}{" "}
-//                         </a>
-//                       </li>
-//                     )
-//                     )}
-//                   </ul>
+//                           <a
+//                             className={`nav-link link-secondary fw-bold  ${key === 0 ? "active " : ""}`}
+//                             id="expertness-tab"
+//                             data-bs-toggle="tab"
+//                             data-bs-target="#expertness"
+//                             href="#"
+//                             onClick={(e) => {
+//                               setparodorshita_acoron_tab(key);
+//                               tabAcorongoto(key);
+//                               setallassessmet(d?.assessment_details);
+//                               setShowcollaps({});
+//                             }}
+//                           >
+//                             <SlBookOpen className="me-1" /> {d.assessment_name_bn}
+//                           </a>
+//                         </li>
+//                       ))}
+//                     </ul>
+//                     </>
 
 //                   )}
+
 //                   {clickedCard === 2 && (
 //                     // Render content for card 3 click
-//                     <div>Card 3 is clicked</div>
+//                     <h5>বার্ষিক সামষ্টিক মূল্যায়ন</h5>
 //                   )}
 //                 </div>
 //               )}
+
 //               {clickedCard === null && (
 //                 <div className="container d-flex align-items-center justify-content-evenly flex-wrap">
 //                   {allassessmet?.map((ass_d: any, index: number) => (

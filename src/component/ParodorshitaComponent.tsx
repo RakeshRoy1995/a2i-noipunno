@@ -70,8 +70,9 @@ export default function ParodorshitaComponent({
                                   fontFamily: "Poppins",
                                 }}
                               >
-                                {convertToBanglaNumber(key + 1)}.{" "}
                                 <PiBookOpenText className="me-2" />
+                                {convertToBanglaNumber(key + 1)}.{" "}
+                                {/* <PiBookOpenText className="me-2" /> */}
                                 {d.oviggota_title}
                               </div>
                               <div className="px-2 rounded ">

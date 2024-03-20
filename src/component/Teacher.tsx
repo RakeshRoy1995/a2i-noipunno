@@ -64,9 +64,12 @@ export default function Teacher() {
   ] = useState([]);
   // navigate
   const navigate = useNavigate()
+
+
   const fetchData = async () => {
     setshowLoadingErr("")
 
+// test 1
 
     try {
       const teacher_dash__: any =
@@ -190,6 +193,7 @@ export default function Teacher() {
               seshowSubject={seshowSubject}
               title={" পারদর্শিতা এবং আচরণগত মূল্যায়ন"}
               selected_subject={selected_subject}
+
             />
           )}
 
@@ -374,6 +378,9 @@ export default function Teacher() {
                                   pi_selection={pi_selection}
                                   allCompitance={allCompitance}
                                   setShowcollaps={setShowcollaps}
+
+                            
+
                                 />
                               </>
                             )}

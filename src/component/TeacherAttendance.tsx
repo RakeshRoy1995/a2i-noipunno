@@ -500,7 +500,7 @@ export default function TeacherAttendance() {
                     </div>
                     <div className="modal-body">
                     <form onSubmit={handleSubmitAttendance}>
-                        <table className="table ">
+                        <table className="table">
                             <thead>
                                 <tr>
                                     <th scope="col">শিক্ষার্থীর রোল</th>
@@ -511,8 +511,8 @@ export default function TeacherAttendance() {
                                 <tbody>
                                     {Student?.map((student, key) => (
                                         <tr key={key}>
-                                          <th scope="row" className="text-center" >{student?.roll}</th>
-                                          <td>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}, {student?.uid}</td>
+                                          <td scope="row" className="text-center" style={{ fontSize: '14px' }}>{student?.roll}</td>
+                                          <td style={{ fontSize: '14px' }}>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}, {student?.uid}</td>
                                           <td className="text-center">
                                               <input
                                               style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}

@@ -270,7 +270,8 @@ const navigate = useNavigate()
 
   const [imagePreview, setImagePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const [warningMessage, setWarningMessage] = useState('ছবি  ১০০ KB এবং (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+  const [warningMessage, setWarningMessage] = useState('');
+ // const [warningMessage, setWarningMessage] = useState('ছবি  ১০০ KB এবং (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
 
 
   const handleImageChange = (e) => {
@@ -284,21 +285,21 @@ const navigate = useNavigate()
       }
 
       // Check file size
-      if (file.size > 100 * 1024) {
-        setWarningMessage('');
-        setErrorMessage('ছবি ১০০ (KB) অতিক্রম করেছে, ছবি  ১০০ (KB) ভিতর হতে হবে!');
-        return;
-      }
+      // if (file.size > 100 * 1024) {
+      //   setWarningMessage('');
+      //   setErrorMessage('ছবি ১০০ (KB) অতিক্রম করেছে, ছবি  ১০০ (KB) ভিতর হতে হবে!');
+      //   return;
+      // }
 
       // Create an image element to get the image dimensions
       const img = new Image();
       img.onload = () => {
         // Check image dimensions
-        if (img.width > 300 || img.height > 300) {
-          setWarningMessage('');
-          setErrorMessage('ছবি ৩০০X৩০০  (PX) অতিক্রম করেছে, ছবি ৩০০X৩০০ (PX) ভিতর হতে হবে!');
-          return;
-        }
+        // if (img.width > 300 || img.height > 300) {
+        //   setWarningMessage('');
+        //   setErrorMessage('ছবি ৩০০X৩০০  (PX) অতিক্রম করেছে, ছবি ৩০০X৩০০ (PX) ভিতর হতে হবে!');
+        //   return;
+        // }
 
         // If both size and dimensions are within limits, set the image preview
         const reader = new FileReader();
@@ -342,7 +343,7 @@ const navigate = useNavigate()
         // Check image dimensions
         if (img.width > 300 || img.height > 300) {
           setSignatureWarningMessage('');
-          setSignatureErrorMessage('স্বাক্ষর ছবি ৩০০X৩০০ (PX) অতিক্রম করেছে, ছবি ৩০০X৩০০ (PX) ভিতর হতে হবে!');
+          setSignatureErrorMessage('স্বাক্ষর ছবি ৩০০X৮০ (PX) অতিক্রম করেছে, ছবি ৩০০X৮০ (PX) ভিতর হতে হবে!');
           return;
         }
 

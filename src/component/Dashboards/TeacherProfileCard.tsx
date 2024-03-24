@@ -91,7 +91,7 @@ return () => clearInterval(intervalId);
             {image ? (
               <img src={img_base_url + image} alt="teacher-profile" />
             ) : (
-              <img src="/public/assets/images/User-avatar.png" alt="default-profile" />
+              <img src="../../../public/assets/images/User-avatar.png" alt="default-profile" />
             )}
 
           </div>

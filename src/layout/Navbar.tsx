@@ -181,7 +181,7 @@ const Navbar = () => {
                         {image ? (
                           <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px" }} className="rounded-5" />
                         ) : (
-                          <img src="/public/assets/images/User-avatar.png" style={{ width: "38px", height: "38px" }} alt="default-profile" />
+                          <img src="../../../public/assets/images/User-avatar.png" alt="default-profile" style={{ width: "38px", height: "38px" }} />
                         )}
                         {/* active icon */}
                         <img

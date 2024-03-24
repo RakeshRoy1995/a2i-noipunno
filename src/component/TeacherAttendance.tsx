@@ -188,6 +188,8 @@ export default function TeacherAttendance() {
 
   const closeModal = () => {
     setShowModal(false);
+     //setAttendance({})
+     setStudent([])
   };
 
   const handleSubmitAttendance = async (event) => {

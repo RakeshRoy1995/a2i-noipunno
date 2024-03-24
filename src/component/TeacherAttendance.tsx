@@ -192,7 +192,7 @@ export default function TeacherAttendance() {
     const datas = {
       ...attendance, class_room_id: classRoomId, date,
     };
-     console.log(datas);
+     console.log('Attendance data', datas);
   };
 
   const handleCheckboxChange = (studentId) => {
@@ -204,21 +204,21 @@ export default function TeacherAttendance() {
   
   const fetchData2 = async () => {
     const class_teacher_all_student = await class_teacher_all_student_data()
-    setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
+    //setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
     console.log("class_teacher", class_teacher_all_student?.data?.data?.students);
     setClassTeacherInfos(class_teacher_all_student?.data?.data?.students[0])
 
     const class_room_infos = await class_room_info()
     console.log("class_room_info", class_room_infos?.data?.data?.students);
     setClassRoomInfos(class_room_infos?.data?.data?.subjects);
-    //setStudents(class_room_infos?.data?.data?.subjects)
+   // setStudents(class_room_infos?.data?.data?.subjects)
   }
 
   useEffect(() => {
     fetchData2()
   }, [])
 
-  console.log('Students Data:', students)
+ // console.log('Students Data:', Student)
 
   return (
     <>
@@ -450,16 +450,16 @@ export default function TeacherAttendance() {
                                 </tr>
                             </thead>
                                 <tbody>
-                                    {students?.map((student, key) => (
+                                    {Student?.map((student, key) => (
                                         <tr key={key}>
                                           <th scope="row" className="text-center" >{student?.roll}</th>
-                                          <td>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}</td>
+                                          <td>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}, {student?.uid}</td>
                                           <td className="text-center">
                                               <input
                                               style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
-                                              className="form-check-input "
+                                              className="form-check-input"
                                               type="checkbox"
-                                              name={`attendance-${student?.id}`}
+                                              name={`attendance-${student?.uid}`}
                                               onChange={() => handleCheckboxChange(student?.uid)}
                                               />
                                           </td>

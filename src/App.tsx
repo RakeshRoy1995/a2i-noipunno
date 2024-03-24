@@ -96,6 +96,7 @@ function App() {
           <Route path="/pdf-maker" element={<PDFMaker />} />
           <Route path="/attendance-subject" element={<AttendanceSubject />} />
           <Route path="/student-attendence" element={<StudentAttendence />} />
+          {/* <Route path="/ab" element={<AssessmentSection />} /> */}
 
 
           {/* <Route path="/bi-pdf-maker2" element={<BiRawPDFDownload />} /> */}

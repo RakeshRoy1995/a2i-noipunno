@@ -47,7 +47,7 @@ export default function DetailsShikhonMullayonShikhonKalin({
         ovigota_uid
       );
 
-      
+
       const ev_data = data?.data?.evaluation.filter((d)=>  d.oviggota_uid == ovigota_uid )
 
       setall_submited_PI(ev_data);
@@ -65,9 +65,9 @@ export default function DetailsShikhonMullayonShikhonKalin({
         confirmButtonText: "হ্যাঁ",
       });
     }
-    
 
-    // // console.log(`data`, data);
+
+    // console.log(`data`, data);
   };
 
 
@@ -88,7 +88,7 @@ export default function DetailsShikhonMullayonShikhonKalin({
                             {convertToBanglaNumber(d?.pi_id)}{" "} */}
 
                             {
-                             convertToBanglaNumber(d.pi_no) || d.pi_no 
+                             convertToBanglaNumber(d.pi_no) || d.pi_no
                             }
                           </h6>
 
@@ -138,7 +138,7 @@ export default function DetailsShikhonMullayonShikhonKalin({
               <h4>
                 <strong>
                 {
-                             convertToBanglaNumber(pi_id) || pi_id 
+                             convertToBanglaNumber(pi_id) || pi_id
                             }
                   {/* {convertToBanglaNumber(showDetailsshikhonKalinMullayon?.class_id)}.{convertToBanglaNumber(showDetailsshikhonKalinMullayon?.oviggota_no)}.{convertToBanglaNumber(pi_id)} */}
                 </strong>

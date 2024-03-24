@@ -6,6 +6,8 @@ import {
   get_common_info,
   teacher_dashboard,
   teacher_own_subject,
+  class_teacher_all_student_data,
+  attendance_submit,
 } from "../Request";
 import Lottie from "lottie-react";
 import loadingAnimation from "../assets/loadingAnimation/loading.json"
@@ -20,7 +22,7 @@ import {
   show_report_open_time_msg,
   teacher_name,
 } from "../utils/Utils";
-
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import AcorongotoComponent from "./AcorongotoComponent";
 import styles from "./Home.style.module.css";
 import ParodorshitaComponent from "./ParodorshitaComponent";
@@ -28,8 +30,11 @@ import ShowAssesment from "./ShowAssesment";
 import bookIcon from "../../src/assets/dashboard_materials/images/dashboard/bicon.svg";
 import "../../src/assets/project_ca_html/css/dashboard.css";
 import ReportForHeadTeacherDashboard from "./Dashboards/ReportForHeadTeacherDashboard";
+import moment from 'moment';
+import { PiSelectionSlashDuotone } from "react-icons/pi";
+import Swal from "sweetalert2";
 
-export default function Teacher() {
+export default function TeacherAttendance() {
 
   const [showLoadingErr, setshowLoadingErr] = useState("");
   let [numberOfRender, setnumberOfRender] = useState(1);
@@ -51,25 +56,33 @@ export default function Teacher() {
   const [Student, setStudent] = useState<any>([]);
   const [teacher, setteacher] = useState<any>({});
   const [teacher_uid, setteacher_uid] = useState<any>("");
+  const [subject_uid, setSubject_uid] = useState<any>("");
+  const [session, setSession] = useState<any>("");
+  const [classRoomId, setClassRoomId] = useState('');
   const [showDetailsshikhonKalinMullayon, setshowDetailsshikhonKalinMullayon] =
     useState<any>("");
   const [showSubject, seshowSubject] = useState(true);
   const [loader, setloader] = useState(true);
   const [showSubjectname, seshowSubjectname] = useState("");
   const [showCompitance, seshowCompitance] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [parodorshita_acoron_tab, setparodorshita_acoron_tab] = useState(0);
+  const [attendance, setAttendance] = useState<any>({});
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const date = moment(selectedDate).format('YYYY-MM-DD h:m:s');
+  const [students, setStudents] = useState([]);
+  const [classTeacherInfos, setClassTeacherInfos] = useState({});
+  const [classRoomInfos, setClassRoomInfos] = useState<any>({});
+
   const [
     shikhonKalinMullayon_sannasik_barsik,
     setshikhonKalinMullayon_sannasik_barsik,
   ] = useState([]);
   // navigate
   const navigate = useNavigate()
-
-
   const fetchData = async () => {
     setshowLoadingErr("")
 
-// test 1
 
     try {
       const teacher_dash__: any =
@@ -151,12 +164,13 @@ export default function Teacher() {
   };
 
   const skill_behaibor_count = async (datas: any) => {
-    seshowSkillBehaibor(true);
-    seshowSubject(false);
-    setselected_subject(datas);
-    setshikhonKalinMullayon(datas.own_subjet.oviggota);
-    setshikhonKalinMullayon_sannasik_barsik(datas.own_subjet.competence);
-    setallassessmet(own_data.assessments[0].assessment_details);
+    setShowModal(true);
+    // seshowSkillBehaibor(true);
+    //seshowSubject(false);
+    // setselected_subject(datas);
+    // setshikhonKalinMullayon(datas.own_subjet.oviggota);
+    // setshikhonKalinMullayon_sannasik_barsik(datas.own_subjet.competence);
+    // setallassessmet(own_data.assessments[0].assessment_details);
   };
 
   useEffect(() => {
@@ -167,6 +181,100 @@ export default function Teacher() {
     setpi_attrbute(data.pi_attribute);
     setelement(e);
   };
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const handleSubmitAttendance = async (event) => {
+    event.preventDefault();
+
+     const newArry = []
+
+     for (const [key, value] of Object.entries(attendance)) {
+      let obj :any= {
+        'student_uid' : key, 
+        'is_present' : value ? 1 : 0, 
+      }
+      newArry.push(obj)
+    }
+
+    const datas = {
+      attendance : newArry,
+      session: session,
+      date,
+      teacher_uid: teacher_uid,
+      subject_uid: subject_uid,
+    };
+
+    try {
+      const { data }: any = await attendance_submit(datas);
+     // setmsg(data.message);
+      // console.log("data", data);
+       if (data.status === true) {
+        Swal.fire({
+          title: 'উপস্থিতি সফলভাবে সংরক্ষণ করা হয়েছে',
+          showClass: {
+            popup: "animate__animated animate__backInDown animate__faster"
+          },
+          hideClass: {
+            popup: "animate__animated animate__backOutDown animate__faster"
+          },
+          width: 'auto', // Set width to auto to fit the content
+          heightAuto: false, // Set heightAuto to false to adjust the height manually
+          customClass: {
+            confirmButton: 'btn-confirm-class',
+            // popup:"bg-color-class"
+          },
+          confirmButtonText: 'ধন্যবাদ' // Change the text of the "Okay" button
+        });
+        setShowModal(false);
+        setAttendance({})
+        setStudent([])
+       }
+
+      //setsendOtoSuccess(true);
+      //setconfirmOtoSuccess(true);
+    } catch (error) {
+      // console.log("error", error);
+      //seterrmsg(error.message);
+    }
+
+   //  console.log('Attendance data', datas);
+  };
+
+  const handleCheckboxChange = (studentId) => {
+    setAttendance((prevAttendance) => ({
+      ...prevAttendance,
+      [studentId]: !prevAttendance[studentId],
+    }));
+  };
+
+ // console.log("attendance" , attendance);
+  
+  
+  const fetchData2 = async () => {
+    const class_teacher_all_student = await class_teacher_all_student_data()
+    //setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
+   // console.log("class_teacher", class_teacher_all_student?.data?.data?.students);
+    setClassTeacherInfos(class_teacher_all_student?.data?.data?.students[0])
+
+    const class_room_infos = await class_room_info()
+   // console.log("class_room_info", class_room_infos?.data?.data?.students);
+    setClassRoomInfos(class_room_infos?.data?.data?.subjects);
+   // setStudents(class_room_infos?.data?.data?.subjects)
+  }
+
+  useEffect(() => {
+    fetchData2()
+  }, [])
+
+  //console.log('Students Data:', Student)
+ // console.log('Subject Data:', subject)
 
   return (
     <>
@@ -191,9 +299,8 @@ export default function Teacher() {
               showSubjectname={showSubjectname}
               setShowProfile={setShowProfile}
               seshowSubject={seshowSubject}
-              title={" পারদর্শিতা এবং আচরণগত মূল্যায়ন"}
+              title={" শিক্ষার্থীর হাজিরা"}
               selected_subject={selected_subject}
-
             />
           )}
 
@@ -243,7 +350,7 @@ export default function Teacher() {
                         <div className="container subject-container">
                           {ShowProfile && (
                             <h2 className="m-0" style={{fontWeight:"bolder"}}>
-                              বিষয় ভিত্তিক তথ্য ও মূল্যায়ন
+                              শিক্ষার্থীর হাজিরা
                             </h2>
                           )}
 
@@ -259,8 +366,10 @@ export default function Teacher() {
                                     style={{ cursor: "pointer" }}
                                     key={key}
                                     onClick={(e) => {
+                                    
                                       skill_behaibor_count(d);
                                       seshowSubjectname(d.subject.name);
+                                      
 
                                       const studnt =
                                         d?.own_subjet?.class_room?.students;
@@ -270,8 +379,11 @@ export default function Teacher() {
                                       });
 
                                       setStudent(studnt);
-
+                                     // setClassRoomId(d.own_subjet.class_room_id);
                                       setteacher_uid(d?.own_subjet.teacher_id);
+                                      setSubject_uid(d?.own_subjet.subject_id);
+                                      setSession(d?.own_subjet?.class_room?.session_year);
+
                                       setShowProfile(false);
                                       localStorage.setItem(
                                         "class_room_id",
@@ -357,92 +469,83 @@ export default function Teacher() {
                           </div>
                         </div>
 
+                        
+
                         {/* ShowAssesment , ParodorshitaComponent,   AcorongotoComponent*/}
-                        {ShowProfile === false && (
-                          <>
-                            {showSkillBehaibor && (
-                              <>
-                                <ShowAssesment
-                                  seshowCompitance={seshowCompitance}
-                                  setassessment_uid={setassessment_uid}
-                                  setMullayon_name={setMullayon_name}
-                                  allassessmet={allassessmet}
-                                  parodorshita_acoron_tab={
-                                    parodorshita_acoron_tab
-                                  }
-                                  own_data={own_data}
-                                  setallassessmet={setallassessmet}
-                                  setparodorshita_acoron_tab={
-                                    setparodorshita_acoron_tab
-                                  }
-                                  pi_selection={pi_selection}
-                                  allCompitance={allCompitance}
-                                  setShowcollaps={setShowcollaps}
-
-                            
-
-                                />
-                              </>
-                            )}
-
-                            {showCompitance && (
-                              <>
-                                {parodorshita_acoron_tab === 0 && (
-                                  <ParodorshitaComponent
-                                    pi_selection={pi_selection}
-                                    teacher_uid={teacher_uid}
-                                    Student={Student}
-                                    assessment_uid={assessment_uid}
-                                    pi_attr={pi_attr}
-                                    showDetailsshikhonKalinMullayon={
-                                      showDetailsshikhonKalinMullayon
-                                    }
-                                    shikhonKalinMullayon_sannasik_barsik={
-                                      shikhonKalinMullayon_sannasik_barsik
-                                    }
-                                    Showcollaps={Showcollaps}
-                                    setShowcollaps={setShowcollaps}
-                                    Mullayon_name={Mullayon_name}
-                                    shikhonKalinMullayon={shikhonKalinMullayon}
-                                    setshowDetailsshikhonKalinMullayon={
-                                      setshowDetailsshikhonKalinMullayon
-                                    }
-                                  />
-                                )}
-
-                                {parodorshita_acoron_tab === 1 && (
-                                  <AcorongotoComponent
-                                    teacher_uid={teacher_uid}
-                                    teacher={teacher}
-                                    Student={Student}
-                                    all_bis={all_bis}
-                                    assessment_uid={assessment_uid}
-                                    pi_attr={pi_attr}
-                                    showDetailsshikhonKalinMullayon={
-                                      showDetailsshikhonKalinMullayon
-                                    }
-                                    shikhonKalinMullayon_sannasik_barsik={
-                                      shikhonKalinMullayon_sannasik_barsik
-                                    }
-                                    Showcollaps={Showcollaps}
-                                    setShowcollaps={setShowcollaps}
-                                    Mullayon_name={Mullayon_name}
-                                    shikhonKalinMullayon={shikhonKalinMullayon}
-                                    setshowDetailsshikhonKalinMullayon={
-                                      setshowDetailsshikhonKalinMullayon
-                                    }
-                                  />
-                                )}
-                              </>
-                            )}
-                          </>
-                        )}
-
+                    
 
                       </div>
                     </div>
                   </div>
                 </div>
+
+            <div>
+
+
+            <div
+                className={`modal fade ${showModal ? 'show' : ''}`}
+            
+                style={{ display: showModal ? 'block' : 'none' }}
+            >
+                <div className="modal-dialog modal-lg">
+                <div className="modal-content">
+                    <div className="modal-header">
+                    <h5 className="modal-title">শিক্ষার্থীর হাজিরা</h5>
+                    <button
+                        type="button"
+                        className="btn-close"
+                        aria-label="Close"
+                        onClick={closeModal}
+                    ></button>
+                    </div>
+                    <div className="modal-body">
+                    <form onSubmit={handleSubmitAttendance}>
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">শিক্ষার্থীর রোল</th>
+                                    <th scope="col">শিক্ষার্থীর নাম</th>
+                                    <th scope="col" className="text-center">উপস্থিতি</th>
+                                </tr>
+                            </thead>
+                                <tbody>
+                                    {Student?.map((student, key) => (
+                                        <tr key={key}>
+                                          <td scope="row" className="text-center" style={{ fontSize: '14px' }}>{student?.roll}</td>
+                                          <td style={{ fontSize: '14px' }}>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}, {student?.uid}</td>
+                                          <td className="text-center">
+                                              <input
+                                              style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
+                                              className="form-check-input"
+                                              type="checkbox"
+                                              name={`attendance-${student?.uid}`}
+                                              onChange={() => handleCheckboxChange(student?.uid)}
+                                              />
+                                          </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                        </table>
+                        <div className="d-flex justify-content-end align-items-center pt-1 pe-3">
+                            <button
+                            type="submit"
+                            className="btn btn-primay px-5"
+                            style={{ backgroundColor: "#428F92", color: "#fff" }}
+                            >
+                            জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} />
+                            </button>
+                        </div>
+                    </form>
+
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+            {showModal && <div className="modal-backdrop fade show"></div>}
+            
+            </div>
+
               </section>
             </div>
           )}

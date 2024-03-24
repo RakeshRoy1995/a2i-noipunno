@@ -261,9 +261,16 @@ const PasswordReset = () => {
               <div className="col-sm-12 col-md-5 col-xl-4 order-mobile-first">
                 <div className="card loginCard max-width-540 login-card-padding">
                   <p className="login-title text-center mb-3">
-                    {showVarify ? "রিসেট পিন" : "রিসেট পিন"}
-                  </p>
 
+                  {
+                    resetPwd ? 'নতুন পিন দিন' : <>
+                      {
+                        otpSubmit ? 'ওটিপি প্রদান করুন' : <>{showVarify ? "রিসেট পিন" : 'রিসেট পিন'}</>
+                      }
+                    </>
+
+                  }
+                  </p>
                 
                   {msg && <p className="text-center text-success bn">{msg}</p>}
 
@@ -274,7 +281,7 @@ const PasswordReset = () => {
                         {
                           showVarify ? <>
                             <div className="alert alert-info mb-4 bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>
-                              নিচের মোবাইল নম্বরটি সঠিক না থাকলে কাস্টমার সাপোর্টে (<a style={{ color: 'white', textDecoration: 'underline' }} href="tel:09638600700">০৯৬৩৮৬০০৭০০</a>) যোগাযোগ করুন।
+                              নিচের মোবাইল নম্বরটি সঠিক না থাকলে কাস্টমার সাপোর্টে (<a style={{ color: 'white', textDecoration: 'underline' }} href="tel:09638600700">০৯৬৩৮৬০০৭০০</a>) যোগাযোগ করুন। অথবা <a href="https://docs.google.com/forms/d/e/1FAIpQLSeG5ZjX6SmEtziCm-0fpkQqYdNtXXzz-jnFc7v-w50tctn3PA/viewform" target="_blank" style={{ color: 'black' }}>এই ফরম</a> পূরণ করুন।
                             </div>
                           </>
                           :

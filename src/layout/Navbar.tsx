@@ -23,7 +23,7 @@ import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
 import { useLocation } from "react-router-dom";
 import { teacher_dashboard, reloadteacher_own_subject } from "../Request";
 import { showReportDeleteEv } from "../utils/Utils";
-
+import DefaultPicture from "../../public/assets/images/User-avatar.png"
 const Navbar = () => {
   const [userDetails, setuserDetails] = useState<any>({});
   const [loading, setLoadin] = useState(true);
@@ -181,7 +181,7 @@ const Navbar = () => {
                         {image ? (
                           <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px" }} className="rounded-5" />
                         ) : (
-                          <img src="../../../public/assets/images/User-avatar.png" alt="default-profile" style={{ width: "38px", height: "38px" }} />
+                          <img src={DefaultPicture} alt="default-profile" style={{ width: "38px", height: "38px" }} />
                         )}
                         {/* active icon */}
                         <img
@@ -221,7 +221,7 @@ const Navbar = () => {
                         </li>
 
                         <li>
-                          <NavLink to="edit-teacher-profile">
+                          <NavLink to="/teacher-profile">
                             <div className="topnav-dropdown-style dropdown-item profile-style">
                               <img
                                 src={amarProfileIcon}
@@ -709,6 +709,25 @@ const Navbar = () => {
                             অনুরোধগুলি
                           </a>
                         </li> */}
+
+                            <li className="nav-item dropdown nav-item-style">
+                              <NavLink
+                                to="/attendance-subject"
+                                className={`nav-link navbar-menu-item d-flex align-items-center
+                            ${isFAQpathActive && "active"}`}
+                                role="button"
+                                // data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                              >
+                                <img
+                                  src={onurudhGoliIcon}
+                                  className="img-fluid icon-right-space"
+                                  alt="main logo"
+                                />
+                                শিক্ষার্থীর হাজিরা 
+                              </NavLink>
+                            </li>
+
                             <li className="nav-item dropdown nav-item-style">
                               <NavLink
                                 to="/faq"
@@ -726,6 +745,9 @@ const Navbar = () => {
                                 প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী
                               </NavLink>
                             </li>
+
+                           
+
                           </ul>
                         </div>
                       </nav>

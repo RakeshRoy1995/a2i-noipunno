@@ -270,7 +270,8 @@ const navigate = useNavigate()
 
   const [imagePreview, setImagePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  const [warningMessage, setWarningMessage] = useState('ছবি  ২০০ KB এবং (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
+  const [warningMessage, setWarningMessage] = useState('');
+ // const [warningMessage, setWarningMessage] = useState('ছবি  ১০০ KB এবং (৩০০ X ৩০০) পিক্সেলের হতে হবে!');
 
 
   const handleImageChange = (e) => {
@@ -284,21 +285,21 @@ const navigate = useNavigate()
       }
 
       // Check file size
-      if (file.size > 100 * 1024) {
-        setWarningMessage('');
-        setErrorMessage('ছবি ১০০ (KB) অতিক্রম করেছে, ছবি  ১০০ (KB) ভিতর হতে হবে!');
-        return;
-      }
+      // if (file.size > 100 * 1024) {
+      //   setWarningMessage('');
+      //   setErrorMessage('ছবি ১০০ (KB) অতিক্রম করেছে, ছবি  ১০০ (KB) ভিতর হতে হবে!');
+      //   return;
+      // }
 
       // Create an image element to get the image dimensions
       const img = new Image();
       img.onload = () => {
         // Check image dimensions
-        if (img.width > 300 || img.height > 300) {
-          setWarningMessage('');
-          setErrorMessage('ছবি ৩০০X৩০০  (PX) অতিক্রম করেছে, ছবি ৩০০X৩০০ (PX) ভিতর হতে হবে!');
-          return;
-        }
+        // if (img.width > 300 || img.height > 300) {
+        //   setWarningMessage('');
+        //   setErrorMessage('ছবি ৩০০X৩০০  (PX) অতিক্রম করেছে, ছবি ৩০০X৩০০ (PX) ভিতর হতে হবে!');
+        //   return;
+        // }
 
         // If both size and dimensions are within limits, set the image preview
         const reader = new FileReader();
@@ -322,16 +323,17 @@ const navigate = useNavigate()
   // signature
   const [signaturePreview, setsSignaturePreview] = useState(null);
   const [signatureErrorMessage, setSignatureErrorMessage] = useState('');
-  const [signatureWarningMessage, setSignatureWarningMessage] = useState('স্বাক্ষর ছবি ২০০ KB এবং দৈর্ঘ-প্রস্থ (৩০০ X ৩০০)  হতে হবে!');
+  const [signatureWarningMessage, setSignatureWarningMessage] = useState('স্বাক্ষর ছবি ৬০ KB এবং  (৩০০ X ৮০) পিক্সেলের হতে হবে!');
 
   const handleSignatureImg = (e) => {
     const file = e.target.files[0];
     if (file) {
 
       // Check file size
-      if (file.size > 100 * 1024) {
+      if (file.size > 60 * 1024) {
         setSignatureWarningMessage('');
-        setSignatureErrorMessage('স্বাক্ষর ছবি ১০০ KB অতিক্রম করেছে, ছবির আকার ১০০ (KB) ভিতর হতে হবে!');
+        setSignatureErrorMessage('স্বাক্ষর ছবি ৬০ KB অতিক্রম করেছে, ছবি ৬০ (KB) ভিতর হতে হবে!,  ');
+
         return;
       }
 
@@ -341,7 +343,7 @@ const navigate = useNavigate()
         // Check image dimensions
         if (img.width > 300 || img.height > 300) {
           setSignatureWarningMessage('');
-          setSignatureErrorMessage('স্বাক্ষর ছবি ৩০০X৩০০ (PX) অতিক্রম করেছে, ছবি ৩০০X৩০০ (PX) ভিতর হতে হবে!');
+          setSignatureErrorMessage('স্বাক্ষর ছবি ৩০০X৮০ (PX) অতিক্রম করেছে, ছবি ৩০০X৮০ (PX) ভিতর হতে হবে!');
           return;
         }
 
@@ -791,11 +793,7 @@ const navigate = useNavigate()
                                   {warningMessage}
                                 </small>
                               )}
-                              {errorMessage && (
-                                <small style={{ padding: "0px", margin: "0px", color: "red",fontWeight:"bold" }}>
-                                  {errorMessage}
-                                </small>
-                              )}
+
 
                               <div className="input-group mt-3">
                                 <input
@@ -834,8 +832,15 @@ const navigate = useNavigate()
                                   }}
                                 />
                               )}
+
                             </div>
+
                           </div>
+                          {errorMessage && (
+                                <small style={{ padding: "0px", margin: "0px", color: "red",fontWeight:"bold" }}>
+                                  {errorMessage}
+                                </small>
+                              )}
                         </div>
 
                         {/* signature upload */}
@@ -848,11 +853,11 @@ const navigate = useNavigate()
                                     {signatureWarningMessage}
                                   </small>
                                 )}
-                                {signatureErrorMessage && (
+                                {/* {signatureErrorMessage && (
                                   <small style={{ padding: "0px", margin: "0px", color: "red", fontWeight:"bold" }}>
                                     {signatureErrorMessage}
                                   </small>
-                                )}
+                                )} */}
 
                               <div className="input-group mt-3">
                                 <input
@@ -862,6 +867,7 @@ const navigate = useNavigate()
                                   accept="image/png, image/jpeg,image/jpg"
                                   onChange={handleSignatureImg}
                                 />
+
 
                               </div>
                             </div>
@@ -890,7 +896,13 @@ const navigate = useNavigate()
                                 />
                               )}
                             </div>
+
                           </div>
+                          {signatureErrorMessage && (
+                                  <small style={{ padding: "0px", margin: "0px", color: "red", fontWeight:"bold" }}>
+                                    {signatureErrorMessage}
+                                  </small>
+                                )}
                         </div>
 
                       </div>

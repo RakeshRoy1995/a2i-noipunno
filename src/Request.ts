@@ -652,12 +652,25 @@ export function all_division() {
 
 export function teacher_designation() {
   // const page_list = `${EVULATION_API}/v2/designation`;
-  const page_list = `https://training.api.project-ca.com/api/v2/designation`;
+  const page_list = `https://api.project-ca.com/api/v2/designation`;
   // const page_list = `https://api.noipunno.gov.bd/api/v2/designation`;
 
   const options = {
     method: "get",
     headers: { "content-type": "application/json" },
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
+export function attendance_submit(data: any) {
+  const page_list = `${EVULATION_API}/v2/store-attendance`;
+
+  const options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data,
     url: page_list,
   };
 

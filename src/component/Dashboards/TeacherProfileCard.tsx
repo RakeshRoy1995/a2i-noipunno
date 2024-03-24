@@ -12,7 +12,7 @@ import darkMoodIcon from "../../assets/dashboard_materials/images/dashboard/moon
 import eyeIcon from "../../assets/dashboard_materials/images/dashboard/eye.svg";
 import { teacher_designation } from "../../Request";
 // import { logged_teacher_details } from "../../utils/Utils";
-
+import DefaultPicture from "../../../public/assets/images/User-avatar.png"
 
 
 const TeacherProfileCard = () => {
@@ -91,17 +91,18 @@ return () => clearInterval(intervalId);
             {image ? (
               <img src={img_base_url + image} alt="teacher-profile" />
             ) : (
-              <img src="../../../public/assets/images/User-avatar.png" alt="default-profile" />
+              <img src={DefaultPicture} alt="default-profile" />
+              // <img src="../../../public/assets/images/user_avatar/teacher.png" alt="default-profile" />
             )}
 
           </div>
           {/* teacher designation */}
           <div className="teacher-title">
-            <h2 style={{ fontWeight: "bold", color: "black" }}>
+            <h2 style={{ color: "black" }}>
               {/* {teacherDesignation} */}
               {/* {isClassTeacher && "শ্রেণি "}
               শিক্ষক */}
-              {designation ? `${designation}` : "শ্রেণি শিক্ষক"}
+              {designation ? `${designation}` : "শ্রেণি শিক্ষক"} 
               { }
             </h2>
           </div>
@@ -119,13 +120,13 @@ return () => clearInterval(intervalId);
           </div>
         </div>
         <div className="teacher-info">
-          <h2 className="card-title text-two-line" style={{ lineHeight: "2", fontWeight: "bolder" }}>
-            {name_bn || name_en || ''}
-          </h2>
-          <p className="card-text" style={{ fontSize: "12px ", fontWeight: 600, color: "##555555" }}>
+          <div className="card-title text-two-line" style={{ lineHeight: "2"}}>
+            {name_bn || name_en || ''} 
+          </div>
+          <div className="card-text" style={{ fontSize: "14px ", color: "##555555" }}>
             {pdsid || caid}
-          </p>
-          <p className="card-text text-center mt-2" style={{ fontSize: "12px", fontWeight: 600, color: "#555555" }}>{schoolName} ({eiin})</p>
+          </div>
+          <div className="card-text text-center mt-2" style={{ fontSize: "14px", color: "#555555" }}>{schoolName} ({eiin})</div>
 
 
 

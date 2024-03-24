@@ -49,13 +49,12 @@ import Teacher from '../Teacher';
 
 const ShikkathirHaziraChart = ({ onClick }) => {
   const handleClick = () => {
-    onClick(); // Call the function passed from the parent component
+    onClick();
   };
 
   return (
-    <div onClick={handleClick} className="col-lg-7 col-md-6">
+    <div className="col-lg col-md-6" onClick={handleClick}>
       <Teacher />
-      {/* Your other chart content goes here */}
     </div>
   );
 };

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function BreadcumbHome({ showSubjectname, seshowSubject, setShowProfile, title, selected_subject }: any) {
 const navigate = useNavigate();
   return (
-    <section className="container pt-3">
+    <section className="container pt-3 mb-3">
       <div className="d-flex align-items-center gap-2">
         <div className="card" style={{ backgroundColor: "white" }}>
           <button
@@ -54,8 +54,9 @@ const navigate = useNavigate();
                   {" "}
                   <MdOutlineArrowForwardIos />
                   {title}
-                  {/* <MdOutlineArrowForwardIos />
-                  {" "} */}
+                  <MdOutlineArrowForwardIos />
+                  {" "}
+
                   {/* <strong>{
                     (selected_subject?.subject?.class_uid === "6") && "ষষ্ঠ শ্রেণি" || (selected_subject?.subject?.class_uid === "7") && "সপ্তম শ্রেণি" ||
                     (selected_subject?.subject?.class_uid === "8") && " অস্টম শ্রেণি" ||

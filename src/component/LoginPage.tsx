@@ -189,6 +189,7 @@ const LoginPage = () => {
           </div> */}
 
 
+          <div className="">
             <div className="container login-container">
               <div className="row">
                 <div className="col-sm-12 col-md-7 col-xl-8">
@@ -257,7 +258,7 @@ const LoginPage = () => {
                             name="password"
                             required
                             placeholder="123456"
-                            data-tooltip="পিন প্রদান করুন"
+                            data-tooltip="৬ ডিজিটের পিন প্রদান করুন"
                             pattern="[0-9]{6}"
                             maxLength={6}
                             value={value}
@@ -298,7 +299,7 @@ const LoginPage = () => {
                           className="form-check-label"
                           htmlFor="flexCheckDefault"
                         >
-                          <p className="pt-2 pin-collect">পিন সংরক্ষণ করুণ</p>
+                          <p className="pt-2 pin-collect">পিন সংরক্ষণ করুন</p>
                         </label>
                       </div>
                     </div> */}
@@ -331,7 +332,7 @@ const LoginPage = () => {
                 </div>
               </div>
             </div>
-
+            </div>
           </div>
 
           <Modal

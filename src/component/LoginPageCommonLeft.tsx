@@ -3,11 +3,24 @@ import appIcon1 from "../assets/login_page_materials/play-store-logo.png";
 import appIcon2 from "../assets/login_page_materials/play-store-logo2.png";
 import chatIcon from "../assets/login_page_materials/chat.svg";
 import listIcon from "../assets/login_page_materials/list.svg";
+import aboutUs from "../assets/login_page_materials/about-us.svg";
 import supportIcon from "../assets/login_page_materials/support.svg";
 const apps = '../assets/app/noipunno.apk';
 import { Link } from "react-router-dom";
+import tippy from "tippy.js";
+import { useEffect } from "react";
 
 export default function LoginPageCommonLeft() {
+     // tooltip  for signature field
+     useEffect(() => {
+        const elementWithDataTooltip = document.querySelectorAll('[data-tooltip ]');
+        elementWithDataTooltip.forEach(element => {
+          tippy(element, {
+            content: element.getAttribute("data-tooltip")
+          });
+        })
+      }, [])
+
   return (
     <div>
         <div className="card transparent-card mb-3">
@@ -48,8 +61,8 @@ export default function LoginPageCommonLeft() {
             <div className="container noipunno-app mb-2">
                 <div className="row">
                     <div className="col-sm-5 text-center"><p className="mt-2 bn">অ্যাপ ডাউনলোড করতে ক্লিক করুন</p></div>
-                    <div className="col-sm-3 mb-2 app-download" style={{ marginRight: '7px' }}><a href={apps} download><img style={{ height: '40px' }} src={ appIcon1 } /></a></div>
-                    <div className="col-sm-3 mb-2 app-download"><a href="https://play.google.com/store/apps/details?id=bd.gov.noipunno" target="_blank"><img style={{ height: '40px' }} src={ appIcon2 }/></a></div>
+                    <div className="col-sm-3 mb-2 app-download" style={{ marginRight: '7px' }}><a href={apps} download><img style={{ height: '40px' }} data-tooltip="ডাউনলোড করুন" src={ appIcon1 } /></a></div>
+                    <div className="col-sm-3 mb-2 app-download"><a href="https://play.google.com/store/apps/details?id=bd.gov.noipunno" target="_blank"><img style={{ height: '40px' }} data-tooltip="ডাউনলোড করুন" src={ appIcon2 }/></a></div>
                 </div>
             </div>
 
@@ -59,13 +72,16 @@ export default function LoginPageCommonLeft() {
             <p className="text-center bn" style={{ fontSize: '17px', color: '#B5248E' }}> <b>হেল্প ডেস্ক:</b> &nbsp;</p>
                 <div className="d-flex mx-auto justify-content-center">
                     <div className="d-flex justify-content-center">
-                        <img src={supportIcon} data-bs-toggle="modal" data-bs-target="#exampleModal1" className="card-footer-image" alt="Logo 1" />
+                        <img src={supportIcon} data-bs-toggle="modal" data-tooltip="যোগাযোগ" data-bs-target="#exampleModal1" className="card-footer-image" alt="যোগাযোগ" style={{ cursor: 'pointer' }} />
                     </div>
                     <div className="d-flex justify-content-center">
-                        <img src={listIcon} data-bs-toggle="modal" data-bs-target="#exampleModal2" className="card-footer-image" alt="Logo 2" />
+                        <img src={aboutUs} data-bs-toggle="modal" data-tooltip="আমাদের সম্পর্কে" data-bs-target="#exampleModal4" className="" alt="আমাদের সম্পর্কে" style={{ cursor: 'pointer', borderRadius: '100px', width: '55px' }} />
                     </div>
                     <div className="d-flex justify-content-center">
-                        <img src={chatIcon} data-bs-toggle="modal" data-bs-target="#exampleModal3" className="card-footer-image" alt="Logo 3" />
+                        <img src={listIcon} data-bs-toggle="modal" data-tooltip="ব্যবহার সহায়িকা" data-bs-target="#exampleModal2" className="card-footer-image" alt="ব্যবহার সহায়িকা" style={{ cursor: 'pointer' }}  />
+                    </div>
+                    <div className="d-flex justify-content-center">
+                        <img src={chatIcon} data-bs-toggle="modal" data-tooltip="আপনার জিজ্ঞাসা" data-bs-target="#exampleModal3" className="card-footer-image" alt="আপনার জিজ্ঞাসা" style={{ cursor: 'pointer' }}  />
                     </div>
                 </div>
             <p className="text-center bn">
@@ -78,22 +94,23 @@ export default function LoginPageCommonLeft() {
                 <div className="">
                     <p className="text-center bn" style={{ fontSize: '17px', color: '#B5248E' }}> <b>হেল্প ডেস্ক:</b> &nbsp;</p>
                 </div>
-                <div className="d-flex justify-content-center">
-                    <img src={supportIcon} data-bs-toggle="modal" data-bs-target="#exampleModal1" className="card-footer-image" alt="Logo 1" />
+                <div className="d-flex justify-content-center" >
+                   <img src={supportIcon} style={{ cursor: 'pointer' }} data-tooltip="যোগাযোগ" data-bs-toggle="modal" data-bs-target="#exampleModal1" className="card-footer-image" alt="যোগাযোগ" />
+                </div>
+                <div className="d-flex justify-content-center" >
+                   <img src={aboutUs} style={{ cursor: 'pointer', borderRadius: '100px', width: '55px' }} data-tooltip="আমাদের সম্পর্কে" data-bs-toggle="modal" data-bs-target="#exampleModal4" className="" alt="আমাদের সম্পর্কে" />
                 </div>
                 <div className="d-flex justify-content-center">
-                    <img src={listIcon} data-bs-toggle="modal" data-bs-target="#exampleModal2" className="card-footer-image" alt="Logo 2" />
+                    <img src={listIcon} style={{ cursor: 'pointer' }} data-tooltip="ব্যবহার সহায়িকা" data-bs-toggle="modal" data-bs-target="#exampleModal2" className="card-footer-image" alt="ব্যবহার সহায়িকা" />
                 </div>
                 <div className="d-flex justify-content-center">
-                    <img src={chatIcon} data-bs-toggle="modal" data-bs-target="#exampleModal3" className="card-footer-image" alt="Logo 3" />
+                    <img src={chatIcon} style={{ cursor: 'pointer' }} data-tooltip="আপনার জিজ্ঞাসা" data-bs-toggle="modal" data-bs-target="#exampleModal3" className="card-footer-image" alt="আপনার জিজ্ঞাসা" />
                 </div>
             <div>
             <p className="text-center bn">
-                &nbsp; <Link to="#" className="" style={{ fontSize: '17px', textDecoration: 'underline', color: '#B5248E' }}> <b>গোপনীয়তার নীতিমালা </b> </Link>
+                &nbsp; <Link to="#" className="" style={{ fontSize: '17px', textDecoration: 'underline', color: '#B5248E' }}><b>গোপনীয়তার নীতিমালা</b> </Link>
             </p>
         </div>
-
-        
 
         </div>
         </div>

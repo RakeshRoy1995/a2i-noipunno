@@ -7,6 +7,7 @@ import {
   teacher_dashboard,
   teacher_own_subject,
   class_teacher_all_student_data,
+  attendance_submit,
 } from "../Request";
 import Lottie from "lottie-react";
 import loadingAnimation from "../assets/loadingAnimation/loading.json"
@@ -54,6 +55,8 @@ export default function TeacherAttendance() {
   const [Student, setStudent] = useState<any>([]);
   const [teacher, setteacher] = useState<any>({});
   const [teacher_uid, setteacher_uid] = useState<any>("");
+  const [subject_uid, setSubject_uid] = useState<any>("");
+  const [session, setSession] = useState<any>("");
   const [classRoomId, setClassRoomId] = useState('');
   const [showDetailsshikhonKalinMullayon, setshowDetailsshikhonKalinMullayon] =
     useState<any>("");
@@ -63,9 +66,9 @@ export default function TeacherAttendance() {
   const [showCompitance, seshowCompitance] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [parodorshita_acoron_tab, setparodorshita_acoron_tab] = useState(0);
-  const [attendance, setAttendance] = useState({});
+  const [attendance, setAttendance] = useState<any>({});
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const date = moment(selectedDate).format('YYYY-MM-DD');
+  const date = moment(selectedDate).format('YYYY-MM-DD h:m:s');
   const [students, setStudents] = useState([]);
   const [classTeacherInfos, setClassTeacherInfos] = useState({});
   const [classRoomInfos, setClassRoomInfos] = useState<any>({});
@@ -186,12 +189,29 @@ export default function TeacherAttendance() {
     setShowModal(false);
   };
 
-  const handleSubmitAttendance = (event) => {
+  const handleSubmitAttendance = async (event) => {
     event.preventDefault();
-    // // console.log(attendance);
+     console.log('Attendance ', attendance);
     const datas = {
-      ...attendance, class_room_id: classRoomId, date,
+      ...attendance,
+      session: session,
+      date,
+      teacher_uid: teacher_uid,
+      subject_uid: subject_uid,
     };
+
+    try {
+      const { data }: any = await attendance_submit(datas);
+     // setmsg(data.message);
+       console.log("data", data);
+
+      //setsendOtoSuccess(true);
+      //setconfirmOtoSuccess(true);
+    } catch (error) {
+       console.log("error", error);
+      //seterrmsg(error.message);
+    }
+
      console.log('Attendance data', datas);
   };
 
@@ -218,7 +238,8 @@ export default function TeacherAttendance() {
     fetchData2()
   }, [])
 
- // console.log('Students Data:', Student)
+  //console.log('Students Data:', Student)
+ // console.log('Subject Data:', subject)
 
   return (
     <>
@@ -323,8 +344,11 @@ export default function TeacherAttendance() {
                                       });
 
                                       setStudent(studnt);
-
+                                     // setClassRoomId(d.own_subjet.class_room_id);
                                       setteacher_uid(d?.own_subjet.teacher_id);
+                                      setSubject_uid(d?.own_subjet.subject_id);
+                                      setSession(d?.own_subjet?.class_room?.session_year);
+
                                       setShowProfile(false);
                                       localStorage.setItem(
                                         "class_room_id",

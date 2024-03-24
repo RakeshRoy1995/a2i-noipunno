@@ -664,6 +664,19 @@ export function teacher_designation() {
   return axios(options);
 }
 
+export function attendance_submit(data: any) {
+  const page_list = `${API_URL}/v2/store-attendance`;
+
+  const options = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    data,
+    url: page_list,
+  };
+
+  return axios(options);
+}
+
 export function sent_otp(data: any) {
   const page_list = `${API_URL}/v2/account-otp`;
 

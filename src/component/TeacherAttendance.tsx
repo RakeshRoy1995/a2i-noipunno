@@ -32,6 +32,7 @@ import "../../src/assets/project_ca_html/css/dashboard.css";
 import ReportForHeadTeacherDashboard from "./Dashboards/ReportForHeadTeacherDashboard";
 import moment from 'moment';
 import { PiSelectionSlashDuotone } from "react-icons/pi";
+import Swal from "sweetalert2";
 
 export default function TeacherAttendance() {
 
@@ -191,9 +192,19 @@ export default function TeacherAttendance() {
 
   const handleSubmitAttendance = async (event) => {
     event.preventDefault();
-     console.log('Attendance ', attendance);
+
+     const newArry = []
+
+     for (const [key, value] of Object.entries(attendance)) {
+      let obj :any= {
+        'student_uid' : key, 
+        'is_present' : value ? 1 : 0, 
+      }
+      newArry.push(obj)
+    }
+
     const datas = {
-      ...attendance,
+      attendance : newArry,
       session: session,
       date,
       teacher_uid: teacher_uid,
@@ -203,7 +214,25 @@ export default function TeacherAttendance() {
     try {
       const { data }: any = await attendance_submit(datas);
      // setmsg(data.message);
-       console.log("data", data);
+      // console.log("data", data);
+       if (data.status === true) {
+        Swal.fire({
+          title: data.message,
+          showClass: {
+            popup: "animate__animated animate__backInDown animate__faster"
+          },
+          hideClass: {
+            popup: "animate__animated animate__backOutDown animate__faster"
+          },
+          width: 'auto', // Set width to auto to fit the content
+          heightAuto: false, // Set heightAuto to false to adjust the height manually
+          customClass: {
+            confirmButton: 'btn-confirm-class',
+            // popup:"bg-color-class"
+          },
+          confirmButtonText: 'ধন্যবাদ' // Change the text of the "Okay" button
+        });
+       }
 
       //setsendOtoSuccess(true);
       //setconfirmOtoSuccess(true);
@@ -221,15 +250,18 @@ export default function TeacherAttendance() {
       [studentId]: !prevAttendance[studentId],
     }));
   };
+
+ // console.log("attendance" , attendance);
+  
   
   const fetchData2 = async () => {
     const class_teacher_all_student = await class_teacher_all_student_data()
     //setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
-    console.log("class_teacher", class_teacher_all_student?.data?.data?.students);
+   // console.log("class_teacher", class_teacher_all_student?.data?.data?.students);
     setClassTeacherInfos(class_teacher_all_student?.data?.data?.students[0])
 
     const class_room_infos = await class_room_info()
-    console.log("class_room_info", class_room_infos?.data?.data?.students);
+   // console.log("class_room_info", class_room_infos?.data?.data?.students);
     setClassRoomInfos(class_room_infos?.data?.data?.subjects);
    // setStudents(class_room_infos?.data?.data?.subjects)
   }

@@ -521,7 +521,7 @@ export default function StudentMullayonModal({
 >
   <GoPerson className="fs-6 fw-bold" />{" "}
   {/* student name */}
-  {studnt?.student_name_bn || studnt?.student_name_en}
+  {studnt?.student_name_bn || studnt?.student_name_en} <br/>
   {/* space */}
   {" "}
   {" "}

@@ -542,6 +542,28 @@ export default function LoginPageModalCommon() {
             </div>
           </div>
         </div>
+
+        <div className="modal fade" id="exampleModal4" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div className="modal-content bn" style={{ border: 'none' }}>
+              <div className="modal-header bg-success text-light">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">আমাদের সম্পর্কে</h1>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div className="modal-body">
+                <div className="row">
+               
+
+                  <h6>আমাদের সম্পর্কে খুব শীঘ্রই আসিতেছে......</h6>
+
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-success" data-bs-dismiss="modal">বন্ধ করুন</button>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
   )
 }

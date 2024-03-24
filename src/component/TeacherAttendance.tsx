@@ -217,7 +217,7 @@ export default function TeacherAttendance() {
       // console.log("data", data);
        if (data.status === true) {
         Swal.fire({
-          title: data.message,
+          title: 'উপস্থিতি সফলভাবে সংরক্ষণ করা হয়েছে',
           showClass: {
             popup: "animate__animated animate__backInDown animate__faster"
           },
@@ -232,16 +232,19 @@ export default function TeacherAttendance() {
           },
           confirmButtonText: 'ধন্যবাদ' // Change the text of the "Okay" button
         });
+        setShowModal(false);
+        setAttendance({})
+        setStudent([])
        }
 
       //setsendOtoSuccess(true);
       //setconfirmOtoSuccess(true);
     } catch (error) {
-       console.log("error", error);
+      // console.log("error", error);
       //seterrmsg(error.message);
     }
 
-     console.log('Attendance data', datas);
+   //  console.log('Attendance data', datas);
   };
 
   const handleCheckboxChange = (studentId) => {
@@ -296,7 +299,7 @@ export default function TeacherAttendance() {
               showSubjectname={showSubjectname}
               setShowProfile={setShowProfile}
               seshowSubject={seshowSubject}
-              title={" পারদর্শিতা এবং আচরণগত মূল্যায়ন"}
+              title={" শিক্ষার্থীর হাজিরা"}
               selected_subject={selected_subject}
             />
           )}
@@ -347,7 +350,7 @@ export default function TeacherAttendance() {
                         <div className="container subject-container">
                           {ShowProfile && (
                             <h2 className="m-0" style={{fontWeight:"bolder"}}>
-                              বিষয় ভিত্তিক তথ্য ও মূল্যায়ন 
+                              শিক্ষার্থীর হাজিরা
                             </h2>
                           )}
 

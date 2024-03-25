@@ -29,6 +29,7 @@ import {
   version_name,
   showReportDeleteEv,
   show_report_open_time_msg,
+  showReportEvBoth,
 } from "../utils/Utils";
 
 import Breadcumb from "../layout/Breadcumb";
@@ -168,7 +169,7 @@ export default function StudentTranscriptBI() {
 
   return (
     <div className="report_page">
-      {showReportDeleteEv() ? (
+      {showReportDeleteEv() || showReportEvBoth() ? (
         <div className="container">
           <div className="row">
             {/* <DownloadPDF_component /> */}

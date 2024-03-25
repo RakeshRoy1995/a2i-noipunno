@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import '../../assets/dashboard_materials/css/dashboard.css';
 import reportIcon from '../../assets/dashboard_materials/images/dashboard/document-text.png';
-import { showReportDeleteEv } from '../../utils/Utils';
+import { showReportDeleteEv, showReportEvBoth } from '../../utils/Utils';
 
 const ReportForHeadTeacherDashboard = () => {
   return (
     <section>
       {
-        showReportDeleteEv() &&
+        showReportDeleteEv() || showReportEvBoth() &&
 
         <div className="container report-container">
           <h2>রিপোর্ট</h2>

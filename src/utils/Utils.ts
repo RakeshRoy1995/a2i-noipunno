@@ -1,4 +1,5 @@
 const VITE_REACT_APP_SHOW_REPORT = import.meta.env.VITE_REACT_APP_SHOW_REPORT;
+const VITE_REACT_APP_SHOW_BOTH_REPORT_EV = import.meta.env.VITE_REACT_APP_SHOW_BOTH_REPORT_EV;
 export const weightId = (allWeight: any, id: any) => {
   let name;
   allWeight.map((al_d: any) => {
@@ -686,6 +687,10 @@ export const accessBIandReport = () => {
 
 export const showReportDeleteEv = () => {
   const res = JSON.parse(VITE_REACT_APP_SHOW_REPORT);
+  return res;
+};
+export const showReportEvBoth = () => {
+  const res = JSON.parse(VITE_REACT_APP_SHOW_BOTH_REPORT_EV);
   return res;
 };
 

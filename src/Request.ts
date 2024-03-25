@@ -666,14 +666,23 @@ export function teacher_designation() {
 
 export function attendance_submit(data: any) {
   const page_list = `${EVULATION_API}/v2/store-attendance`;
-
   const options = {
     method: "POST",
     headers: { "content-type": "application/json" },
     data,
     url: page_list,
   };
+  return axios(options);
+}
 
+export function attendance_get(data: any) {
+  const page_list = `${EVULATION_API}/v2/get-attendance`;
+  const options = {
+    method: "GET",
+    headers: { "content-type": "application/json" },
+    data,
+    url: page_list,
+  };
   return axios(options);
 }
 

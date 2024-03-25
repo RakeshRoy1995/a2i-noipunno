@@ -8,6 +8,7 @@ import {
   teacher_own_subject,
   class_teacher_all_student_data,
   attendance_submit,
+  attendance_get,
 } from "../Request";
 import Lottie from "lottie-react";
 import loadingAnimation from "../assets/loadingAnimation/loading.json"
@@ -192,6 +193,17 @@ export default function TeacherAttendance() {
      setStudent([])
   };
 
+  // get attendance
+  const handleGetAttendance = async () => {
+    const setDate = {
+      class_room_uid:'1780295779101963',
+      date:'2024-03-25'
+    }
+    const { data }: any = await attendance_get(setDate);
+    console.log("get attendance data", data);
+  }
+  handleGetAttendance();
+ 
   const handleSubmitAttendance = async (event) => {
     event.preventDefault();
 
@@ -514,7 +526,7 @@ export default function TeacherAttendance() {
                                     {Student?.map((student, key) => (
                                         <tr key={key}>
                                           <td scope="row" className="text-center" style={{ fontSize: '14px' }}>{student?.roll}</td>
-                                          <td style={{ fontSize: '14px' }}>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}, {student?.uid}</td>
+                                          <td style={{ fontSize: '14px' }}>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}</td>
                                           <td className="text-center">
                                               <input
                                               style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}

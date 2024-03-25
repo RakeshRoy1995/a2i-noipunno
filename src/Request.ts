@@ -675,13 +675,16 @@ export function attendance_submit(data: any) {
   return axios(options);
 }
 
-export function attendance_get(data: any) {
+export function attendance_get(setDate) {
   const page_list = `${EVULATION_API}/v2/get-attendance`;
   const options = {
     method: "GET",
     headers: { "content-type": "application/json" },
-    data,
     url: page_list,
+    params: {
+      class_room_uid: setDate.class_room_uid,
+      date: setDate.date
+    },
   };
   return axios(options);
 }

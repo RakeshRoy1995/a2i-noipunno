@@ -169,6 +169,9 @@ export default function Teacher() {
     setelement(e);
   };
 
+  //console.log(subject);
+
+
   return (
     <>
 

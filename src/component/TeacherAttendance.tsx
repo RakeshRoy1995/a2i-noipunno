@@ -231,8 +231,6 @@ export default function TeacherAttendance() {
   const handleSubmitAttendance = async (event) => {
     event.preventDefault();
 
-    
-
     const newArry = []
 
     for (const [key, value] of Object.entries(attendance)) {
@@ -251,7 +249,7 @@ export default function TeacherAttendance() {
       attendance: newArry,
     };
 
-    // console.log(datas);
+     console.log(datas);
 
     try {
       const { data }: any = await attendance_submit(datas);
@@ -321,7 +319,6 @@ export default function TeacherAttendance() {
     let attendanceRecord :any = {}
 
     console.log("attendance" , attendance);
-    
 
     if (attendance[uid] !== undefined) {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid && attendance[uid]);
@@ -490,7 +487,7 @@ export default function TeacherAttendance() {
                                           {d?.subject?.class_uid == "6"
                                             ? "ষষ্ঠ "
                                             : <> {d?.subject?.class_uid == "7" ? "সপ্তম " : <>  {d?.subject?.class_uid == "8" ? "অষ্টম" : "নবম"}  </>} </>}{" "}
-                                          শ্রেণি - {" "} {d.own_subjet?.class_room_uid}
+                                          শ্রেণি 
                                         </p>
                                       </div>
                                       <div className="d-flex gap-1 ">
@@ -643,28 +640,27 @@ export default function TeacherAttendance() {
                                         <tr key={key}>
                                           <td scope="row" className="text-center" style={{ fontSize: '14px' }}>{student?.roll}</td>
                                           <td style={{ fontSize: '14px' }}>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}</td>
-                                          <td className="text-center">
+                                          <td className="text-center" style={{ fontSize: '14px' }}>
 
                                             {
                                               enableEditMode ? 
-                                            
+                                              
+                                              <input
+                                                  style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
+                                                  className="form-check-input"
+                                                  type="checkbox"
+                                                  name={`attendance-${student?.uid}`}
+                                                  onChange={(e) => handleCheckboxChange(student?.uid)}
+                                                  checked={ getAttendanceDataChecker(student?.uid)}
+                                                />  : <>
+                                              
+                                                {
+                                                  getAttendanceDataChecker(student?.uid) == true ? 'Present' : 'Absent'
+                                                }
+                                              
+                                              </>
 
-                                           <input
-                                              style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
-                                              className="form-check-input"
-                                              type="checkbox"
-                                              name={`attendance-${student?.uid}`}
-                                              onChange={(e) => handleCheckboxChange(student?.uid)}
-                                              checked={ getAttendanceDataChecker(student?.uid)}
-                                            />  : <>
-                                            
-                                            {
-                                              getAttendanceDataChecker(student?.uid) == true ? 'Present' : 'Absent'
                                             }
-                                            
-                                            </>
-
-                                          }
 
                                           </td>
                                         </tr>

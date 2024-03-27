@@ -175,12 +175,11 @@ export default function TeacherAttendance() {
         date: dateGet
       }
       const { data }: any = await attendance_get(setDate);
-      console.log(data.data);
+      //console.log(data.data);
 
       let obj = {}
 
       data.data.map((attendent_data:any)=>{
-
         if (datas.own_subjet.class_room_uid == attendent_data?.class_room_uid) {
           obj[attendent_data['student_uid']] = attendent_data['student_uid'] ? true : false
         }
@@ -249,7 +248,7 @@ export default function TeacherAttendance() {
       attendance: newArry,
     };
 
-     console.log(datas);
+    // console.log(datas);
 
     try {
       const { data }: any = await attendance_submit(datas);
@@ -318,7 +317,7 @@ export default function TeacherAttendance() {
     //console.log(getAttendanceData);
     let attendanceRecord :any = {}
 
-    console.log("attendance" , attendance);
+   // console.log("attendance" , attendance);
 
     if (attendance[uid] !== undefined) {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid && attendance[uid]);
@@ -336,18 +335,12 @@ export default function TeacherAttendance() {
     }
   };
 
-
-
-  
-
   // const handleCheckboxChange = (studentId) => {
   //    setAttendance((prevAttendance) => ({
   //      ...prevAttendance,
   //      [studentId]: !prevAttendance[studentId],
   //    }));
   //  };
-
-  
 
   return (
     <>
@@ -490,9 +483,9 @@ export default function TeacherAttendance() {
                                           শ্রেণি 
                                         </p>
                                       </div>
-                                      <div className="d-flex gap-1 ">
+                                      <div className="d-flex gap-1">
                                         <div className="total-student">
-                                          <p> শ্রেণি শিক্ষক:</p>
+                                          <p>শ্রেণি শিক্ষক:</p>
                                         </div>
                                         <div className="total-student">
                                           <p>

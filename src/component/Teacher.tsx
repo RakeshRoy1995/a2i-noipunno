@@ -69,7 +69,7 @@ export default function Teacher() {
   const fetchData = async () => {
     setshowLoadingErr("")
 
-// test 1
+    // test 1
 
     try {
       const teacher_dash__: any =
@@ -201,7 +201,7 @@ export default function Teacher() {
 
           {!loader && (
             <div className="dashboard-section ">
-              <section className="np-breadcumb-section  pb-5"  style={{backgroundColor: "#F1F1F2"}}>
+              <section className="np-breadcumb-section  pb-5" style={{ backgroundColor: "#F1F1F2" }}>
                 <div className="container">
                   <div className="row">
                     {/* {ShowProfile && (location.pathname !== "/mollayon-koron")  && (
@@ -242,7 +242,7 @@ export default function Teacher() {
                       <div className="row">
                         <div className="container subject-container">
                           {ShowProfile && (
-                            <h2 className="m-0" style={{fontWeight:"bolder"}}>
+                            <h2 className="m-0" style={{ fontWeight: "bolder" }}>
                               বিষয় ভিত্তিক তথ্য ও মূল্যায়ন
                             </h2>
                           )}
@@ -378,13 +378,9 @@ export default function Teacher() {
                                   pi_selection={pi_selection}
                                   allCompitance={allCompitance}
                                   setShowcollaps={setShowcollaps}
-
-                            
-
                                 />
                               </>
                             )}
-
                             {showCompitance && (
                               <>
                                 {parodorshita_acoron_tab === 0 && (
@@ -437,8 +433,6 @@ export default function Teacher() {
                             )}
                           </>
                         )}
-
-
                       </div>
                     </div>
                   </div>

@@ -271,19 +271,40 @@ export default function ShowAssesment({
 
 
 
-// t2
-
-// import React, { useEffect, useState } from "react";
-// import styles from "./Home.style.module.css";
-// import { SlBookOpen } from "react-icons/sl";
-// import { Link } from "react-router-dom";
-// import { make_group_by_PI_BI, pis_list_func } from "../utils/Utils";
-// import { get_pi_bi_evaluation_list } from "../Request";
-// import Button from 'react-bootstrap/Button';
-// import Card from 'react-bootstrap/Card';
-// import Breadcumbtitle from "../layout/Breadcumb";
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { motion } from "framer-motion";
+// import AnnualSummativeAssessment from './AnnualSummativeAssessment';
+// import Assessmentduringlearning from './Assessmentduringlearning';
+// import QuarterlySummativeAssessment from './QuarterlySummativeAssessment';
+// import { Link, useLocation } from 'react-router-dom';
+// import { useEffect, useState } from "react";
+// import NameComponent from "./NameComponent";
+
+
+// interface UserData {
+//   name: string;
+//   // other properties
+// }
 // export default function ShowAssesment({
 //   seshowCompitance,
 //   setassessment_uid,
@@ -291,146 +312,87 @@ export default function ShowAssesment({
 //   allassessmet,
 //   own_data,
 //   setparodorshita_acoron_tab,
-//   parodorshita_acoron_tab,
-//   setallassessmet,
-//   pi_selection,
 //   allCompitance,
 //   setShowcollaps,
-//   setClickedCardIndex
+//   pi_selection,
 // }: any) {
 //   const [ShowSecounderyTab, setShowSecounderyTab] = useState<any>({});
 //   const [class_id, setclass_id] = useState<any>('');
-//   const [clickedCard, setClickedCard] = useState<number | null>(null);
-//   // t1
-//   const [cardData, setCardData] = useState<any[]>([]);
-
+//   const location = useLocation();
 //   const fetchData = async () => {
 //     try {
-//       // Your existing code
-//     } catch (error: any) {
-//       // Handle error
+//       setassessment_uid(own_data?.assessments[0]?.assessment_details[0].uid);
+//       setclass_id(own_data.subjects[0].class_room.class_id);
+
+//       seshowCompitance(true);
+//       setparodorshita_acoron_tab(0);
+//       setassessment_uid(allassessmet[0]?.uid);
+//       setShowSecounderyTab({ ...ShowSecounderyTab, ["id"]: allassessmet[0].uid });
+//       setMullayon_name(allassessmet[0]?.assessment_details_name_bn);
+//     } catch (error) {
+//       console.error('Error fetching data:', error);
+//     }
+//   };
+
+//   const tabAcorongoto = async (key: number) => {
+//     try {
+//       setassessment_uid(own_data?.assessments[key]?.assessment_details[0].uid);
+//       setShowSecounderyTab({ ...ShowSecounderyTab, ["id"]: own_data?.assessments[key]?.assessment_details[0].uid });
+//       setMullayon_name(own_data?.assessments[key]?.assessment_details[0]?.assessment_details_name_bn);
+//       setparodorshita_acoron_tab(key);
+//       seshowCompitance(true);
+//       setclass_id(own_data.subjects[key].class_room.class_id);
+//     } catch (error) {
+//       console.error('Error in tabAcorongoto:', error);
+//     }
+//   };
+
+//   const pi_selection_list_by_subject = async (key: number) => {
+//     try {
+//       const subject = pi_selection.find((data) => data.assessment_type === key);
+//       const pi_list = subject?.pi_list || [];
+//       const check_sannasik_barsik_or_not = key === 1234567892 || key === 1234567891;
+
+//       pis_list_func(allCompitance, pi_list, check_sannasik_barsik_or_not);
+//     } catch (error) {
+//       console.error('Error in pi_selection_list_by_subject:', error);
 //     }
 //   };
 
 //   useEffect(() => {
 //     fetchData();
 //   }, []);
+//   // test
+//   const [teacher_uid, setteacher_uid] = useState<any>("");
+//   const [userData, setUserData] = useState<UserData>({ name: 'a' });
 
-//   const tabAcorongoto = async (key: number) => {
-//     try {
-//       setassessment_uid(own_data?.assessments[key]?.assessment_details[0].uid);
-//       setShowSecounderyTab({
-//         ...ShowSecounderyTab,
-//         ["id"]: own_data?.assessments[key]?.assessment_details[0].uid,
-//       });
-//       setMullayon_name(
-//         own_data?.assessments[key]?.assessment_details[0]
-//           ?.assessment_details_name_bn
-//       );
-//       setparodorshita_acoron_tab(key);
-//       seshowCompitance(true);
-//       setclass_id(own_data.subjects[key].class_room.class_id)
-//       pis_list_func(allCompitance, []);
-//     } catch (error: any) { }
-//   };
 
-//   const handleCardClick = async (index: number) => {
-//     console.log(`Card ${index + 1} clicked`);
-//     setClickedCard(index);
-
-//     if (index === 0) {
-//       // Handle logic for the first card click
-//       // Call the same logic as the onClick of the <a> tag
-//       setparodorshita_acoron_tab(0);
-//       await tabAcorongoto(0);
-//       setallassessmet(own_data?.assessments[0]?.assessment_details);
-//       setShowcollaps({});
-//     }
-//   }
+//   console.log("pi_selectionpi_selection", pi_selection);
 
 //   return (
-//     <div className="container">
-//       <div className="row">
+//     <motion.div
+//       initial={{ opacity: 0, scale: 0.5 }}
+//       animate={{ opacity: 1, scale: 1 }}
+//       transition={{ duration: 0.5 }}
+//     >
+//       <div className='container w-100 mx-auto d-flex justify-content-center align-items-center gap-5'>
+//         <Link to="/Assessment-during-learning" state={{ pi_selection, allassessmet }} >
 
-//         {/* sub tab-1 */}
-//         <div className="tab-content" id="provatiTabContent">
-//           {parodorshita_acoron_tab === 0 && (
-//             <div
-//               className="tab-pane fade show active"
-//               id="provati"
-//               role="tabpanel"
-//               aria-labelledby="provati-tab"
-//             >
-//               {/* Render additional content based on which card is clicked */}
-//               {clickedCard !== null && (
-//                 <div className="mt-3">
-//                   {clickedCard === 0 && (
-//                     // Render content for card 1 click
-//                     <h5>শিখনকালীন মূল্যায়ন</h5>
-//                   )}
+//           <Assessmentduringlearning    />
+//         </Link>
 
-//                   {clickedCard === 1 && (
-//                     // Render content for card 2 click
-//                     <>
-//                     <h5>ষাষ্মাসিক সামষ্টিক মূল্যায়ন</h5>
-//                     <ul className="nav d-flex mt-2 justify-content-around py-1 assestment-tabs">
-//                       {own_data?.assessments.map((d: any, key: any) => (
-//                         <li
-//                           className={`nav-item w-50 f-dlex justify-content-center ${styles.nav_tab_bottom_border}`}
-//                           key={key}
-//                           style={{ fontSize: "15px" }}
-//                         >
-//                           <a
-//                             className={`nav-link link-secondary fw-bold  ${key === 0 ? "active " : ""}`}
-//                             id="expertness-tab"
-//                             data-bs-toggle="tab"
-//                             data-bs-target="#expertness"
-//                             href="#"
-//                             onClick={(e) => {
-//                               setparodorshita_acoron_tab(key);
-//                               tabAcorongoto(key);
-//                               setallassessmet(d?.assessment_details);
-//                               setShowcollaps({});
-//                             }}
-//                           >
-//                             <SlBookOpen className="me-1" /> {d.assessment_name_bn}
-//                           </a>
-//                         </li>
-//                       ))}
-//                     </ul>
-//                     </>
 
-//                   )}
-
-//                   {clickedCard === 2 && (
-//                     // Render content for card 3 click
-//                     <h5>বার্ষিক সামষ্টিক মূল্যায়ন</h5>
-//                   )}
-//                 </div>
-//               )}
-
-//               {clickedCard === null && (
-//                 <div className="container d-flex align-items-center justify-content-evenly flex-wrap">
-//                   {allassessmet?.map((ass_d: any, index: number) => (
-//                     <div key={index}>
-//                       <Card
-//                         style={{ width: '18rem', height: "10rem", boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)', cursor: "pointer" }}
-//                         onClick={() => handleCardClick(index)}
-//                       >
-//                         <SlBookOpen className="w-100 mx-auto mt-5" />
-//                         <Card.Body>
-//                           <Card.Title className="d-flex justify-content-center align-items-center mx-auto"> {ass_d.assessment_details_name_bn}</Card.Title>
-//                         </Card.Body>
-//                       </Card>
-//                     </div>
-//                   ))}
-//                 </div>
-//               )}
-//             </div>
-//           )}
-
-//         </div>
+//         <Link to={"/Quarterly-Summative-Assessment"}>
+//           <QuarterlySummativeAssessment />
+//         </Link>
+//         <Link to={"/Annual-Summative-Assessment"}>
+//           <AnnualSummativeAssessment />
+//         </Link>
+//         <Link to={"/SecondComponent"}>
+//           {/* <NameComponent name={userData.name} /> */}
+//           <NameComponent />
+//         </Link>
 //       </div>
-//     </div>
+//     </motion.div>
 //   );
 // }

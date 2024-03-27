@@ -33,7 +33,7 @@ export default function ParodorshitaComponent({
     <div className="py-2">
       <div className="row">
         <div className="text-center">
-        { loadingspinner && <><Spinner animation="border" /> Data is loading...</>   }
+          {loadingspinner && <><Spinner animation="border" /> Data is loading...</>}
         </div>
 
         {show_shannasik_barsik() == false ? (

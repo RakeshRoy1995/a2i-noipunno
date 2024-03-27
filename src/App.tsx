@@ -34,6 +34,10 @@ import PasswordReset2 from "./component/_PasswordReset";
 import PrivacyPolicy from "./component/PrivacyPolicy";
 import ShowAssesment from "./component/ShowAssesment";
 import AttendanceSubject from "./component/Attendence/StudentAttendence/AttendanceSubject";
+import AssesDuringLearningData from "./component/AssesDuringLearningData";
+import QuarterSummativeAssessData from "./component/QuarterSummativeAssessData";
+import AnnualSummativeAssessData from "./component/AnnualSummativeAssessData";
+import SecondComponent from "./component/SecondComponent";
 // import Test from "./component/Assesment/AssessmentSection";
 // import AptBehavAssessment from "./component/Assesment/AssessmentSection";
 // import AssessmentSection from "./component/Assesment/AssessmentSection";
@@ -96,6 +100,12 @@ function App() {
           <Route path="/pdf-maker" element={<PDFMaker />} />
           <Route path="/attendance-subject" element={<AttendanceSubject />} />
           <Route path="/student-attendence" element={<StudentAttendence />} />
+
+          <Route path="/Assessment-during-learning" element={<AssesDuringLearningData/>} />
+          <Route path="/Quarterly-Summative-Assessment" element={<QuarterSummativeAssessData/>} />
+          <Route path="/Annual-Summative-Assessment" element={<AnnualSummativeAssessData/>} />
+          <Route path="/SecondComponent" element={<SecondComponent/>} />
+
 
 
           {/* <Route path="/bi-pdf-maker2" element={<BiRawPDFDownload />} /> */}

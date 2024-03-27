@@ -49,7 +49,7 @@ const AssesDuringLearningData: React.FC = () => {
 
   return (
     <div>
-      <h1>শিখনকালীন মূল্যায়hhhhhন</h1>
+      <h1>শিখনকালীন মূল্যায়ন</h1>
       <div>
         <p>Name: {name}</p>
 

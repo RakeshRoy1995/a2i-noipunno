@@ -922,7 +922,7 @@ export default function StudentMullayonBehave({
                             className="btn btn-sm btn-outline-secondary m-1"
                             onClick={(e) => requestToReview(e)}
                           >
-                            Submit
+                            অনুরোধ জমা দিন
                           </button>
                         )}
                       </div>

@@ -8,6 +8,7 @@ import {
   show_pis,
   convertToBanglaNumber,
 } from "../utils/Utils";
+import { FaCheckCircle } from "react-icons/fa";
 
 export default function DetailsShikhonMullayonSannasikBarshik({
   showDetailsshikhonKalinMullayon,
@@ -78,7 +79,7 @@ export default function DetailsShikhonMullayonSannasikBarshik({
                             )}
                             .{convertToBanglaNumber(d?.pi_id)}{" "}
                             {/* {
-                             convertToBanglaNumber(d.pi_no) || d.pi_no 
+                             convertToBanglaNumber(d.pi_no) || d.pi_no
                             } */}
                             {/* <p>{showDetailsshikhonKalinMullayon.class_uid } .{showDetailsshikhonKalinMullayon.competence_id} . {d.pi_id}</p> */}
                           </h6>
@@ -104,9 +105,10 @@ export default function DetailsShikhonMullayonSannasikBarshik({
                             <h6>
                               {d?.name_bn}{" "}
                               {check_pi_submitted(d, assessment_uid) && (
-                                <i className="fa-regular fa-circle-check"></i>
+                                // <i className="fa-regular fa-circle-check"></i>
+                                <FaCheckCircle/>
                               )}{" "}
-                              
+
                             </h6>
                           </div>
                         </div>
@@ -120,7 +122,7 @@ export default function DetailsShikhonMullayonSannasikBarshik({
         ))}
       </div>
 
-      
+
 
       <Modal
         className="mt-5"

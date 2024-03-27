@@ -67,6 +67,7 @@ export default function TeacherAttendance() {
   const [showDetailsshikhonKalinMullayon, setshowDetailsshikhonKalinMullayon] =
     useState<any>("");
   const [showSubject, seshowSubject] = useState(true);
+  const [enableEditMode, setnableEditMode] = useState(false);
   const [loader, setloader] = useState(true);
   const [showSubjectname, seshowSubjectname] = useState("");
   const [showCompitance, seshowCompitance] = useState(false);
@@ -89,7 +90,6 @@ export default function TeacherAttendance() {
   const fetchData = async () => {
     setshowLoadingErr("")
 
-
     try {
       const teacher_dash__: any =
         localStorage.getItem("teacher_dashboard") || "";
@@ -109,8 +109,6 @@ export default function TeacherAttendance() {
 
       const own_subjet_: any = localStorage.getItem("own_subjet") || "";
       let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
-
-
 
       if (own_subjet == "") {
         own_subjet = await teacher_own_subject();
@@ -168,6 +166,7 @@ export default function TeacherAttendance() {
   };
 
   const skill_behaibor_count = async (datas: any) => {
+    //console.log("datas" , datas);
     setShowModal(true);
     // get attendance
     const handleGetAttendance = async () => {
@@ -176,8 +175,19 @@ export default function TeacherAttendance() {
         date: dateGet
       }
       const { data }: any = await attendance_get(setDate);
-      //console.log(data.data);
+      console.log(data.data);
 
+      let obj = {}
+
+      data.data.map((attendent_data:any)=>{
+
+        if (datas.own_subjet.class_room_uid == attendent_data?.class_room_uid) {
+          obj[attendent_data['student_uid']] = attendent_data['student_uid'] ? true : false
+        }
+      })
+
+      setAttendance(obj)
+      //console.log("obj" , obj);
       setGetAttendanceData(data.data)
       //setGetAttendanceStatus(data.staus)
       // console.log("get attendance data", data);
@@ -205,12 +215,12 @@ export default function TeacherAttendance() {
 
   const openModal = () => {
     setShowModal(true);
-
   };
 
   const closeModal = () => {
     setShowModal(false);
     //setAttendance({})
+    setnableEditMode(false)
     setStudent([])
     setClassRoomUid("")
     setGetAttendanceData([]);
@@ -220,6 +230,8 @@ export default function TeacherAttendance() {
 
   const handleSubmitAttendance = async (event) => {
     event.preventDefault();
+
+    
 
     const newArry = []
 
@@ -240,8 +252,6 @@ export default function TeacherAttendance() {
     };
 
     // console.log(datas);
-
-
 
     try {
       const { data }: any = await attendance_submit(datas);
@@ -268,21 +278,17 @@ export default function TeacherAttendance() {
         setAttendance({})
         setStudent([])
       }
-
       //setsendOtoSuccess(true);
       //setconfirmOtoSuccess(true);
     } catch (error) {
       // console.log("error", error);
       //seterrmsg(error.message);
     }
-
     //  console.log('Attendance data', datas);
   };
 
   const handleCheckboxChange = (studentId) => {
-
-    console.log("studentId", studentId);
-
+   // console.log("studentId", studentId);
     setAttendance((prevAttendance) => ({
       ...prevAttendance,
       [studentId]: !prevAttendance[studentId],
@@ -304,40 +310,50 @@ export default function TeacherAttendance() {
   useEffect(() => {
     fetchData2()
   }, [])
-
+  
   //console.log('Students Data:', Student)
   //console.log('Subject Data:', subject)
-
-  //console.log(getAttendanceData);
-
+  //console.log('attendance', getAttendanceData);
+ // console.log('attendance', attendance);
 
   const getAttendanceDataChecker = (uid: string) => {
     //console.log(getAttendanceData);
     let attendanceRecord :any = {}
 
+    console.log("attendance" , attendance);
+    
+
     if (attendance[uid] !== undefined) {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid && attendance[uid]);
-      console.log("3" , attendanceRecord);
+     // console.log("3" , attendanceRecord);
     } else {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid);
-
     }
 
-
     if (attendanceRecord) {
-      if (attendanceRecord.is_present == 1) {
+      if (attendanceRecord.is_present == 1) { 
         return true;
       } else {
         return false;
       }
     }
-
   };
 
 
+
+  
+
+  // const handleCheckboxChange = (studentId) => {
+  //    setAttendance((prevAttendance) => ({
+  //      ...prevAttendance,
+  //      [studentId]: !prevAttendance[studentId],
+  //    }));
+  //  };
+
+  
+
   return (
     <>
-
       {!showReportDeleteEv() ? (
         <div className="content mb-5 teacher_compo_bg">
           {showLoadingErr ? (
@@ -362,8 +378,6 @@ export default function TeacherAttendance() {
               selected_subject={selected_subject}
             />
           )}
-
-
 
           {!loader && (
             <div className="dashboard-section ">
@@ -561,10 +575,14 @@ export default function TeacherAttendance() {
                             type="button"
                             className="btn-close"
                             aria-label="Close"
-                            onClick={closeModal}
+                            onClick={ closeModal
+                              
+                              }
                           ></button>
                         </div>
                         <div className="modal-body">
+
+
                           {
                             getAttendanceData === null || getAttendanceData.length === 0 ? <>
                               <form onSubmit={handleSubmitAttendance}>
@@ -627,14 +645,27 @@ export default function TeacherAttendance() {
                                           <td style={{ fontSize: '14px' }}>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}</td>
                                           <td className="text-center">
 
-                                            <input
+                                            {
+                                              enableEditMode ? 
+                                            
+
+                                           <input
                                               style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
                                               className="form-check-input"
                                               type="checkbox"
                                               name={`attendance-${student?.uid}`}
                                               onChange={(e) => handleCheckboxChange(student?.uid)}
                                               checked={ getAttendanceDataChecker(student?.uid)}
-                                            />
+                                            />  : <>
+                                            
+                                            {
+                                              getAttendanceDataChecker(student?.uid) == true ? 'Present' : 'Absent'
+                                            }
+                                            
+                                            </>
+
+                                          }
+
                                           </td>
                                         </tr>
                                       ))}
@@ -642,11 +673,13 @@ export default function TeacherAttendance() {
                                   </table>
                                   <div className="d-flex justify-content-end align-items-center pt-1 pe-3">
                                     <button
-                                      type="submit"
+                                      type= {enableEditMode ? "button" : "submit" } 
+
+                                      onClick={ (e)=> !enableEditMode ? setnableEditMode(true) : setnableEditMode(false) }
                                       className="btn btn-primay px-5"
                                       style={{ backgroundColor: "#428F92", color: "#fff" }}>
                                       {
-                                        getAttendanceData === null || getAttendanceData.length === 0 ? <><h5 className="modal-title">জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
+                                        enableEditMode ? <><h5 className="modal-title">জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
                                           : <><h5 className="modal-title">পুনরায় জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
                                       }
 

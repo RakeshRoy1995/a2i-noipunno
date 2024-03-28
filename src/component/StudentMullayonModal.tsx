@@ -524,7 +524,7 @@ export default function StudentMullayonModal({
   {studnt?.student_name_bn || studnt?.student_name_en}
   {/* space */}
   {" "}
-  {" "}
+  {" "} <br/>
   {/* student roll */}
   রোল : {convertToBanglaNumber(studnt?.roll)}
 </td>

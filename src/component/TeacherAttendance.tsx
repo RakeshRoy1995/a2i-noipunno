@@ -181,7 +181,7 @@ export default function TeacherAttendance() {
 
       data.data.map((attendent_data:any)=>{
         if (datas.own_subjet.class_room_uid == attendent_data?.class_room_uid) {
-          obj[attendent_data['student_uid']] = attendent_data['student_uid'] ? true : false
+          obj[attendent_data['student_uid']] = attendent_data.is_present ? true : false
         }
       })
 
@@ -317,22 +317,41 @@ export default function TeacherAttendance() {
     //console.log(getAttendanceData);
     let attendanceRecord :any = {}
 
-    console.log("attendance" , attendance);
+    //console.log("attendance" , attendance);
+   // console.log('UID ',attendance[uid]);
+
+    // if (attendance[uid] == true) {
+    //   attendanceRecord = getAttendanceData.find(data => data.student_uid === uid && attendance[uid]);
+    //   //console.log("U " , attendanceRecord);
+    // } else {
+    //   attendanceRecord = getAttendanceData.find(data => data.student_uid === uid);
+    //  // console.log("N " , attendanceRecord);
+    // }
 
     if (attendance[uid] !== undefined) {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid && attendance[uid]);
-     // console.log("3" , attendanceRecord);
+       
+      console.log("U " , attendanceRecord);
     } else {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid);
+    
+      console.log("N " , attendanceRecord);
     }
 
-    if (attendanceRecord) {
-      if (attendanceRecord.is_present == 1) { 
-        return true;
-      } else {
-        return false;
+    console.log('Status ',attendanceRecord)
+
+
+      if (attendanceRecord) {
+        if (attendanceRecord.is_present == 1 || attendanceRecord.is_present == true) { 
+          return true;
+        }else if (attendanceRecord == undefined) { 
+          return false;
+        } else {
+          return false;
+        }
       }
-    }
+
+    
   };
 
   // const handleCheckboxChange = (studentId) => {
@@ -634,7 +653,7 @@ export default function TeacherAttendance() {
                                           <td scope="row" className="text-center" style={{ fontSize: '14px' }}>{student?.roll}</td>
                                           <td style={{ fontSize: '14px' }}>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}</td>
                                           <td className="text-center" style={{ fontSize: '14px' }}>
-
+                                    
                                             {
                                               enableEditMode ? 
                                               
@@ -644,16 +663,19 @@ export default function TeacherAttendance() {
                                                   type="checkbox"
                                                   name={`attendance-${student?.uid}`}
                                                   onChange={(e) => handleCheckboxChange(student?.uid)}
-                                                  checked={ getAttendanceDataChecker(student?.uid)}
+                                                  checked={ getAttendanceDataChecker(student?.uid) !==undefined ? true : false }
                                                 />  : <>
                                               
                                                 {
                                                   getAttendanceDataChecker(student?.uid) == true ? 'Present' : 'Absent'
                                                 }
+
                                               
                                               </>
 
                                             }
+
+                                                
 
                                           </td>
                                         </tr>

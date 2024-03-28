@@ -55,7 +55,7 @@ const PasswordReset = () => {
         setshoOtpVarify(true);
       } catch (error) {
         setUserId_from_Cookie(getUserId);
-        seterror("ভুল আইডি");
+        seterror("এই ইউজার আইডি খুজে পাওয়া যায়নি");
       }
     }
     fetchData();
@@ -81,7 +81,7 @@ const PasswordReset = () => {
         setshoOtpVarify(true);
         setUserId_from_Cookie(caId);
       } catch (error) {
-        seterror("ভুল আইডি");
+        seterror("এই ইউজার আইডি খুজে পাওয়া যায়নি");
       }
 
     } else {
@@ -95,7 +95,7 @@ const PasswordReset = () => {
         setbuttonSHow(false)
         setOtpSubmitButton(true)
       } else {
-        seterror("ভুল আইডি");
+        seterror("এই ইউজার আইডি খুজে পাওয়া যায়নি");
       }
     }
   }
@@ -296,7 +296,7 @@ const PasswordReset = () => {
                     
                   </p>
 
-                  {msg && <p className="text-center  alert alert-info bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>{msg}</p>}
+                  {msg && <p className="text-center alert alert-info bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>{msg}</p>}
 
                   {
                     !otpSubmit ?
@@ -311,7 +311,7 @@ const PasswordReset = () => {
                           </>
                             :
                             <>
-                              {error && <p className="text-center text-danger bn">{error}</p>}
+                              {error && <p className="text-center alert alert-danger bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>{error}</p>}
                             </>
                         }
                         {/* user id field */}
@@ -449,7 +449,7 @@ const PasswordReset = () => {
                           !resetPwd &&
                           <>
 
-                            {error && <p className="text-center text-danger bn">{error}</p>}
+                            {error && <p className="text-center alert alert-danger bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>{error}</p>}
 
                             <form onSubmit={handleOTPSubmit}>
 
@@ -521,7 +521,7 @@ const PasswordReset = () => {
                   {
                     resetPwd && <>
                       <form onSubmit={handleNewPaswordSubmit}>
-                        {error && <p className="text-center text-danger bn">{error}</p>}
+                        {error && <p className="text-center alert alert-danger bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>{error}</p>}
 
                         <div className="form-group mb-1">
                           <label htmlFor="pin" className="login-field-title mb-2">

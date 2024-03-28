@@ -513,21 +513,21 @@ export default function StudentMullayonModal({
 
                         {/* student name */}
                         <td
-  // style={{
-  //   fontSize: "14px",
-  //   fontWeight: "bold",
-  // }}
-  className="fs-md-2 fs-lg-3 fw-bold"
->
-  <GoPerson className="fs-6 fw-bold" />{" "}
-  {/* student name */}
-  {studnt?.student_name_bn || studnt?.student_name_en}
-  {/* space */}
-  {" "}
-  {" "} <br/>
-  {/* student roll */}
-  রোল : {convertToBanglaNumber(studnt?.roll)}
-</td>
+                    // style={{
+                    //   fontSize: "14px",
+                    //   fontWeight: "bold",
+                    // }}
+                    className="fs-md-2 fs-lg-3 fw-bold"
+                  >
+                    <GoPerson className="fs-6 fw-bold" />{" "}
+                    {/* student name */}
+                    {studnt?.student_name_bn || studnt?.student_name_en}
+                    {/* space */}
+                    {" "}
+                    {" "} <br/>
+                    {/* student roll */}
+                    রোল : {convertToBanglaNumber(studnt?.roll)}
+                  </td>
 
 
                       </td>

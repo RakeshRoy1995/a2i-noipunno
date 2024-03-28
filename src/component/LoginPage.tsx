@@ -258,7 +258,7 @@ const LoginPage = () => {
                             name="password"
                             // required
                             placeholder="123456"
-                            data-tooltip="৬ ডিজিটের পিন প্রদান করুন"
+                            data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন। শুধুমাত্র ইংরেজি সংখ্যা ০ থেকে 9 পর্যন্ত।"
                             pattern="[0-9]{6}"
                             maxLength={6}
                             value={value}

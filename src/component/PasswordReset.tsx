@@ -91,7 +91,7 @@ const PasswordReset = () => {
       const { data }: any = await resetPassword(datas);
       //// console.log(data);
       if (data?.status === true) {
-        setmsg("আপনার নম্বরে ওটিপিটি পাঠানো হয়েছে।")
+        setmsg(data.message)
         setbuttonSHow(false)
         setOtpSubmitButton(true)
       } else {
@@ -293,9 +293,10 @@ const PasswordReset = () => {
                       </>
 
                     }
+                    
                   </p>
 
-                  {msg && <p className="text-center text-success bn">{msg}</p>}
+                  {msg && <p className="text-center  alert alert-info bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>{msg}</p>}
 
                   {
                     !otpSubmit ?
@@ -304,7 +305,7 @@ const PasswordReset = () => {
 
                         {
                           showVarify ? <>
-                            <div className="text-center alert alert-info mb-4 bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>
+                            <div className="text-center alert alert-info mb-3 bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>
                               নিচের মোবাইল নম্বরটি সঠিক না থাকলে কাস্টমার সাপোর্টে (<a style={{ color: 'white', textDecoration: 'underline' }} href="tel:09638600700">০৯৬৩৮৬০০৭০০</a>) যোগাযোগ করুন।
                             </div>
                           </>
@@ -357,7 +358,7 @@ const PasswordReset = () => {
                         {/* phone number field */}
                         {showVarify && (
                           <>
-                            <div className="form-group mb-1 mt-3">
+                            <div className="form-group mb-1 mt-2">
                               <label htmlFor="pin" className="login-field-title mt-2 mb-2">
                                 মোবাইল নম্বর
                               </label>
@@ -384,7 +385,7 @@ const PasswordReset = () => {
                         {/* email field */}
                         {showVarify && (
                           <>
-                            <div className="form-group mb-1 mt-3">
+                            <div className="form-group mb-1 mt-2">
                               <label htmlFor="email" className="login-field-title mt-2 mb-2">ইমেইল</label>
                               <div className="input-group">
                                 <img src={pinNumberFieldUserIcon} className="np-login-field-icon" alt="logo" />

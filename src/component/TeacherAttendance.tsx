@@ -317,7 +317,7 @@ export default function TeacherAttendance() {
     //console.log(getAttendanceData);
     let attendanceRecord :any = {}
 
-   // console.log("attendance" , attendance);
+    console.log("attendance" , attendance);
 
     if (attendance[uid] !== undefined) {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid && attendance[uid]);

@@ -17,6 +17,7 @@ import {
   section_name,
   shift_name,
   showReportDeleteEv,
+  showReportEvBoth,
   show_report_open_time_msg,
   teacher_name,
 } from "../utils/Utils";
@@ -168,10 +169,13 @@ export default function Teacher() {
     setelement(e);
   };
 
+  //console.log(subject);
+
+
   return (
     <>
 
-      {!showReportDeleteEv() ? (
+      {( !showReportDeleteEv() || showReportEvBoth() ) ? (
         <div className="content mb-5 teacher_compo_bg">
           {showLoadingErr ? (
             <p className="text-danger text-center">{showLoadingErr}</p>

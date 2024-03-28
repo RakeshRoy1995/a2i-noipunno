@@ -22,7 +22,7 @@ import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
 
 import { useLocation } from "react-router-dom";
 import { teacher_dashboard, reloadteacher_own_subject } from "../Request";
-import { showReportDeleteEv } from "../utils/Utils";
+import { showReportDeleteEv, showReportEvBoth } from "../utils/Utils";
 import DefaultPicture from "../../public/assets/images/User-avatar.png"
 const Navbar = () => {
   const [userDetails, setuserDetails] = useState<any>({});
@@ -436,7 +436,7 @@ const Navbar = () => {
                                 />
                               </a>
                               <ul className="dropdown-menu border-0 dropdown-menu-item-style">
-                                {showReportDeleteEv() && (
+                                {( showReportDeleteEv() || showReportEvBoth() ) && (
                                   <>
                                     <li>
                                       <NavLink
@@ -760,12 +760,12 @@ const Navbar = () => {
                         onClick={fetchData}
                         className="nav-link navbar-menu-item nav-right-dorpdown d-flex align-items-center mx-1"
                         type="button"
-                        title="যদি কিছু ডেটা যেমন শিক্ষার্থী যোগ করা হয়, শিক্ষক যোগ করা হয় বা অন্য কিছু পরিবর্তন করা হয় তবে দয়া করে ডেটা পুনরায় লোড করুন"
+                        title="যদি কিছু ডেটা যেমন শিক্ষার্থী যোগ করা হয়, শিক্ষক যোগ করা হয় বা অন্য কিছু আপডেট করা হয় তবে দয়া করে ডেটা পুনরায় লোড করুন"
                       >
-                        ডেটা পুনরায় লোড করুন
+                        নৈপূণ্য আপডেট
                       </button>
 
-                      {showReportDeleteEv() && (
+                      { showReportDeleteEv() || showReportEvBoth() && (
                         <Link
                           to="/mollayon-koron"
                           id="mollayon_koron_btn"

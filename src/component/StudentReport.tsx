@@ -21,6 +21,7 @@ import {
   showReportDeleteEv,
   show_report_open_time_msg,
   teacher_name,
+  showReportEvBoth,
 } from "../utils/Utils";
 import Breadcumb from "../layout/Breadcumb";
 import BiRawPDFDownload from "./PDFMaker/ReportPdf";
@@ -249,7 +250,7 @@ export default function StudentReport() {
 
   return (
     <div className="report_page">
-      {showReportDeleteEv() ? (
+      {showReportDeleteEv() || showReportEvBoth() ? (
         <div className="container">
           <div className="row">
             <Breadcumb title={"রিপোর্ট কার্ড"} />

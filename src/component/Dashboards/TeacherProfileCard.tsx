@@ -98,11 +98,11 @@ return () => clearInterval(intervalId);
           </div>
           {/* teacher designation */}
           <div className="teacher-title">
-            <h2 style={{ fontWeight: "bold", color: "black" }}>
+            <h2 style={{ color: "black" }}>
               {/* {teacherDesignation} */}
               {/* {isClassTeacher && "শ্রেণি "}
               শিক্ষক */}
-              {designation ? `${designation}` : "শ্রেণি শিক্ষক"}
+              {designation ? `${designation}` : "শ্রেণি শিক্ষক"} 
               { }
             </h2>
           </div>
@@ -120,13 +120,13 @@ return () => clearInterval(intervalId);
           </div>
         </div>
         <div className="teacher-info">
-          <h2 className="card-title text-two-line" style={{ lineHeight: "2", fontWeight: "bolder" }}>
-            {name_bn || name_en || ''}
-          </h2>
-          <p className="card-text" style={{ fontSize: "14px ", fontWeight: 600, color: "##555555" }}>
+          <div className="card-title text-two-line" style={{ lineHeight: "2"}}>
+            {name_bn || name_en || ''} 
+          </div>
+          <div className="card-text" style={{ fontSize: "14px ", color: "##555555" }}>
             {pdsid || caid}
-          </p>
-          <p className="card-text text-center mt-2" style={{ fontSize: "14px", fontWeight: 600, color: "#555555" }}>{schoolName} ({eiin})</p>
+          </div>
+          <div className="card-text text-center mt-2" style={{ fontSize: "14px", color: "#555555" }}>{schoolName} ({eiin})</div>
 
 
 

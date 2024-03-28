@@ -7,6 +7,8 @@ import {
   teacher_dashboard,
   teacher_own_subject,
   class_teacher_all_student_data,
+  attendance_submit,
+  attendance_get,
 } from "../Request";
 import Lottie from "lottie-react";
 import loadingAnimation from "../assets/loadingAnimation/loading.json"
@@ -31,6 +33,7 @@ import "../../src/assets/project_ca_html/css/dashboard.css";
 import ReportForHeadTeacherDashboard from "./Dashboards/ReportForHeadTeacherDashboard";
 import moment from 'moment';
 import { PiSelectionSlashDuotone } from "react-icons/pi";
+import Swal from "sweetalert2";
 
 export default function TeacherAttendance() {
 
@@ -54,18 +57,26 @@ export default function TeacherAttendance() {
   const [Student, setStudent] = useState<any>([]);
   const [teacher, setteacher] = useState<any>({});
   const [teacher_uid, setteacher_uid] = useState<any>("");
+  const [subject_uid, setSubject_uid] = useState<any>("");
+  const [session, setSession] = useState<any>("");
+  const [classRoomUid, setClassRoomUid] = useState<any>("");
+  const [getAttendanceData, setGetAttendanceData] = useState<any>([]);
+  const [getAttandanceStatus, setGetAttendanceStatus] = useState<any>(false);
+
   const [classRoomId, setClassRoomId] = useState('');
   const [showDetailsshikhonKalinMullayon, setshowDetailsshikhonKalinMullayon] =
     useState<any>("");
   const [showSubject, seshowSubject] = useState(true);
+  const [enableEditMode, setnableEditMode] = useState(false);
   const [loader, setloader] = useState(true);
   const [showSubjectname, seshowSubjectname] = useState("");
   const [showCompitance, seshowCompitance] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [parodorshita_acoron_tab, setparodorshita_acoron_tab] = useState(0);
-  const [attendance, setAttendance] = useState({});
+  const [attendance, setAttendance] = useState<any>({});
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const date = moment(selectedDate).format('YYYY-MM-DD');
+  const date = moment(selectedDate).format('YYYY-MM-DD h:m:s');
+  const dateGet = moment(selectedDate).format('YYYY-MM-DD');
   const [students, setStudents] = useState([]);
   const [classTeacherInfos, setClassTeacherInfos] = useState({});
   const [classRoomInfos, setClassRoomInfos] = useState<any>({});
@@ -78,7 +89,6 @@ export default function TeacherAttendance() {
   const navigate = useNavigate()
   const fetchData = async () => {
     setshowLoadingErr("")
-
 
     try {
       const teacher_dash__: any =
@@ -99,8 +109,6 @@ export default function TeacherAttendance() {
 
       const own_subjet_: any = localStorage.getItem("own_subjet") || "";
       let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
-
-
 
       if (own_subjet == "") {
         own_subjet = await teacher_own_subject();
@@ -139,9 +147,7 @@ export default function TeacherAttendance() {
         setallCompitance(compitnc_obj);
         setsubject(all_subject);
         setloader(false);
-
       }
-
 
     } catch (error) {
       setshowLoadingErr("");
@@ -160,7 +166,32 @@ export default function TeacherAttendance() {
   };
 
   const skill_behaibor_count = async (datas: any) => {
+    //console.log("datas" , datas);
     setShowModal(true);
+    // get attendance
+    const handleGetAttendance = async () => {
+      const setDate = {
+        class_room_uid: datas.own_subjet?.class_room_uid,
+        date: dateGet
+      }
+      const { data }: any = await attendance_get(setDate);
+      //console.log(data.data);
+
+      let obj = {}
+
+      data.data.map((attendent_data:any)=>{
+        if (datas.own_subjet.class_room_uid == attendent_data?.class_room_uid) {
+          obj[attendent_data['student_uid']] = attendent_data['student_uid'] ? true : false
+        }
+      })
+
+      setAttendance(obj)
+      //console.log("obj" , obj);
+      setGetAttendanceData(data.data)
+      //setGetAttendanceStatus(data.staus)
+      // console.log("get attendance data", data);
+    }
+    handleGetAttendance();
     // seshowSkillBehaibor(true);
     //seshowSubject(false);
     // setselected_subject(datas);
@@ -168,6 +199,9 @@ export default function TeacherAttendance() {
     // setshikhonKalinMullayon_sannasik_barsik(datas.own_subjet.competence);
     // setallassessmet(own_data.assessments[0].assessment_details);
   };
+
+  //getAttendanceData getAttandanceStatus
+  //console.log(getAttendanceData);
 
   useEffect(() => {
     fetchData();
@@ -184,45 +218,132 @@ export default function TeacherAttendance() {
 
   const closeModal = () => {
     setShowModal(false);
+    //setAttendance({})
+    setnableEditMode(false)
+    setStudent([])
+    setClassRoomUid("")
+    setGetAttendanceData([]);
   };
 
-  const handleSubmitAttendance = (event) => {
+  //console.log(subject_uid);
+
+  const handleSubmitAttendance = async (event) => {
     event.preventDefault();
-    // // console.log(attendance);
+
+    const newArry = []
+
+    for (const [key, value] of Object.entries(attendance)) {
+      let obj: any = {
+        'student_uid': key,
+        'is_present': value ? 1 : 0,
+      }
+      newArry.push(obj)
+    }
+
     const datas = {
-      ...attendance, class_room_id: classRoomId, date,
+      session: session,
+      date,
+      teacher_uid: teacher_uid,
+      subject_uid: subject_uid,
+      attendance: newArry,
     };
-     console.log(datas);
+
+    // console.log(datas);
+
+    try {
+      const { data }: any = await attendance_submit(datas);
+      // setmsg(data.message);
+      // console.log("data", data);
+      if (data.status === true) {
+        Swal.fire({
+          title: 'উপস্থিতি সফলভাবে সংরক্ষণ করা হয়েছে',
+          showClass: {
+            popup: "animate__animated animate__backInDown animate__faster"
+          },
+          hideClass: {
+            popup: "animate__animated animate__backOutDown animate__faster"
+          },
+          width: 'auto', // Set width to auto to fit the content
+          heightAuto: false, // Set heightAuto to false to adjust the height manually
+          customClass: {
+            confirmButton: 'btn-confirm-class',
+            // popup:"bg-color-class"
+          },
+          confirmButtonText: 'ধন্যবাদ' // Change the text of the "Okay" button
+        });
+        setShowModal(false);
+        setAttendance({})
+        setStudent([])
+      }
+      //setsendOtoSuccess(true);
+      //setconfirmOtoSuccess(true);
+    } catch (error) {
+      // console.log("error", error);
+      //seterrmsg(error.message);
+    }
+    //  console.log('Attendance data', datas);
   };
 
   const handleCheckboxChange = (studentId) => {
+   // console.log("studentId", studentId);
     setAttendance((prevAttendance) => ({
       ...prevAttendance,
       [studentId]: !prevAttendance[studentId],
     }));
   };
-  
+
   const fetchData2 = async () => {
     const class_teacher_all_student = await class_teacher_all_student_data()
-    setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
-    console.log("class_teacher", class_teacher_all_student?.data?.data?.students);
+    //setStudents(class_teacher_all_student?.data?.data?.students[0]?.students)
+    // console.log("class_teacher", class_teacher_all_student?.data?.data?.students);
     setClassTeacherInfos(class_teacher_all_student?.data?.data?.students[0])
 
     const class_room_infos = await class_room_info()
-    console.log("class_room_info", class_room_infos?.data?.data?.students);
+    // console.log("class_room_info", class_room_infos?.data?.data?.students);
     setClassRoomInfos(class_room_infos?.data?.data?.subjects);
-    //setStudents(class_room_infos?.data?.data?.subjects)
+    // setStudents(class_room_infos?.data?.data?.subjects)
   }
 
   useEffect(() => {
     fetchData2()
   }, [])
+  
+  //console.log('Students Data:', Student)
+  //console.log('Subject Data:', subject)
+  //console.log('attendance', getAttendanceData);
+ // console.log('attendance', attendance);
 
-  console.log('Students Data:', students)
+  const getAttendanceDataChecker = (uid: string) => {
+    //console.log(getAttendanceData);
+    let attendanceRecord :any = {}
+
+   // console.log("attendance" , attendance);
+
+    if (attendance[uid] !== undefined) {
+      attendanceRecord = getAttendanceData.find(data => data.student_uid === uid && attendance[uid]);
+     // console.log("3" , attendanceRecord);
+    } else {
+      attendanceRecord = getAttendanceData.find(data => data.student_uid === uid);
+    }
+
+    if (attendanceRecord) {
+      if (attendanceRecord.is_present == 1) { 
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
+
+  // const handleCheckboxChange = (studentId) => {
+  //    setAttendance((prevAttendance) => ({
+  //      ...prevAttendance,
+  //      [studentId]: !prevAttendance[studentId],
+  //    }));
+  //  };
 
   return (
     <>
-
       {!showReportDeleteEv() ? (
         <div className="content mb-5 teacher_compo_bg">
           {showLoadingErr ? (
@@ -243,16 +364,14 @@ export default function TeacherAttendance() {
               showSubjectname={showSubjectname}
               setShowProfile={setShowProfile}
               seshowSubject={seshowSubject}
-              title={" পারদর্শিতা এবং আচরণগত মূল্যায়ন"}
+              title={" শিক্ষার্থীর হাজিরা"}
               selected_subject={selected_subject}
             />
           )}
 
-
-
           {!loader && (
             <div className="dashboard-section ">
-              <section className="np-breadcumb-section  pb-5"  style={{backgroundColor: "#F1F1F2"}}>
+              <section className="np-breadcumb-section  pb-5" style={{ backgroundColor: "#F1F1F2" }}>
                 <div className="container">
                   <div className="row">
                     {/* {ShowProfile && (location.pathname !== "/mollayon-koron")  && (
@@ -290,12 +409,14 @@ export default function TeacherAttendance() {
                         </div>
                       </div>
 
+
                       <div className="row">
                         <div className="container subject-container">
-                          {ShowProfile && (
-                            <h2 className="m-0" style={{fontWeight:"bolder"}}>
-                              বিষয় ভিত্তিক তথ্য ও মূল্যায়ন 
+                          {ShowProfile && (<>
+                            <h2 className="m-0" style={{ fontWeight: "bolder" }}>
+                              শিক্ষার্থীর হাজিরা
                             </h2>
+                          </>
                           )}
 
                           {/* card collection */}
@@ -310,10 +431,10 @@ export default function TeacherAttendance() {
                                     style={{ cursor: "pointer" }}
                                     key={key}
                                     onClick={(e) => {
-                                    
+
                                       skill_behaibor_count(d);
                                       seshowSubjectname(d.subject.name);
-                                      
+                                      setClassRoomUid(d.own_subjet?.class_room_uid);
 
                                       const studnt =
                                         d?.own_subjet?.class_room?.students;
@@ -323,8 +444,12 @@ export default function TeacherAttendance() {
                                       });
 
                                       setStudent(studnt);
-
+                                      // setClassRoomId(d.own_subjet.class_room_id);
                                       setteacher_uid(d?.own_subjet.teacher_id);
+                                      setSubject_uid(d?.own_subjet.subject_id);
+                                      setSession(d?.own_subjet?.class_room?.session_year);
+
+
                                       setShowProfile(false);
                                       localStorage.setItem(
                                         "class_room_id",
@@ -355,12 +480,12 @@ export default function TeacherAttendance() {
                                           {d?.subject?.class_uid == "6"
                                             ? "ষষ্ঠ "
                                             : <> {d?.subject?.class_uid == "7" ? "সপ্তম " : <>  {d?.subject?.class_uid == "8" ? "অষ্টম" : "নবম"}  </>} </>}{" "}
-                                          শ্রেণি{" "}
+                                          শ্রেণি 
                                         </p>
                                       </div>
-                                      <div className="d-flex gap-1 ">
+                                      <div className="d-flex gap-1">
                                         <div className="total-student">
-                                          <p> শ্রেণি শিক্ষক:</p>
+                                          <p>শ্রেণি শিক্ষক:</p>
                                         </div>
                                         <div className="total-student">
                                           <p>
@@ -410,82 +535,160 @@ export default function TeacherAttendance() {
                           </div>
                         </div>
 
-                        
+
 
                         {/* ShowAssesment , ParodorshitaComponent,   AcorongotoComponent*/}
-                    
+
 
                       </div>
                     </div>
                   </div>
                 </div>
 
-            <div>
+                <div>
 
 
-            <div
-                className={`modal fade ${showModal ? 'show' : ''}`}
-            
-                style={{ display: showModal ? 'block' : 'none' }}
-            >
-                <div className="modal-dialog modal-lg">
-                <div className="modal-content">
-                    <div className="modal-header">
-                    <h5 className="modal-title">শিক্ষার্থীর হাজিরা</h5>
-                    <button
-                        type="button"
-                        className="btn-close"
-                        aria-label="Close"
-                        onClick={closeModal}
-                    ></button>
-                    </div>
-                    <div className="modal-body">
-                    <form onSubmit={handleSubmitAttendance}>
-                        <table className="table ">
-                            <thead>
-                                <tr>
-                                    <th scope="col">শিক্ষার্থীর রোল</th>
-                                    <th scope="col">শিক্ষার্থীর নাম</th>
-                                    <th scope="col" className="text-center">উপস্থিতি</th>
-                                </tr>
-                            </thead>
-                                <tbody>
-                                    {students?.map((student, key) => (
+                  <div
+                    className={`modal fade ${showModal ? 'show' : ''}`}
+
+                    style={{ display: showModal ? 'block' : 'none' }}
+                  >
+                    <div className="modal-dialog modal-lg">
+                      <div className="modal-content">
+                        <div className="modal-header">
+
+                          {
+                            getAttendanceData === null || getAttendanceData.length === 0 ? <h5 className="modal-title">শিক্ষার্থীর হাজিরা</h5>
+                              : <h5 className="modal-title">আজকের দিনের শিক্ষার্থীর হাজিরা</h5>
+                          }
+                          <button
+                            type="button"
+                            className="btn-close"
+                            aria-label="Close"
+                            onClick={ closeModal
+                              
+                              }
+                          ></button>
+                        </div>
+                        <div className="modal-body">
+
+
+                          {
+                            getAttendanceData === null || getAttendanceData.length === 0 ? <>
+                              <form onSubmit={handleSubmitAttendance}>
+                                <table className="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">শিক্ষার্থীর রোল</th>
+                                      <th scope="col">শিক্ষার্থীর নাম</th>
+                                      <th scope="col" className="text-center">উপস্থিতি</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {Student?.map((student, key) => (
+                                      <tr key={key}>
+                                        <td scope="row" className="text-center" style={{ fontSize: '14px' }}>{student?.roll}</td>
+                                        <td style={{ fontSize: '14px' }}>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}</td>
+                                        <td className="text-center">
+                                          <input
+                                            style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            name={`attendance-${student?.uid}`}
+                                            onChange={() => handleCheckboxChange(student?.uid)}
+                                          />
+                                        </td>
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+                                <div className="d-flex justify-content-end align-items-center pt-1 pe-3">
+                                  <button
+                                    type="submit"
+                                    className="btn btn-primay px-5"
+                                    style={{ backgroundColor: "#428F92", color: "#fff" }}>
+                                    {
+                                      getAttendanceData === null || getAttendanceData.length === 0 ? <><h5 className="modal-title">জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
+                                        : <><h5 className="modal-title">পুনরায় জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
+                                    }
+
+                                  </button>
+                                </div>
+                              </form>
+                            </>
+                              :
+                              <>
+
+                                <form onSubmit={handleSubmitAttendance}>
+                                  <table className="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">শিক্ষার্থীর রোল</th>
+                                        <th scope="col">শিক্ষার্থীর নাম</th>
+                                        <th scope="col" className="text-center">উপস্থিতি</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {Student?.map((student, key) => (
                                         <tr key={key}>
-                                          <th scope="row" className="text-center" >{student?.roll}</th>
-                                          <td>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}</td>
-                                          <td className="text-center">
+                                          <td scope="row" className="text-center" style={{ fontSize: '14px' }}>{student?.roll}</td>
+                                          <td style={{ fontSize: '14px' }}>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}</td>
+                                          <td className="text-center" style={{ fontSize: '14px' }}>
+
+                                            {
+                                              enableEditMode ? 
+                                              
                                               <input
-                                              style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
-                                              className="form-check-input "
-                                              type="checkbox"
-                                              name={`attendance-${student?.id}`}
-                                              onChange={() => handleCheckboxChange(student?.uid)}
-                                              />
+                                                  style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
+                                                  className="form-check-input"
+                                                  type="checkbox"
+                                                  name={`attendance-${student?.uid}`}
+                                                  onChange={(e) => handleCheckboxChange(student?.uid)}
+                                                  checked={ getAttendanceDataChecker(student?.uid)}
+                                                />  : <>
+                                              
+                                                {
+                                                  getAttendanceDataChecker(student?.uid) == true ? 'Present' : 'Absent'
+                                                }
+                                              
+                                              </>
+
+                                            }
+
                                           </td>
                                         </tr>
-                                    ))}
-                                </tbody>
-                        </table>
-                        <div className="d-flex justify-content-end align-items-center pt-1 pe-3">
-                            <button
-                            type="submit"
-                            className="btn btn-primay px-5"
-                            style={{ backgroundColor: "#428F92", color: "#fff" }}
-                            >
-                            জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} />
-                            </button>
-                        </div>
-                    </form>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                  <div className="d-flex justify-content-end align-items-center pt-1 pe-3">
+                                    <button
+                                      type= {enableEditMode ? "button" : "submit" } 
 
+                                      onClick={ (e)=> !enableEditMode ? setnableEditMode(true) : setnableEditMode(false) }
+                                      className="btn btn-primay px-5"
+                                      style={{ backgroundColor: "#428F92", color: "#fff" }}>
+                                      {
+                                        enableEditMode ? <><h5 className="modal-title">জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
+                                          : <><h5 className="modal-title">পুনরায় জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
+                                      }
+
+                                    </button>
+                                  </div>
+                                </form>
+
+                              </>
+                          }
+
+
+
+                        </div>
+
+                      </div>
                     </div>
-                    
+                  </div>
+                  {showModal && <div className="modal-backdrop fade show"></div>}
+
                 </div>
-                </div>
-            </div>
-            {showModal && <div className="modal-backdrop fade show"></div>}
-            
-            </div>
 
               </section>
             </div>

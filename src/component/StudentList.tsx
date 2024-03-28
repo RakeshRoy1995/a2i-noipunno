@@ -178,7 +178,7 @@ const StudentList = () => {
                       <tbody>
                         <tr>
                           <td className="p-1">
-                            <strong>রোলঃ </strong>
+                            <strong>রোলঃ</strong>
                           </td>
                           <td className="p-1">
                             {selectedItem?.roll || "no-entry"}

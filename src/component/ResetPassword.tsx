@@ -189,7 +189,7 @@ function ResetPassword() {
                   <div className="card-body">
                     {/* send reset otp */}
                     {!sendOtoSuccess && (
-                      <form onSubmit={sendOTP}>     
+                      <form onSubmit={sendOTP}>
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label">আপনার ইউজার আইডি</label>
                             <div className="input-group">
@@ -199,7 +199,7 @@ function ResetPassword() {
                                 className="form-control"
                                 readOnly
                                 name="caid"
-                            
+
                                 defaultValue={user_Caid}
                               />
                             </div>
@@ -214,7 +214,7 @@ function ResetPassword() {
                           >
                             ওটিপি পাঠান
                           </button>
-              
+
                       </form>
                     )}
 
@@ -227,7 +227,7 @@ function ResetPassword() {
 
                         <input type="hidden" id="pin" name="user_type_id" defaultValue={1}/>
                         <input type="hidden" id="pin" name="caid" defaultValue={user_Caid}/>
-{/*                     
+{/*
                         <div className="form-group">
                           <div className="mb-3" style={{ fontSize: "16px" }}>
                             <label className="form-label">ওটিপি</label>
@@ -238,7 +238,7 @@ function ResetPassword() {
                                 className="form-control"
                                 name="pin"
                                 placeholder="ওটিপি কোড"
-                                maxLength={4} 
+                                maxLength={4}
                                 onInput={handleInput}
                               />
                             </div>
@@ -246,7 +246,7 @@ function ResetPassword() {
                         </div> */}
                               <div className="text-center mx-auto otp-card">
 
-  
+
                                   <p className="text-center p-2 mb-2">ওটিপি</p>
 
                                   <div className="d-flex">
@@ -264,7 +264,7 @@ function ResetPassword() {
                                                     style={{ float:'left',  border: '1px solid #1d2327'  }}
                                                     required
                                                   />
-                                            
+
                                           </div>
                                         ))}
                                   </div>
@@ -282,12 +282,12 @@ function ResetPassword() {
                                   width: '250px',
                                 }}
                               >
-                                
+
                                 নিশ্চিত
-                                
+
                               </button>
-                        
-                       
+
+
                       </form>
                     )}
 
@@ -312,8 +312,8 @@ function ResetPassword() {
                                 className="form-control"
                                 name="password"
                                 placeholder="নতুন পিন দিন"
-                                data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
-                                maxLength={6} 
+                                data-tooltip="৬ ডিজিটের নতুন পিন প্রদান করুন। শুধুমাত্র ইংরেজি সংখ্যা ০ থেকে ৯ পর্যন্ত"
+                                maxLength={6}
                                 onInput={handleInput}
                                 onChange={handlePasswordChange}
                               />
@@ -334,7 +334,7 @@ function ResetPassword() {
                                 name="password_confirmation"
                                 placeholder="নতুন পিনটি পুনরায় দিন"
                                 data-tooltip="৬ (ছয়) ডিজিটের নতুন পিন প্রদান করুন"
-                                maxLength={6} 
+                                maxLength={6}
                                 onInput={handleInput}
                                 onChange={handleConfirmPasswordChange}
                                 onKeyUp={handleBlur}
@@ -342,7 +342,7 @@ function ResetPassword() {
                             </div>
                           </div>
                         </div>
-                        
+
                           <button
                             type="submit"
                             className="btn login-button"
@@ -354,7 +354,7 @@ function ResetPassword() {
                           >
                             নিশ্চিত
                           </button>
-                       
+
                       </form>
                     )}
 

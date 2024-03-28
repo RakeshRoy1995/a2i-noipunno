@@ -227,7 +227,7 @@ const LoginPage = () => {
                             type="text"
                             // value={value}
                             defaultValue={userId_from_Cookie}
-                            required
+                            // required
                             autoComplete="off"
                             placeholder="ইউজার আইডি"
                             name="caid"
@@ -243,7 +243,7 @@ const LoginPage = () => {
                         <label htmlFor="pin" className="login-field-title mb-2">
                           পিন নম্বর
                         </label>
-        
+
                         <div className="input-group">
                           <img
                             src={pinNumberFieldUserIcon}
@@ -256,7 +256,7 @@ const LoginPage = () => {
                             defaultValue={userPin_from_Cookie}
                             id="pin"
                             name="password"
-                            required
+                            // required
                             placeholder="123456"
                             data-tooltip="৬ ডিজিটের পিন প্রদান করুন"
                             pattern="[0-9]{6}"
@@ -280,7 +280,7 @@ const LoginPage = () => {
                                 // />
                                 <img onClick={() => setShowPassword(!showPassword)} src={passwordHideEyeIcon} style={{ width: '20px', height: '20px' }} alt="" />
                               )}
-                          
+
                             </span>
                           </div>
                         </div>

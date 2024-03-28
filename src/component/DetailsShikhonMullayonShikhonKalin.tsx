@@ -5,7 +5,7 @@ import { Button, Modal, Spinner } from "react-bootstrap";
 import { get_pi_evaluation_by_pi } from "../Request";
 import { check_pi_submitted, show_pis , convertToBanglaNumber } from "../utils/Utils";
 import Swal from "sweetalert2";
-
+import { FaCheckCircle } from "react-icons/fa";
 export default function DetailsShikhonMullayonShikhonKalin({
   showDetailsshikhonKalinMullayon,
   assessment_uid,
@@ -110,7 +110,12 @@ export default function DetailsShikhonMullayonShikhonKalin({
                             }}
                             className="text-decoration text-success  ps-2 pointer"
                           >
-                            <h6>{d?.name_bn}  {check_pi_submitted(d , assessment_uid , showDetailsshikhonKalinMullayon.uid ) && <i className="fa-regular fa-circle-check"></i>} { showModal && <Spinner animation="border" /> }    </h6>
+                            <h6>{d?.name_bn}  {check_pi_submitted(d , assessment_uid , showDetailsshikhonKalinMullayon.uid ) &&
+                            //
+                            <FaCheckCircle/>
+
+                            }
+                            { showModal && <Spinner animation="border" /> }    </h6>
                           </div>
                         </div>
                       </div>

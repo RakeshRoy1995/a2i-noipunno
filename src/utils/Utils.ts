@@ -163,7 +163,7 @@ export const show_compitance = (compitance_uid: any) => {
 export const show_pis = (compitance_uid: any) => {
   const all_compitance_id = JSON.parse(localStorage.getItem("show_pi_list"));
 
-  return all_compitance_id.includes(compitance_uid);
+  return all_compitance_id?.includes(compitance_uid) || false
 };
 
 export const show_shannasik_barsik = () => {
@@ -400,7 +400,7 @@ export const formate_teanscript_data = (data: any) => {
         const pi = allPi[y];
         const pi_data = our_all_piData.filter((d: any) => d.uid == pi.pi_uid);
 
-        
+
         const Pi_obj = {
           ...pi,
           student_data: student_dta[0],
@@ -517,7 +517,7 @@ export const teacher_list = () => {
     let subjects = [];
     subjects = [...own_subject?.data?.data?.subjects];
     subjects.map((item) =>
-    item.class_room?.class_teacher && 
+    item.class_room?.class_teacher &&
       all_teachers_with_duplicate?.push(item.class_room?.class_teacher)
     );
   }
@@ -641,7 +641,7 @@ export const show_sub_by_religion = (religion: any, subject_name: any) => {
       subject_name == "বৌদ্ধধর্ম শিক্ষা")
   ) {
 
-    
+
     return true;
   }
 
@@ -674,7 +674,7 @@ export const accessBIandReport = () => {
   if (ch_Class_teacher) {
     return true
   } else {
-    
+
     const data = localStorage.getItem("own_subjet");
     const storageData = JSON.parse(data);
 
@@ -682,7 +682,7 @@ export const accessBIandReport = () => {
 
     return false
   }
-  
+
 };
 
 export const showReportDeleteEv = () => {
@@ -710,7 +710,7 @@ export const showPiBiSubject = (data: any) => {
     }
   }
 
-  
+
   // return true
 };
 

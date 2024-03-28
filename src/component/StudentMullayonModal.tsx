@@ -521,7 +521,7 @@ export default function StudentMullayonModal({
 >
   <GoPerson className="fs-6 fw-bold" />{" "}
   {/* student name */}
-  {studnt?.student_name_bn || studnt?.student_name_en} <br/>
+  {studnt?.student_name_bn || studnt?.student_name_en}
   {/* space */}
   {" "}
   {" "}
@@ -669,7 +669,7 @@ export default function StudentMullayonModal({
               <div className="col-md-6">
                 <div className="row p-1">
                   {showReview ? (
-                    <div className="d-flex justify-content-end align-items-center">
+                    <div className="d-flex justify-content-end align-items-center flex-wrap gap-2">
                       <textarea
                         className="form-control"
                         placeholder="আপনি কেন এটি পর্যালোচনা করতে চান তার একটি কারণ দিন"
@@ -684,7 +684,7 @@ export default function StudentMullayonModal({
                           className="btn btn-sm btn-outline-secondary m-1"
                           onClick={(e) => requestToReview(e)}
                         >
-                          Submit
+                          অনুরোধ জমা দিন
                         </button>
                       )}
                     </div>

@@ -77,6 +77,7 @@ export default function TeacherAttendance() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const date = moment(selectedDate).format('YYYY-MM-DD h:m:s');
   const dateGet = moment(selectedDate).format('YYYY-MM-DD');
+  const dateGet2 = moment(selectedDate).format('DD-MM-YYYY');
   const [students, setStudents] = useState([]);
   const [classTeacherInfos, setClassTeacherInfos] = useState({});
   const [classRoomInfos, setClassRoomInfos] = useState<any>({});
@@ -580,8 +581,9 @@ export default function TeacherAttendance() {
 
                           {
                             getAttendanceData === null || getAttendanceData.length === 0 ? <h5 className="modal-title">শিক্ষার্থীর হাজিরা</h5>
-                              : <h5 className="modal-title">আজকের দিনের শিক্ষার্থীর হাজিরা</h5>
+                              : <h5 className="modal-title">আজকের ( {dateGet2} ) দিনের শিক্ষার্থীর হাজিরা</h5>
                           }
+
                           <button
                             type="button"
                             className="btn-close"

@@ -331,25 +331,27 @@ export default function TeacherAttendance() {
     if (attendance[uid] !== undefined) {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid && attendance[uid]);
        
-      console.log("U " , attendanceRecord);
+      //console.log("U " , attendanceRecord);
     } else {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid);
     
-      console.log("N " , attendanceRecord);
+     // console.log("N " , attendanceRecord);
     }
 
     console.log('Status ',attendanceRecord)
 
 
-      if (attendanceRecord) {
+      if (attendanceRecord && attendanceRecord !== undefined) {
         if (attendanceRecord.is_present == 1 || attendanceRecord.is_present == true) { 
           return true;
-        }else if (attendanceRecord == undefined) { 
-          return false;
         } else {
           return false;
         }
       }
+
+      // if (attendanceRecord == undefined) {
+      //   return false;
+      // }
 
     
   };

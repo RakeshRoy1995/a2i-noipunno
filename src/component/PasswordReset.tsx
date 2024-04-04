@@ -274,6 +274,11 @@ const PasswordReset = () => {
           </div> */}
 
           <div className="container login-container">
+
+              <div className="logo">
+                  <img src={noipunnoLogo} style={{ width: '130px', height: '130px' }} alt="" />
+              </div>
+
             <div className="row">
               <div className="col-sm-12 col-md-7 col-xl-8">
                 <LoginPageCommonLeft />

@@ -710,13 +710,12 @@ const Navbar = () => {
                           </a>
                         </li> */}
 
-                            <li className="nav-item dropdown nav-item-style">
+                            {/* <li className="nav-item dropdown nav-item-style">
                               <NavLink
                                 to="/attendance-subject"
                                 className={`nav-link navbar-menu-item d-flex align-items-center
                             ${isFAQpathActive && "active"}`}
                                 role="button"
-                                // data-bs-toggle="dropdown"
                                 aria-expanded="false"
                               >
                                 <img
@@ -726,7 +725,7 @@ const Navbar = () => {
                                 />
                                 শিক্ষার্থীর হাজিরা 
                               </NavLink>
-                            </li>
+                            </li> */}
 
                             <li className="nav-item dropdown nav-item-style">
                               <NavLink

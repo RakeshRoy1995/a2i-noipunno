@@ -1,15 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import {
   class_room_info,
   get_common_info,
   teacher_dashboard,
   teacher_own_subject,
-  teacher_own_subject_redesign,
 } from "../Request";
 import Lottie from "lottie-react";
-import loadingAnimation from "../assets/loadingAnimation/loading.json";
+import loadingAnimation from "../assets/loadingAnimation/loading.json"
 import { Spinner } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import BreadcumbHome from "../layout/BreadcumbHome";
@@ -32,6 +31,7 @@ import "../../src/assets/project_ca_html/css/dashboard.css";
 import ReportForHeadTeacherDashboard from "./Dashboards/ReportForHeadTeacherDashboard";
 
 export default function Teacher() {
+
   const [showLoadingErr, setshowLoadingErr] = useState("");
   let [numberOfRender, setnumberOfRender] = useState(1);
   const [subject, setsubject] = useState([]);
@@ -64,10 +64,11 @@ export default function Teacher() {
     setshikhonKalinMullayon_sannasik_barsik,
   ] = useState([]);
   // navigate
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+
 
   const fetchData = async () => {
-    setshowLoadingErr("");
+    setshowLoadingErr("")
 
     // test 1
 
@@ -91,86 +92,19 @@ export default function Teacher() {
       const own_subjet_: any = localStorage.getItem("own_subjet") || "";
       let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
 
-      console.log(`own_subjet`, own_subjet);
+
 
       if (own_subjet == "") {
-        own_subjet = await teacher_own_subject_redesign();
+        own_subjet = await teacher_own_subject();
 
         // console.log(`own_subjet`, own_subjet);
-        localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+        localStorage.setItem("own_subjet", JSON.stringify(own_subjet))
       }
 
       if (own_subjet?.success == false) {
         setshowLoadingErr(own_subjet.msg);
       } else {
-        setown_data(own_subjet?.data?.data);
-        setteacher(own_subjet.data.data.user);
 
-        const all_subject: any = [];
-
-        // let compitnc_obj = {};
-        own_subjet.data.data.subjects.map((d: any) => {
-          data.data.subjects.map((d_2: any) => {
-            if (d_2.subject_id === d.subject_id) {
-              const obj: any = {
-                subject: d_2.subject_info,
-                own_subjet: d,
-                teacher: d.class_room.class_teacher,
-              };
-              // d?.oviggota.map((competnc) => {
-              //   compitnc_obj = { ...compitnc_obj, [competnc.uid]: competnc };
-              // });
-              all_subject.push(obj);
-            }
-          });
-        });
-
-        // setall_bis(own_subjet.data.data.bis);
-        // setallCompitance(compitnc_obj);
-        setsubject(all_subject);
-        setloader(false);
-
-        // await fetchData_for_restapi();
-      }
-    } catch (error) {
-      setshowLoadingErr("");
-
-      numberOfRender++;
-
-      if (numberOfRender <= 10) {
-        setnumberOfRender(numberOfRender);
-        fetchData();
-      } else {
-        setshowLoadingErr(
-          "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
-        );
-      }
-    }
-  };
-
-
-  const fetchData_for_restapi = async () => {
-    setshowLoadingErr("");
-
-    try {
-      const teacher_dash__: any =
-        localStorage.getItem("teacher_dashboard") || "";
-      const teacher_dash = teacher_dash__ ? JSON.parse(teacher_dash__) : "";
-
-      const data: any = teacher_dash;
-
-      const own_subjet_: any = localStorage.getItem("own_subjet") || "";
-      let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
-
-      // console.log(`own_sdddubjet`, own_subjet);
-      own_subjet = await teacher_own_subject();
-
-      // console.log(`own_subjet`, own_subjet);
-      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
-
-      if (own_subjet?.success == false) {
-        setshowLoadingErr(own_subjet.msg);
-      } else {
         setown_data(own_subjet?.data?.data);
         setteacher(own_subjet.data.data.user);
 
@@ -193,13 +127,14 @@ export default function Teacher() {
           });
         });
 
-        console.log(`2222222`, own_subjet);
-
         setall_bis(own_subjet.data.data.bis);
         setallCompitance(compitnc_obj);
         setsubject(all_subject);
         setloader(false);
+
       }
+
+
     } catch (error) {
       setshowLoadingErr("");
 
@@ -236,9 +171,11 @@ export default function Teacher() {
 
   console.log(subject);
 
+
   return (
     <>
-      {!showReportDeleteEv() || showReportEvBoth() ? (
+
+      {( !showReportDeleteEv() || showReportEvBoth() ) ? (
         <div className="content mb-5 teacher_compo_bg">
           {showLoadingErr ? (
             <p className="text-danger text-center">{showLoadingErr}</p>
@@ -260,15 +197,15 @@ export default function Teacher() {
               seshowSubject={seshowSubject}
               title={" পারদর্শিতা এবং আচরণগত মূল্যায়ন"}
               selected_subject={selected_subject}
+
             />
           )}
 
+
+
           {!loader && (
             <div className="dashboard-section ">
-              <section
-                className="np-breadcumb-section  pb-5"
-                style={{ backgroundColor: "#F1F1F2" }}
-              >
+              <section className="np-breadcumb-section  pb-5" style={{ backgroundColor: "#F1F1F2" }}>
                 <div className="container">
                   <div className="row">
                     {/* {ShowProfile && (location.pathname !== "/mollayon-koron")  && (
@@ -309,15 +246,14 @@ export default function Teacher() {
                       <div className="row">
                         <div className="container subject-container">
                           {ShowProfile && (
-                            <h2
-                              className="m-0"
-                              style={{ fontWeight: "bolder" }}
-                            >
+                            <h2 className="m-0" style={{ fontWeight: "bolder" }}>
                               বিষয় ভিত্তিক তথ্য ও মূল্যায়ন
                             </h2>
                           )}
 
                           {/* card collection */}
+
+
                           <div className="row">
                             {showSubject && (
                               <>
@@ -367,23 +303,9 @@ export default function Teacher() {
                                       <div className="total-student">
                                         <p>
                                           {" "}
-                                          {d?.subject?.class_uid == "6" ? (
-                                            "ষষ্ঠ "
-                                          ) : (
-                                            <>
-                                              {" "}
-                                              {d?.subject?.class_uid == "7" ? (
-                                                "সপ্তম "
-                                              ) : (
-                                                <>
-                                                  {" "}
-                                                  {d?.subject?.class_uid == "8"
-                                                    ? "অষ্টম"
-                                                    : "নবম"}{" "}
-                                                </>
-                                              )}{" "}
-                                            </>
-                                          )}{" "}
+                                          {d?.subject?.class_uid == "6"
+                                            ? "ষষ্ঠ "
+                                            : <> {d?.subject?.class_uid == "7" ? "সপ্তম " : <>  {d?.subject?.class_uid == "8" ? "অষ্টম" : "নবম"}  </>} </>}{" "}
                                           শ্রেণি{" "}
                                         </p>
                                       </div>
@@ -410,8 +332,7 @@ export default function Teacher() {
                                         </h6>
                                         <h6 className={styles.branch}>
                                           {section_name(
-                                            d?.own_subjet?.class_room
-                                              ?.section_id
+                                            d?.own_subjet?.class_room?.section_id
                                           )}{" "}
                                           শাখা
                                         </h6>
@@ -523,6 +444,7 @@ export default function Teacher() {
               </section>
             </div>
           )}
+
 
           <style
             dangerouslySetInnerHTML={{

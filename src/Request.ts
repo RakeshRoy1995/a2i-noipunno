@@ -1,5 +1,5 @@
 import axios from "axios";
-import { formate_own_subject_data } from "./utils/Utils";
+import { formate_own_subject_data, formate_own_subject_data_new } from "./utils/Utils";
 
 const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 const EVULATION_API = import.meta.env.VITE_REACT_APP_PI_EVULATION_API_URL;
@@ -181,7 +181,94 @@ export function clssWiseSubject(data: any) {
   return axios(options);
 }
 
+export async function teacher_own_subject_redesign() {
+    const object :any= {}
+    const cls_room = await class_room_info();
+    localStorage.setItem("cls_room", JSON.stringify(cls_room));
+
+  if (cls_room?.data?.data?.subjects?.length == 0) {
+    object.success = false;
+    object.msg = "আপনি কোনও বিষয় পাননি";
+    return object;
+  }
+
+  if ( cls_room.data.status ) {
+    const data = formate_own_subject_data_new(cls_room);
+    data.success = true;
+    return data;
+  }
+}
+
+
+
 export async function teacher_own_subject() {
+  const page_list = `${API_URL}/v2/own-subjects`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+  };
+
+  const own_sub = await axios(options);
+
+  const object: any = {};
+  if (own_sub.data.data.subjects.length == 0) {
+    object.success = false;
+    object.msg = "আপনি কোনও বিষয় পাননি";
+    return object;
+  }
+
+
+  let common_info: any = localStorage.getItem("common_room")
+    ? JSON.parse(localStorage.getItem("common_room"))
+    : "";
+  if (common_info == "") {
+    common_info = await get_common_info();
+    localStorage.setItem("common_room", JSON.stringify(common_info));
+  }
+
+  let bi: any = localStorage.getItem("bi")
+    ? JSON.parse(localStorage.getItem("bi"))
+    : "";
+
+  if (bi == "") {
+    bi = await bi_info();
+    localStorage.setItem("bi", JSON.stringify(bi));
+  }
+
+  let cls_room: any = localStorage.getItem("cls_room")
+    ? JSON.parse(localStorage.getItem("cls_room"))
+    : "";
+
+  if (cls_room == "") {
+    cls_room = await class_room_info();
+    localStorage.setItem("cls_room", JSON.stringify(cls_room));
+  }
+
+  if (cls_room.data.data.subjects.length == 0) {
+    object.success = false;
+    object.msg = "আপনি কোনও বিষয় পাননি";
+    return object;
+  }
+
+  if (bi !== "" && common_info !== "" && cls_room !== "") {
+    const data = formate_own_subject_data(own_sub, cls_room);
+    data.data.data.assessments = common_info.data.data.assessments;
+    data.data.data.pi_attribute_weight =
+      common_info.data.data.pi_attribute_weight;
+    data.data.data.bis = bi.data.data.bis;
+    data.success = true;
+    localStorage.removeItem("common_room");
+    localStorage.removeItem("cls_room");
+    return data;
+  }
+}
+
+
+
+
+export async function teacher_own_subject_new() {
   const page_list = `${API_URL}/v2/own-subjects`;
 
   const options = {

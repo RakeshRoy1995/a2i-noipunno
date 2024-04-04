@@ -130,7 +130,7 @@ export default function Teacher() {
         setsubject(all_subject);
         setloader(false);
 
-        await fetchData_for_restapi();
+        // await fetchData_for_restapi();
       }
     } catch (error) {
       setshowLoadingErr("");
@@ -148,6 +148,7 @@ export default function Teacher() {
     }
   };
 
+  
   const fetchData_for_restapi = async () => {
     setshowLoadingErr("");
 

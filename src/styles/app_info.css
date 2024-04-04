@@ -24,8 +24,8 @@
 
 .chat_app_info .popup {
   position: absolute;
-  /* width: 257px;
-  height: 360px; */
+  width: 257px;
+  height: 360px;
   right: 0;
   bottom: 100%;
   /* display: none; */
@@ -44,7 +44,7 @@
   position: absolute;
   bottom: -18px;
   right: 15px;
-  z-index: 99;
+  z-index: 999 !important;
 }
 
 .chat_app_info .popup-app-info-top {
@@ -68,7 +68,6 @@
 }
 
 .chat_app_info .chat_btn {
-  background-color: #ffffff;
   border: none;
   border-radius: 6px 6px 0px 0px;
 }
@@ -88,7 +87,7 @@
 
 .chat_app_info .popup-card-body {
   padding: 0px 0px 5px 0px;
-  height: 120px;
+  height: 140px;
 }
 
 .chat_app_info .popup-card-icons {

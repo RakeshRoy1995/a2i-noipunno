@@ -1,67 +1,70 @@
-.popup.active {
-    transform: translateX(0%) !important;
-    animation-delay: 2s; 
+.new_chat_box {
+    position: fixed;
+    right: 3px;
+    bottom: 60px;
+    z-index: 999;
 }
 
-
-.popup {
+.new_popup {
     position: absolute;
-    width: 390px !important;
-    height: 228px !important;
+    width: 390px;
     border-radius: 6px;
     left: auto;
     right: 0;
     bottom: 100%;
     display: none;
     background-color: #ffffff;
-    margin-bottom: 10px;
+    margin-bottom: -45px;
+    margin-right: 70px;
     transition: transform 0.5s ease;
-    transform: translateX(100%);
-    animation-delay: 2s; 
+    transform: translateX(8%);
 }
 
+.new_popup.active {
+    transform: translateX(0%);
+}
 
-.popup:after {
+.new_popup:after {
     content: "";
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-top: 10px solid var(--bg_primary);
     position: absolute;
-    bottom: -18px;
-    right: 25px;
+    right: -18px;
+    bottom: 12px;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid var(--bg_primary);
     z-index: 99;
 }
 
-.popup-app-info-top {
-    height: 170px !important;
-    padding: 20px;
+.new_popup-app-info-top {
+     /* height: 300px;  */
+     padding: 0px 18px;
     border: 1px solid #93f0f3;
     border-radius: 6px 6px 0px 0px;
 }
 
-.popup-card-institutions {
+.new_popup-card-institutions {
     font-family: kalpurush;
     font-size: 11px;
     font-weight: 400;
     height: 60px;
     letter-spacing: 0px;
-    color: var(--text_dark);
+    color: black;
     padding-top: 5px;
 }
 
-.popup-card-institutions ul> :first-child {
+.new_popup-card-institutions ul> :first-child {
     font-weight: 700;
 }
 
-.chat_btn {
+.new_chat_btn {
     border: none;
     border-radius: 6px 6px 0px 0px;
 }
 
-.popup-app-info-reserved {
+.new_popup-app-info-reserved {
     height: 22px;
 }
 
@@ -73,28 +76,28 @@
     letter-spacing: 0px;
 }
 
-.popup-card-body {
+.new_popup-card-body {
     padding: 0px 0px 5px 0px;
-    height: 120px;
+    /* height: 110px; */
 }
 
-.popup-card-icons {
+.new_popup-card-icons {
     gap: 5px;
     height: 40px;
     margin-bottom: 5px;
 }
 
-.popup-app-info-bottom {
-    height: 105px;
+.new_popup-app-info-bottom {
+    /* height: 105px; */
 }
 
-.popup-version-bottom {
-    height: 50px;
-    background-color: var(--bg_primary);
+.new_popup-version-bottom {
+    /* height: 50px; */
+    background-color: #428f92;
     border-radius: 0px 0px 6px 6px;
 }
 
-.popup-version {
+.new_popup-version {
     padding: 15px 13px 15px 13px;
     font-family: kalpurush;
     font-size: 14px;
@@ -104,7 +107,7 @@
     text-align: center;
 }
 
-.popup-version-info {
+.new_popup-version-info {
     font-family: kalpurush;
     font-size: 12px;
     font-weight: 400;

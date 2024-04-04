@@ -25,7 +25,7 @@ export default function LoginPageCommonLeft() {
     <div>
         <div className="card transparent-card mb-3">
             <div className="logo text-center">
-                <img src={noipunnoLogo} style={{ width: '130px', height: '130px' }} alt="" />
+                <h4 className="fw-bold py-5" style={{ color: '#B5248E' }}>নৈপুন্য আপডেট</h4>
             </div>
 
             <div className="card-body-custom">

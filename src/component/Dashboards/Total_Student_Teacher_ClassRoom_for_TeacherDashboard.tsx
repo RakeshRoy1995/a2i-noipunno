@@ -35,7 +35,7 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
             std_data?.class_room?.class_teacher?.uid,
         };
 
-        std_data?.competence.map((conpitance_data: any) => {
+        std_data?.competence?.map((conpitance_data: any) => {
           conpitance_data?.pis.map((data: any) => {
             app_PI.push(data);
           });

@@ -1,5 +1,6 @@
 const VITE_REACT_APP_SHOW_REPORT = import.meta.env.VITE_REACT_APP_SHOW_REPORT;
-const VITE_REACT_APP_SHOW_BOTH_REPORT_EV = import.meta.env.VITE_REACT_APP_SHOW_BOTH_REPORT_EV;
+const VITE_REACT_APP_SHOW_BOTH_REPORT_EV = import.meta.env
+  .VITE_REACT_APP_SHOW_BOTH_REPORT_EV;
 export const weightId = (allWeight: any, id: any) => {
   let name;
   allWeight.map((al_d: any) => {
@@ -21,25 +22,24 @@ export const shift_name = (shifts_id: any) => {
   }
 };
 
-export const branch_name = (branch_id: any , showInPDF=false) => {
+export const branch_name = (branch_id: any, showInPDF = false) => {
   const data = localStorage.getItem("teacher_dashboard");
   const storageData = JSON.parse(data);
-  if (storageData && !showInPDF ) {
+  if (storageData && !showInPDF) {
     const branch = storageData.data.branches.find(
       (branches) => branches.uid == branch_id
     );
     return branch?.branch_name;
-  }else{
+  } else {
     if (storageData?.data?.branches.length > 1) {
       const branch = storageData.data.branches.find(
         (branches) => branches.uid == branch_id
       );
-      return branch?.branch_name + " ,"
+      return branch?.branch_name + " ,";
     }
-    return ""
+    return "";
   }
 };
-
 
 export const branch_location = (branch_id: any) => {
   const data = localStorage.getItem("teacher_dashboard");
@@ -163,7 +163,7 @@ export const show_compitance = (compitance_uid: any) => {
 export const show_pis = (compitance_uid: any) => {
   const all_compitance_id = JSON.parse(localStorage.getItem("show_pi_list"));
 
-  return all_compitance_id?.includes(compitance_uid) || false
+  return all_compitance_id?.includes(compitance_uid) || false;
 };
 
 export const show_shannasik_barsik = () => {
@@ -205,8 +205,11 @@ export const show_comment_box_Pi = (
   return "";
 };
 
-export function check_pi_submitted(pis_id: any, assessment_uid: any , oviggota_uid :any =null) {
-
+export function check_pi_submitted(
+  pis_id: any,
+  assessment_uid: any,
+  oviggota_uid: any = null
+) {
   const pi_bi_evaluation_list = JSON.parse(
     localStorage.getItem("pi_bi_evaluation_list")
   );
@@ -333,30 +336,27 @@ export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
   own_subjet.data.data.subjects.map((d: any) => {
     let obj = {};
     class_room?.data?.data?.subjects.map((d_2: any) => {
-      if (d_2?.subject_id === d?.subject_id && d_2.class_room ) {
-
+      if (d_2?.subject_id === d?.subject_id && d_2.class_room) {
         // console.log(`d_2.class_room`, d_2.class_room);
-      const stdnt =   d_2.class_room.students.map((formate_stu)=>{
+        const stdnt = d_2.class_room.students.map((formate_stu) => {
+          // console.log(`formate_stu`, formate_stu);
 
-        // console.log(`formate_stu`, formate_stu);
+          const studnt: any = {
+            ...formate_stu,
+            ...formate_stu?.student_info,
+            ["branch"]: d_2?.class_room?.branch_id,
+            ["section"]: d_2?.class_room?.section_id,
+            ["shift"]: d_2?.class_room?.shift_id,
+            ["version"]: d_2?.class_room?.version_id,
+            ["class"]: d_2?.class_room?.class_id,
+          };
 
-        const studnt :any = {
-          ...formate_stu ,
-          ...formate_stu?.student_info,
-          ['branch'] : d_2?.class_room?.branch_id,
-          ['section'] : d_2?.class_room?.section_id,
-          ['shift'] : d_2?.class_room?.shift_id,
-          ['version'] : d_2?.class_room?.version_id,
-          ['class'] : d_2?.class_room?.class_id,
-        }
+          delete studnt["student_info"];
 
-        delete studnt['student_info']
+          return studnt;
+        });
 
-        return studnt
-
-        })
-
-        d_2.class_room.students = stdnt
+        d_2.class_room.students = stdnt;
 
         obj = { ...d_2, ...d };
         own_subject_data.push(obj);
@@ -371,6 +371,46 @@ export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
   delete own_subjet["config"];
   delete own_subjet["headers"];
   delete own_subjet["request"];
+
+  return own_subjet;
+};
+
+export const formate_own_subject_data_new = (
+  class_room: any
+) => {
+  const own_subject_data: any = [];
+
+  
+  
+  class_room?.data?.data?.subjects.map((d_2: any) => {
+    let obj = {};
+    const stdnt = d_2.class_room.students.map((formate_stu) => {
+      const studnt: any = {
+        ...formate_stu,
+        ...formate_stu?.student_info,
+        ["branch"]: d_2?.class_room?.branch_id,
+        ["section"]: d_2?.class_room?.section_id,
+        ["shift"]: d_2?.class_room?.shift_id,
+        ["version"]: d_2?.class_room?.version_id,
+        ["class"]: d_2?.class_room?.class_id,
+      };
+      delete studnt["student_info"];
+      return studnt;
+    });
+    
+
+    d_2.class_room.students = stdnt;
+    obj = { ...d_2 };
+    own_subject_data.push(obj);
+  });
+
+  const own_subjet :any = {
+    data : {
+      data : {
+        subjects : own_subject_data
+      }
+    }
+  }
 
   return own_subjet;
 };
@@ -399,7 +439,6 @@ export const formate_teanscript_data = (data: any) => {
       for (let y = 0; y < allPi.length; y++) {
         const pi = allPi[y];
         const pi_data = our_all_piData.filter((d: any) => d.uid == pi.pi_uid);
-
 
         const Pi_obj = {
           ...pi,
@@ -481,7 +520,6 @@ export const formate_Bi_teanscript_dataBy_single_student = (
 
   let obj = {};
 
-
   const stu = student_name;
   const allPi = data;
 
@@ -516,9 +554,10 @@ export const teacher_list = () => {
   if (own_subject && own_subject?.data?.data?.subjects.length) {
     let subjects = [];
     subjects = [...own_subject?.data?.data?.subjects];
-    subjects.map((item) =>
-    item.class_room?.class_teacher &&
-      all_teachers_with_duplicate?.push(item.class_room?.class_teacher)
+    subjects.map(
+      (item) =>
+        item.class_room?.class_teacher &&
+        all_teachers_with_duplicate?.push(item.class_room?.class_teacher)
     );
   }
 
@@ -624,7 +663,6 @@ export const make_group_by_report_data = (studentData: any) => {
 };
 
 export const show_sub_by_religion = (religion: any, subject_name: any) => {
-
   if (
     religion == "Islam" &&
     (subject_name == "হিন্দুধর্ম শিক্ষা" ||
@@ -640,8 +678,6 @@ export const show_sub_by_religion = (religion: any, subject_name: any) => {
       subject_name == "খ্রীষ্টধর্ম শিক্ষা" ||
       subject_name == "বৌদ্ধধর্ম শিক্ষা")
   ) {
-
-
     return true;
   }
 
@@ -670,19 +706,19 @@ export const accessBIandReport = () => {
   const data = localStorage.getItem("teacher_dashboard");
   const storageData = JSON.parse(data);
 
-  const ch_Class_teacher = storageData?.data?.teachers[0].is_class_teacher?.uid ? true : false
+  const ch_Class_teacher = storageData?.data?.teachers[0].is_class_teacher?.uid
+    ? true
+    : false;
   if (ch_Class_teacher) {
-    return true
+    return true;
   } else {
-
     const data = localStorage.getItem("own_subjet");
     const storageData = JSON.parse(data);
 
     // // console.log(`storageData`, storageData.data.data.subjects);
 
-    return false
+    return false;
   }
-
 };
 
 export const showReportDeleteEv = () => {
@@ -710,57 +746,73 @@ export const showPiBiSubject = (data: any) => {
     }
   }
 
-
   // return true
 };
 
-
 export const make_group_by_PI_BI = (studentData: any) => {
+  const groupedByStudentId = studentData.pi_evaluation_list.reduce(
+    (acc, student) => {
+      const {
+        oviggota_uid,
+        pi_uid,
+        evaluate_type,
+        competence_uid,
+        class_room_uid,
+        teacher_uid,
+      } = student;
 
-  const groupedByStudentId = studentData.pi_evaluation_list.reduce((acc, student) => {
-    const { oviggota_uid , pi_uid , evaluate_type, competence_uid , class_room_uid , teacher_uid} = student;
+      const makeIndex =
+        oviggota_uid +
+        "" +
+        pi_uid +
+        "" +
+        evaluate_type +
+        "" +
+        competence_uid +
+        "" +
+        class_room_uid +
+        "" +
+        teacher_uid;
+      if (!acc[makeIndex]) {
+        acc[makeIndex] = [];
+      }
+      acc[makeIndex].push(student);
 
-    const makeIndex = oviggota_uid +"" + pi_uid +"" + evaluate_type +"" + competence_uid +"" + class_room_uid + "" + teacher_uid
-    if (!acc[makeIndex]) {
-      acc[makeIndex] = [];
-    }
-    acc[makeIndex].push(student);
+      return acc;
+    },
+    {}
+  );
 
-    return acc;
-  }, {});
-
-  const result = []
+  const result = [];
 
   for (let x in groupedByStudentId) {
-    result.push(groupedByStudentId[x][0])
+    result.push(groupedByStudentId[x][0]);
   }
 
-  studentData.pi_evaluation_list = result
+  studentData.pi_evaluation_list = result;
 
   return studentData;
 };
 
-
-export function save_PI_BI_again(data :any) {
-
+export function save_PI_BI_again(data: any) {
   const pi_bi_evaluation_list__: any =
-                localStorage.getItem("pi_bi_evaluation_list") || "";
-              let pi_bi_evaluation_list = pi_bi_evaluation_list__
-                ? JSON.parse(pi_bi_evaluation_list__)
-                : "";
+    localStorage.getItem("pi_bi_evaluation_list") || "";
+  let pi_bi_evaluation_list = pi_bi_evaluation_list__
+    ? JSON.parse(pi_bi_evaluation_list__)
+    : "";
 
-              const getData = pi_bi_evaluation_list?.pi_evaluation_list || [];
+  const getData = pi_bi_evaluation_list?.pi_evaluation_list || [];
 
-              getData.push(data[0]);
+  getData.push(data[0]);
 
-              pi_bi_evaluation_list.pi_evaluation_list = getData;
-              localStorage.setItem(
-                "pi_bi_evaluation_list",
-                JSON.stringify(pi_bi_evaluation_list)
-              );
+  pi_bi_evaluation_list.pi_evaluation_list = getData;
+  localStorage.setItem(
+    "pi_bi_evaluation_list",
+    JSON.stringify(pi_bi_evaluation_list)
+  );
 }
 
 export const show_report_open_time_msg =
-  'সকলের অবগতির জন্য জানানো যাচ্ছে যে, ২০২৪ সালের শিক্ষাবর্ষের কার্যক্রম চালু করার লক্ষ্যে আগামী ১৭ জানুয়ারি সন্ধ্যা ছয়টা থেকে ২০ জানুয়ারি সন্ধ্যা ছয়টা পর্যন্ত  নৈপুণ্য এর কার্যক্রম সাময়িকভাবে বন্ধ থাকবে। সবার সহযোগিতার জন্যে ধন্যবাদ';
+  "সকলের অবগতির জন্য জানানো যাচ্ছে যে, ২০২৪ সালের শিক্ষাবর্ষের কার্যক্রম চালু করার লক্ষ্যে আগামী ১৭ জানুয়ারি সন্ধ্যা ছয়টা থেকে ২০ জানুয়ারি সন্ধ্যা ছয়টা পর্যন্ত  নৈপুণ্য এর কার্যক্রম সাময়িকভাবে বন্ধ থাকবে। সবার সহযোগিতার জন্যে ধন্যবাদ";
 // export const show_report_OFF_time_msg = "দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে";
 export const show_report_OFF_time_msg = "";

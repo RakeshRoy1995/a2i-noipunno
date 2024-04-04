@@ -24,8 +24,8 @@
 
 .chat_app_info .popup {
   position: absolute;
-  width: 257px;
-  height: 360px;
+  /* width: 257px;
+  height: 360px; */
   right: 0;
   bottom: 100%;
   /* display: none; */

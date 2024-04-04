@@ -828,6 +828,8 @@ const LoginPage = () => {
 
         <LoginPageModalCommon/>
 
+        <PopUpAppInfo />
+
       </motion.div>
     </>
   );

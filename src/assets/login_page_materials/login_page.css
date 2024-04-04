@@ -434,7 +434,7 @@ label.form-check-label:focus,
 
 .chat_box {
   position: fixed;
-  right: 3px;
+  right: 10px;
   bottom: 60px;
   z-index: 999;
 }

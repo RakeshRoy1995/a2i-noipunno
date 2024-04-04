@@ -19,15 +19,14 @@ export default function ShowAssesment({
   setShowcollaps,
 }: any) {
   const [ShowSecounderyTab, setShowSecounderyTab] = useState<any>({});
-  const [class_id, setclass_id] = useState<any>('');
+  const [class_id, setclass_id] = useState<any>("");
+  const [showMainAssessments, setshowMainAssessments] = useState<any>(false);
   // const [pi_selection, setpi_selection] = useState<any>([]);
 
   const fetchData = async () => {
-
-
     try {
       setassessment_uid(own_data?.assessments[0]?.assessment_details[0].uid);
-      setclass_id(own_data.subjects[0].class_room.class_id)
+      setclass_id(own_data.subjects[0].class_room.class_id);
       const pi_bi_evaluation_list__: any =
         localStorage.getItem("pi_bi_evaluation_list") || "";
       const pi_bi_evaluation_list = pi_bi_evaluation_list__
@@ -36,21 +35,14 @@ export default function ShowAssesment({
 
       let own_subjet: any = "";
       if (pi_bi_evaluation_list) {
-        const list = make_group_by_PI_BI(pi_bi_evaluation_list)
-        own_subjet = list
+        const list = make_group_by_PI_BI(pi_bi_evaluation_list);
+        own_subjet = list;
 
-        localStorage.setItem(
-          "pi_bi_evaluation_list",
-          JSON.stringify(list)
-        );
-
+        localStorage.setItem("pi_bi_evaluation_list", JSON.stringify(list));
       } else {
         own_subjet = await get_pi_bi_evaluation_list(2);
-        const list = make_group_by_PI_BI(own_subjet.data.data)
-        localStorage.setItem(
-          "pi_bi_evaluation_list",
-          JSON.stringify(list)
-        );
+        const list = make_group_by_PI_BI(own_subjet.data.data);
+        localStorage.setItem("pi_bi_evaluation_list", JSON.stringify(list));
       }
 
       seshowCompitance(true);
@@ -63,7 +55,6 @@ export default function ShowAssesment({
       setMullayon_name(allassessmet[0]?.assessment_details_name_bn);
       pis_list_func(allCompitance, [], false);
     } catch (error: any) {
-
       // console.log(`error`, error);
     }
   };
@@ -82,30 +73,25 @@ export default function ShowAssesment({
       setparodorshita_acoron_tab(key);
       seshowCompitance(true);
 
-      setclass_id(own_data.subjects[key].class_room.class_id)
+      setclass_id(own_data.subjects[key].class_room.class_id);
       pis_list_func(allCompitance, []);
-
-
-    } catch (error: any) { }
+    } catch (error: any) {}
   };
 
   const pi_selection_list_by_subject = async (key: number) => {
     try {
-
-      const subject_id = localStorage.getItem(
-        "subject_id"
-      );
+      const subject_id = localStorage.getItem("subject_id");
       // const subject = pi_selection.find((data) => data.assessment_type == key && data.subject_uid == subject_id && data.class_id == class_id);
       const subject = pi_selection.find((data) => data.assessment_type == key);
-      const pi_list = subject?.pi_list || []
+      const pi_list = subject?.pi_list || [];
 
-      let check_sannasik_barsik_or_not = false
+      let check_sannasik_barsik_or_not = false;
       if (key == 1234567892 || key == 1234567891) {
-        check_sannasik_barsik_or_not = true
+        check_sannasik_barsik_or_not = true;
       }
 
       pis_list_func(allCompitance, pi_list, check_sannasik_barsik_or_not);
-    } catch (error: any) { }
+    } catch (error: any) {}
   };
 
   useEffect(() => {
@@ -119,38 +105,38 @@ export default function ShowAssesment({
       <div className="row">
         <div className="d-flex align-items-center">
           <div className="card shadow-lg border-0 w-100 rounded">
-
-            <ul className="nav d-flex mt-2 justify-content-around py-1 assestment-tabs">
-              {own_data?.assessments.map((d: any, key: any) => (
-
-                <li
-                  className={`nav-item w-50 f-dlex justify-content-center ${styles.nav_tab_bottom_border}`}
-                  key={key}
-                  style={{ fontSize: "15px" }}
-                >
-                  <a
-                    className={`nav-link link-secondary fw-bold  ${key === 0 ? "active " : ""
-                      } `}
-                    id="expertness-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#expertness"
-                    href="#"
-                    onClick={(e) => {
-                      setparodorshita_acoron_tab(key);
-                      tabAcorongoto(key);
-                      setallassessmet(d?.assessment_details);
-                      setShowcollaps({});
-                    }}
+            {showMainAssessments && (
+              <ul className="nav d-flex mt-2 justify-content-around py-1 assestment-tabs">
+                {own_data?.assessments.map((d: any, key: any) => (
+                  <li
+                    className={`nav-item w-50 f-dlex justify-content-center ${styles.nav_tab_bottom_border}`}
+                    key={key}
+                    style={{ fontSize: "15px" }}
                   >
-                    <SlBookOpen className="me-1" /> {d.assessment_name_bn}{" "}
-                  </a>
-                </li>
-              )
-              )}
-            </ul>
+                    <a
+                      className={`nav-link link-secondary fw-bold  ${
+                        key === 0 ? "active " : ""
+                      } `}
+                      id="expertness-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#expertness"
+                      href="#"
+                      onClick={(e) => {
+                        setparodorshita_acoron_tab(key);
+                        tabAcorongoto(key);
+                        setallassessmet(d?.assessment_details);
+                        setShowcollaps({});
+                      }}
+                    >
+                      <SlBookOpen className="me-1" /> {d.assessment_name_bn}{" "}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
             {/* card */}
 
-{/* uncommon after testing */}
+            {/* uncommon after testing */}
             {/* sub tab-1 */}
             <div className="tab-content" id="tabContent">
               {parodorshita_acoron_tab === 0 && (
@@ -169,17 +155,23 @@ export default function ShowAssesment({
                           style={{ fontSize: "14px" }}
                         >
                           <a
-                            className={`fw-bold nav-link link-secondary ${styles.nav_tab_bottom_border
-                              } ${ShowSecounderyTab?.id === ass_d.uid
+                            className={`fw-bold nav-link link-secondary ${
+                              styles.nav_tab_bottom_border
+                            } ${
+                              ShowSecounderyTab?.id === ass_d.uid
                                 ? " active"
                                 : ""
-                              } `}
+                            } `}
                             id="expertness-tab"
                             data-bs-toggle="tab"
                             data-bs-target="#expertness"
                             href="#"
                             onClick={(e: any) => {
                               seshowCompitance(true);
+
+                              setshowMainAssessments(
+                                ky == 1 || ky == 2 ? true : false
+                              );
                               setparodorshita_acoron_tab(0);
                               setassessment_uid(ass_d.uid);
 
@@ -193,7 +185,6 @@ export default function ShowAssesment({
                                 ass_d.assessment_details_name_bn
                               );
                               setShowcollaps({});
-
                             }}
                           >
                             <SlBookOpen className="me-1" />{" "}
@@ -225,17 +216,22 @@ export default function ShowAssesment({
                           style={{ fontSize: "14px" }}
                         >
                           <Link
-                            className={`fw-bold nav-link link-secondary ${styles.nav_tab_bottom_border
-                              } ${ShowSecounderyTab?.id === ass_d.uid
+                            className={`fw-bold nav-link link-secondary ${
+                              styles.nav_tab_bottom_border
+                            } ${
+                              ShowSecounderyTab?.id === ass_d.uid
                                 ? " active"
                                 : ""
-                              } `}
+                            } `}
                             id="expertness-tab"
                             data-bs-toggle="tab"
                             data-bs-target="#expertness"
                             to={"/student-mullayon-behave/" + ass_d.uid}
                             onClick={(e: any) => {
                               setparodorshita_acoron_tab(1);
+                              // setshowMainAssessments(
+                              //   ky == 1 || ky == 2 ? true : false
+                              // );
                               seshowCompitance(true);
                               setassessment_uid(ass_d.uid);
                               setShowSecounderyTab({
@@ -258,39 +254,12 @@ export default function ShowAssesment({
                 </div>
               )}
             </div>
-
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import { motion } from "framer-motion";
 // import AnnualSummativeAssessment from './AnnualSummativeAssessment';
@@ -299,7 +268,6 @@ export default function ShowAssesment({
 // import { Link, useLocation } from 'react-router-dom';
 // import { useEffect, useState } from "react";
 // import NameComponent from "./NameComponent";
-
 
 // interface UserData {
 //   name: string;
@@ -366,7 +334,6 @@ export default function ShowAssesment({
 //   const [teacher_uid, setteacher_uid] = useState<any>("");
 //   const [userData, setUserData] = useState<UserData>({ name: 'a' });
 
-
 //   console.log("pi_selectionpi_selection", pi_selection);
 
 //   return (
@@ -380,7 +347,6 @@ export default function ShowAssesment({
 
 //           <Assessmentduringlearning    />
 //         </Link>
-
 
 //         <Link to={"/Quarterly-Summative-Assessment"}>
 //           <QuarterlySummativeAssessment />

@@ -75,7 +75,9 @@ export default function LoginPageCommonLeft() {
                         <img src={supportIcon} data-bs-toggle="modal" data-tooltip="যোগাযোগ" data-bs-target="#exampleModal1" className="card-footer-image" alt="যোগাযোগ" style={{ cursor: 'pointer' }} />
                     </div>
                     <div className="d-flex justify-content-center">
-                        <img src={aboutUs} data-bs-toggle="modal" data-tooltip="আমাদের সম্পর্কে" data-bs-target="#exampleModal4" className="" alt="আমাদের সম্পর্কে" style={{ cursor: 'pointer', borderRadius: '100px', width: '55px' }} />
+                        <a href="https://support.noipunno.gov.bd" target="_blank">
+                            <img src={aboutUs} data-bs-toggle="modal" data-tooltip="আপনার সমস্যা লিখুন" data-bs-target="#exampleModal4" className="" alt="আপনার সমস্যা লিখুন" style={{ cursor: 'pointer', borderRadius: '100px', width: '55px' }} />
+                        </a>
                     </div>
                     <div className="d-flex justify-content-center">
                         <img src={listIcon} data-bs-toggle="modal" data-tooltip="ব্যবহার সহায়িকা" data-bs-target="#exampleModal2" className="card-footer-image" alt="ব্যবহার সহায়িকা" style={{ cursor: 'pointer' }}  />
@@ -98,7 +100,9 @@ export default function LoginPageCommonLeft() {
                    <img src={supportIcon} style={{ cursor: 'pointer' }} data-tooltip="যোগাযোগ" data-bs-toggle="modal" data-bs-target="#exampleModal1" className="card-footer-image" alt="যোগাযোগ" />
                 </div>
                 <div className="d-flex justify-content-center" >
-                   <img src={aboutUs} style={{ cursor: 'pointer', borderRadius: '100px', width: '55px' }} data-tooltip="আমাদের সম্পর্কে" data-bs-toggle="modal" data-bs-target="#exampleModal4" className="" alt="আমাদের সম্পর্কে" />
+                    <a href="https://support.noipunno.gov.bd" target="_blank">
+                        <img src={aboutUs} style={{ cursor: 'pointer', borderRadius: '100px', width: '55px' }} data-tooltip="আপনার সমস্যা লিখুন" alt="আপনার সমস্যা লিখুন" />
+                    </a>
                 </div>
                 <div className="d-flex justify-content-center">
                     <img src={listIcon} style={{ cursor: 'pointer' }} data-tooltip="ব্যবহার সহায়িকা" data-bs-toggle="modal" data-bs-target="#exampleModal2" className="card-footer-image" alt="ব্যবহার সহায়িকা" />

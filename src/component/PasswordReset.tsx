@@ -643,6 +643,8 @@ const PasswordReset = () => {
 
           <LoginPageModalCommon />
 
+          <PopUpAppInfo />
+
         </div>
         {/* bootstrap 5.0.2 min.js */}
       </section>

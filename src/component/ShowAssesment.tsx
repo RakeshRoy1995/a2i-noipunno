@@ -356,7 +356,7 @@ export default function ShowAssesment({
 //         </Link>
 //         <Link to={"/SecondComponent"}>
 //           {/* <NameComponent name={userData.name} /> */}
-//           <NameComponent />
+//           {/* <NameComponent /> */}
 //         </Link>
 //       </div>
 //     </motion.div>

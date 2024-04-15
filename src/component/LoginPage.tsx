@@ -191,6 +191,9 @@ const LoginPage = () => {
 
           <div className="">
             <div className="container login-container">
+              <div className="logo">
+                  <img src={noipunnoLogo} style={{ width: '120px', height: '120px' }} alt="" />
+              </div>
               <div className="row">
                 <div className="col-sm-12 col-md-7 col-xl-8">
 
@@ -824,6 +827,8 @@ const LoginPage = () => {
         </section>
 
         <LoginPageModalCommon/>
+        
+        <PopUpAppInfo />
 
       </motion.div>
     </>

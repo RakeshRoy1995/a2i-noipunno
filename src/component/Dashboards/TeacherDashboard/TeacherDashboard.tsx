@@ -3,6 +3,7 @@ import BishoybittikThottoOMullayon from "../BishoybittikThottoOMullayon";
 import ClassRoutine from "../ClassRoutine";
 import ReportForTeacherDashboard from "../ReportForTeacherDashboard";
 import PopUpAppInfo from '../../PopUpAppInfo/PopUpAppInfo';
+import PopUpAppInfoInside from "../../PopUpAppInfo/PopUpAppInfoInside";
 
 
 
@@ -13,7 +14,7 @@ const TeacherDashboard = () => {
       {/* <ReportForTeacherDashboard /> */}
       <BishoybittikThottoOMullayon />
       {/* <ClassRoutine /> */}
-      <PopUpAppInfo />
+      <PopUpAppInfoInside />
     </div>
   );
 };

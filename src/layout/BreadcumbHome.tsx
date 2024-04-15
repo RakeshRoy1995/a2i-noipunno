@@ -4,8 +4,8 @@ import { BiSidebar } from "react-icons/bi";
 import { MdArrowBackIosNew, MdOutlineArrowForwardIos } from "react-icons/md";
 import styles from "../component/Home.style.module.css";
 import { useNavigate } from 'react-router-dom';
-export default function BreadcumbHome({ showSubjectname, seshowSubject, setShowProfile, title, selected_subject }: any) {
-const navigate = useNavigate();
+export default function BreadcumbHome({ seshowCompitance,  setMullayon_name, breadcumbTitle, showSubjectname, seshowSubject, setShowProfile, title, selected_subject }: any) {
+  const navigate = useNavigate();
   return (
     <section className="container pt-3 mb-3">
       <div className="d-flex align-items-center gap-2">
@@ -14,6 +14,8 @@ const navigate = useNavigate();
             className='border-0  rounded shadow-sm bg-white' onClick={() => {
               seshowSubject(true);
               setShowProfile(true)
+              seshowCompitance(false)
+              setMullayon_name("")
               navigate('/')
 
 
@@ -56,6 +58,7 @@ const navigate = useNavigate();
                   {title}
                   <MdOutlineArrowForwardIos />
                   {" "}
+                  {breadcumbTitle}
 
                   {/* <strong>{
                     (selected_subject?.subject?.class_uid === "6") && "ষষ্ঠ শ্রেণি" || (selected_subject?.subject?.class_uid === "7") && "সপ্তম শ্রেণি" ||

@@ -29,6 +29,12 @@ export default function ParodorshitaComponent({
   const [loadingspinner, setloadingspinner] = useState(false);
 
 
+
+  console.log(
+    "shikhonKalinMullayon", shikhonKalinMullayon
+  );
+
+
   return (
     <div className="py-2">
       <div className="row">
@@ -38,7 +44,7 @@ export default function ParodorshitaComponent({
 
         {show_shannasik_barsik() == false ? (
           <>
-            {shikhonKalinMullayon.map((d: any, key: any) => (
+            {shikhonKalinMullayon?.map((d: any, key: any) => (
               <div key={key}>
                 {show_compitance(d.uid) && (
                   <>
@@ -112,7 +118,7 @@ export default function ParodorshitaComponent({
           </>
         ) : (
           <div className="card card-body mx-2">
-            {shikhonKalinMullayon_sannasik_barsik.map((d: any, key: any) => (
+            {shikhonKalinMullayon_sannasik_barsik?.map((d: any, key: any) => (
               <div key={key}>
                 <div
                   onClick={(e: any) => {

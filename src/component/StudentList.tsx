@@ -181,7 +181,7 @@ const StudentList = () => {
                             <strong>রোলঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.roll || "-"}
+                            { convertToBanglaNumber(selectedItem?.roll)  || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -189,10 +189,12 @@ const StudentList = () => {
                             <strong> শ্রেণীঃ </strong>
                           </td>
                           <td className="p-1">
-                            {(selectedItem?.class === "6" && "ষষ্ঠ") ||
-                              (selectedItem?.class === "7" && "সপ্তম") ||
+                            {(selectedItem?.class == "6" && "ষষ্ঠ") ||
+                              (selectedItem?.class == "7" && "সপ্তম") ||
+                              (selectedItem?.class == "8" && "অষ্টম") ||
+                              (selectedItem?.class == "9" && "৯ম") ||
 
-                              "no-entry"}
+                              "-"}
                           </td>
                         </tr>
                         <tr>
@@ -226,7 +228,7 @@ const StudentList = () => {
                             <strong>মোবাইলঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.student_mobile_no || "-"}
+                            { convertToBanglaNumber( selectedItem?.student_mobile_no) || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -312,26 +314,26 @@ const StudentList = () => {
                         </tr>
                         <tr>
                           <td className="p-1">
-                            <strong>পিতার মোবাইল নাম্বারঃ</strong>
+                            <strong>পিতার মোবাইল নম্বারঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.father_mobile_no || "-"}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="p-1">
-                            <strong>মাতার মোবাইল নাম্বারঃ</strong>
-                          </td>
-                          <td className="p-1">
-                            {selectedItem?.mother_mobile_no || "-"}
+                            { convertToBanglaNumber(selectedItem?.father_mobile_no)  || "-"}
                           </td>
                         </tr>
                         <tr>
                           <td className="p-1">
-                            <strong>অভিবাবকের মোবাইল নাম্বারঃ</strong>
+                            <strong>মাতার মোবাইল নম্বারঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.guardian_mobile_no || "-"}
+                            { convertToBanglaNumber(selectedItem?.mother_mobile_no)  || "-"}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="p-1">
+                            <strong>অভিবাবকের মোবাইল নম্বারঃ</strong>
+                          </td>
+                          <td className="p-1">
+                            {convertToBanglaNumber(selectedItem?.guardian_mobile_no) || "-"}
                           </td>
                         </tr>
                       </tbody>

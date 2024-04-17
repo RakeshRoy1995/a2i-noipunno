@@ -120,7 +120,7 @@ export default function ShowAssesment({
     fetchData();
   }, []);
 
-  console.log(`breadcumbdffffTitle`,  showMainAssessments , parodorshita_acoron_tab);
+  
   return (
     <div className="container">
       {breadcumbTitle}

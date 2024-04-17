@@ -11,7 +11,7 @@ export default function BreadcumbHome({ setshowMainAssessments, seshowCompitance
       <div className="d-flex align-items-center gap-2">
         <div className="card" style={{ backgroundColor: "white" }}>
           <button
-            className='border-0  rounded shadow-sm bg-white' onClick={() => {
+            className='border-0  rounded shadow-sm bg-white w-100' onClick={() => {
               seshowSubject(false);
               setShowProfile(false)
               seshowCompitance(false)
@@ -20,7 +20,7 @@ export default function BreadcumbHome({ setshowMainAssessments, seshowCompitance
               navigate('/')
 
 
-            }} style={{ padding: "1.2rem" }}>
+            }} style={{ padding: "1rem",  }}>
             <MdArrowBackIosNew className="fs-3 text-secondary" />
           </button>
         </div>

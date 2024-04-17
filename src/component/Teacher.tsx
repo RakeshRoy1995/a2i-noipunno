@@ -284,7 +284,7 @@ export default function Teacher() {
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.1 }}
+              transition={{ duration: 0.5 }}
             >
               <div className="dashboard-section ">
                 <section
@@ -348,10 +348,7 @@ export default function Teacher() {
                                       className="col-sm-12 col-md-12 col-lg-4 col-xl-4 g-2"
                                       style={{
                                         cursor: !waitForMoreData && "pointer",
-                                        background:'linearGradient(var(180deg), #92278f 0%, #662d91 100%)', 
-                                        border: '0px solid rgba(0, 0, 0, 0)',
-                                        transform: 'translateY(0px)',
-                                        transition: 'all .75s cubic-bezier(0.72, 0.11, 0.22, 0.92'
+
                                       }}
                                       key={key}
                                       title={
@@ -395,10 +392,10 @@ export default function Teacher() {
                                       }}
                                     >
                                       <motion.div
-                                        whileHover={{ scale: 1.1 }}
+                                        whileHover={{ scale: 0.9 }}
                                         whileTap={{ scale: 0.9 }}
                                       >
-                                        <a className="subject-number">
+                                        <a className="subject-number ">
                                           <div className="icon">
                                             <img src={bookIcon} alt="" />
                                           </div>
@@ -482,6 +479,7 @@ export default function Teacher() {
                                         </a>
                                       </motion.div>
                                     </div>
+
                                   ))}
                                 </>
                               )}

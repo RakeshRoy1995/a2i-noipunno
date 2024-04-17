@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import { make_group_by_PI_BI, pis_list_func } from "../utils/Utils";
 import { get_pi_bi_evaluation_list } from "../Request";
 import { Card } from "react-bootstrap";
+import { motion } from "framer-motion"
+import { TiTick } from "react-icons/ti";
+
+import Tilt from "react-parallax-tilt";
 
 export default function ShowAssesment({
   seshowCompitance,
@@ -96,8 +100,8 @@ export default function ShowAssesment({
       setclass_id(own_data.subjects[key].class_room.class_id);
 
       const is_sannasik_barsik = uidName == 'শিখনকালীন মূল্যায়ন' ? false : true
-      pis_list_func(allCompitance, [] , is_sannasik_barsik);
-    } catch (error: any) {}
+      pis_list_func(allCompitance, [], is_sannasik_barsik);
+    } catch (error: any) { }
   };
 
   const pi_selection_list_by_subject = async (key: number) => {
@@ -113,7 +117,7 @@ export default function ShowAssesment({
       }
 
       pis_list_func(allCompitance, pi_list, check_sannasik_barsik_or_not);
-    } catch (error: any) {}
+    } catch (error: any) { }
   };
 
   useEffect(() => {
@@ -123,7 +127,8 @@ export default function ShowAssesment({
   
   return (
     <div className="container">
-      {breadcumbTitle}
+      <h2 className="ms-3 mb-3" style={{ fontWeight: "bolder" }}> {breadcumbTitle}</h2>
+
       <div className="row">
         <div className="d-flex align-items-center">
           <div className=" border-0 w-100 rounded">
@@ -135,10 +140,10 @@ export default function ShowAssesment({
                     key={key}
                     style={{ fontSize: "15px" }}
                   >
+
                     <a
-                      className={`nav-link link-secondary fw-bold  ${
-                        key === 0 ? "active " : ""
-                      } `}
+                      className={`nav-link link-secondary fw-bold  ${key === 0 ? "active " : ""
+                        } `}
                       id="expertness-tab"
                       data-bs-toggle="tab"
                       data-bs-target="#expertness"
@@ -153,181 +158,138 @@ export default function ShowAssesment({
                       <SlBookOpen className="me-1" /> {d.assessment_name_bn}
                       {" "}
                     </a>
+                    {key === parodorshita_acoron_tab && <TiTick className="" style={{ fontSize: "2rem" }} />}
                   </li>
-                ))}
-              </ul>
-            )}
-            {/* card */}
 
-            {/* uncommon after testing */}
+                ))}
+
+              </ul>
+
+            )}
+
+
+            {/* card */}
             {/* sub tab-1 */}
 
             {Mullayon_name == "" && (
               <div className="tab-content" id="tabContent">
-                  <div
-                    className={"tab-pane fade show active"}
-                    id="provati"
-                    role="tabpanel"
-                    aria-labelledby="provati-tab"
-                  >
-                    <div className="row">
-                      <ul className="nav d-flex mt-2 justify-content-around py-1 assestment-tabs">
-                        {allassessmet?.map((ass_d: any, ky: any) => (
-                          // <li
-                          //   className={`nav-item`}
-                          //   key={ky}
-                          //   style={{ fontSize: "14px" }}
-                          // >
-                          //   <a
-                          //     className={`fw-bold nav-link link-secondary ${
-                          //       styles.nav_tab_bottom_border
-                          //     } ${
-                          //       ShowSecounderyTab?.id === ass_d.uid
-                          //         ? " active"
-                          //         : ""
-                          //     } `}
-                          //     id="expertness-tab"
-                          //     data-bs-toggle="tab"
-                          //     data-bs-target="#expertness"
-                          //     href="#"
-                          //     onClick={(e: any) => {
-                          //       seshowCompitance(true);
-
-                          //       setshowMainAssessments(
-                          //         ky == 1 || ky == 2 ? true : false
-                          //       );
-                          //       setparodorshita_acoron_tab(0);
-                          //       setassessment_uid(ass_d.uid);
-
-                          //       pi_selection_list_by_subject(ass_d.uid);
-
-                          //       setShowSecounderyTab({
-                          //         ...ShowSecounderyTab,
-                          //         ["id"]: ass_d.uid,
-                          //       });
-                          //       setMullayon_name(
-                          //         ass_d.assessment_details_name_bn
-                          //       );
-                          //       setShowcollaps({});
-                          //     }}
-                          //   >
-                          //     <SlBookOpen className="me-1" />{" "}
-                          //     {ass_d.assessment_details_name_bn}
-                          //   </a>
-                          // </li>
-                          <Card
-                            className="mx-auto rounded-5 shadow  mb-5 bg-body rounded mt-5
-
-                        "
-                            style={{
-                              width: "22rem",
-                              height: "13rem",
-                              cursor: "pointer",
-                            }}
-                            onClick={(e: any) => {
-                              seshowCompitance(true);
-
-                              setshowMainAssessments(
-                                ky == 1 || ky == 2 ? true : false
-                              );
-
-                              localStorage.setItem(
-                                "show_shannasik_barsik",
-                                ky !== 0 ? "true" : "false"
-                              );
-                              setparodorshita_acoron_tab(0);
-                              setassessment_uid(ass_d.uid);
-
-                              pi_selection_list_by_subject(ass_d.uid);
-
-                              setShowSecounderyTab({
-                                ...ShowSecounderyTab,
-                                ["id"]: ass_d.uid,
-                              });
-                              setMullayon_name(
-                                ass_d.assessment_details_name_bn
-                              );
-                              setShowcollaps({});
-                            }}
-                          >
-                            <div className="d-flex flex-column justify-content-center align-items-center mt-5 h-100 ">
-                              <div className="d-flex justify-content-center align-items-center">
-                                <SlBookOpen style={{ fontSize: "28" }} />
-                              </div>
-                              <Card.Body
-                                className="text-center"
-                                style={{
-                                  fontSize: "28px",
-                                  fontWeight: "bolder",
-                                }}
-                              >
-                                {ass_d.assessment_details_name_bn}
-                              </Card.Body>
-                            </div>
-                          </Card>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-              </div>
-            )}
-
-            {/* bi assesment*/}
-            {/* <div className="tab-content" id="tabContent">
-              {parodorshita_acoron_tab === 1 && (
                 <div
                   className={"tab-pane fade show active"}
-                  id="expertness"
+                  id="provati"
                   role="tabpanel"
-                  aria-labelledby="expertness-tab"
+                  aria-labelledby="provati-tab"
                 >
                   <div className="row">
                     <ul className="nav d-flex mt-2 justify-content-around py-1 assestment-tabs">
                       {allassessmet?.map((ass_d: any, ky: any) => (
-                        <li
-                          className={`nav-item`}
-                          key={ky}
-                          style={{ fontSize: "14px" }}
+
+                        // <Card
+                        //   className="mx-auto rounded-5 shadow  mb-5 bg-body rounded mt-5 MainCard
+
+                        // "
+                        //   style={{
+                        //     width: "22rem",
+                        //     height: "13rem",
+                        //     cursor: "pointer",
+                        //   }}
+                        //   onClick={(e: any) => {
+                        //     seshowCompitance(true);
+
+                        //     setshowMainAssessments(
+                        //       ky == 1 || ky == 2 ? true : false
+                        //     );
+
+                        //     localStorage.setItem(
+                        //       "show_shannasik_barsik",
+                        //       ky !== 0 ? "true" : "false"
+                        //     );
+                        //     setparodorshita_acoron_tab(0);
+                        //     setassessment_uid(ass_d.uid);
+
+                        //     pi_selection_list_by_subject(ass_d.uid);
+
+                        //     setShowSecounderyTab({
+                        //       ...ShowSecounderyTab,
+                        //       ["id"]: ass_d.uid,
+                        //     });
+                        //     setMullayon_name(
+                        //       ass_d.assessment_details_name_bn
+                        //     );
+                        //     setShowcollaps({});
+                        //   }}
+                        // >
+                        //   <div className="d-flex flex-column justify-content-center align-items-center mt-5 h-100 ">
+                        //     <div className="d-flex justify-content-center align-items-center">
+                        //       <SlBookOpen style={{ fontSize: "28" }} />
+                        //     </div>
+                        //     <Card.Body
+                        //       className="text-center"
+                        //       style={{
+                        //         fontSize: "28px",
+                        //         fontWeight: "bolder",
+                        //       }}
+                        //     >
+                        //       {ass_d.assessment_details_name_bn}
+                        //     </Card.Body>
+                        //   </div>
+                        // </Card>
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ duration: 0.5 }}
                         >
-                          <Link
-                            className={`fw-bold nav-link link-secondary ${
-                              styles.nav_tab_bottom_border
-                            } ${
-                              ShowSecounderyTab?.id === ass_d.uid
-                                ? " active"
-                                : ""
-                            } `}
-                            id="expertness-tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#expertness"
-                            to={"/student-mullayon-behave/" + ass_d.uid}
-                            onClick={(e: any) => {
-                              setparodorshita_acoron_tab(1);
-                              // setshowMainAssessments(
-                              //   ky == 1 || ky == 2 ? true : false
-                              // );
-                              seshowCompitance(true);
-                              setassessment_uid(ass_d.uid);
-                              setShowSecounderyTab({
-                                ...ShowSecounderyTab,
-                                ["id"]: ass_d.uid,
-                              });
-                              setMullayon_name(
-                                ass_d.assessment_details_name_bn
-                              );
-                              setShowcollaps({});
-                            }}
-                          >
-                            <SlBookOpen className="me-1" />{" "}
-                            {ass_d.assessment_details_name_bn} fff
-                          </Link>
-                        </li>
+                          <Tilt>
+                            <Card
+                              className="mx-auto rounded-5 shadow mb-5 bg-body  mt-5"
+                              style={{
+                                width: "22rem",
+                                height: "13rem",
+                                cursor: "pointer",
+
+                              }}
+                              onClick={(e: any) => {
+                                seshowCompitance(true);
+                                setshowMainAssessments(ky == 1 || ky == 2 ? true : false);
+                                localStorage.setItem(
+                                  "show_shannasik_barsik",
+                                  ky !== 0 ? "true" : "false"
+                                );
+                                setparodorshita_acoron_tab(0);
+                                setassessment_uid(ass_d.uid);
+                                pi_selection_list_by_subject(ass_d.uid);
+                                setShowSecounderyTab({
+                                  ...ShowSecounderyTab,
+                                  ["id"]: ass_d.uid,
+                                });
+                                setMullayon_name(ass_d.assessment_details_name_bn);
+                                setShowcollaps({});
+                              }}
+                            >
+                              <div className="d-flex flex-column justify-content-center align-items-center mt-5 h-100">
+                                <div className="d-flex justify-content-center align-items-center">
+                                  <SlBookOpen style={{ fontSize: "28px" }} />
+                                </div>
+                                <Card.Body
+                                  className="text-center "
+                                  style={{
+                                    fontSize: "28px",
+                                    fontWeight: "bolder",
+                                  }}
+                                >
+                                  {ass_d.assessment_details_name_bn}
+                                </Card.Body>
+                              </div>
+                            </Card>
+                          </Tilt>
+                        </motion.div>
                       ))}
                     </ul>
                   </div>
                 </div>
-              )}
-            </div> */}
+              </div>
+            )}
           </div>
         </div>
       </div>

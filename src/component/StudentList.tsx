@@ -93,11 +93,11 @@ const StudentList = () => {
                   <div className="d-flex justify-content-start align-items-center gap-4 ">
                     <div>
                       <img
-                        src=
-                        {
-                          (student?.gender == "Male") && male_avt_img ||
-                          (student?.gender == "Female") && female_avt_img
+                        src={
+                          (student?.gender?.toLowerCase() == "male") && male_avt_img ||
+                          (student?.gender?.toLowerCase() == "female") && female_avt_img
                         }
+
                         width="60rem"
                         className="img-fluid"
                       />
@@ -105,10 +105,10 @@ const StudentList = () => {
                     <div className="d-flex flex-column justify-content-center align-items-start gap-1">
                       <div className="d-flex flex-column justify-content-center align-items-start gap-1">
                         <h5 className={styles.teacherName}>
-                          নামঃ {student?.student_name_bn || student?.student_name_en || "no-entry"}{" "}
+                          নামঃ {student?.student_name_bn || student?.student_name_en || "-"}{" "}
                         </h5>
                         <h5 className={styles.teacherName}>
-                          রোলঃ {convertToBanglaNumber(student?.roll || "no-entry")}{" "}
+                          রোলঃ {convertToBanglaNumber(student?.roll || "-")}{" "}
                         </h5>
                       </div>
                       <div className="d-flex justify-content-center align-items-center">
@@ -158,8 +158,8 @@ const StudentList = () => {
                     >
                       <img
                         src={
-                          (selectedItem?.gender == "Male") && male_avt_img ||
-                          (selectedItem?.gender == "Female") && female_avt_img
+                          (selectedItem?.gender?.toLowerCase() == "male") && male_avt_img ||
+                          (selectedItem?.gender?.toLowerCase() == "female") && female_avt_img
                         }
                         width="100rem"
                         className="img-fluid border border-info p-1"
@@ -181,7 +181,7 @@ const StudentList = () => {
                             <strong>রোলঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.roll || "no-entry"}
+                            {selectedItem?.roll || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -200,7 +200,7 @@ const StudentList = () => {
                             <strong> সেকশনঃ </strong>
                           </td>
                           <td className="p-1">
-                            {section_name(selectedItem?.section) || "no-entry"}
+                            {section_name(selectedItem?.section) || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -208,7 +208,7 @@ const StudentList = () => {
                             <strong> শিফটঃ </strong>
                           </td>
                           <td className="p-1">
-                            {shift_name(selectedItem?.shift) || "no-entry"}
+                            {shift_name(selectedItem?.shift) || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -226,7 +226,7 @@ const StudentList = () => {
                             <strong>মোবাইলঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.student_mobile_no || "no-entry"}
+                            {selectedItem?.student_mobile_no || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -234,7 +234,7 @@ const StudentList = () => {
                             <strong>ইমেইলঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.email || "no-entry"}
+                            {selectedItem?.email || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -242,7 +242,7 @@ const StudentList = () => {
                             <strong>জন্ম তারিখঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.date_of_birth || "no-entry"}
+                            {selectedItem?.date_of_birth || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -250,7 +250,7 @@ const StudentList = () => {
                             <strong>রক্তের গ্রুপঃ </strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.blood_group || "no-entry"}
+                            {selectedItem?.blood_group || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -258,7 +258,7 @@ const StudentList = () => {
                             <strong>পিতার নামঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.father_name_bn || "no-entry"}
+                            {selectedItem?.father_name_bn || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -266,7 +266,7 @@ const StudentList = () => {
                             <strong>মাতার নামঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.mother_name_bn || "no-entry"}
+                            {selectedItem?.mother_name_bn || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -274,7 +274,7 @@ const StudentList = () => {
                             <strong> রেজিস্টেশন তারিখঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.registration_year || "no-entry"}
+                            {selectedItem?.registration_year || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -282,7 +282,7 @@ const StudentList = () => {
                             <strong>লিঙ্গঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.gender || "no-entry"}
+                            {selectedItem?.gender || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -290,7 +290,7 @@ const StudentList = () => {
                             <strong>ধর্মঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.religion || "no-entry"}
+                            {selectedItem?.religion || "-"}
                           </td>
                         </tr>
 
@@ -299,7 +299,7 @@ const StudentList = () => {
                             <strong>বর্তমান ঠিকানাঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.present_address || "no-entry"}
+                            {selectedItem?.present_address || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -307,7 +307,7 @@ const StudentList = () => {
                             <strong>স্থায়ী ঠিকানাঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.present_address || "no-entry"}
+                            {selectedItem?.present_address || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -315,7 +315,7 @@ const StudentList = () => {
                             <strong>পিতার মোবাইল নাম্বারঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.father_mobile_no || "no-entry"}
+                            {selectedItem?.father_mobile_no || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -323,7 +323,7 @@ const StudentList = () => {
                             <strong>মাতার মোবাইল নাম্বারঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.mother_mobile_no || "no-entry"}
+                            {selectedItem?.mother_mobile_no || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -331,7 +331,7 @@ const StudentList = () => {
                             <strong>অভিবাবকের মোবাইল নাম্বারঃ</strong>
                           </td>
                           <td className="p-1">
-                            {selectedItem?.guardian_mobile_no || "no-entry"}
+                            {selectedItem?.guardian_mobile_no || "-"}
                           </td>
                         </tr>
                       </tbody>

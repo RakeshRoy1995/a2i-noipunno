@@ -4,7 +4,7 @@ import { BiSidebar } from "react-icons/bi";
 import { MdArrowBackIosNew, MdOutlineArrowForwardIos } from "react-icons/md";
 import styles from "../component/Home.style.module.css";
 import { useNavigate } from 'react-router-dom';
-export default function BreadcumbHome({ seshowCompitance,  setMullayon_name, breadcumbTitle, showSubjectname, seshowSubject, setShowProfile, title, selected_subject }: any) {
+export default function BreadcumbHome({ setshowMainAssessments, seshowCompitance,  setMullayon_name, breadcumbTitle, showSubjectname, seshowSubject, setShowProfile, title, selected_subject }: any) {
   const navigate = useNavigate();
   return (
     <section className="container pt-3 mb-3">
@@ -12,9 +12,10 @@ export default function BreadcumbHome({ seshowCompitance,  setMullayon_name, bre
         <div className="card" style={{ backgroundColor: "white" }}>
           <button
             className='border-0  rounded shadow-sm bg-white' onClick={() => {
-              seshowSubject(true);
-              setShowProfile(true)
+              seshowSubject(false);
+              setShowProfile(false)
               seshowCompitance(false)
+              setshowMainAssessments(false)
               setMullayon_name("")
               navigate('/')
 

@@ -23,27 +23,18 @@ export default function ParodorshitaComponent({
   setshowDetailsshikhonKalinMullayon,
   Student,
   teacher_uid,
-  pi_selection,
+  Mullayon_name,
 }: any) {
 
   const [loadingspinner, setloadingspinner] = useState(false);
-
-
-
-  console.log(
-    "shikhonKalinMullayon", shikhonKalinMullayon
-  );
-
-
   return (
-    <div className="py-2">
-      <div className="row">
+    <div className="">
+      <div className="row container mx-auto ">
         <div className="text-center">
           {loadingspinner && <><Spinner animation="border" /> Data is loading...</>}
         </div>
-
         {show_shannasik_barsik() == false ? (
-          <>
+          <div className="card border-0 w-100 rounded">
             {shikhonKalinMullayon?.map((d: any, key: any) => (
               <div key={key}>
                 {show_compitance(d.uid) && (
@@ -60,13 +51,13 @@ export default function ParodorshitaComponent({
                       className="col-sm-12 col-md-12"
                     >
                       <div
-                        className={`d-flex align-items-center custom-py-2 gap-2`}
+                        className={`d-flex align-items-center`}
                       >
                         <div
-                          className={`card shadow-lg border-0 p-1 w-100 ${styles.card_hover}`}
+                          className={`card border-0 p-1 w-100 ${styles.card_hover}`}
                         >
                           <div className="d-flex justify-content-between">
-                            <div className="d-flex justify-content-between align-items-center w-100 px-1">
+                            <div className="d-flex justify-content-between align-items-center w-100 px-1 py-2">
                               <div
                                 className="py-2"
                                 style={{
@@ -91,6 +82,7 @@ export default function ParodorshitaComponent({
                           </div>
                         </div>
                       </div>
+                      <hr className="p-0 m-0" />
                     </div>
 
                     <div
@@ -115,7 +107,7 @@ export default function ParodorshitaComponent({
                 )}
               </div>
             ))}
-          </>
+          </div>
         ) : (
           <div className="card card-body mx-2">
             {shikhonKalinMullayon_sannasik_barsik?.map((d: any, key: any) => (

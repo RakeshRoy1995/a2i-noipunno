@@ -398,8 +398,8 @@ const Navbar = () => {
                         </li> */}
 
                             <li className="nav-item dropdown nav-item-style ">
-                              <NavLink
-                                to="/"
+                              <a
+                                href="/"
                                 // activeClassName='active'
                                 className="nav-link navbar-menu-item d-flex align-items-center"
                                 role="button"
@@ -412,7 +412,7 @@ const Navbar = () => {
                                   alt="main logo"
                                 />
                                 প্রথম পাতা
-                              </NavLink>
+                              </a>
                             </li>
 
                             <li className="nav-item dropdown nav-item-style">

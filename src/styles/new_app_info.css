@@ -1,0 +1,119 @@
+.new_chat_box {
+    position: fixed;
+    right: 3px;
+    bottom: 60px;
+    z-index: 999;
+}
+
+.new_popup {
+    position: absolute;
+    width: 390px;
+    border-radius: 6px;
+    left: auto;
+    right: 0;
+    bottom: 100%;
+    display: none;
+    background-color: #ffffff;
+    margin-bottom: -45px;
+    margin-right: 70px;
+    transition: transform 0.5s ease;
+    transform: translateX(8%);
+}
+
+.new_popup.active {
+    transform: translateX(0%);
+}
+
+.new_popup:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-right: 10px solid transparent;
+    position: absolute;
+    right: -18px;
+    bottom: 12px;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid var(--bg_primary);
+    z-index: 99;
+}
+
+.new_popup-app-info-top {
+     /* height: 300px;  */
+     padding: 0px 18px;
+    border: 1px solid #93f0f3;
+    border-radius: 6px 6px 0px 0px;
+}
+
+.new_popup-card-institutions {
+    font-family: kalpurush;
+    font-size: 11px;
+    font-weight: 400;
+    height: 60px;
+    letter-spacing: 0px;
+    color: black;
+    padding-top: 5px;
+}
+
+.new_popup-card-institutions ul> :first-child {
+    font-weight: 700;
+}
+
+.new_chat_btn {
+    border: none;
+    border-radius: 6px 6px 0px 0px;
+}
+
+.new_popup-app-info-reserved {
+    height: 22px;
+}
+
+.reserved-app-info {
+    font-family: kalpurush;
+    font-size: 14px;
+    font-weight: 400;
+    height: 19px;
+    letter-spacing: 0px;
+}
+
+.new_popup-card-body {
+    padding: 0px 0px 5px 0px;
+    /* height: 110px; */
+}
+
+.new_popup-card-icons {
+    gap: 5px;
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.new_popup-app-info-bottom {
+    /* height: 105px; */
+}
+
+.new_popup-version-bottom {
+    /* height: 50px; */
+    background-color: #428f92;
+    border-radius: 0px 0px 6px 6px;
+}
+
+.new_popup-version {
+    padding: 15px 13px 15px 13px;
+    font-family: kalpurush;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: center;
+}
+
+.new_popup-version-info {
+    font-family: kalpurush;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: center;
+    margin-left: 15px;
+    color: var(--text_white);
+}

@@ -343,7 +343,6 @@ export default function Teacher() {
     )} */}
 
                           {/* card collection */}
-
                           <div className="row">
                             {showSubject && (
                               <>

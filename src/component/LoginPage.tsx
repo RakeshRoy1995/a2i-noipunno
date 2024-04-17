@@ -331,6 +331,7 @@ const LoginPage = () => {
                         </p>
                       </div>
                     </form>
+                    
                   </div>
                 </div>
               </div>
@@ -827,7 +828,7 @@ const LoginPage = () => {
         </section>
 
         <LoginPageModalCommon/>
-        
+
         <PopUpAppInfo />
 
       </motion.div>

@@ -398,8 +398,8 @@ const Navbar = () => {
                         </li> */}
 
                             <li className="nav-item dropdown nav-item-style ">
-                              <NavLink
-                                to="/"
+                              <a
+                                href="/"
                                 // activeClassName='active'
                                 className="nav-link navbar-menu-item d-flex align-items-center"
                                 role="button"
@@ -412,7 +412,7 @@ const Navbar = () => {
                                   alt="main logo"
                                 />
                                 প্রথম পাতা
-                              </NavLink>
+                              </a>
                             </li>
 
                             <li className="nav-item dropdown nav-item-style">
@@ -558,7 +558,7 @@ const Navbar = () => {
                                     </div>
                                   </NavLink>
                                 </li>
-                                {/* <li>
+                                <li>
                                   <NavLink
                                     to="/student-attendence"
                                     // activeClassName='active'
@@ -575,7 +575,7 @@ const Navbar = () => {
                                       </p>
                                     </div>
                                   </NavLink>
-                                </li> */}
+                                </li>
                               </ul>
                             </li>
                             <li className="nav-item dropdown nav-item-style">
@@ -710,7 +710,7 @@ const Navbar = () => {
                           </a>
                         </li> */}
 
-                            {/* <li className="nav-item dropdown nav-item-style">
+                            <li className="nav-item dropdown nav-item-style">
                               <NavLink
                                 to="/attendance-subject"
                                 className={`nav-link navbar-menu-item d-flex align-items-center
@@ -725,7 +725,7 @@ const Navbar = () => {
                                 />
                                 শিক্ষার্থীর হাজিরা 
                               </NavLink>
-                            </li>  */}
+                            </li> 
 
                             <li className="nav-item dropdown nav-item-style">
                               <NavLink

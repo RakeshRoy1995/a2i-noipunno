@@ -71,6 +71,7 @@ function App() {
       <Routes>
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Home />} />
           <Route
             path="/student-mullayon/:assessment_uid/:competence_uid"
             element={<StudentMullayon />}

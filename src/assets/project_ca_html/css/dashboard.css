@@ -474,8 +474,10 @@ body {
 
 .subject-container .subject-number {
   /* width: 267.2px; */
+
   height: 241px;
   border-radius: 6px;
+  position: relative;
   background-color: #fff;
   box-shadow: 0px 2px 3px 0px #0000001a, 0px 0px 1px 0px #0000001a;
   display: flex;
@@ -484,8 +486,12 @@ body {
   flex-direction: column;
   margin-bottom: 16px;
   gap: 5px;
-}
 
+}
+/* .subject-container .subject-number:hover {
+background-color: rebeccapurple !important;
+border-radius: red !important;
+} */
 .subject-container .subject-number .icon {
   width: 82px;
   height: 82px;

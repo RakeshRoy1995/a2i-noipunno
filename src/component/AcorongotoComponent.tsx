@@ -6,6 +6,7 @@ import StudentMullayonBehave from "./StudentMullayonBehave";
 import { get_bi_evaluation_by_bi } from "../Request";
 import { add_pi_uid, convertToBanglaNumber } from "../utils/Utils";
 import { FaExpand } from "react-icons/fa";
+import { motion } from "framer-motion"
 
 export default function AcorongotoComponent({
   all_bis,
@@ -15,6 +16,7 @@ export default function AcorongotoComponent({
   setShowcollaps,
   teacher,
   teacher_uid,
+  Mullayon_name
 }: any) {
   const [is_draft, setis_draft] = useState<any>(1);
   const [all_submited_PI, setall_submited_PI] = useState<any>([]);
@@ -123,8 +125,14 @@ export default function AcorongotoComponent({
             </div>
           </div>
         )}
+         <motion.div
+    initial={{ opacity: 0, scale: 0.5 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5 }}
+  >
+        <div className="card border-0 w-100 rounded p-2">
         {Student.map((d: any, key: any) => (
-          <div key={key}>
+          <div key={key} >
             <div
               onClick={(e: any) => {
                 // setshowDetailsshikhonKalinMullayon(d);
@@ -134,13 +142,13 @@ export default function AcorongotoComponent({
               style={{ cursor: "pointer" }}
               className="col-sm-12 col-md-12"
             >
-              <div className={`d-flex align-items-center custom-py-2 gap-2`}>
+              <div className={`d-flex align-items-center`}>
                 <div
-                  className={`card shadow-lg border-0 p-1 w-100 ${styles.card_hover}`}
+                  className={`card  border-0 py-2 w-100 ${styles.card_hover}`}
                 >
                   <div className="d-flex justify-content-between">
                     <div className="d-flex justify-content-between align-items-center w-100 px-1">
-                      <div className="py-2" style={{ color: "#428F92" }}>
+                      <div className="py-2" style={{ color: "#428F92" ,fontWeight:"bold"}}>
                         <PiBookOpenText className="me-2" />
                         {d?.student_name_bn || d?.student_name_en}
                       </div>
@@ -149,7 +157,7 @@ export default function AcorongotoComponent({
                         className="px-2 rounded "
                         style={{ color: "#428F92" }}
                       >
-                        <span>
+                        <span style={{fontWeight:"bold"}}>
                           শিক্ষার্থীর রোল: {convertToBanglaNumber(d.roll)}{" "}
                           <img src="/assets/images/arrow-down.svg" alt="" />{" "}
                         </span>
@@ -159,6 +167,8 @@ export default function AcorongotoComponent({
                 </div>
               </div>
             </div>
+
+            <hr className="p-0 m-0" />
 
             <div
               className={
@@ -194,6 +204,8 @@ export default function AcorongotoComponent({
             </div>
           </div>
         ))}
+        </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -234,7 +234,7 @@
   /* width: 267.2px; */
   height: 241px;
   border-radius: 6px;
-  background-color: #fff !important;
+  background-color: #fff;
   box-shadow: 0px 2px 3px 0px #0000001a, 0px 0px 1px 0px #0000001a;
   display: flex;
   justify-content: center;
@@ -701,5 +701,6 @@
 .tab_active_color {
   color: red;
 }
+
 
 /* +++++++++++++++++++++++++++++++++++++++ */

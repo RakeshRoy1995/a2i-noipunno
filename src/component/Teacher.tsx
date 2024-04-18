@@ -281,11 +281,7 @@ export default function Teacher() {
           )}
 
           {!loader && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-            >
+            
               <div className="dashboard-section ">
                 <section
                   className="np-breadcumb-section  pb-5"
@@ -391,10 +387,7 @@ export default function Teacher() {
                                         }
                                       }}
                                     >
-                                      <motion.div
-                                        whileHover={{ scale: 0.9 }}
-                                        whileTap={{ scale: 0.9 }}
-                                      >
+                                      
                                         <a className="subject-number ">
                                           <div className="icon">
                                             <img src={bookIcon} alt="" />
@@ -477,7 +470,7 @@ export default function Teacher() {
                                             </div>
                                           </div>
                                         </a>
-                                      </motion.div>
+
                                     </div>
 
                                   ))}
@@ -579,7 +572,6 @@ export default function Teacher() {
                   </div>
                 </section>
               </div>
-            </motion.div>
           )}
 
           <style

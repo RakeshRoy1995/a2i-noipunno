@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Home.style.module.css";
 import { SlBookOpen } from "react-icons/sl";
-import { Link } from "react-router-dom";
+
 import { make_group_by_PI_BI, pis_list_func } from "../utils/Utils";
 import { get_pi_bi_evaluation_list } from "../Request";
 import { Card } from "react-bootstrap";
 import { motion } from "framer-motion"
 import { TiTick } from "react-icons/ti";
 
-import Tilt from "react-parallax-tilt";
+
 
 export default function ShowAssesment({
   seshowCompitance,
@@ -124,10 +124,16 @@ export default function ShowAssesment({
               <ul className="nav d-flex mt-2 justify-content-around py-1 assestment-tabs">
                 {own_data?.assessments.map((d: any, key: any) => (
                   <li
-                    className={`nav-item w-50 f-dlex justify-content-center ${styles.nav_tab_bottom_border}`}
+                    className={`nav-item w-50 f-dlex justify-content-center px-1`}
                     key={key}
                     style={{ fontSize: "15px" ,
-                  border: 'solid 1px' }}
+                    border: 'solid 1px' }}  
+                    onClick={(e) => {
+                      setparodorshita_acoron_tab(key);
+                      tabAcorongoto(key);
+                      setallassessmet(own_data?.assessments[0]?.assessment_details);
+                      setShowcollaps({});
+                    }}
                   >
 
                     <a
@@ -137,17 +143,16 @@ export default function ShowAssesment({
                       data-bs-toggle="tab"
                       data-bs-target="#expertness"
                       href="#"
-                      onClick={(e) => {
-                        setparodorshita_acoron_tab(key);
-                        tabAcorongoto(key);
-                        setallassessmet(own_data?.assessments[0]?.assessment_details);
-                        setShowcollaps({});
-                      }}
+                      
                     >
-                      <SlBookOpen className="me-1" /> {d.assessment_name_bn} 
-                      {" "}
+                      <div className="d-flex align-items-center justify-content-center gap-1">
+                        <SlBookOpen className="me-1" /> {d.assessment_name_bn} 
+                        {key === parodorshita_acoron_tab && <TiTick className="" style={{ fontSize: "2rem" }} />}
+                        {" "}
+                      </div>
+
                     </a>
-                    {key === parodorshita_acoron_tab && <TiTick className="" style={{ fontSize: "2rem" }} />}
+                    {/* {key === parodorshita_acoron_tab && <TiTick className="" style={{ fontSize: "2rem" }} />} */}
                   </li>
 
                 ))}
@@ -172,107 +177,47 @@ export default function ShowAssesment({
                     <ul className="nav d-flex mt-2 justify-content-around py-1 assestment-tabs">
                       {allassessmet?.map((ass_d: any, ky: any) => (
 
-                        // <Card
-                        //   className="mx-auto rounded-5 shadow  mb-5 bg-body rounded mt-5 MainCard
+                          <Card
+                            className="mx-auto rounded-3 shadow mb-5 bg-body  mt-5"
+                            style={{
+                              width: "20rem",
+                              height: "12rem",
+                              cursor: "pointer",
+                              
 
-                        // "
-                        //   style={{
-                        //     width: "22rem",
-                        //     height: "13rem",
-                        //     cursor: "pointer",
-                        //   }}
-                        //   onClick={(e: any) => {
-                        //     seshowCompitance(true);
+                            }}
+                            onClick={(e: any) => {
+                              seshowCompitance(true);
+                              setshowMainAssessments(ky == 1 || ky == 2 ? true : false);
+                              localStorage.setItem(
+                                "show_shannasik_barsik",
+                                ky !== 0 ? "true" : "false"
+                              );
+                              setparodorshita_acoron_tab(0);
+                              setassessment_uid(ass_d.uid);
+                              pi_selection_list_by_subject(ass_d.uid);
+                              setShowSecounderyTab({
+                                ...ShowSecounderyTab,
+                                ["id"]: ass_d.uid,
+                              });
+                              setMullayon_name(ass_d.assessment_details_name_bn);
+                              setShowcollaps({});
+                            }}
+                          >
+                            <div className="d-flex justify-content-center align-items-center mx-auto h-100">
+                            <SlBookOpen style={{ fontSize: "20px" }} />
+                              <Card.Body
+                                className="text-center "
+                                style={{
+                                  fontSize: "20px",
+                                  fontWeight: "bolder",
+                                }}
+                              >
+                                {ass_d.assessment_details_name_bn}
+                              </Card.Body>
+                            </div>
+                          </Card>
 
-                        //     setshowMainAssessments(
-                        //       ky == 1 || ky == 2 ? true : false
-                        //     );
-
-                        //     localStorage.setItem(
-                        //       "show_shannasik_barsik",
-                        //       ky !== 0 ? "true" : "false"
-                        //     );
-                        //     setparodorshita_acoron_tab(0);
-                        //     setassessment_uid(ass_d.uid);
-
-                        //     pi_selection_list_by_subject(ass_d.uid);
-
-                        //     setShowSecounderyTab({
-                        //       ...ShowSecounderyTab,
-                        //       ["id"]: ass_d.uid,
-                        //     });
-                        //     setMullayon_name(
-                        //       ass_d.assessment_details_name_bn
-                        //     );
-                        //     setShowcollaps({});
-                        //   }}
-                        // >
-                        //   <div className="d-flex flex-column justify-content-center align-items-center mt-5 h-100 ">
-                        //     <div className="d-flex justify-content-center align-items-center">
-                        //       <SlBookOpen style={{ fontSize: "28" }} />
-                        //     </div>
-                        //     <Card.Body
-                        //       className="text-center"
-                        //       style={{
-                        //         fontSize: "28px",
-                        //         fontWeight: "bolder",
-                        //       }}
-                        //     >
-                        //       {ass_d.assessment_details_name_bn}
-                        //     </Card.Body>
-                        //   </div>
-                        // </Card>
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          initial={{ opacity: 0, scale: 0.5 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <Tilt>
-                            <Card
-                              className="mx-auto rounded-5 shadow mb-5 bg-body  mt-5"
-                              style={{
-                                width: "22rem",
-                                height: "13rem",
-                                cursor: "pointer",
-
-                              }}
-                              onClick={(e: any) => {
-                                seshowCompitance(true);
-                                setshowMainAssessments(ky == 1 || ky == 2 ? true : false);
-                                localStorage.setItem(
-                                  "show_shannasik_barsik",
-                                  ky !== 0 ? "true" : "false"
-                                );
-                                setparodorshita_acoron_tab(0);
-                                setassessment_uid(ass_d.uid);
-                                pi_selection_list_by_subject(ass_d.uid);
-                                setShowSecounderyTab({
-                                  ...ShowSecounderyTab,
-                                  ["id"]: ass_d.uid,
-                                });
-                                setMullayon_name(ass_d.assessment_details_name_bn);
-                                setShowcollaps({});
-                              }}
-                            >
-                              <div className="d-flex flex-column justify-content-center align-items-center mt-5 h-100">
-                                <div className="d-flex justify-content-center align-items-center">
-                                  <SlBookOpen style={{ fontSize: "28px" }} />
-                                </div>
-                                <Card.Body
-                                  className="text-center "
-                                  style={{
-                                    fontSize: "28px",
-                                    fontWeight: "bolder",
-                                  }}
-                                >
-                                  {ass_d.assessment_details_name_bn}
-                                </Card.Body>
-                              </div>
-                            </Card>
-                          </Tilt>
-                        </motion.div>
                       ))}
                     </ul>
                   </div>

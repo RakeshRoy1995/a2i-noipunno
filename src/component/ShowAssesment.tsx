@@ -188,21 +188,14 @@ export default function ShowAssesment({
                       {allassessmet?.map((ass_d: any, ky: any) => (
 
 
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          initial={{ opacity: 0, scale: 0.5 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          {/* 3 card */}
+                     
                           <Card
                             className="mx-auto rounded-3 shadow mb-5 bg-body  mt-5"
                             style={{
                               width: "20rem",
                               height: "12rem",
                               cursor: "pointer",
-                              
+
 
                             }}
                             onClick={(e: any) => {
@@ -232,6 +225,7 @@ export default function ShowAssesment({
                                 style={{
                                   fontSize: "28px",
                                   fontWeight: "bolder",
+                                  color:"#873896"
                                 }}
                               >
                                 {ass_d.assessment_details_name_bn}
@@ -239,7 +233,7 @@ export default function ShowAssesment({
                             </div>
                           </Card>
 
-                        </motion.div>
+
                       ))}
                     </ul>
                   </div>

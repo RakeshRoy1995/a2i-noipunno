@@ -34,14 +34,7 @@ export default function ShowAssesment({
 
   const fetchData = async () => {
     try {
-      const uidName = breadcumbTitle.split(" ")[0];
 
-      // const found = own_data?.assessments[key]?.assessment_details.find((element) => element?.assessment_details_name_bn?.includes(uidName) );
-
-      console.log(
-        `own_data?.assessments[0]?.assessment_details`,
-        own_data?.assessments[0]?.assessment_details
-      );
       setassessment_uid(own_data?.assessments[0]?.assessment_details[0].uid);
       setclass_id(own_data.subjects[0].class_room.class_id);
       const pi_bi_evaluation_list__: any =
@@ -79,15 +72,10 @@ export default function ShowAssesment({
   const tabAcorongoto = async (key: number) => {
     try {
       const uidName = breadcumbTitle.split(" ")[0];
-
-
-
       const found = own_data?.assessments[key]?.assessment_details.find(
         (element) => element?.assessment_details_name_bn?.includes(uidName)
       );
 
-      console.log(`found`, uidName, found);
-      // console.log(`own_data?.assessments[key]?.assessment_details`, uidName, found,  own_data?.assessments[key]?.assessment_details );
       setassessment_uid(found.uid);
       setShowSecounderyTab({
         ...ShowSecounderyTab,
@@ -138,11 +126,12 @@ export default function ShowAssesment({
                   <li
                     className={`nav-item w-50 f-dlex justify-content-center ${styles.nav_tab_bottom_border}`}
                     key={key}
-                    style={{ fontSize: "15px" }}
+                    style={{ fontSize: "15px" ,
+                  border: 'solid 1px' }}
                   >
 
                     <a
-                      className={`nav-link link-secondary fw-bold  ${key === 0 ? "active " : ""
+                      className={`nav-link link-secondary fw-bold  ${key === 0 ? " " : ""
                         } `}
                       id="expertness-tab"
                       data-bs-toggle="tab"
@@ -155,7 +144,7 @@ export default function ShowAssesment({
                         setShowcollaps({});
                       }}
                     >
-                      <SlBookOpen className="me-1" /> {d.assessment_name_bn}
+                      <SlBookOpen className="me-1" /> {d.assessment_name_bn} 
                       {" "}
                     </a>
                     {key === parodorshita_acoron_tab && <TiTick className="" style={{ fontSize: "2rem" }} />}

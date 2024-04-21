@@ -11,7 +11,7 @@ import { FaExpand } from "react-icons/fa";
 import DetailsShikhonMullayonSannasikBarshik from "./DetailsShikhonMullayonSannasikBarshik";
 import DetailsShikhonMullayonShikhonKalin from "./DetailsShikhonMullayonShikhonKalin";
 import { Spinner } from "react-bootstrap";
-
+import { motion } from "framer-motion"
 export default function ParodorshitaComponent({
   assessment_uid,
   pi_attr,
@@ -23,22 +23,24 @@ export default function ParodorshitaComponent({
   setshowDetailsshikhonKalinMullayon,
   Student,
   teacher_uid,
-  pi_selection,
+  Mullayon_name,
 }: any) {
 
   const [loadingspinner, setloadingspinner] = useState(false);
-
-
   return (
-    <div className="py-2">
-      <div className="row">
+    <div className="">
+      <div className="row container mx-auto ">
         <div className="text-center">
           {loadingspinner && <><Spinner animation="border" /> Data is loading...</>}
         </div>
-
         {show_shannasik_barsik() == false ? (
-          <>
-            {shikhonKalinMullayon.map((d: any, key: any) => (
+           <motion.div
+           initial={{ opacity: 0, scale: 0.5 }}
+           animate={{ opacity: 1, scale: 1 }}
+           transition={{ duration: 0.5 }}
+         >
+          <div className="card border-0 w-100 rounded p-2">
+            {shikhonKalinMullayon?.map((d: any, key: any) => (
               <div key={key}>
                 {show_compitance(d.uid) && (
                   <>
@@ -54,13 +56,13 @@ export default function ParodorshitaComponent({
                       className="col-sm-12 col-md-12"
                     >
                       <div
-                        className={`d-flex align-items-center custom-py-2 gap-2`}
+                        className={`d-flex align-items-center`}
                       >
                         <div
-                          className={`card shadow-lg border-0 p-1 w-100 ${styles.card_hover}`}
+                          className={`card border-0 p-1 w-100 ${styles.card_hover}`}
                         >
                           <div className="d-flex justify-content-between">
-                            <div className="d-flex justify-content-between align-items-center w-100 px-1">
+                            <div className="d-flex justify-content-between align-items-center w-100 px-1 py-2 mb-1">
                               <div
                                 className="py-2"
                                 style={{
@@ -85,6 +87,7 @@ export default function ParodorshitaComponent({
                           </div>
                         </div>
                       </div>
+                      <hr className="p-0 m-0" />
                     </div>
 
                     <div
@@ -109,11 +112,12 @@ export default function ParodorshitaComponent({
                 )}
               </div>
             ))}
-          </>
+          </div>
+          </motion.div>
         ) : (
           <div className="card card-body mx-2">
-            {shikhonKalinMullayon_sannasik_barsik.map((d: any, key: any) => (
-              <div key={key}>
+            {shikhonKalinMullayon_sannasik_barsik?.map((d: any, key: any) => (
+              <div key={key} className="mt-1">
                 <div
                   onClick={(e: any) => {
                     setshowDetailsshikhonKalinMullayon(d);

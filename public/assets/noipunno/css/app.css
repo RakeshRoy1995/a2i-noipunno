@@ -103,8 +103,13 @@
     line-height: 20px;
 }
 
+
+
 .assestment-tabs .active {
-    border-bottom: 2px solid #428f92;
+    /* border-bottom: 2px solid #428f92; */
+    box-shadow: rgba(240, 46, 170, 0.4) -5px 5px, 
+    rgba(240, 46, 170, 0.3) -10px 10px,
+;
     width: 100%;
     display: flex;
     justify-content: center;

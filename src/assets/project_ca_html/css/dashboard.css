@@ -472,10 +472,11 @@ body {
   padding-bottom: 10px;
 }
 
+
 .subject-container .subject-number {
-  /* width: 267.2px; */
   height: 241px;
   border-radius: 6px;
+  position: relative;
   background-color: #fff;
   box-shadow: 0px 2px 3px 0px #0000001a, 0px 0px 1px 0px #0000001a;
   display: flex;
@@ -484,7 +485,67 @@ body {
   flex-direction: column;
   margin-bottom: 16px;
   gap: 5px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
+
+/* Base styles for lines */
+.subject-container .subject-number::before,
+.subject-container .subject-number::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: #662d91;
+  opacity: 0; /* Initially hidden */
+  transition: width 1s ease, height 1s ease, transform 1s ease, opacity 1s ease; /* Transition properties */
+
+}
+
+/* Top border transition */
+.subject-container .subject-number::before {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+}
+
+/* Right border transition */
+.subject-container .subject-number::after {
+  bottom: 0;
+  right: 0;
+  width: 3px;
+  height: 0;
+}
+
+/* Hover styles */
+.subject-container .subject-number:hover::before {
+  width: 100%;
+  transform-origin: right; /* Set transform origin to the right */
+  transform: scaleX(0); /* Scale along X-axis */
+  opacity: 1; /* Fade in */
+}
+.subject-container .subject-number:hover {
+  transform: scale(1.05); /* Scale up slightly on hover */
+}
+.subject-container .subject-number:hover::after {
+  height: 100%;
+  transform: translateY(-100%); /* Move along Y-axis */
+  opacity: 1; /* Fade in */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .subject-container .subject-number .icon {
   width: 82px;

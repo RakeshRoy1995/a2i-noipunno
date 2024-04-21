@@ -281,7 +281,7 @@ export default function Teacher() {
           )}
 
           {!loader && (
-            
+
               <div className="dashboard-section ">
                 <section
                   className="np-breadcumb-section  pb-5"
@@ -423,7 +423,7 @@ export default function Teacher() {
                                             শ্রেণি{" "}
                                           </p>
                                         </div>
-                                        <div className="d-flex gap-1 ">
+                                        <div className="d-flex gap-1 flex-wrap">
                                           <div className="total-student">
                                             <p> শ্রেণি শিক্ষক:</p>
                                           </div>
@@ -472,7 +472,7 @@ export default function Teacher() {
                                           </div>
                                         </div>
                                       </a>
-                                    
+
                                     </div>
 
                                   ))}

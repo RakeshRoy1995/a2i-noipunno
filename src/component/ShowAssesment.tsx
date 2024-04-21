@@ -183,7 +183,7 @@ export default function ShowAssesment({
                               width: "20rem",
                               height: "12rem",
                               cursor: "pointer",
-                              
+
 
                             }}
                             onClick={(e: any) => {
@@ -211,6 +211,7 @@ export default function ShowAssesment({
                                 style={{
                                   fontSize: "20px",
                                   fontWeight: "bolder",
+                                  color:"#873896"
                                 }}
                               >
                                 {ass_d.assessment_details_name_bn}

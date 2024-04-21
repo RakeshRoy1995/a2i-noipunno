@@ -387,90 +387,92 @@ export default function Teacher() {
                                         }
                                       }}
                                     >
-                                      
-                                        <a className="subject-number ">
-                                          <div className="icon">
-                                            <img src={bookIcon} alt="" />
-                                          </div>
-                                          <h2 className="mt-3">
+
+
+                                      <a className="subject-number style-borders style-borderss">
+
+                                        <div className="icon">
+                                          <img src={bookIcon} alt="" />
+                                        </div>
+                                        <h2 className="mt-3">
+                                          {" "}
+                                          {d?.subject?.name}
+                                        </h2>
+                                        <div className="total-student">
+                                          <p>
                                             {" "}
-                                            {d?.subject?.name}
-                                          </h2>
+                                            {d?.subject?.class_uid == "6" ? (
+                                              "ষষ্ঠ "
+                                            ) : (
+                                              <>
+                                                {" "}
+                                                {d?.subject?.class_uid ==
+                                                  "7" ? (
+                                                  "সপ্তম "
+                                                ) : (
+                                                  <>
+                                                    {" "}
+                                                    {d?.subject?.class_uid ==
+                                                      "8"
+                                                      ? "অষ্টম"
+                                                      : "নবম"}{" "}
+                                                  </>
+                                                )}{" "}
+                                              </>
+                                            )}{" "}
+                                            শ্রেণি{" "}
+                                          </p>
+                                        </div>
+                                        <div className="d-flex gap-1 ">
+                                          <div className="total-student">
+                                            <p> শ্রেণি শিক্ষক:</p>
+                                          </div>
                                           <div className="total-student">
                                             <p>
-                                              {" "}
-                                              {d?.subject?.class_uid == "6" ? (
-                                                "ষষ্ঠ "
-                                              ) : (
-                                                <>
-                                                  {" "}
-                                                  {d?.subject?.class_uid ==
-                                                  "7" ? (
-                                                    "সপ্তম "
-                                                  ) : (
-                                                    <>
-                                                      {" "}
-                                                      {d?.subject?.class_uid ==
-                                                      "8"
-                                                        ? "অষ্টম"
-                                                        : "নবম"}{" "}
-                                                    </>
-                                                  )}{" "}
-                                                </>
-                                              )}{" "}
-                                              শ্রেণি{" "}
+                                              {d?.teacher?.name_bn ||
+                                                d?.teacher?.name_en}
                                             </p>
                                           </div>
-                                          <div className="d-flex gap-1 ">
-                                            <div className="total-student">
-                                              <p> শ্রেণি শিক্ষক:</p>
-                                            </div>
-                                            <div className="total-student">
-                                              <p>
-                                                {d?.teacher?.name_bn ||
-                                                  d?.teacher?.name_en}
-                                              </p>
-                                            </div>
-                                          </div>
-                                          <div className="flex-md-row flex-lg-row d-flex  justify-content-center gap-2">
-                                            <h6 className={styles.session}>
-                                              {shift_name(
-                                                d?.own_subjet?.class_room
-                                                  ?.shift_id
-                                              )}{" "}
-                                              সেশন
-                                            </h6>
-                                            <h6
-                                              className={styles.horizontal_bar}
-                                            >
-                                              ।{" "}
-                                            </h6>
-                                            <h6 className={styles.branch}>
-                                              {section_name(
-                                                d?.own_subjet?.class_room
-                                                  ?.section_id
-                                              )}{" "}
-                                              শাখা
-                                            </h6>
-                                          </div>
+                                        </div>
+                                        <div className="flex-md-row flex-lg-row d-flex  justify-content-center gap-2">
+                                          <h6 className={styles.session}>
+                                            {shift_name(
+                                              d?.own_subjet?.class_room
+                                                ?.shift_id
+                                            )}{" "}
+                                            সেশন
+                                          </h6>
+                                          <h6
+                                            className={styles.horizontal_bar}
+                                          >
+                                            ।{" "}
+                                          </h6>
+                                          <h6 className={styles.branch}>
+                                            {section_name(
+                                              d?.own_subjet?.class_room
+                                                ?.section_id
+                                            )}{" "}
+                                            শাখা
+                                          </h6>
+                                        </div>
 
-                                          <div className="total-student-show">
-                                            <div className="bottom">
-                                              <div className="text">
-                                                মোট শিক্ষার্থী{" "}
-                                              </div>
-                                              <div className="badge">
-                                                <div className="success">
-                                                  {
-                                                    d.own_subjet?.class_room
-                                                      ?.students?.length
-                                                  }
-                                                </div>
+                                        <div className="total-student-show">
+                                          <div className="bottom">
+                                            <div className="text">
+                                              মোট শিক্ষার্থী{" "}
+                                            </div>
+                                            <div className="badge">
+                                              <div className="success">
+                                                {
+                                                  d.own_subjet?.class_room
+                                                    ?.students?.length
+                                                }
                                               </div>
                                             </div>
                                           </div>
-                                        </a>
-
+                                        </div>
+                                      </a>
+                                    
                                     </div>
 
                                   ))}

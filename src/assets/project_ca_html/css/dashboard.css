@@ -475,7 +475,7 @@ body {
 
 .subject-container .subject-number {
   height: 241px;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   position: relative;
   background-color: #fff;
   box-shadow: 0px 2px 3px 0px #0000001a, 0px 0px 1px 0px #0000001a;
@@ -486,53 +486,62 @@ body {
   margin-bottom: 16px;
   gap: 5px;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: transform 3s ease;
+
 }
 
-/* Base styles for lines */
-.subject-container .subject-number::before,
-.subject-container .subject-number::after {
+
+
+/* ss */
+
+.style-borders {
+  position: relative;
+}
+
+
+
+.style-borderss {
+  position: relative;
+}
+
+.style-borders::before {
   content: "";
   position: absolute;
-  width: 0;
-  height: 0;
-  background: #662d91;
-  opacity: 0; /* Initially hidden */
-  transition: width 1s ease, height 1s ease, transform 1s ease, opacity 1s ease; /* Transition properties */
-
-}
-
-/* Top border transition */
-.subject-container .subject-number::before {
-  top: 0;
   left: 0;
-  width: 0;
-  height: 3px;
+  top: 0;
+  height: 5px;
+  width: 5px;
+  transition-property: width, height;
+  transition-duration: 1s;
 }
 
-/* Right border transition */
-.subject-container .subject-number::after {
+.style-borders::after {
+  content: "";
+  position: absolute;
   bottom: 0;
   right: 0;
-  width: 3px;
-  height: 0;
+  height: 5px;
+  width: 5px;
+  transition-property: width, height;
+  transition-duration: 1s;
 }
 
-/* Hover styles */
-.subject-container .subject-number:hover::before {
-  width: 100%;
-  transform-origin: right; /* Set transform origin to the right */
-  transform: scaleX(0); /* Scale along X-axis */
-  opacity: 1; /* Fade in */
+.style-borders:hover::before {
+  border-top: 2px solid red;
+  border-left: 2px solid red;
+  height: 50px;
+  width: 50px;
 }
-.subject-container .subject-number:hover {
-  transform: scale(1.05); /* Scale up slightly on hover */
+
+.style-borders:hover::after {
+  height: 50px;
+  width: 50px;
+  border-bottom: 2px solid red;
+  border-right: 2px solid red;
 }
-.subject-container .subject-number:hover::after {
-  height: 100%;
-  transform: translateY(-100%); /* Move along Y-axis */
-  opacity: 1; /* Fade in */
-}
+
+
+
 
 
 
@@ -1559,7 +1568,7 @@ body {
 
 .subject-container .subject-number {
   height: 250px;
-  border-radius: 6px;
+  /* border-radius: 6px; */
   background-color: #fff;
   box-shadow: 0px 2px 3px 0px #0000001a, 0px 0px 1px 0px #0000001a;
   display: flex;

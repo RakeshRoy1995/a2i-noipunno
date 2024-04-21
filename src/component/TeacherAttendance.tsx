@@ -647,8 +647,8 @@ export default function TeacherAttendance() {
                                       <span> আজকের তারিখঃ {dateGet2}</span>
                                     </div>
                                   </div>
-                                  <div className="col-sm-4"></div>
-                                  <div className="col-sm-4">
+                                  <div className="col-sm-3"></div>
+                                  <div className="col-sm-5">
                                     <div className="d-flex justify-content-end align-items-center pt-1 pe-3">
                                       <button
                                         type="submit"
@@ -719,8 +719,8 @@ export default function TeacherAttendance() {
                                         <span> আজকের তারিখঃ {dateGet2}</span>
                                       </div>
                                     </div>
-                                    <div className="col-sm-4"></div>
-                                    <div className="col-sm-4">
+                                    <div className="col-sm-3"></div>
+                                    <div className="col-sm-5">
                                       <div className="d-flex justify-content-end align-items-center pt-1 pe-3">
                                         <button
                                           type= {enableEditMode ? "button" : "submit" } 

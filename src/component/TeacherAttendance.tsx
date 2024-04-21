@@ -702,11 +702,7 @@ export default function TeacherAttendance() {
 
                                               
                                               </>
-
-                                            }
-
-                                                
-
+                                            }     
                                           </td>
                                         </tr>
                                       ))}

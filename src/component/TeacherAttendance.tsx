@@ -308,7 +308,7 @@ export default function TeacherAttendance() {
   useEffect(() => {
     fetchData2()
   }, [])
-  
+
   //console.log('Students Data:', Student)
   //console.log('Subject Data:', subject)
   //console.log('attendance', getAttendanceData);
@@ -331,11 +331,11 @@ export default function TeacherAttendance() {
 
     if (attendance[uid] !== undefined) {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid && attendance[uid]);
-       
+
       //console.log("U " , attendanceRecord);
     } else {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid);
-    
+
      // console.log("N " , attendanceRecord);
     }
 
@@ -343,7 +343,7 @@ export default function TeacherAttendance() {
 
 
       if (attendanceRecord && attendanceRecord !== undefined) {
-        if (attendanceRecord.is_present == 1 || attendanceRecord.is_present == true) { 
+        if (attendanceRecord.is_present == 1 || attendanceRecord.is_present == true) {
           return true;
         } else {
           return false;
@@ -354,7 +354,7 @@ export default function TeacherAttendance() {
       //   return false;
       // }
 
-    
+
   };
 
   // const handleCheckboxChange = (studentId) => {
@@ -502,7 +502,7 @@ export default function TeacherAttendance() {
                                           {d?.subject?.class_uid == "6"
                                             ? "ষষ্ঠ "
                                             : <> {d?.subject?.class_uid == "7" ? "সপ্তম " : <>  {d?.subject?.class_uid == "8" ? "অষ্টম" : "নবম"}  </>} </>}{" "}
-                                          শ্রেণি 
+                                          শ্রেণি
                                         </p>
                                       </div>
                                       <div className="d-flex gap-1">
@@ -589,7 +589,7 @@ export default function TeacherAttendance() {
                             className="btn-close"
                             aria-label="Close"
                             onClick={ closeModal
-                              
+
                               }
                           ></button>
                         </div>
@@ -657,10 +657,10 @@ export default function TeacherAttendance() {
                                           <td scope="row" className="text-center" style={{ fontSize: '14px' }}>{student?.roll}</td>
                                           <td style={{ fontSize: '14px' }}>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}</td>
                                           <td className="text-center" style={{ fontSize: '14px' }}>
-                                    
+
                                             {
-                                              enableEditMode ? 
-                                              
+                                              enableEditMode ?
+
                                               <input
                                                   style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
                                                   className="form-check-input"
@@ -669,17 +669,17 @@ export default function TeacherAttendance() {
                                                   onChange={(e) => handleCheckboxChange(student?.uid)}
                                                   checked={ getAttendanceDataChecker(student?.uid) !==undefined ? true : false }
                                                 />  : <>
-                                              
+
                                                 {
                                                   getAttendanceDataChecker(student?.uid) == true ? 'Present' : 'Absent'
                                                 }
 
-                                              
+
                                               </>
 
                                             }
 
-                                                
+
 
                                           </td>
                                         </tr>
@@ -688,7 +688,7 @@ export default function TeacherAttendance() {
                                   </table>
                                   <div className="d-flex justify-content-end align-items-center pt-1 pe-3">
                                     <button
-                                      type= {enableEditMode ? "button" : "submit" } 
+                                      type= {enableEditMode ? "button" : "submit" }
 
                                       onClick={ (e)=> !enableEditMode ? setnableEditMode(true) : setnableEditMode(false) }
                                       className="btn btn-primay px-5"

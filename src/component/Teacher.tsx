@@ -350,6 +350,7 @@ export default function Teacher() {
                                       title={
                                         waitForMoreData
                                           ? "Loading. please Wait..."
+
                                           : ""
                                       }
                                       onClick={(e) => {
@@ -476,6 +477,8 @@ export default function Teacher() {
                                     </div>
 
                                   ))}
+
+                                  
                                 </>
                               )}
                             </div>

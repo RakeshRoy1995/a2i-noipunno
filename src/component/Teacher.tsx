@@ -23,6 +23,7 @@ import {
   show_report_open_time_msg,
   teacher_name,
 } from "../utils/Utils";
+import Swal from "sweetalert2";
 
 import AcorongotoComponent from "./AcorongotoComponent";
 import styles from "./Home.style.module.css";
@@ -43,7 +44,6 @@ export default function Teacher() {
   const [shikhonKalinMullayon, setshikhonKalinMullayon] = useState([]);
   const [allassessmet, setallassessmet] = useState([]);
   const [assessment_uid, setassessment_uid] = useState("");
-  const [breadcumbTitle, setbreadcumbTitle] = useState("");
   const [pi_attrbute, setpi_attrbute] = useState([]);
   const [pi_selection, setpi_selection] = useState([]);
   const [own_data, setown_data] = useState<any>([]);
@@ -94,8 +94,6 @@ export default function Teacher() {
 
       const own_subjet_: any = localStorage.getItem("own_subjet") || "";
       let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
-
-      console.log(`own_subjet`, own_subjet);
 
       if (own_subjet == "") {
         own_subjet = await teacher_own_subject_redesign();
@@ -289,11 +287,7 @@ export default function Teacher() {
                 >
                   <div className="container">
                     <div className="row">
-                      {/* {ShowProfile && (location.pathname !== "/mollayon-koron")  && (
-                <div className="col-md-3 mt-2">
-                  <ProfileCard />
-                </div>
-              )} */}
+                      
 
                       <div
                         className={
@@ -349,7 +343,7 @@ export default function Teacher() {
                                       key={key}
                                       title={
                                         waitForMoreData
-                                          ? "Loading. please Wait..."
+                                          ? "ডেটা লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন"
                                           : ""
                                       }
                                       onClick={(e) => {
@@ -385,6 +379,19 @@ export default function Teacher() {
                                             d.own_subjet?.pi_selection
                                           );
                                         }
+
+                                        // {
+                                        //   waitForMoreData &&
+                                        //   Swal.fire({
+                                        //     title: "ডেটা লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন",
+                                            
+                                        //   });
+                                        // }
+
+
+
+
+
                                       }}
                                     >
 
@@ -424,9 +431,9 @@ export default function Teacher() {
                                           </p>
                                         </div>
                                         <div className="d-flex gap-1 flex-wrap">
-                                          <div className="total-student">
+                                          {/* <div className="total-student">
                                             <p> শ্রেণি শিক্ষক:</p>
-                                          </div>
+                                          </div> */}
                                           <div className="total-student">
                                             <p>
                                               {d?.teacher?.name_bn ||

@@ -3,14 +3,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import editIcon from "../../assets/dashboard_materials/images/dashboard/edit-2.svg";
 
-import teacherProfileImg from "../../assets/dashboard_materials/images/dashboard/60px.png";
-import femaleProfileImg from "../../assets/dashboard_materials/images/dashboard/female_teacher.png";
-
+import { motion } from "framer-motion";
 import starIcon from "../../assets/dashboard_materials/images/dashboard/ico.svg";
 import messageIcon from "../../assets/dashboard_materials/images/dashboard/message.svg";
 import darkMoodIcon from "../../assets/dashboard_materials/images/dashboard/moon.svg";
 import eyeIcon from "../../assets/dashboard_materials/images/dashboard/eye.svg";
-import { teacher_designation } from "../../Request";
+// import { teacher_designation } from "../../Request";
 // import { logged_teacher_details } from "../../utils/Utils";
 import DefaultPicture from "../../../public/assets/images/User-avatar.png"
 
@@ -79,6 +77,8 @@ return () => clearInterval(intervalId);
 
   return (
     <div className="col-lg-3 col-md-3">
+
+<motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
       <div className="card teacher-profile border-0">
         <div className="card-header border-0">
           <Link to={"/edit-teacher-profile"}>
@@ -139,6 +139,8 @@ return () => clearInterval(intervalId);
 
         </div>
       </div>
+
+      </motion.div>
     </div>
   );
 };

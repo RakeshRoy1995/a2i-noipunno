@@ -3,7 +3,7 @@
 }
 
 .teacher-student-card .card-container {
-  height: 122px;
+  height: 9rem;
   border-radius: 6px;
   background-color: #fff;
   box-shadow: 0px 2px 3px 0px #0000001a, 0px 0px 1px 0px #0000001a;
@@ -74,3 +74,5 @@
   text-align: center;
   color: #428f92;
 }
+
+

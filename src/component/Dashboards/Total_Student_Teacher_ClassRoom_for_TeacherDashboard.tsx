@@ -1,8 +1,7 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import "../../assets/dashboard_materials/css/total_student_teacher_classroom_for_teacher_dashboard.css";
 import {
-  showReportDeleteEv,
-  show_report_open_time_msg,
   teacher_list,
 } from "../../utils/Utils";
 
@@ -21,13 +20,15 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
       localStorage.getItem("teacher_dashboard")
     );
 
-
-
     // end
     let obj: any = {};
     const app_PI: any = [];
 
-    if (studentsData && studentsData?.data?.data?.subjects?.length && local_storege_data) {
+    if (
+      studentsData &&
+      studentsData?.data?.data?.subjects?.length &&
+      local_storege_data
+    ) {
       studentsData.data.data.subjects.map((std_data: any) => {
         obj = {
           ...obj,
@@ -42,14 +43,12 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
         });
 
         return std_data?.class_room?.students.map((stu_data: any) => {
-
-
           const studnt: any = {
             ...stu_data,
-            ...stu_data?.student_info
-          }
+            ...stu_data?.student_info,
+          };
 
-          delete studnt['student_info']
+          delete studnt["student_info"];
 
           student.push(studnt);
 
@@ -77,11 +76,14 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
   };
 
   // total subject
-  const local_storage_total_subject_data = JSON.parse(localStorage.getItem("own_subjet"));
+  const local_storage_total_subject_data = JSON.parse(
+    localStorage.getItem("own_subjet")
+  );
   // console.log(local_storage_total_subject_data);
 
   // Check if data exists and has the 'data' property
-  const total_subject = local_storage_total_subject_data?.data?.data?.subjects?.length
+  const total_subject =
+    local_storage_total_subject_data?.data?.data?.subjects?.length;
 
   // console.log("Number of subjects:", total_subject);
   setInterval(() => {
@@ -92,14 +94,16 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
   // total classroom
   let totalUniqueClassroomUid = 0; // Declare totalUniqueClassroomUid outside the if block
 
-  const local_storage_total_classroom = JSON.parse(localStorage.getItem("own_subjet"));
+  const local_storage_total_classroom = JSON.parse(
+    localStorage.getItem("own_subjet")
+  );
   const totalClassroom = local_storage_total_classroom?.data?.data?.subjects;
 
   if (totalClassroom) {
     const classRoomUid = local_storage_total_classroom?.data?.data?.subjects;
     const uniqueClassRoomUid = new Set();
 
-    classRoomUid.forEach(classRoomUids => {
+    classRoomUid.forEach((classRoomUids) => {
       if (classRoomUids.class_room_uid) {
         uniqueClassRoomUid.add(classRoomUids.class_room_uid);
       }
@@ -113,62 +117,68 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
       <div className="col-lg-2 col-md-3 ">
         <div className="teacher-student-card gy-5">
           {/* total student in a class */}
-
-          <a href="#">
-            <div className="card-container">
-              <div className="total-student">
-                <div className="title">
-                  <h3>
-                    সর্বমোট
-                    <br />
-                    <span>শিক্ষার্থী</span>
-                  </h3>
-                  {/* <h6>শ্রেণী - ষষ্ঠ - সপ্তম</h6> */}
-                </div>
-                <div className="circle">
-                  <h5>{all_student?.length || "00"}</h5>
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <a href="#">
+              <div className="card-container">
+                <div className="total-student">
+                  <div className="title">
+                    <h3>
+                      সর্বমোট
+                      <br />
+                      <span>শিক্ষার্থী</span>
+                    </h3>
+                    {/* <h6>শ্রেণী - ষষ্ঠ - সপ্তম</h6> */}
+                  </div>
+                  <div className="circle">
+                    <h5>{all_student?.length || "00"}</h5>
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
+            </a>
+          </motion.div>
 
           {/* total subject */}
-          <a href="#">
-            <div className="card-container">
-              <div className="total-student">
-                <div className="title">
-                  <h3>
-                    সর্বমোট
-                    <br />
-                    <span>বিষয় </span>
-                  </h3>
-                  {/* <h6>আপনার স্কুল এ</h6> */}
-                </div>
-                <div className="circle">
-                  <h5>{total_subject || "00"}</h5>
+
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <a href="#">
+              <div className="card-container">
+                <div className="total-student">
+                  <div className="title">
+                    <h3>
+                      সর্বমোট
+                      <br />
+                      <span>বিষয় </span>
+                    </h3>
+                    {/* <h6>আপনার স্কুল এ</h6> */}
+                  </div>
+                  <div className="circle">
+                    <h5>{total_subject || "00"}</h5>
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
+            </a>
+          </motion.div>
 
           {/* total classroom */}
-          <a href="#">
-            <div className="card-container">
-              <div className="total-student">
-                <div className="title">
-                  <h3>
-                    সর্বমোট
-                    <br />
-                    <span>শ্রেণী কক্ষ</span>
-                  </h3>
-                  {/* <h6>আপনার স্কুল এ</h6> */}
-                </div>
-                <div className="circle">
-                  <h5>{totalUniqueClassroomUid || "00"}</h5>
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <a href="#">
+              <div className="card-container">
+                <div className="total-student">
+                  <div className="title">
+                    <h3>
+                      সর্বমোট
+                      <br />
+                      <span>শ্রেণী কক্ষ</span>
+                    </h3>
+                    {/* <h6>আপনার স্কুল এ</h6> */}
+                  </div>
+                  <div className="circle">
+                    <h5>{totalUniqueClassroomUid || "00"}</h5>
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
+            </a>
+          </motion.div>
         </div>
       </div>
 
@@ -212,7 +222,6 @@ const Total_Student_Teacher_ClassRoom_for_TeacherDashboard = () => {
           </div>
         </div>
       </div> */}
-
     </>
   );
 };

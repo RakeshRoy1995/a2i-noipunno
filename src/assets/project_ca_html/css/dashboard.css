@@ -587,6 +587,17 @@ body {
   color:#3e686b  !important
 }
 
+
+.class_wise_subject_page .subject-container .subject-number:hover .total-student p {
+  font-family: Public Sans;
+  font-size: 14px !important;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  color:#fff  !important
+}
+
+
 .subject-container .subject-number .total-student .number {
   width: 27px;
   height: 18px;
@@ -1625,5 +1636,37 @@ body {
   text-align: left;
   color: #69cb1c;
 }
+
+
+ 
+.book-list .book-list-card {
+  border-bottom: 2px solid #fff !important;
+  border-radius: 0px 0px 6px 6px;
+  box-shadow: 15px 16px 52px 10px rgba(221, 221, 221, 0.75);
+  -webkit-box-shadow: 15px 16px 52px 10px rgba(221, 221, 221, 0.75);
+  -moz-box-shadow: 15px 16px 52px 10px rgba(221, 221, 221, 0.75);
+}
+
+.book-list .book-list-card:hover {
+  border-bottom: 2px solid #428F92 !important;
+  border-radius: 0px 0px 0px 0px;
+  box-shadow: 40px 16px 66px 10px rgba(221, 221, 221, 1);
+  -webkit-box-shadow: 40px 16px 66px 10px rgba(221, 221, 221, 1);
+  -moz-box-shadow: 40px 16px 66px 10px rgba(221, 221, 221, 1);
+  transition: 0.5s ease-in-out;
+}
+
+.book-list .book-title {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: sans-serif;
+  letter-spacing: 1px;
+  line-height: 150%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 
 /* =================================== Class ================================== 6 */

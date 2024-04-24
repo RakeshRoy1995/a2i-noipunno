@@ -7,15 +7,13 @@ import {
   show_compitance,
   show_shannasik_barsik,
 } from "../utils/Utils";
-import { FaExpand } from "react-icons/fa";
 import DetailsShikhonMullayonSannasikBarshik from "./DetailsShikhonMullayonSannasikBarshik";
 import DetailsShikhonMullayonShikhonKalin from "./DetailsShikhonMullayonShikhonKalin";
 import { Spinner } from "react-bootstrap";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 export default function ParodorshitaComponent({
   assessment_uid,
   pi_attr,
-  showDetailsshikhonKalinMullayon,
   Showcollaps,
   setShowcollaps,
   shikhonKalinMullayon,
@@ -23,22 +21,23 @@ export default function ParodorshitaComponent({
   setshowDetailsshikhonKalinMullayon,
   Student,
   teacher_uid,
-  Mullayon_name,
 }: any) {
-
   const [loadingspinner, setloadingspinner] = useState(false);
   return (
-    <div className="">
-      <div className="row container mx-auto ">
-        <div className="text-center">
-          {loadingspinner && <><Spinner animation="border" /> Data is loading...</>}
-        </div>
-        {show_shannasik_barsik() == false ? (
-           <motion.div
-           initial={{ opacity: 0, scale: 0.5 }}
-           animate={{ opacity: 1, scale: 1 }}
-           transition={{ duration: 0.5 }}
-         >
+    <>
+      <div className="text-center">
+        {loadingspinner && (
+          <>
+            <Spinner animation="border" /> Data is loading...
+          </>
+        )}
+      </div>
+      {show_shannasik_barsik() == false ? (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="card border-0 w-100 rounded p-2">
             {shikhonKalinMullayon?.map((d: any, key: any) => (
               <div key={key}>
@@ -55,9 +54,7 @@ export default function ParodorshitaComponent({
                       style={{ cursor: "pointer" }}
                       className="col-sm-12 col-md-12"
                     >
-                      <div
-                        className={`d-flex align-items-center`}
-                      >
+                      <div className={`d-flex align-items-center`}>
                         <div
                           className={`card border-0 p-1 w-100 ${styles.card_hover}`}
                         >
@@ -113,30 +110,29 @@ export default function ParodorshitaComponent({
               </div>
             ))}
           </div>
-          </motion.div>
-        ) : (
-          <div className="card card-body mx-2">
-            {shikhonKalinMullayon_sannasik_barsik?.map((d: any, key: any) => (
-              <div key={key} className="mt-1">
-                <div
-                  onClick={(e: any) => {
-                    setshowDetailsshikhonKalinMullayon(d);
-                  }}
-                >
-                  <DetailsShikhonMullayonSannasikBarshik
-                    showDetailsshikhonKalinMullayon={d}
-                    assessment_uid={assessment_uid}
-                    pi_attr={pi_attr}
-                    Student={Student}
-                    teacher_uid={teacher_uid}
-                    setloadingspinner={setloadingspinner}
-                  />
-                </div>
+        </motion.div>
+      ) : (
+        <div className="card card-body mx-2">
+          {shikhonKalinMullayon_sannasik_barsik?.map((d: any, key: any) => (
+            <div key={key} className="mt-1">
+              <div
+                onClick={(e: any) => {
+                  setshowDetailsshikhonKalinMullayon(d);
+                }}
+              >
+                <DetailsShikhonMullayonSannasikBarshik
+                  showDetailsshikhonKalinMullayon={d}
+                  assessment_uid={assessment_uid}
+                  pi_attr={pi_attr}
+                  Student={Student}
+                  teacher_uid={teacher_uid}
+                  setloadingspinner={setloadingspinner}
+                />
               </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 }

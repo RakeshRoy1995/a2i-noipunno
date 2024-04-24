@@ -344,7 +344,7 @@ export default function Teacher() {
                                       title={
                                         waitForMoreData
                                           ? "ডেটা লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন"
-                                          ? "Loading. please Wait..."
+                                         
 
                                           : ""
                                       }

@@ -521,17 +521,17 @@ body {
 /* Hover styles */
 .subject-container .subject-number:hover::before {
   width: 100%;
-  transform-origin: right; /* Set transform origin to the right */
-  transform: scaleX(0); /* Scale along X-axis */
-  opacity: 1; /* Fade in */
+  transform-origin: right;
+  transform: scaleX(0);
+  opacity: 1;
 }
 .subject-container .subject-number:hover {
-  transform: scale(1.05); /* Scale up slightly on hover */
+  /* transform: scale(1.05); */
 }
 .subject-container .subject-number:hover::after {
   height: 100%;
-  transform: translateY(-100%); /* Move along Y-axis */
-  opacity: 1; /* Fade in */
+  transform: translateY(-100%);
+  opacity: 1;
 }
 
 
@@ -1638,7 +1638,7 @@ body {
 }
 
 
- 
+
 .book-list .book-list-card {
   border-bottom: 2px solid #fff !important;
   border-radius: 0px 0px 6px 6px;

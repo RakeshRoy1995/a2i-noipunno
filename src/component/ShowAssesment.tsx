@@ -143,7 +143,7 @@ export default function ShowAssesment({
                       href="#"
                     >
                       <div className="d-flex align-items-center justify-content-center gap-1">
-                        <SlBookOpen className="me-1" /> {d.assessment_name_bn} 
+                        <SlBookOpen className="me-1" /> {d.assessment_name_bn}
                         {key === parodorshita_acoron_tab && (
                           <TiTick className="" style={{ fontSize: "2rem" }} />
                         )}{" "}
@@ -175,7 +175,7 @@ export default function ShowAssesment({
                     {allassessmet?.map((ass_d: any, ky: any) => (
                       <div
                         style={{ cursor: "pointer" }}
-                        className="col-sm-12 col-md-6 col-lg-6 col-xl-4 my-2 cur"
+                        className="col-sm-12 col-md-6 col-lg-6 col-xl-4 my-2 "
                         onClick={(e: any) => {
                           seshowCompitance(true);
                           setshowMainAssessments(

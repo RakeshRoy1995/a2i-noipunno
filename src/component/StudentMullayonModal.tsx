@@ -407,21 +407,39 @@ export default function StudentMullayonModal({
           confirmButtonText: "হ্যাঁ",
         }).then(async (result) => {
           if (result.isConfirmed) {
-            const res = {
-              ...all_submited_PI[0],
-              remark: reviewText,
-              oviggota_uid:
-                assessment_uid == 1234567892 || assessment_uid == 1234567891
-                  ? null
-                  : oviggota_uid,
-            };
 
-            await pi_review(res);
-            Swal.fire({
-              title:
-                "অনুগ্রহ করে আপনার পর্যালোচনা অনুরোধ গ্রহণ করার জন্য অপেক্ষা করুন। আপনার অনুরোধ গ্রহণ করার পরে আপনি এটি আবার পর্যালোচনা করতে পারেন",
-              icon: "success",
-            });
+            try {
+
+
+
+              const res = {
+                ...all_submited_PI[0],
+                remark: reviewText,
+                oviggota_uid:
+                  assessment_uid == 1234567892 || assessment_uid == 1234567891
+                    ? null
+                    : oviggota_uid,
+              };
+  
+              await pi_review(res);
+              Swal.fire({
+                title:
+                  "অনুগ্রহ করে আপনার পর্যালোচনা অনুরোধ গ্রহণ করার জন্য অপেক্ষা করুন। আপনার অনুরোধ গ্রহণ করার পরে আপনি এটি আবার পর্যালোচনা করতে পারেন",
+                icon: "success",
+              });
+
+
+
+              
+            } catch (error) {
+              const title = error?.response?.data?.message || "সার্ভার ত্রুটি ঘটেছে! অনুগ্রহ করে আবার চেষ্টা করুন।"
+              Swal.fire({
+                icon: "error",
+                title,
+                confirmButtonText: "হ্যাঁ",
+              });
+            }
+            
             setShowModal(false);
             setreviewText("");
           }

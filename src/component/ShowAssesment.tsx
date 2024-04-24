@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Home.style.module.css";
 import { SlBookOpen } from "react-icons/sl";
 
 import { make_group_by_PI_BI, pis_list_func } from "../utils/Utils";
 import { get_pi_bi_evaluation_list } from "../Request";
-import { Card } from "react-bootstrap";
-import { motion } from "framer-motion"
 import { TiTick } from "react-icons/ti";
-
-
 
 export default function ShowAssesment({
   seshowCompitance,
@@ -34,7 +29,6 @@ export default function ShowAssesment({
 
   const fetchData = async () => {
     try {
-
       setassessment_uid(own_data?.assessments[0]?.assessment_details[0].uid);
       setclass_id(own_data.subjects[0].class_room.class_id);
       const pi_bi_evaluation_list__: any =
@@ -87,9 +81,10 @@ export default function ShowAssesment({
 
       setclass_id(own_data.subjects[key].class_room.class_id);
 
-      const is_sannasik_barsik = uidName == 'শিখনকালীন মূল্যায়ন' ? false : true
+      const is_sannasik_barsik =
+        uidName == "শিখনকালীন মূল্যায়ন" ? false : true;
       pis_list_func(allCompitance, [], is_sannasik_barsik);
-    } catch (error: any) { }
+    } catch (error: any) {}
   };
 
   const pi_selection_list_by_subject = async (key: number) => {
@@ -105,17 +100,19 @@ export default function ShowAssesment({
       }
 
       pis_list_func(allCompitance, pi_list, check_sannasik_barsik_or_not);
-    } catch (error: any) { }
+    } catch (error: any) {}
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  
   return (
     <div className="container">
-      <h2 className="ms-3 mb-3" style={{ fontWeight: "bolder" }}> {breadcumbTitle}</h2>
+      <h2 className="mb-3" style={{ fontWeight: "bolder" }}>
+        {" "}
+        {breadcumbTitle}
+      </h2>
 
       <div className="row">
         <div className="d-flex align-items-center">
@@ -126,41 +123,37 @@ export default function ShowAssesment({
                   <li
                     className={`nav-item w-50 f-dlex justify-content-center px-1`}
                     key={key}
-                    style={{ fontSize: "15px" ,
-                    border: 'solid 1px' }}  
+                    style={{ fontSize: "15px", border: "solid 1px" , cursor :"pointer" }}
                     onClick={(e) => {
                       setparodorshita_acoron_tab(key);
                       tabAcorongoto(key);
-                      setallassessmet(own_data?.assessments[0]?.assessment_details);
+                      setallassessmet(
+                        own_data?.assessments[0]?.assessment_details
+                      );
                       setShowcollaps({});
                     }}
                   >
-
                     <a
-                      className={`nav-link link-secondary fw-bold  ${key === 0 ? " " : ""
-                        } `}
+                      className={`nav-link link-secondary fw-bold  ${
+                        key === 0 ? " " : ""
+                      } `}
                       id="expertness-tab"
                       data-bs-toggle="tab"
                       data-bs-target="#expertness"
                       href="#"
-                      
                     >
                       <div className="d-flex align-items-center justify-content-center gap-1">
                         <SlBookOpen className="me-1" /> {d.assessment_name_bn} 
-                        {key === parodorshita_acoron_tab && <TiTick className="" style={{ fontSize: "2rem" }} />}
-                        {" "}
+                        {key === parodorshita_acoron_tab && (
+                          <TiTick className="" style={{ fontSize: "2rem" }} />
+                        )}{" "}
                       </div>
-
                     </a>
                     {/* {key === parodorshita_acoron_tab && <TiTick className="" style={{ fontSize: "2rem" }} />} */}
                   </li>
-
                 ))}
-
               </ul>
-
             )}
-
 
             {/* card */}
             {/* sub tab-1 */}
@@ -173,54 +166,54 @@ export default function ShowAssesment({
                   role="tabpanel"
                   aria-labelledby="provati-tab"
                 >
-                  <div className="row">
-                    <ul className="nav d-flex mt-2 justify-content-around py-1 assestment-tabs">
-                      {allassessmet?.map((ass_d: any, ky: any) => (
+                  <h2 className="" style={{ fontWeight: "bolder" }}>
+                    {" "}
+                    মূল্যায়ন করুন
+                  </h2>
 
-                          <Card
-                            className="mx-auto rounded-3 shadow mb-5 bg-body  mt-5"
-                            style={{
-                              width: "20rem",
-                              height: "12rem",
-                              cursor: "pointer",
-
-
-                            }}
-                            onClick={(e: any) => {
-                              seshowCompitance(true);
-                              setshowMainAssessments(ky == 1 || ky == 2 ? true : false);
-                              localStorage.setItem(
-                                "show_shannasik_barsik",
-                                ky !== 0 ? "true" : "false"
-                              );
-                              setparodorshita_acoron_tab(0);
-                              setassessment_uid(ass_d.uid);
-                              pi_selection_list_by_subject(ass_d.uid);
-                              setShowSecounderyTab({
-                                ...ShowSecounderyTab,
-                                ["id"]: ass_d.uid,
-                              });
-                              setMullayon_name(ass_d.assessment_details_name_bn);
-                              setShowcollaps({});
-                            }}
-                          >
-                            <div className="d-flex justify-content-center align-items-center mx-auto h-100">
-                            <SlBookOpen style={{ fontSize: "20px" }} />
-                              <Card.Body
-                                className="text-center "
-                                style={{
-                                  fontSize: "20px",
-                                  fontWeight: "bolder",
-                                  color:"#873896"
-                                }}
-                              >
-                                {ass_d.assessment_details_name_bn}
-                              </Card.Body>
+                  <div className="row book-list">
+                    {allassessmet?.map((ass_d: any, ky: any) => (
+                      <div
+                        style={{ cursor: "pointer" }}
+                        className="col-sm-12 col-md-6 col-lg-6 col-xl-4 my-2 cur"
+                        onClick={(e: any) => {
+                          seshowCompitance(true);
+                          setshowMainAssessments(
+                            ky == 1 || ky == 2 ? true : false
+                          );
+                          localStorage.setItem(
+                            "show_shannasik_barsik",
+                            ky !== 0 ? "true" : "false"
+                          );
+                          setparodorshita_acoron_tab(0);
+                          setassessment_uid(ass_d.uid);
+                          pi_selection_list_by_subject(ass_d.uid);
+                          setShowSecounderyTab({
+                            ...ShowSecounderyTab,
+                            ["id"]: ass_d.uid,
+                          });
+                          setMullayon_name(ass_d.assessment_details_name_bn);
+                          setShowcollaps({});
+                        }}
+                      >
+                        <div className="card border-0 w-100 h-100">
+                          <div className="d-flex gap-4 align-items-center p-4 book-list-card">
+                            <div className="w-25">
+                              <img
+                                src="/assets/icons/open-book.png"
+                                className="img-fluid book-icon"
+                              />
                             </div>
-                          </Card>
-
-                      ))}
-                    </ul>
+                            <div
+                              className="book-title w-75"
+                              style={{ color: "#a22d92", fontSize: "20px" }}
+                            >
+                              {ass_d.assessment_details_name_bn}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

@@ -70,6 +70,10 @@ export default function TeacherAttendance() {
   const [enableEditMode, setnableEditMode] = useState(false);
   const [loader, setloader] = useState(true);
   const [showSubjectname, seshowSubjectname] = useState("");
+  const [showClassname, setClass_uid] = useState("");
+  const [classTeacherName, setClassTeacherName] = useState("");
+  const [sessionName, setSessionName] = useState("");
+  const [shakhaName, setShakhaName] = useState("");
   const [showCompitance, seshowCompitance] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [parodorshita_acoron_tab, setparodorshita_acoron_tab] = useState(0);
@@ -364,6 +368,8 @@ export default function TeacherAttendance() {
   //    }));
   //  };
 
+ // console.log(attendanceDataAll);
+
   return (
     <>
       {!showReportDeleteEv() ? (
@@ -453,9 +459,12 @@ export default function TeacherAttendance() {
                                     style={{ cursor: "pointer" }}
                                     key={key}
                                     onClick={(e) => {
-
                                       skill_behaibor_count(d);
                                       seshowSubjectname(d.subject.name);
+                                      setClass_uid(d?.subject?.class_uid);
+                                      setClassTeacherName(d?.teacher?.name_bn || d?.teacher?.name_en);
+                                      setSessionName(shift_name(d?.own_subjet?.class_room?.shift_id));
+                                      setShakhaName(section_name(d?.own_subjet?.class_room?.section_id));
                                       setClassRoomUid(d.own_subjet?.class_room_uid);
 
                                       const studnt =
@@ -470,7 +479,6 @@ export default function TeacherAttendance() {
                                       setteacher_uid(d?.own_subjet.teacher_id);
                                       setSubject_uid(d?.own_subjet.subject_id);
                                       setSession(d?.own_subjet?.class_room?.session_year);
-
 
                                       setShowProfile(false);
                                       localStorage.setItem(
@@ -580,8 +588,8 @@ export default function TeacherAttendance() {
                         <div className="modal-header">
 
                           {
-                            getAttendanceData === null || getAttendanceData.length === 0 ? <h5 className="modal-title">শিক্ষার্থীর হাজিরা</h5>
-                              : <h5 className="modal-title">আজকের ( {dateGet2} ) দিনের শিক্ষার্থীর হাজিরা</h5>
+                            getAttendanceData === null || getAttendanceData.length === 0 ? <h5 className="modal-title">শিক্ষার্থীর হাজিরা </h5>
+                              : <h5 className="modal-title">আজকের ( {dateGet2} ) দিনের শিক্ষার্থীর হাজিরা </h5>
                           }
 
                           <button
@@ -595,6 +603,13 @@ export default function TeacherAttendance() {
                         </div>
                         <div className="modal-body">
 
+                          <div className="text-center">
+                            <span> {showSubjectname} | </span>
+                            <span> {showClassname == "6" && "ষষ্ঠ "} {showClassname == "7" && "সপ্তম "} {showClassname == "8" && "অষ্টম "} শ্রেণি | </span>
+                            <span>শ্রেণি শিক্ষকঃ {classTeacherName} | </span>
+                            <span> {sessionName} সেশন । </span>
+                            <span> {shakhaName} শাখা </span>
+                          </div>
 
                           {
                             getAttendanceData === null || getAttendanceData.length === 0 ? <>
@@ -625,18 +640,29 @@ export default function TeacherAttendance() {
                                     ))}
                                   </tbody>
                                 </table>
-                                <div className="d-flex justify-content-end align-items-center pt-1 pe-3">
-                                  <button
-                                    type="submit"
-                                    className="btn btn-primay px-5"
-                                    style={{ backgroundColor: "#428F92", color: "#fff" }}>
-                                    {
-                                      getAttendanceData === null || getAttendanceData.length === 0 ? <><h5 className="modal-title">জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
-                                        : <><h5 className="modal-title">পুনরায় জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
-                                    }
 
-                                  </button>
+                                <div className="row">
+                                  <div className="col-sm-4">
+                                    <div>
+                                      <span> আজকের তারিখঃ {dateGet2}</span>
+                                    </div>
+                                  </div>
+                                  <div className="col-sm-3"></div>
+                                  <div className="col-sm-5">
+                                    <div className="d-flex justify-content-end align-items-center pt-1 pe-3">
+                                      <button
+                                        type="submit"
+                                        className="btn btn-primay px-5"
+                                        style={{ backgroundColor: "#428F92", color: "#fff" }}>
+                                        {
+                                          getAttendanceData === null || getAttendanceData.length === 0 ? <><h5 className="modal-title">জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
+                                            : <><h5 className="modal-title">পুনরায় জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
+                                        }
+                                      </button>
+                                    </div>
+                                  </div>
                                 </div>
+
                               </form>
                             </>
                               :
@@ -690,16 +716,18 @@ export default function TeacherAttendance() {
                                     <button
                                       type= {enableEditMode ? "button" : "submit" }
 
-                                      onClick={ (e)=> !enableEditMode ? setnableEditMode(true) : setnableEditMode(false) }
-                                      className="btn btn-primay px-5"
-                                      style={{ backgroundColor: "#428F92", color: "#fff" }}>
-                                      {
-                                        enableEditMode ? <><h5 className="modal-title">জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
-                                          : <><h5 className="modal-title">পুনরায় জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
-                                      }
-
-                                    </button>
+                                          onClick={ (e)=> !enableEditMode ? setnableEditMode(true) : setnableEditMode(false) }
+                                          className="btn btn-primay px-5"
+                                          style={{ backgroundColor: "#428F92", color: "#fff" }}>
+                                          {
+                                            enableEditMode ? <><h5 className="modal-title">জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
+                                              : <><h5 className="modal-title">পুনরায় জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
+                                          }
+                                        </button>
+                                      </div>
+                                    </div>
                                   </div>
+
                                 </form>
 
                               </>

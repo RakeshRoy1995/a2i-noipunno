@@ -674,7 +674,7 @@ export default function TeacherAttendance() {
                                       <tr>
                                         <th scope="col">শিক্ষার্থীর রোল</th>
                                         <th scope="col">শিক্ষার্থীর নাম</th>
-                                        <th scope="col" className="text-center">উপস্থিতি</th>
+                                        <th scope="col" className="text-center">উপস্থিতি </th>
                                       </tr>
                                     </thead>
                                     <tbody>

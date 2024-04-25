@@ -78,7 +78,7 @@ return () => clearInterval(intervalId);
   return (
     <div className="col-lg-3 col-md-3">
 
-<motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+
       <div className="card teacher-profile border-0">
         <div className="card-header border-0">
           <Link to={"/edit-teacher-profile"}>
@@ -102,7 +102,7 @@ return () => clearInterval(intervalId);
               {/* {teacherDesignation} */}
               {/* {isClassTeacher && "শ্রেণি "}
               শিক্ষক */}
-              {designation ? `${designation}` : "শ্রেণি শিক্ষক"} 
+              {designation ? `${designation}` : "শ্রেণি শিক্ষক"}
               { }
             </h2>
           </div>
@@ -121,7 +121,7 @@ return () => clearInterval(intervalId);
         </div>
         <div className="teacher-info">
           <div className="card-title text-two-line" style={{ lineHeight: "2"}}>
-            {name_bn || name_en || ''} 
+            {name_bn || name_en || ''}
           </div>
           <div className="card-text" style={{ fontSize: "14px ", color: "##555555" }}>
             {pdsid || caid}
@@ -140,7 +140,7 @@ return () => clearInterval(intervalId);
         </div>
       </div>
 
-      </motion.div>
+     
     </div>
   );
 };

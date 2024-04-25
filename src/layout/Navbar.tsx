@@ -723,9 +723,12 @@ const Navbar = () => {
                                   className="img-fluid icon-right-space"
                                   alt="main logo"
                                 />
-                                শিক্ষার্থীর হাজিরা 
+                                শিক্ষার্থীর হাজিরা
                               </NavLink>
-                            </li> 
+                            </li>
+
+
+
 
                             <li className="nav-item dropdown nav-item-style">
                               <NavLink
@@ -745,7 +748,7 @@ const Navbar = () => {
                               </NavLink>
                             </li>
 
-                           
+
 
                           </ul>
                         </div>

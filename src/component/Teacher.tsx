@@ -287,7 +287,7 @@ export default function Teacher() {
                 >
                   <div className="container">
                     <div className="row">
-                      
+
 
                       <div
                         className={
@@ -344,6 +344,8 @@ export default function Teacher() {
                                       title={
                                         waitForMoreData
                                           ? "ডেটা লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন"
+                                         
+
                                           : ""
                                       }
                                       onClick={(e) => {
@@ -384,7 +386,7 @@ export default function Teacher() {
                                         //   waitForMoreData &&
                                         //   Swal.fire({
                                         //     title: "ডেটা লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন",
-                                            
+
                                         //   });
                                         // }
 
@@ -483,6 +485,8 @@ export default function Teacher() {
                                     </div>
 
                                   ))}
+
+
                                 </>
                               )}
                             </div>

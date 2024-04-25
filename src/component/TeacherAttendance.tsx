@@ -184,7 +184,7 @@ export default function TeacherAttendance() {
 
       let obj = {}
 
-      data.data.map((attendent_data:any)=>{
+      data.data.map((attendent_data: any) => {
         if (datas.own_subjet.class_room_uid == attendent_data?.class_room_uid) {
           obj[attendent_data['student_uid']] = attendent_data.is_present ? true : false
         }
@@ -290,7 +290,7 @@ export default function TeacherAttendance() {
   };
 
   const handleCheckboxChange = (studentId) => {
-   // console.log("studentId", studentId);
+    // console.log("studentId", studentId);
     setAttendance((prevAttendance) => ({
       ...prevAttendance,
       [studentId]: !prevAttendance[studentId],
@@ -312,18 +312,18 @@ export default function TeacherAttendance() {
   useEffect(() => {
     fetchData2()
   }, [])
-  
+
   //console.log('Students Data:', Student)
   //console.log('Subject Data:', subject)
   //console.log('attendance', getAttendanceData);
- // console.log('attendance', attendance);
+  // console.log('attendance', attendance);
 
   const getAttendanceDataChecker = (uid: string) => {
     //console.log(getAttendanceData);
-    let attendanceRecord :any = {}
+    let attendanceRecord: any = {}
 
     //console.log("attendance" , attendance);
-   // console.log('UID ',attendance[uid]);
+    // console.log('UID ',attendance[uid]);
 
     // if (attendance[uid] == true) {
     //   attendanceRecord = getAttendanceData.find(data => data.student_uid === uid && attendance[uid]);
@@ -335,30 +335,30 @@ export default function TeacherAttendance() {
 
     if (attendance[uid] !== undefined) {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid && attendance[uid]);
-       
+
       //console.log("U " , attendanceRecord);
     } else {
       attendanceRecord = getAttendanceData.find(data => data.student_uid === uid);
-    
-     // console.log("N " , attendanceRecord);
+
+      // console.log("N " , attendanceRecord);
     }
 
-    console.log('Status ',attendanceRecord)
+    console.log('Status ', attendanceRecord)
 
 
-      if (attendanceRecord && attendanceRecord !== undefined) {
-        if (attendanceRecord.is_present == 1 || attendanceRecord.is_present == true) { 
-          return true;
-        } else {
-          return false;
-        }
+    if (attendanceRecord && attendanceRecord !== undefined) {
+      if (attendanceRecord.is_present == 1 || attendanceRecord.is_present == true) {
+        return true;
+      } else {
+        return false;
       }
+    }
 
-      // if (attendanceRecord == undefined) {
-      //   return false;
-      // }
+    // if (attendanceRecord == undefined) {
+    //   return false;
+    // }
 
-    
+
   };
 
   // const handleCheckboxChange = (studentId) => {
@@ -368,7 +368,7 @@ export default function TeacherAttendance() {
   //    }));
   //  };
 
- // console.log(attendanceDataAll);
+  // console.log(attendanceDataAll);
 
   return (
     <>
@@ -465,8 +465,8 @@ export default function TeacherAttendance() {
                                       setClassTeacherName(d?.teacher?.name_bn || d?.teacher?.name_en);
                                       setSessionName(shift_name(d?.own_subjet?.class_room?.shift_id));
                                       setShakhaName(section_name(d?.own_subjet?.class_room?.section_id));
-                                      setClassRoomUid(d.own_subjet?.class_room_uid);  
-                                      
+                                      setClassRoomUid(d.own_subjet?.class_room_uid);
+
                                       const studnt =
                                         d?.own_subjet?.class_room?.students;
 
@@ -510,7 +510,7 @@ export default function TeacherAttendance() {
                                           {d?.subject?.class_uid == "6"
                                             ? "ষষ্ঠ "
                                             : <> {d?.subject?.class_uid == "7" ? "সপ্তম " : <>  {d?.subject?.class_uid == "8" ? "অষ্টম" : "নবম"}  </>} </>}{" "}
-                                          শ্রেণি 
+                                          শ্রেণি
                                         </p>
                                       </div>
                                       <div className="d-flex gap-1">
@@ -573,7 +573,9 @@ export default function TeacherAttendance() {
                       </div>
                     </div>
                   </div>
+
                 </div>
+                </section>
 
                 <div>
 
@@ -596,9 +598,9 @@ export default function TeacherAttendance() {
                             type="button"
                             className="btn-close"
                             aria-label="Close"
-                            onClick={ closeModal
-                              
-                              }
+                            onClick={closeModal
+
+                            }
                           ></button>
                         </div>
                         <div className="modal-body">
@@ -640,7 +642,7 @@ export default function TeacherAttendance() {
                                     ))}
                                   </tbody>
                                 </table>
-                                
+
                                 <div className="row">
                                   <div className="col-sm-4">
                                     <div>
@@ -662,7 +664,7 @@ export default function TeacherAttendance() {
                                     </div>
                                   </div>
                                 </div>
-                             
+
                               </form>
                             </>
                               :
@@ -683,63 +685,52 @@ export default function TeacherAttendance() {
                                           <td scope="row" className="text-center" style={{ fontSize: '14px' }}>{student?.roll}</td>
                                           <td style={{ fontSize: '14px' }}>{student?.class_room?.student_info?.student_name_bn || student?.student_name_en}</td>
                                           <td className="text-center" style={{ fontSize: '14px' }}>
-                                    
+
                                             {
-                                              enableEditMode ? 
-                                              
-                                              <input
+                                              enableEditMode ?
+
+                                                <input
                                                   style={{ height: "10px", overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}
                                                   className="form-check-input"
                                                   type="checkbox"
                                                   name={`attendance-${student?.uid}`}
                                                   onChange={(e) => handleCheckboxChange(student?.uid)}
-                                                  checked={ getAttendanceDataChecker(student?.uid) !==undefined ? true : false }
-                                                />  : <>
-                                              
-                                                {
-                                                  getAttendanceDataChecker(student?.uid) == true ? 'Present' : 'Absent'
-                                                }
+                                                  checked={getAttendanceDataChecker(student?.uid) !== undefined ? true : false}
+                                                /> : <>
 
-                                              
-                                              </>
-                                            }     
+                                                  {
+                                                    getAttendanceDataChecker(student?.uid) == true ? 'Present' : 'Absent'
+                                                  }
+
+
+                                                </>
+
+                                            }
+
+
+
                                           </td>
                                         </tr>
                                       ))}
                                     </tbody>
                                   </table>
 
-                                  <div className="row">
-                                    <div className="col-sm-4">
-                                      <div>
-                                        <span> আজকের তারিখঃ {dateGet2}</span>
-                                      </div>
-                                    </div>
-                                    <div className="col-sm-3"></div>
-                                    <div className="col-sm-5">
-                                      <div className="d-flex justify-content-end align-items-center pt-1 pe-3">
-                                        <button
-                                          type= {enableEditMode ? "button" : "submit" } 
+                                  <div className="d-flex justify-content-end align-items-center pt-1 pe-3">
+                                    <button
+                                      type={enableEditMode ? "button" : "submit"}
 
-                                          onClick={ (e)=> !enableEditMode ? setnableEditMode(true) : setnableEditMode(false) }
-                                          className="btn btn-primay px-5"
-                                          style={{ backgroundColor: "#428F92", color: "#fff" }}>
-                                          {
-                                            enableEditMode ? <><h5 className="modal-title">জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
-                                              : <><h5 className="modal-title">পুনরায় জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
-                                          }
-                                        </button>
-                                      </div>
-                                    </div>
+                                      onClick={(e) => !enableEditMode ? setnableEditMode(true) : setnableEditMode(false)}
+                                      className="btn btn-primay px-5"
+                                      style={{ backgroundColor: "#428F92", color: "#fff" }}>
+                                      {
+                                        enableEditMode ? <><h5 className="modal-title">জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
+                                          : <><h5 className="modal-title">পুনরায় জমা দিন <MdOutlineKeyboardArrowRight className="fs-3" style={{ marginTop: "-0.3rem" }} /></h5></>
+                                      }
+                                    </button>
                                   </div>
-                                  
                                 </form>
-
                               </>
                           }
-
-
-
                         </div>
 
                       </div>
@@ -749,9 +740,11 @@ export default function TeacherAttendance() {
 
                 </div>
 
-              </section>
-            </div>
-          )}
+
+            </div >
+
+          )
+          }
 
 
           <style
@@ -762,7 +755,7 @@ export default function TeacherAttendance() {
           />
 
           {/* Teachers List end */}
-        </div>
+        </div >
       ) : (
         <>
           {showLoadingErr ? (

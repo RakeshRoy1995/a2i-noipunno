@@ -18,6 +18,7 @@ export default function AttendanceSubject() {
     <div className="card-container">
       <div className="row g-3" >
         <TeacherAttendance/>
+        
       </div>
     </div>
   </section>

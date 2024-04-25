@@ -79,6 +79,7 @@ const StudentList = () => {
   return (
     <section className="student_list_page">
       <Breadcumb title={"শিক্ষার্থীর তালিকা"} />
+
       {student?.length == 0 ?
         (<div className="container student_list_page py-5 text-center" >No Student Found</div>) :
         (<div className="container py-3" >
@@ -126,6 +127,7 @@ const StudentList = () => {
                 </div>
               ))}
 
+              {/* student profile card modal */}
               <Modal
                 className="mx-auto pl-0"
                 show={showModal}
@@ -144,35 +146,15 @@ const StudentList = () => {
                 </Modal.Header>
                 <Modal.Body>
                   <div className="container">
-                    <div
-                      className={`text-center text-lg-end 
 
-                  ${(screenSize === "small_screen" && "w-100") ||
-                        ((screenSize === "medium_screen" ||
-                          screenSize === "large_screen") &&
-                          "w-75") ||
-                        (screenSize === "extra_large_screen" && "w-75")
-                        } 
-                     
-                    mb-1 mx-auto mb-4 mb-md-2 mb-lg-2`}
-                    >
-                      <img
-                        src={
-                          (selectedItem?.gender?.toLowerCase() == "male") && male_avt_img ||
-                          (selectedItem?.gender?.toLowerCase() == "female") && female_avt_img
-                        }
-                        width="100rem"
-                        className="img-fluid border border-info p-1"
-                      />
-                    </div>
 
-                    <table
+                    {/* <table
                       className={`table ${(screenSize === "small_screen" && "w-100") ||
                         ((screenSize === "medium_screen" ||
                           screenSize === "large_screen") &&
                           "w-75") ||
                         (screenSize === "extra_large_screen" && "w-75")
-                        } 
+                        }
                      text-sm mx-auto`}
                     >
                       <tbody>
@@ -181,7 +163,7 @@ const StudentList = () => {
                             <strong>রোলঃ</strong>
                           </td>
                           <td className="p-1">
-                            { convertToBanglaNumber(selectedItem?.roll)  || "-"}
+                            {convertToBanglaNumber(selectedItem?.roll) || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -228,7 +210,7 @@ const StudentList = () => {
                             <strong>মোবাইলঃ</strong>
                           </td>
                           <td className="p-1">
-                            { convertToBanglaNumber( selectedItem?.student_mobile_no) || "-"}
+                            {convertToBanglaNumber(selectedItem?.student_mobile_no) || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -317,7 +299,7 @@ const StudentList = () => {
                             <strong>পিতার মোবাইল নম্বারঃ</strong>
                           </td>
                           <td className="p-1">
-                            { convertToBanglaNumber(selectedItem?.father_mobile_no)  || "-"}
+                            {convertToBanglaNumber(selectedItem?.father_mobile_no) || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -325,7 +307,7 @@ const StudentList = () => {
                             <strong>মাতার মোবাইল নম্বারঃ</strong>
                           </td>
                           <td className="p-1">
-                            { convertToBanglaNumber(selectedItem?.mother_mobile_no)  || "-"}
+                            {convertToBanglaNumber(selectedItem?.mother_mobile_no) || "-"}
                           </td>
                         </tr>
                         <tr>
@@ -337,11 +319,129 @@ const StudentList = () => {
                           </td>
                         </tr>
                       </tbody>
-                    </table>
+                    </table> */}
+
+                    <div className="d-flex  justify-content-between align-items-center" >
+                          {/* cad */}
+                      <div className="row d-flex flex-col-4 justify-content-center align-items-center mx-auto w-50 text-center shadow p-3 mb-5 bg-body rounded"
+                     >
+                      <div className={`text-center
+
+                  ${(screenSize === "small_screen" && "w-100") ||
+                        ((screenSize === "medium_screen" ||
+                          screenSize === "large_screen") &&
+                          "w-75") ||
+                        (screenSize === "extra_large_screen" && "w-75")
+                        }mb-1 mx-auto mb-4 mb-md-2 mb-lg-2`}>
+                      <img
+                        src={
+                          (selectedItem?.gender?.toLowerCase() == "male") && male_avt_img ||
+                          (selectedItem?.gender?.toLowerCase() == "female") && female_avt_img
+                        }
+                        width="100rem"
+                        className="mt-2"
+
+                      />
+                    </div>
+
+                        <div>
+                          <p> রোলঃ {convertToBanglaNumber(selectedItem?.roll) || "-"}
+                          </p>
+                        </div>
+
+                        <div>
+                          <p> সেকশনঃ
+                            {(selectedItem?.class == " 6" && " ষষ্ঠ") ||
+                              (selectedItem?.class == " 7" && " সপ্তম") ||
+                              (selectedItem?.class == " 8" && " অষ্টম") ||
+                              (selectedItem?.class == " 9" && " ৯ম") ||
+                              "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>শ্রেণীঃ {section_name(selectedItem?.section) || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>শিফটঃ {shift_name(selectedItem?.shift) || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>ভার্শনঃ {version_name(selectedItem?.version) ||
+                            selectedItem?.version ||
+                            "no-entry"}
+                          </p>
+                        </div>
+
+                      </div>
+
+                      {/* more info */}
+                      <div className="flex-col-8">
+                      <div>
+                          <p>মোবাইলঃ {convertToBanglaNumber(selectedItem?.student_mobile_no) || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>ইমেইলঃ  {selectedItem?.email || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>জন্ম তারিখঃ  {selectedItem?.date_of_birth || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>রক্তের গ্রুপঃ   {selectedItem?.blood_group || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>পিতার নামঃ  {selectedItem?.father_name_bn || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>মাতার নামঃ   {selectedItem?.mother_name_bn || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>রেজিস্টেশন তারিখঃ    {selectedItem?.registration_year || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>লিঙ্গঃ {selectedItem?.gender || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>ধর্মঃ   {selectedItem?.religion || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>বর্তমান ঠিকানাঃ   {selectedItem?.present_address || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>স্থায়ী ঠিকানাঃ {selectedItem?.present_address || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>পিতার মোবাইল নম্বারঃ  {convertToBanglaNumber(selectedItem?.father_mobile_no) || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>মাতার মোবাইল নম্বারঃ    {convertToBanglaNumber(selectedItem?.mother_mobile_no) || "-"}
+                          </p>
+                        </div>
+                        <div>
+                          <p>অভিবাবকের মোবাইল নম্বারঃ    {convertToBanglaNumber(selectedItem?.guardian_mobile_no) || "-"}
+                          </p>
+                        </div>
+
+                      </div>
+                    </div>
+
+
                   </div>
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={handleCloseModal}>
+                  <Button style={{ backgroundColor: "#963293", borderStyle: "none" }} onClick={handleCloseModal}>
                     বন্ধ করুন
                   </Button>
                 </Modal.Footer>

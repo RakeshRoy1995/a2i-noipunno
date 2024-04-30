@@ -23,19 +23,19 @@ import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
 import { useLocation } from "react-router-dom";
 import { teacher_dashboard, reloadteacher_own_subject } from "../Request";
 import { showReportDeleteEv, showReportEvBoth } from "../utils/Utils";
-import DefaultPicture from "../../public/assets/images/User-avatar.png"
+import DefaultPicture from "../../public/assets/images/User-avatar.png";
 const Navbar = () => {
   const [userDetails, setuserDetails] = useState<any>({});
   const [loading, setLoadin] = useState(true);
   const [teacher_details, setTeacher_details] = useState({});
   // teacher profile
-  const {
-    image
-  }: any = teacher_details;
+  const { image }: any = teacher_details;
   // console.log(teacher_details);
 
   const getUserDetails = () => {
-    const get_teachers_details = JSON.parse(localStorage.getItem("teacher_dashboard"));
+    const get_teachers_details = JSON.parse(
+      localStorage.getItem("teacher_dashboard")
+    );
     if (get_teachers_details) {
       setTeacher_details(get_teachers_details?.data?.teachers[0]);
 
@@ -43,22 +43,23 @@ const Navbar = () => {
       //   setSchoolName(item.institute_name)
       // );
 
-      const isClassTeacherValid = get_teachers_details?.data?.teachers[0]?.is_class_teacher;
+      const isClassTeacherValid =
+        get_teachers_details?.data?.teachers[0]?.is_class_teacher;
       if (isClassTeacherValid) {
         // setIsClassTeacher(true)
       }
 
-      setLoadin(false)
+      setLoadin(false);
     }
-  }
+  };
   setInterval(() => {
     if (loading) {
-      getUserDetails()
+      getUserDetails();
     }
   }, 500);
   // end teacher profile img
 
-  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL
+  const img_base_url = import.meta.env.VITE_REACT_APP_IMAGE_URL;
   setTimeout(() => {
     if (!userDetails?.email) {
       const items = JSON.parse(localStorage.getItem("customer_login_auth"));
@@ -75,8 +76,7 @@ const Navbar = () => {
     window.location.reload();
   };
 
-  const location = useLocation()
-
+  const location = useLocation();
 
   const [isReportPathActive, setIsReportPathActive] = useState(false);
   const [isShikkarthiPathActive, setIsShikkarthiPathActive] = useState(false);
@@ -116,7 +116,6 @@ const Navbar = () => {
     }
   };
 
-
   const fetchData = async () => {
     try {
       const data_dash: any = await teacher_dashboard();
@@ -152,17 +151,16 @@ const Navbar = () => {
                     onClick={(e) => window.location.reload()}
                     className="pointer"
                   >
-                   <NavLink to="/">
-                   <img
-                      src={noipunnologo}
-                      className="img-fluid"
-                      alt="main logo"
-                    />
-                   </NavLink>
+                    <NavLink to="/">
+                      <img
+                        src={noipunnologo}
+                        className="img-fluid"
+                        alt="main logo"
+                      />
+                    </NavLink>
                   </div>
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group position-relative">
-
                       <NavLink
                         className="navbar-menu-item d-flex align-items-center ms-2"
                         to="/"
@@ -177,11 +175,19 @@ const Navbar = () => {
                           alt="moon icon"
                         /> */}
                         {/* {image && <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px"}}  className="rounded-5"/>} */}
-
                         {image ? (
-                          <img src={img_base_url + image} alt="teacher-profile" style={{ width: "38px", height: "38px" }} className="rounded-5" />
+                          <img
+                            src={img_base_url + image}
+                            alt="teacher-profile"
+                            style={{ width: "38px", height: "38px" }}
+                            className="rounded-5"
+                          />
                         ) : (
-                          <img src={DefaultPicture} alt="default-profile" style={{ width: "38px", height: "38px" }} />
+                          <img
+                            src={DefaultPicture}
+                            alt="default-profile"
+                            style={{ width: "38px", height: "38px" }}
+                          />
                         )}
                         {/* active icon */}
                         <img
@@ -305,7 +311,7 @@ const Navbar = () => {
                         </div>
                       </a>
                     </li> */}
-{/* logout */}
+                        {/* logout */}
                         <li onClick={handleLogout}>
                           <a href="#">
                             <div className="topnav-dropdown-style dropdown-item profile-style">
@@ -436,7 +442,8 @@ const Navbar = () => {
                                 />
                               </a>
                               <ul className="dropdown-menu border-0 dropdown-menu-item-style">
-                                {( showReportDeleteEv() || showReportEvBoth() ) && (
+                                {(showReportDeleteEv() ||
+                                  showReportEvBoth()) && (
                                   <>
                                     <li>
                                       <NavLink
@@ -714,7 +721,7 @@ const Navbar = () => {
                               <NavLink
                                 to="/attendance-subject"
                                 className={`nav-link navbar-menu-item d-flex align-items-center
-                            ${isFAQpathActive && "active"}`}
+                            ${location.pathname.slice(1) == 'attendance-subject' && "active"}`}
                                 role="button"
                                 aria-expanded="false"
                               >
@@ -726,9 +733,6 @@ const Navbar = () => {
                                 শিক্ষার্থীর হাজিরা
                               </NavLink>
                             </li>
-
-
-
 
                             <li className="nav-item dropdown nav-item-style">
                               <NavLink
@@ -747,9 +751,6 @@ const Navbar = () => {
                                 প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী
                               </NavLink>
                             </li>
-
-
-
                           </ul>
                         </div>
                       </nav>
@@ -767,23 +768,24 @@ const Navbar = () => {
                         ডেটা আপডেট করুন
                       </button>
 
-                      { showReportDeleteEv() || showReportEvBoth() && (
-                        <Link
-                          to="/mollayon-koron"
-                          id="mollayon_koron_btn"
-                          className="nav-link navbar-menu-item nav-right-dorpdown d-flex align-items-center"
-                          role="button"
-                          // data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <img
-                            src={doublecheckPng}
-                            className="img-fluid "
-                            alt="add icon"
-                          />
-                          মূল্যায়ন শুরু করুন
-                        </Link>
-                      )}
+                      {showReportDeleteEv() ||
+                        (showReportEvBoth() && (
+                          <Link
+                            to="/mollayon-koron"
+                            id="mollayon_koron_btn"
+                            className="nav-link navbar-menu-item nav-right-dorpdown d-flex align-items-center"
+                            role="button"
+                            // data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <img
+                              src={doublecheckPng}
+                              className="img-fluid "
+                              alt="add icon"
+                            />
+                            মূল্যায়ন শুরু করুন
+                          </Link>
+                        ))}
                     </div>
                   </div>
                 </div>

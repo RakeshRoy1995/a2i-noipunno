@@ -5,17 +5,11 @@ import inputFieldUserIcon from "../assets/login_page_materials/icons/user-square
 import pinNumberFieldUserIcon from "../assets/login_page_materials/icons/lock.svg";
 import passwordHideEyeIcon from "../assets/login_page_materials/hidden.png";
 import passwordShowEyeIcon from "../assets/login_page_materials/eye.png";
-import mediaFileIcon from "../assets/login_page_materials/new/media-file-svgrepo-com.svg";
-import pdfIcon from "../assets/login_page_materials/new/pdf-svgrepo-com.svg";
-import govtLogo from "../assets/login_page_materials/icons/Vector.png";
-import nctbLogo from "../assets/login_page_materials/icons/NCTB_logo.png";
-import unicef from "../assets/login_page_materials/icons/Logo_Signature_Container_Circle_ENG_RGB-300x300 1.png";
-import A2I from "../assets/login_page_materials/icons/Aspire_to_Innovate_Seal 2.svg";
 import { Helmet } from "react-helmet";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { loginPassword } from "../Request";
+import { landingPageSlider, loginPassword } from "../Request";
 import PopUpAppInfo from "./PopUpAppInfo/PopUpAppInfo";
 import { Button, Modal } from "react-bootstrap";
 import { motion } from "framer-motion"
@@ -29,8 +23,16 @@ const LoginPage = () => {
   const [loading, setloading] = useState(false);
   const [savePin, setSavePin] = useState(false);
   const [userId, setUserId] = useState('');
+  const [sliderData, setsliderData] = useState([]);
   const [userId_from_Cookie, setUserId_from_Cookie] = useState("");
   const [userPin_from_Cookie, setUserPin_from_Cookie] = useState("");
+
+
+  const fetchData = async() => {
+    const { data }: any = await landingPageSlider();
+    setsliderData(data.data)
+  };
+
 
   const setCookie = (name, value, days) => {
     const expirationDate = new Date();
@@ -124,7 +126,12 @@ const LoginPage = () => {
     // }
   };
 
+  
+
+
   useEffect(() => {
+
+    fetchData()
     const userId_Cookes = getCookie("userId");
     const userPin_Cookies = getCookie("userPin");
     localStorage.removeItem("customer_login_auth");
@@ -155,6 +162,7 @@ const LoginPage = () => {
     setValue(sanitizedValue); // Update the state with the sanitized value
   };
 
+
     // tooltip  for signature field
     useEffect(() => {
       const elementWithDataTooltip = document.querySelectorAll('[data-tooltip ]');
@@ -163,7 +171,12 @@ const LoginPage = () => {
           content: element.getAttribute("data-tooltip")
         });
       })
+
+      
     }, [])
+
+
+    console.log(`sliderData`,  sliderData);
 
   return (
     <>
@@ -197,7 +210,11 @@ const LoginPage = () => {
               <div className="row">
                 <div className="col-sm-12 col-md-7 col-xl-8">
 
-                  <LoginPageCommonLeft/>
+                  {
+                    sliderData.length > 0 && <LoginPageCommonLeft sliderData={sliderData}/>
+                  }
+
+                  
 
                 </div>
 
@@ -212,7 +229,7 @@ const LoginPage = () => {
 
                       <div className="form-group mb-1">
                         <label htmlFor="caid" className="login-field-title mb-2">
-                          ইউজার আইডি
+                          ইউজার আইডি 
                         </label>
                         <div className="input-group">
                           <div className="input-group-prepend">

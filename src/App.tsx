@@ -14,7 +14,6 @@ import StudentTranscript from "./component/StudentTranscript";
 import TeachersList from "./component/TeachersList";
 import StudentMullayonBehave from "./component/StudentMullayonBehave";
 import StudentMullayonBehaveSubmit from "./component/StudentMullayonBehaveSubmit";
-import { all_teachers, teacher_dashboard, teacher_own_subject, } from "./Request";
 import AmarProfile from "./component/AmarProfile";
 import MullayonKoron from "./component/MullayonKoron";
 import HeadTeacherDashboard from "./component/Dashboards/HeadTeacherDashboard/HeadTeacherDashboard";
@@ -25,24 +24,21 @@ import LoginPage from "./component/LoginPage";
 import PasswordReset from "./component/PasswordReset";
 import StudentReport from "./component/StudentReport";
 import PDFMaker from "./component/PDFMaker/PDFMaker";
-import BiRawPDFDownload from "./component/PDFMaker/ReportPdf";
+
 import StudentTranscriptBI from "./component/StudentTranscriptBI";
-import GeneratePdf from "./component/generatePdf/GeneratePdf";
 import ResetPassword from "./component/ResetPassword";
 import StudentAttendence from "./component/Attendence/StudentAttendence/StudentAttendence";
 import PasswordReset2 from "./component/_PasswordReset";
 import PrivacyPolicy from "./component/PrivacyPolicy";
-import ShowAssesment from "./component/ShowAssesment";
 import AttendanceSubject from "./component/Attendence/StudentAttendence/AttendanceSubject";
 import AssesDuringLearningData from "./component/AssesDuringLearningData";
 import QuarterSummativeAssessData from "./component/QuarterSummativeAssessData";
 import AnnualSummativeAssessData from "./component/AnnualSummativeAssessData";
 import SecondComponent from "./component/SecondComponent";
-// import Test from "./component/Assesment/AssessmentSection";
-// import AptBehavAssessment from "./component/Assesment/AssessmentSection";
-// import AssessmentSection from "./component/Assesment/AssessmentSection";
+import DeviceError from './component/HOC/withDeviceShowError' 
 
 function App() {
+  
   const [topbar, settopbar] = useState(false);
   const [render, setRender] = useState(true);
   const fetchData = async () => {
@@ -129,4 +125,4 @@ function App() {
   );
 }
 
-export default App;
+export default DeviceError(App);

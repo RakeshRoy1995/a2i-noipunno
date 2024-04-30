@@ -828,3 +828,14 @@ export function class_teacher_all_student_data() {
   return axios(options);
 }
 
+export function landingPageSlider() {
+  const page_list = `https://accounts.noipunno.gov.bd/api/landing-page-slider`;
+
+  const options = {
+    method: "get",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+  };
+
+  return axios(options);
+}

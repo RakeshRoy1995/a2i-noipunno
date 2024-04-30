@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Maintence from "../../layout/Maintence";
 
 const DeviceError = (WrappedComponent) => {
@@ -8,13 +7,12 @@ const DeviceError = (WrappedComponent) => {
       return /Mobi|Android/i.test(navigator.userAgent);
     };
 
-    if (!isMobileDevice()) {
+    if (isMobileDevice()) {
       return <Maintence />
     } else {
         return <WrappedComponent {...props} />;
     }
 
-    
   };
 };
 

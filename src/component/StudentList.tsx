@@ -321,9 +321,9 @@ const StudentList = () => {
                       </tbody>
                     </table> */}
 
-                    <div className="d-flex  justify-content-between align-items-center" >
+                    <div className="d-flex justify-content-center align-items-center" >
                           {/* cad */}
-                      <div className="row d-flex flex-col-4 justify-content-center align-items-center mx-auto w-50 text-center shadow p-3 mb-5 bg-body rounded"
+                      <div className="row d-flex flex-col-4 justify-content-center align-items-center mx-auto w-50 text-center shadow p-3 mb-5 bg-body rounded lh-lg"
                      >
                       <div className={`text-center
 
@@ -376,7 +376,7 @@ const StudentList = () => {
                       </div>
 
                       {/* more info */}
-                      <div className="flex-col-8">
+                      <div className="flex-col-8 lh-base">
                       <div>
                           <p>মোবাইলঃ {convertToBanglaNumber(selectedItem?.student_mobile_no) || "-"}
                           </p>
@@ -441,7 +441,7 @@ const StudentList = () => {
                   </div>
                 </Modal.Body>
                 <Modal.Footer>
-                  <Button style={{ backgroundColor: "#963293", borderStyle: "none" }} onClick={handleCloseModal}>
+                  <Button style={{ backgroundColor: "#428F92", borderStyle: "none" }} onClick={handleCloseModal}>
                     বন্ধ করুন
                   </Button>
                 </Modal.Footer>

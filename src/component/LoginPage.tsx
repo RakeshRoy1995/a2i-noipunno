@@ -126,7 +126,7 @@ const LoginPage = () => {
     // }
   };
 
-  
+
 
 
   useEffect(() => {
@@ -172,7 +172,7 @@ const LoginPage = () => {
         });
       })
 
-      
+
     }, [])
 
 
@@ -214,7 +214,7 @@ const LoginPage = () => {
                     sliderData.length > 0 && <LoginPageCommonLeft sliderData={sliderData}/>
                   }
 
-                  
+
 
                 </div>
 
@@ -229,7 +229,7 @@ const LoginPage = () => {
 
                       <div className="form-group mb-1">
                         <label htmlFor="caid" className="login-field-title mb-2">
-                          ইউজার আইডি 
+                          ইউজার আইডি
                         </label>
                         <div className="input-group">
                           <div className="input-group-prepend">
@@ -348,7 +348,7 @@ const LoginPage = () => {
                         </p>
                       </div>
                     </form>
-                    
+
                   </div>
                 </div>
               </div>

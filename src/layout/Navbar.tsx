@@ -565,7 +565,7 @@ const Navbar = () => {
                                     </div>
                                   </NavLink>
                                 </li>
-                                <li>
+                                {/* <li>
                                   <NavLink
                                     to="/student-attendence"
                                     // activeClassName='active'
@@ -582,7 +582,7 @@ const Navbar = () => {
                                       </p>
                                     </div>
                                   </NavLink>
-                                </li>
+                                </li> */}
                               </ul>
                             </li>
                             <li className="nav-item dropdown nav-item-style">
@@ -717,11 +717,14 @@ const Navbar = () => {
                           </a>
                         </li> */}
 
-                            <li className="nav-item dropdown nav-item-style">
+                            {/* <li className="nav-item dropdown nav-item-style">
                               <NavLink
                                 to="/attendance-subject"
                                 className={`nav-link navbar-menu-item d-flex align-items-center
-                            ${location.pathname.slice(1) == 'attendance-subject' && "active"}`}
+                            ${
+                              location.pathname.slice(1) ==
+                                "attendance-subject" && "active"
+                            }`}
                                 role="button"
                                 aria-expanded="false"
                               >
@@ -732,7 +735,7 @@ const Navbar = () => {
                                 />
                                 শিক্ষার্থীর হাজিরা
                               </NavLink>
-                            </li>
+                            </li> */}
 
                             <li className="nav-item dropdown nav-item-style">
                               <NavLink

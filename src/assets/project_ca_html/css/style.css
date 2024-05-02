@@ -208,15 +208,11 @@ body {
   border-radius: 6px;
 }
 
-<<<<<<< HEAD #navbarSupportedContent ul li:hover>a {
-  background-color: #e4feff;
-
-  =======#navbarSupportedContent ul li:hover>a {
-    background-color: var(--bg-secondary-light);
-    >>>>>>>e375c73649e347ae2b18619721a82ed65afd3eaf color: var(--bg_primary);
-    border-radius: 6px;
-  }
-
+#navbarSupportedContent ul li:hover>a {
+  background-color: var(--bg-secondary-light);
+  color: var(--bg_primary);
+  border-radius: 6px;
+}
   .management-dropdown-style {
     padding: 7px 24px;
     width: 234px;
@@ -666,9 +662,6 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: 28px;
-    <<<<<<< HEAD
-    /* 155.556% */
-    =======>>>>>>>e375c73649e347ae2b18619721a82ed65afd3eaf
   }
 
   .card-bg-color {
@@ -749,10 +742,8 @@ body {
     border-bottom: 2px solid var(--primary-regular);
   }
 
-  <<<<<<< HEAD <<<<<<< HEAD .std-assessment .nested-tab .nav-links .active {
-    background-color: none !important;
 
-    =======.std-assessment .nav-item.active {
+    std-assessment .nav-item.active {
       background-color: transparent !important;
       display: flex;
       padding: 10px 0px !important;
@@ -763,7 +754,7 @@ body {
       font-style: normal;
       font-weight: 600;
       line-height: 22px;
-      >>>>>>>69d66249ef73dcc3298ed21fd1231e111e3760ec border-bottom: 2px solid #428f92;
+      border-bottom: 2px solid #428f92;
     }
 
     /* .std-assessment .nested-tab .nav-links .active {
@@ -771,10 +762,7 @@ body {
   border-bottom: 2px solid #428f92;
 } */
 
-    <<<<<<< HEAD
-
-    /* std-assessment-download end */
-    ==============.std-assessment .nav-item.active {
+    .std-assessment .nav-item.active {
       background-color: transparent !important;
       display: flex;
       padding: 10px 0px !important;
@@ -788,7 +776,6 @@ body {
       border-bottom: 2px solid var(--primary-regular);
     }
 
-    >>>>>>>e375c73649e347ae2b18619721a82ed65afd3eaf
 
     /* std-assessment-download end */
     /* communication-cards  start*/
@@ -857,5 +844,3 @@ body {
       background-color: var(--forground-bg);
     }
 
-    /* communication-cards  end */
-    >>>>>>>11aaaa442aa871287c235e2962006c6ee1bd4f46

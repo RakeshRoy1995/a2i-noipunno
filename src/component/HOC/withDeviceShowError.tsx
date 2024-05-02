@@ -7,7 +7,7 @@ const DeviceError = (WrappedComponent) => {
       return /Mobi|Android/i.test(navigator.userAgent);
     };
 
-    if (isMobileDevice()) {
+    if (!isMobileDevice()) {
       return <Maintence />
     } else {
         return <WrappedComponent {...props} />;

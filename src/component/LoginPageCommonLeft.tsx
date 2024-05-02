@@ -9,10 +9,9 @@ import teacherassistance from "../assets/login_page_materials/sikkhok-sohayika.p
 const apps = '../assets/app/noipunno.apk';
 import { Link } from "react-router-dom";
 import tippy from "tippy.js";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-import { landingSlider } from "../Request";
-export default function LoginPageCommonLeft() {
+export default function LoginPageCommonLeft({sliderData}:any) {
     // tooltip  for signature field
     useEffect(() => {
         const elementWithDataTooltip = document.querySelectorAll('[data-tooltip ]');

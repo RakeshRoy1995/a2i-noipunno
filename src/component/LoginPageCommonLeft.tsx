@@ -9,15 +9,19 @@ import teacherassistance from "../assets/login_page_materials/sikkhok-sohayika.p
 const apps = '../assets/app/noipunno.apk';
 import { Link } from "react-router-dom";
 import tippy from "tippy.js";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { landingPageSlider } from "../Request";
 
-export default function LoginPageCommonLeft({ sliderData }: any) {
-    const sliderDescription = sliderData.forEach(function (obj) {
-        console.log(obj.description);
-    });
+export default function LoginPageCommonLeft() {
+    const [sliderData, setsliderData] = useState([]);
+    const fetchData = async() => {
+        const { data }: any = await landingPageSlider();
+        setsliderData(data.data)
+      };
 
     // tooltip  for signature field
     useEffect(() => {
+        fetchData()
         const elementWithDataTooltip = document.querySelectorAll('[data-tooltip ]');
         elementWithDataTooltip.forEach(element => {
             tippy(element, {

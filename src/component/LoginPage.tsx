@@ -211,7 +211,7 @@ const LoginPage = () => {
                 <div className="col-sm-12 col-md-7 col-xl-8">
 
                   {
-                    sliderData.length > 0 && <LoginPageCommonLeft sliderData={sliderData}/>
+                    sliderData.length > 0 && <LoginPageCommonLeft />
                   }
 
 

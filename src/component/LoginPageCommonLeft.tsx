@@ -11,7 +11,11 @@ import { Link } from "react-router-dom";
 import tippy from "tippy.js";
 import { useEffect } from "react";
 
-export default function LoginPageCommonLeft({sliderData}:any) {
+export default function LoginPageCommonLeft({ sliderData }: any) {
+    const sliderDescription = sliderData.forEach(function (obj) {
+        console.log(obj.description);
+    });
+
     // tooltip  for signature field
     useEffect(() => {
         const elementWithDataTooltip = document.querySelectorAll('[data-tooltip ]');
@@ -30,7 +34,7 @@ export default function LoginPageCommonLeft({sliderData}:any) {
                     <h4 className="fw-bold py-5" style={{ color: '#B5248E' }}>নৈপুন্য আপডেট</h4>
                 </div>
                 {/* carousel start */}
-                <div className="card-body-custom">
+                {/* <div className="card-body-custom">
                     <div id="carouselExampleIndicators" className="carousel carousel-inner-custom slide mb-0" data-bs-ride="carousel">
                         <ol className="carousel-indicators mb-0">
                             <li style={{ width: '15px', height: '15px', backgroundColor: '#92278f', borderRadius: '50%', marginBottom: '0px' }} data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="" aria-label="Slide 1"></li>
@@ -58,9 +62,43 @@ export default function LoginPageCommonLeft({sliderData}:any) {
                             </div>
                         </div>
                     </div>
+                </div> */}
+
+
+                {/* test */}
+                <div className="card-body-custom">
+                    <div id="carouselExampleIndicators" className="carousel carousel-inner-custom slide mb-0" data-bs-ride="carousel">
+                        <ol className="carousel-indicators mb-0">
+                            {sliderData.map((slide, index) => (
+                                <li key={index} style={{ width: '15px', height: '15px', backgroundColor: '#92278f', borderRadius: '50%', marginBottom: '0px' }} data-bs-target="#carouselExampleIndicators" data-bs-slide-to={index} className={index === 0 ? 'active' : ''} aria-label={`Slide ${index + 1}`}></li>
+                            ))}
+                        </ol>
+                        <div className="carousel-inner">
+                            {sliderData.map((slide, index) => (
+                                <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+                                    <p className="mb-2" style={{ letterSpacing: '0.5px', textAlign: 'justify' }}>
+                                        {slide.description}
+                                    </p>
+                                    <br />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
+
                 {/* carousel end */}
 
+
+
+
+
+
+
+
+
+
+
+                {/* update button  start*/}
                 <div className="container noipunno-app mb-2">
                     <div className="row">
                         <div className="col-sm-5 text-center"><p className="mt-2 bn">অ্যাপ ডাউনলোড করতে ক্লিক করুন</p></div>
@@ -68,9 +106,9 @@ export default function LoginPageCommonLeft({sliderData}:any) {
                         <div className="col-sm-3 mb-2 app-download"><a href="https://play.google.com/store/apps/details?id=bd.gov.noipunno" target="_blank"><img style={{ height: '40px' }} data-tooltip="ডাউনলোড করুন" src={appIcon2} /></a></div>
                     </div>
                 </div>
-
+                {/* update button  end*/}
             </div>
-
+            {/* mobile help desk */}
             <div className="help-desk-mobile">
                 <p className="text-center bn" style={{ fontSize: '17px', color: '#B5248E' }}> <b>হেল্প ডেস্ক:</b> &nbsp;</p>
                 <div className="d-flex mx-auto justify-content-center">
@@ -96,7 +134,7 @@ export default function LoginPageCommonLeft({sliderData}:any) {
                     &nbsp; <Link to="#" className="" style={{ fontSize: '17px', textDecoration: 'underline', color: '#B5248E' }}> <b>গোপনীয়তার নীতিমালা </b> </Link>
                 </p>
             </div>
-
+            {/* footer */}
             <div className="footer-card-custom d-flex justify-content-center help-desk-desktop">
                 <div className="d-flex align-items-center">
                     <div className="">

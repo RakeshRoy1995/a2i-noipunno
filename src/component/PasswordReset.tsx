@@ -311,7 +311,7 @@ const PasswordReset = () => {
                         {
                           showVarify ? <>
                             <div className="text-center alert alert-info mb-3 bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>
-                              নিচের মোবাইল নম্বরটি সঠিক না থাকলে কাস্টমার সাপোর্টে (<a style={{ color: 'white', textDecoration: 'underline' }} href="tel:09638600700">০৯৬৩৮৬০০৭০০</a>) যোগাযোগ করুন।
+                              নিচের মোবাইল নম্বরটি সঠিক না থাকলে কাস্টমার সাপোর্টে (<a style={{ color: 'white', textDecoration: 'underline' }} href="tel:09638600700">০৯৬৩৮৬০০৭০০</a>) যোগাযোগ করুন। অথবা সাপোর্ট টিকিট তৈরি করতে <a target="_black" href="https://support.noipunno.gov.bd/">এখানে</a>  লিংকে ক্লিক করুন
                             </div>
                           </>
                             :

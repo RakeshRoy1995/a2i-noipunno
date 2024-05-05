@@ -21,13 +21,18 @@ import teacherIcon from "../assets/navbar_materials/icons/teacher.svg";
 import teacherActiveIcon from "../assets/navbar_materials/icons/Status.svg";
 
 import { useLocation } from "react-router-dom";
-import { teacher_dashboard, reloadteacher_own_subject } from "../Request";
+import { teacher_dashboard, reloadteacher_own_subject, teacher_own_subject_redesign } from "../Request";
 import { showReportDeleteEv, showReportEvBoth } from "../utils/Utils";
 import DefaultPicture from "../../public/assets/images/User-avatar.png";
+import { Spinner } from "react-bootstrap";
 const Navbar = () => {
   const [userDetails, setuserDetails] = useState<any>({});
   const [loading, setLoadin] = useState(true);
   const [teacher_details, setTeacher_details] = useState({});
+  let [numberOfRender, setnumberOfRender] = useState(1);
+  const [showLoadingErr, setshowLoadingErr] = useState("");
+  const [loader, setloader] = useState(true);
+  const [loadingspinner, setloadingspinner] = useState(false);
   // teacher profile
   const { image }: any = teacher_details;
   // console.log(teacher_details);
@@ -116,28 +121,130 @@ const Navbar = () => {
     }
   };
 
-  const fetchData = async () => {
+  // const fetchData = async () => {
+  //   try {
+  //     const data_dash: any = await teacher_dashboard();
+  //     localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
+
+  //     const own_subjet: any = await reloadteacher_own_subject();
+  //     localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+
+  //     window.location.reload();
+  //   } catch (error) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title:
+  //         "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন",
+  //       confirmButtonText: "হ্যাঁ",
+  //     });
+  //   }
+  // };
+
+  // const fetchData = async () => {
+  //   try {
+  //     // Check if teacher_dashboard, cls_room, and own_subject are in localStorage
+  //     if (localStorage.getItem("teacher_dashboard")) {
+  //       localStorage.removeItem("teacher_dashboard");
+  //     }
+
+  //     if (localStorage.getItem("cls_room")) {
+  //       localStorage.removeItem("cls_room");
+  //     }
+
+  //     if (localStorage.getItem("own_subjet")) {
+  //       localStorage.removeItem("own_subjet");
+  //     }
+  //     if (localStorage.getItem("bi")) {
+  //       localStorage.removeItem("bi");
+  //     }
+
+  //     const data_dash = await teacher_dashboard();
+  //     localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
+
+  //     const own_subjet = await teacher_own_subject_redesign();
+  //     localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+
+  //     setloader(false);
+
+  //     // await fetchData_for_restapi();
+  //   } catch (error) {
+  //     setshowLoadingErr("");
+
+  //     numberOfRender++;
+
+  //     if (numberOfRender <= 10) {
+  //       setnumberOfRender(numberOfRender);
+  //       await fetchData(); // Await the recursive call
+  //     } else {
+  //       setshowLoadingErr(
+  //         "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
+  //       );
+  //     }
+  //   }
+  // };
+  const fetchData = () => {
     try {
-      const data_dash: any = await teacher_dashboard();
-      localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
+      // Remove items from localStorage except 'customer_login_auth' and 'token'
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key !== 'customer_login_auth' && key !== 'token') {
+          localStorage.removeItem(key);
+        }
+      }
 
-      const own_subjet: any = await reloadteacher_own_subject();
-      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
+      // Redirect to the home page
+      window.location.href = '/'; // Adjust the URL to your home page URL
 
-      window.location.reload();
+  
+
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title:
-          "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন",
-        confirmButtonText: "হ্যাঁ",
-      });
+      // Handle errors
+      setshowLoadingErr("");
+
+      numberOfRender++;
+
+      if (numberOfRender <= 10) {
+        setnumberOfRender(numberOfRender);
+        fetchData(); // Recursive call is not async, no need for await
+      } else {
+        setshowLoadingErr(
+          "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
+        );
+      }
     }
   };
+
 
   useEffect(() => {
     activeRoute();
   }, [location]);
+// handle update data
+
+// const handleUpdateData =()=>{
+// fetchData()
+// }
+const handleUpdateData = () => {
+  // Set loadingspinner to true to indicate data fetching is in progress
+  setloadingspinner(true);
+
+  // Perform data fetching
+  fetchData()
+    .then((data) => {
+      // Data fetching completed successfully
+      // Perform any necessary operations with the data
+
+      // Set loadingspinner back to false since data fetching is completed
+      setloadingspinner(false);
+    })
+    .catch((error) => {
+      // Handle errors if any occurred during data fetching
+      console.error("Error fetching data:", error);
+
+      // Set loadingspinner back to false since data fetching is completed (even if it failed)
+      setloadingspinner(false);
+    });
+};
+
 
   return (
     <>
@@ -362,46 +469,7 @@ const Navbar = () => {
                           id="navbarSupportedContent"
                         >
                           <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-1">
-                            {/* <li className="nav-item dropdown nav-item-style">
-                          <a
-                            className="nav-link active navbar-menu-item d-flex align-items-center"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                          >
-                            <img src={prothomPatha} className="img-fluid icon-right-space" alt="main logo" />
-                            প্রথম পাতা
-                            <img src={downArrorIcon} className="img-fluid icon-left-space tick-icons" alt="tik icon" />
-                          </a>
-                          <ul className="dropdown-menu border-0 dropdown-menu-item-style">
-                            <li>
-                              <a className="dropdown-item" href="#">
-                                <div className="dropdown-list-item-style d-flex align-items-center">
-                                  <img
-                                    src={unOrderListIcon}
-                                    className="img-fluid dropdown-list-item-icon"
-                                    alt="icon"
-                                  />
-                                  <p className="dropdown-class-list">প্রধান শিক্ষক</p>
-                                </div>
-                              </a>
-                            </li>
-                            <li>
-                              <a className="dropdown-item" href="#">
-                                <div className="dropdown-list-item-style d-flex align-items-center">
-                                  <img
-                                    src={unOrderListIcon}
-                                    className="img-fluid dropdown-list-item-icon"
-                                    alt="icon"
-                                  />
-                                  <p className="dropdown-class-list">
-                                    বিষয়ভিত্তিক শিক্ষক
-                                  </p>
-                                </div>
-                              </a>
-                            </li>
-                          </ul>
-                        </li> */}
+
 
                             <li className="nav-item dropdown nav-item-style ">
                               <a
@@ -763,13 +831,15 @@ const Navbar = () => {
                   <div className="d-lg-flex d-block align-items-lg-center mt-2 mt-lg-0">
                     <div className="btn-group position-relative">
                       <button
-                        onClick={fetchData}
+                        // onClick={fetchData}
+                        onClick={handleUpdateData}
                         className="nav-link navbar-menu-item nav-right-dorpdown d-flex align-items-center mx-1"
                         type="button"
                         title="যদি কিছু ডেটা যেমন শিক্ষার্থী যোগ করা হয়, শিক্ষক যোগ করা হয় বা অন্য কিছু আপডেট করা হয় তবে দয়া করে ডেটা পুনরায় লোড করুন"
                       >
                         ডেটা আপডেট করুন
                       </button>
+                      {/* <div>{loadingspinner && <><Spinner animation="border" variant="primary"/> ডেটা লোড হচ্ছে অনুগ্রহ করে অপেক্ষা করুন</>}</div> */}
 
                       {showReportDeleteEv() ||
                         (showReportEvBoth() && (

@@ -23,15 +23,12 @@ const LoginPage = () => {
   const [loading, setloading] = useState(false);
   const [savePin, setSavePin] = useState(false);
   const [userId, setUserId] = useState('');
-  const [sliderData, setsliderData] = useState([]);
+ 
   const [userId_from_Cookie, setUserId_from_Cookie] = useState("");
   const [userPin_from_Cookie, setUserPin_from_Cookie] = useState("");
 
 
-  const fetchData = async() => {
-    const { data }: any = await landingPageSlider();
-    setsliderData(data.data)
-  };
+
 
 
   const setCookie = (name, value, days) => {
@@ -131,7 +128,7 @@ const LoginPage = () => {
 
   useEffect(() => {
 
-    fetchData()
+    // fetchData()
     const userId_Cookes = getCookie("userId");
     const userPin_Cookies = getCookie("userPin");
     localStorage.removeItem("customer_login_auth");
@@ -176,7 +173,7 @@ const LoginPage = () => {
     }, [])
 
 
-    console.log(`sliderData`,  sliderData);
+    // console.log(`sliderData`,  sliderData);
 
   return (
     <>
@@ -210,9 +207,7 @@ const LoginPage = () => {
               <div className="row">
                 <div className="col-sm-12 col-md-7 col-xl-8">
 
-                  {
-                    sliderData.length > 0 && <LoginPageCommonLeft />
-                  }
+                <LoginPageCommonLeft />
 
 
 

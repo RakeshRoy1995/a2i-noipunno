@@ -23,7 +23,7 @@ const LoginPage = () => {
   const [loading, setloading] = useState(false);
   const [savePin, setSavePin] = useState(false);
   const [userId, setUserId] = useState('');
-  const [sliderData, setsliderData] = useState([]);
+ 
   const [userId_from_Cookie, setUserId_from_Cookie] = useState("");
   const [userPin_from_Cookie, setUserPin_from_Cookie] = useState("");
 
@@ -169,7 +169,7 @@ const LoginPage = () => {
     }, [])
 
 
-    console.log(`sliderData`,  sliderData);
+    // console.log(`sliderData`,  sliderData);
 
   return (
     <>

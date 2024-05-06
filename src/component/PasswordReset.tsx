@@ -384,7 +384,7 @@ const PasswordReset = () => {
                                   name="pin"
                                   required
                                   defaultValue={modifiedNumber}
-                                  placeholder="মোবাইল নম্বর"
+                                  placeholder={ modifiedNumber == "" && "আপনি মোবাইল নম্বর প্রদান করেননি"}
                                   disabled
                                 />
                               </div>
@@ -405,7 +405,7 @@ const PasswordReset = () => {
                                   name="email"
                                   required
                                   defaultValue={modifiedEmail(email)}
-                                  placeholder="ইমেইল"
+                                  placeholder={ modifiedEmail(email) == "" && "আপনি ইমেল প্রদান করেননি "}
                                   disabled
                                 />
                               </div>

@@ -53,8 +53,8 @@ const ShikkathirHaziraChart = ({ onClick }) => {
   };
 
   return (
-    <div className="col-lg col-md-6" onClick={handleClick}>
-      <Teacher />
+    <div className="col-lg col-md-6" >
+      <Teacher onClick={handleClick} />
     </div>
   );
 };

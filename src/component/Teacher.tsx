@@ -33,7 +33,7 @@ import bookIcon from "../../src/assets/dashboard_materials/images/dashboard/bico
 import "../../src/assets/project_ca_html/css/dashboard.css";
 import ReportForHeadTeacherDashboard from "./Dashboards/ReportForHeadTeacherDashboard";
 
-export default function Teacher() {
+export default function Teacher({ onClick }: any) {
   const [showLoadingErr, setshowLoadingErr] = useState("");
   const [showMainAssessments, setshowMainAssessments] = useState<any>(false);
   let [numberOfRender, setnumberOfRender] = useState(1);
@@ -199,8 +199,6 @@ export default function Teacher() {
             }
           });
         });
-
-        console.log(`2222222`, own_subjet);
 
         setall_bis(own_subjet.data.data.bis);
         setallCompitance(compitnc_obj);
@@ -375,6 +373,8 @@ export default function Teacher() {
                                         setpi_selection(
                                           d.own_subjet?.pi_selection
                                         );
+
+                                        onClick();
                                       }
 
                                       // {

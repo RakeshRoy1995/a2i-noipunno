@@ -178,6 +178,10 @@ const PasswordReset = () => {
 
   // modifiedEmail function
   const modifiedEmail = (email) => {
+    if (!email) {
+      return "";
+    }
+    console.log(email);
     const replacedPart = "*".repeat(email.length - 7)
     const visiblePart = email.substring(0, 3) + ".com";
     return visiblePart.substring(0, 3) + replacedPart + visiblePart.substring(visiblePart.length - 4)
@@ -298,7 +302,7 @@ const PasswordReset = () => {
                       </>
 
                     }
-                    
+
                   </p>
 
                   {msg && <p className="text-center alert alert-info bn" style={{ backgroundColor: '#17A2B8', color: 'white' }}>{msg}</p>}

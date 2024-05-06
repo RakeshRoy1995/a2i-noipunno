@@ -15,16 +15,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 15px;
 }
 
 .teacher-student-card .card-container .total-student .title h3 {
   color: #428f92;
   font-feature-settings: "clig" off, "liga" off;
   font-family: Public Sans;
-  font-size: 14px;
+  font-size: 24px;
   font-style: normal;
   font-weight: 300;
-  line-height: 16px;
+  line-height: 26px;
   text-transform: uppercase;
 }
 
@@ -32,7 +33,7 @@
   color: #2d6668;
   font-feature-settings: "clig" off, "liga" off;
   font-family: Public Sans;
-  font-size: 14px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: 16px;
@@ -74,5 +75,3 @@
   text-align: center;
   color: #428f92;
 }
-
-

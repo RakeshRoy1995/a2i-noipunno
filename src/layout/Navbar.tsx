@@ -182,7 +182,8 @@ const Navbar = () => {
   //     }
   //   }
   // };
-  const fetchData = () => {
+
+  const fetchData = async () => {
     try {
       // Remove items from localStorage except 'customer_login_auth' and 'token'
       for (let i = 0; i < localStorage.length; i++) {
@@ -194,25 +195,28 @@ const Navbar = () => {
 
       // Redirect to the home page
       window.location.href = '/'; // Adjust the URL to your home page URL
-
-  
-
     } catch (error) {
       // Handle errors
       setshowLoadingErr("");
 
-      numberOfRender++;
-
+      // Increment numberOfRender if less than or equal to 10
       if (numberOfRender <= 10) {
-        setnumberOfRender(numberOfRender);
-        fetchData(); // Recursive call is not async, no need for await
+        setnumberOfRender(prev => prev + 1);
       } else {
+        // If numberOfRender exceeds 10, show an error message
         setshowLoadingErr(
           "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
         );
+        return;
       }
+
+      // Retry fetching after handling the error
+     
     }
   };
+
+
+
 
 
   useEffect(() => {
@@ -224,25 +228,8 @@ const Navbar = () => {
 // fetchData()
 // }
 const handleUpdateData = () => {
-  // Set loadingspinner to true to indicate data fetching is in progress
-  setloadingspinner(true);
-
   // Perform data fetching
   fetchData()
-    .then((data) => {
-      // Data fetching completed successfully
-      // Perform any necessary operations with the data
-
-      // Set loadingspinner back to false since data fetching is completed
-      setloadingspinner(false);
-    })
-    .catch((error) => {
-      // Handle errors if any occurred during data fetching
-      console.error("Error fetching data:", error);
-
-      // Set loadingspinner back to false since data fetching is completed (even if it failed)
-      setloadingspinner(false);
-    });
 };
 
 

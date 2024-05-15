@@ -124,7 +124,7 @@ const Navbar = () => {
 
   const fetchData = () => {
     try {
-     
+
 
       localStorage.removeItem('teacher_dashboard');
       localStorage.removeItem('own_subjet');
@@ -139,18 +139,24 @@ const Navbar = () => {
       // Handle errors
       setshowLoadingErr("");
 
-      numberOfRender++;
-
+      // Increment numberOfRender if less than or equal to 10
       if (numberOfRender <= 10) {
-        setnumberOfRender(numberOfRender);
-        fetchData(); // Recursive call is not async, no need for await
+        setnumberOfRender(prev => prev + 1);
       } else {
+        // If numberOfRender exceeds 10, show an error message
         setshowLoadingErr(
           "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
         );
+        return;
       }
+
+      // Retry fetching after handling the error
+
     }
   };
+
+
+
 
 
   useEffect(() => {

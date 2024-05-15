@@ -12,14 +12,11 @@ export default function BreadcumbHome({ setshowMainAssessments, seshowCompitance
         <div className="card" style={{ backgroundColor: "white" }}>
           <button
             className='border-0  rounded shadow-sm bg-white w-100' onClick={() => {
-              seshowSubject(false);
-              setShowProfile(false)
+              seshowSubject( breadcumbTitle ? false : true);
+              setShowProfile(breadcumbTitle ? false : true)
               seshowCompitance(false)
               setshowMainAssessments(false)
               setMullayon_name("")
-              navigate('/')
-
-
             }} style={{ padding: "1rem",  }}>
             <MdArrowBackIosNew className="fs-3 text-secondary" />
           </button>
@@ -52,7 +49,9 @@ export default function BreadcumbHome({ setshowMainAssessments, seshowCompitance
               <h6 className="d-flex justify-content-lg-center align-items-center gap-1" style={{ color: "#428F92", fontSize: "12px" }}>
                 {" "}
                 <AiOutlineHome />
-                প্রথম পাতা{" "}
+                <div className="curson_pointer">
+                  প্রথম পাতা  {" "}
+                </div> 
                 <span style={{ color: "#000" }} className="d-flex justify-content-lg-center align-items-center">
                   {" "}
                   <MdOutlineArrowForwardIos />

@@ -121,80 +121,20 @@ const Navbar = () => {
     }
   };
 
-  // const fetchData = async () => {
-  //   try {
-  //     const data_dash: any = await teacher_dashboard();
-  //     localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
 
-  //     const own_subjet: any = await reloadteacher_own_subject();
-  //     localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
-
-  //     window.location.reload();
-  //   } catch (error) {
-  //     Swal.fire({
-  //       icon: "error",
-  //       title:
-  //         "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন",
-  //       confirmButtonText: "হ্যাঁ",
-  //     });
-  //   }
-  // };
-
-  // const fetchData = async () => {
-  //   try {
-  //     // Check if teacher_dashboard, cls_room, and own_subject are in localStorage
-  //     if (localStorage.getItem("teacher_dashboard")) {
-  //       localStorage.removeItem("teacher_dashboard");
-  //     }
-
-  //     if (localStorage.getItem("cls_room")) {
-  //       localStorage.removeItem("cls_room");
-  //     }
-
-  //     if (localStorage.getItem("own_subjet")) {
-  //       localStorage.removeItem("own_subjet");
-  //     }
-  //     if (localStorage.getItem("bi")) {
-  //       localStorage.removeItem("bi");
-  //     }
-
-  //     const data_dash = await teacher_dashboard();
-  //     localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash.data));
-
-  //     const own_subjet = await teacher_own_subject_redesign();
-  //     localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
-
-  //     setloader(false);
-
-  //     // await fetchData_for_restapi();
-  //   } catch (error) {
-  //     setshowLoadingErr("");
-
-  //     numberOfRender++;
-
-  //     if (numberOfRender <= 10) {
-  //       setnumberOfRender(numberOfRender);
-  //       await fetchData(); // Await the recursive call
-  //     } else {
-  //       setshowLoadingErr(
-  //         "দুঃখিত। তথ্য সঠিকভাবে লোড হয়নি। অনুগ্রহ করে সাইটটি আবার লোড করুন"
-  //       );
-  //     }
-  //   }
-  // };
-
-  const fetchData = async () => {
+  const fetchData = () => {
     try {
-      // Remove items from localStorage except 'customer_login_auth' and 'token'
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key !== 'customer_login_auth' && key !== 'token') {
-          localStorage.removeItem(key);
-        }
-      }
 
-      // Redirect to the home page
-      window.location.href = '/'; // Adjust the URL to your home page URL
+
+      localStorage.removeItem('teacher_dashboard');
+      localStorage.removeItem('own_subjet');
+      localStorage.removeItem('all_students');
+      localStorage.removeItem('our_all_pi');
+      localStorage.removeItem('bi');
+
+      window.location.href = '/';
+
+
     } catch (error) {
       // Handle errors
       setshowLoadingErr("");
@@ -211,7 +151,7 @@ const Navbar = () => {
       }
 
       // Retry fetching after handling the error
-     
+
     }
   };
 
@@ -223,15 +163,6 @@ const Navbar = () => {
     activeRoute();
   }, [location]);
 // handle update data
-
-// const handleUpdateData =()=>{
-// fetchData()
-// }
-const handleUpdateData = () => {
-  // Perform data fetching
-  fetchData()
-};
-
 
   return (
     <>
@@ -818,8 +749,7 @@ const handleUpdateData = () => {
                   <div className="d-lg-flex d-block align-items-lg-center mt-2 mt-lg-0">
                     <div className="btn-group position-relative">
                       <button
-                        // onClick={fetchData}
-                        onClick={handleUpdateData}
+                        onClick={fetchData}
                         className="nav-link navbar-menu-item nav-right-dorpdown d-flex align-items-center mx-1"
                         type="button"
                         title="যদি কিছু ডেটা যেমন শিক্ষার্থী যোগ করা হয়, শিক্ষক যোগ করা হয় বা অন্য কিছু আপডেট করা হয় তবে দয়া করে ডেটা পুনরায় লোড করুন"

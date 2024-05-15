@@ -28,9 +28,6 @@ const LoginPage = () => {
   const [userPin_from_Cookie, setUserPin_from_Cookie] = useState("");
 
 
-
-
-
   const setCookie = (name, value, days) => {
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + days);
@@ -128,7 +125,6 @@ const LoginPage = () => {
 
   useEffect(() => {
 
-    // fetchData()
     const userId_Cookes = getCookie("userId");
     const userPin_Cookies = getCookie("userPin");
     localStorage.removeItem("customer_login_auth");
@@ -208,8 +204,6 @@ const LoginPage = () => {
                 <div className="col-sm-12 col-md-7 col-xl-8">
 
                 <LoginPageCommonLeft />
-
-
 
                 </div>
 

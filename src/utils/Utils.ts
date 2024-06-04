@@ -375,13 +375,9 @@ export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
   return own_subjet;
 };
 
-export const formate_own_subject_data_new = (
-  class_room: any
-) => {
+export const formate_own_subject_data_new = (class_room: any) => {
   const own_subject_data: any = [];
 
-  
-  
   class_room?.data?.data?.subjects.map((d_2: any) => {
     let obj = {};
     const stdnt = d_2.class_room.students.map((formate_stu) => {
@@ -397,20 +393,19 @@ export const formate_own_subject_data_new = (
       delete studnt["student_info"];
       return studnt;
     });
-    
 
     d_2.class_room.students = stdnt;
     obj = { ...d_2 };
     own_subject_data.push(obj);
   });
 
-  const own_subjet :any = {
-    data : {
-      data : {
-        subjects : own_subject_data
-      }
-    }
-  }
+  const own_subjet: any = {
+    data: {
+      data: {
+        subjects: own_subject_data,
+      },
+    },
+  };
 
   return own_subjet;
 };
@@ -816,3 +811,47 @@ export const show_report_open_time_msg =
   "সকলের অবগতির জন্য জানানো যাচ্ছে যে, ২০২৪ সালের শিক্ষাবর্ষের কার্যক্রম চালু করার লক্ষ্যে আগামী ১৭ জানুয়ারি সন্ধ্যা ছয়টা থেকে ২০ জানুয়ারি সন্ধ্যা ছয়টা পর্যন্ত  নৈপুণ্য এর কার্যক্রম সাময়িকভাবে বন্ধ থাকবে। সবার সহযোগিতার জন্যে ধন্যবাদ";
 // export const show_report_OFF_time_msg = "দুপুর ১টা থেকে মূল্যায়ন খোলা থাকবে";
 export const show_report_OFF_time_msg = "";
+
+export function getSudentbyReligion(studnt = [], subject_name = "") {
+  if (
+    subject_name == "ইসলাম শিক্ষা" ||
+    subject_name == "হিন্দুধর্ম শিক্ষা" ||
+    subject_name == "খ্রীষ্টধর্ম শিক্ষা" ||
+    subject_name == "বৌদ্ধধর্ম শিক্ষা"
+  ) {
+    
+    const list = studnt.filter((data: any) => {
+      if (
+        data?.religion == "Islam" &&
+        (subject_name == "ইসলাম শিক্ষা")
+      ) {
+        return true;
+      }
+
+      if (
+        data?.religion == "Hinduism" &&
+        (subject_name == "হিন্দুধর্ম শিক্ষা")
+      ) {
+        return true;
+      }
+
+      if (
+        data?.religion == "Christianity" &&
+        (subject_name == "খ্রীষ্টধর্ম শিক্ষা")
+      ) {
+        return true;
+      }
+
+      if (
+        data?.religion == "Buddhism" &&
+        (subject_name == "বৌদ্ধধর্ম শিক্ষা")
+      ) {
+        return true;
+      }
+    });
+    
+    return list;
+  } else {
+    return studnt;
+  }
+}

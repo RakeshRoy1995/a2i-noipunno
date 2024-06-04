@@ -16,6 +16,7 @@ import { Link, useLocation } from "react-router-dom";
 import BreadcumbHome from "../layout/BreadcumbHome";
 import {
   formate_own_subject_data,
+  getSudentbyReligion,
   section_name,
   shift_name,
   showReportDeleteEv,
@@ -347,8 +348,10 @@ export default function Teacher({ onClick }: any) {
                                           skill_behaibor_count(d);
                                         seshowSubjectname(d.subject.name);
 
-                                        const studnt =
-                                          d?.own_subjet?.class_room?.students;
+                                        const studnt = getSudentbyReligion(d?.own_subjet?.class_room?.students , d?.subject?.name)
+
+                                        // const studnt =
+                                        //   d?.own_subjet?.class_room?.students;
 
                                         studnt.sort(function (a, b) {
                                           return a.roll - b.roll;

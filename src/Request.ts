@@ -1,5 +1,8 @@
 import axios from "axios";
-import { formate_own_subject_data, formate_own_subject_data_new } from "./utils/Utils";
+import {
+  formate_own_subject_data,
+  formate_own_subject_data_new,
+} from "./utils/Utils";
 
 const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 const EVULATION_API = import.meta.env.VITE_REACT_APP_PI_EVULATION_API_URL;
@@ -182,9 +185,9 @@ export function clssWiseSubject(data: any) {
 }
 
 export async function teacher_own_subject_redesign() {
-    const object :any= {}
-    const cls_room = await class_room_info();
-    localStorage.setItem("cls_room", JSON.stringify(cls_room));
+  const object: any = {};
+  const cls_room = await class_room_info();
+  localStorage.setItem("cls_room", JSON.stringify(cls_room));
 
   if (cls_room?.data?.data?.subjects?.length == 0) {
     object.success = false;
@@ -192,14 +195,12 @@ export async function teacher_own_subject_redesign() {
     return object;
   }
 
-  if ( cls_room.data.status ) {
+  if (cls_room.data.status) {
     const data = formate_own_subject_data_new(cls_room);
     data.success = true;
     return data;
   }
 }
-
-
 
 export async function teacher_own_subject() {
   const page_list = `${API_URL}/v2/own-subjects`;
@@ -218,7 +219,6 @@ export async function teacher_own_subject() {
     object.msg = "আপনি কোনও বিষয় পাননি";
     return object;
   }
-
 
   let common_info: any = localStorage.getItem("common_room")
     ? JSON.parse(localStorage.getItem("common_room"))
@@ -265,9 +265,6 @@ export async function teacher_own_subject() {
   }
 }
 
-
-
-
 export async function teacher_own_subject_new() {
   const page_list = `${API_URL}/v2/own-subjects`;
 
@@ -285,7 +282,6 @@ export async function teacher_own_subject_new() {
     object.msg = "আপনি কোনও বিষয় পাননি";
     return object;
   }
-
 
   let common_info: any = localStorage.getItem("common_room")
     ? JSON.parse(localStorage.getItem("common_room"))
@@ -349,12 +345,8 @@ export async function reloadteacher_own_subject() {
   const student: any = [];
 
   if (bi !== "" && common_info !== "" && cls_room !== "") {
-
     const data_dash: any = await class_teacher_all_student_data();
-    localStorage.setItem(
-      "class_teacher_student",
-      JSON.stringify(data_dash)
-    );
+    localStorage.setItem("class_teacher_student", JSON.stringify(data_dash));
 
     own_sub.data.data.subjects.map((std_data: any) => {
       std_data.competence.map((conpitance_data: any) => {
@@ -419,16 +411,164 @@ export function get_common_info() {
   return axios(options);
 }
 
-export function teacher_dashboard() {
-  const page_list = `${API_URL}/v2/teacher-dashboard`;
+export async function teacher_dashboard() {
+  // const page_list = `${API_URL}/v2/teacher-dashboard`;
 
-  const options = {
-    method: "get",
+  // const options = {
+  //   method: "get",
+  //   headers: { "content-type": "application/json" },
+  //   url: page_list,
+  // };
+
+  // return axios(options);
+
+  const { user }: any = JSON.parse(localStorage.getItem("customer_login_auth"));
+  const caid = user?.caid;
+
+  const page_list_teacher = `${EVULATION_API}/v3/teacher-get-by-caid`;
+  const options_teacher = {
+    method: "POST",
     headers: { "content-type": "application/json" },
-    url: page_list,
+    url: page_list_teacher,
+    data: {
+      caid,
+    },
   };
 
-  return axios(options);
+  const teachers = await axios(options_teacher);
+
+
+  const page_list_institute = `${EVULATION_API}/v3/institute-by-eiin/${user?.eiin}`;
+  const options_institute = {
+    method: "GET",
+    headers: { "content-type": "application/json" },
+    url: page_list_institute,
+  };
+
+  const institute = await axios(options_institute);
+
+  const page_list_shift = `${EVULATION_API}/v3/shift-list`;
+  const options_shift = {
+    method: "GET",
+    headers: { "content-type": "application/json" },
+    url: page_list_shift,
+  };
+
+  const shift = await axios(options_shift);
+
+
+
+  const page_list_version = `${EVULATION_API}/v3/version-list`;
+  const options_version = {
+    method: "GET",
+    headers: { "content-type": "application/json" },
+    url: page_list_version,
+  };
+
+  const version = await axios(options_version);
+
+
+  const page_list_section = `${EVULATION_API}/v3/section-list`;
+  const options_section = {
+    method: "GET",
+    headers: { "content-type": "application/json" },
+    url: page_list_section,
+  };
+
+  const section = await axios(options_section);
+
+
+  const page_list_subject = `${EVULATION_API}/v3/teacher-subject-list`;
+  const options_subject = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    url: page_list_subject,
+    data : {
+      uid : teachers?.data?.data?.uid
+    }
+
+  };
+
+  const subject = await axios(options_subject);
+
+  const page_list_cls_teacher = `${EVULATION_API}/v3/class-teacher-check`;
+  const options_cls_teacher = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    url: page_list_cls_teacher,
+    data : {
+      uid : teachers?.data?.data?.uid
+    }
+
+  };
+
+  const cls_teacher = await axios(options_cls_teacher);
+  const newUser = {
+    ...user , 
+    district_id : teachers?.data?.data?.district_id,
+    division_id : teachers?.data?.data?.division_id,
+    upazilla_id : teachers?.data?.data?.upazilla_id,
+  }
+
+  const newTeacher = {
+    ...teachers?.data?.data , 
+    is_class_teacher : cls_teacher?.data?.data,
+  }
+
+  const newObj = {
+    data : {
+      institute : [institute?.data?.data] || [],
+      sections : section?.data?.data || [],
+      shifts : shift?.data?.data || [],
+      subjects : subject?.data?.data || [],
+      teachers : [newTeacher] || [],
+      versions : version?.data?.data || [],
+      user : newUser
+    },
+    status : true
+  }
+
+  return newObj;
+}
+
+export async function teacher_dashboardForRestData() {
+
+  const { data }: any = JSON.parse(localStorage.getItem("teacher_dashboard"));
+
+  const page_list_branch = `${EVULATION_API}/v3/branch-list`;
+  const options_branch = {
+    method: "GET",
+    headers: { "content-type": "application/json" },
+    url: page_list_branch,
+  };
+
+  const branch = await axios(options_branch);
+
+
+
+  const page_list_class = `${EVULATION_API}/v3/class-list`;
+  const options_class = {
+    method: "GET",
+    headers: { "content-type": "application/json" },
+    url: page_list_class,
+  };
+
+  const classes = await axios(options_class);
+
+
+
+
+  const newObj = {
+    data : {
+      ...data, 
+      branches : branch?.data?.data,
+      classes : classes?.data?.data,
+    },
+    status : true
+  }
+
+  console.log(`xxxxxxxx`, newObj);
+  return newObj;
 }
 
 export function all_student() {
@@ -443,10 +583,8 @@ export function all_student() {
   return axios(options);
 }
 
-
 export function update_teacher_profile(caid: any, data: any) {
   const page_list = `${EVULATION_API}/v2/teachers/${caid}`;
-
 
   let obj = {};
   for (const [name, value] of data) {
@@ -455,10 +593,9 @@ export function update_teacher_profile(caid: any, data: any) {
     }
   }
 
-
   let img = {};
   for (const [name, value] of data) {
-    if ((name === "image" || name == "signature")) {
+    if (name === "image" || name == "signature") {
       img = { ...img, [name]: value };
     }
   }
@@ -468,7 +605,7 @@ export function update_teacher_profile(caid: any, data: any) {
     headers: { "content-type": "multipart/form-data" },
     url: page_list,
     params: { ...obj },
-    data: { ...img }
+    data: { ...img },
   };
 
   return axios(options);
@@ -770,7 +907,7 @@ export function attendance_get(setDate) {
     url: page_list,
     params: {
       class_room_uid: setDate.class_room_uid,
-      date: setDate.date
+      date: setDate.date,
     },
   };
   return axios(options);
@@ -814,7 +951,6 @@ export function confirm_pass(data: any) {
 
   return axios(options);
 }
-
 
 export function class_teacher_all_student_data() {
   const page_list = `${API_URL}/v2/class-students`;

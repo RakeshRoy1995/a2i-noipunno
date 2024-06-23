@@ -5,6 +5,7 @@ import {
   class_room_info,
   get_common_info,
   teacher_dashboard,
+  teacher_dashboardForRestData,
   teacher_own_subject,
   teacher_own_subject_redesign,
 } from "../Request";
@@ -86,12 +87,14 @@ export default function Teacher({ onClick }: any) {
         data = teacher_dash;
       } else {
         const data_dash: any = await teacher_dashboard();
-        data = data_dash.data;
+        data = data_dash;
         localStorage.setItem(
           "teacher_dashboard",
-          JSON.stringify(data_dash.data)
+          JSON.stringify(data_dash)
         );
       }
+
+      console.log(`datadash`, data);
 
       const own_subjet_: any = localStorage.getItem("own_subjet") || "";
       let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
@@ -179,6 +182,8 @@ export default function Teacher({ onClick }: any) {
       if (own_subjet?.success == false) {
         setshowLoadingErr(own_subjet.msg);
       } else {
+
+
         setown_data(own_subjet?.data?.data);
         setteacher(own_subjet.data.data.user);
 
@@ -205,10 +210,17 @@ export default function Teacher({ onClick }: any) {
         setallCompitance(compitnc_obj);
         setsubject(all_subject);
         setloader(false);
+        
       }
       //
+      
       seshowSkillBehaibor(true);
       setwaitForMoreData(false);
+      const dashboardData =  await teacher_dashboardForRestData()
+      localStorage.setItem(
+        "teacher_dashboard",
+        JSON.stringify(dashboardData)
+      );
     } catch (error) {
       setshowLoadingErr("");
 

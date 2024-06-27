@@ -88,13 +88,8 @@ export default function Teacher({ onClick }: any) {
       } else {
         const data_dash: any = await teacher_dashboard();
         data = data_dash;
-        localStorage.setItem(
-          "teacher_dashboard",
-          JSON.stringify(data_dash)
-        );
+        localStorage.setItem("teacher_dashboard", JSON.stringify(data_dash));
       }
-
-      console.log(`datadash`, data);
 
       const own_subjet_: any = localStorage.getItem("own_subjet") || "";
       let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
@@ -139,6 +134,8 @@ export default function Teacher({ onClick }: any) {
         await fetchData_for_restapi();
       }
     } catch (error) {
+
+      console.log(`error`, error);
       setshowLoadingErr("");
 
       numberOfRender++;
@@ -170,7 +167,6 @@ export default function Teacher({ onClick }: any) {
       const own_subjet_: any = localStorage.getItem("own_subjet") || "";
       let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
 
-      console.log(`own_subjet`, own_subjet.data.data.bis);
       if (!own_subjet.data.data.bis) {
         own_subjet = await teacher_own_subject();
       }
@@ -182,8 +178,6 @@ export default function Teacher({ onClick }: any) {
       if (own_subjet?.success == false) {
         setshowLoadingErr(own_subjet.msg);
       } else {
-
-
         setown_data(own_subjet?.data?.data);
         setteacher(own_subjet.data.data.user);
 
@@ -210,22 +204,21 @@ export default function Teacher({ onClick }: any) {
         setallCompitance(compitnc_obj);
         setsubject(all_subject);
         setloader(false);
-        
       }
       //
-      
+
       seshowSkillBehaibor(true);
       setwaitForMoreData(false);
-      const dashboardData =  await teacher_dashboardForRestData()
-      localStorage.setItem(
-        "teacher_dashboard",
-        JSON.stringify(dashboardData)
-      );
+      if (teacher_dash?.data?.classes) {
+        const dashboardData = await teacher_dashboardForRestData();
+        localStorage.setItem(
+          "teacher_dashboard",
+          JSON.stringify(dashboardData)
+        );
+      }
     } catch (error) {
       setshowLoadingErr("");
-
       numberOfRender++;
-
       if (numberOfRender <= 10) {
         setnumberOfRender(numberOfRender);
         fetchData();
@@ -360,7 +353,10 @@ export default function Teacher({ onClick }: any) {
                                           skill_behaibor_count(d);
                                         seshowSubjectname(d.subject.name);
 
-                                        const studnt = getSudentbyReligion(d?.own_subjet?.class_room?.students , d?.subject?.name)
+                                        const studnt = getSudentbyReligion(
+                                          d?.own_subjet?.class_room?.students,
+                                          d?.subject?.name
+                                        );
 
                                         // const studnt =
                                         //   d?.own_subjet?.class_room?.students;

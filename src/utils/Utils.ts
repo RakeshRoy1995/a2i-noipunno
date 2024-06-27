@@ -333,7 +333,9 @@ export const all_students = (students_id: any) => {
 
 export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
   const own_subject_data: any = [];
-  own_subjet.data.data.subjects.map((d: any) => {
+
+  
+  own_subjet.data.subjects.map((d: any) => {
     let obj = {};
     class_room?.data?.data?.subjects.map((d_2: any) => {
       if (d_2?.subject_id === d?.subject_id && d_2.class_room) {
@@ -365,13 +367,7 @@ export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
 
     return obj;
   });
-
-  own_subjet.data.data.subjects = own_subject_data;
-
-  delete own_subjet["config"];
-  delete own_subjet["headers"];
-  delete own_subjet["request"];
-
+  own_subjet.subjects = own_subject_data;
   return own_subjet;
 };
 
@@ -855,3 +851,45 @@ export function getSudentbyReligion(studnt = [], subject_name = "") {
     return studnt;
   }
 }
+
+
+
+export const formate_own_subject_from_json = (own_subjet: any, class_room: any) => {
+  
+
+  const data = [];
+
+  const clss_room = class_room?.data?.data?.subjects
+  const clss_own_subjet = own_subjet?.data?.data?.subjects
+
+  for (let index = 0; index < clss_room.length; index++) {
+    const clssRoom_element = clss_room[index];
+
+    for (let index = 0; index < clss_own_subjet.length; index++) {
+      const dubject_element = clss_own_subjet[index];
+      let obj = {}
+      if (dubject_element?.uid ==  clssRoom_element?.subject_id) {
+        obj = {
+          ['competence'] : dubject_element?.competence,
+          ['oviggota'] : dubject_element?.oviggota,
+          ['pi_selection'] : dubject_element?.pi_selection,
+          ['subject_id'] : clssRoom_element?.subject_id,
+          ['subject_uid'] : clssRoom_element?.subject_id,
+        }
+        data.push(obj)
+      }
+      
+    }
+    
+  }
+
+  const result = {
+    data : {
+      subjects : data
+    },
+    status : true
+
+  }
+  console.log(`result`,  result);
+  return result;
+};

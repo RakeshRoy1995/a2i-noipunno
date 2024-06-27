@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   formate_own_subject_data,
   formate_own_subject_data_new,
+  formate_own_subject_from_json,
 } from "./utils/Utils";
 
 const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
@@ -203,15 +204,22 @@ export async function teacher_own_subject_redesign() {
 }
 
 export async function teacher_own_subject() {
-  const page_list = `${API_URL}/v2/own-subjects`;
 
-  const options = {
+
+
+  const page_list_2 = `own-subjects.json`;
+
+  const options_2 = {
     method: "get",
     headers: { "content-type": "application/json" },
-    url: page_list,
+    url: page_list_2,
   };
 
-  const own_sub = await axios(options);
+  const own_sub = await axios(options_2);
+
+  
+
+
 
   const object: any = {};
   if (own_sub.data.data.subjects.length == 0) {
@@ -253,15 +261,30 @@ export async function teacher_own_subject() {
   }
 
   if (bi !== "" && common_info !== "" && cls_room !== "") {
-    const data = formate_own_subject_data(own_sub, cls_room);
-    data.data.data.assessments = common_info.data.data.assessments;
-    data.data.data.pi_attribute_weight =
+    const newOwnSub = formate_own_subject_from_json(own_sub , cls_room)
+    
+    const data = formate_own_subject_data(newOwnSub, cls_room);
+
+    console.log(newOwnSub);
+    data.assessments = common_info.data.data.assessments;
+    data.pi_attribute_weight =
       common_info.data.data.pi_attribute_weight;
-    data.data.data.bis = bi.data.data.bis;
+    data.bis = bi.data.data.bis;
     data.success = true;
+
+    const res = {
+      data : {
+        data
+      },
+      status :  200,
+      statusText : "", 
+      success :  true
+    }
+
+    console.log(`datacsawerr`, data);
     localStorage.removeItem("common_room");
     localStorage.removeItem("cls_room");
-    return data;
+    return res;
   }
 }
 
@@ -438,6 +461,47 @@ export async function teacher_dashboard() {
   const teachers = await axios(options_teacher);
 
 
+
+  const page_list_cls_teacher = `${EVULATION_API}/v3/class-teacher-check`;
+  const options_cls_teacher = {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    url: page_list_cls_teacher,
+    data : {
+      uid : teachers?.data?.data?.uid
+    }
+
+  };
+
+  const cls_teacher = await axios(options_cls_teacher);
+  const newUser = {
+    ...user , 
+    district_id : teachers?.data?.data?.district_id,
+    division_id : teachers?.data?.data?.division_id,
+    upazilla_id : teachers?.data?.data?.upazilla_id,
+  }
+
+  const newTeacher = {
+    ...teachers?.data?.data , 
+    is_class_teacher : cls_teacher?.data?.data,
+  }
+
+
+
+  const tempnewObj = {
+    data : {
+      teachers : [newTeacher] || [],
+      user : newUser
+    },
+    status : true
+  }
+
+  localStorage.setItem(
+    "teacher_dashboard",
+    JSON.stringify(tempnewObj)
+  );
+
+
   const page_list_institute = `${EVULATION_API}/v3/institute-by-eiin/${user?.eiin}`;
   const options_institute = {
     method: "GET",
@@ -491,29 +555,7 @@ export async function teacher_dashboard() {
 
   const subject = await axios(options_subject);
 
-  const page_list_cls_teacher = `${EVULATION_API}/v3/class-teacher-check`;
-  const options_cls_teacher = {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    url: page_list_cls_teacher,
-    data : {
-      uid : teachers?.data?.data?.uid
-    }
-
-  };
-
-  const cls_teacher = await axios(options_cls_teacher);
-  const newUser = {
-    ...user , 
-    district_id : teachers?.data?.data?.district_id,
-    division_id : teachers?.data?.data?.division_id,
-    upazilla_id : teachers?.data?.data?.upazilla_id,
-  }
-
-  const newTeacher = {
-    ...teachers?.data?.data , 
-    is_class_teacher : cls_teacher?.data?.data,
-  }
+  
 
   const newObj = {
     data : {
@@ -567,7 +609,6 @@ export async function teacher_dashboardForRestData() {
     status : true
   }
 
-  console.log(`xxxxxxxx`, newObj);
   return newObj;
 }
 

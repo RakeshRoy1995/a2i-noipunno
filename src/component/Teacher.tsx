@@ -83,7 +83,13 @@ export default function Teacher({ onClick }: any) {
       const teacher_dash = teacher_dash__ ? JSON.parse(teacher_dash__) : "";
 
       let data: any = "";
-      if (teacher_dash) {
+      if (
+        teacher_dash?.data?.subjects &&
+        teacher_dash?.data?.sections &&
+        teacher_dash?.data?.shifts &&
+        teacher_dash?.data?.teachers &&
+        teacher_dash?.data?.versions
+      ) {
         data = teacher_dash;
       } else {
         const data_dash: any = await teacher_dashboard();
@@ -108,6 +114,8 @@ export default function Teacher({ onClick }: any) {
         setteacher(own_subjet.data.data.user);
 
         const all_subject: any = [];
+
+        console.log(`datasss`, data);
 
         // let compitnc_obj = {};
         own_subjet.data.data.subjects.map((d: any) => {
@@ -134,8 +142,7 @@ export default function Teacher({ onClick }: any) {
         await fetchData_for_restapi();
       }
     } catch (error) {
-
-      console.log(`error`, error);
+      console.log(`error 1111`, numberOfRender, error);
       setshowLoadingErr("");
 
       numberOfRender++;
@@ -170,10 +177,6 @@ export default function Teacher({ onClick }: any) {
       if (!own_subjet.data.data.bis) {
         own_subjet = await teacher_own_subject();
       }
-
-      // console.log(`own_subjet`, own_subjet.data.data.bis);
-
-      localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
 
       if (own_subjet?.success == false) {
         setshowLoadingErr(own_subjet.msg);
@@ -231,7 +234,6 @@ export default function Teacher({ onClick }: any) {
   };
 
   const skill_behaibor_count = async (datas: any) => {
-    console.log("skill", datas);
     seshowSkillBehaibor(true);
     seshowSubject(false);
     setselected_subject(datas);

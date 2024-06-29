@@ -206,6 +206,16 @@ export async function teacher_own_subject_redesign() {
 export async function teacher_own_subject() {
 
 
+  // const page_list = `${API_URL}/v2/own-subjects`;
+
+  // const options = {
+  //   method: "get",
+  //   headers: { "content-type": "application/json" },
+  //   url: page_list,
+  // };
+
+  // const own_sub_2 = await axios(options);
+
 
   const page_list_2 = `own-subjects.json`;
 
@@ -216,10 +226,6 @@ export async function teacher_own_subject() {
   };
 
   const own_sub = await axios(options_2);
-
-  
-
-
 
   const object: any = {};
   if (own_sub.data.data.subjects.length == 0) {
@@ -262,14 +268,11 @@ export async function teacher_own_subject() {
 
   if (bi !== "" && common_info !== "" && cls_room !== "") {
     const newOwnSub = formate_own_subject_from_json(own_sub , cls_room)
-    
     const data = formate_own_subject_data(newOwnSub, cls_room);
-
-    console.log(newOwnSub);
     data.assessments = common_info.data.data.assessments;
     data.pi_attribute_weight =
       common_info.data.data.pi_attribute_weight;
-    data.bis = bi.data.data.bis;
+    // data.bis = bi.data.data.bis;
     data.success = true;
 
     const res = {
@@ -281,9 +284,13 @@ export async function teacher_own_subject() {
       success :  true
     }
 
-    console.log(`datacsawerr`, data);
-    localStorage.removeItem("common_room");
-    localStorage.removeItem("cls_room");
+    // localStorage.removeItem("common_room");
+    // localStorage.removeItem("cls_room");
+
+    localStorage.setItem("own_subjet", JSON.stringify(res));
+    localStorage.setItem("assessments", JSON.stringify(common_info.data.data.assessments));
+    localStorage.setItem("pi_attribute_weight", JSON.stringify(common_info.data.data.pi_attribute_weight));
+
     return res;
   }
 }

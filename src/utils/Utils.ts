@@ -334,7 +334,6 @@ export const all_students = (students_id: any) => {
 export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
   const own_subject_data: any = [];
 
-  
   own_subjet.data.subjects.map((d: any) => {
     let obj = {};
     class_room?.data?.data?.subjects.map((d_2: any) => {
@@ -367,7 +366,12 @@ export const formate_own_subject_data = (own_subjet: any, class_room: any) => {
 
     return obj;
   });
+
+
+  
   own_subjet.subjects = own_subject_data;
+  delete own_subjet['data']
+  console.log(`sdfdgtrg`, own_subjet);
   return own_subjet;
 };
 
@@ -815,81 +819,68 @@ export function getSudentbyReligion(studnt = [], subject_name = "") {
     subject_name == "খ্রীষ্টধর্ম শিক্ষা" ||
     subject_name == "বৌদ্ধধর্ম শিক্ষা"
   ) {
-    
     const list = studnt.filter((data: any) => {
-      if (
-        data?.religion == "Islam" &&
-        (subject_name == "ইসলাম শিক্ষা")
-      ) {
+      if (data?.religion == "Islam" && subject_name == "ইসলাম শিক্ষা") {
         return true;
       }
 
-      if (
-        data?.religion == "Hinduism" &&
-        (subject_name == "হিন্দুধর্ম শিক্ষা")
-      ) {
+      if (data?.religion == "Hinduism" && subject_name == "হিন্দুধর্ম শিক্ষা") {
         return true;
       }
 
       if (
         data?.religion == "Christianity" &&
-        (subject_name == "খ্রীষ্টধর্ম শিক্ষা")
+        subject_name == "খ্রীষ্টধর্ম শিক্ষা"
       ) {
         return true;
       }
 
-      if (
-        data?.religion == "Buddhism" &&
-        (subject_name == "বৌদ্ধধর্ম শিক্ষা")
-      ) {
+      if (data?.religion == "Buddhism" && subject_name == "বৌদ্ধধর্ম শিক্ষা") {
         return true;
       }
     });
-    
+
     return list;
   } else {
     return studnt;
   }
 }
 
-
-
-export const formate_own_subject_from_json = (own_subjet: any, class_room: any) => {
-  
-
+export const formate_own_subject_from_json = (
+  own_subjet: any,
+  class_room: any
+) => {
   const data = [];
 
-  const clss_room = class_room?.data?.data?.subjects
-  const clss_own_subjet = own_subjet?.data?.data?.subjects
+  const clss_room = class_room?.data?.data?.subjects;
+  const clss_own_subjet = own_subjet?.data?.data?.subjects;
 
-  for (let index = 0; index < clss_room.length; index++) {
-    const clssRoom_element = clss_room[index];
+  for (let index = 0; index < clss_own_subjet.length; index++) {
+    const dubject_element = clss_own_subjet[index];
 
-    for (let index = 0; index < clss_own_subjet.length; index++) {
-      const dubject_element = clss_own_subjet[index];
-      let obj = {}
-      if (dubject_element?.uid ==  clssRoom_element?.subject_id) {
-        obj = {
-          ['competence'] : dubject_element?.competence,
-          ['oviggota'] : dubject_element?.oviggota,
-          ['pi_selection'] : dubject_element?.pi_selection,
-          ['subject_id'] : clssRoom_element?.subject_id,
-          ['subject_uid'] : clssRoom_element?.subject_id,
-        }
-        data.push(obj)
+    for (let index = 0; index < clss_room.length; index++) {
+      const clssRoom_element = clss_room[index];
+
+      if (dubject_element?.uid == clssRoom_element?.subject_id) {
+        const obj = {
+          ["competence"]: dubject_element?.competence,
+          ["oviggota"]: dubject_element?.oviggota,
+          ["pi_selection"]: dubject_element?.pi_selection,
+          ["subject_id"]: clssRoom_element?.subject_id,
+          ["subject_uid"]: clssRoom_element?.subject_id,
+        };
+        data.push(obj);
+        break;
       }
-      
     }
-    
   }
 
   const result = {
-    data : {
-      subjects : data
+    data: {
+      subjects: data,
     },
-    status : true
-
-  }
-  console.log(`result`,  result);
+    status: true,
+  };
+  console.log(`result`, result);
   return result;
 };

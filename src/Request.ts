@@ -272,7 +272,7 @@ export async function teacher_own_subject() {
     data.assessments = common_info.data.data.assessments;
     data.pi_attribute_weight =
       common_info.data.data.pi_attribute_weight;
-    // data.bis = bi.data.data.bis;
+    data.bis = bi.data.data.bis;
     data.success = true;
 
     const res = {

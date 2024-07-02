@@ -1023,3 +1023,18 @@ export function landingPageSlider() {
 
   return axios(options);
 }
+
+export function pi_selection_list(subject_uid:any) {
+  const page_list = `${EVULATION_API}/v3/pi-selection-list`;
+
+  const options = {
+    method: "post",
+    headers: { "content-type": "application/json" },
+    url: page_list,
+    data : {
+      subject_uid
+    }
+  };
+
+  return axios(options);
+}

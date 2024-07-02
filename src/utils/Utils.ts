@@ -162,7 +162,6 @@ export const show_compitance = (compitance_uid: any) => {
 
 export const show_pis = (compitance_uid: any) => {
   const all_compitance_id = JSON.parse(localStorage.getItem("show_pi_list"));
-
   return all_compitance_id?.includes(compitance_uid) || false;
 };
 

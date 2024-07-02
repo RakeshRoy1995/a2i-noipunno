@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   class_room_info,
   get_common_info,
+  pi_selection_list,
   teacher_dashboard,
   teacher_dashboardForRestData,
   teacher_own_subject,
@@ -34,6 +35,7 @@ import ShowAssesment from "./ShowAssesment";
 import bookIcon from "../../src/assets/dashboard_materials/images/dashboard/bicon.svg";
 import "../../src/assets/project_ca_html/css/dashboard.css";
 import ReportForHeadTeacherDashboard from "./Dashboards/ReportForHeadTeacherDashboard";
+import { piValidation } from "../utils";
 
 export default function Teacher({ onClick }: any) {
   const [showLoadingErr, setshowLoadingErr] = useState("");
@@ -251,6 +253,50 @@ export default function Teacher({ onClick }: any) {
     setelement(e);
   };
 
+  const getPiSelection = async(subject_id : number)=>{
+    const own_subjet_: any = localStorage.getItem("own_subjet") || "";
+      const own_subjet :any = own_subjet_ ? JSON.parse(own_subjet_) : "";
+
+      const {data} = await pi_selection_list(subject_id)
+       
+      const subject = []
+      if (data?.data?.pi_selection) {
+
+        for (let index = 0; index < own_subjet?.data?.data?.subjects.length; index++) {
+          const Own_element = own_subjet?.data?.data?.subjects[index];
+          const pi_selection = []
+          
+          
+            for (let index = 0; index < data?.data?.pi_selection.length; index++) {
+              const Pi_element = data?.data?.pi_selection[index];
+      
+              if (Own_element?.subject_uid == Pi_element.subject_uid && piValidation(Pi_element) ) {
+  
+                setpi_selection(data?.data?.pi_selection)
+                
+              }
+              
+            }
+          
+
+          Own_element.pi_selection = pi_selection
+          subject.push(Own_element)
+        }
+
+        const obj = {
+          data : {
+            ...own_subjet?.data?.data , 
+            ['subjects'] : subject
+          }
+        }
+
+        own_subjet.data = obj
+
+        localStorage.removeItem("own_subjet")
+        localStorage.setItem("own_subjet", JSON.stringify(own_subjet) )
+      }
+  }
+
   // console.log(subject);
 
   return (
@@ -349,7 +395,7 @@ export default function Teacher({ onClick }: any) {
                                         ? "ডেটা লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন"
                                         : ""
                                     }
-                                    onClick={(e) => {
+                                    onClick={async(e) => {
                                       {
                                         !waitForMoreData &&
                                           skill_behaibor_count(d);
@@ -383,9 +429,11 @@ export default function Teacher({ onClick }: any) {
                                           d.own_subjet.subject_id
                                         );
 
-                                        setpi_selection(
-                                          d.own_subjet?.pi_selection
-                                        );
+                                        await getPiSelection(d.own_subjet.subject_id)
+
+                                        // setpi_selection(
+                                        //   d.own_subjet?.pi_selection
+                                        // );
 
                                         onClick();
                                       }

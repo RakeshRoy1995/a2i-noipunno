@@ -67,3 +67,15 @@ export const toast = (type: any, msg: any) => {
   }
 };
 
+
+export const piValidation = (data: any) => {
+  
+  const end_date = new Date(data?.end_date)
+  const start_date = new Date(data?.start_date)
+  const today = new Date()
+  if (today <= end_date && today >= start_date ) {
+    return true
+  }
+  return
+};
+

@@ -23,6 +23,8 @@ export default function ParodorshitaComponent({
   teacher_uid,
 }: any) {
   const [loadingspinner, setloadingspinner] = useState(false);
+
+  console.log(`shikhonKalinMullayon_sannasik_barsik`, shikhonKalinMullayon_sannasik_barsik);
   return (
     <>
       <div className="text-center">

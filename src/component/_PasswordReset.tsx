@@ -183,7 +183,7 @@ const PasswordReset = () => {
                       </button>
                     }
 
-                    
+
 
                     <div className="form-group my-2">
                       <p className="mb-1">
@@ -274,4 +274,3 @@ const PasswordReset = () => {
 };
 
 export default PasswordReset;
-

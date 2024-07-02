@@ -35,10 +35,10 @@ import AssesDuringLearningData from "./component/AssesDuringLearningData";
 import QuarterSummativeAssessData from "./component/QuarterSummativeAssessData";
 import AnnualSummativeAssessData from "./component/AnnualSummativeAssessData";
 import SecondComponent from "./component/SecondComponent";
-import DeviceError from './component/HOC/withDeviceShowError' 
+import DeviceError from './component/HOC/withDeviceShowError'
 
 function App() {
-  
+
   const [topbar, settopbar] = useState(false);
   const [render, setRender] = useState(true);
   const fetchData = async () => {

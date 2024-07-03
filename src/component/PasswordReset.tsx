@@ -673,7 +673,7 @@ import A2I from "../assets/login_page_materials/icons/Aspire_to_Innovate_Seal 2.
 import { Helmet } from "react-helmet";
 import { useState, useEffect, useRef, ChangeEvent } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { userInfo, resetPassword, otpComfirm, changePin } from "../Request";
 import PopUpAppInfo from "./PopUpAppInfo/PopUpAppInfo";
 import LoginPageCommonLeft from "./LoginPageCommonLeft";
@@ -697,7 +697,7 @@ const PasswordReset = () => {
   const [resetPwd, setResetPassword] = useState(false);
   const [getCaid, setCaid] = useState('');
   const [contactMethod, setContactMethod] = useState("mobile"); // Default to mobile
-
+const navigate = useNavigate()
   const { getUserId } = useParams();
   // clg
   // console.log(getUserId);
@@ -756,13 +756,14 @@ const PasswordReset = () => {
         }
       } catch (error) {
         // const errorMessages = error?.response?.data?.message
-        console.log(error?.response?.data?.error?.message);
+        // console.log(error?.response?.data?.error?.message);
         Swal.fire({
           icon: 'error',
           title: error?.response?.data?.error?.message,
-          confirmButtonText: "বন্ধ করুন",
-
+          timer:5000,
+          confirmButtonText:"ধন্যবাদ"
         })
+        navigate("/login")
       }
 
     }

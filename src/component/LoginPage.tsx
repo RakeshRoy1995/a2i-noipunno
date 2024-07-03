@@ -23,7 +23,7 @@ const LoginPage = () => {
   const [loading, setloading] = useState(false);
   const [savePin, setSavePin] = useState(false);
   const [userId, setUserId] = useState('');
- 
+
   const [userId_from_Cookie, setUserId_from_Cookie] = useState("");
   const [userPin_from_Cookie, setUserPin_from_Cookie] = useState("");
 
@@ -320,7 +320,8 @@ const LoginPage = () => {
                           {
                             userId ?
                             <Link
-                              to={`/password/reset/${userId}`}
+                              // to={`/password/reset/${userId}`}
+                              to={"/password/reset"}
                               className="forget-password"
                               style={{ color: '#428F92', fontSize: '16px' }}>
                               পিন ভুলে গেছেন? ক্লিক করুন

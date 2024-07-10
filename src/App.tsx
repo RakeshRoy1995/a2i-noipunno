@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./component/PrivateRoute";
+import ReactGA from 'react-ga4';
 // import Login from "./component/Login";
 
 import Footer from "./layout/Footer";
@@ -37,7 +38,14 @@ import AnnualSummativeAssessData from "./component/AnnualSummativeAssessData";
 import SecondComponent from "./component/SecondComponent";
 import DeviceError from './component/HOC/withDeviceShowError'
 
+ReactGA.initialize('G-490R6G2TSV');
+
+
 function App() {
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+  }, []);
 
   const [topbar, settopbar] = useState(false);
   const [render, setRender] = useState(true);

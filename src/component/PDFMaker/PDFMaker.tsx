@@ -67,7 +67,7 @@ const MyDocument = ({
             <Text style={[styles.tableCell, { paddingBottom: "5px" }]}>
               শিক্ষার্থীর নাম:{" "}
               {student_info_pdf?.student_name_bn ||
-                student_info_pdf?.student_name_en}
+                student_info_pdf?.student_name_en} {" "}
             </Text>
           </View>
           <View style={styles.tableColRoll}>

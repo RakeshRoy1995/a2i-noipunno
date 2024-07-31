@@ -89,7 +89,9 @@ const MyDocument = ({
           >
             <Text style={styles.tableCell}>
               {/* শ্রেণী: {convertToBanglaNumber(student_info_pdf?.class)} */}
-              শ্রেণী: {student_info_pdf?.class == "6" ? "ষষ্ঠ" : "সপ্তম"}
+              শ্রেণী: {student_info_pdf?.class == "6" ? "ষষ্ঠ" : student_info_pdf?.class == 7 ? "সপ্তম" : 
+              student_info_pdf?.class == 8 ? "অষ্টম" : "নবম"
+              }
             </Text>
           </View>
           <View

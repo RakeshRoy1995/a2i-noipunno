@@ -55,7 +55,7 @@ export default function DetailsShikhonMullayonSannasikBarshik({
     setShowModal(true);
 
   };
-  console.log(`showDetailsshikhonKalinMullayon`, showDetailsshikhonKalinMullayon);
+  
   return (
     <div>
       <div className="row">
@@ -69,19 +69,10 @@ export default function DetailsShikhonMullayonSannasikBarshik({
                       <div className="d-flex justify-content-between align-items-center w-100 px-1">
                         <div className="d-flex" style={{ color: "#428F92" }}>
                           <h6>
-                            {/* {convertToBanglaNumber(
-                              showDetailsshikhonKalinMullayon?.class_id ||
-                                showDetailsshikhonKalinMullayon?.class_uid
-                            )}
-                            .
-                            {convertToBanglaNumber(
-                              showDetailsshikhonKalinMullayon?.competence_id
-                            )}
-                            .{convertToBanglaNumber(d?.pi_id)}{" "} */}
+                           
                             {
                              convertToBanglaNumber(d?.pi_no) || d?.pi_no
                             }
-                            {/* <p>{showDetailsshikhonKalinMullayon.class_uid } .{showDetailsshikhonKalinMullayon.competence_id} . {d.pi_id}</p> */}
                           </h6>
 
                           <div
@@ -97,7 +88,7 @@ export default function DetailsShikhonMullayonSannasikBarshik({
                               get_all_pi_evaluation_by_pi(d.uid);
 
                               setpi_name(d?.name_bn);
-                              setpi_id(d?.pi_id);
+                              setpi_id(d?.pi_no);
                               setloadingspinner(true)
                             }}
                             className="text-decoration text-success  ps-2 pointer"
@@ -140,16 +131,7 @@ export default function DetailsShikhonMullayonSannasikBarshik({
               </h4>
               <h4>
                 <strong>
-                  {convertToBanglaNumber(
-                    showDetailsshikhonKalinMullayon?.class_id ||
-                      showDetailsshikhonKalinMullayon?.class_uid
-                  )}
-                  .
-                  {convertToBanglaNumber(
-                    showDetailsshikhonKalinMullayon?.competence_id
-                  )}
-                  .{convertToBanglaNumber(pi_id)}{" "}
-                  {/* {convertToBanglaNumber(showDetailsshikhonKalinMullayon?.class_id)}.{convertToBanglaNumber(showDetailsshikhonKalinMullayon?.oviggota_no)}.{convertToBanglaNumber(pi_id)} */}
+                  {convertToBanglaNumber(pi_id)}{" "}
                 </strong>
               </h4>
             </span>

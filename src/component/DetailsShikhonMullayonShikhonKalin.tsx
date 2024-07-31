@@ -89,7 +89,7 @@ export default function DetailsShikhonMullayonShikhonKalin({
 
                             {
                              convertToBanglaNumber(d.pi_no) || d.pi_no
-                            }
+                            } 
                           </h6>
 
                           <div

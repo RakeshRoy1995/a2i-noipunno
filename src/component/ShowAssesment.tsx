@@ -83,7 +83,8 @@ export default function ShowAssesment({
 
       const is_sannasik_barsik =
         uidName == "শিখনকালীন মূল্যায়ন" ? false : true;
-      pis_list_func(allCompitance, [], is_sannasik_barsik);
+
+      // pis_list_func(allCompitance, [], is_sannasik_barsik);
     } catch (error: any) {}
   };
 

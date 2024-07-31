@@ -55,7 +55,7 @@ export default function DetailsShikhonMullayonSannasikBarshik({
     setShowModal(true);
 
   };
-
+  console.log(`showDetailsshikhonKalinMullayon`, showDetailsshikhonKalinMullayon);
   return (
     <div>
       <div className="row">
@@ -69,7 +69,7 @@ export default function DetailsShikhonMullayonSannasikBarshik({
                       <div className="d-flex justify-content-between align-items-center w-100 px-1">
                         <div className="d-flex" style={{ color: "#428F92" }}>
                           <h6>
-                            {convertToBanglaNumber(
+                            {/* {convertToBanglaNumber(
                               showDetailsshikhonKalinMullayon?.class_id ||
                                 showDetailsshikhonKalinMullayon?.class_uid
                             )}
@@ -77,10 +77,10 @@ export default function DetailsShikhonMullayonSannasikBarshik({
                             {convertToBanglaNumber(
                               showDetailsshikhonKalinMullayon?.competence_id
                             )}
-                            .{convertToBanglaNumber(d?.pi_id)}{" "}
-                            {/* {
-                             convertToBanglaNumber(d.pi_no) || d.pi_no
-                            } */}
+                            .{convertToBanglaNumber(d?.pi_id)}{" "} */}
+                            {
+                             convertToBanglaNumber(d?.pi_no) || d?.pi_no
+                            }
                             {/* <p>{showDetailsshikhonKalinMullayon.class_uid } .{showDetailsshikhonKalinMullayon.competence_id} . {d.pi_id}</p> */}
                           </h6>
 

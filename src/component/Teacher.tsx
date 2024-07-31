@@ -26,6 +26,7 @@ import {
   show_report_open_time_msg,
   teacher_name,
 } from "../utils/Utils";
+import { saveAs } from 'file-saver';
 import Swal from "sweetalert2";
 
 import AcorongotoComponent from "./AcorongotoComponent";
@@ -39,6 +40,7 @@ import { piValidation } from "../utils";
 
 export default function Teacher({ onClick }: any) {
   const [showLoadingErr, setshowLoadingErr] = useState("");
+  const [jsonData, setJsonData] = useState(null);
   const [showMainAssessments, setshowMainAssessments] = useState<any>(false);
   let [numberOfRender, setnumberOfRender] = useState(1);
   const [subject, setsubject] = useState([]);
@@ -58,6 +60,7 @@ export default function Teacher({ onClick }: any) {
   const [ShowProfile, setShowProfile] = useState(true);
   const [Student, setStudent] = useState<any>([]);
   const [teacher, setteacher] = useState<any>({});
+  const [piSelectObj, setpiSelectObj] = useState<any>({});
   const [teacher_uid, setteacher_uid] = useState<any>("");
   const [showDetailsshikhonKalinMullayon, setshowDetailsshikhonKalinMullayon] =
     useState<any>("");
@@ -78,7 +81,6 @@ export default function Teacher({ onClick }: any) {
     setshowLoadingErr("");
 
     // test 1
-
     try {
       const teacher_dash__: any =
         localStorage.getItem("teacher_dashboard") || "";
@@ -117,8 +119,6 @@ export default function Teacher({ onClick }: any) {
 
         const all_subject: any = [];
 
-        console.log(`datasss`, data);
-
         // let compitnc_obj = {};
         own_subjet.data.data.subjects.map((d: any) => {
           data.data.subjects.map((d_2: any) => {
@@ -144,7 +144,6 @@ export default function Teacher({ onClick }: any) {
         await fetchData_for_restapi();
       }
     } catch (error) {
-      console.log(`error 1111`, numberOfRender, error);
       setshowLoadingErr("");
 
       numberOfRender++;
@@ -177,6 +176,14 @@ export default function Teacher({ onClick }: any) {
       let own_subjet = own_subjet_ ? JSON.parse(own_subjet_) : "";
 
       if (!own_subjet.data.data.bis) {
+
+
+
+
+
+        
+
+
         own_subjet = await teacher_own_subject();
       }
 
@@ -253,49 +260,61 @@ export default function Teacher({ onClick }: any) {
     setelement(e);
   };
 
-  const getPiSelection = async(subject_id : number)=>{
+  const getPiSelection = async (subject_id: number) => {
     const own_subjet_: any = localStorage.getItem("own_subjet") || "";
-      const own_subjet :any = own_subjet_ ? JSON.parse(own_subjet_) : "";
+    const own_subjet: any = own_subjet_ ? JSON.parse(own_subjet_) : "";
+    if (piSelectObj[subject_id]) {
+      setpi_selection(piSelectObj[subject_id]);
+    } else {
+      const { data } = await pi_selection_list(subject_id);
 
-      const {data} = await pi_selection_list(subject_id)
-       
-      const subject = []
+      const subject = [];
       if (data?.data?.pi_selection) {
-
-        for (let index = 0; index < own_subjet?.data?.data?.subjects.length; index++) {
+        for (
+          let index = 0;
+          index < own_subjet?.data?.data?.subjects.length;
+          index++
+        ) {
           const Own_element = own_subjet?.data?.data?.subjects[index];
-          const pi_selection = []
-          
-          
-            for (let index = 0; index < data?.data?.pi_selection.length; index++) {
-              const Pi_element = data?.data?.pi_selection[index];
-      
-              if (Own_element?.subject_uid == Pi_element.subject_uid && piValidation(Pi_element) ) {
-  
-                setpi_selection(data?.data?.pi_selection)
-                
-              }
-              
-            }
-          
+          const pi_selection = [];
 
-          Own_element.pi_selection = pi_selection
-          subject.push(Own_element)
+          for (
+            let index = 0;
+            index < data?.data?.pi_selection.length;
+            index++
+          ) {
+            const Pi_element = data?.data?.pi_selection[index];
+
+            if (
+              Own_element?.subject_uid == Pi_element.subject_uid &&
+              piValidation(Pi_element)
+            ) {
+              setpi_selection(data?.data?.pi_selection);
+              setpiSelectObj({
+                ...piSelectObj,
+                [subject_id]: data?.data?.pi_selection,
+              });
+            }
+          }
+
+          Own_element.pi_selection = pi_selection;
+          subject.push(Own_element);
         }
 
         const obj = {
-          data : {
-            ...own_subjet?.data?.data , 
-            ['subjects'] : subject
-          }
-        }
+          data: {
+            ...own_subjet?.data?.data,
+            ["subjects"]: subject,
+          },
+        };
 
-        own_subjet.data = obj
+        own_subjet.data = obj;
 
-        localStorage.removeItem("own_subjet")
-        localStorage.setItem("own_subjet", JSON.stringify(own_subjet) )
+        localStorage.removeItem("own_subjet");
+        localStorage.setItem("own_subjet", JSON.stringify(own_subjet));
       }
-  }
+    }
+  };
 
   // console.log(subject);
 
@@ -395,7 +414,7 @@ export default function Teacher({ onClick }: any) {
                                         ? "ডেটা লোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন"
                                         : ""
                                     }
-                                    onClick={async(e) => {
+                                    onClick={async (e) => {
                                       {
                                         !waitForMoreData &&
                                           skill_behaibor_count(d);
@@ -429,7 +448,9 @@ export default function Teacher({ onClick }: any) {
                                           d.own_subjet.subject_id
                                         );
 
-                                        await getPiSelection(d.own_subjet.subject_id)
+                                        await getPiSelection(
+                                          d.own_subjet.subject_id
+                                        );
 
                                         // setpi_selection(
                                         //   d.own_subjet?.pi_selection

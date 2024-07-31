@@ -120,13 +120,16 @@ const LoginPage = () => {
     // }
   };
 
-
+  function deleteCookie(name) {
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
 
 
   useEffect(() => {
 
     const userId_Cookes = getCookie("userId");
     const userPin_Cookies = getCookie("userPin");
+    const error_Show = getCookie("error_Show");
     localStorage.removeItem("customer_login_auth");
     localStorage.removeItem("token");
 
@@ -135,6 +138,11 @@ const LoginPage = () => {
     if (userId_Cookes && userPin_Cookies) {
       setUserId_from_Cookie(userId_Cookes);
       setUserPin_from_Cookie(userPin_Cookies);
+    }
+
+    if (error_Show) {
+      deleteCookie("error_Show")
+      seterror(error_Show);
     }
   }, []);
 
@@ -167,6 +175,9 @@ const LoginPage = () => {
 
 
     }, [])
+
+
+    
 
 
     // console.log(`sliderData`,  sliderData);
@@ -320,8 +331,7 @@ const LoginPage = () => {
                           {
                             userId ?
                             <Link
-                              // to={`/password/reset/${userId}`}
-                              to={"/password/reset"}
+                              to={`/password/reset/${userId}`}
                               className="forget-password"
                               style={{ color: '#428F92', fontSize: '16px' }}>
                               পিন ভুলে গেছেন? ক্লিক করুন

@@ -25,6 +25,8 @@ export const shift_name = (shifts_id: any) => {
 export const branch_name = (branch_id: any, showInPDF = false) => {
   const data = localStorage.getItem("teacher_dashboard");
   const storageData = JSON.parse(data);
+
+  console.log(`storageData`, storageData );
   if (storageData && !showInPDF) {
     const branch = storageData.data.branches.find(
       (branches) => branches.uid == branch_id
@@ -129,7 +131,6 @@ export const pis_list_func = (
   const selectedIds = pi_list.map((item: any) => {
     return item.pi_uid;
   });
-
   localStorage.setItem("show_compitance_id", JSON.stringify(all_compitance_id));
   // localStorage.setItem("show_all_pis_id", JSON.stringify(all_pis_id));
   localStorage.setItem("show_pi_list", JSON.stringify(selectedIds));
@@ -162,6 +163,8 @@ export const show_compitance = (compitance_uid: any) => {
 
 export const show_pis = (compitance_uid: any) => {
   const all_compitance_id = JSON.parse(localStorage.getItem("show_pi_list"));
+
+  console.log(`ssss`, all_compitance_id?.includes(compitance_uid) );
   return all_compitance_id?.includes(compitance_uid) || false;
 };
 

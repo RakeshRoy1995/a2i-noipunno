@@ -42,8 +42,11 @@ const MyDocument = ({
     <Page size="A4" style={styles.page}>
       <View fixed>
         <Text style={[styles.h1]}>
-          {instititute?.institute_name}
-          <br />
+          { instititute?.institute_name_bn || instititute?.institute_name}
+        </Text>
+
+        <Text style={[styles.h2]}>
+          EIIN -{ instititute?.eiin }
         </Text>
         <Text style={[styles.h2]}>
           {" "}
@@ -55,7 +58,7 @@ const MyDocument = ({
         {/* style={{ color: 'white', textAlign: 'center', margin: 30 }} */}
         <Text style={[styles.h3, { marginBottom: 30 }]}>
           বিষয়ভিত্তিক ট্রান্সক্রিপ্ট-
-          {convertToBanglaNumber(student_info_pdf?.registration_year)}
+          {convertToBanglaNumber(student_info_pdf?.session_year)}
         </Text>
       </View>
       <View style={styles.table}>
@@ -273,7 +276,7 @@ const MyDocument = ({
         </Text>
 
         <Text
-          style={{ fontSize: 7 }}
+          style={{ fontSize: 7 , textAlign: "right", }}
           render={({ pageNumber, totalPages }) =>
             `${pageNumber} / ${totalPages}`
           }

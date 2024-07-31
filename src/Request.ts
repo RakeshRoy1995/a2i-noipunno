@@ -7,6 +7,7 @@ import {
 
 const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 const EVULATION_API = import.meta.env.VITE_REACT_APP_PI_EVULATION_API_URL;
+const OWNSUBJECT_API = import.meta.env.VITE_REACT_APP_OWNSUBJECT_API;
 
 const authToken = localStorage.getItem("customer_login_auth") || "";
 
@@ -206,26 +207,26 @@ export async function teacher_own_subject_redesign() {
 export async function teacher_own_subject() {
 
 
-  // const page_list = `${API_URL}/v2/own-subjects`;
+  const page_list = `/own-subjects.json`;
 
-  // const options = {
-  //   method: "get",
-  //   headers: { "content-type": "application/json" },
-  //   url: page_list,
-  // };
-
-  // const own_sub_2 = await axios(options);
-
-
-  const page_list_2 = `own-subjects.json`;
-
-  const options_2 = {
+  const options = {
     method: "get",
     headers: { "content-type": "application/json" },
-    url: page_list_2,
+    url: page_list,
   };
 
-  const own_sub = await axios(options_2);
+  const own_sub = await axios(options);
+
+
+  // const page_list_2 = `https://ekshop-com-bd-v3.sgp1.vultrobjects.com/own-subjects.json`;
+
+  // const options_2 = {
+  //   method: "get",
+  //   headers: { "content-type": "application/json" },
+  //   url: page_list_2,
+  // };
+
+  // const own_sub = await axios(options_2);
 
   const object: any = {};
   if (own_sub.data.data.subjects.length == 0) {
@@ -562,6 +563,20 @@ export async function teacher_dashboard() {
 
   const subject = await axios(options_subject);
 
+
+  const page_list_brnch= `${EVULATION_API}/v3/branch-list`;
+  const options_brnch= {
+    method: "GET",
+    headers: { "content-type": "application/json" },
+    url: page_list_brnch,
+    data : {
+      uid : teachers?.data?.data?.uid
+    }
+
+  };
+
+  const branch = await axios(options_brnch);
+
   
 
   const newObj = {
@@ -572,6 +587,7 @@ export async function teacher_dashboard() {
       subjects : subject?.data?.data || [],
       teachers : [newTeacher] || [],
       versions : version?.data?.data || [],
+      branches : branch?.data?.data || [],
       user : newUser
     },
     status : true

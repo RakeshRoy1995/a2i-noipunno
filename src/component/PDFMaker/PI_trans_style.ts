@@ -101,7 +101,7 @@ export const styles = StyleSheet.create({
   tableCell: {
     fontFamily: "kalpurush",
     padding: "2px",
-    fontSize: 10,
+    fontSize: 9,
     lineHeight: "1px",
     textOverflow: "ellipsis",
     flexDirection: 'row',

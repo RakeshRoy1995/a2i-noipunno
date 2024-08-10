@@ -24,7 +24,6 @@ export default function ParodorshitaComponent({
 }: any) {
   const [loadingspinner, setloadingspinner] = useState(false);
 
-  console.log(`shikhonKalinMullayon_sannasik_barsik`, shikhonKalinMullayon_sannasik_barsik);
   return (
     <>
       <div className="text-center">

@@ -23,7 +23,7 @@ import { MdArrowBackIosNew } from "react-icons/md";
 import Swal from "sweetalert2";
 import "./Home.style.module.css";
 import { useNavigate } from "react-router-dom";
-import { convertToBanglaNumber, save_PI_BI_again, show_comment_box_Pi } from "../utils/Utils";
+import { convertToBanglaNumber, get_the_class_id, save_PI_BI_again, show_comment_box_Pi } from "../utils/Utils";
 
 const class_room_id = localStorage.getItem("class_room_id");
 
@@ -107,8 +107,10 @@ export default function StudentMullayonModal({
     try {
       setmsg("");
       seterr("");
+      const clss_id = get_the_class_id();
       const data: any = submitData.map((d: any) => {
         d.submit_status = submit_status;
+        d.class_uid = clss_id;
         return d;
       });
 
@@ -167,7 +169,7 @@ export default function StudentMullayonModal({
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "সার্ভার ত্রুটি ঘটেছে! অনুগ্রহ করে আবার চেষ্টা করুন।",
+        title: `সার্ভার ত্রুটি ঘটেছে! অনুগ্রহ করে আবার চেষ্টা করুন। ${error?.response?.data?.message}`,
         confirmButtonText: "হ্যাঁ",
       });
     }
@@ -197,6 +199,8 @@ export default function StudentMullayonModal({
         is_approved: 1,
         remark,
       };
+
+      console.log(`params`, params);
 
       if (submitObj[student_id]) {
         if (submitObj[student_id].weight_uid == weight_uid) {

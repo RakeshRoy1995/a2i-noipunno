@@ -3,6 +3,7 @@ import {
   formate_own_subject_data,
   formate_own_subject_data_new,
   formate_own_subject_from_json,
+  get_the_class_id,
 } from "./utils/Utils";
 
 const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
@@ -114,7 +115,7 @@ export function all_class(data: any = "") {
 }
 
 export function Pi_save(data: any) {
-  const page_list = `${EVULATION_API}/v2/pi-evaluation`;
+  const page_list = `${EVULATION_API}/v3/pi-evaluation`;
 
   const options = {
     method: "POST",
@@ -681,7 +682,8 @@ export function get_pi_evaluation_by_pi(
   evaluate_type: any,
   oviggota_uid: any
 ) {
-  const page_list = `${EVULATION_API}/v2/get-pi-evaluation-by-pi?oviggota_uid=${oviggota_uid}&class_room_uid=${class_room_uid}&pi_uid=${pi_uid}&evaluate_type=${evaluate_type}`;
+  const clss_id = get_the_class_id();
+  const page_list = `${EVULATION_API}/v3/get-pi-evaluation-by-pi?oviggota_uid=${oviggota_uid}&class_room_uid=${class_room_uid}&pi_uid=${pi_uid}&evaluate_type=${evaluate_type}&class_uid=${clss_id}`;
 
   const options = {
     method: "get",

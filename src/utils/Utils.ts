@@ -25,8 +25,6 @@ export const shift_name = (shifts_id: any) => {
 export const branch_name = (branch_id: any, showInPDF = false) => {
   const data = localStorage.getItem("teacher_dashboard");
   const storageData = JSON.parse(data);
-
-  console.log(`storageData`, storageData );
   if (storageData && !showInPDF) {
     const branch = storageData.data.branches.find(
       (branches) => branches.uid == branch_id
@@ -883,6 +881,17 @@ export const formate_own_subject_from_json = (
     },
     status: true,
   };
-  console.log(`result`, result);
   return result;
+};
+
+
+export const get_the_class_id = () => {
+  const data = localStorage.getItem("cls_room");
+  const class_room_id = localStorage.getItem("class_room_id");
+  const storageData = JSON.parse(data);
+
+  const class_id =  storageData.data.data.subjects.find((collection:any)=> collection.class_room_uid == class_room_id  )
+console.log(`class_id`, class_id);
+  return class_id.class_room.class_id
+ 
 };
